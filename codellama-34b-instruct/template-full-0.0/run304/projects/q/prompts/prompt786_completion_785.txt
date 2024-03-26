@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null, rejected
+```
+This would result in different behavior because `null` is a primitive value and will not have a `then` method, unlike `rejected` which is a function. This means that the promise returned by `Q(object)["finally"](callback)` will not be able to be chained with other promises using `then`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined, rejected
+```
+This would result in different behavior because `undefined` is a primitive value and will not have a `then` method, unlike `rejected` which is a function. This means that the promise returned by `Q(object)["finally"](callback)` will not be able to be chained with other promises using `then`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rejected, null
+```
+This would result in different behavior because `rejected` is a function and will have a `then` method, unlike `null` which is a primitive value

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because the `!` operator negates the result of the `isGlob` function, causing the `zipArchive.glob()` method to be called even if the `src` parameter is not a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob(src)
+```
+This would result in different behavior because the `isGlob` function is called twice, which could cause performance issues.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.split(',').some(isGlob)
+```
+This would result in different behavior because the `some()` method checks if any element in the array returned by `src.split(',')` matches the `isGlob` function, which could cause the `zipArchive.glob()` method to be called even if the `src` parameter is not a glob.
+
+DONE.

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.rules.slice()
+```
+This would result in different behavior because `slice()` creates a shallow copy of the array, which means that the new array would have the same elements as the original array, but any changes made to the new array would not affect the original array. In contrast, `this.rules` returns the original array, so any changes made to the new array would also affect the original array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.rules.filter(rule => rule.query(path, verb, ctx) === true)
+```
+This would result in different behavior because `filter()` creates a new array with only the elements that pass the test implemented by the provided function. In this case, the function checks if the `query()` method of each rule returns `true`. If any of the rules return `false`, they will be excluded from the new array. In contrast, `this.rules` returns the original array, which may contain rules that return `false` for the given `path`, `verb`, and `

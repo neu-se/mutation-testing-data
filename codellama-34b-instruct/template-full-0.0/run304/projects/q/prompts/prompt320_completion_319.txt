@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].call(promise, args)
+```
+This would result in different behavior because `call` is used instead of `apply`, which changes the value of `this` inside the called function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].bind(promise, args)()
+```
+This would result in different behavior because `bind` creates a new function with a bound context and arguments, and then calls it immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].apply(promise, args.slice(1))
+```
+This would result in different behavior because `slice` is used to remove the first element of the `args` array, which changes the arguments passed to the called function.
+
+DONE.
