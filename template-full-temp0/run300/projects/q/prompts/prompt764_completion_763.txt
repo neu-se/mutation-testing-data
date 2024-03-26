@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress);
+```
+This would result in different behavior because the `onProgress` callback would not be called for the `promise` when it is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress).then(onFulfilled, onRejected, onProgress);
+```
+This would result in different behavior because the `onProgress` callback would be called twice for the `promise` when it is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress).then(onFulfilled, onRejected);
+```
+This would result in different behavior because the `onProgress` callback would not be called for the `promise` when it is rejected.
+
+DONE.
