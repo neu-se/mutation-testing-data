@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the function is now checking the `currentUrlStr` instead of the `baseUrlStr`, which could lead to false positives or false negatives in the test results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/#.*$/, ''))
+```
+This would result in different behavior because the `baseUrlStr` is now being modified before being passed to the `_has_illegal_chars` function, which could lead to different results depending on the specific characters in the `baseUrlStr`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://'))
+```
+This would result in different behavior because the `baseUrl

@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return value;
+}).then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the `then` method is called twice, which would cause the rejection to be thrown twice, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return value;
+}).catch(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the `catch` method is used instead of `then`, which would cause the rejection to be caught and handled differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return value;
+}).finally(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the `finally` method is used instead of `then`, which would cause the rejection to be thrown after

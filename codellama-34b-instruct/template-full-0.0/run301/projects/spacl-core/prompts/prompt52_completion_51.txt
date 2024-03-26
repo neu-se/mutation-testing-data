@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parts.push(part.slice(1))
+```
+This would result in different behavior because it would push the entire part string to the `parts` array, instead of just the part after the colon.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parts.push(part.replace(/([^/]+)/g, '\\$1'))
+```
+This would result in different behavior because it would push the part string with all non-slash characters replaced with the regex pattern `\\$1`, instead of just the part after the colon.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parts.push(part.replace(/([^/]+)/g, '\\$1').slice(1))
+```
+This would result in different behavior because it would push the part string with all non-slash characters replaced with the regex pattern `\\$1`, and then slice the first character off the result.
+
+DONE.
