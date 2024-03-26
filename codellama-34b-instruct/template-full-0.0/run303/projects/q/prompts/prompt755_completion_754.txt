@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = allResolved;
+```
+This would result in different behavior because `allResolved` is not a function, so it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function () { return Q.reject(); };
+```
+This would result in different behavior because `allResolved` would always return a rejected promise, even if the input promises are resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function (promises) { return Q.all(promises).then(function () { return Q.reject(); }); };
+```
+This would result in different behavior because `allResolved` would return a rejected promise if any of the input promises are rejected, even if some of the other promises are resolved.
+
+DONE.
