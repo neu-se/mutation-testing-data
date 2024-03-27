@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!ended
+```
+This would result in different behavior because the `!` operator negates the value of `ended`, so if `ended` is `true`, `!ended` would be `false`, and vice versa. This would cause the `read` function to be called with `ended` set to `false`, even if the previous call to `read` returned `ended` set to `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended && !test(data)
+```
+This would result in different behavior because the `&&` operator is a logical AND operator, and it would only evaluate the second operand if the first operand is `true`. In this case, if `ended` is `true`, the second operand `!test(data)` would not be evaluated, and the `read` function would be called with `ended` set to `true`, even if `test(data)` is `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended || !

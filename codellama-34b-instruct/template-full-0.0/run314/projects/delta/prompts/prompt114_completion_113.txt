@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(accum, curr, index) => accum + curr.retain
+```
+This would result in different behavior because the `retain` property is not always present in the `Op` objects, and the `+` operator would return `NaN` when `curr.retain` is `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(accum, curr, index) => accum + (curr.retain || 0)
+```
+This would result in different behavior because the `||` operator would return `0` when `curr.retain` is `undefined`, which would cause the accumulator to be incremented by `0` instead of `NaN`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(accum, curr, index) => accum + (curr.retain || 1)
+```
+This would result in different behavior because the `||` operator would return `1` when `curr.retain` is `undefined`, which would cause the accumulator

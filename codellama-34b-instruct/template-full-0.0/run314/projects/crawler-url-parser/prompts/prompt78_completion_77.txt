@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+$('a').each(function (i, el) {
+	let href = $(this).attr('href');
+	let text = $(this).text().trim();
+	//href = href.replace(/;.*$/g,"");
+	if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+	let currentUrl = parse(href, baseUrlStr);
+
+	if (currentUrl && currentUrl.url) {
+		if (urlMap.has(currentUrl.url)) {
+			let tmpUrl = urlMap.get(currentUrl.url);
+			if (!tmpUrl.text.includes(text)) {
+				tmpUrl.text = `${tmpUrl.text} ${text}`;
+			}
+		} else {
+			currentUrl.text = text == null ? "" : text;
+			currentUrl.baseurl = baseUrlStr
