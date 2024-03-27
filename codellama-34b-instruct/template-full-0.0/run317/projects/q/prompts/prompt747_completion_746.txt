@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected, onProgress)
+```
+This would result in different behavior because it would cause the `onProgress` callback to be called for each promise in the array, regardless of whether the promise was fulfilled or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected).then(onProgress)
+```
+This would result in different behavior because it would cause the `onProgress` callback to be called only after all promises in the array have been fulfilled or rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected).then(onProgress).catch(onRejected)
+```
+This would result in different behavior because it would cause the `onProgress` callback to be called only after all promises in the array have been fulfilled or rejected, and it would also catch any errors that occur during the execution of the

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{value: p.stackCounter + 1, configurable: true}
+```
+This would result in different behavior because the `stackCounter` property would be incremented by 1, which would cause the `makeStackTraceLong` function to concatenate the stack trace of `promise` with the error stack trace, even if the error stack trace already contains the stack trace of `promise`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{value: p.stackCounter - 1, configurable: true}
+```
+This would result in different behavior because the `stackCounter` property would be decremented by 1, which would cause the `makeStackTraceLong` function to concatenate the stack trace of `promise` with the error stack trace, even if the error stack trace does not contain the stack trace of `promise`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{value: p.stackCounter * 2, configurable: true}
+```
+This would result in

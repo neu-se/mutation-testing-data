@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null, null)
+```
+This would result in different behavior because `defer` is a function that takes two arguments, but `null` is not a valid argument for either of them. In the original code, `defer` is called with two arguments, `rejected` and `promise`, which are both defined in the surrounding code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(rejected, promise)
+```
+This would result in different behavior because `defer` is a function that takes two arguments, but `rejected` and `promise` are not defined in the surrounding code. In the original code, `rejected` and `promise` are defined as local variables in the `reject` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(function () { return rejected; }, function () { return promise; })
+```
+This would result in different behavior because `defer` is a function that takes
