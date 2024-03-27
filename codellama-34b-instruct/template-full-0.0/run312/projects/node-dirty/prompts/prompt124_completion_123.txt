@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because the `write` method is called with a callback function that emits an `'error'` event if `err` is not null, whereas the original code fragment does not have a callback function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+  if (err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
