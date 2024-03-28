@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the original code fragment checks if `abort` is truthy, while this new code fragment checks if `abort` is falsy. If `abort` is a non-null object or a non-empty string, the original code would return `abortCb(cb, abort, onAbort)`, while this new code would return `cb(null, array[i++])`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || onAbort
+```
+This would result in different behavior because the original code fragment checks if `abort` is truthy, while this new code fragment checks if `abort` or `onAbort` is truthy. If `abort` is falsy and `onAbort` is truthy, the original code would return `abortCb(cb, abort, onAbort)`, while this new code would return `cb(null, array[i++])`.
+
+Option 3: The PL

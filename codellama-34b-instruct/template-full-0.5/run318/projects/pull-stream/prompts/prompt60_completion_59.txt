@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink.abort()
+```
+This would result in different behavior because the original code fragment was a reference to the `sink.abort` function, but this replacement calls the function, which could have unintended consequences.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function () {}
+```
+This would result in different behavior because the original code fragment was a reference to the `sink.abort` function, but this replacement overrides the function with an empty function, which could cause the code to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+  if (err) {
+    cb(err);
+  } else {
+    cb();
+  }
+}
+```
+This would result in different behavior because the original code fragment was a reference to the `sink.abort` function, but this replacement overrides the function with a new implementation that only calls the callback

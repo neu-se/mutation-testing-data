@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(flush).bind(null, false);
+```
+This would result in different behavior because `process.nextTick` will be called with `false` as its argument, which will cause the `flush` function to be called with `false` as its argument, which will result in the `laterQueue` not being flushed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(flush).bind(null, true);
+```
+This would result in different behavior because `process.nextTick` will be called with `true` as its argument, which will cause the `flush` function to be called with `true` as its argument, which will result in the `laterQueue` being flushed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(flush).bind(null, undefined);
+```
+This would result in different behavior because `process.nextTick` will be called with `undefined` as its

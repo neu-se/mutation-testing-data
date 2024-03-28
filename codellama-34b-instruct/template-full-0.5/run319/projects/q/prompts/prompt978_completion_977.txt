@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+args.push(deferred.makeNodeResolver());
+```
+This would result in different behavior because the original code used `array_slice(args || [])` to create a copy of the `args` array, while this replacement code modifies the original `args` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+args.unshift(deferred.makeNodeResolver());
+```
+This would result in different behavior because the original code used `array_slice(args)` to create a copy of the `args` array, while this replacement code modifies the original `args` array by adding the node resolver function to the beginning of the array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+args.concat([deferred.makeNodeResolver()]);
+```
+This would result in different behavior because the original code used `array_slice(args)` to create a copy of the `args` array, while this replacement code creates a new array that contains the original `args` array followed by

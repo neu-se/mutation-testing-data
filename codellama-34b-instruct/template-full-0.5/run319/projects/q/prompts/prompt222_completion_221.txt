@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer.prototype = Object.create(Promise.prototype);
+```
+This would result in different behavior because it would create a new object with `Promise.prototype` as its prototype, instead of using `Promise.prototype` directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer.prototype = Promise.prototype;
+```
+This would result in different behavior because it would set `defer.prototype` to the same object as `Promise.prototype`, which would mean that all instances of `defer` would share the same prototype.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer.prototype = {
+    then: function (onFulfilled, onRejected) {
+        return this.promise.then(onFulfilled, onRejected);
+    }
+};
+```
+This would result in different behavior because it would create a new object with a `then` method that would delegate to the `then` method of `this.

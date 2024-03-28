@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.off
+```
+This would result in different behavior because `output.off` would turn off the `close` event listener, causing the promise to never resolve or reject.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('error', () => {});
+```
+This would result in different behavior because the empty callback function would be called for any errors emitted by the `output` stream, but it would not reject the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('error', reject);
+```
+This would result in different behavior because the `reject` function would be called for any errors emitted by the `output` stream, causing the promise to be rejected.
+
+DONE.

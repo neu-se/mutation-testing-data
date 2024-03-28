@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.prev
+```
+This would result in different behavior because `iter.prev` would return the previous operation in the delta, rather than the next one, which is what `iter.next` does. This would cause the `while` loop to iterate over the operations in the opposite order, potentially leading to different results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peekLength() + 1
+```
+This would result in different behavior because `iter.peekLength()` returns the length of the current operation, while `iter.peekLength() + 1` would return the length of the current operation plus one. This would cause the `while` loop to iterate over the operations in the same order, but with an additional iteration at the end, potentially leading to different results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext() && iter.peekType() !== 'insert'
+```
+This would result in different behavior because `iter.hasNext()` returns a

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestPortTick
+```
+This would result in different behavior because `requestPortTick` is a function that posts a message to the message channel, while `requestTick` is a function that calls `flush` asynchronously. Using `requestPortTick` instead of `requestTick` would cause the `flush` function to be called twice, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, 1000)
+```
+This would result in different behavior because `setTimeout` would delay the execution of `flush` by 1000 milliseconds, while `requestTick` executes `flush` asynchronously as soon as possible.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve().then(flush)
+```
+This would result in different behavior because `Promise.resolve().then(flush)` would execute `flush` asynchronously, but it would not use the `nextTick

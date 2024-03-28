@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then.bind(this)
+```
+This would result in different behavior because `bind` creates a new function with the `this` context set to the first argument, which in this case is `this`. This means that the new function will always be called with `this` set to the promise, even if it is called as a method of a different object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then.call(null)
+```
+This would result in different behavior because `call` sets the `this` context of the function to `null`, which means that the function will be called with `this` set to the global object (or `undefined` in strict mode). This can cause the function to behave differently if it relies on `this` to access properties or methods of the object it is called on.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.then.apply(this, arguments)
+```
+This would result in different behavior because `apply` sets the

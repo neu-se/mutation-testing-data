@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null, value)
+```
+This would result in different behavior because `defer` is a function that expects a promise and a value, but `null` is not a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(Q.reject(value), value)
+```
+This would result in different behavior because `Q.reject` returns a rejected promise with the provided value, which would cause the `deferred.resolve` call to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(Q.resolve(value), value)
+```
+This would result in different behavior because `Q.resolve` returns a resolved promise with the provided value, which would cause the `deferred.resolve` call to succeed.
+
+DONE.

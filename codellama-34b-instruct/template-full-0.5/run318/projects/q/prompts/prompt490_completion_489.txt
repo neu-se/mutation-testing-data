@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejected && false
+```
+This would result in different behavior because the `rejected` variable would always be `false` in this case, even if the promise is actually rejected. This would cause the `untrackRejection` function to be called even if the promise is not actually rejected, which could lead to incorrect behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rejected || true
+```
+This would result in different behavior because the `rejected` variable would always be `true` in this case, even if the promise is actually fulfilled. This would cause the `trackRejection` function to be called even if the promise is not actually rejected, which could lead to incorrect behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!rejected
+```
+This would result in different behavior because the `rejected` variable would be negated, causing the `trackRejection` function to be called even if the promise is actually fulfilled. This would cause the `

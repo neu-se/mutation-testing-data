@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(ended)
+```
+This would result in different behavior because the `last` variable is now being checked before calling `cb`, which would cause the function to return a different value in some cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+last ? cb(null, data) : terminate(cb)
+```
+This would result in different behavior because the `last` variable is now being checked before calling `terminate`, which would cause the function to return a different value in some cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+last ? cb(ended) : terminate(cb)
+```
+This would result in different behavior because the `ended` variable is now being passed to `cb` instead of `null`, which would cause the function to return a different value in some cases.
+
+DONE.

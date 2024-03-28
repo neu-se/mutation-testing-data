@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because it would pipe the response data directly to the write stream, without first consuming it to free up memory.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: false })
+```
+This would result in different behavior because it would pipe the response data to the write stream, but would not close the write stream after the response has been consumed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: true })
+```
+This would result in different behavior because it would pipe the response data to the write stream, and would close the write stream after the response has been consumed.
+
+DONE.

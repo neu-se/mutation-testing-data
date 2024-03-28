@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name]
+```
+This would result in different behavior because it would cause the policy name to be used as the key for the map, rather than the policy object itself. This could potentially cause issues if the policy name is not unique, or if the policy object is not correctly serializable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name.toUpperCase()]
+```
+This would result in different behavior because it would cause the policy name to be uppercased before being used as the key for the map. This could potentially cause issues if the policy name is not case-sensitive, or if the uppercased name is not correctly serializable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name + '1']
+```
+This would result in different behavior because it would cause the policy name to be appended with the string '1' before

@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return
+```
+This would result in different behavior because the `return` statement would cause the function to exit immediately, without executing any further code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error()
+```
+This would result in different behavior because the `throw` statement would cause an error to be thrown, which would be caught by the `try` block and passed to the `done` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    loop = false
+    if (done) done(end === true ? null : end)
+    else if (end && end !== true) {
+      console.warn(doneLackingErr)
+      throw end
+    }
+  }
+  else if (op && false === op(data) || abort) {
+    loop = false
+    read(abort || true, done || function () {})
+  }
+ 

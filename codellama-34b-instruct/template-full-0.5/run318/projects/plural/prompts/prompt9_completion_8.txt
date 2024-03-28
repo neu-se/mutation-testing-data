@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiou]y$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because the regex pattern is now only matching words that end with a consonant followed by "y" instead of also matching words that end with "quy".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiou]y$|quy$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because the regex pattern is now also matching words that end with "quy" but the function is still only returning the plural form for words that end with a consonant followed by "y".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiou]y$|quy$/i, function(w)

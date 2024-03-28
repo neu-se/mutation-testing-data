@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+trackUnhandledRejections
+```
+This would result in different behavior because it would cause the `trackRejection` function to be called, which would add the promise and reason to the `unhandledRejections` and `unhandledReasons` arrays, even if the rejection is handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!trackUnhandledRejections && unhandledRejections.length > 0
+```
+This would result in different behavior because it would only call the `trackRejection` function if the `trackUnhandledRejections` variable is `false` and the `unhandledRejections` array is not empty. This would ensure that the `trackRejection` function is only called if there are unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!trackUnhandledRejections || unhandledRejections.length === 0
+```
+This would result in different behavior because it would only call the `trackRe

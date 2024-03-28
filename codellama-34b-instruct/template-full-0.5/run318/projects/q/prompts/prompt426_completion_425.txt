@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(value).then(fulfilled, rejected, progressed);
+```
+This would result in different behavior because the `then` method is called on the `Q` function, which is not a promise and does not have a `then` method. This would cause an error to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(value).then(fulfilled, rejected, progressed).then(null, null);
+```
+This would result in different behavior because the `then` method is called twice, with the second call having no effect.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(value).then(fulfilled, rejected, progressed).then(null, null).then(fulfilled, rejected, progressed);
+```
+This would result in different behavior because the `then` method is called three times, with the third call having no effect.
+
+DONE.

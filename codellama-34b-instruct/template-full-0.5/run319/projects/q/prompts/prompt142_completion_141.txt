@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var p = promise; !p; p = p.source
+```
+This would result in different behavior because the `!p` operator would return `true` if `p` is falsy, which would cause the loop to continue even if `p` is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var p = promise; p.source; !p
+```
+This would result in different behavior because the `p.source` property would be evaluated before the `!p` operator, which would cause the loop to continue even if `p` is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var p = promise; p.source; p.source
+```
+This would result in different behavior because the `p.source` property would be evaluated twice, which would cause the loop to continue even if `p` is resolved.
+
+DONE.

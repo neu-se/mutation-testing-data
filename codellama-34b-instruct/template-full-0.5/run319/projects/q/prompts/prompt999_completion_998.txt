@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not being called on the promise returned by `Q(object).dispatch("post", [name, nodeArgs])`, which means that the error will not be caught and the promise will not be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is being called on the promise returned by `Q(object).dispatch("post", [name, nodeArgs])`, but the error is being resolved instead of rejected. This means that the promise will be resolved with the error, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(function () {
+    deferred

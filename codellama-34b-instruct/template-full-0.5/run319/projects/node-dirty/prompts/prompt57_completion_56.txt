@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.close()
+```
+This would result in different behavior because the callback function would be called with the wrong `this` context, causing the `close` method to be called on the wrong object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this._writeStream.close()
+```
+This would result in different behavior because the `_writeStream` property is not defined on the `Dirty` class, and the `close` method would not be called on the correct object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.emit('drain', this._writeStream)
+```
+This would result in different behavior because the `emit` method is not defined on the `Dirty` class, and the `drain` event would not be emitted with the correct arguments.
+
+DONE.

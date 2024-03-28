@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.type === 'Point'
+```
+This would result in different behavior because it would cause the `fromGeoJSON` method to always throw an error, regardless of whether the input `point` is a valid GeoJSON point.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point' && point.type !== 'Feature'
+```
+This would result in different behavior because it would cause the `fromGeoJSON` method to throw an error if the input `point` is not a valid GeoJSON point or feature, but it would not throw an error if the input `point` is a valid GeoJSON feature with a `Point` geometry.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point' && point.type !== 'Feature' && point.type !== 'GeometryCollection'
+```
+This would result in different behavior because it would cause the `fromGeoJSON` method to throw an error if the input `point` is

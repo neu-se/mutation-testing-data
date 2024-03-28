@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.reject, deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called with two arguments, which would cause the promise to be resolved with the first argument (the error) instead of being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(null, deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called with `null` as the first argument, which would cause the promise to be resolved with `null` instead of being rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.reject).then(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called with only one argument (the error), and the `then` method is called with the resolved value of the

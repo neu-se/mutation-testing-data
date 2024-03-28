@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isGlob(src)
+```
+This would result in different behavior because the `isGlob` function returns `true` if the input is a glob pattern, and `false` otherwise. In the original code, the `!` operator is used to negate the result of `isGlob(src)`, so if `src` is a glob pattern, the result would be `false`. However, if we replace `!isGlob(src)` with `isGlob(src)`, the result would be `true` if `src` is a glob pattern, which would cause the `directory` method to be called instead of the `glob` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.startsWith('*')
+```
+This would result in different behavior because `src.startsWith('*')` checks if the input string `src` starts with an asterisk, which is a common pattern for glob patterns. If `src` does start with an asterisk, the result would be `true`, which would cause the

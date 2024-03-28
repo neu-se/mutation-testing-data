@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` would be called immediately, whereas the original code fragment `nextStream` would only be called when the `end` argument is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the callback passed to `_read` would be called with the `err` and `data` arguments, whereas the original code fragment would only call the callback with the `err` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err

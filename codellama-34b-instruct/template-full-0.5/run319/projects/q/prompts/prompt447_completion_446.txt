@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function(reason) {
+    untrackRejection(promise);
+    return reason;
+});
+```
+This would result in different behavior because it would unconditionally untrack the rejection, regardless of whether it has been handled or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function(reason) {
+    return reason;
+}).then(untrackRejection(promise));
+```
+This would result in different behavior because it would unconditionally untrack the rejection, regardless of whether it has been handled or not, and it would also execute the `untrackRejection` function immediately, rather than waiting for the promise to be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function(reason) {
+    if (reason instanceof Error) {
+        untrackRejection(promise);
+    }
+    return reason;
+});
+```
+This would result in different behavior because it

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+decodeURI
+```
+This would result in different behavior because `decodeURI` only decodes the URI's escape sequences and does not decode the path separators, which may cause the file to be saved in the wrong location.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+decodeURIComponent(path.basename(pathname))
+```
+This would result in different behavior because `decodeURIComponent` only decodes the escape sequences in the pathname, and does not decode the path separators, which may cause the file to be saved in the wrong location.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.basename(decodeURI(pathname))
+```
+This would result in different behavior because `decodeURI` only decodes the URI's escape sequences and does not decode the path separators, which may cause the file to be saved in the wrong location.
+
+DONE.

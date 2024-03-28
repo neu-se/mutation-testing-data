@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(reject(reason))
+```
+This would result in different behavior because `become` is a function that accepts a promise as an argument, but `reject` is a function that returns a promise. By calling `reject` inside `become`, the `reject` function would be called with the promise returned by `reject`, which would result in a promise that is already rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+become(Q.reject(reason))
+```
+This would result in different behavior because `Q.reject` is a function that returns a rejected promise, but `reject` is a function that returns a promise. By calling `Q.reject` inside `become`, the `reject` function would be called with the rejected promise returned by `Q.reject`, which would result in a promise that is already rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+become(fulfill(reason))
+```
+This

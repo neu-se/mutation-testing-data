@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.reject(new Error("callback was not a function"))
+```
+This would result in different behavior because the original code fragment would have called the `callback` function if it was a function, but this new code fragment would have rejected the promise with an error if `callback` was not a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(callback)
+```
+This would result in different behavior because the original code fragment would have called the `callback` function if it was a function, but this new code fragment would have resolved the promise with the `callback` function itself, regardless of whether it was a function or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(callback()).then(function(value) { return value; })
+```
+This would result in different behavior because the original code fragment would have called the `callback` function if it was a function and returned its result, but this new code fragment would have resolved the promise with the result of calling the

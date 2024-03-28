@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.npost = function (object, name, args) {
+    return Q(object).npost(name, args);
+};
+```
+This would result in different behavior because the `npost` method is not defined on the `Q` object, so it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.npost = function (object, name, args) {
+    return Q(object).npost(name, args).then(function () {
+        return Q(object).npost(name, args);
+    });
+};
+```
+This would result in different behavior because the `npost` method is called twice, which would cause the promise to resolve twice.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.npost = function (object, name, args) {
+    return Q(object).npost(name, args).then(function () {
+        return Q(object).npost(name, args).

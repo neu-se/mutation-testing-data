@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+self.promiseDispatch(function (value) {
+    if (done) {
+        return;
+    }
+    done = true;
+
+    deferred.resolve(_fulfilled(value));
+}, "when", [function (exception) {
+    if (done) {
+        return;
+    }
+    done = true;
+
+    deferred.resolve(_rejected(exception));
+}]);
+```
+This would result in different behavior because `self.promiseDispatch` would be called with a different set of arguments, potentially leading to a different execution path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    deferred.resolve(_fulfilled(value));
+}, "when", [function (exception) {
+    deferred.resolve(_rejected(exception));
+}]);
+```
+This would result in different behavior because `Q.nextTick` would be called with a different function, potentially leading to a different execution path.
+
+Option

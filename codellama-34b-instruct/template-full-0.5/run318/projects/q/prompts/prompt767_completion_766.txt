@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.reject(rejection);
+```
+This would result in different behavior because `Q.reject` creates a new rejected promise, whereas `noop` does not return anything, which would result in the promise being fulfilled with `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.resolve(rejection);
+```
+This would result in different behavior because `Q.resolve` creates a new fulfilled promise, whereas `noop` does not return anything, which would result in the promise being fulfilled with `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q.defer().resolve(rejection);
+```
+This would result in different behavior because `Q.defer().resolve()` creates a new fulfilled promise, whereas `noop` does not return anything, which would result in the promise being fulfilled with `undefined`.
+
+DONE.

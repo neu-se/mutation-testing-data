@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    return callback.fcall().then(function () {
+        return value;
+    });
+}, function (reason) {
+    // TODO attempt to recycle the rejection with "this".
+    return callback.fcall().then(function () {
+        throw reason;
+    });
+}).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is called on the result of `then`, which would cause the promise to be rejected if the callback throws an error, whereas the original code only rejects the promise if the original promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    return callback.fcall(value).then(function () {
+        return value;
+    });
+}, function (reason) {
+    // TODO attempt to recycle the rejection with "this".
+    return callback.fcall(reason).then(function () {
+        throw reason

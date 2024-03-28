@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+key, null, cb
+```
+This would result in different behavior because `null` is a valid JSON value, but `undefined` is not, so the `JSON.parse()` call would fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+key, NaN, cb
+```
+This would result in different behavior because `NaN` is a valid JSON value, but it would not be equal to `undefined`, so the `if (val === undefined)` check would fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+key, 'undefined', cb
+```
+This would result in different behavior because `'undefined'` is a string, but `undefined` is a special value in JavaScript, so the `if (val === undefined)` check would fail.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', reject);
+```
+This would result in different behavior because the `on('error', reject)` event would be called twice, once for the `zipArchive` and once for the `output` stream, which could cause the test to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('finish', resolve);
+```
+This would result in different behavior because the `on('finish', resolve)` event would be called twice, once for the `zipArchive` and once for the `output` stream, which could cause the test to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('close', resolve);
+```
+This would result in different behavior because the `on('close', resolve)` event would be called twice, once for the `zipArchive` and once for the `output` stream, which could cause the test to fail.

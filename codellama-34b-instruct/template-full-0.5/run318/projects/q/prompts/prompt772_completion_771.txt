@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises = array_map(promises, Q);
+```
+This would result in different behavior because the original code fragment uses `array_map` to create a new array with the same elements as `promises`, while this code fragment uses `Q` to create a new promise that resolves with the same value as `promises`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises = array_map(promises, function (promise) {
+    return when(promise, noop, noop);
+});
+```
+This would result in different behavior because the original code fragment uses `array_map` to create a new array with the same elements as `promises`, while this code fragment uses `when` to create a new promise that resolves with the same value as `promises`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises = array_map(promises, function (promise) {
+    return promise.then(noop, noop);

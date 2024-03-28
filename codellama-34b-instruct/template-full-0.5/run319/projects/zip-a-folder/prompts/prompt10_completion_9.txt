@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because `!isGlob` would negate the result of the `isGlob` function, causing the `glob` method to be called on the `src` string even if it is not a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob.call(null, src)
+```
+This would result in different behavior because `isGlob.call(null, src)` would call the `isGlob` function with a `null` context, which could cause the function to behave differently if it relies on the context object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob(src)
+```
+This would result in different behavior because `isGlob(src)` would call the `isGlob` function with a different set of arguments than the original code, which could cause the function to behave differently if it relies on the arguments passed to it.
+
+DONE.

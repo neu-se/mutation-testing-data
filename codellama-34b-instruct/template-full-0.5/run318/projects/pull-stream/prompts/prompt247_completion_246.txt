@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This would result in different behavior because `err && abort` is a different condition than `err || abort`. In the original code, if `err` is truthy, the function aborts and calls `cb` with `err`. In the mutated code, if `err` is falsy, the function aborts and calls `cb` with `abort`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err ? abort : cb
+```
+This would result in different behavior because `err ? abort : cb` is a different condition than `err || abort`. In the original code, if `err` is truthy, the function aborts and calls `cb` with `err`. In the mutated code, if `err` is truthy, the function aborts and calls `cb` with `abort`. If `err` is falsy, the function calls `cb` with `cb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!

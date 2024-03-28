@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  cb(err || abort)
+})
+```
+This would result in different behavior because the original code fragment only calls `cb` with `err` if `err` is truthy, while this new code fragment always calls `cb` with `err` or `abort`, regardless of whether `err` is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  cb(err && abort)
+})
+```
+This would result in different behavior because the original code fragment only calls `cb` with `err` if `err` is truthy, while this new code fragment only calls `cb` with `err` if `err` and `abort` are both truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  cb(err ^ abort)
+})
+```
+This would result in different behavior because the original

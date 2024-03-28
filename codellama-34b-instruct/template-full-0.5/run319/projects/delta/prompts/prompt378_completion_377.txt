@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peekType() !== 'delete')
+```
+This would result in different behavior because the original code fragment checks for `otherIter.peekType() === 'insert'` instead of `'delete'`, which would cause the `transform` method to behave differently when both deltas have insert operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peekType() !== 'insert')
+```
+This would result in different behavior because the original code fragment checks for `otherIter.peekType() === 'delete'` instead of `'insert'`, which would cause the `transform` method to behave differently when both deltas have insert operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peekType() !== 'retain')

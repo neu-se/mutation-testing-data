@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = flush();
+```
+This would result in different behavior because `channel.port1.onmessage` would be set to the return value of `flush()`, which is `undefined`, instead of the `flush` function itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = function() { return flush(); };
+```
+This would result in different behavior because `channel.port1.onmessage` would be set to a function that returns the return value of `flush()`, which is `undefined`, instead of the `flush` function itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = function() { flush(); };
+```
+This would result in different behavior because `channel.port1.onmessage` would be set to a function that calls `flush()`, but does not return its return value, which could cause the `setImmediate` function to not work as expected.
+
+DONE.

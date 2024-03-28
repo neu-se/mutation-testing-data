@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes
+```
+This would result in different behavior because it would always evaluate to true if the last op has a retain attribute, regardless of its value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes.length > 0
+```
+This would result in different behavior because it would only evaluate to true if the last op has a retain attribute and the length of that attribute is greater than 0.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes.some(attr => attr.name === 'foo')
+```
+This would result in different behavior because it would only evaluate to true if the last op has a retain attribute and one of the attributes has the name 'foo'.
+
+DONE.

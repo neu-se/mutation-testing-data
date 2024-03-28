@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+done && function () {}
+```
+This would result in different behavior because if `done` is truthy, the function would be called with an empty argument list, which would cause the `read` function to be called with an empty argument list, which would cause the stream to be read with an empty buffer, which would cause the `read` function to return an empty string, which would cause the `op` function to be called with an empty string, which would cause the `done` function to be called with an empty argument list, which would cause the stream to be closed without any data being read.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+done || function (err) { throw err }
+```
+This would result in different behavior because if `done` is falsy, the function would be called with an error object, which would cause the `read` function to be called with an error object, which would cause the stream to be read with an error object, which would cause the `op` function to be called with an error object, which would

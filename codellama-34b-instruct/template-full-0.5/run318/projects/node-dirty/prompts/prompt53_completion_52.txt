@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && this._inFlightWrites > 0
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the second condition would only be evaluated if the first condition is true. In the original code, the `||` operator is used to check if either condition is true, regardless of the order in which they are evaluated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0 && this._inFlightWrites > 0
+```
+This would result in different behavior because the `>` operator has a higher precedence than the `&&` operator, so the second condition would only be evaluated if the first condition is true. In the original code, the `>` operator is used to check if the size of the queue is greater than zero, regardless of the number of in-flight writes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.size ||

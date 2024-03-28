@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.insert
+```
+This would result in different behavior because `insert` and `delete` are opposing operations, and using `insert` instead of `delete` would cause the inverted Delta to have the opposite effect.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(op), { 'delete': true })
+```
+This would result in different behavior because `retain` with the `delete` attribute set to `true` would cause the inverted Delta to retain the deleted content, rather than removing it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.push(new Op({ delete: Op.length(op) }))
+```
+This would result in different behavior because `push` would add a new operation to the inverted Delta, rather than modifying the existing one.
+
+DONE.

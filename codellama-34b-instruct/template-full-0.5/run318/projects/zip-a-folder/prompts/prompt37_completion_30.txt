@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob(src)
+```
+This would result in different behavior because the `!` operator negates the result of the `isGlob()` function, so if the `src` variable is a glob, the negated result would be `false`, and the code would enter the `else` block, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob(src) && src.length > 0
+```
+This would result in different behavior because the `&&` operator requires both operands to be true, so if the `src` variable is a glob, the result of `isGlob(src)` would be `true`, but the result of `src.length > 0` would be `false`, since the length of a glob is not greater than zero. This would cause the code to enter the `else` block, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob(src) ||

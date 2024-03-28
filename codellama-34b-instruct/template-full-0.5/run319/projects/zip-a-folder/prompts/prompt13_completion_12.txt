@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart);
+});
+```
+This would result in different behavior because it would change the order of the glob parts, potentially causing the archive to be created with a different structure.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart, {
+        cwd: path.dirname(targetFilePath),
+    });
+});
+```
+This would result in different behavior because it would change the working directory of the glob search, potentially causing the archive to be created with a different structure.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart, {
+        ignore: ['**/node_modules/**'],
+    });
+});
+```
+This would result in different behavior because it would exclude any files or directories that

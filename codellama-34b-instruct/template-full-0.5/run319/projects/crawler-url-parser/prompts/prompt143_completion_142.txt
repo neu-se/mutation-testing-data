@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "/").replace(/\/default\.[a-z]+$/, "/");
+```
+This would result in different behavior because the regular expression pattern is different, which could cause the replace function to match and replace different parts of the string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "/").replace(/\/default\.[a-z]+$/, "");
+```
+This would result in different behavior because the second replace function is removing the default part of the URL, which could cause the type of the link to be classified as "external" instead of "internal".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "").replace(/\/default\.[a-z]+$/, "/");
+```

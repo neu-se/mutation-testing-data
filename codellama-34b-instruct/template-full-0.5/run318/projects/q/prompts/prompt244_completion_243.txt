@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.inspect.bind(resolvedPromise)
+```
+This would result in different behavior because `bind` creates a new function with the `this` value bound to `resolvedPromise`, which would cause the `inspect` method to be called on a different object than the one it was originally called on.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.inspect.call(null)
+```
+This would result in different behavior because `call` sets the `this` value to `null` when calling the `inspect` method, which would cause the method to be called on a different object than the one it was originally called on.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.inspect.apply(undefined)
+```
+This would result in different behavior because `apply` sets the `this` value to `undefined` when calling the `inspect` method, which would cause the method to be called on a different

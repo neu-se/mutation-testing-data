@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the function `_has_illegal_chars` is being called with `currentUrlStr` instead of `baseUrlStr`, which could lead to different results if the two strings contain different types of characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/^\/\//, 'http://'))
+```
+This would result in different behavior because the `baseUrlStr` is being modified by replacing the `//` at the beginning with `http://`, which could lead to different results if the `baseUrlStr` contains a different protocol.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/#.*$/, ''))
+```
+This would result in different behavior because the `baseUrlStr` is being

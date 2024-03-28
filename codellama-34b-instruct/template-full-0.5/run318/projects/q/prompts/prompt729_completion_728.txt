@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.slice(1)
+```
+This would result in different behavior because `promises.slice(1)` returns a new array containing all elements of `promises` except the first one, whereas `promises` returns the original array. This change would cause the `all` function to resolve with a different array of promises, which could lead to unexpected behavior in the calling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises.concat([Q.reject("error")])
+```
+This would result in different behavior because `promises.concat([Q.reject("error")])` returns a new array containing all elements of `promises` followed by a new promise that is rejected with the error message "error". This change would cause the `all` function to reject with the error message "error", even if all the promises in the original array were resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.map(function (promise) { return Q.resolve

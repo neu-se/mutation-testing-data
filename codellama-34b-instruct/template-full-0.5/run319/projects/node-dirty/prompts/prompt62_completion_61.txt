@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.destroy(new Error('Intentional error'));
+```
+This would result in different behavior because the `destroy()` method is called with an error, which would cause the write stream to be destroyed and the `close` event to be emitted, even if there are still writes pending.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.destroy(null);
+```
+This would result in different behavior because the `destroy()` method is called with `null`, which would cause the write stream to be destroyed and the `close` event to be emitted, even if there are still writes pending.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy());
+```
+This would result in different behavior because the `end()` method is called with a callback that calls `destroy()`, which would cause the write stream to be destroyed and the `close` event to be emitted, even if there are still writes pending.
+

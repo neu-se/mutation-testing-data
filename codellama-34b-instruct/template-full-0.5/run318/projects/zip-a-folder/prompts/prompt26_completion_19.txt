@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+format, {}
+```
+This would result in different behavior because it would ignore any `archiverOptions` passed in and always use an empty object, which could cause issues if the `archiverOptions` are important for the correct behavior of the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+format, { gzip: true }
+```
+This would result in different behavior because it would always enable gzip compression, even if the `archiverOptions` passed in had `gzip: false`. This could cause issues if the function is not designed to handle gzip compression.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+format, { zlib: { level: 9 } }
+```
+This would result in different behavior because it would always set the compression level to 9, even if the `archiverOptions` passed in had a different compression level. This could cause issues if the function is not designed to handle different compression levels.
+
+DONE.

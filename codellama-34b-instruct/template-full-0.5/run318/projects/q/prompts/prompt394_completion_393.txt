@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the `undefined` value is not a promise, and `Q.when` would not be able to observe the promise's fulfillment or rejection.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+value.then(undefined)
+```
+This would result in different behavior because the `then` method would not be called on the original promise, and the `undefined` value would not be a valid callback function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value.then(function() { throw "error"; })
+```
+This would result in different behavior because the `then` method would be called on the original promise, but the callback function would throw an error, which would not be caught by the `Q.when` method.
+
+DONE.

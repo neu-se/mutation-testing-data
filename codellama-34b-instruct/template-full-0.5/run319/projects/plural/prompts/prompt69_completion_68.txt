@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'memo', 'memo'
+```
+This would result in different behavior because the second argument to `addRule` is a function that returns the same string that was passed in, so the plural of "memo" would be "memo" instead of "memos".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'memo', function(w) { return w + 's' }
+```
+This would result in different behavior because the second argument to `addRule` is a function that returns the original string plus "s", so the plural of "memo" would be "memos" instead of "memo".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'memo', function(w) { return w.substr(0, w.length - 1) + 'os' }
+```
+This would result in different behavior because the second argument to `addRule` is a function that returns the original string minus the last character plus "os", so the

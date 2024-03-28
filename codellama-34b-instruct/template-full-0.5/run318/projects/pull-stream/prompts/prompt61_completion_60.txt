@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+while (true) {
+  read(null, function (end, data) {
+    if (end || abort) {
+      loop = false
+      if (done) done(end === true ? null : end)
+      else if (end && end !== true) {
+        console.warn(doneLackingErr)
+        throw end
+      }
+    } else if (op && false === op(data) || abort) {
+      loop = false
+      read(abort || true, done || function () {})
+    }
+  })
+}
+```
+This would result in different behavior because the original code uses a `while` loop to repeatedly call the `read` function, while this modified code uses a `while (true)` loop, which will run indefinitely until the `read` function returns a value that causes the loop to exit.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+while (loop) {
+  read(null, function (end, data) {
+    if (end

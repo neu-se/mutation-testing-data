@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).npost(name, args)
+```
+This would result in different behavior because `Q(object).npost` is a method that calls a method of a Node-style object that accepts a Node-style callback with a given array of arguments, plus a provided callback. By replacing it with `Q(object).npost(name, args)`, the method would be called with the `name` and `args` arguments, which would result in a different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).npost(name, args).fail(deferred.reject)
+```
+This would result in different behavior because `Q(object).npost(name, args).fail(deferred.reject)` would call the `fail` method on the result of `Q(object).npost(name, args)`, which would reject the promise if the method fails. By replacing it with `Q(object).npost(name, args)`, the method would be called without the `fail` method,

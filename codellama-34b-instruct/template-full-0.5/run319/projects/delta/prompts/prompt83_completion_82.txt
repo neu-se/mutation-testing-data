@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes !== lastOp.attributes
+```
+This would result in different behavior because it would always return `true` if `newOp.attributes` and `lastOp.attributes` are not equal, regardless of the type of the attributes. In the original code, `isEqual` is used to compare the attributes, which allows for a more nuanced comparison based on the type of the attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes !== lastOp.attributes || newOp.attributes.length !== lastOp.attributes.length
+```
+This would result in different behavior because it would also check the length of the attributes, not just their equality. This could cause the code to behave differently if the attributes have the same values but different lengths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes !== lastOp.attributes || !Object.keys(newOp.attributes).every(key => lastOp.attributes[key] === newOp.attributes[key])

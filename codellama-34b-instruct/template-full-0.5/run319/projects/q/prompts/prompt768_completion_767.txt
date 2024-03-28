@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop, noop)
+```
+This would result in different behavior because it would create a new promise that resolves to the original promise's rejection value, rather than the original promise's fulfillment value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop, function () { throw new Error("Rejected"); })
+```
+This would result in different behavior because it would create a new promise that rejects with a new error, rather than the original promise's rejection value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () { return Q.reject(new Error("Rejected")); })
+```
+This would result in different behavior because it would create a new promise that rejects with a new error, rather than the original promise's fulfillment value.
+
+DONE.

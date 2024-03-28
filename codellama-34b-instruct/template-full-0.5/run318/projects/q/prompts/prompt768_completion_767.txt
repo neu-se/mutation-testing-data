@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop, noop)
+```
+This would result in different behavior because `then` returns a new promise that resolves with the return value of the fulfillment or rejection handler. In this case, the fulfillment and rejection handlers are both `noop`, which means that the returned promise would resolve with `undefined`. This would cause the subsequent `when` call to resolve with `undefined`, which would result in different behavior than the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop, noop).then(noop)
+```
+This would result in different behavior because the second `then` call would return a new promise that resolves with the return value of the fulfillment handler. In this case, the fulfillment handler is `noop`, which means that the returned promise would resolve with `undefined`. This would cause the subsequent `when` call to resolve with `undefined`, which would result in different behavior than the original code.
+
+Option 3: The

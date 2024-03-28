@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+lastOp.delete > 0
+```
+This would result in different behavior because it would always prefer to insert before deleting at the same index, even if the delete operation comes first.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp.insert === undefined
+```
+This would result in different behavior because it would always prefer to insert before deleting at the same index, even if the delete operation comes first and there is no insert operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof lastOp !== 'object'
+```
+This would result in different behavior because it would always prefer to insert before deleting at the same index, even if the delete operation comes first and the last operation is not an object.
+
+DONE.

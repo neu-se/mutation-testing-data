@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `fs.writeFileSync` is a synchronous function that returns the number of bytes written, whereas `fs.writeFile` is an asynchronous function that returns a promise. Using `fs.writeFileSync` in the `universalify.fromCallback` method would cause the function to return a number instead of a promise, which could break the code that relies on the promise being returned.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs))
+```
+This would result in different behavior because `fs.writeFile.bind(fs)` returns a new function that is bound to the `fs` object, which means that the `this` context inside the function will be set to `fs`. Using this bound function in the `universalify.fromCallback` method could cause the function to behave differently if it relies on the `this` context being set to something other than

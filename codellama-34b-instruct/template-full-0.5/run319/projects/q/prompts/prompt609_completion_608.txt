@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject, op, args
+```
+This would result in different behavior because `deferred.reject` would cause the promise to be rejected, rather than resolved, which would cause the `dispatch` method to return a rejected promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve, op, args.slice()
+```
+This would result in different behavior because `args.slice()` would create a shallow copy of the `args` array, which would cause the `dispatch` method to receive a different set of arguments than the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve, op, args.concat([null])
+```
+This would result in different behavior because `args.concat([null])` would add an extra `null` value to the end of the `args` array, which would cause the `dispatch` method to receive a different set of arguments than the original code.
+
+DONE.

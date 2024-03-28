@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reject
+```
+This would result in different behavior because the original code fragment resolves the promise when the output stream is closed, while the replaced code fragment rejects the promise instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolve(new Error('Testing mutation'))
+```
+This would result in different behavior because the original code fragment resolves the promise with no arguments, while the replaced code fragment resolves the promise with an error object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolve(output.on('error', reject))
+```
+This would result in different behavior because the original code fragment resolves the promise with no arguments, while the replaced code fragment resolves the promise with the result of the `on` method, which is a function that handles the error event.
+
+DONE.

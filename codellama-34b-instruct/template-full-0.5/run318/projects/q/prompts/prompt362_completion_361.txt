@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_rejected(value)
+```
+This would result in different behavior because the `_rejected` function is called instead of the `_fulfilled` function, which could cause the promise to be rejected instead of resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_fulfilled(value).then(_rejected)
+```
+This would result in different behavior because the `_fulfilled` function is called first, and then the `_rejected` function is called on the result of the `_fulfilled` function. This could cause the promise to be rejected instead of resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_rejected(value).then(_fulfilled)
+```
+This would result in different behavior because the `_rejected` function is called first, and then the `_fulfilled` function is called on the result of the `_rejected` function. This could cause the promise to be resolved instead of rejected.
+
+DONE.

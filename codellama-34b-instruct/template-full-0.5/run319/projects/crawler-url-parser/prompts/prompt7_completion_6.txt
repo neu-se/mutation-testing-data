@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && !_has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because the `!` operator inverts the result of the `_has_illegal_chars` function, causing the `baseUrlStr` to be considered valid even if it contains illegal characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr) && false
+```
+This would result in different behavior because the additional `false` condition would cause the `baseUrlStr` to be considered invalid even if it does not contain illegal characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr) && baseUrlStr.length > 0
+```
+This would result in different behavior because the additional `baseUrlStr.length > 0` condition would cause the `baseUrlStr` to be considered invalid if it is empty,

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(null);
+```
+This would result in different behavior because `nodeArgs.push(null)` would add `null` to the end of the `nodeArgs` array, instead of the `deferred.makeNodeResolver()` function that was originally passed. This would cause the `setTimeout` function to be called with a `null` callback, which would result in an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(undefined);
+```
+This would result in different behavior because `nodeArgs.push(undefined)` would add `undefined` to the end of the `nodeArgs` array, instead of the `deferred.makeNodeResolver()` function that was originally passed. This would cause the `setTimeout` function to be called with a `undefined` callback, which would result in an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(function () {});
+```
+This would result in different behavior because `nodeArgs.

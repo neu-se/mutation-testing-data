@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `fs.writeFileSync` is a synchronous function that returns nothing, while `universalify.fromCallback(fs.writeFile)` is an asynchronous function that returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile, { throws: false })
+```
+This would result in different behavior because the `throws` option is set to `false`, which means that the function will not throw an error if the file cannot be written.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile, { encoding: 'utf8' })
+```
+This would result in different behavior because the `encoding` option is set to `'utf8'`, which means that the file will be written using UTF-8 encoding, while the original code did not specify an encoding.
+
+DONE.

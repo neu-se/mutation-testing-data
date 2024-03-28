@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    loop = false;
+    if (done) done(null);
+    else if (end && end !== true) {
+      console.warn(doneLackingErr);
+      throw end;
+    }
+  }
+});
+```
+This would result in different behavior because the original code fragment only checks if `end` is truthy, while the new code fragment checks if `end` is strictly equal to `true`. This means that if `end` is a non-boolean value, the new code fragment will not behave the same way as the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    loop = false;
+    if (done) done(null);
+    else if (end && end !== true) {
+      console.warn(doneLackingErr);
+      throw end;
+    }

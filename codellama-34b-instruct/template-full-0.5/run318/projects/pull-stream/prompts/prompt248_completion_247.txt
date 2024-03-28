@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, cb)
+```
+This would result in different behavior because it would always pass `true` as the first argument to `read`, which would cause the stream to be aborted immediately, rather than waiting for the current stream to end.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, cb)
+```
+This would result in different behavior because it would always pass `null` as the first argument to `read`, which would cause the stream to be aborted immediately, rather than waiting for the current stream to end.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  cb(err || abort)
+})
+```
+This would result in different behavior because it would always pass the `abort` value as the first argument to `read`, and would also pass a callback function that would be called with the error or the abort value.
+
+DONE.

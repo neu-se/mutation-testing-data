@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(_rejected(exception));
+```
+This would result in different behavior because the `deferred.resolve()` method is called with the result of `_rejected(exception)`, which is a rejected promise. This would cause the `then()` method to be called with a rejected promise, which would result in the `rejected` callback being called instead of the `fulfilled` callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(_fulfilled(value));
+```
+This would result in different behavior because the `deferred.reject()` method is called with the result of `_fulfilled(value)`, which is a fulfilled promise. This would cause the `then()` method to be called with a fulfilled promise, which would result in the `fulfilled` callback being called instead of the `rejected` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(_progressed(value));
+```
+This would result in

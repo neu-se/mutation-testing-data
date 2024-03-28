@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && true
+```
+This would result in different behavior because `end && true` is always truthy, whereas `end` is only truthy if the stream has ended. This change would cause the `once` function to be called even if the stream has not ended, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end || false
+```
+This would result in different behavior because `end || false` is always truthy, whereas `end` is only truthy if the stream has ended. This change would cause the `once` function to be called even if the stream has not ended, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end !== true
+```
+This would result in different behavior because `end !== true` is always truthy, whereas `end` is only truthy if the stream has ended. This change would cause the `once` function to be called even if the stream has not ended, which could lead to unexpected behavior

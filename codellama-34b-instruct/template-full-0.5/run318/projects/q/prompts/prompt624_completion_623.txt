@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.all(object).dispatch("set", [key, value]);
+```
+This would result in different behavior because `Q.all(object)` would return a promise that resolves to an array of promises, rather than a promise that resolves to the original object. This would cause the `dispatch` method to be called on an array of promises, rather than the original object, which would likely result in a type error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(object).dispatch("set", [key, value]);
+```
+This would result in different behavior because `Q.resolve(object)` would return a promise that resolves to the original object, rather than the original object itself. This would cause the `dispatch` method to be called on a promise, rather than the original object, which would likely result in a type error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.reject(object).dispatch("set", [key, value]);
+```
+This would

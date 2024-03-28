@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.type === 'Point' || point.coordinates.length === 2
+```
+This would result in different behavior because it would allow objects with a `type` property that is not `'Point'` and objects with a `coordinates` property that is not an array of length 2 to be passed as arguments to the `fromGeoJSON` method, which would cause the method to throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty('type') || !point.hasOwnProperty('coordinates') || point.type !== 'Point' || point.coordinates.length !== 2
+```
+This would result in different behavior because it would allow objects with a `type` property that is not `'Point'` and objects with a `coordinates` property that is not an array of length 2 to be passed as arguments to the `fromGeoJSON` method, which would cause the method to throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with

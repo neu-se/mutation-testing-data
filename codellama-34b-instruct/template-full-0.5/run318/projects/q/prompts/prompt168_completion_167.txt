@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+line.includes("(module.js:") || line.includes("(node.js:")
+```
+This would result in different behavior because it would only check if the line includes the substring "(module.js:" or "(node.js:", instead of checking if it matches the entire regex pattern.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+line.match(/^at .+ \((.+):(\d+):(\d+)\)$/)
+```
+This would result in different behavior because it would only check if the line matches the regex pattern, without checking if it includes the substring "(module.js:" or "(node.js:".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+line.includes("(module.js:") && line.includes("(node.js:")
+```
+This would result in different behavior because it would only check if the line includes both substrings "(module.js:" and "(node.js:", instead of checking if it matches the entire regex

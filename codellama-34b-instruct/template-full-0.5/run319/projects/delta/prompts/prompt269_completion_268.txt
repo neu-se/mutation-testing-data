@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.delete(1)
+```
+This would result in different behavior because the original code fragment was `retDelta.chop()`, which removes any trailing retain ops from the delta, while the new code fragment would delete the first op in the delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(1)
+```
+This would result in different behavior because the original code fragment was `retDelta.chop()`, which removes any trailing retain ops from the delta, while the new code fragment would retain the first op in the delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(new Delta())
+```
+This would result in different behavior because the original code fragment was `retDelta.chop()`, which removes any trailing retain ops from the delta, while the new code fragment would add a new, empty delta to the end of the delta.
+
+DONE.

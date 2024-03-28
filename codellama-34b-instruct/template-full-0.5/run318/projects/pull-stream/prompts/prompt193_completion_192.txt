@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This would result in different behavior because the `!` operator negates the value of `aborted`, so if `aborted` is `true`, the code would return `cb(aborted)` instead of skipping the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+aborted && true
+```
+This would result in different behavior because the `&&` operator would evaluate to `true` if `aborted` is `true`, but `false` otherwise. This would cause the code to return `cb(aborted)` even if `aborted` is `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+aborted || false
+```
+This would result in different behavior because the `||` operator would evaluate to `false` if `aborted` is `false`, but `true` otherwise. This would cause the code to return `cb(aborted)` even if `aborted` is `true`.
+
+DONE.

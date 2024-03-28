@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.unpipe(output);
+```
+This would result in different behavior because `unpipe` would remove the `output` stream from the `zipArchive` object, causing the archive to not be written to the file.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(process.stdout);
+```
+This would result in different behavior because `process.stdout` is a different stream than `output`, so the archive would be written to the console instead of the file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(fs.createWriteStream('different-file.zip'));
+```
+This would result in different behavior because a different file path is being used to create the write stream, so the archive would be written to a different file than the one intended.
+
+DONE.

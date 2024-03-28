@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error'
+```
+This would result in different behavior because the `'load'` event is emitted when the database is fully loaded, while the `'error'` event is emitted when an error occurs. Using `'error'` instead of `'load'` would cause the `Dirty` class to emit an error event when the database is fully loaded, which would be unexpected and potentially cause issues for the users of the class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain'
+```
+This would result in different behavior because the `'load'` event is emitted when the database is fully loaded, while the `'drain'` event is emitted when the write stream is drained. Using `'drain'` instead of `'load'` would cause the `Dirty` class to emit a drain event when the database is fully loaded, which would be unexpected and potentially cause issues for the users of the class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'read_close'
+```
+This would result in

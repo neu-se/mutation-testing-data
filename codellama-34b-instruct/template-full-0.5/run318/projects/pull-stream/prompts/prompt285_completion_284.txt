@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (end) return cb(null, data)
+```
+This would result in different behavior because the original code would call `cb` with an error if `mapper` threw an error, while this new code would return `null` as the first argument to `cb`, which could cause unexpected behavior in the code that uses this function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (end) return cb(data)
+```
+This would result in different behavior because the original code would call `cb` with an error if `mapper` threw an error, while this new code would return `data` as the first argument to `cb`, which could cause unexpected behavior in the code that uses this function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (end) return cb(null)
+```
+This would result in different behavior because the original code would call `cb` with an error if `mapper` threw an error, while this new code would return `null` as the first

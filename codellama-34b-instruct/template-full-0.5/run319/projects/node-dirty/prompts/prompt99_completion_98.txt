@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'CORRUPTED_ROW' });
+```
+This would result in different behavior because the error object would have a different code property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'CORRUPTED_ROW', rowStr });
+```
+This would result in different behavior because the error object would have a different code property and a different rowStr property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'CORRUPTED_ROW', rowStr, data: this._data });
+```
+This would result in different behavior because the error object would have a different code property, a different rowStr property, and a different data property.
+
+DONE.

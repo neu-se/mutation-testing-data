@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.emit("unhandledRejection", reason, promise)
+```
+This would result in different behavior because the `emit` method is not defined on the `process` object, so it would throw a `TypeError`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.emit("rejectionHandled", reason, promise)
+```
+This would result in different behavior because the `emit` method is not defined on the `process` object, so it would throw a `TypeError`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.on("unhandledRejection", function (reason, promise) {
+    // do something with the reason and promise
+})
+```
+This would result in different behavior because the `on` method is not defined on the `process` object, so it would throw a `TypeError`.
+
+DONE.

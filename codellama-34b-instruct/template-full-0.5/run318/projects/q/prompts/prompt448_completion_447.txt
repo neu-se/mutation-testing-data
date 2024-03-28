@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.pop
+```
+This would result in different behavior because `pop` removes the last element of an array, whereas `push` adds an element to the end of an array. This change would cause the `trackRejection` function to remove the last unhandled rejection instead of adding a new one, which could lead to unexpected behavior in the promise library.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.shift
+```
+This would result in different behavior because `shift` removes the first element of an array, whereas `push` adds an element to the end of an array. This change would cause the `trackRejection` function to remove the first unhandled rejection instead of adding a new one, which could lead to unexpected behavior in the promise library.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.slice(0, 1)
+```
+This would result in different behavior because `slice` returns a shallow copy

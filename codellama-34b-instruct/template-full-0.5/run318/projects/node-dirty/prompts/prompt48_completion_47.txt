@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+key, updater(this.get(key) + 1), cb
+```
+This would result in different behavior because the `+ 1` would cause the value to be incremented by 1 before being passed to the `updater` function, which would change the behavior of the `update` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+key, updater(this.get(key) || []), cb
+```
+This would result in different behavior because the `|| []` would cause an empty array to be passed to the `updater` function if the value at the given key is falsy, which would change the behavior of the `update` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+key, updater(this.get(key).slice(1)), cb
+```
+This would result in different behavior because the `.slice(1)` would cause the value at the given key to be sliced from the first character, which would change the

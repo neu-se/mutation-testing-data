@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, prev, { [id]: getCountry(id, options) });
+```
+This would result in different behavior because it would not spread the `prev` object, which could cause issues if the `prev` object has properties that are not intended to be overwritten by the `getCountry` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, prev, { [id]: getCountry(id, options) }, { deprecated: true });
+```
+This would result in different behavior because it would add a `deprecated` property to the returned object, which could cause issues if the `deprecated` property is not handled correctly by the code that uses the returned object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, prev, { [id]: getCountry(id, options) }, { foo: 'bar' });
+```
+This would result in different behavior because it would add a `foo` property with the value `'bar'`

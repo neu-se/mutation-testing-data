@@ -1,0 +1,9 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (baseUrlStr && !/^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(baseUrlStr)) return null;
+```
+This would result in different behavior because the regular expression used in the original code fragment only checks for illegal characters, while the new regular expression checks for illegal characters and also ensures that the base URL is a valid URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (baseUrlStr && !/^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(baseUrlStr) && baseUrlStr.indexOf('://') === -1)

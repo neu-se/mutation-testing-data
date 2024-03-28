@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^\//) === true
+```
+This would result in different behavior because `spec.match(/^\//)` returns a `RegExpMatchArray` object, which is an array-like object containing the matches, captures, and indices of the match. In this case, the match is the entire string, so the `RegExpMatchArray` object would contain only one element, which is the entire string.
+
+In the original code, the `spec.match(/^\//) === null` check is used to ensure that the path specification does not begin with a slash. If the path specification begins with a slash, it would indicate that the path is absolute, which is not allowed in the specification language.
+
+By replacing the `spec.match(/^\//) === null` check with `spec.match(/^\//) === true`, we are effectively allowing absolute paths to be specified, which could lead to unexpected behavior in the code that consumes the `Matcher` class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.

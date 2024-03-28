@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^https?:\/\//, 'http://'
+```
+This would result in different behavior because the original code fragment only replaced the protocol with "http://" if it was "//", but this new code fragment would replace the protocol with "http://" if it was "https://" as well.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?!https?:\/\/).*/, 'http://'
+```
+This would result in different behavior because the original code fragment only replaced the protocol with "http://" if it was "//", but this new code fragment would replace the protocol with "http://" if it was any other protocol (e.g. "ftp://", "mailto:", etc.).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?!https?:\/\/).*/, ''
+```
+This would result in different behavior because the original code fragment only replaced the protocol with "http://" if it was "//", but this new code fragment

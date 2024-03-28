@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    if (err) {
+        nodeback(err);
+    } else {
+        nodeback(null, value);
+    }
+}
+```
+This would result in different behavior because it would cause the `nodeback` function to be called with an error object as the first argument, even if the promise resolves successfully.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    if (err) {
+        nodeback(err);
+    } else {
+        nodeback(value);
+    }
+}
+```
+This would result in different behavior because it would cause the `nodeback` function to be called with the resolved value as the first argument, even if the promise rejects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    if (err) {
+        nodeback(err);
+    } else {
+        nodeback(null, value);

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(null);
+```
+This would result in different behavior because the original code fragment resolved the promise with the result of the Node function, while this new code fragment resolves the promise with `null` regardless of the result of the Node function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Invalid argument"));
+```
+This would result in different behavior because the original code fragment resolved the promise with the result of the Node function, while this new code fragment rejects the promise with an error message regardless of the result of the Node function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.resolve);
+```
+This would result in different behavior because the original code fragment resolved the promise with the result of the Node function, while this new code fragment resolves the promise with the result of the Node function twice.
+
+DONE.

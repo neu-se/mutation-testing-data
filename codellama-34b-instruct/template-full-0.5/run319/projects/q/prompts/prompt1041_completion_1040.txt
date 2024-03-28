@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+next.resolve({
+    head: value,
+    tail: next.promise
+});
+```
+This would result in different behavior because the original code was using `Q.defer()` to create a new promise, while this code is using `next.resolve()` to resolve the existing promise. This could cause issues if the promise is already resolved or if there are other parts of the code that rely on the promise being resolved in a specific way.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+next.resolve(value);
+```
+This would result in different behavior because the original code was using `Q.defer()` to create a new promise and then resolving it with an object containing the `head` and `tail` properties. This code is simply resolving the promise with the `value` variable. This could cause issues if the promise is expected to be resolved with an object containing specific properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+next.reject(error);
+```
+This would

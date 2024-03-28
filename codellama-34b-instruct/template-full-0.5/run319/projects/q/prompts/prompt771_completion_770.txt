@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled().then(function() { return null; });
+```
+This would result in different behavior because it would cause the `allSettled` method to return a promise that resolves to `null`, rather than a promise that resolves to an array of promise states.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled().then(function() { throw new Error("All promises were rejected"); });
+```
+This would result in different behavior because it would cause the `allSettled` method to throw an error if all of the promises are rejected, rather than returning a promise that resolves to an array of promise states.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled().then(function() { return Q.reject("All promises were rejected"); });
+```
+This would result in different behavior because it would cause the `allSettled` method to return a promise that

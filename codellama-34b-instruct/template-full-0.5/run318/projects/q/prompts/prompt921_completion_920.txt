@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `deferred.reject` function would be called twice if the `Q(callback).fapply(nodeArgs)` promise is rejected, which would cause the `deferred.reject` function to be called twice.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because the `deferred.resolve` function would be called if the `Q(callback).fapply(nodeArgs)` promise is rejected, which would cause the `deferred.resolve` function to be called instead of the `deferred.reject` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(function () {});
+```
+This would result in different behavior because the `function () {}` function would be

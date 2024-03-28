@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This would result in different behavior because the `set` method is not being called on the `_queue` object, which is a `Map` instance. As a result, the `cbs` list of callbacks would not be stored in the `_queue` map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, []);
+```
+This would result in different behavior because an empty array is being used to store the `cbs` list of callbacks in the `_queue` map, rather than the original `cbs` list.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.slice());
+```
+This would result in different behavior because a copy of the `cbs` list is being stored in the `_queue` map, rather than the original `cbs` list.
+
+DONE.

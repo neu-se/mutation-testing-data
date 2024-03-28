@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+finalise()
+```
+This would result in different behavior because `finalise` is a function that returns a string, but `finalise()` calls the function and returns the result, which is a string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+finalise.call(this)
+```
+This would result in different behavior because `finalise.call(this)` calls the `finalise` function with `this` as the context, which is the `Matcher` instance. This means that the function will have access to the instance's properties and methods, which may not be the case with `finalise()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+finalise.bind(this)()
+```
+This would result in different behavior because `finalise.bind(this)()` calls the `finalise` function with `this` as the context, and then immediately calls the resulting function with no arguments. This is similar to `finalise.call(this)`, but it also immediately calls the

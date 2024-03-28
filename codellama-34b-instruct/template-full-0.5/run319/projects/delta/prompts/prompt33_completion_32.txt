@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attr[key] !== base[key] || base[key] === undefined
+```
+This would result in different behavior because the `||` operator is used instead of the `&&` operator, which changes the logic of the expression. With `||`, the expression will evaluate to `true` if either `attr[key]` is not equal to `base[key]` or `base[key]` is `undefined`. This means that the `baseInverted` object will be updated with a `null` value for any key that is not in `attr` or `base`, regardless of whether the value in `base` is `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attr[key] !== base[key] && base[key] !== undefined
+```
+This would result in different behavior because the `!==` operator is used instead of the `===` operator, which changes the logic of the expression. With `!==`, the expression will evaluate to `true` if `attr[key]` is not equal to `base[key

@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {
+    return obj.dispatch;
+});
+```
+This would result in different behavior because `Q.promised` returns a function that takes an object and returns a promise for the result of the operation. However, in this code fragment, the function returned by `Q(object).then` takes an object and returns a promise for the `dispatch` property of the object, which is not the same as the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {
+    return obj.dispatch().then(function (result) {
+        return result.dispatch;
+    });
+});
+```
+This would result in different behavior because it adds an extra `then` call to the original code, which would cause the `dispatch` method to be called twice.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {
+    return obj.dispatch.apply

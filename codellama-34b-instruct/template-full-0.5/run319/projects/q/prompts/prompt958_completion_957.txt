@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.apply(thisp, nodeArgs)
+```
+This would result in different behavior because `callback.apply(thisp, nodeArgs)` would not be wrapped in a promise, which would cause the `fail` method to not be called if an error occurs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback.apply(thisp, nodeArgs)).fail(deferred.reject)
+```
+This would result in different behavior because `callback.apply(thisp, nodeArgs)` would be wrapped in a promise, but the `fail` method would not be called if an error occurs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback.apply(thisp, nodeArgs)).fail(deferred.reject).then(deferred.resolve)
+```
+This would result in different behavior because `callback.apply(thisp, nodeArgs)` would be wrapped in a promise, and the `fail` method would be called if an error occurs, but the `

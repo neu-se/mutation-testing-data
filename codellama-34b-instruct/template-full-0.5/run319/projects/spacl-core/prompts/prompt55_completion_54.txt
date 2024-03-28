@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}.*/`
+```
+This would result in different behavior because the addition of the `.*` at the end of the regex would match any character zero or more times, effectively making the match optional.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}.+/`
+```
+This would result in different behavior because the addition of the `.+` at the end of the regex would match any character one or more times, effectively making the match required.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}[^/]+/`
+```
+This would result in different behavior because the addition of the `[^/]+` at the end of the regex would match any character except for a forward slash one or more times, effectively making the match required and not allowing forward slashes in

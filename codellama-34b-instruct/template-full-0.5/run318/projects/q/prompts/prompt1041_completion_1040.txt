@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = next.resolve;
+```
+This would result in different behavior because it would resolve the `ends.promise` with the `next.promise` instead of the `next.resolve`, which could cause the `get` method to return a rejected promise instead of a resolved one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = next.reject;
+```
+This would result in different behavior because it would resolve the `ends.promise` with the `next.promise` instead of the `next.resolve`, and then reject the `ends.promise` with the `next.reject` function, which could cause the `get` method to return a rejected promise instead of a resolved one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.

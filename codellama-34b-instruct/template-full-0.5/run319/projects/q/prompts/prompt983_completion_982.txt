@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called on the promise returned by `this.dispatch`, which would cause the promise to be resolved instead of rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).then(deferred.reject);
+```
+This would result in different behavior because the `then` method is called on the promise returned by `this.dispatch`, which would cause the promise to be resolved with the result of the `deferred.reject` function instead of rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).then(function () {
+    deferred.reject();
+});
+```
+This would result in different behavior because the `then` method is called on the promise returned by `this.dispatch`, which would cause the promise to be

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) === null
+```
+This would result in different behavior because the `!==` operator is replaced with `===` operator, which would cause the `if` statement to evaluate to `true` when the regex matches, instead of `false` when the regex does not match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) !== null && spec.match(/[^/]:|:\/|:$/)[0] === ''
+```
+This would result in different behavior because the additional condition `&& spec.match(/[^/]:|:\/|:$/)[0] === ''` is added, which would cause the `if` statement to evaluate to `true` only when the regex matches and the first match is an empty string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) !== null && spec.match(/[^/

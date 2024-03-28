@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr, false, false
+```
+This would result in different behavior because the `URL.parse()` method would not be called with the `true` value for the `parseQueryString` parameter, which would cause the query string to not be parsed and the `search` property of the returned URL object to be set to `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr, true, false
+```
+This would result in different behavior because the `URL.parse()` method would be called with the `true` value for the `parseQueryString` parameter, but the `false` value for the `slashesDenoteHost` parameter, which would cause the query string to be parsed, but the `search` property of the returned URL object to be set to the query string, rather than the entire URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr, false, true
+```
+This would result in different behavior because the `URL.parse()` method would not

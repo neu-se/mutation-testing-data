@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `deferred.makeNodeResolver()` function is not called, which would cause the `nodeArgs` array to be pushed onto the `this.dispatch("post", [name, nodeArgs])` function call instead of being passed as a parameter to the `deferred.reject` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the `deferred.makeNodeResolver()` function is not called, which would cause the `nodeArgs` array to be pushed onto the `this.dispatch("post", [name, nodeArgs])` function call instead of being passed as a parameter to the `deferred.reject` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver().bind(null)
+```
+This would result in different behavior because the `deferred.makeNodeResolver()` function is called with the `bind` method, which would cause the `

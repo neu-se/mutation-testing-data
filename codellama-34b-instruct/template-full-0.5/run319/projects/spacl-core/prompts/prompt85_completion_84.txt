@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(null, false)
+```
+This would result in different behavior because the `clone` method would be called with `null` as the name argument, which would cause the new policy to have a `null` name, rather than the expected name. Additionally, the `deep` argument would be set to `false`, which would cause the new policy to have a shallow copy of the rules, rather than a deep copy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(this.name, true)
+```
+This would result in different behavior because the `clone` method would be called with `this.name` as the name argument, which would cause the new policy to have the same name as the original policy, rather than a new name. Additionally, the `deep` argument would be set to `true`, which would cause the new policy to have a deep copy of the rules, rather than a shallow copy.
+
+Option 3: The PLACEHOLDER can be replaced

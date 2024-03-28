@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.get(name)
+```
+This would result in different behavior because it would cause the `query` method to always return `null`, regardless of whether the policy exists or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.get(name).query
+```
+This would result in different behavior because it would cause the `query` method to always return the result of the `query` method of the policy, regardless of whether the policy exists or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.get(name) || this.get(name).query
+```
+This would result in different behavior because it would cause the `query` method to return the result of the `query` method of the policy if the policy exists, or `null` if the policy does not exist.
+
+DONE.

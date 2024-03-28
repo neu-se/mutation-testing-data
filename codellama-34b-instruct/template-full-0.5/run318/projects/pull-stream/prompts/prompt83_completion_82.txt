@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return done(end);
+  }
+  if (op && false === op(data)) {
+    return read(abort || true, done || function () {});
+  }
+  next();
+});
+```
+This would result in different behavior because the `next()` function is not called when the `read` function is called with `null` as the first argument, which is not the case in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return done(end);
+  }
+  if (op && false === op(data)) {
+    return read(abort || true, done || function () {});
+  }
+  next();
+});
+```
+This would result in different behavior because the `next()` function is called twice in the original code, but only once in the replaced code.
+
+Option

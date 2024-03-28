@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator would negate the `abort` signal, causing the code to continue executing even if the stream has been aborted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || true
+```
+This would result in different behavior because the `||` operator would always return `true`, causing the code to always abort the current stream and move on to the next one, regardless of whether the previous stream has been aborted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort && false
+```
+This would result in different behavior because the `&&` operator would always return `false`, causing the code to never abort the current stream, even if the previous stream has been aborted.
+
+DONE.

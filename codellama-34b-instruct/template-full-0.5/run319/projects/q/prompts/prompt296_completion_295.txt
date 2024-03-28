@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(y).join
+```
+This would result in different behavior because `Q(y)` would be a promise that is already fulfilled with the value of `y`, whereas `Q(x)` was a promise that was pending and would be fulfilled with the value of `x` once the promise was resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(y)
+```
+This would result in different behavior because `Q(x).then(y)` would return a new promise that is resolved with the value of `y` once the promise returned by `Q(x)` is resolved, whereas `Q(x).join` would return a new promise that is resolved with the value of `x` once the promise returned by `Q(x)` is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(x).catch(y)
+```
+This would result in different behavior because `Q(x).catch(y)` would return a new promise that is

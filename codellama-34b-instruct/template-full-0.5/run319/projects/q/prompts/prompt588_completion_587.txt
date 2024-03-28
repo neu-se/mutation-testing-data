@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(function () {
+    var foo = yield getFooPromise();
+    var bar = yield getBarPromise();
+    Q.return(foo + bar);
+})
+```
+This would result in different behavior because the `Q.return` statement would be executed immediately, instead of being yielded like the other statements. This would cause the generator to return a value immediately, instead of waiting for the promise to be fulfilled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(function () {
+    var foo = yield getFooPromise();
+    var bar = yield getBarPromise();
+    return foo + bar;
+})
+```
+This would result in different behavior because the `return` statement would be executed immediately, instead of being yielded like the other statements. This would cause the generator to return a value immediately, instead of waiting for the promise to be fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(function ()

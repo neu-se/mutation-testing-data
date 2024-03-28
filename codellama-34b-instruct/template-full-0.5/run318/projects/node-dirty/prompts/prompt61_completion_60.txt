@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._readStream.end()
+```
+This would result in different behavior because `end()` would close the read stream immediately, whereas `destroy()` would only close the stream when all data has been flushed to the underlying system.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._readStream.destroySoon()
+```
+This would result in different behavior because `destroySoon()` would close the read stream as soon as possible, whereas `end()` would only close the stream when all data has been flushed to the underlying system.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._readStream.pause()
+```
+This would result in different behavior because `pause()` would temporarily suspend the read stream, whereas `end()` would close the stream permanently.
+
+DONE.

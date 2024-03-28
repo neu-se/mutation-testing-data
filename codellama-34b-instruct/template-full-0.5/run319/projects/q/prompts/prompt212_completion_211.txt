@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+value === Promise
+```
+This would result in different behavior because `instanceof` checks the prototype chain, while `===` checks for strict equality. In this case, `value` may be a different object that happens to have the same properties and methods as `Promise`, but it is not the same object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+value.constructor === Promise
+```
+This would result in different behavior because `constructor` is a property of the object that refers to the function that created it. In this case, `value` may be an instance of a subclass of `Promise`, while `Promise` is the base class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.getPrototypeOf(value) === Promise.prototype
+```
+This would result in different behavior because `Object.getPrototypeOf(value)` returns the prototype object of `value`, while `Promise.prototype` is the prototype object of the `Promise` class. In this case,

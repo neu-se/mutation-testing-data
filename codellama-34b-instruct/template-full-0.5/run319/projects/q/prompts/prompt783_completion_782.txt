@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { return; })
+```
+This would result in different behavior because `Q(object).then()` returns a new promise that is resolved with the return value of the callback function. In this case, the callback function returns `undefined`, which means the new promise will be resolved with `undefined`. This will cause the promise returned by `Q.fail` to be resolved with `undefined`, instead of being rejected with the error object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { throw new Error(); })
+```
+This would result in different behavior because `Q(object).then()` returns a new promise that is resolved with the return value of the callback function. In this case, the callback function throws an error, which means the new promise will be rejected with the error object. This will cause the promise returned by `Q.fail` to be rejected with the error object, instead of being resolved with `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with

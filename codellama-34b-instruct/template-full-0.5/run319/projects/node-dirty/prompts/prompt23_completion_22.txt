@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); }
+```
+This would result in different behavior because the `emit` method is not called, so the `drain` event will not be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(new Error('Dummy error')); }
+```
+This would result in different behavior because a dummy error is passed to the `cb` function, which would cause the `drain` event to be emitted with an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(null, 'dummy data'); }
+```
+This would result in different behavior because dummy data is passed to the `cb` function, which would cause the `drain` event to be emitted with data.
+
+DONE.

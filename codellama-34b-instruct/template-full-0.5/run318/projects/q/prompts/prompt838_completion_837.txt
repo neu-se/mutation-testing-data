@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, onUnhandledError);
+```
+This would result in different behavior because the error handler would be called with a null value instead of the promise's rejection reason, which could cause the error to be unnoticed or misinterpreted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    throw new Error("Intentional error");
+});
+```
+This would result in different behavior because the error would be thrown immediately instead of being propagated through the promise chain, which could cause the program to crash or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    onUnhandledError(new Error("Intentional error"));
+});
+```
+This would result in different behavior because the error would be passed to the error handler immediately instead of being propagated through the promise chain, which could cause the program to behave unexpectedly.
+
+DONE.

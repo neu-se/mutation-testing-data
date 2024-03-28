@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Array.from(urlMap.values()).filter(function (el) {
+	return el.type == "internal";
+});
+```
+This would result in different behavior because the `filter()` method would remove any elements from the array that have a type other than "internal", which would cause the `map()` method to skip over those elements and not create objects for them.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Array.from(urlMap.values()).map(function (el) {
+	return {
+		url: el.url,
+		text: el.text,
+		type: "internal"
+	}
+});
+```
+This would result in different behavior because the `map()` method would create objects with a "type" property that is always set to "internal", regardless of the original value of the "type" property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Array.from(urlMap.values()).map(function (el) {

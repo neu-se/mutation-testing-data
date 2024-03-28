@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejected, fulfilled, progressed
+```
+This would result in different behavior because the order of the callbacks is changed, which could cause issues if the callbacks are dependent on each other.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fulfilled, rejected, progressed, 42
+```
+This would result in different behavior because the additional argument `42` would be passed to the callbacks, which could cause issues if the callbacks are not designed to handle it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rejected, fulfilled, progressed, Q.when(value, fulfilled, rejected, progressed)
+```
+This would result in different behavior because the additional argument `Q.when(value, fulfilled, rejected, progressed)` would be passed to the callbacks, which could cause issues if the callbacks are not designed to handle it.
+
+DONE.

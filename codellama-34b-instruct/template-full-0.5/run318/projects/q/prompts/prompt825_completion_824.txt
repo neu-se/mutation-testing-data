@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() {
+    throw new Error("something went wrong");
+});
+```
+This would result in different behavior because the `then` method is used to handle the resolution of the promise, but instead of returning a new promise, it throws an error. This would cause the promise to be rejected, which would trigger the `onUnhandledError` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() {
+    return Q.reject("something went wrong");
+});
+```
+This would result in different behavior because the `then` method is used to handle the resolution of the promise, but instead of returning a new promise, it returns a rejected promise. This would cause the promise to be rejected, which would trigger the `onUnhandledError` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() {
+    return Q.resolve("something went wrong");
+});
+```
+This would result in

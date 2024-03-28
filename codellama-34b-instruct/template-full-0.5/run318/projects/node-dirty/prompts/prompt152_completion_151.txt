@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._waitForDrain = false;
+```
+This would result in different behavior because it would cause the loop to exit early, without writing all the remaining data to the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._waitForDrain = true;
+```
+This would result in different behavior because it would cause the loop to continue indefinitely, even if the stream is not draining.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._waitForDrain = !this._writeStream.write(data, (err) => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because it would cause the loop to continue writing data to the stream even

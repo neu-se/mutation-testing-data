@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null, cb
+```
+This would result in different behavior because the `abort` signal would be ignored, and the stream would continue to read data even if an abort signal was received.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort, null
+```
+This would result in different behavior because the `cb` function would not be called with the `err` parameter, and the stream would not be able to report errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort, function(err) { cb(err); }
+```
+This would result in different behavior because the `cb` function would be called with the `err` parameter, but the `abort` signal would still be ignored.
+
+DONE.

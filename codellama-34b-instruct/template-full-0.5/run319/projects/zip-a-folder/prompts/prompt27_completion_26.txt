@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.off
+```
+This would result in different behavior because the `off` event is never emitted, so the promise would never be resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('error', reject);
+output.on('close', resolve);
+```
+This would result in different behavior because the `on` method is called twice, so the `reject` function would be called twice if an error occurs, and the `resolve` function would be called twice if the archive is successfully finalized, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.once('close', resolve);
+```
+This would result in different behavior because the `once` method is called only once, so the `resolve` function would be called only once if the archive is successfully finalized, which is the intended behavior.
+
+DONE.

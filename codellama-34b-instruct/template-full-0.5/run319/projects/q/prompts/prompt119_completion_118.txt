@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+uncurryThis(Object.prototype.hasOwnProperty.bind(Object.prototype))
+```
+This would result in different behavior because `uncurryThis` is a function that takes a function as an argument and returns a new function that is the same as the original function, but with the `this` value bound to the first argument. In this case, we are binding the `this` value of `Object.prototype.hasOwnProperty` to `Object.prototype`, which means that the function will always return `true` when called with any property name, because `Object.prototype` has all properties defined in the standard.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+uncurryThis(Object.prototype.hasOwnProperty.bind(null))
+```
+This would result in different behavior because `null` is not an object, so the `this` value of `Object.prototype.hasOwnProperty` would be `null` when called with any property name. This would cause the function to always return `false`, because

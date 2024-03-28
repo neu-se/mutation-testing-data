@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', () => this.close());
+```
+This would result in different behavior because the `emit` method is called with a callback function that closes the stream, whereas the original code called the `close` method directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this.close.bind(this));
+```
+This would result in different behavior because the `emit` method is called with a bound version of the `close` method, which would cause the stream to be closed when the `drain` event is emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', () => { this.close(); this.emit('close'); });
+```
+This would result in different behavior because the `emit` method is called with a callback function that closes the stream and emits a `close` event, whereas the original code only called the `close` method.
+
+DONE.

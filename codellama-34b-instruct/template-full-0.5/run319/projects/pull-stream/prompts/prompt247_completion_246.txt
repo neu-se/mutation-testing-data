@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the `err && abort` expression would be evaluated first, and the `cb` function would only be called if both `err` and `abort` are truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err || !abort, cb
+```
+This would result in different behavior because the `!` operator has a higher precedence than the `||` operator, so the `!abort` expression would be evaluated first, and the `cb` function would only be called if `err` is truthy or `abort` is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : cb
+```
+This would result in different behavior because the `?:` operator has a higher precedence than the `||` operator, so the `err ? abort : cb` expression would be evaluated first, and

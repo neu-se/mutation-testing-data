@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort === false ? null : abort
+```
+This would result in different behavior because the original code fragment checks if `abort` is `true`, while this replacement checks if it is `false`. This could cause the `onEnd` callback to be called with `null` instead of the expected `abort` value, leading to unexpected behavior in the code that uses this function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort === true ? null : null
+```
+This would result in different behavior because the original code fragment checks if `abort` is `true`, while this replacement checks if it is `true` and returns `null` in both cases. This could cause the `onEnd` callback to be called with `null` regardless of the value of `abort`, leading to unexpected behavior in the code that uses this function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort === true ? null : undefined
+```
+This would result in different behavior because the original code fragment checks

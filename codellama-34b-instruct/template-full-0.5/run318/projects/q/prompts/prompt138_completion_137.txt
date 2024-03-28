@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+        error.stack
+```
+This would result in different behavior because it would invert the logic of the original code fragment, causing the `makeStackTraceLong` function to be called only if `hasStacks` is false, `promise.stack` is truthy, `error` is an object that is not null, and `error.stack` exists.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+hasStacks ||
+        !promise.stack ||
+        typeof error !== "object" ||
+        error === null ||
+        !error.stack
+```
+This would result in different behavior because it would invert the logic of the original code fragment, causing the `makeStackTraceLong` function to be called only if `hasStacks` is true, `promise.stack` is falsy, `error` is not an object or is null, or `error.stack` does not exist.
+

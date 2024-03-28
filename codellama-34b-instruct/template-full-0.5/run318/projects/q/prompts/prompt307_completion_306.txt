@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(resolve, reject);
+```
+This would result in different behavior because the `then` method is called with the `resolve` and `reject` functions as arguments, which would cause the promise to be resolved or rejected immediately, rather than waiting for all promises in the array to be settled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function (value) {
+    resolve(value);
+}, function (reason) {
+    reject(reason);
+});
+```
+This would result in different behavior because the `then` method is called with an anonymous function that takes two arguments, `value` and `reason`, and calls `resolve` and `reject` with those values, respectively. This would cause the promise to be resolved or rejected with the values returned by the `then` method, rather than the original values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then

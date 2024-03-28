@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_writeFileSync
+```
+This would result in different behavior because `_writeFileSync` is a synchronous version of the `_writeFile` function, which means it will not return a promise and will not be able to handle asynchronous errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_writeFile.bind(null, file, obj, options)
+```
+This would result in different behavior because the `bind` method creates a new function that, when called, will call the original `_writeFile` function with the specified `file`, `obj`, and `options` arguments. This means that the `writeFile` function will not be able to handle asynchronous errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_writeFile.bind(null, file, obj, options).catch(function (err) {
+  err.message = `${file}: ${err.message}`;
+  throw err;
+})
+```
+This would result in different behavior because the `catch` method is used

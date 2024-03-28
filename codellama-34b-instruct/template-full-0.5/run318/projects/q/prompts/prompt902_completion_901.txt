@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).done
+```
+This would result in different behavior because `.done` is a method that is called when the promise is resolved, while `.fail` is a method that is called when the promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).then(function(value) {
+    throw new Error("Intentional error");
+})
+```
+This would result in different behavior because `.then` is a method that is called when the promise is resolved, and the function passed to it throws an error, causing the promise to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).then(function(value) {
+    return Q.reject(value);
+})
+```
+This would result in different behavior because `.then` is a method that is called when the promise is resolved, and the function passed to it returns a rejected promise, causing the original promise to be rejected.

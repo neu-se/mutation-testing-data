@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"\n" + "From previous event:\n"
+```
+This would result in different behavior because the `STACK_JUMP_SEPARATOR` constant is not defined, so the string literal `"From previous event:\n"` is used instead. This would cause the `filterStackString` function to incorrectly filter out stack frames that contain the string `"From previous event:\n"`, potentially hiding important information from the stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"\n" + "From previous event:\n" + "\n"
+```
+This would result in different behavior because an extra newline character is added to the string literal, potentially causing the `filterStackString` function to incorrectly filter out stack frames that contain the string `"From previous event:\n"`, or causing the `makeStackTraceLong` function to incorrectly concatenate the stack trace with the string `"From previous event:\n"`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"\n" + "From previous event:\

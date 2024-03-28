@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method would not be called with the correct error argument, potentially causing the promise to be resolved when it should have been rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method would be called with the correct error argument, potentially causing the promise to be rejected when it should have been resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(function() {
+    deferred.reject(new Error("Something went wrong"));
+});
+```
+This would result in different behavior because the `fail` method would be called with a custom error message, potentially causing the promise to be rejected with a different error than the one intended.
+
+DONE.

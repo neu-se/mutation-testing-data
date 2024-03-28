@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'type' || 'Point'
+```
+This would result in different behavior because the `||` operator will always return the first truthy operand, which in this case is the string `'type'`. This means that if the `point` object does not have a `type` property, the `fromGeoJSON` method will still return a `GeoPoint` object, even though the `point` object is not a valid GeoJSON point.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'type' && 'Point'
+```
+This would result in different behavior because the `&&` operator will only return the second operand if the first operand is truthy. If the `point` object does not have a `type` property, the `fromGeoJSON` method will return `undefined`, since the first operand is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'type' ^ 'Point'
+```
+This would result in different behavior because the `

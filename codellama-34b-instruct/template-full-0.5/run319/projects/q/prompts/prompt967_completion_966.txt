@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+args.slice()
+```
+This would result in different behavior because `args.slice()` creates a shallow copy of the `args` array, while `args` itself is a reference to the original array. If the function that uses `args` modifies it, the changes will not be reflected in the `args` array passed to `Q.nbind`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+args.concat()
+```
+This would result in different behavior because `args.concat()` creates a new array that is a concatenation of `args` and any additional arguments passed to it. This means that if the function that uses `args` modifies it, the changes will not be reflected in the `args` array passed to `Q.nbind`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+args.slice(0)
+```
+This would result in different behavior because `args.slice(0)` creates a shallow copy of the `args` array starting from index 0.

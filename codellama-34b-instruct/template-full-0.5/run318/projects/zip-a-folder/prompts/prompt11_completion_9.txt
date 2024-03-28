@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart);
+});
+```
+This would result in different behavior because the original code fragment only splits the `src` string on commas and then globs each part, but this new code fragment splits the `src` string on commas and then globs each part, but it also adds a new `forEach` loop that iterates over the resulting array and globs each part again. This would result in duplicate globs, which could potentially cause issues with the compression algorithm.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart, {});
+});
+```
+This would result in different behavior because the original code fragment only splits the `src` string on commas and then globs each part, but this new code fragment splits the `src` string on commas and then globs each part with an empty options object. This would result in

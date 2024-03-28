@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not being called on the promise returned by `Q.ninvoke`, which is what the original code expects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `then` method is being called on the promise returned by `Q.ninvoke`, but the `deferred.resolve` and `deferred.reject` functions are not being called with the correct arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).then(function (result) {
+    deferred.resolve(result);
+}, function (error) {
+    deferred.reject(error);
+});

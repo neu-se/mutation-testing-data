@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+buildCountry(data, id, "INVALID")
+```
+This would result in different behavior because the additional argument "INVALID" would cause the `buildCountry` function to return `undefined`, which would then be assigned to `countries[id]`. This would cause the `getCountry` function to return `undefined` for any country ID, even if the country exists in the data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+buildCountry(data, id, data.countries[id].name)
+```
+This would result in different behavior because the additional argument `data.countries[id].name` would cause the `buildCountry` function to return a different country object than the one that was originally returned. This would cause the `getCountry` function to return a different country object for any country ID, even if the country exists in the data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+buildCountry(data, id, { ...data.countries[id], name: "IN

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null)
+```
+This would result in different behavior because `defer` is a function that returns a new deferred object, but passing `null` as the first argument would cause the function to return `null`, which would then be used as the `this` value for the `makeNodeResolver()` method call, which would likely throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer.bind(null)
+```
+This would result in different behavior because `defer.bind(null)` would create a new function that, when called, would call `defer()` with `null` as the `this` value, which would likely throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer.call(null)
+```
+This would result in different behavior because `defer.call(null)` would call the `defer()` function with `null` as the `this` value, which would likely throw an error.
+
+DONE.

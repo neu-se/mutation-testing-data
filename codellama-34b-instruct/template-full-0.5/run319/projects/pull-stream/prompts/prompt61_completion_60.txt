@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (end === true) {
+  loop = false
+  if (done) done(null)
+  else if (doneLackingErr) {
+    console.warn(doneLackingErr)
+    throw doneLackingErr
+  }
+}
+```
+This would result in different behavior because the original code checks if `end` is truthy, while this code checks if `end` is strictly equal to `true`. This change would cause the function to behave differently if `end` is a truthy value other than `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (end || abort) {
+  loop = false
+  if (done) done(end || abort)
+  else if (doneLackingErr) {
+    console.warn(doneLackingErr)
+    throw doneLackingErr
+  }
+}
+```
+This would result in different behavior because the original code checks if `end` is truthy, while this code checks if `end` or

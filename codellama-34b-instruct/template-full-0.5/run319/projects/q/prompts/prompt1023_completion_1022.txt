@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(nodeback)
+```
+This would result in different behavior because `Q.nodeify` is a function that takes a nodeback function as an argument and returns a promise. In this option, we are calling `then` on the promise returned by `Q(object)`, which takes a callback function as an argument, but we are passing `nodeback` as the callback function. This would cause the promise to resolve with the value returned by `nodeback` instead of the original value returned by `Q(object)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(object).nodeify(nodeback)
+```
+This would result in different behavior because `Q.resolve` returns a promise that is already resolved with the value of `object`, whereas `Q(object)` returns a promise that is pending until `object` is resolved. In this option, we are calling `nodeify` on the resolved promise returned by `Q.resolve`, which would cause the promise to resolve with the value returned by `nodeback` instead

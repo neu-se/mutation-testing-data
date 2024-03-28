@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+super[Symbol.match] = function (string) { return null; };
+```
+This would result in different behavior because it would cause the `Matcher` class to always return `null` when its `Symbol.match` method is called, even if the input string matches the regular expression. This would cause the `Matcher` class to incorrectly reject all input strings, regardless of whether they match the regular expression or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+super[Symbol.match] = function (string) { return string.match(this.regex); };
+```
+This would result in different behavior because it would cause the `Matcher` class to use a different regular expression to match the input string than the one specified in the `spec` parameter. This would cause the `Matcher` class to incorrectly reject some input strings that should be accepted, and accept some input strings that should be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+super[Symbol.match] = function (

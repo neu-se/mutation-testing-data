@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isInternalFrame(line) && !isNodeFrame(line) && !line
+```
+This would result in different behavior because the `!line` check would cause the line to be excluded from the filtered stack trace, even if it is not an internal or Node frame.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isInternalFrame(line) && !isNodeFrame(line) && line !== ""
+```
+This would result in different behavior because the `line !== ""` check would cause the line to be excluded from the filtered stack trace, even if it is not an internal or Node frame and is not an empty string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!isInternalFrame(line) && !isNodeFrame(line) && line.indexOf(" ") === -1
+```
+This would result in different behavior because the `line.indexOf(" ") === -1` check would cause the line to be excluded from the filtered stack trace, even if it is not

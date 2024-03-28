@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+aborted || true
+```
+This would result in different behavior because `aborted || true` always returns `true`, while `aborted` returns `true` only if `aborted` is truthy. This change would cause the `cb(aborted)` line to be called even if `aborted` is falsy, which may not be the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This would result in different behavior because `!aborted` returns `true` if `aborted` is falsy, while `aborted` returns `true` only if `aborted` is truthy. This change would cause the `cb(aborted)` line to be called only if `aborted` is falsy, which may not be the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+aborted && true
+```
+This would result in different behavior because `aborted && true` returns `true` only if `ab

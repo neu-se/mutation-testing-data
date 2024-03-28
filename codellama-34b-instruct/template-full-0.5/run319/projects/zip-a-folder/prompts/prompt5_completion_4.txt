@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream || targetFilePath
+```
+This would result in different behavior because the `||` operator would cause the second operand to be evaluated only if the first operand is falsy, whereas the `&&` operator would cause the second operand to be evaluated only if the first operand is truthy. In this case, if `zipAFolderOptions?.customWriteStream` is falsy, the `targetFilePath` would be used, which is not the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!zipAFolderOptions?.customWriteStream && targetFilePath
+```
+This would result in different behavior because the `!` operator would negate the result of the `zipAFolderOptions?.customWriteStream` expression, causing the second operand to be evaluated only if the first operand is falsy. In this case, if `zipAFolderOptions?.customWriteStream` is truthy, the `targetFilePath` would be used, which is not the desired behavior.

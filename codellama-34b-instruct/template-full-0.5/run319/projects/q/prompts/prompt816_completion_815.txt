@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).fail
+```
+This would result in different behavior because `Q.fail` is a legacy alias for `Q.catch`, and it would cause the promise to be rejected instead of resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(null, null)
+```
+This would result in different behavior because it would cause the promise to be resolved with `undefined` instead of the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function () { throw new Error("Test error"); })
+```
+This would result in different behavior because it would cause the promise to be rejected with a new error instead of the original value.
+
+DONE.

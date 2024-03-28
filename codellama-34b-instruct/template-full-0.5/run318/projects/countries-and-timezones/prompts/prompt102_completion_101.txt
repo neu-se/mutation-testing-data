@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(tzs).forEach(key => {
+  if (!tzs[key].deprecated) {
+    prev[key] = tzs[key];
+  }
+});
+```
+This would result in different behavior because `Object.keys` returns an array of the object's own enumerable property names, in the same order as we get with a normal loop. However, `Object.assign` does not guarantee any particular order, and it may also copy enumerable properties from the object's prototype chain. In this case, the order of the copied properties may be different, resulting in different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.values(tzs).forEach(value => {
+  if (!value.deprecated) {
+    prev[value.name] = value;
+  }
+});
+```
+This would result in different behavior because `Object.values` returns an array of the object's own enumerable property values, in the same order as we get with a normal

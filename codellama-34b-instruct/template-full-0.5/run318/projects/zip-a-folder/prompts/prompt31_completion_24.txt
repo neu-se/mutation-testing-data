@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.off
+```
+This would result in different behavior because `output.off` is not a valid event listener for the `close` event, and would therefore not be triggered when the output stream is closed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('error', () => {});
+```
+This would result in different behavior because the empty function would be called when the `error` event is emitted, rather than the `reject` function being called with the error message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('finish', resolve);
+```
+This would result in different behavior because the `finish` event is not the same as the `close` event, and would therefore not be triggered when the output stream is closed.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {}
+```
+This would result in different behavior because it would override the original method with a new function that does nothing, causing the promise to never be resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () { throw new Error("Test error"); }
+```
+This would result in different behavior because it would cause the promise to be rejected with a new error, instead of being resolved or rejected according to the original method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () { return Q.reject("Test rejection"); }
+```
+This would result in different behavior because it would cause the promise to be rejected with a new rejection reason, instead of being resolved or rejected according to the original method.
+
+DONE.

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(null, onUnhandledError);
+```
+This would result in different behavior because the `onUnhandledError` function would be called with any errors that are not handled by the promise chain, even if the error is not a rejection.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(function () {}, onUnhandledError);
+```
+This would result in different behavior because the `onUnhandledError` function would be called with any errors that are not handled by the promise chain, even if the error is not a rejection. Additionally, the `function () {}` callback would be called with the resolved value, which could cause unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.then(null, function (error) {
+    throw error;
+});
+```
+This would result in different behavior because the error would be rethrown, which would cause the promise chain to be rejected with the error.
+
+DONE.

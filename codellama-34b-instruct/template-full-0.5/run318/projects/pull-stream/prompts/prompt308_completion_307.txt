@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!ended
+```
+This would result in different behavior because the `!` operator negates the value of `ended`, so if `ended` is `true`, the result of the expression would be `false`, and if `ended` is `false`, the result would be `true`. This would cause the code to behave differently than the original code, which would have returned `ended` as `true` if the stream had ended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended && cb(null, data)
+```
+This would result in different behavior because the `&&` operator evaluates the left-hand side expression and, only if it is truthy, evaluates the right-hand side expression and returns the result. In this case, if `ended` is `true`, the code would return `cb(null, data)`, which would call the callback function with `null` as the first argument and `data` as the second argument. If `ended` is `false`, the code would return `null`, which would not call the callback function

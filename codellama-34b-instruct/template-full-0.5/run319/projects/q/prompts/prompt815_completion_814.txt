@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Q can't apply finally callback");
+```
+This would result in different behavior because the original code fragment was `throw new Error("Q can't apply finally callback");`, which throws an error if the callback is not a function, while the new code fragment throws an error unconditionally, which would cause the promise to be rejected even if the callback is a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return null;
+```
+This would result in different behavior because the original code fragment was `return promise.fcall().then(function () { return value; });`, which returns a promise that is resolved with the value of the original promise, while the new code fragment returns a promise that is resolved with `null`, which would cause the promise to be fulfilled with `null` instead of the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q.reject(new Error("Q can't apply finally callback"));
+```
+This would result in different behavior

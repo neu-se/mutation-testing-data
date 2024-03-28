@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, false)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, but without cloning the underlying rules. This could cause issues if the policy is used in a way that relies on the rules being cloned.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, true)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, and with cloned rules. This could cause issues if the policy is used in a way that relies on the rules not being cloned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, Math.random() < 0.5)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, and with a random selection of cloned or non-cloned

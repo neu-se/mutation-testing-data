@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('error'); }
+```
+This would result in different behavior because it would cause the `emit` event to be called with the `'error'` argument, which would trigger any error handlers that have been registered for the `'error'` event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain', 'foo'); }
+```
+This would result in different behavior because it would cause the `emit` event to be called with the `'drain'` argument and the string `'foo'` as the second argument. This would trigger any event handlers that have been registered for the `'drain'` event with the string `'foo'` as the second argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain', 42); }
+```
+This would result in different behavior because it would cause the `emit` event to be called with

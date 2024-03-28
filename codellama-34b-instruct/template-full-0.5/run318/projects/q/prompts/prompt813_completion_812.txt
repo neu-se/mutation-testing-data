@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.fcall(null)
+```
+This would result in different behavior because `fcall` is a method of the `Q` function, not the `Promise` prototype, and it would throw an error if called on a `Promise` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () { return null; })
+```
+This would result in different behavior because `then` is a method of the `Promise` prototype, and it would return a new promise that resolves to `null` when the original promise is fulfilled, rather than throwing an error immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () { throw new Error(); })
+```
+This would result in different behavior because `then` is a method of the `Promise` prototype, and it would return a new promise that rejects with an error when the original promise is fulfilled, rather than throwing an error immediately.
+
+DONE.

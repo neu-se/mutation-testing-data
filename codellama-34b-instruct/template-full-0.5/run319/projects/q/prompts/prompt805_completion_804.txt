@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"]().then(function () {
+    throw new Error("Something went wrong");
+})
+```
+This would result in different behavior because the original code fragment would resolve the promise with the value returned by the callback, while this new code fragment would reject the promise with the error "Something went wrong".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"]().then(function () {
+    return Q.reject("Something went wrong");
+})
+```
+This would result in different behavior because the original code fragment would resolve the promise with the value returned by the callback, while this new code fragment would reject the promise with the error "Something went wrong".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"]().then(function () {
+    return Q.resolve("Something went wrong");
+})
+```
+This would result in different behavior because the original code fragment would reject the promise with the error

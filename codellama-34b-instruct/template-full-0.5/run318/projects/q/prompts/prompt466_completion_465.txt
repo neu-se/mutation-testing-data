@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport > -1
+```
+This would result in different behavior because `atReport` would always be greater than -1, even if the promise is not in the `unhandledRejections` array, causing the `process.emit()` function to be called unnecessarily.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+atReport !== -1 && reportedUnhandledRejections.indexOf(promise) === -1
+```
+This would result in different behavior because `atReport` would only be compared to -1 if the promise is not already in the `reportedUnhandledRejections` array, causing the `process.emit()` function to be called only if the promise is not already reported.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.indexOf(promise) === -1
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would be checked directly, rather than relying on the `atReport`

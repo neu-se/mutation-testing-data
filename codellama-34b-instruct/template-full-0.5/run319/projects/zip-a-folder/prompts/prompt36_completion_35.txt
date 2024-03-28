@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `output` variable is a writable stream, and writing to a null stream would cause an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the `output` variable is a writable stream, and writing to an undefined stream would cause an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.pipe(fs.createWriteStream(targetFilePath))
+```
+This would result in different behavior because it would create a new writable stream for the `targetFilePath` and write the output to that stream, instead of writing to the existing `output` stream.
+
+DONE.

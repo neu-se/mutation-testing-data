@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(this, prop)
+```
+This would result in different behavior because it would force the `hasOwnProperty` method to be called in the context of `Object.prototype`, which could potentially cause issues if the method is overridden or if the object being tested has a custom `hasOwnProperty` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.bind(this, prop)()
+```
+This would result in different behavior because it would force the `hasOwnProperty` method to be called in the context of `Object.prototype`, and it would also bind the `this` value to `Object.prototype`, which could potentially cause issues if the method is overridden or if the object being tested has a custom `hasOwnProperty` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(Object.prototype, prop)
+```
+This would

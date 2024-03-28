@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This would result in different behavior because `readFileSync` is a synchronous function, whereas `readFile` is an asynchronous function. Using `readFileSync` would cause the code to block until the file is read, rather than returning a promise that resolves when the file is read.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile.bind(fs))
+```
+This would result in different behavior because `fs.readFile` is a method that requires a `this` context, whereas `fs.readFile.bind(fs)` returns a bound function that has the correct `this` context. Using `fs.readFile.bind(fs)` would cause the code to call the correct method with the correct `this` context, whereas using `fs.readFile` would result in an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback

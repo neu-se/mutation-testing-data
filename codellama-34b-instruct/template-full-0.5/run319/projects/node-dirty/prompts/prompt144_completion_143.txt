@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites < 0
+```
+This would result in different behavior because the original code fragment checks if the number of in-flight writes is less than or equal to 0, while this replacement checks if it is strictly less than 0. This means that the replacement would not trigger the `drain` event when there are no in-flight writes, which could cause the application to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!this._waitForDrain && this._inFlightWrites <= 0
+```
+This would result in different behavior because the original code fragment checks if the number of in-flight writes is less than or equal to 0, while this replacement checks if the number of in-flight writes is strictly less than 0 and if `this._waitForDrain` is false. This means that the replacement would not trigger the `drain` event when there are no in-flight writes and `this._waitForDrain` is false, which could

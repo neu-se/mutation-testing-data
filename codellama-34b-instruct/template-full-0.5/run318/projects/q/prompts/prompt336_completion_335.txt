@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (inspected.state === "rejected") {
+    promise.exception = inspected.reason;
+}
+```
+This would result in different behavior because the condition would be evaluated to `false`, and the `promise.exception` property would not be set.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (inspected.state === "pending" || inspected.state === "rejected") {
+    return promise;
+}
+```
+This would result in different behavior because the `return` statement would not be executed if the condition is `true`, and the function would return a value instead of a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (inspected.state === "pending" || inspected.state === "rejected") {
+    throw new Error("Promise is not resolved");
+}
+```
+This would result in different behavior because the `throw` statement would be executed if the condition is `true`, and the

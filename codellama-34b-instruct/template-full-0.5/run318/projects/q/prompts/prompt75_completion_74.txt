@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = flush;
+```
+This would result in different behavior because the `onmessage` event would be assigned to the `flush` function directly, rather than being wrapped in a closure that also calls `requestPortTick`. This could cause the `flush` function to be called too frequently, leading to performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = function () {
+  requestPortTick();
+  flush();
+};
+```
+This would result in different behavior because the `onmessage` event would be assigned to a function that calls both `requestPortTick` and `flush`, rather than just `flush` as in the original code. This could cause the `requestPortTick` function to be called more frequently than necessary, leading to performance issues.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = function () {
+  setTimeout(flush, 0);
+};
+```

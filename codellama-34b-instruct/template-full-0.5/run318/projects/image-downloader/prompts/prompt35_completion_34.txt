@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because it would pipe the response data directly to the write stream, without first checking the status code. This could result in data being written to the file even if the request failed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: false })
+```
+This would result in different behavior because it would pipe the response data to the write stream without ending the stream, which could result in data being written to the file even if the request failed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: true })
+```
+This would result in different behavior because it would pipe the response data to the write stream and end the stream, which could result in data being written to the file even if the request failed.
+
+DONE.

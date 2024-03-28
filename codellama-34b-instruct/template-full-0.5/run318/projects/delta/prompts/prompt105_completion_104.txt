@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.ops.forEach(op => {
+  if (op.retain && op.attributes) {
+    op.attributes = null;
+  }
+});
+```
+This would result in different behavior because it would remove the attributes from all retain ops, which would cause the `length` method to return incorrect results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.ops.forEach(op => {
+  if (op.retain && op.attributes) {
+    op.attributes = { foo: 'bar' };
+  }
+});
+```
+This would result in different behavior because it would set the attributes of all retain ops to a hardcoded object, which would cause the `length` method to return incorrect results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.ops.forEach(op => {
+  if (op.retain && op.attributes) {
+    op.attributes = op.attributes.slice();
+  }
+});

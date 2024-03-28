@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, true, false)
+```
+This would result in different behavior because the `false` value for the `slashesDenoteHost` parameter would cause the `host` property to be set to `null`, which would then cause the `baseUrlStr` variable to be set to `null`, leading to a different URL being resolved in the subsequent `URL.resolve` call.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, true, true)
+```
+This would result in different behavior because the `true` value for the `slashesDenoteHost` parameter would cause the `host` property to be set to the value of the `protocol` property, which would then cause the `baseUrlStr` variable to be set to the value of the `protocol` property, leading to a different URL being resolved in the subsequent `URL.resolve` call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr

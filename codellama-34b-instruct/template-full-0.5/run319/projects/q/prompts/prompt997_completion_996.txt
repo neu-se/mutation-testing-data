@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeRejector
+```
+This would result in different behavior because `makeNodeRejector` is a different method than `makeNodeResolver`, and it would cause the promise to be rejected instead of resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(null)
+```
+This would result in different behavior because passing `null` as the first argument to `makeNodeResolver` would cause the promise to be resolved with a value of `null`, which is different from the original behavior where the promise is resolved with the value of the `deferred` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.promise)
+```
+This would result in different behavior because passing `deferred.promise` as the first argument to `makeNodeResolver` would cause the promise to be resolved with a value of `deferred.promise`, which is different from the original behavior where the promise is resolved with the

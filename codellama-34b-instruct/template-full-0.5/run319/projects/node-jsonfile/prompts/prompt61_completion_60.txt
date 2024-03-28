@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!Buffer.isBuffer
+```
+This would result in different behavior because the `!` operator negates the result of `Buffer.isBuffer`, so if the content is a buffer, the `if` statement would evaluate to `false` and the content would not be converted to a UTF-8 string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Buffer.isBuffer && content.toString('utf8')
+```
+This would result in different behavior because the `&&` operator short-circuits if the first operand is falsy, so if the content is not a buffer, the `if` statement would evaluate to `false` and the content would not be converted to a UTF-8 string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Buffer.isBuffer || content.toString('utf8')
+```
+This would result in different behavior because the `||` operator short-circuits if the first operand is truthy, so if the content is a buffer, the `if`
