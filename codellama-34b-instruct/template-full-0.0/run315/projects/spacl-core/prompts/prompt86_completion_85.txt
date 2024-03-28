@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.clone(name, false)
+```
+This would result in different behavior because the `clone` method is called with `deep` set to `false`, which means that the underlying rules are not cloned, but only the policy itself is cloned. This could lead to unexpected behavior if the rules are modified after the policy is cloned.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.clone(name, true)
+```
+This would result in different behavior because the `clone` method is called with `deep` set to `true`, which means that the underlying rules are cloned as well. This could lead to unexpected behavior if the rules are not intended to be cloned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.clone(name, !deep)
+```
+This would result in different behavior because the `clone` method is called with `deep` set to the opposite of what it was originally set to. This could lead to unexpected behavior if the rules are not intended to be

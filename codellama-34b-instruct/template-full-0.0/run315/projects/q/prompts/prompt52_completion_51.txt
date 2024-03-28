@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    process.nextTick(flush);
+};
+```
+This would result in different behavior because the `process.nextTick` function is not defined in the current scope, and would cause a `ReferenceError` to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    setTimeout(flush, 0);
+};
+```
+This would result in different behavior because the `setTimeout` function is not defined in the current scope, and would cause a `ReferenceError` to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    flush();
+};
+```
+This would result in different behavior because the `flush` function is not defined in the current scope, and would cause a `ReferenceError` to be thrown.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because the `!` operator negates the result of the `isGlob` function, causing the `zipArchive.glob()` method to be called even if the `src` parameter is not a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob.call(null, src)
+```
+This would result in different behavior because the `call()` method is used to call the `isGlob` function with a different `this` value (in this case, `null`), which could potentially cause the function to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob.apply(null, [src])
+```
+This would result in different behavior because the `apply()` method is used to call the `isGlob` function with a different `this` value (in this case, `null`) and a different set of arguments (in this case, an array containing the `src` parameter).
