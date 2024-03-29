@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const opLength = Math.min(thisIter.peekLength(), length);
+```
+This would result in different behavior because it would always use the length of the current op in the iteration, rather than the length of the op in the other delta. This would cause the diff algorithm to produce different results, as it would be comparing different lengths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const opLength = Math.max(thisIter.peekLength(), length);
+```
+This would result in different behavior because it would always use the maximum of the length of the current op in the iteration and the length of the op in the other delta. This would cause the diff algorithm to produce different results, as it would be comparing different lengths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const opLength = Math.floor(Math.random() * length);
+```
+This would result in different behavior because it would randomly choose a length between 0 and the length of the op in the other delta. This

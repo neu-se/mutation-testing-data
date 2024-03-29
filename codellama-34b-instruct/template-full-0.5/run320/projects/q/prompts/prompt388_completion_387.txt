@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { throw new Error("intentional error"); });
+```
+This would result in different behavior because the original code would continue to call `thenResolve` with the fulfilled value, while the modified code would throw an error instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return Q.reject("intentional rejection"); });
+```
+This would result in different behavior because the original code would continue to call `thenResolve` with the fulfilled value, while the modified code would reject the promise with the given reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return Q.resolve("intentional resolution"); });
+```
+This would result in different behavior because the original code would continue to call `thenResolve` with the fulfilled value, while the modified code would resolve the promise with the given value.
+
+DONE.

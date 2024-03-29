@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the callback function passed to `read` would be called with a different set of arguments, which could potentially cause the `nextChunk` function to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different

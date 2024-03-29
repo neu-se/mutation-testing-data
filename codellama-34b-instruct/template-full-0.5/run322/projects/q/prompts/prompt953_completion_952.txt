@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `deferred.reject` callback would be called regardless of whether the promise is resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(function() {});
+```
+This would result in different behavior because the `fail` method would be called with a different callback function, which would not have the same effect as the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(function(err) { throw err; });
+```
+This would result in different behavior because the `fail` method would be called with a different callback function that throws an error, which would not have the same effect as the original code.
+
+DONE.

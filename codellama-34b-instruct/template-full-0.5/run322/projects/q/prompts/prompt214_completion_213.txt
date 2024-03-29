@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromiseAlike(value) || isPromise(value)
+```
+This would result in different behavior because the `isPromiseAlike` check would return `true` for a wider range of values, including those that are not actually promises but have a `then` method. This could cause the `coerce` function to return a promise that is not actually a promise, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) || isPromiseAlike(value)
+```
+This would result in different behavior because the `isPromise` check would return `false` for values that are not actually promises but have a `then` method, even if they are promise-like. This could cause the `coerce` function to return a promise that is not actually a promise, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) && isPromiseAlike(value)
+```

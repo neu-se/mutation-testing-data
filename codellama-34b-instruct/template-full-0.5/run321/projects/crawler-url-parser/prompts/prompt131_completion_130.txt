@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/')
+```
+This would result in different behavior because the second replacement would also match the first replacement, resulting in an infinite loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/default\.[a-z]+$/, '')
+```
+This would result in different behavior because the second replacement would remove the "default" part of the URL, which would affect the output of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/default\.[a-z]+$/, 'default')
+```
+This would result in different behavior because the second replacement would replace the "default" part of the URL with the string "default", which would

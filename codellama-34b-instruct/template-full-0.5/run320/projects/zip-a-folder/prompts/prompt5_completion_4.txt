@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream || targetFilePath
+```
+This would result in different behavior because the `||` operator would cause the `targetFilePath` to be used as the output stream even if a custom write stream is provided in the `zipAFolderOptions`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!zipAFolderOptions?.customWriteStream && !targetFilePath
+```
+This would result in different behavior because the `!` operator would cause the `targetFilePath` to be ignored even if it is provided in the `zipAFolderOptions`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream ?? targetFilePath
+```
+This would result in different behavior because the `??` operator would cause the `targetFilePath` to be used as the output stream if a custom write stream is not provided in the `zipAFolderOptions`.
+
+DONE.

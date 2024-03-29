@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof newOp.insert === 'number' &&
+          typeof lastOp.insert === 'number'
+```
+This would result in different behavior because it would allow the code to execute the `this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };` statement, which would change the value of `this.ops[index - 1]` to an object with an `insert` property that is the sum of `lastOp.insert` and `newOp.insert`. In the original code, this statement is only executed if `typeof newOp.insert === 'string' && typeof lastOp.insert === 'string'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof newOp.insert === 'object' &&
+          typeof lastOp.insert === 'object'
+```
+This would result in different behavior because it would allow the code to execute the `this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };` statement, which would change the

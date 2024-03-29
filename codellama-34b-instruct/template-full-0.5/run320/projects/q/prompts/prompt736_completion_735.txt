@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(function (promises) {
+    return all(array_map(promises, function (promise) {
+        promise = Q(promise);
+        function regardless() {
+            return promise.inspect();
+        }
+        return promise.then(regardless, regardless);
+    }));
+});
+```
+This would result in different behavior because it adds an unnecessary `then` method to the promise, which would cause the `allSettled` method to return a promise that is always fulfilled, even if one of the input promises is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(function (promises) {
+    return all(array_map(promises, function (promise) {
+        promise = Q(promise);
+        function regardless() {
+            return promise.inspect();
+        }
+        return promise.then(regardless, regardless).catch(function (e) {
+            return e;
+        });
+    }

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This would result in different behavior because the original code fragment checks if the `this._queue` map contains the `key` before setting it, while this new code fragment unconditionally sets the `key` in the `this._queue` map, which could lead to unexpected behavior if the `key` is already present in the map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.slice());
+```
+This would result in different behavior because the original code fragment sets the `key` in the `this._queue` map to a new array containing the callbacks, while this new code fragment sets the `key` to a shallow copy of the callbacks array, which could lead to unexpected behavior if the callbacks array is modified after it is added to the `this._queue` map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.filter

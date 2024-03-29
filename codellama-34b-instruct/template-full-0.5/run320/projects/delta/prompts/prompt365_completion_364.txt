@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() === 'insert')
+```
+This would result in different behavior because the original code only skips the current iteration if the other iterator's next type is not 'insert', while the modified code skips the current iteration if the other iterator's next type is 'insert', regardless of the priority flag.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() !== 'insert' &&
+        (priority || otherIter.peekType() !== 'insert')
+```
+This would result in different behavior because the original code only skips the current iteration if the current iterator's next type is 'insert', while the modified code skips the current iteration if the current iterator's next type is not 'insert', regardless of the priority flag.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (

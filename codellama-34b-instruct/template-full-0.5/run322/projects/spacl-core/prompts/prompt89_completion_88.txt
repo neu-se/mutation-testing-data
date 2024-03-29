@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name]
+```
+This would result in different behavior because it would create a map with the policy name as both the key and the value, rather than the policy name as the key and the policy object as the value. This would likely cause errors in the `query` and `matches` methods, which rely on the policy object being present in the map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, null]
+```
+This would result in different behavior because it would create a map with the policy name as the key and `null` as the value, rather than the policy object as the value. This would likely cause errors in the `query` and `matches` methods, which rely on the policy object being present in the map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, {}]
+```
+This would result in different behavior because it would create a map with the policy

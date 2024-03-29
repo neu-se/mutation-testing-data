@@ -1,0 +1,18 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!hasStacks || typeof process === "object" && process && process.env && process.env.Q_DEBUG
+```
+This would result in different behavior because it would check if the `Q_DEBUG` environment variable is set, which would enable long stack traces even if `hasStacks` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+hasStacks && typeof process === "object" && process && process.env && process.env.Q_DEBUG
+```
+This would result in different behavior because it would check if long stack traces are enabled and the `Q_DEBUG` environment variable is set, which would only enable long stack traces if `hasStacks` is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!hasStacks && typeof process === "object" && process && process.env && process.env.Q_DEBUG
+```
+This would result in different behavior because it would check if long stack traces are not enabled and the `Q_DEBUG` environment

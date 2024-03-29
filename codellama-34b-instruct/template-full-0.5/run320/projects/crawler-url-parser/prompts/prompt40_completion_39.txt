@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host === null && baseUrlStr
+```
+This would result in different behavior because the `===` operator checks for both value and type equality, while the `==` operator only checks for value equality. In this case, it's possible that `parsedUrl.host` could be a string with a value of `"null"`, which would cause the `==` operator to return `true`, but the `===` operator would return `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host == null && baseUrlStr.length > 0
+```
+This would result in different behavior because it checks if the `baseUrlStr` has a length greater than 0, which could be useful if the `baseUrlStr` is an empty string or `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host == null && baseUrlStr.indexOf("http") === 0
+```
+This would result in different behavior because it checks

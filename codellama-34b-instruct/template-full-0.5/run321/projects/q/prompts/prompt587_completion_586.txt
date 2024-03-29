@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function() { throw new Error("Something went wrong"); });
+```
+This would result in different behavior because the `then` method is called on the promise returned by `Q.async`, which would cause the promise to be rejected with the error message "Something went wrong". This would cause the `spawn` function to throw an error, rather than returning a promise for the return value of the generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).catch(function() { return Q.reject("Something went wrong"); });
+```
+This would result in different behavior because the `catch` method is called on the promise returned by `Q.async`, which would cause the promise to be rejected with the error message "Something went wrong". This would cause the `spawn` function to return a rejected promise, rather than returning a promise for the return value of the generator.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/(\/[^\/]*)[\/]?$/, "\\"
+```
+This would result in different behavior because the original code fragment replaces the last path segment with an empty string, while the new code fragment replaces it with a backslash. This could cause the `pageurl_without_last_part` variable to have a different value than expected, potentially altering the outcome of the `gettype` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/(\/[^\/]*)[\/]?$/, "../"
+```
+This would result in different behavior because the original code fragment replaces the last path segment with an empty string, while the new code fragment replaces it with a relative path to the parent directory. This could cause the `pageurl_without_last_part` variable to have a different value than expected, potentially altering the outcome of the `gettype` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/(\/[^\

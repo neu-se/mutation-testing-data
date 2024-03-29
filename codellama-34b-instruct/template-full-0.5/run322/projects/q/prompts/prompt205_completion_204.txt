@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+firstLine.indexOf("(module.js:") !== -1 ||
+           firstLine.indexOf("(node.js:") !== -1;
+```
+This would result in different behavior because it would cause the `isNodeFrame` function to always return `true`, even if the stack line does not contain the expected strings.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+firstLine.indexOf("(module.js:") !== -1 ||
+           firstLine.indexOf("(node.js:") !== -1 ||
+           firstLine.indexOf("(q.js:") !== -1;
+```
+This would result in different behavior because it would cause the `isNodeFrame` function to return `true` if the stack line contains any of the expected strings, including the string `"(q.js:"`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+firstLine.indexOf("(module.js:") !== -1 ||
+           firstLine.indexOf("(node.js

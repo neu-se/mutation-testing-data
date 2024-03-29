@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function(result) { return result; });
+```
+This would result in different behavior because the `then` method is called on the result of `nfapply`, which is a promise, instead of on the original promise returned by `Q(callback)`. This could cause the promise chain to be resolved or rejected differently, depending on the implementation of `nfapply`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).fail(function(error) { throw error; });
+```
+This would result in different behavior because the `fail` method is called on the result of `nfapply`, which is a promise, instead of on the original promise returned by `Q(callback)`. This could cause the promise chain to be resolved or rejected differently, depending on the implementation of `nfapply`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).finally(function()

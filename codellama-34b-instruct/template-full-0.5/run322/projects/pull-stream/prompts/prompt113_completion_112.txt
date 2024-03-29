@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null, acc)
+```
+This would result in different behavior because the original code only calls the `cb` function with the `err` and `acc` parameters, while this modified code also passes `null` as the first argument, which could cause the `cb` function to be called with a different set of parameters than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(err || acc)
+```
+This would result in different behavior because the original code only calls the `cb` function with the `err` and `acc` parameters, while this modified code only passes the `err` parameter if it is truthy, and the `acc` parameter otherwise. This could cause the `cb` function to be called with a different set of parameters than expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(acc, err)
+```
+This would result in different behavior because the original code calls the `cb` function with the `err` parameter first, while this modified code calls

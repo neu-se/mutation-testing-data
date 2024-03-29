@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+)/'
+```
+This would result in different behavior because the extra `/` at the end of the regex would cause the match to fail, as it would require an additional `/` at the end of the string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+)(?:\/|$)/'
+```
+This would result in different behavior because the non-capturing group `(?:\/|$)` would allow the match to succeed even if there is no `/` at the end of the string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+)(?:\/|$)?/'
+```
+This would result in different behavior because the `?` at the end of the regex would make the entire group optional, allowing the match to succeed even if there is no `/` at the end of the string.
+
+DONE.

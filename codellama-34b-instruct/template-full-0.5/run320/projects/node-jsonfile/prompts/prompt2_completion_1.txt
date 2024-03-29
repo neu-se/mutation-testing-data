@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This would result in different behavior because `readFileSync` is a synchronous function that returns the contents of the file, whereas `readFile` is an asynchronous function that returns a promise that resolves with the contents of the file. Using `readFileSync` in the `universalify.fromCallback` function would cause the function to return a promise that resolves with the contents of the file, which is different from the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { encoding: 'utf8' })
+```
+This would result in different behavior because the `encoding` option is set to `'utf8'` instead of the default value of `'utf-8'`. This would cause the function to return a promise that resolves with the contents of the file encoded in UTF-8, which is different from the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:

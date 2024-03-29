@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return isNodeFrame(stackLine) || isInternalFrame(stackLine);
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to be called for both node and internal frames, which would result in incorrect filtering of the stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return isNodeFrame(stackLine) && isInternalFrame(stackLine);
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to be called only for node frames that are also internal frames, which would result in incorrect filtering of the stack trace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return !isNodeFrame(stackLine) || !isInternalFrame(stackLine);
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to be called only for non-node frames that are not internal frames, which would result in incorrect filtering of the stack trace.
+
+DONE.

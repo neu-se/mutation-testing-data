@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    loop = false;
+    if (done) done(end === true ? null : end);
+    else if (end && end !== true) {
+      console.warn(doneLackingErr);
+      throw end;
+    }
+  } else if (op && false === op(data) || abort) {
+    loop = false;
+    read(abort || true, done || function () {});
+  } else if (!loop) {
+    next();
+  }
+})
+```
+This would result in different behavior because the `if (end)` block is now inside the `read` callback function, which means it will only be executed if the read operation is successful. In the original code, the `if (end)` block was outside the `read` callback function, so it would be executed regardless of whether the read operation was successful.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (

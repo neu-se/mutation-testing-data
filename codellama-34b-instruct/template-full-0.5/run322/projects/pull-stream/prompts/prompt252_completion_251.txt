@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!_read
+```
+This would result in different behavior because the `!` operator would invert the boolean value of `_read`, causing the `nextChunk()` function to be called when `_read` is false, instead of when it is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read && _read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `&&` operator would cause the `nextChunk()` function to be called only when `_read` is true, instead of when it is false. Additionally, the `nextStream()` function would be called when `err` is true and `err` is not equal to `true`, instead of when `err

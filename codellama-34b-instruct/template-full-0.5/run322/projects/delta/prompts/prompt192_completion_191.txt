@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength() === 0 &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because the original code checks if there are no more operations in the other iterator, while this code checks if the length of the next operation is 0.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain' &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because the original code checks if the next operation is an insert, while this code checks if it is a retain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength() > 0 &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because the original code checks if the length of the next operation

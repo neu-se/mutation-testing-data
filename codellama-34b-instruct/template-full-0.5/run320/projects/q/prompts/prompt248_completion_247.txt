@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+e.stack.lastIndexOf("\n") + 1
+```
+This would result in different behavior because `lastIndexOf` returns the index of the last occurrence of the specified value in the string, whereas `indexOf` returns the index of the first occurrence. This would cause the stack trace to be generated from the last line of the error message, rather than the first.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+e.stack.slice(e.stack.indexOf("\n") + 1)
+```
+This would result in different behavior because `slice` returns a new string that is a subset of the original string, whereas `indexOf` returns the index of the first occurrence of the specified value in the string. This would cause the stack trace to be generated from the second line of the error message, rather than the first.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+e.stack.split("\n").slice(1).join("\n")
+```
+This would result in different behavior because `

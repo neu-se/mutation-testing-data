@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pendingCount > 0
+```
+This would result in different behavior because it would cause the `onRejected` function to be called even if there are still pending promises, which would lead to a rejection of the promise returned by `any` even if some of the promises are still pending.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pendingCount === promises.length
+```
+This would result in different behavior because it would cause the `onRejected` function to be called only if all promises have been rejected, which would lead to a rejection of the promise returned by `any` only if all promises are rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pendingCount < promises.length
+```
+This would result in different behavior because it would cause the `onRejected` function to be called if there are still pending promises, which would lead to a rejection of the promise returned by `any` even if some of the promises are still pending.
+
+DONE

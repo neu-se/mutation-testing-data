@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(callback)
+```
+This would result in different behavior because `Q.finally` is a shorthand for `Q.then` with a callback that always returns a fulfilled promise. In this case, the callback is `callback`, which may not always return a fulfilled promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { return callback(); })
+```
+This would result in different behavior because it would always return a fulfilled promise, regardless of the return value of `callback`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { return Q.resolve(callback()); })
+```
+This would result in different behavior because it would always return a fulfilled promise, regardless of the return value of `callback`. Additionally, it would also resolve any promises returned by `callback`.
+
+DONE.

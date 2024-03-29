@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.inspect = function () {
+    if (!resolvedPromise) {
+        return { state: "pending" };
+    }
+    return resolvedPromise.inspect();
+};
+```
+This would result in different behavior because it would cause the `inspect` method to return the result of calling `inspect` on the `resolvedPromise` object, rather than returning the `resolvedPromise` object itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.inspect = function () {
+    if (!resolvedPromise) {
+        return { state: "pending" };
+    }
+    return resolvedPromise.valueOf();
+};
+```
+This would result in different behavior because it would cause the `inspect` method to return the result of calling `valueOf` on the `resolvedPromise` object, rather than returning the `resolvedPromise` object itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

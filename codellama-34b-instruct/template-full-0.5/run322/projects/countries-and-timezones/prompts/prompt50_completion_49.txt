@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.values(data.timezones).forEach(timezone => {
+  timezones[timezone.name] = timezone;
+});
+```
+This would result in different behavior because it would add all timezones to the `timezones` object, regardless of whether they are deprecated or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(data.timezones).forEach(timezone => {
+  timezones[timezone] = { ...data.timezones[timezone] };
+});
+```
+This would result in different behavior because it would add all timezones to the `timezones` object, but with a different structure.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.values(data.timezones).forEach(timezone => {
+  timezones[timezone.name] = { ...timezone };
+});
+```
+This would result in different behavior because it would add all timezones

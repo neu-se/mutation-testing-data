@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = compile(spec)
+```
+This would result in different behavior because it would call the `compile` function with the `spec` parameter, which is not the intended behavior. The `compile` function is only meant to be used as a helper function to generate the regex and props for the `Matcher` class, and it should not be called directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = { regex: spec, props: [] }
+```
+This would result in different behavior because it would return a different object with the same properties as the one returned by the `compile` function. The `regex` property of the returned object would be set to the `spec` parameter, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = { regex: /^$/, props: [] }
+```
+This would result in different behavior because it would return a different object with the same properties

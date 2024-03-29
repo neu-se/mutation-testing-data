@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(resolve, reject);
+```
+This would result in different behavior because it would resolve the promise with the result of `Q(answerPs[i])`, rather than the original code which resolves the promise with the result of `Q(answerPs[i]).then(resolve, reject)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(resolve).catch(reject);
+```
+This would result in different behavior because it would catch any errors that occur during the execution of `Q(answerPs[i]).then(resolve)` and reject the promise with the error, rather than the original code which would only reject the promise if an error occurs during the execution of `Q(answerPs[i])`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function(result) {
+    resolve(result);
+}, function(error) {
+    reject

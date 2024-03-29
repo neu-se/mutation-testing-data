@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(false);
+```
+This would result in different behavior because the original code fragment checks if the write stream is corked before corking it, while this new code fragment always corks the write stream without checking its current state. This could cause the write stream to be corked multiple times, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(true);
+```
+This would result in different behavior because the original code fragment checks if the write stream is corked before corking it, while this new code fragment always corks the write stream without checking its current state. This could cause the write stream to be corked multiple times, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(this._inFlightWrites > 0);
+```
+This would result in different behavior because the original code fragment checks

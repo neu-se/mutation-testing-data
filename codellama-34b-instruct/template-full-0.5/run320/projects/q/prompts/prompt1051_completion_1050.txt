@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end.tail = null;
+```
+This would result in different behavior because `end.tail` is used in the `get` method to get the next item in the queue, and if it is set to `null`, the `get` method will throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end.tail = ends.promise;
+```
+This would result in different behavior because `end.tail` is used in the `get` method to get the next item in the queue, and if it is set to `ends.promise`, the `get` method will get the next item in the queue, but it will also resolve the `closed` promise, which is not the desired behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end.tail = Q.reject(new Error("Can't get value from closed queue"));
+```
+This would result in different behavior because `end.tail` is used in the `get` method to get the next item

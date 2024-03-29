@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pendingCount > 0
+```
+This would result in different behavior because if `pendingCount` is greater than 0, the `onRejected` function will be called, which will reject the promise with the error message "Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message. This will cause the promise to be rejected, even if some of the promises in the array are fulfilled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pendingCount < promises.length
+```
+This would result in different behavior because if `pendingCount` is less than the length of the `promises` array, the `onRejected` function will be called, which will reject the promise with the error message "Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message. This will cause the promise to be rejected, even if some of the promises in the array are fulfilled.

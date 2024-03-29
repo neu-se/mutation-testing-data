@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(result.value, callback, errback);
+```
+This would result in different behavior because `when` is a function that returns a promise for the result of the callback, but in this case, the callback is not being used to transform the value. Instead, it is being used as a predicate to determine whether to continue the loop or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (result.value) {
+    callback(result.value);
+} else {
+    errback(result.value);
+}
+```
+This would result in different behavior because it would only call the `callback` function if the `result.value` is truthy, and it would only call the `errback` function if the `result.value` is falsy. In the original code, both functions are called regardless of the value of `result.value`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (result.value) {
+    callback(result.value);

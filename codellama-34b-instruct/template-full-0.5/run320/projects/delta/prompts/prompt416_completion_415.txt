@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (nextType === 'delete') {
+  index -= length;
+} else if (nextType === 'insert' && (offset < index || !priority)) {
+  index += length;
+}
+```
+This would result in different behavior because the original code fragment only subtracted the minimum of `length` and `index - offset` if `nextType` was `'delete'`, but this modified code fragment subtracts `length` unconditionally.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (nextType === 'delete') {
+  index -= length;
+} else if (nextType === 'insert' && (offset < index || !priority)) {
+  index += length;
+} else {
+  index += length;
+}
+```
+This would result in different behavior because the original code fragment only added `length` to `index` if `nextType` was `'insert'` and `offset < index || !priority`, but this modified code fragment always adds `length` to `index` if `

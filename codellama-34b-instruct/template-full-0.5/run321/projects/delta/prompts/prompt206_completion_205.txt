@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.delete(otherOp);
+```
+This would result in different behavior because `delta.delete(otherOp)` would delete the entire `otherOp` object, whereas `delta.push(otherOp)` would push a copy of `otherOp` to the `delta` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherOp.delete);
+```
+This would result in different behavior because `otherOp.delete` is a function that deletes the `otherOp` object, whereas `delta.push(otherOp)` pushes a copy of `otherOp` to the `delta` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(new Delta(otherOp));
+```
+This would result in different behavior because `new Delta(otherOp)` creates a new `Delta` object from `otherOp`, whereas `delta.push(otherOp)` pushes a copy of `otherOp` to the `delta` array.
+

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+version !== '1' && version !== '1.0'
+```
+This would result in different behavior because it would always return `false` for versions other than `'1'` or `'1.0'`, regardless of whether the `spec` string contains any wildcards.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(version === '1' || version === '1.0'
+      ? /[*+][^/]|[^/][*+]/
+      : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) === null
+```
+This would result in different behavior because it would always return `true` for versions other than `'1'` or `'1.0'`, regardless of whether the `spec` string contains any wildcards.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+version !== '1' && version !== '1.0' && spec.match(/\

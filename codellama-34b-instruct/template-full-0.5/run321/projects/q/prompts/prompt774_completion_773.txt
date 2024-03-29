@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.slice()
+```
+This would result in different behavior because `slice()` returns a shallow copy of the array, which would cause the `allSettled` method to return a promise for an array of settled promises, rather than a promise for the original array of promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises.filter(function() { return true; })
+```
+This would result in different behavior because `filter()` returns a new array with only the elements that pass the test implemented by the provided function. In this case, the function always returns `true`, so the resulting array would be identical to the original array of promises. However, this change would still cause the `allSettled` method to return a promise for an array of settled promises, rather than a promise for the original array of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.map(function() { return Q.resolve(); })
+```
+This would result in different behavior because `map

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.retain(
+  Op.length(thisOp) - thisOp.delete,
+  AttributeMap.invert(thisOp.attributes, otherOp.attributes),
+);
+```
+This would result in different behavior because the `thisOp.delete` property is not defined, and the `Op.length(thisOp)` method would return the length of the op, which is not necessarily the same as the number of deleted characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.retain(
+  Op.length(thisOp) - otherOp.delete,
+  AttributeMap.invert(thisOp.attributes, otherOp.attributes),
+);
+```
+This would result in different behavior because the `otherOp.delete` property is not defined, and the `Op.length(thisOp)` method would return the length of the op, which is not necessarily the same as the number of deleted characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ret

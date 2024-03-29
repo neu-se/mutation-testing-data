@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+untrackRejection(this);
+```
+This would result in different behavior because the `untrackRejection` function is not called, which means that the `unhandledRejections` array would not be updated, and the rejection would not be reported as unhandled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+trackRejection(this, reason);
+```
+This would result in different behavior because the `trackRejection` function is called twice, which means that the `unhandledRejections` array would be updated twice, and the rejection would be reported as unhandled twice.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+untrackRejection(this);
+trackRejection(this, reason);
+```
+This would result in different behavior because the `untrackRejection` function is called first, which means that the `unhandledRejections` array would be updated, but the rejection would not be reported as unhandled. Then, the `trackRe

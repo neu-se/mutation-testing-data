@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.verbs[verb]
+```
+This would result in different behavior because it would allow a verb to be added to the `verbs` object even if it is already present, which could lead to inconsistent behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+verb in this.verbs && !this.verbs[verb]
+```
+This would result in different behavior because it would only allow a verb to be added to the `verbs` object if it is not already present, which could lead to inconsistent behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!this.verbs[verb] || (verb in this.verbs && !this.verbs[verb])
+```
+This would result in different behavior because it would allow a verb to be added to the `verbs` object if it is not already present, but would also allow it to be added if it is already present and has a value of `false`.
+
+DONE.

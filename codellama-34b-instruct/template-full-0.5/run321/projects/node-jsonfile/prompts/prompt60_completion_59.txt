@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Buffer.isBuffer(content) && content.length > 0
+```
+This would result in different behavior because it would only strip the BOM if the content is a buffer and has a length greater than 0.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+content.startsWith('\uFEFF')
+```
+This would result in different behavior because it would only strip the BOM if the content starts with the BOM character.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+content.includes('\uFEFF')
+```
+This would result in different behavior because it would strip the BOM if the content includes the BOM character anywhere, not just at the beginning.
+
+DONE.

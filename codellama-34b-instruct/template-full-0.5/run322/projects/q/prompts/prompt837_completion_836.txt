@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw error;
+```
+This would result in different behavior because the error would be thrown immediately, rather than being forwarded to the next tick.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.domain.bind(error, promise);
+```
+This would result in different behavior because the error would be bound to the process domain, rather than being forwarded to the next tick.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(error, promise);
+```
+This would result in different behavior because the error would be passed to Q.nextTick, rather than being forwarded to the next tick.
+
+DONE.

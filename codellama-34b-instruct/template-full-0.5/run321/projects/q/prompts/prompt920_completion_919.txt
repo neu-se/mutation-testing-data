@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    deferred.reject(err);
+}
+```
+This would result in different behavior because the original code fragment was `function (err, value) { deferred.resolve(value); }`, which would resolve the promise with the value, whereas this new code fragment would reject the promise with the error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    deferred.resolve(err);
+}
+```
+This would result in different behavior because the original code fragment was `function (err, value) { deferred.resolve(value); }`, which would resolve the promise with the value, whereas this new code fragment would resolve the promise with the error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    deferred.notify(err);
+}
+```
+This would result in different behavior because the original code fragment was `function (err, value) { deferred.resolve(

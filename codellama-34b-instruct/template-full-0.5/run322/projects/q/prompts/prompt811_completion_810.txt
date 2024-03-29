@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fail()
+```
+This would result in different behavior because `fail()` is a method that rejects a promise, causing the promise to be in the rejected state, whereas `callback()` is a function that returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.then(function() { throw new Error("Test error"); })
+```
+This would result in different behavior because `then()` is a method that returns a new promise that is resolved with the result of the callback function, whereas `throw new Error("Test error")` would cause an error to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.then(function() { return Q.reject(new Error("Test error")); })
+```
+This would result in different behavior because `then()` is a method that returns a new promise that is resolved with the result of the callback function, whereas `Q.reject(new Error("Test error"))` would cause the promise to be rejected with the given error.

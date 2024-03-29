@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback === null
+```
+This would result in different behavior because `callback.apply` would still be a function even if `callback` is null, while the original code fragment would evaluate to `true` if `callback` is null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback !== void 0
+```
+This would result in different behavior because `void 0` is a special value that represents the absence of a value, while `null` is a value that represents the absence of an object reference. The original code fragment would evaluate to `true` if `callback` is `null`, while this replacement would evaluate to `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof callback !== "function"
+```
+This would result in different behavior because it would also evaluate to `true` if `callback` is not a function, while the original code fragment would only evaluate to `true` if `callback` is null or undefined.
+
+DONE.

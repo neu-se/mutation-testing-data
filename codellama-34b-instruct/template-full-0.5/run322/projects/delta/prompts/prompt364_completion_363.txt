@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'insert'
+```
+This would result in different behavior because it would cause the `while` loop to iterate over the `other` delta's operations even if they are not of type `insert`, which could lead to incorrect or unexpected behavior in the `transform` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'insert' && thisIter.peekType() !== 'insert'
+```
+This would result in different behavior because it would cause the `while` loop to iterate over the `other` delta's operations even if they are not of type `insert`, and it would also cause the `while` loop to iterate over the `this` delta's operations even if they are not of type `insert`, which could lead to incorrect or unexpected behavior in the `transform` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert'
+```
+This would result in

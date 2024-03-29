@@ -1,0 +1,32 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+        error.stack
+```
+This would result in different behavior because the code would not check if `error` is an object or if it is null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+        error.stack &&
+        error.stack.length > 0
+```
+This would result in different behavior because the code would also check if the `error.stack` property is not empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+        error.stack &&
+        error.stack.length > 0 &&
+        error.stack.indexOf("From previous event:") === -1
+```
+This would result in

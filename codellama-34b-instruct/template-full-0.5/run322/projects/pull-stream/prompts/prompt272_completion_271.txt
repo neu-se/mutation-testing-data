@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+stream.pipe(process.stdout)
+```
+This would result in different behavior because `stream.pipe(process.stdout)` would write the contents of the stream to the console, while `stream` would pass the stream object through to the next function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stream.on('data', (chunk) => {
+  console.log(chunk.toString());
+});
+```
+This would result in different behavior because `stream.on('data', (chunk) => {...})` would listen for the 'data' event on the stream and log the chunk to the console, while `stream` would pass the stream object through to the next function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+stream.pipe(fs.createWriteStream('output.txt'));
+```
+This would result in different behavior because `stream.pipe(fs.createWriteStream('output.txt'))` would write the contents of the stream to a file named 'output.txt',

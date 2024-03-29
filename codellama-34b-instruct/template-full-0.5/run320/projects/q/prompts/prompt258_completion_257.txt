@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(null, function (reason) {
+    throw reason;
+});
+```
+This would result in different behavior because the original code fragment resolves the promise with the value, while this new code fragment rejects the promise with the same value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function (resolvedValue) {
+    return resolvedValue + 1;
+});
+```
+This would result in different behavior because the original code fragment resolves the promise with the value, while this new code fragment resolves the promise with the value plus one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function (resolvedValue) {
+    return Q.reject(resolvedValue);
+});
+```
+This would result in different behavior because the original code fragment resolves the promise with the value, while this new code fragment rejects the promise with the same value.
+
+DONE.

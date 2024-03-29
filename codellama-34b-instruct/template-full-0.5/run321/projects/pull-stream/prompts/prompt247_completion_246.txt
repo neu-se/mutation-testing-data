@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This would result in different behavior because `err && abort` will only execute `cb` if both `err` and `abort` are truthy, whereas the original code fragment would execute `cb` if either `err` or `abort` are truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err || !abort, cb
+```
+This would result in different behavior because `err || !abort` will only execute `cb` if either `err` or `!abort` are truthy, whereas the original code fragment would execute `cb` if either `err` or `abort` are truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null, cb
+```
+This would result in different behavior because `err ? abort : null` will execute `cb` with the value of `abort` if `err` is truthy, and with the value of `null` if `err` is

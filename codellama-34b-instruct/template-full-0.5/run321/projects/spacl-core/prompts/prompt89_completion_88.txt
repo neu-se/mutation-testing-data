@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name]
+```
+This would result in different behavior because it would create a duplicate key in the map, which would cause the `query` method to return `null` for any policy that has the same name as another policy in the map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name.toLowerCase()]
+```
+This would result in different behavior because it would create a key in the map that is different from the original key, which would cause the `query` method to return `null` for any policy that has a name that is not identical to the name of another policy in the map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name.split('').reverse().join('')]
+```
+This would result in different behavior because it would create a key in the map that is different from the original key, which would cause the

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object
+```
+This would result in different behavior because `object` is a variable that refers to the object being nodeified, whereas `Q(object)` is a promise that resolves to the object. Using `object` directly would not create a promise and would not allow the `nodeback` function to be called with the appropriate arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(null, nodeback)
+```
+This would result in different behavior because `Q(object).then(null, nodeback)` would create a promise that resolves to the object, but would not call the `nodeback` function with the appropriate arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (value) {
+    nodeback(null, value);
+}, function (error) {
+    nodeback(error);
+});
+```
+This would result in different behavior because `Q(object).then(function (value) { nodeback(null

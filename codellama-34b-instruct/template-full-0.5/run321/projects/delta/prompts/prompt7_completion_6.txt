@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes.filter(attr => attr[key] === null)
+```
+This would result in different behavior because the `filter` method would return a new array containing only the attributes that have a value of `null`, whereas the original code fragment would return all attributes, including those with a value of `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes.map(attr => attr[key] === null ? null : attr[key])
+```
+This would result in different behavior because the `map` method would return a new array containing the attributes that have a value of `null`, whereas the original code fragment would return all attributes, including those with a value of `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+attributes.reduce((copy, attr) => {
+  if (attr[key] === null) {
+    copy[attr] = null;
+  }
+  return copy;
+}, {})
+```
+This would result in different behavior because the `reduce` method

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(y)
+```
+This would result in different behavior because `Q(y)` would return a promise for `y`, whereas `Q(x).join` would return a promise for the result of joining `x` and `y`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(function(x) { return Q(y); })
+```
+This would result in different behavior because `Q(x).then(function(x) { return Q(y); })` would return a promise for the result of joining `x` and `y`, whereas `Q(x).join` would return a promise for the result of joining `x` and `y` if they are the same, but a rejection otherwise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(x).join(Q(y))
+```
+This would result in different behavior because `Q(x).join(Q(y))` would return a promise for the result of joining `x

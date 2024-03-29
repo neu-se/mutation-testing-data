@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    return callback.fcall(value).then(function () {
+        return value;
+    });
+});
+```
+This would result in different behavior because it would call the `callback` function with the `value` argument, which is not the same as calling it with no arguments as in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    return callback.fcall().then(function () {
+        throw reason;
+    });
+});
+```
+This would result in different behavior because it would call the `callback` function with no arguments, which is not the same as calling it with the `reason` argument as in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    return callback.fcall(reason).then(function () {
+        return value;
+    });
+});
+```
+This would result in different behavior because

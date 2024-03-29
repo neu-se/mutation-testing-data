@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    loop = false;
+    if (done) done(null);
+    return;
+  }
+  if (op && false === op(data)) {
+    loop = false;
+    read(abort || true, done || function () {});
+    return;
+  }
+  next();
+});
+```
+This would result in different behavior because it changes the order of the operations in the `read` callback. In the original code, the `if` statements are evaluated in a specific order, but in the modified code, the `if` statements are evaluated in a different order. This could potentially cause the code to behave differently in certain edge cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    loop = false;
+    if (done) done(null);
+    return;
+  }
+  if (op

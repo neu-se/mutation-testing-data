@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("tail")
+```
+This would result in different behavior because the original code fragment uses the `get()` method to retrieve the value of the `head` property, but this code fragment uses the `get()` method to retrieve the value of the `tail` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("head").fail(function (error) {
+  closed.resolve(error);
+  throw error;
+})
+```
+This would result in different behavior because the original code fragment uses the `get()` method to retrieve the value of the `head` property, but this code fragment uses the `fail()` method to handle errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("tail").then(function (result) {
+  return result.fail(function (error) {
+    closed.resolve(error);
+    throw error;
+  });
+})
+```
+This would result in different

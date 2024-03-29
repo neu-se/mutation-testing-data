@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parts.push(`/${part.replace(/([.$])/g, '\\$1')}`)
+```
+This would result in different behavior because the regular expression is not properly escaped, which could cause it to match unexpected characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parts.push(`/${part.replace(/([.$])/g, '\\$1')}`.replace(/\\/g, '\\\\'))
+```
+This would result in different behavior because the regular expression is not properly escaped, which could cause it to match unexpected characters. Additionally, the `replace` method is not necessary, as the regular expression can be written to match the same characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parts.push(`/${part.replace(/([.$])/g, '\\$1')}`.replace(/\\/g, '\\\\'))
+```
+This would result in different behavior because the regular expression is not properly escaped, which could cause it to match

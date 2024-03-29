@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb()
+```
+This would result in different behavior because `abortCb` is a function, and calling it would execute the function immediately, rather than passing it as an argument to `cb`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb.call(null, cb, abort, onAbort)
+```
+This would result in different behavior because `call` is a method that allows you to call a function with a specific `this` value, which in this case is `null`. This would cause the `abortCb` function to be called with a different `this` value than the original code, which could potentially change its behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb.bind(null, cb, abort, onAbort)()
+```
+This would result in different behavior because `bind` is a method that returns a new function that has a specific `this` value and arguments, which in this case is `null

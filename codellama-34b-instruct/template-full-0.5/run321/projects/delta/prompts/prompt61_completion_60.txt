@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'function' &&
+      Object.keys(attributes).length > 0
+```
+This would result in different behavior because it checks if the `attributes` variable is a function, rather than an object. This would cause the `insert` method to always add the `attributes` property to the new op, even if it is not an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 1
+```
+This would result in different behavior because it checks if the `attributes` variable has more than one key, rather than checking if it has any keys. This would cause the `insert` method to only add the `attributes` property to the new op if the `attributes` variable has more than one key.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{value: stack + "foo", configurable: true}
+```
+This would result in different behavior because it would append the string "foo" to the stack property, which would cause the makeStackTraceLong function to fail to remove the internal frames from the stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{value: stack, enumerable: true}
+```
+This would result in different behavior because it would make the stack property enumerable, which would cause the filterStackString function to include it in the filtered stack trace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{value: stack, writable: false}
+```
+This would result in different behavior because it would make the stack property non-writable, which would cause the makeStackTraceLong function to fail to concatenate the stack traces of the promise and the error.
+
+DONE.

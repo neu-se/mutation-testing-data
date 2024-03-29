@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+progressed.call(null, value)
+```
+This would result in different behavior because the `call` method is used to invoke the `progressed` function with a `this` value of `null`, whereas the original code uses the `progressed` function as a callback and relies on the `this` value being set to the promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+progressed.bind(null, value)()
+```
+This would result in different behavior because the `bind` method is used to create a new function that is bound to the `null` object and has the `value` argument pre-filled, whereas the original code uses the `progressed` function as a callback and relies on the `this` value being set to the promise object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(value).then(progressed)
+```
+This would result in different behavior because the `Q.resolve` method is used to create a new promise

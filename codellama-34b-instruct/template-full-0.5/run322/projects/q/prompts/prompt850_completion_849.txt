@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error && "string" === typeof error
+```
+This would result in different behavior because the `error` variable is being checked for truthiness instead of falsiness, which would cause the `onUnhandledError` function to be called even if `error` is not an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+error && error instanceof Error
+```
+This would result in different behavior because the `error` variable is being checked for being an instance of the `Error` class instead of being a string, which would cause the `onUnhandledError` function to be called even if `error` is not an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+error && "string" === typeof error && error.message === "Timed out after 1000 ms"
+```
+This would result in different behavior because the `error` variable is being checked for being a string and having a specific message, which would cause the `onUnhandledError` function to be

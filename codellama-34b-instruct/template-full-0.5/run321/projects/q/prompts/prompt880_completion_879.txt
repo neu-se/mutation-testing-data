@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeRejecter
+```
+This would result in different behavior because `makeNodeRejecter` is a different function than `makeNodeResolver`, and would cause the promise to be rejected instead of resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(null)
+```
+This would result in different behavior because `makeNodeResolver` expects a function as its argument, and passing `null` would cause a type error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(function () {})
+```
+This would result in different behavior because `makeNodeResolver` expects a function as its argument, and passing an empty function would cause the promise to be resolved with `undefined` instead of the expected value.
+
+DONE.

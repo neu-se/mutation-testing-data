@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejected !== null
+```
+This would result in different behavior because `rejected` may be a function, but it may also be `null` or `undefined`, in which case the `typeof` operator would return `"function"`, causing the code to enter the `if` block when it should not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rejected instanceof Function
+```
+This would result in different behavior because `rejected` may be a function, but it may also be an instance of a custom class that inherits from `Function`, in which case the `typeof` operator would return `"function"`, causing the code to enter the `if` block when it should not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(rejected) === "[object Function]"
+```
+This would result in different behavior because `Object.prototype.toString` can return different values for different types of objects, including functions, and the `typeof` operator

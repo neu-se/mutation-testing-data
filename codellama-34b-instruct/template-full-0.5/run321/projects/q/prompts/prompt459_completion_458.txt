@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.slice(), promise
+```
+This would result in different behavior because `slice()` returns a shallow copy of the array, whereas the original code uses the same array. This could cause the `untrackRejection` function to not properly remove the promise from the `unhandledRejections` array, leading to incorrect tracking of unhandled rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.concat(promise), promise
+```
+This would result in different behavior because `concat()` creates a new array by concatenating the `unhandledRejections` array with the `promise` object, whereas the original code modifies the `unhandledRejections` array in place. This could cause the `untrackRejection` function to not properly remove the promise from the `unhandledRejections` array, leading to incorrect tracking of unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+[promise], promise

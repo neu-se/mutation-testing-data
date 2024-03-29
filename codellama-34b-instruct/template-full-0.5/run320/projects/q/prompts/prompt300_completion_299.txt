@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.all([this, that])
+```
+This would result in different behavior because `Q.all` returns a promise that is fulfilled when all of the promises in the input array are fulfilled, whereas `Q(this).join(that)` returns a promise that is fulfilled when `this` and `that` are the same value, but otherwise rejects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.race([this, that])
+```
+This would result in different behavior because `Q.race` returns a promise that is fulfilled when any of the promises in the input array are fulfilled, whereas `Q(this).join(that)` returns a promise that is fulfilled when `this` and `that` are the same value, but otherwise rejects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(this).then(function (value) {
+    return Q(that).then(function (otherValue) {
+        if (value === otherValue)

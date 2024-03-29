@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(null));
+```
+This would result in different behavior because the original code fragment uses `void 0` as the second argument to `makeNodeResolver`, which is a shorthand for `undefined`. However, `null` is a different value, and it could potentially cause the function to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(function() {}));
+```
+This would result in different behavior because the original code fragment uses `void 0` as the second argument to `makeNodeResolver`, which is a shorthand for `undefined`. However, a function expression is a different value, and it could potentially cause the function to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(deferred.resolve));
+```
+This would result in different behavior because the original code fragment uses `void 0` as

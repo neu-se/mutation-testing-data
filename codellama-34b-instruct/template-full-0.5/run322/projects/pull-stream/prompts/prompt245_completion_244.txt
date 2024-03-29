@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort
+```
+This would result in different behavior because the original code fragment uses the `||` operator, which means "or", while this replacement uses the `&&` operator, which means "and". This change would cause the code to only abort the current stream if both `err` and `abort` are true, rather than if either one is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!err || abort
+```
+This would result in different behavior because the original code fragment uses the `||` operator, which means "or", while this replacement uses the `!` operator, which means "not", and the `||` operator again. This change would cause the code to abort the current stream if `err` is false or if `abort` is true, rather than if either one is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null
+```
+This would result in different behavior because the original code fragment uses the `||` operator, which

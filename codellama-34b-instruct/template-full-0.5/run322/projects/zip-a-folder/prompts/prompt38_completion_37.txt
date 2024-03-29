@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because `!isGlob` would negate the result of the `isGlob` function, making the code archive the file if it's not a glob, rather than if it is.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob(src, { cwd: path.dirname(targetFilePath) })
+```
+This would result in different behavior because it would use a different `cwd` option for the `isGlob` function, which could cause the function to return a different result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob(src, { ignore: ['node_modules/**'] })
+```
+This would result in different behavior because it would ignore any files in the `node_modules` directory when checking if the source is a glob, which could cause the function to return a different result.
+
+DONE.

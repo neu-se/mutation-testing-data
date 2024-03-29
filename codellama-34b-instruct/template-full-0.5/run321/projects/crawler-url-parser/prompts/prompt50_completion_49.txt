@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(baseUrlStr, parsedUrl)
+```
+This would result in different behavior because `URL.parse` expects two arguments, while `URL.resolve` expects three.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.resolve(baseUrlStr, parsedUrl, {})
+```
+This would result in different behavior because `URL.resolve` expects a third argument to be an object with options, while `URL.parse` does not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.resolve(baseUrlStr, parsedUrl, {
+  removeDirectoryIndex: true,
+  removeTrailingSlash: true,
+  stripWWW: true,
+  stripFragment: true,
+  normalizeHttps: false,
+  normalizeProtocol: true,
+  removeQueryParameters: [/^utm_\w+/i, 'ref']
+})
+```
+This would result in different behavior because `URL.resolve` would use the

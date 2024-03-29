@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.type = 'LineString';
+```
+This would result in different behavior because the `fromGeoJSON` method would no longer throw an error when the `type` property is not equal to `'Point'`, which would allow for the creation of a `GeoPoint` object with a non-point geometry, which is not intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.coordinates = [30, 40];
+```
+This would result in different behavior because the `fromGeoJSON` method would no longer throw an error when the `coordinates` property is not an array with two elements, which would allow for the creation of a `GeoPoint` object with invalid coordinates, which is not intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.coordinates[0] = 30;
+```
+This would result in different behavior because the `fromGeoJSON` method would no longer throw an error when the `coordinates` property is

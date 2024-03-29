@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites);
+```
+This would result in different behavior because the `this.emit` call in the original code fragment only emits the `'drain'` event when there are no more in-flight writes, while the new code fragment always emits the `'drain'` event with the current number of in-flight writes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._queue.size);
+```
+This would result in different behavior because the `this.emit` call in the original code fragment only emits the `'drain'` event when the queue size is 0, while the new code fragment always emits the `'drain'` event with the current queue size.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._data.size);
+```
+This would result in different behavior because the `this.emit` call in the original code fragment only

@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer();
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = next.resolve;
+```
+This would result in different behavior because the `next.promise` property is not defined, causing the `ends.resolve` method to be called with an undefined value, which would likely result in an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer();
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = next.reject;
+```
+This would result in different behavior because the `ends.resolve` method is being called with a rejected promise, which would likely cause the `get` method to return a rejected promise instead of a resolved one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer();
+ends.resolve({
+    head: value,
+    tail:

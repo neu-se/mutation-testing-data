@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes[key] === undefined
+```
+This would result in different behavior because `undefined` is not the same as `null`, and the original code fragment checks for `null` specifically.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes[key] !== attributes[key]
+```
+This would result in different behavior because the original code fragment checks for `null`, but this new code fragment checks for any value that is not equal to itself, which includes both `null` and `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(attributes, key)
+```
+This would result in different behavior because the original code fragment checks for the presence of a property on the `attributes` object, but this new code fragment checks for the presence of a property on the `Object.prototype` object, which is not the same thing.
+
+DONE.

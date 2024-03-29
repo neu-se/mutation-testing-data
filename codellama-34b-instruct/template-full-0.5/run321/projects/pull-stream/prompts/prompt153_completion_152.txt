@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator inverts the boolean value of `abort`, so if `abort` is `true`, `!abort` would be `false`, and vice versa. This could cause the `abortCb` function to be called with a different value than the original code, which could lead to different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && onAbort
+```
+This would result in different behavior because the `&&` operator evaluates both operands and returns the second operand if the first operand is truthy, or `undefined` if the first operand is falsy. If `abort` is `true`, `abort && onAbort` would return `onAbort`, which could cause the `abortCb` function to be called with a different value than the original code, which could lead to different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes = lastOp.attributes
+```
+This would result in different behavior because the `newOp.attributes` property would always be set to the value of `lastOp.attributes`, regardless of whether `newOp.insert` is a string or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes = Object.assign({}, lastOp.attributes)
+```
+This would result in different behavior because `Object.assign()` creates a shallow copy of `lastOp.attributes`, which means that any changes made to `newOp.attributes` would not affect `lastOp.attributes`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes = Object.assign({}, lastOp.attributes, {
+  insert: newOp.insert
+})
+```
+This would result in different behavior because `Object.assign()` creates a shallow copy of `lastOp.attributes` and adds a new property `insert` with the value of `newOp.insert`.

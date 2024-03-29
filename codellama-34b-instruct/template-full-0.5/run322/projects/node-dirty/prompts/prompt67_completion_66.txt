@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy(new Error('intentionally broken')));
+```
+This would result in different behavior because the `destroy` method is called with an error, which would cause the stream to be closed with an error, rather than being closed normally.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy(this._data));
+```
+This would result in different behavior because `this._data` is an object, and passing it to the `destroy` method would cause it to be treated as a callback, rather than being used as the data to be written to the stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy(this._data.size));
+```
+This would result in different behavior because `this._data.size` is a number, and passing it to the `destroy` method would cause it to be treated

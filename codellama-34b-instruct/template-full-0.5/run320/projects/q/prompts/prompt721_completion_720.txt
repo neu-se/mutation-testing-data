@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(promises);
+```
+This would result in different behavior because it would resolve the deferred promise with the original `promises` array, instead of resolving it with the array of resolved values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(array_slice(promises, 1));
+```
+This would result in different behavior because it would resolve the deferred promise with a slice of the `promises` array, starting from the second element, instead of resolving it with the array of resolved values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(array_map(promises, function (promise) { return promise.inspect().value; }));
+```
+This would result in different behavior because it would resolve the deferred promise with an array of the resolved values of the promises in the `promises` array, instead of resolving it with the array of resolved values.
+
+DONE.

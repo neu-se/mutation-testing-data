@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(next.promise);
+```
+This would result in different behavior because the original code resolves the `ends` promise with an object containing the `head` and `tail` properties, while this modified code resolves it with a promise that resolves to an object containing the `head` and `tail` properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({head: value, tail: Q.reject(error)});
+```
+This would result in different behavior because the original code resolves the `ends` promise with an object containing the `head` and `tail` properties, while this modified code resolves it with an object containing the `head` and `tail` properties, but the `tail` property is a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({head: value, tail: Q.defer()});
+```
+This would result in different behavior because the original code resolves the `ends` promise with

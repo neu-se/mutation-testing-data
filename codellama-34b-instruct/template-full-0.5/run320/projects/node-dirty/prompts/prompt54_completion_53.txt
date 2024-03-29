@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain');
+```
+This would result in different behavior because `emit` would be called immediately, regardless of the state of the `_queue` and `_waitForDrain` variables.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0 ? this.emit('drain') : this.emit('read_close');
+```
+This would result in different behavior because the `emit` call would be conditional on the `_queue` size, and would emit a different event depending on the condition.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0 ? this.emit('drain') : this.emit('write_close');
+```
+This would result in different behavior because the `emit` call would be conditional on the `_inFlightWrites` variable, and would emit a different event depending on the condition.
+
+DONE.

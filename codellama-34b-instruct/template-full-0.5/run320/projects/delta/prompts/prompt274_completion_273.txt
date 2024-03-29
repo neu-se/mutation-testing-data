@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() === 'insert'
+```
+This would result in different behavior because the condition would always be true, causing the `insert` operation to be pushed to the `delta` object, regardless of the type of the next operation in `thisIter`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() === 'retain'
+```
+This would result in different behavior because the condition would always be false, causing the `insert` operation to be skipped, regardless of the type of the next operation in `thisIter`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.peekLength() > 0
+```
+This would result in different behavior because the condition would always be true, causing the `insert` operation to be pushed to the `delta` object, regardless of the length of the next operation in `thisIter`.
+
+DONE.

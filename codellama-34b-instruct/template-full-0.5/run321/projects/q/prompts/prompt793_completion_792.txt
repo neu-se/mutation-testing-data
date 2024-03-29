@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() {}, function() {})
+```
+This would result in different behavior because the `then` method takes two arguments, a callback for the fulfilled state and a callback for the rejected state. By providing an empty function for the second argument, the promise will be resolved even if it is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { throw new Error(); })
+```
+This would result in different behavior because the `then` method takes a callback that is called with the resolved value of the promise. By throwing an error in the callback, the promise will be rejected even if it is fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { return Q.reject(); })
+```
+This would result in different behavior because the `then` method takes a callback that is called with the resolved value of the promise. By returning a rejected promise in the callback, the promise will be rejected even

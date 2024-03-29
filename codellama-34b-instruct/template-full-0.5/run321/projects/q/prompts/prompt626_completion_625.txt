@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this)
+```
+This would result in different behavior because `this.dispatch.bind(this)` is a bound function, which means that it will always be called with the same `this` value, regardless of how it's called. In this case, the `this` value would be the promise object, so the `dispatch` method would always be called on the promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(null)
+```
+This would result in different behavior because `this.dispatch.bind(null)` is a bound function that is not called with any specific `this` value. This means that the `dispatch` method would be called on the global object (or `undefined` in strict mode), rather than the promise object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this, "set")
+```
+This would result in different behavior because `this.dispatch.bind(this, "set

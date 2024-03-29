@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because the original code fragment only called `read` with `abort` and `done` if they were both truthy, but this replacement code fragment would call `read` with `abort` and `done` regardless of their truthiness.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort, done || function () {})
+```
+This would result in different behavior because the original code fragment only called `read` with `abort` and `done` if `abort` was truthy, but this replacement code fragment would call `read` with `abort` and `done` regardless of `abort`'s truthiness.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done)
+```
+This would result in different behavior because the original code fragment only called `read` with `abort` and `done` if `done`

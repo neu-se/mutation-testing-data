@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && (priority || otherIter.peekType() !== 'insert')) {
+```
+This would result in different behavior because it would prioritize retaining the insert operation from the other delta, even if it is not the next operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && (priority || otherIter.peekType() === 'insert')) {
+```
+This would result in different behavior because it would prioritize retaining the insert operation from the other delta, even if it is not the next operation, and it would also retain the insert operation even if the other delta's next operation is not an insert.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && (priority || otherIter.peekType() === 'delete')) {
+```
+This would result in different behavior because it

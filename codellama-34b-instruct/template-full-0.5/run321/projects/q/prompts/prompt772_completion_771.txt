@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(promises, function (promises) {
+    promises = array_map(promises, Q);
+    return when(all(array_map(promises, function (promise) {
+        return when(promise, noop, noop);
+    })), function () {
+        return promises;
+    });
+});
+```
+This would result in different behavior because the `noop` function is called instead of `onRejected` and `onProgress`, which would cause the promise to be rejected even if some of the promises are resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+when(promises, function (promises) {
+    promises = array_map(promises, Q);
+    return when(all(array_map(promises, function (promise) {
+        return when(promise, noop, noop);
+    })), function () {
+        return promises;
+    });
+});
+```
+This would result in different behavior because the `all

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'close', reject
+```
+This would result in different behavior because the event `'close'` is emitted when the output stream is closed, while the event `'error'` is emitted when there is an error in the stream. Replacing `'error'` with `'close'` would cause the promise to reject when the stream is closed, rather than when there is an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'end', reject
+```
+This would result in different behavior because the event `'end'` is emitted when the output stream has finished writing all data, while the event `'error'` is emitted when there is an error in the stream. Replacing `'error'` with `'end'` would cause the promise to reject when the stream has finished writing all data, rather than when there is an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'finish', reject
+```
+This would result in different behavior because the event `'finish'` is emitted when the output stream has finished writing

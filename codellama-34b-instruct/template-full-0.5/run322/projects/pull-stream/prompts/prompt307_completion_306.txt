@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? cb(null, data) : terminate(cb)
+```
+This would result in different behavior because the `terminate` function is not called when `last` is `true`, which could cause the stream to not be properly terminated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!last ? cb(null, data) : terminate(cb)
+```
+This would result in different behavior because the `terminate` function is not called when `last` is `false`, which could cause the stream to not be properly terminated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(null, data)
+```
+This would result in different behavior because the `terminate` function is called when `last` is `true`, which could cause the stream to be terminated prematurely.
+
+DONE.

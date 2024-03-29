@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, false)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, but without cloning the underlying rules. This could cause issues if the rules are stateful or have side effects, as they would not be properly reset.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, true)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, but with a deep copy of the underlying rules. This could cause issues if the rules are stateful or have side effects, as they would not be properly reset.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(name, !deep)
+```
+This would result in different behavior because it would create a new policy with the same name as the original policy, but with a shallow copy of the underlying rules if `deep` is

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress);
+```
+This would result in different behavior because the `onProgress` callback would not be called for the `promise` when it is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `deferred.resolve` and `deferred.reject` functions would not be called with the correct arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress).then(function (result) {
+    deferred.resolve(result);
+}, function (err) {
+    deferred.reject(err);
+});
+```
+This would result in different behavior because the `deferred.resolve` and `deferred.re

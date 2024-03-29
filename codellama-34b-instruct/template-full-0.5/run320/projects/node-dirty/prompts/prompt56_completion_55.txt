@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => this.destroy()
+```
+This would result in different behavior because `destroy()` is a different method than `close()`, and it would cause the database to be closed and removed from memory, rather than just closing the connection.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => this.emit('close')
+```
+This would result in different behavior because `emit()` is a different method than `close()`, and it would cause the `close` event to be emitted, rather than actually closing the connection.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => this.close(true)
+```
+This would result in different behavior because `close()` with a `true` argument would force the connection to be closed immediately, rather than waiting for pending writes to complete.
+
+DONE.

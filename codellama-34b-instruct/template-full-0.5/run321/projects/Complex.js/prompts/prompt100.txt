@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+     };
+
+     * 3. Abuse the identity cos(atan(y/x) = x / sqrt(x^2+y^2): (OVERALL ERROR: 3.4780178737037204e-10)
+
+     Math.log(a / Math.cos(Math.atan2(b, a)))
+
+     * 4. Use 3. and apply log rules: (OVERALL ERROR: 1.2014087502620896e-9)
+
+     Math.log(a) - Math.log(Math.cos(Math.atan2(b, a)))
+
+     */
+
+     a = a / 2;
+     b = b / 2;
+
+    return 0.5 * Math.log(a * a + b * b) + Math.LN2;
+  }
+
+  var parse = function(a, b) {
+
+    var z = { 're': 0, 'im': 0 };
+
+    if (a === undefined || a === null) {
+      z['re'] =
+      z['im'] = 0;
+    } else if (b !== undefined) {
+      z['re'] = a;
+      z['im'] = b;
+    } else
+      switch (typeof a) {
+
+        case 'object':
+
+          if ('im' in a && 're' in a) {
+            z['re'] = a['re'];
+            z['im'] = a['im'];
+          } else if ('abs' in a && 'arg' in a) {
+            if (!Number.isFinite(a['abs']) && Number.isFinite(a['arg'])) {
+              return Complex['INFINITY'];
+            }
+            z['re'] = a['abs'] * Math.cos(a['arg']);
+            z['im'] = a['abs'] * Math.sin(a['arg']);
+          } else if ('r' in a && 'phi' in a) {
+            if (!Number.isFinite(a['r']) && Number.isFinite(a['phi'])) {
+              return Complex['INFINITY'];
+            }
+            z['re'] = a['r'] * Math.cos(a['phi']);
+            z['im'] = a['r'] * Math.sin(a['phi']);
+          } else if (a.length === 2) { // Quick array check
+            z['re'] = a[0];
+            z['im'] = a[1];
+          } else {
+            parser_exit();
+          }
+          break;
+
+        case 'string':
+
+          z['im'] = /* void */
+          z['re'] = 0;
+
+          var tokens = a.match(/\d+\.?\d*e[+-]?\d+|\d+\.?\d*|\.\d+|./g);
+          var plus = 1;
+          var minus = 0;
+
+          if (tokens === null) {
+            parser_exit();
+          }
+
+          for (var i = 0; i < tokens.length; i++) {
+
+            var c = tokens[i];
+
+            if (c === ' ' || c === '\t' || c === '\n') {
+              /* void */
+            } else if (c === '+') {
+              plus++;
+            } else if (c === '-') {
+              minus++;
+            } else if (c === 'i' || c === 'I') {
+
+              if (plus + minus === 0) {
+                parser_exit();
+              }
+
+              if (tokens[i + 1] !== ' ' && !isNaN(tokens[i + 1])) {
+                z['im'] += parseFloat((minus % 2 ? '-' : '') + tokens[i + 1]);
+                i++;
+              } else {
+                z['im'] += parseFloat((minus % 2 ? '-' : '') + '1');
+              }
+              plus = minus = 0;
+
+            } else {
+
+              if (plus + minus === 0 || isNaN(c)) {
+                parser_exit();
+              }
+
+              if (tokens[i + 1] === 'i' || tokens[i + 1] === 'I') {
+                z['im'] += parseFloat(<PLACEHOLDER>);
+                i++;
+              } else {
+                z['re'] += parseFloat((minus % 2 ? '-' : '') + c);
+              }
+              plus = minus = 0;
+            }
+          }
+
+          // Still something on the stack
+          if (plus + minus > 0) {
+            parser_exit();
+          }
+          break;
+
+        case 'number':
+          z['im'] = 0;
+          z['re'] = a;
+          break;
+
+        default:
+          parser_exit();
+      }
+
+    if (isNaN(z['re']) || isNaN(z['im'])) {
+      // If a calculation is NaN, we treat it as NaN and don't throw
+      //parser_exit();
+    }
+
+    return z;
+  };
+
+  /**
+   * @constructor
+   * @returns {Complex}
+   */
+  function Complex(a, b) {
+
+    if (!(this instanceof Complex)) {
+      return new Complex(a, b);
+    }
+
+    var z = parse(a, b);
+
+    this['re'] = z['re'];
+    this['im'] = z['im'];
+  }
+
+  Complex.prototype = {
+
+    're': 0,
+    'im': 0,
+
+    /**
+     * Calculates the sign of a complex number, which is a normalized complex
+     *
+     * @returns {Complex}
+     */
+    'sign': function() {
+
+      var abs = this['abs']();
+
+      return new Complex(
+        this['re'] / abs,
+        this['im'] / abs);
+    },
+
+    /**
+     * Adds two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'add': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      // Infinity + Infinity = NaN
+      if (this['isInfinite']() && z['isInfinite']()) {
+        return Complex['NAN'];
+      }
+
+      // Infinity + z = Infinity { where z != Infinity }
+      if (this['isInfinite']() || z['isInfinite']()) {
+        return Complex['INFINITY'];
+      }
+
+      return new Complex(
+        this['re'] + z['re'],
+        this['im'] + z['im']);
+    },
+
+    /**
+     * Subtracts two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'sub': function(a, b) {
+
+      var z = new Complex(a, b);
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+(minus % 2 ? '-' : '') + c
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

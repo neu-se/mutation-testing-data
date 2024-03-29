@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', 'drain');
+```
+This would result in different behavior because it would emit an additional 'drain' event with the string 'drain' as the argument, whereas the original code only emits the 'drain' event without any arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites);
+```
+This would result in different behavior because it would emit an additional 'drain' event with the value of `this._inFlightWrites` as the argument, whereas the original code only emits the 'drain' event without any arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._queue.size);
+```
+This would result in different behavior because it would emit an additional 'drain' event with the value of `this._queue.size` as the argument, whereas the original code only emits the 'drain' event

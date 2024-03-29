@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    loop = false;
+    if (done) done(null);
+  } else if (end) {
+    loop = false;
+    if (done) done(end);
+  }
+});
+```
+This would result in different behavior because the original code fragment checks for the `abort` variable before calling the `done` callback, while this modified version does not. This could potentially cause the `done` callback to be called with an `end` value that is not `null` or `true`, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    loop = false;
+    if (done) done(end);
+  }
+});
+```
+This would result in different behavior because the original code fragment checks for the `abort` variable before calling the `done` callback, while this modified version

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.inspect.then(function (inspection) {
+    return inspection.value;
+});
+```
+This would result in different behavior because `promise.inspect` returns a promise for an object with information about the promise, while `promise.inspect.then(function (inspection) { return inspection.value; })` returns a promise for the value of the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.inspect.then(function (inspection) {
+    return inspection.value.then(function (value) {
+        return value;
+    });
+});
+```
+This would result in different behavior because `promise.inspect.then(function (inspection) { return inspection.value; })` returns a promise for the value of the promise, while `promise.inspect.then(function (inspection) { return inspection.value.then(function (value) { return value; }); })` returns a promise for the value of

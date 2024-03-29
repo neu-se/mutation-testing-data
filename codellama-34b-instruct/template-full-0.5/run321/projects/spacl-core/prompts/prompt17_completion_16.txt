@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return { regex: spec.replace(/[*+][^/]|[^/][*+]/g, ''), props: props.reverse() }
+```
+This would result in different behavior because the regular expression used in the `replace()` method is different from the original code. The original code used the regular expression `/[*+][^/]|[^/][*+]/` to match wildcards, but the new code uses `/[*+][^/]|[^/][*+]/g` which matches all occurrences of the pattern instead of just the first one. This could cause the `compile()` function to produce different results for some inputs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return { regex: spec.replace(/[*+][^/]|[^/][*+]/g, ''), props: props.reverse().slice(1) }
+```
+This would result in different behavior because the `slice()` method is called on the `props` array with an argument of `1`, which would remove

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextType === 'delete' && offset < index
+```
+This would result in different behavior because the `&&` operator has a higher precedence than `===`, so the expression would be evaluated as `(nextType === 'delete') && (offset < index)`, which would always be false since `nextType` is never equal to `'delete'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextType === 'delete' || offset < index
+```
+This would result in different behavior because the `||` operator has a lower precedence than `===`, so the expression would be evaluated as `nextType === ('delete' || offset < index)`, which would always be true since `offset < index` would always be true if `nextType` is not equal to `'delete'`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextType === 'delete' ? offset < index : false
+```
+This would result in different behavior because the ternary operator `?:` has a higher precedence than `===

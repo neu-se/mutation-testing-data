@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected, onProgress)
+```
+This would result in different behavior because the `then` method would be called on the `promise` object, but the `onProgress` callback would not be passed as an argument to the `then` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected, onProgress).then(onProgress)
+```
+This would result in different behavior because the `then` method would be called on the `promise` object, passing `onProgress` as the third argument. However, the `onProgress` callback would not be called until the promise is settled, which would not happen until after the `then` method has been called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected, onProgress).then(function () {
+    onProgress();
+})
+```
+This

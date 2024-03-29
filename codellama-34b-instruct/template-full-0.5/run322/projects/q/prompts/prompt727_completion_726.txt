@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pendingCount < 0
+```
+This would result in different behavior because it would cause the `deferred.resolve(promises)` line to be executed even if there are still pending promises, which could lead to a race condition.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pendingCount === promises.length
+```
+This would result in different behavior because it would cause the `deferred.resolve(promises)` line to be executed only when all promises have been fulfilled, which could lead to a situation where the promise is never resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pendingCount >= promises.length
+```
+This would result in different behavior because it would cause the `deferred.resolve(promises)` line to be executed only when all promises have been fulfilled or rejected, which could lead to a situation where the promise is never resolved.
+
+DONE.

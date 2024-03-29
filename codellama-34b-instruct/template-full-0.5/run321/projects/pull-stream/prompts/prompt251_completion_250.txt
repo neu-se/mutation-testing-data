@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort, null
+```
+This would result in different behavior because it would cause the `read` function to be called with a `null` callback, which would likely cause an error or unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort, function() {}
+```
+This would result in different behavior because it would cause the `read` function to be called with a no-op callback, which would likely cause the `read` function to return immediately without performing any work.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort, function(err) { throw err; }
+```
+This would result in different behavior because it would cause the `read` function to be called with a callback that throws an error if one is passed to it, which would likely cause the `read` function to return an error immediately.
+
+DONE.

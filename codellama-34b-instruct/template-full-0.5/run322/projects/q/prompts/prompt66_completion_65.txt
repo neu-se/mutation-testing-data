@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && MessageChannel.toString().indexOf("[native code]") === -1
+```
+This would result in different behavior because it checks if the `MessageChannel` constructor is not a native code, which would make the `requestTick` function fall back to the `setTimeout` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && MessageChannel.toString().indexOf("[object MessageChannel]") === -1
+```
+This would result in different behavior because it checks if the `MessageChannel` constructor is not an object, which would make the `requestTick` function fall back to the `setTimeout` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && MessageChannel.toString().indexOf("MessageChannel") === -1
+```
+This would result in different behavior because it checks if the `MessageChannel` constructor does not contain the string "MessageChannel", which would make the `request

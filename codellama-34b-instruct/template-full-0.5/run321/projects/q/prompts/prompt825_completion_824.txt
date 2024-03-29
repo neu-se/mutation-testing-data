@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function (reason) {
+    throw reason;
+});
+```
+This would result in different behavior because the original code fragment would pass the reason for rejection to the `finally` callback, while the modified code fragment would throw the reason as an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    return value;
+}, function (reason) {
+    return reason;
+});
+```
+This would result in different behavior because the original code fragment would pass the reason for rejection to the `finally` callback, while the modified code fragment would return the reason as a fulfilled value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    return value;
+}, function (reason) {
+    throw reason;
+});
+```
+This would result in different behavior because the original code fragment would pass the reason for rejection to the `finally` callback

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+exception, self.promiseDispatch
+```
+This would result in different behavior because it would call the `promiseDispatch` method on the `self` object, which is not the same as calling the `promiseDispatch` method on the `exception` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+exception, self.promiseDispatch.bind(exception)
+```
+This would result in different behavior because it would call the `promiseDispatch` method on the `exception` object, but it would bind the `this` context to the `exception` object, which may not be the same as the `this` context in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+exception, Q.resolve(exception)
+```
+This would result in different behavior because it would resolve the `exception` promise immediately, rather than waiting for the `promiseDispatch` method to be called on it.
+
+DONE.

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb(aborted)
+```
+This would result in different behavior because `abortCb` is a function that is only defined if `busy` is true, and it is used to call the `cb` function with the `aborted` error. By replacing `cb` with `abortCb(aborted)`, we are ensuring that the `cb` function is called with the `aborted` error, even if `busy` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(aborted)
+```
+This would result in different behavior because `cb` is a function that is always defined, and it is used to call the `next` function with the `aborted` error. By replacing `abortCb(aborted)` with `cb(aborted)`, we are ensuring that the `next` function is called with the `aborted` error, even if `busy` is true.
+
+Option 3: The PLACEHOLDER can be replaced with:

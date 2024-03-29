@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, tzs[key])
+```
+This would result in different behavior because `Object.assign` returns a new object, while `{...tzs[key]}` returns a new object with the same properties as `tzs[key]`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.assign(prev, { [key]: tzs[key] })
+```
+This would result in different behavior because `Object.assign` mutates the `prev` object, while `{...tzs[key]}` returns a new object with the same properties as `tzs[key]`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.assign(prev, { [key]: tzs[key] }, { deprecated: true })
+```
+This would result in different behavior because `Object.assign` returns a new object with the `deprecated` property set to `true`, while `{...tzs[key]}` returns a new object with the same properties as `tzs

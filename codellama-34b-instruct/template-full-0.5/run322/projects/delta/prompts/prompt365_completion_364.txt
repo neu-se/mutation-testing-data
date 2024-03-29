@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'delete' &&
+        (priority || otherIter.peekType() !== 'delete')
+```
+This would result in different behavior because `thisIter.peekType() === 'delete'` would check if the current operation is a deletion, while `otherIter.peekType() !== 'delete'` would check if the next operation is not a deletion. This change would cause the loop to skip over deletion operations in the `this` delta, which could result in incorrect behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() === 'insert')
+```
+This would result in different behavior because `otherIter.peekType() === 'insert'` would check if the next operation is an insertion, while `priority || otherIter.peekType() === 'insert'` would check if the next operation is an insertion or if the `priority` flag is set

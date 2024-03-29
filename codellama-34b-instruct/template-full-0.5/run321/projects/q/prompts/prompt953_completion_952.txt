@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not called on the correct object. In the original code, `fail` is called on the result of `Q(bound).fapply(nodeArgs)`, which is a promise. In this modified code, `fail` is called on `deferred.reject`, which is a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called with the wrong argument. In the original code, `fail` is called with `deferred.reject` as its argument. In this modified code, `fail` is called with `deferred.resolve` as its argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail(function () {

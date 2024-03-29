@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.match
+```
+This would result in different behavior because `rule.match` returns a boolean value indicating whether the rule matches the given path, whereas `rule.query` returns a boolean value indicating whether the rule allows the given action on the given path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!rule.query
+```
+This would result in different behavior because `!rule.query` negates the result of `rule.query`, which would cause the `query` method to return the opposite of what it should return for the given path and action.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx)
+```
+This would result in different behavior because it would cause the `query` method to be called recursively, which could lead to a stack overflow error.
+
+DONE.

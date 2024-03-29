@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled().then(function (states) {
+    return states.filter(function (state) {
+        return state.status === "fulfilled";
+    }).map(function (state) {
+        return state.value;
+    });
+});
+```
+This would result in different behavior because it would filter out all rejected promises and return only the fulfilled ones, which is the opposite of the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled().then(function (states) {
+    return states.map(function (state) {
+        return state.status === "rejected" ? Q.reject(state.reason) : state.value;
+    });
+});
+```
+This would result in different behavior because it would reject the promise if any of the promises in the array are rejected, which is the opposite of the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

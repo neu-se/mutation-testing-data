@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0
+```
+This would result in different behavior because it would always evaluate to `true` when the queue is not empty, even if there are no in-flight writes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0
+```
+This would result in different behavior because it would always evaluate to `true` when there are in-flight writes, even if the queue is empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.size + this._inFlightWrites > 0
+```
+This would result in different behavior because it would always evaluate to `true` when there are either in-flight writes or items in the queue, even if the queue is empty.
+
+DONE.

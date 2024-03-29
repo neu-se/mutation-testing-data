@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then().then(function() { throw reason; });
+```
+This would result in different behavior because the original code fragment throws the rejection reason directly, while the new code fragment throws the reason inside a nested `then` callback, which would cause the rejection to be handled by the next `then` or `catch` handler in the chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then().catch(function() { throw reason; });
+```
+This would result in different behavior because the original code fragment throws the rejection reason directly, while the new code fragment throws the reason inside a `catch` callback, which would cause the rejection to be handled by the next `catch` handler in the chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.then().done(function() { throw reason; });
+```
+This would result in different behavior because the original code fragment throws the rejection reason directly, while the new code fragment throws the reason inside a `done` callback

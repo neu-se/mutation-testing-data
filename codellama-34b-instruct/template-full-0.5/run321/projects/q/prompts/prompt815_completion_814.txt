@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(<PLACEHOLDER>).then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the `throw` statement would be executed unconditionally, regardless of the result of the `callback` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(<PLACEHOLDER>).then(function (value) {
+    throw reason;
+});
+```
+This would result in different behavior because the `throw` statement would only be executed if the `callback` function returned a truthy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(<PLACEHOLDER>).then(function (value) {
+    if (value) {
+        throw reason;
+    }
+});
+```
+This would result in different behavior because the `throw` statement would only be executed if the `callback` function returned a truthy value, and the `reason

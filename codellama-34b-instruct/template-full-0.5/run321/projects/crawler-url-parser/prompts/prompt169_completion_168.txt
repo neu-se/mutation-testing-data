@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path + '/'
+```
+This would result in different behavior because it would add an extra `/` to the end of the `linkurl_path`, which would cause the `includes` method to return `false`, even if the `linkurl_path` is a prefix of the `pageurl_path`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.split('/').pop()
+```
+This would result in different behavior because it would extract the last segment of the `linkurl_path` and compare it to the `pageurl_path`, even if the `linkurl_path` is a prefix of the `pageurl_path`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.substring(0, linkurl_path.indexOf('/'))
+```
+This would result in different behavior because it would extract the first segment of the `linkurl_path` and compare it to the `pageurl_path`, even if the `linkurl

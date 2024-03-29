@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && !ended
+```
+This would result in different behavior because it would cause the `read` function to be called with `end` set to `true` and `ended` set to `false`, which would cause the stream to be closed prematurely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!end && ended
+```
+This would result in different behavior because it would cause the `read` function to be called with `end` set to `false` and `ended` set to `true`, which would cause the stream to continue reading even after the end of the stream has been reached.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended || !end
+```
+This would result in different behavior because it would cause the `read` function to be called with `ended` set to `true` or `end` set to `false`, which would cause the stream to be closed prematurely or continue reading even after the end of the stream has been reached.
+
+DONE.

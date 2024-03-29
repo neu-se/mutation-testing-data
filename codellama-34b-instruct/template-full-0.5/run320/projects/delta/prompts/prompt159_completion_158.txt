@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType(<PLACEHOLDER>) === 'insert') {
+```
+This would result in different behavior because the `peekType` method is now checking for the literal string '<PLACEHOLDER>', rather than the type of the next op.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && thisIter.peekLength() === 0) {
+```
+This would result in different behavior because the `peekLength` method is now checking for the length of the next op, rather than the type of the next op.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && otherIter.peekType() === 'insert') {
+```
+This would result in different behavior because the `peekType` method is now checking for the type of the next op in both iterators, rather than just the `thisIter`

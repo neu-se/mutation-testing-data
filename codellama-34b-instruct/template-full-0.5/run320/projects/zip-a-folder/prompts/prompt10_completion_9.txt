@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because the `!` operator negates the result of the `isGlob` function, causing the code to enter the `else` block and execute the `zipArchive.directory(src, false)` method instead of the `zipArchive.glob(globPart)` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split(',').length > 1
+```
+This would result in different behavior because the `split` method returns an array of substrings, and the `length` property of the array would be greater than 1 if there are multiple glob patterns in the `src` string. The `zipArchive.directory(src, false)` method would be executed instead of the `zipArchive.glob(globPart)` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.startsWith('!')
+```
+This would result in different behavior because the `startsWith` method checks if the `src`

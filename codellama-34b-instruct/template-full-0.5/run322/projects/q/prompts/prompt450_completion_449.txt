@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reason && typeof reason.stack === "undefined"
+```
+This would result in different behavior because it would negate the condition, causing the `untrackRejection` function to be called even if `reason.stack` is defined, which would cause the `unhandledReasons` array to be populated with incorrect values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reason && typeof reason.stack !== "string"
+```
+This would result in different behavior because it would check if `reason.stack` is not a string, which would cause the `untrackRejection` function to be called even if `reason.stack` is a string, which would cause the `unhandledReasons` array to be populated with incorrect values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reason && typeof reason.stack !== "number"
+```
+This would result in different behavior because it would check if `reason.stack` is not a number, which would cause the `untrackRejection` function

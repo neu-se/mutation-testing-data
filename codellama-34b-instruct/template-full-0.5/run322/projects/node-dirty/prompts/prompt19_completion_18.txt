@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cbs.push(cb);
+```
+This would result in different behavior because it would push the callback function to the `cbs` array unconditionally, regardless of whether the key exists in the `_queue` map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This would result in different behavior because it would set the `cbs` array as the value for the `key` in the `_queue` map, even if the `key` does not exist in the map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.slice());
+```
+This would result in different behavior because it would set a shallow copy of the `cbs` array as the value for the `key` in the `_queue` map, even if the `key` does not exist in the map.
+
+DONE.

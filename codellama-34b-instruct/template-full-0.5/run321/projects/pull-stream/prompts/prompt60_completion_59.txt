@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+  if('function' == typeof err)
+    cb = err, err = true
+  abort = err || true
+  if(read) return read(abort, cb || function () {})
+}
+```
+This would result in different behavior because the `sink.abort` function is now defined twice, which would cause an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+  if('function' == typeof err)
+    cb = err, err = true
+  abort = err || true
+  if(read) return read(abort, cb || function () {})
+}
+```
+This would result in different behavior because the `sink.abort` function is now defined with a different name, which would cause the code to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (

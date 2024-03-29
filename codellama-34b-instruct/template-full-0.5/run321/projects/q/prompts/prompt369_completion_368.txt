@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+exception.message
+```
+This would result in different behavior because `exception.message` is a string, whereas `exception` is an object. If the `rejected` callback is expecting an exception object, it may not handle the string correctly, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(exception.message)
+```
+This would result in different behavior because `new Error(exception.message)` creates a new error object with the same message as the original exception, whereas `exception` is the original exception object. If the `rejected` callback is expecting the original exception object, it may not handle the new error object correctly, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is a primitive value, whereas `exception` is an object. If the `rejected` callback is expecting an exception object, it may not handle the `null` value correctly, leading to unexpected

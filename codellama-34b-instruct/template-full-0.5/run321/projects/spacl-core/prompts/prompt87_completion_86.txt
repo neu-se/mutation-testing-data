@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone(false)))
+```
+This would result in different behavior because the `clone` method would not be called on the rules, which could cause issues if the rules are stateful or have side effects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone(null)))
+```
+This would result in different behavior because the `clone` method would be called on the rules with a `null` argument, which could cause errors if the rules are not designed to handle a `null` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone(undefined)))
+```
+This would result in different behavior because the `clone` method would be called on the rules with an `undefined` argument, which could cause errors if the rules are not designed to handle an

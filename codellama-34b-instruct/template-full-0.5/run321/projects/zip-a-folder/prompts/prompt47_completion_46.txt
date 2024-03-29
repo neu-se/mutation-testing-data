@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+src, true
+```
+This would result in different behavior because the second argument is now `true` instead of `false`, which would result in the `directory` method being called with `recursive` set to `true`, which would include all subdirectories and their contents in the archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src, '*'
+```
+This would result in different behavior because the second argument is now a glob pattern `'*'` instead of `false`, which would result in the `directory` method being called with `recursive` set to `true`, but only for files that match the glob pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src, (file) => file.isDirectory()
+```
+This would result in different behavior because the second argument is now a function that returns `true` if the file is a directory, and `false` otherwise. This would result in the `directory` method being called with `recursive` set to `true`, but

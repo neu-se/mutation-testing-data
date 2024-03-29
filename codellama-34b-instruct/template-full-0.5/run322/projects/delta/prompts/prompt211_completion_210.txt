@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops.slice(0, this.ops.length - 1)
+```
+This would result in different behavior because it would remove the last operation from the `ops` array, which could result in a different final result when concatenating the two deltas.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.ops.slice(0, other.ops.length - 1)
+```
+This would result in different behavior because it would remove the last operation from the `ops` array of the other delta, which could result in a different final result when concatenating the two deltas.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ops.slice(0, Math.min(this.ops.length, other.ops.length) - 1)
+```
+This would result in different behavior because it would remove the last operation from the `ops` array of the shorter delta, which could result in a different final result when concatenating the two deltas.

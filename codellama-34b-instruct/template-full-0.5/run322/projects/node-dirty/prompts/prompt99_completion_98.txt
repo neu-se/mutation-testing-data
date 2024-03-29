@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'E_INVALID_ROW' })
+```
+This would result in different behavior because the error object would have a different code property, which could cause the error handling logic to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { rowStr: 'my_custom_error_message' })
+```
+This would result in different behavior because the error object would have a different rowStr property, which could cause the error handling logic to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { rowStr: rowStr.toUpperCase() })
+```
+This would result in different behavior because the error object would have a different rowStr property, which would be the uppercase version of the original rowStr, which could cause the error handling logic to behave differently.

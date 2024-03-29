@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb(aborted)
+```
+This would result in different behavior because the original code fragment `next` only calls the `abortCb` function if `busy` is `false`, but the new code fragment calls it unconditionally, which could cause the callback to be called twice.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb(err)
+```
+This would result in different behavior because the original code fragment `next` only calls the `abortCb` function with the `aborted` error, but the new code fragment calls it with the `err` error, which could cause the callback to be called with a different error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb()
+```
+This would result in different behavior because the original code fragment `next` only calls the `abortCb` function if `busy` is `false` and `aborted` is `true`, but the new code fragment calls it

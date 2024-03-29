@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because the `pipe` method would be called on the `res` object instead of the `createWriteStream` function, which would cause the data to be written to the `res` object instead of the file.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).pipe(res)
+```
+This would result in different behavior because the `pipe` method would be called on the `createWriteStream` function instead of the `res` object, which would cause the data to be written to the `createWriteStream` function instead of the file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: false })
+```
+This would result in different behavior because the `end` option would be set to `false`, which would cause the `res` object to not be closed after the data is written to the file, which could cause issues if

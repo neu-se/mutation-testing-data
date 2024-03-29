@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.nodeify
+```
+This would result in different behavior because it would call the `nodeify` method on the `object` directly, instead of creating a promise with `Q(object)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function(obj) { return obj.nodeify; })
+```
+This would result in different behavior because it would first create a promise with `Q(object)`, and then return a new function that returns the `nodeify` method of the resolved object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function(obj) { return obj.nodeify(); })
+```
+This would result in different behavior because it would first create a promise with `Q(object)`, and then return the result of calling the `nodeify` method on the resolved object.
+
+DONE.

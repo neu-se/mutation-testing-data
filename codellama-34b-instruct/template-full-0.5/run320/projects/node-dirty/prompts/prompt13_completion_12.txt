@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!cbs.includes(cb)
+```
+This would result in different behavior because the `includes` method checks if the callback is already in the list, and if it is, it will not add it again. In the original code, the callback is always added to the list, which can cause duplicate callbacks to be called when the key is persisted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cbs.length === 0
+```
+This would result in different behavior because the `length` property is always zero, so the callback will never be added to the list. This can cause the callback to never be called, even if the key is persisted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cbs.length > 0
+```
+This would result in different behavior because the `length` property is always greater than zero, so the callback will always be added to the list. This can cause the callback to be called multiple times, even if the key is not persisted.
+

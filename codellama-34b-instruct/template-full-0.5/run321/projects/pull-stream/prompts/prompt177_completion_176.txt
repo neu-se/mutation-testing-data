@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the original code fragment checks if `abort` is truthy, while this new fragment checks if it's falsy. If `abort` is a truthy value, the original code would return `abortCb(cb, abort, onAbort)`, while this new fragment would return `cb(null, array[i++])`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort !== true
+```
+This would result in different behavior because the original code fragment checks if `abort` is equal to `true`, while this new fragment checks if it's not equal to `true`. If `abort` is a truthy value other than `true`, the original code would return `abortCb(cb, abort, onAbort)`, while this new fragment would return `cb(null, array[i++])`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort !== false
+```
+This

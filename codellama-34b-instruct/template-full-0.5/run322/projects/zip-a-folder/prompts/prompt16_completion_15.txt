@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(targetBasePath, fs.constants.R_OK | fs.constants.W_OK)
+```
+This would result in different behavior because it would change the access mode to read-only, which would cause the code to fail if it tries to write to the target folder.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(targetBasePath, fs.constants.R_OK | fs.constants.W_OK | fs.constants.X_OK)
+```
+This would result in different behavior because it would add the execute permission to the access mode, which would cause the code to fail if it tries to execute a file in the target folder.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(targetBasePath, fs.constants.R_OK | fs.constants.W_OK | fs.constants.X_OK | fs.constants.F_OK

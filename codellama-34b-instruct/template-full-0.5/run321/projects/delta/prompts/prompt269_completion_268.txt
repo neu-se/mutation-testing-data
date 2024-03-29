@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.delete()
+```
+This would result in different behavior because `retDelta.delete()` will delete the entire delta, whereas `retDelta.chop()` will only delete any trailing empty retain ops.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(1)
+```
+This would result in different behavior because `retDelta.retain(1)` will retain only the first character of the delta, whereas `retDelta.chop()` will remove all trailing empty retain ops.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(retDelta.length() - 1)
+```
+This would result in different behavior because `retDelta.retain(retDelta.length() - 1)` will retain all but the last character of the delta, whereas `retDelta.chop()` will remove all trailing empty retain ops.
+
+DONE.

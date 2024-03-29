@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.nfapply(FS.readFile, [__filename])
+```
+This would result in different behavior because it would call `FS.readFile` with the filename `__filename` instead of the actual filename.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nfcall(FS.readFile, __filename)
+```
+This would result in different behavior because it would call `FS.readFile` with the filename `__filename` instead of the actual filename, and it would also pass the result of `FS.readFile` to `Q.nfcall`, which would likely cause an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nfapply(FS.readFileSync, [__filename])
+```
+This would result in different behavior because it would call `FS.readFileSync` with the filename `__filename` instead of the actual filename, and it would also pass the result of `FS.readFileSync` to `Q.nfapply`,

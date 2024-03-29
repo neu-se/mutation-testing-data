@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise.then(null, deferred.reject);
+```
+This would result in different behavior because the `then` method is called on the `promise` object, but the first argument is `null`, which means that the `onFulfilled` callback is not provided, so the promise will not be resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise.then(function() {
+    deferred.reject();
+});
+```
+This would result in different behavior because the `then` method is called on the `promise` object, and the first argument is a function that calls `deferred.reject()`, which means that the promise will be rejected regardless of whether it was previously resolved or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise.then(function() {
+    deferred.resolve();
+});
+```
+This would result in different behavior because the `then` method is

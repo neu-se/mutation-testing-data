@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherOp.retain
+```
+This would result in different behavior because `otherOp.retain` would always be true, even if `otherOp.delete` was false, which would cause the `if` statement to always execute the `delta.push(otherOp)` branch, even if it should have executed the `continue` branch.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!otherOp.delete
+```
+This would result in different behavior because `!otherOp.delete` would always be false, even if `otherOp.delete` was true, which would cause the `if` statement to always execute the `delta.push(otherOp)` branch, even if it should have executed the `continue` branch.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherOp.delete && otherOp.attributes
+```
+This would result in different behavior because `otherOp.delete` would be true if the `otherOp` operation is a delete operation, and `otherOp.attributes`

@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (aborted) {
+  cb(aborted);
+  abortCb && abortCb(aborted);
+}
+```
+This would result in different behavior because the original code fragment only checks if `aborted` is truthy, while this new fragment checks if it is strictly equal to `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (aborted === true) {
+  cb(aborted);
+  abortCb && abortCb(aborted);
+}
+```
+This would result in different behavior because the original code fragment checks if `aborted` is truthy, while this new fragment checks if it is strictly equal to `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (aborted !== false) {
+  cb(aborted);
+  abortCb && abortCb(aborted);
+}
+```
+This would result in different behavior because the original code fragment checks if `aborted` is truthy, while this

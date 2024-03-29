@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: tarFilePath, format: 'zip', zipAFolderOptions}
+```
+This would result in different behavior because it changes the format of the archive from 'tar' to 'zip', which would result in a different file extension and potentially different compression ratios.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions: {compression: COMPRESSION_LEVEL.uncompressed}}
+```
+This would result in different behavior because it sets the compression level to uncompressed, which would result in a larger archive size and potentially different compression ratios.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions: {customWriteStream: new WriteStream()}}
+```
+This would result in different behavior because it sets a custom write stream, which could potentially alter the behavior of

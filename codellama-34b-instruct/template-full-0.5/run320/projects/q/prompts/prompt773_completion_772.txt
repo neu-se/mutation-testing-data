@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.when(promises, function (promises) {
+    promises = array_map(promises, Q);
+    return when(all(array_map(promises, function (promise) {
+        return when(promise, noop, noop);
+    })), function () {
+        return promises;
+    });
+});
+```
+This would result in different behavior because the `noop` function would no longer be called, potentially causing the promise to never resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(promises, function (promises) {
+    promises = array_map(promises, Q);
+    return when(all(array_map(promises, function (promise) {
+        return when(promise, noop, noop);
+    })), function () {
+        return promises;
+    });
+}).then(null, function () {
+    throw new Error("Q can't get fulfillment value from any promise, all

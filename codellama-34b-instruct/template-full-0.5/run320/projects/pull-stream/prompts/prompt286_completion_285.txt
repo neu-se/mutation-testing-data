@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `!` operator negates the `end` variable, causing the `data` variable to be set to `mapper(data)` even if `end` is `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && mapper(data)
+```
+This would result in different behavior because the `&&` operator short-circuits the evaluation of the expression if `end` is `false`, meaning that `mapper(data)` would not be called if `end` is `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end ? null : mapper(data)
+```
+This would result in different behavior because the `? :` operator evaluates to `null` if `end` is `true`, and `mapper(data)` if `end` is `false`.
+
+DONE.

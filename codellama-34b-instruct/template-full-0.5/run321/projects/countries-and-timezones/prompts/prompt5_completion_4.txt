@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Object.keys(data.timezones).reduce((result, id) => {
+  const tz = data.timezones[id];
+  const { c, a } = tz;
+  const aliasTz = data.timezones[a] || {};
+  const countries = c || aliasTz.c;
+
+  if (!countries) return result;
+
+  countries.forEach((country) => {
+    if (!result[country]) Object.assign(result, { [country]: { current: [], all: [] } });
+    if (tz.r === undefined) result[country].current.push(id);
+    result[country].all.push(id);
+  });
+
+  return result;
+}, {});
+```
+This would result in different behavior because the `Object.keys()` method returns an array of the own enumerable property names of an object, while the `Object.values()` method returns an array of the own enumerable property values of an object. In this case, the `Object.keys

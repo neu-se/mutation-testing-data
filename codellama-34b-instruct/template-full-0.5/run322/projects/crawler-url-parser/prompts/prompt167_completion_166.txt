@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.includes(pageurl_path)
+```
+This would result in different behavior because it would check if the link URL path is contained within the page URL path, rather than the other way around. This would cause the `gettype` function to return "uplevel" for links that are not actually on the same level as the page, potentially leading to incorrect classification of links.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!pageurl_path.includes(linkurl_path)
+```
+This would result in different behavior because it would check if the page URL path does not contain the link URL path, rather than the other way around. This would cause the `gettype` function to return "uplevel" for links that are actually on the same level as the page, potentially leading to incorrect classification of links.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.startsWith(pageurl_path)
+```
+This would result in different behavior because it would

@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = next.reject;
+```
+This would result in different behavior because the `resolve` method is replaced with `reject`, which would cause the promise to be rejected instead of resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = function() {
+    throw new Error("Can't resolve promise");
+};
+```
+This would result in different behavior because the `resolve` method is replaced with a function that throws an error, which would cause the promise to be rejected instead of resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+ends.resolve = function() {
+    return Q.reject(new Error("Can't resolve promise"));
+};

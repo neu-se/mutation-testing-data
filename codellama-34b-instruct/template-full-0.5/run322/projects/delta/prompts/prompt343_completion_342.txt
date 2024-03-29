@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = null;
+```
+This would result in different behavior because it would cause the `transform` method to throw an error when trying to call `Delta.getHandler`, which is a function that is expected to be present and return a valid handler object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => ({
+  transform: () => null,
+});
+```
+This would result in different behavior because it would cause the `transform` method to return `null` instead of a valid delta object, which would cause any code that relies on the return value of `transform` to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => ({
+  transform: () => new Delta(),
+});
+```
+This would result in different behavior because it would cause the `transform` method to return a new, empty delta object instead of a delta object with the expected contents, which would cause any code that relies on the return value

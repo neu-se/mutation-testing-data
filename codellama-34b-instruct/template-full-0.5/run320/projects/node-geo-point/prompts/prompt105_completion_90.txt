@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 180) / 360 * Math.pow(2, zoom - 1)
+```
+This would result in different behavior because the `zoom` value is decreased by 1, which would cause the tiles to be smaller and more detailed, potentially revealing more information about the location.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 180) / 360 * Math.pow(2, zoom + 1)
+```
+This would result in different behavior because the `zoom` value is increased by 1, which would cause the tiles to be larger and less detailed, potentially hiding information about the location.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 180) / 360 * Math.pow(2, zoom) * 2
+```
+This would result in different behavior because the result of the `Math.pow` function

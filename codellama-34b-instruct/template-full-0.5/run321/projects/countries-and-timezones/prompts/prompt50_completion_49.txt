@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name)
+```
+This would result in different behavior because it would cause an infinite loop, as the function `getTimezone` calls `memoizeTimezone` which calls `getTimezone` again, creating a recursive loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name, { deprecated: true })
+```
+This would result in different behavior because it would return all timezones, including deprecated ones, whereas the original code only returns non-deprecated timezones.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name, { allTimezones: true })
+```
+This would result in different behavior because it would return all timezones for a given country, including deprecated ones, whereas the original code only returns non-deprecated timezones.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? cb(null, data) : terminate(cb)
+```
+This would result in different behavior because the original code fragment `cb` would always be called, whereas the modified code fragment would only call `cb` if `last` is `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(null, data)
+```
+This would result in different behavior because the original code fragment `cb` would always be called, whereas the modified code fragment would only call `terminate` if `last` is `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+last ? cb(null, data) : cb(ended, data)
+```
+This would result in different behavior because the original code fragment `cb` would always be called with `null` as the first argument, whereas the modified code fragment would call `cb` with `ended` as the first argument if `last` is `false`.
+
+DONE.

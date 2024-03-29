@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+acc = reducer(acc, data)
+```
+This would result in different behavior because the `acc` variable would be updated with the result of the `reducer` function, but the `sink` variable would not be updated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink.write(data)
+```
+This would result in different behavior because the `sink` variable is a writable stream, and calling `write` on it would write the data to the stream, but the `acc` variable would not be updated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+acc = reducer(acc, data)
+sink.write(data)
+```
+This would result in different behavior because both the `acc` variable and the `sink` variable would be updated, but the `sink` variable would be updated with the result of the `reducer` function, rather than the original data.
+
+DONE.

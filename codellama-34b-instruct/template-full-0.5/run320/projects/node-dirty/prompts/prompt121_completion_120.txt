@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', 'drain')
+```
+This would result in different behavior because it would emit the event with an additional argument, which may cause the event listener to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites)
+```
+This would result in different behavior because it would emit the event with the number of in-flight writes, which may cause the event listener to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._queue.size)
+```
+This would result in different behavior because it would emit the event with the size of the queue, which may cause the event listener to behave differently.
+
+DONE.

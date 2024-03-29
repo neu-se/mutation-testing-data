@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+array_map(promises, function (promise) {
+    return when(promise, noop, noop);
+})
+```
+This would result in different behavior because the `noop` function would be called instead of `onFulfilled` and `onRejected`, which would cause the promise to never be resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array_map(promises, function (promise) {
+    return when(promise, function () {
+        throw new Error("Promise rejected");
+    });
+})
+```
+This would result in different behavior because the `onRejected` function would be called with a different error message, which would cause the promise to be rejected with a different error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+array_map(promises, function (promise) {
+    return when(promise, function () {
+        return Q.reject("Promise rejected");

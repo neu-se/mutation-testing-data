@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+prev, { [id]: getTimezone(id, options) }
+```
+This would result in different behavior because the `getTimezone` function returns a timezone object, while the `getCountry` function returns a country object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev, { [id]: getCountry(id, { ...options, deprecated: true }) }
+```
+This would result in different behavior because the `deprecated` option is set to `true`, which will cause the `deliverCountry` function to return a country object with only the `timezones` property, instead of the full country object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prev, { [id]: getCountry(id, { ...options, allTimezones: true }) }
+```
+This would result in different behavior because the `allTimezones` option is set to `true`, which will cause the `deliverCountry` function to return a country object with the `allTime

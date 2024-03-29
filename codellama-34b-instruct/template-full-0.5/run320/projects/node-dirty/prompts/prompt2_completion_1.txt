@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This would result in different behavior because the `cbs` list would not be cleared after the data is persisted to disk, leading to duplicate callbacks being called multiple times.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, []);
+```
+This would result in different behavior because the `cbs` list would be reset to an empty array after the data is persisted to disk, leading to lost callbacks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.clear();
+```
+This would result in different behavior because the `cbs` list would be cleared after the data is persisted to disk, leading to lost callbacks.
+
+DONE.

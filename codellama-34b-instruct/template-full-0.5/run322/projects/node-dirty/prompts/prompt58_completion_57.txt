@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain');
+```
+This would result in different behavior because `this.emit('drain')` will emit the 'drain' event immediately, whereas `this.close()` will close the dirty db file streams.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('close');
+```
+This would result in different behavior because `this.emit('close')` will emit the 'close' event immediately, whereas `this.close()` will close the dirty db file streams.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('drain'));
+```
+This would result in different behavior because `this.emit('error', new Error('drain'))` will emit an 'error' event with a message 'drain', whereas `this.close()` will close the dirty db file streams.
+
+DONE.

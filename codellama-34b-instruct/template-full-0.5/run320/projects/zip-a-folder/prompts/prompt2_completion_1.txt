@@ -1,0 +1,30 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        gzip: false,
+    },
+});
+```
+This would result in different behavior because the original code uses the `gzip` option with a level of compression, while the new code does not use `gzip` at all.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        gzip: true,
+        gzipOptions: {
+            level: COMPRESSION_LEVEL.medium,
+        },
+    },
+});
+```
+This would result in different behavior because the original code uses the `gzip` option with a level of compression, while the new code uses a different level of compression.

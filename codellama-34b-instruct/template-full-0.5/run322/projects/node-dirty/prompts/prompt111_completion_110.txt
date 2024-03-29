@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Corrupted row at the end of the db: ${buffer.slice(0, -1)}`)
+```
+This would result in different behavior because it would remove the last character of the buffer, which would cause the error message to be different.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Corrupted row at the beginning of the db: ${buffer.slice(1)}`)
+```
+This would result in different behavior because it would remove the first character of the buffer, which would cause the error message to be different.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Corrupted row at the end of the db: ${buffer.toUpperCase()}`)
+```
+This would result in different behavior because it would convert the buffer to uppercase, which would cause the error message to be different.
+
+DONE.

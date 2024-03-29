@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && !this._waitForDrain
+```
+This would result in different behavior because the `&&` operator has higher precedence than the `||` operator, so the expression would evaluate to `true` if `this._queue.size` is truthy and `this._waitForDrain` is falsy, which is the opposite of the original expression.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0 || this._waitForDrain
+```
+This would result in different behavior because the `> 0` operator checks if the size of the queue is greater than 0, which is not the same as checking if the queue is empty or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!this._queue.isEmpty() || this._waitForDrain
+```
+This would result in different behavior because `this._queue.isEmpty()` checks if the queue is empty, which is not the same as checking if the size of

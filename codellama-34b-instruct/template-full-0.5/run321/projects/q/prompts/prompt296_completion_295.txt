@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(y).join
+```
+This would result in different behavior because it would join `y` with the resolved value of `x`, rather than joining `x` with `y`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(Q.resolve)
+```
+This would result in different behavior because it would resolve the promise returned by `Q(x)` and return a new promise that is resolved with the value of `x`, rather than joining `x` with `y`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(function(value) { return Q.reject(value); })
+```
+This would result in different behavior because it would reject the promise returned by `Q(x)` with the value of `x`, rather than joining `x` with `y`.
+
+DONE.

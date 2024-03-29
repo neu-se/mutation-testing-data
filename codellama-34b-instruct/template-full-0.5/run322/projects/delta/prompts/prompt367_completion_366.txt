@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && (priority || otherIter.peekType() !== 'insert')) {
+```
+This would result in different behavior because the original code only considers the `priority` flag when the other delta is an insert, but this modified code would also consider it when the other delta is a retain or delete.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && otherIter.peekType() === 'insert') {
+```
+This would result in different behavior because the original code only considers the `priority` flag when the other delta is an insert, but this modified code would always consider it when both deltas are inserts.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (thisIter.peekType() === 'insert' && otherIter.peekType() !== 'insert') {
+```
+This would result in different behavior because the original code only

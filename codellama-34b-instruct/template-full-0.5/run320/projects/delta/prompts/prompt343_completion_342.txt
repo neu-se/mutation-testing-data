@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler(embedType).invert(opData, baseOpData)
+```
+This would result in different behavior because `invert` would not be called on the handler, which could cause a bug if the handler is expected to have an `invert` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler(embedType).transform(opData, baseOpData, priority)
+```
+This would result in different behavior because `transform` would not be called on the handler with the correct arguments, which could cause a bug if the handler is expected to have a `transform` method that takes those arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler(embedType).transform(opData, baseOpData, !priority)
+```
+This would result in different behavior because `transform` would be called on the handler with the opposite value of `priority`, which could cause a bug if the handler is expected to have a `transform` method

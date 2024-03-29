@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled.then(function() {throw new Error("Error");});
+```
+This would result in different behavior because the `then` method is called on the result of `allSettled`, which is a promise that is always fulfilled with an array of promise states. By adding a `then` method that throws an error, the promise returned by `allSettled` will be rejected, which will cause the test to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled.then(function() {return Q.reject("Error");});
+```
+This would result in different behavior because the `then` method is called on the result of `allSettled`, which is a promise that is always fulfilled with an array of promise states. By adding a `then` method that returns a rejected promise, the promise returned by `allSettled` will be rejected, which will cause the test to fail.
+
+Option 3: The PLACEH

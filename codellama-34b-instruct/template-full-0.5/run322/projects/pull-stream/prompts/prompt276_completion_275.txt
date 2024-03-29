@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` would be called immediately after `nextChunk()`, whereas in the original code, `nextChunk()` is only called when `_read` is not null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read = null
+```
+This would result in different behavior because `_read` would be set to null immediately after `nextChunk()` is called, whereas in the original code, `_read` is only set to null when `nextStream()` is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return cb(null, data)
+```
+This would result in different behavior because `cb` would be called with null and data, whereas in the original code, `cb` is only called with null and data when `nextChunk()` is called.
+
+DONE.

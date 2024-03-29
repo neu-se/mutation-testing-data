@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(thisOp), AttributeMap.invert(thisOp.attributes, otherOp.attributes));
+```
+This would result in different behavior because it would retain the length of `thisOp` instead of `otherOp`, which could cause the resulting delta to have a different length than the original.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(otherOp), AttributeMap.invert(otherOp.attributes, thisOp.attributes));
+```
+This would result in different behavior because it would retain the length of `otherOp` instead of `thisOp`, which could cause the resulting delta to have a different length than the original.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(thisOp), AttributeMap.invert(otherOp.attributes, thisOp.attributes));
+```
+This would result in different behavior because it would retain the length of `thisOp` but invert the attributes of

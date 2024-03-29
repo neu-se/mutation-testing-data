@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point' && point.type !== 'MultiPoint'
+```
+This would result in different behavior because it would also check if the `type` property is not equal to `'MultiPoint'`, which is a valid value for a GeoJSON `Point` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point' || point.type !== 'MultiPoint'
+```
+This would result in different behavior because it would always return `true`, regardless of the value of the `type` property, because the `!==` operator checks for strict inequality, and the `||` operator checks for logical OR.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point' && point.type !== 'MultiPoint' && point.type !== 'LineString'
+```
+This would result in different behavior because it would also check if the `type` property is not equal to `'LineString'`, which is a valid value for a GeoJSON

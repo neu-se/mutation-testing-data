@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.unshift
+```
+This would result in different behavior because `unshift` adds the argument to the beginning of the array, whereas `push` adds it to the end. This could cause the arguments to be applied to the callback in the wrong order, leading to unexpected results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.pop
+```
+This would result in different behavior because `pop` removes the last element of the array, whereas `push` adds an element to the end. This could cause the callback to be called with the wrong arguments, leading to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.splice(0, 0, deferred.makeNodeResolver())
+```
+This would result in different behavior because `splice` adds the element to the beginning of the array, whereas `push` adds it to the end. This could cause the callback to be called with the wrong arguments, leading to unexpected results.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+done(end)
+```
+This would result in different behavior because `end` is always truthy, so the `if` condition would always be true, even if `end` is not an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+done(end === true)
+```
+This would result in different behavior because `end === true` is a strict comparison, so it would only be true if `end` is a boolean with the value `true`. If `end` is any other value, such as an error object, the condition would be false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+done(end || true)
+```
+This would result in different behavior because `end || true` is a logical OR expression that returns `true` if `end` is truthy, and `false` otherwise. If `end` is an error object, the condition would be true, but if `end` is any other value, the condition would be false.
+
+DONE.

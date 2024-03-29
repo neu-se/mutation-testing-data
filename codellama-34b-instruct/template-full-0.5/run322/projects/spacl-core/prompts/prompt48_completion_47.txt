@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+props.push(part.slice(1))
+```
+This would result in different behavior because it would push the entire part string to the props array, instead of just the part after the colon.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+props.push(part.split(':')[1])
+```
+This would result in different behavior because it would push the part after the colon to the props array, but would also split the part string at the colon, which could result in an empty string being pushed if there is no colon in the part.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+props.push(part.match(/:(.+)/)[1])
+```
+This would result in different behavior because it would push the part after the colon to the props array, but would also use a regular expression to match the colon and the part after it, which could result in a different behavior if the part string does not contain a colon.
+
+DONE.

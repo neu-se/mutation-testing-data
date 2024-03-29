@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', err);
+```
+This would result in different behavior because `emit` is not a function, so it would throw a `TypeError`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites);
+```
+This would result in different behavior because it would emit the number of in-flight writes, which is not the same as emitting the `'drain'` event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.emit('drain', err);
+```
+This would result in different behavior because it would emit the `'drain'` event on the `_writeStream` object, which is not the same as emitting it on `this`.
+
+DONE.

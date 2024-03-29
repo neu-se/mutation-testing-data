@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {}
+```
+This would result in different behavior because it would overwrite the `descriptor[op]` function with an empty function, causing the `promiseDispatch` method to always return an empty function, regardless of the value of `op`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = null
+```
+This would result in different behavior because it would set the `descriptor[op]` function to `null`, causing the `promiseDispatch` method to always return `null`, regardless of the value of `op`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () { throw new Error("test error") }
+```
+This would result in different behavior because it would overwrite the `descriptor[op]` function with a function that throws an error, causing the `promiseDispatch` method to always throw an error, regardless of the value of `op`.
+
+DONE.

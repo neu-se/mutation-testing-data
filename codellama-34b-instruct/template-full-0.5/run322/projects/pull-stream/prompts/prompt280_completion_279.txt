@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+mapper.call(this, data)
+```
+This would result in different behavior because `mapper.call(this, data)` would call the `mapper` function with the `data` argument, but it would also set the `this` value of the `mapper` function to the `this` value of the current context, which may not be what the developer intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+mapper.call(null, data)
+```
+This would result in different behavior because `mapper.call(null, data)` would call the `mapper` function with the `data` argument, but it would set the `this` value of the `mapper` function to `null`, which may not be what the developer intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+mapper.apply(this, [data])
+```
+This would result in different behavior because `mapper.apply(this, [data])` would call the `ma

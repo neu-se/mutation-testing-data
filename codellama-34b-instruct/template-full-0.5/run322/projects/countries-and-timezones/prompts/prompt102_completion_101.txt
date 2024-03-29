@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+...
+function deliverTimezones(tzs, options) {
+  const { deprecated } = options || {};
+  if (deprecated === true) return tzs;
+  return Object.keys(tzs).reduce((prev, key) => {
+    if (!tzs[key].deprecated) prev[key] = tzs[key];
+    return prev;
+  }, {});
+}
+...
+```
+This would result in different behavior because the original code uses `Object.assign` to merge the `tzs` object with the `prev` object, while this modified code uses the spread operator to merge the `tzs` object with the `prev` object. The spread operator only copies own enumerable properties from a provided object onto a new object, while `Object.assign` copies all enumerable own properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...
+function deliverTimezones(tzs, options) {
+  const { deprecated } = options || {};
+  if (deprec

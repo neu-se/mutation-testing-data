@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, noop)
+```
+This would result in different behavior because the `then` method would still be called, but the `onRejected` callback would be `noop`, which would ignore any rejections and return a resolved promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop, null)
+```
+This would result in different behavior because the `then` method would still be called, but the `onFulfilled` callback would be `noop`, which would ignore any fulfilled values and return a resolved promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function () { throw new Error('error'); })
+```
+This would result in different behavior because the `then` method would still be called, but the `onRejected` callback would throw an error, which would cause the promise to be rejected with the error.
+
+DONE.

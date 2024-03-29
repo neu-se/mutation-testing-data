@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream` is a function that returns a stream, but `nextStream()` would call the function immediately and return the result of the function, which is not what is intended. The original code fragment `nextStream` is intended to be called later when the stream is ready to be read.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read = nextStream
+```
+This would result in different behavior because `_read` is a variable that is used to store the current stream, but `nextStream` is a function that returns a stream, so assigning it to `_read` would cause the function to be called immediately and the result would be stored in `_read`, which is not what is intended. The original code fragment `nextStream` is intended to be called later when the stream is ready to be read.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read = function() { return nextStream() }
+```
+This would result in different behavior

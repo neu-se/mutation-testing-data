@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+args.slice()
+```
+This would result in different behavior because `args.slice()` creates a new array from `args`, whereas `args` itself is a reference to the original array. If the code that consumes the promise returned by `reject` modifies the array, it will not affect the array held by the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+args.concat()
+```
+This would result in different behavior because `args.concat()` creates a new array by concatenating `args` with an empty array, whereas `args` itself is a reference to the original array. If the code that consumes the promise returned by `reject` modifies the array, it will not affect the array held by the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+args.map(function(arg) { return arg; })
+```
+This would result in different behavior because `args.map(function(arg) { return arg; })` creates a new array by mapping

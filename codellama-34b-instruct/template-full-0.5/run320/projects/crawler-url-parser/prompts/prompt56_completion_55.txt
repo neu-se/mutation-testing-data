@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, false, true);
+```
+This would result in different behavior because the `false` argument for the `normalize` parameter would cause the URL to be parsed without normalizing the hostname, which could result in different behavior for URLs with internationalized domain names (IDNs).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, true, false);
+```
+This would result in different behavior because the `false` argument for the `stripFragment` parameter would cause the URL fragment (the part of the URL after the `#` symbol) to be included in the parsed URL, which could result in different behavior for URLs with fragments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, false, false);
+```
+This would result in different behavior because both the `normalize` and `stripFragment` parameters are set to `false`, which would cause the URL to be parsed without normalizing the hostname or

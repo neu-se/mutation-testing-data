@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (typeof otherOp.delete === 'number' &&
+    (typeof thisOp.retain === 'number' ||
+    (typeof thisOp.retain === 'object' && thisOp.retain !== null))) {
+  delta.push(otherOp);
+}
+```
+This would result in different behavior because the original code fragment checks if `otherOp.delete` is a number, but the modified code fragment checks if `otherOp.retain` is a number or an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (typeof otherOp.delete === 'number' &&
+    (typeof thisOp.retain === 'number' ||
+    (typeof thisOp.retain === 'object' && thisOp.retain !== null))) {
+  delta.delete(otherOp);
+}
+```
+This would result in different behavior because the original code fragment pushes `otherOp` to `delta`, but the modified code fragment deletes `otherOp` from `delta`.
+
+Option 3

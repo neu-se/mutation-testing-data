@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return (opt ? '^/$|^' : '^') + parts.reduce((acc, seg) => seg + acc, '$')
+```
+This would result in different behavior because the `reduce` method is called on `parts` with the initial value of `acc` set to an empty string, which means that the resulting regex will always start with a `/`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return (opt ? '^/$|^' : '^') + parts.reduce((acc, seg) => seg + acc, '')
+```
+This would result in different behavior because the `reduce` method is called on `parts` with the initial value of `acc` set to an empty string, which means that the resulting regex will never start with a `/`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return (opt ? '^/$|^' : '^') + parts.reduce((acc, seg) => seg + acc, '/')
+```
+This would result in different behavior

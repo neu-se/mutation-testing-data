@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiouy]o$/i, function(w) { return w + 'es' })
+```
+This would result in different behavior because the regular expression has been modified to include the `^` character at the beginning, which negates the character class and matches any character that is not in the class. This means that the rule will now match any word that ends in a consonant followed by "o", instead of just words that end in "o" and a vowel.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiouy]o$/i, function(w) { return w.substr(0, w.length - 2) + 'ies' })
+```
+This would result in different behavior because the function has been modified to remove the last two characters of the word instead of just the last character. This means that the rule will now match any word that ends in "o" and a consonant, and the plural form will have the "ies" ending instead

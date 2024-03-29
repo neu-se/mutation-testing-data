@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` would be called twice in a row, which would cause the stream to be read twice, potentially leading to unexpected results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, null)
+```
+This would result in different behavior because `nextStream(null, null)` would pass `null` as the `abort` and `cb` arguments to `nextStream`, which would cause the stream to be read with incorrect arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function() {})
+```
+This would result in different behavior because `nextStream(null, function() {})` would pass an empty function as the `cb` argument to `nextStream`, which would cause the stream to be read with an incorrect callback function.
+
+DONE.

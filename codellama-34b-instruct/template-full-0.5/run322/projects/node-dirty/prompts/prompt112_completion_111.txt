@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.slice(0, -1)}`)
+```
+This would result in different behavior because the new error message would not include the last character of the buffer, which could be significant if it is not a newline character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.toUpperCase()}`)
+```
+This would result in different behavior because the new error message would have all uppercase letters, which could be significant if the error message is being parsed or searched for specific text.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.split('').reverse().join('')}`)
+```
+This would result in different behavior because the new error message would have the characters of the buffer in reverse order, which could be significant if the error message is being parsed or

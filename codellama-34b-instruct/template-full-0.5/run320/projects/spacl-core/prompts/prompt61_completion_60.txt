@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = compile(spec)
+```
+This would result in different behavior because the `compile` function expects a string as its input, but `spec` is an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = compile(spec.toString())
+```
+This would result in different behavior because the `compile` function expects a string as its input, but `spec.toString()` returns a string representation of the object, which may not be in the same format as the original string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const { regex, props } = compile(JSON.stringify(spec))
+```
+This would result in different behavior because the `JSON.stringify` function returns a JSON representation of the object, which may not be in the same format as the original string.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'finish'
+```
+This would result in different behavior because the `'close'` event is emitted when the archive is fully read, while the `'finish'` event is emitted when all data has been flushed to the underlying system. Replacing `'close'` with `'finish'` would cause the program to exit before all data is written to the output stream, potentially resulting in a corrupted archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'end'
+```
+This would result in different behavior because the `'end'` event is emitted when the archive is fully read and the output stream is closed. Replacing `'close'` with `'end'` would cause the program to exit before the output stream is closed, potentially resulting in a corrupted archive.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error'
+```
+This would result in different behavior because the `'error'` event is emitted when an error occurs during the archive creation process. Replacing `'close'` with `'error

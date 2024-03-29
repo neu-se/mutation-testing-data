@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.glob(globPart);
+});
+```
+This would result in different behavior because it would cause the `glob` method to be called multiple times, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.directory(globPart, false);
+});
+```
+This would result in different behavior because it would cause the `directory` method to be called multiple times, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach((globPart) => {
+    zipArchive.file(globPart, { name: globPart });
+});
+```
+This would result in different behavior because it would cause the `file` method to be called multiple times, which is not the intended behavior.
+
+DONE.

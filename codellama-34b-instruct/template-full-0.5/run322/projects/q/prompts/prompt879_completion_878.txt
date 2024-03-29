@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(deferred)
+```
+This would result in different behavior because `bind` creates a new function with a hardcoded `this` value, which would cause the `makeNodeResolver` function to be called with the wrong context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.call(deferred)
+```
+This would result in different behavior because `call` calls the function immediately with the given context, which would cause the `makeNodeResolver` function to be called with the wrong context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.apply(deferred)
+```
+This would result in different behavior because `apply` calls the function immediately with the given context and arguments, which would cause the `makeNodeResolver` function to be called with the wrong context and arguments.
+
+DONE.

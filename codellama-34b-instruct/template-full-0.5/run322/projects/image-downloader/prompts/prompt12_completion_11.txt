@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pathname.slice(1)
+```
+This would result in different behavior because `pathname.slice(1)` returns a new string that is one character shorter than `pathname`, which could cause the `decodeURIComponent` function to fail if the last character of the pathname is a special character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pathname.replace(/[^a-zA-Z0-9]/g, '')
+```
+This would result in different behavior because `pathname.replace(/[^a-zA-Z0-9]/g, '')` returns a new string that only contains alphanumeric characters, which could cause the `decodeURIComponent` function to fail if the pathname contains special characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pathname.split('/').pop()
+```
+This would result in different behavior because `pathname.split('/').pop()` returns the last segment of the pathname, which could be different from the `pathname` variable

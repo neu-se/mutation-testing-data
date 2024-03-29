@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{
+  let i = 0;
+  while (iter.hasNext()) {
+    const thisOp = iter.peek();
+    if (thisOp.insert) {
+      line.push(iter.next());
+    } else if (typeof thisOp.retain === 'number' && thisOp.attributes == null) {
+      line.retain(thisOp.retain);
+      return baseIndex + thisOp.retain;
+    } else if (thisOp.delete || typeof thisOp.retain === 'number') {
+      const length = (thisOp.delete || thisOp.retain) as number;
+      const slice = base.slice(baseIndex, baseIndex + length);
+      slice.forEach((baseOp) => {
+        if (thisOp.delete) {
+          line.push(baseOp);
+        } else if (thisOp.retain && thisOp.attributes) {
+          line.retain(
+            Op.length(baseOp),
+            AttributeMap.invert(

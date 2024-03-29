@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pause
+```
+This would result in different behavior because `res.pause` would stop the stream from reading data, whereas `res.resume` would continue reading data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.destroy
+```
+This would result in different behavior because `res.destroy` would close the stream and release any resources associated with it, whereas `res.resume` would continue reading data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.on('data', () => {})
+```
+This would result in different behavior because `res.on('data', () => {})` would register an event listener that would be called every time data is received, whereas `res.resume` would continue reading data without any additional event listeners.
+
+DONE.

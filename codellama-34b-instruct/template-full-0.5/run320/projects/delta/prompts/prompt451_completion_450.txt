@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.hasNext()
+```
+This would result in different behavior because the `!` operator inverts the boolean value of the expression, so `!this.hasNext()` would return `true` when `this.hasNext()` returns `false`, and vice versa. This change would cause the `rest()` method to return an empty array when the iterator has no more elements, which would be incorrect.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.peekType() !== 'retain'
+```
+This would result in different behavior because `this.peekType()` returns the type of the next operation, which can be either `'delete'`, `'retain'`, or `'insert'`. The `!==` operator checks for strict inequality, so `this.peekType() !== 'retain'` would return `true` when the next operation is not a retain operation, and `false` otherwise. This change would cause the `rest()` method to return an empty array when the next operation is not a retain operation, which would

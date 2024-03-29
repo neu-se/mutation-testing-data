@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK | fs.constants.W_OK);
+```
+This would result in different behavior because it would check for both read and write permissions, which would cause the code to throw an error if the user does not have write permissions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK & fs.constants.W_OK);
+```
+This would result in different behavior because it would check for both read and write permissions, but only if the user has both permissions. If the user only has read permission, the code would not throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK ^ fs.constants.W_OK);
+```
+This would result in different behavior because it would check for both read and write permissions, but only if the user has one

@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, args]).then(function(result) {
+    return result;
+});
+```
+This would result in different behavior because the original code does not use `then` to handle the promise returned by `dispatch`, and the new code does.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, args]).catch(function(error) {
+    throw error;
+});
+```
+This would result in different behavior because the original code does not use `catch` to handle the promise returned by `dispatch`, and the new code does.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, args]).finally(function() {
+    return Q(object).dispatch("post", [name, args]);
+});
+```
+This would result in different behavior because the original code does not use `finally` to handle the promise returned by `dispatch`, and the new

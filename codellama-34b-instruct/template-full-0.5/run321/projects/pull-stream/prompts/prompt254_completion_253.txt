@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment uses `read(null, function(err, data) {...})`, which reads the next chunk of data from the stream, while the new code fragment uses `read(true, function(err, data) {...})`, which reads the next chunk of data from the stream and also signals that the stream should be closed after reading the current chunk.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {

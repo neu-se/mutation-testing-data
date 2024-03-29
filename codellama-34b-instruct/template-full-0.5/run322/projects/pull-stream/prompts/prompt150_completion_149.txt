@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || value != null
+```
+This would result in different behavior because the `||` operator has a lower precedence than the `!=` operator, so the expression would be evaluated as `(abort || value) != null`, which would always be true if `abort` is truthy, regardless of the value of `value`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && value != null
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `!=` operator, so the expression would be evaluated as `abort && (value != null)`, which would only be true if both `abort` and `value` are truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!abort && value != null
+```
+This would result in different behavior because the `!` operator has a higher precedence than the `&&` operator, so the expression would be evaluated as `!abort && (value != null)`, which

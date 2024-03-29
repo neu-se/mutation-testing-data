@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, {end: false});
+```
+This would result in different behavior because the `end` option is set to `false`, which means that the output stream will not be closed when the archive is finalized. This could cause issues if the archive is not properly closed, leading to incomplete or corrupted archives.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, {end: true});
+```
+This would result in different behavior because the `end` option is set to `true`, which means that the output stream will be closed when the archive is finalized. This could cause issues if the archive is not properly closed, leading to incomplete or corrupted archives.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, {end: false, finish: true});
+```
+This would result in different behavior because the `finish` option is set to `true`, which means that the output stream will be closed

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+key, []
+```
+This would result in different behavior because the `[]` empty array would always be used as the value for the `cbs` variable, regardless of whether the `key` is present in the `_queue` map or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+key, this._queue.get(key) || []
+```
+This would result in different behavior because the `this._queue.get(key) || []` expression would return the value associated with the `key` in the `_queue` map if it exists, or an empty array if it doesn't. This would ensure that the `cbs` variable is always set to a valid array, even if the `key` is not present in the `_queue` map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+key, this._queue.get(key) || this._queue.set(key, [])
+```
+This would result in different behavior because the `this._queue.set(

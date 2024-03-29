@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if(end = end || abort) {
+    if(done) done(end === true ? null : end)
+    else if(end && end !== true) {
+      console.warn(doneLackingErr)
+      throw end
+    }
+  }
+  else if(op && false === op(data) || abort) {
+    read(abort || true, done || function () {})
+  }
+})
+```
+This would result in different behavior because the original code fragment only calls the `read` function with two arguments, but this code fragment calls it with three arguments. This could cause the `read` function to behave differently, potentially leading to a failure in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if(end = end || abort) {
+    if(done) done(end === true ? null : end)
+    else if(end &&

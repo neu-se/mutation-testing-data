@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('Dummy error'));
+```
+This would result in different behavior because it would cause the `emit` method to be called with an error event, which would trigger the error handling logic in the `Dirty` class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', () => this.emit('drain'));
+```
+This would result in different behavior because it would cause the `emit` method to be called with a `'drain'` event, which would trigger the `drain` event handler in the `Dirty` class. However, the event handler would also call `emit` again, which would result in an infinite loop.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', () => this.emit('drain', () => this.emit('drain')));
+```
+This would result in different behavior because it would cause the `emit` method to be called with a `'drain'`

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { throw new Error("Oh no!") })
+```
+This would result in different behavior because the promise would be rejected with a new error, which would be handled by the unhandled rejection tracking.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.reject("Oh no!") })
+```
+This would result in different behavior because the promise would be rejected with a new rejection reason, which would be handled by the unhandled rejection tracking.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.reject("Oh no!") }, function() { throw new Error("Oh no!") })
+```
+This would result in different behavior because the promise would be rejected with a new rejection reason and the error would be thrown, which would be handled by the unhandled rejection tracking.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.promiseDispatch
+```
+This would result in different behavior because `promiseDispatch` is not a function, so it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this)
+```
+This would result in different behavior because `dispatch.bind(this)` would return a new function that is bound to the `this` context of the `Promise` object, but it would not actually call the `dispatch` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.apply(this, [op, args])
+```
+This would result in different behavior because `dispatch.apply(this, [op, args])` would call the `dispatch` function with the `this` context of the `Promise` object and the `op` and `args` arguments, but it would not return a promise.
+
+DONE.

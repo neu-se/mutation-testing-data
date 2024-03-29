@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.emit = function () {};
+```
+This would result in different behavior because the `process.emit` function would no longer be called, which means that the `unhandledRejection` event would not be emitted, and the `rejectionHandled` event would not be emitted either.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.emit = function (event, reason, promise) {
+    if (event === "unhandledRejection") {
+        return;
+    }
+    return this.emit(event, reason, promise);
+};
+```
+This would result in different behavior because the `process.emit` function would only be called for the `unhandledRejection` event, and the `rejectionHandled` event would not be emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.emit = function (event, reason, promise) {
+    if (event === "rejectionHandled") {
+        return;

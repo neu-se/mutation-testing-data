@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.spawn(function* () {
+    var foo = yield getFooPromise();
+    var bar = yield getBarPromise();
+    return foo + bar;
+})
+```
+This would result in different behavior because the `getFooPromise` and `getBarPromise` functions are not defined, so the code would throw a `ReferenceError` instead of executing the generator function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.spawn(function () {
+    var foo = getFooPromise();
+    var bar = getBarPromise();
+    return foo + bar;
+})
+```
+This would result in different behavior because the `getFooPromise` and `getBarPromise` functions are not defined, so the code would throw a `ReferenceError` instead of executing the generator function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.spawn(function* () {
+    var foo = yield getFooPromise();
+   

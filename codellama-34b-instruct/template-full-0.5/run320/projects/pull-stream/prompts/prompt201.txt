@@ -1,0 +1,87 @@
+Your task is to apply mutation testing to the following code:
+```
+'use strict'
+
+function id (e) { return e }
+var prop = require('../util/prop')
+
+module.exports = function asyncMap (map) {
+  if(!map) return id
+  map = prop(map)
+  var busy = false, abortCb, aborted
+  return function (read) {
+    return function next (abort, cb) {
+      if(aborted) return cb(aborted)
+      if(abort) {
+        aborted = abort
+        if(!busy) read(abort, function (err) {
+          //incase the source has already ended normally,
+          //we should pass our own error.
+          cb(abort)
+        })
+        else read(abort, function (err) {
+          //if we are still busy, wait for the mapper to complete.
+          if(busy) abortCb = cb
+          else <PLACEHOLDER>(abort)
+        })
+      }
+      else
+        read(null, function (end, data) {
+          if(end) cb(end)
+          else if(aborted) cb(aborted)
+          else {
+            busy = true
+            map(data, function (err, data) {
+              busy = false
+              if(aborted) {
+                cb(aborted)
+                abortCb && abortCb(aborted)
+              }
+              else if(err) next (err, cb)
+              else cb(null, data)
+            })
+          }
+        })
+    }
+  }
+}
+
+
+
+
+
+
+
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+cb
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

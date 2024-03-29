@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This would result in different behavior because `readFileSync` is a synchronous function that reads the entire contents of a file into memory, while `readFile` is an asynchronous function that reads the contents of a file into memory in chunks. Using `readFileSync` instead of `readFile` would cause the function to block until the entire file is read, which could lead to performance issues for large files.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { encoding: 'utf-8' })
+```
+This would result in different behavior because the `encoding` option is set to `'utf-8'` instead of the default value of `null`. This would cause the function to read the file contents as a UTF-8 encoded string instead of a buffer, which could lead to differences in the file contents if the file contains non-ASCII characters.
+
+Option 3: The PLACEHOLDER can be replaced with

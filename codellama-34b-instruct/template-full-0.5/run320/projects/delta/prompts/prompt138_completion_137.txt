@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        thisIter.peekLength() <= firstLeft &&
+        otherIter.peekType() === 'insert'
+```
+This would result in different behavior because it would also check if the next operation in the other delta is an insert, which is not checked in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        thisIter.peekLength() <= firstLeft &&
+        otherIter.peekType() === 'retain'
+```
+This would result in different behavior because it would also check if the next operation in the other delta is a retain, which is not checked in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        thisIter.peekLength() <= firstLeft &&
+        otherIter.peekType() === 'delete'
+```
+This would result

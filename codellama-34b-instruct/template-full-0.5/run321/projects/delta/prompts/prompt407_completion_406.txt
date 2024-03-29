@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+handler.transform(thisData[embedType], otherData[embedType], !priority)
+```
+This would result in different behavior because the `priority` parameter is negated, which would cause the transform to behave differently when `priority` is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+handler.transform(otherData[embedType], thisData[embedType], priority)
+```
+This would result in different behavior because the order of the arguments to `transform` is reversed, which would cause the transform to behave differently when `priority` is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+handler.transform(thisData[embedType], otherData[embedType], priority && !this.isInverted())
+```
+This would result in different behavior because the `isInverted` method is called, which would cause the transform to behave differently when the delta is inverted.
+
+DONE.

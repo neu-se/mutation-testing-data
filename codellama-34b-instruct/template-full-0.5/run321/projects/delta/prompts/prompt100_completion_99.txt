@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'string' && !lastOp.attributes
+```
+This would result in different behavior because it would allow the `chop` method to pop the last operation from the `ops` array even if it is not a `retain` operation, which could lead to unexpected behavior in the `filter`, `forEach`, `map`, `partition`, `reduce`, and `slice` methods that rely on the `ops` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes
+```
+This would result in different behavior because it would allow the `chop` method to pop the last operation from the `ops` array even if it has attributes, which could lead to unexpected behavior in the `filter`, `forEach`, `map`, `partition`, `reduce`, and `slice` methods that rely on the `ops` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+lastOp

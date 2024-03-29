@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort && true, done || function () {}
+```
+This would result in different behavior because the `&&` operator has higher precedence than the `||` operator, so the expression would be evaluated as `(abort && true), done || function () {}`. This would cause the `done` callback to be called with a value of `true` if `abort` is truthy, rather than the value of `done` if it is falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || false, done || function () {}
+```
+This would result in different behavior because the `||` operator has higher precedence than the `&&` operator, so the expression would be evaluated as `abort || (false, done || function () {})`. This would cause the `done` callback to be called with a value of `false` if `abort` is falsy, rather than the value of `done` if it is truthy.
+
+Option 3: The PLACEHOLDER can be replaced

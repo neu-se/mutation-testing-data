@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"].then(callback)
+```
+This would result in different behavior because `then` is a method that returns a promise, so the returned promise would be different from the original promise returned by `finally`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"].then(function () {
+  return callback();
+})
+```
+This would result in different behavior because the function returned by `then` would be called with a different `this` value than the original function, which could affect the behavior of the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"].then(callback).then(function () {
+  return callback();
+})
+```
+This would result in different behavior because the `then` method would be called twice, which could cause the callback to be called twice.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(y).join
+```
+This would result in different behavior because `Q(y)` is a different promise than `Q(x)`, and `join` will return a different result when called on a different promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(Q.reject)
+```
+This would result in different behavior because `then` returns a new promise that is resolved with the result of the callback, but `Q.reject` returns a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(x).then(function (value) { return Q.reject(value); })
+```
+This would result in different behavior because `then` returns a new promise that is resolved with the result of the callback, but the callback returns a rejected promise.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) || value.inspect().state === "fulfilled"
+```
+This would result in different behavior because it would also consider promises that are fulfilled as "near" values, which is not the case in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) && value.inspect().state === "rejected"
+```
+This would result in different behavior because it would only consider promises that are rejected as "near" values, which is not the case in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromiseAlike(value)
+```
+This would result in different behavior because it would consider any object with a `then` method as "near", which is not the case in the original code.
+
+DONE.

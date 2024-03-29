@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This would result in different behavior because `fs.readFileSync` is a synchronous function, whereas `fs.readFile` is an asynchronous function. Using `fs.readFileSync` would cause the code to block until the file is read, which could lead to performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { throws: false })
+```
+This would result in different behavior because the `throws` option is set to `false`, which means that the function will not throw an error if the file does not exist or is not readable. This could cause the code to continue executing even if there is an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { encoding: 'utf8' })
+```
+This would result in different behavior because the `encoding` option is set to `utf8

@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "string" &&
+        error !== null &&
+        error.stack
+```
+This would result in different behavior because the `typeof error` check would now return "string" instead of "object", which would cause the `error.stack` property to be undefined, even if the `error` object is not null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "undefined" &&
+        error !== null &&
+        error.stack
+```
+This would result in different behavior because the `typeof error` check would now return "undefined" instead of "object", which would cause the `error.stack` property to be undefined, even if the `error` object is not null.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+       

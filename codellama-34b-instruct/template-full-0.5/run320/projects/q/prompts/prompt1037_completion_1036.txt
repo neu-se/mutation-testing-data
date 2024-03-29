@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer();
+```
+This would result in different behavior because `Q.defer()` returns a new deferred object, which means that `next.resolve` and `next.reject` would be different functions than `ends.resolve` and `ends.reject`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer(ends.promise);
+```
+This would result in different behavior because `Q.defer()` returns a new deferred object, but the `ends.promise` argument would cause the new deferred object to be resolved with the same value as `ends.promise`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var next = Q.defer(ends.promise.then(function (value) {
+  return value;
+}));
+```
+This would result in different behavior because `Q.defer()` returns a new deferred object, and the `ends.promise.then()` method

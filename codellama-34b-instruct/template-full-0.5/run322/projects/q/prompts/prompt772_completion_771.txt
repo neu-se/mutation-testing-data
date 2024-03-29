@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return promises.map(function (promise) {
+    return promise.then(null, function (err) {
+        return err;
+    });
+});
+```
+This would result in different behavior because the original code uses `all` to wait for all promises to be resolved, while this code uses `map` to create a new array of promises that are resolved with the rejection reason if the original promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return promises.map(function (promise) {
+    return promise.then(function (value) {
+        return value;
+    }, function (err) {
+        throw err;
+    });
+});
+```
+This would result in different behavior because the original code uses `all` to wait for all promises to be resolved, while this code uses `map` to create a new array of promises that are resolved with the value if the original promise is fulfilled, or rejected with the rejection reason if the original promise is rejected.
+
+Option 3: The

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function () { throw new Error("intentional error"); });
+```
+This would result in different behavior because it adds an additional `then` handler to the promise returned by `Q.async(makeGenerator)()`, which would cause the promise to be rejected with the error "intentional error". This would cause the test to fail, indicating that the test is effective in detecting this type of error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function () { return "intentional value"; });
+```
+This would result in different behavior because it adds an additional `then` handler to the promise returned by `Q.async(makeGenerator)()`, which would cause the promise to be fulfilled with the value "intentional value". This would cause the test to fail, indicating that the test is effective in detecting this type of error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().
