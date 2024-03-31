@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return OBJECT.then(ft, rt, progress);
+```
+This would result in different behavior because `OBJECT.then` does not match the original code `Q(object).then`, and would cause a different promise chain to be constructed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return object.then(undefined, rt, progress);
+```
+This would result in different behavior because `object.then` does not match the original code `Q(object).then`, and would cause a different promise chain to be constructed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(undefined, rt, progress).then(ft);
+```
+This would result in different behavior because `Q(object).then` would update the original promise chain, which would not happen with `OBJECT.then` or `object.then`.
+
+DONE.

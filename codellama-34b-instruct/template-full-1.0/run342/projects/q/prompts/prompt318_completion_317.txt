@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.toString = function () {
+    return "[object Promise Mutant]";
+};
+```
+This would result in different behavior because the `toString` method has changed, which would affect how the object is represented as a string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.valueOf = function () {
+    var inspected = inspect();
+    if (inspected.state === "pending" ||
+        inspected.state === "rejected") {
+        return promise;
+    }
+    return "I've been mutated!";
+};
+```
+This would result in different behavior because the `valueOf` method has changed, which would affect how the object is coerced to a primitive value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.promiseDispatch = function (resolve, op, args) {
+    var result;
+    try {
+        if (descriptor[op]) {
+            result = descriptor[op

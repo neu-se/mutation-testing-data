@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isObject(point) || point.type !== 'Point'
+```
+This would result in different behavior because it would also check if the `type` property of the `point` object is not equal to `'Point'`, which would cause the `fromGeoJSON` method to throw a `TypeError` if the `type` property is not present or has a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isObject(point) || point.coordinates[0] !== point.coordinates[1]
+```
+This would result in different behavior because it would also check if the `coordinates` property of the `point` object is not an array containing two equal elements, which would cause the `fromGeoJSON` method to throw a `TypeError` if the `coordinates` property is not present or has a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!isObject(point) || point.longitude !== -180
+```

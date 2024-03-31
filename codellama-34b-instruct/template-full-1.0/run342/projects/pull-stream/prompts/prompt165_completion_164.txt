@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb(cb, abort, onAbort())
+```
+This would result in different behavior because the original code was calling the `abortCb` function with the `onAbort` parameter, which is a callback function that should be called when the abort event occurs. However, this new code fragment is calling the `onAbort` function immediately and passing its return value to `abortCb`, which is not correct.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb(null, cb, abort, onAbort)
+```
+This would result in different behavior because the original code was calling `abortCb` with two arguments (the `cb` callback function and the `abort` flag), but this new code fragment is calling it with three arguments (the `null` argument, the `cb` callback function, and the `abort` flag).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb(cb, null, abort,

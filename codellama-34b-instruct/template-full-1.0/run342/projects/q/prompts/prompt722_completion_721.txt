@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromise(promise) &&
+                    (typeof snapshot === "undefined" || snapshot.state === "fulfilled")
+```
+This would result in different behavior because the `snapshot` variable is no longer checked for its `state` property, making the code always return true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isPromise(promise) &&
+                    (snapshot = promise.inspect()).state === "fulfilled"
+```
+This would result in different behavior because the `isPromise` check is negated, making the code always return false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise(promise) &&
+                    (snapshot = promise.inspect()).state === "rejected"
+```
+This would result in different behavior because the expected `fulfilled` state is changed to `rejected`, causing the code to return false when it should be true.
+
+DONE.

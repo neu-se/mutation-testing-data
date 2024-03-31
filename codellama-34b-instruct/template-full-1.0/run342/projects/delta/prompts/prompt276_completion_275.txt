@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+  invert(base: Delta): Delta {
+    const inverse = new Delta();
+    this.reduce((baseIndex, op) => {
+      if (op.insert) {
+        inverse.delete(Op.length(op));
+      } else if (typeof op.retain === 'number' && op.attributes == null) {
+        inverse.retain(op.retain);
+        return baseIndex + op.retain;
+      } else if (op.delete || typeof op.retain === 'number') {
+        const length = (op.delete || op.retain) as number;
+        const slice = base.slice(baseIndex, baseIndex + length);
+        slice.forEach((baseOp) => {
+          if (op.delete) {
+            inverse.push(baseOp);
+          } else if (op.retain && op.attributes) {
+            inverse.retain(
+              Op.length(baseOp),
+              AttributeMap.invert(op.attributes, baseOp.

@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.reduce(function (accum, promise) {
+  return accum.then(function () {
+    return promise;
+  });
+}, Q.resolve())
+```
+This would result in different behavior because the `allSettled` method is not present in the replacement code, which means that the promise returned by `allResolved` would not be fulfilled with an array of promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises.reduce(function (accum, promise) {
+  return accum.then(function () {
+    return promise;
+  }).then(function (result) {
+    throw result[0];
+  });
+}, Q.resolve())
+```
+This would result in different behavior because the returned promise would be rejected with the result of the first rejected promise, rather than fulfilled with an array of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.reduce(function (accum, promise) {
+  return

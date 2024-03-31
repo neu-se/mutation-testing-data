@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1').toLowerCase()}`
+```
+This would result in different behavior because it would convert the captured group to lowercase, which could cause the match to fail in some cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1').slice(0, 1)}`
+```
+This would result in different behavior because it would only capture the first character of the match, which could cause the match to fail in some cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1').split('').reverse().join('')}`
+```
+This would result in different behavior because it would reverse the order of the captured group, which could cause the match to fail in some cases.
+
+DONE.

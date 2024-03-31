@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+writeFileSync: async function (file, obj, options = {}) {
+  const fs = options.fs || _fs
+
+  const str = stringify(obj, options)
+
+  await fs.writeFileSync(file, str, options)
+},
+```
+This would result in different behavior because the function is now asynchronous, which would cause the `writeFileSync` function to return a promise instead of a value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+writeFileSync: (file, obj, options = {}) => {
+  const fs = options.fs || _fs
+
+  const str = stringify(obj, options)
+
+  fs.writeFileSync(file, str, options)
+  return null
+},
+```
+This would result in different behavior because the function is now a concise function expression, and the `return null` statement will always be executed, even if the `writeFileSync` function throws an error.
+
+Option 3: The PLACEHOLDER can

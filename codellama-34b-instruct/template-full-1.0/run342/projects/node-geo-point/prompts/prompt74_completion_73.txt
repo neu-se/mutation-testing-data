@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var θ = deg2rad(bearing);
+θ = θ + Number(Math.PI / 2);
+```
+This would result in different behavior because the `Number` function is unnecessary, as the `PLACEHOLDER` only needs to accept a numeric value.
+Use of `Number` changes the expected input range of `deg2rad` from [0, 360] to [0, 360.9999999].
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var θ = deg2rad(bearing);
+θ = (θ > 180) ? θ - 180 : 180 - θ;
+```
+This would result in different behavior because the ternary operator changes the update to `θ`. Instead of a simple conversion to radians, the formula subtracts 180 from `θ` if it's greater than 180, and vice versa. The unexpected results may confuse test

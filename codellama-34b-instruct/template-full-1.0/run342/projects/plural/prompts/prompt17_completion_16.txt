@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/x$|ch$|s$/i, function(w) { return w })
+```
+This would result in different behavior because the return value of the anonymous function would be the original word, not the word with an 'es' suffix added.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/x$|ch$|s$/i, function(w) { return w + 's' })
+```
+This would result in different behavior because the return value of the anonymous function would always be the original word with an 's' suffix added, regardless of whether the original word already ended in 's'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/x$|ch$|s$/i, function(w) { return w.replace(/[bc]h$/, '$1') })
+```
+This would result in different behavior because the return value of the anonymous function would be the original word with the 'h' prefix removed, if the

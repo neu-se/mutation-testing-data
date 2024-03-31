@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.resolve
+```
+This would result in different behavior because `Q.resolve` and `Q.reject` have opposite meanings. In this case, `Q.resolve` would make the promise return a resolved value instead of a rejected error, which would cause the `fail` callback to not be executed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(error)
+```
+This would result in different behavior because `Q.resolve` with an error argument is equivalent to `Q.reject` with no arguments. This would cause the `fail` callback to still be executed, but with a different error than the one intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve("random string")
+```
+This would result in different behavior because `Q.resolve` with a non-Error object as an argument would resolve the promise with a resolved value, which would cause the `fail` callback to not be executed.
+
+DONE.

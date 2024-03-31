@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.openWriteStream
+```
+This would result in different behavior because `fs.openWriteStream` is a different method than `fs.createWriteStream` and does not create a writable stream, which is necessary for the function to work correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.createWriteStream(targetFilePath, { flags: 'r' })
+```
+This would result in different behavior because the `flags` option is set to `'r'` instead of the default `'w'`, which means that the stream is opened for reading instead of writing. This would cause the function to fail when it tries to write to the stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.createWriteStream(targetFilePath, { encoding: 'binary' })
+```
+This would result in different behavior because the `encoding` option is set to `'binary'` instead of the default `'utf8'`, which means that the stream is encoded in binary format instead of UTF-8.

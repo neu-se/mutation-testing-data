@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain')
+```
+This would result in the `drain` event being emitted immediately, rather than waiting for the `writeStream` to drain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('close')
+```
+This would result in the `close` event being emitted immediately, rather than waiting for the `writeStream` to close.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(() => this.emit('drain'))
+```
+This would result in the `drain` event being emitted after the current event loop iteration, rather than waiting for the `writeStream` to drain.
+
+DONE.

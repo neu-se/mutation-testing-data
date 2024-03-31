@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fn && key;
+```
+This would result in different behavior because `&&` operator has higher precedence than `,` operator, so it would evaluate the `fn && key` first, and if it's truthy, it will return the result of `key`. If `fn` is falsy, it will return `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fn || key;
+```
+This would result in different behavior because `||` operator has lower precedence than `,` operator, so it would evaluate the `key` first, and if it's falsy, it will return the result of `fn`. If `key` is truthy, it will return `key`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!fn && key;
+```
+This would result in different behavior because `!` operator has high precedence, so it would evaluate the `!fn` first, and if it's truthy, it will return the result of

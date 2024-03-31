@@ -1,0 +1,9 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/').replace(/\/[^\/]+\.[a-z]+$/, '/')
+```
+This would result in different behavior because the regular expression used in the first replacement would match and remove any string that ends with `/index.[a-z]+`, while the regular expression used in the second replacement would match and remove any string that ends with `/default.[a-z]+`, and the third regular expression would match and remove any string that ends with `/[^\/]+\.[a-z]+`. This would potentially cause the `gettype` function to return a different value for the `type` property when comparing two URLs that have different domain names, leading to different behavior in the application.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/\/index\.[a-z]+/, '').replace(/\/default\.[a-z]+/, '

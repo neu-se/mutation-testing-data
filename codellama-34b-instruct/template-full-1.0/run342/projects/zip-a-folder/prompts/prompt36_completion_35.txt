@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.end();
+```
+This would result in different behavior because `output.end()` would immediately terminate the stream, whereas `output` alone would continue to buffer the data until the stream is closed or flushed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.write('something else');
+```
+This would result in different behavior because `output.write()` would append the string `'something else'` to the stream, whereas `output` alone would not modify the stream at all.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.pipe(fs.createWriteStream('some other file'));
+```
+This would result in different behavior because `output.pipe()` would write the stream to a different file, whereas `output` alone would write the stream to the original file.
+
+DONE.

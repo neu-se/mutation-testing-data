@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(URL.resolve(baseUrl, parsedUrl))
+```
+This would result in different behavior because `URL.resolve` resolves a relative URL against a base URL, while `URL.parse` parses a URL string into its components. In this case, `URL.resolve` would produce a different URL from what the original code intended, which could cause the tests to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedUrl.href)
+```
+This would result in different behavior because `parsedUrl.href` contains the full URL string, while `URL.parse` expects a URL string in the format `protocol://host:port/path`. This would cause `URL.parse` to throw an error, which could cause the tests to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr.replace('#.*$', ''))
+```
+This would result in different behavior because it would remove any fragment identifier

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (deferred.reject !== deferred.resolve) {
+    return deferred.promise;
+}
+```
+This would result in different behavior because the nodeArgs are never pushed to the promise chain, so the nodeback would never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (deferred.promise.isPending()) {
+    return deferred.promise;
+}
+```
+This would result in different behavior because the promise would never be resolved or rejected, resulting in a never-ending loop.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (object instanceof Array) {
+    return [];
+}
+```
+This would result in different behavior because the object would never be an array, resulting in a never-ending loop.
+
+DONE.

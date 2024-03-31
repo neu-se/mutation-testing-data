@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/appendix|index/i, function(w) { return w.substr(0, w.length - 3) + 'ices' }
+```
+This would result in different behavior because the substr method is now subtracting 3 from the length of the word, instead of 2, which would change the resulting plural form of the word.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/appendix|index/i, function(w) { return w.substr(0, w.length - 2) + 'exes' }
+```
+This would result in different behavior because the plural form of the word is now being formed with the substring method, but the resulting plural form is now different from the original (e.g. "appendix" becomes "appendices" instead of "appendixes").
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/appendix|index/i, function(w) { return w.replace(/x$/, 'ices')

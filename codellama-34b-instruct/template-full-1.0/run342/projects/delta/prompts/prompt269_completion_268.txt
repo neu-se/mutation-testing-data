@@ -1,0 +1,19 @@
+  Option 1: The `PLACEHOLDER` can be replaced with:
+```
+retDelta.retain(1);
+```
+This would result in different behavior because it would insert a non-empty retain operation, which could affect the inserts and deletes operations in the delta.
+
+Option 2: The `PLACEHOLDER` can be replaced with:
+```
+retDelta.delete(1);
+```
+This would result in different behavior because it would insert a delete operation, which could affect the length of the delta and the inserts operations.
+
+Option 3: The `PLACEHOLDER` can be replaced with:
+```
+retDelta.concat(other);
+```
+This would result in different behavior because it would concatenate the two deltas, which could result in an entirely different set of operations and attributes.
+
+DONE.

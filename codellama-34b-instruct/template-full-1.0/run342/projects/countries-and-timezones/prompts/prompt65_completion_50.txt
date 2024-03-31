@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+countries[id].allTimezones
+```
+This would result in different behavior because `allTimezones` is an optional property that may not be present in all country objects. Using `countries[id]` would only return the country object itself, while `countries[id].allTimezones` would return an array of all timezones for that country, or `undefined` if the property is not present.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+timezones[country.id]
+```
+This would result in different behavior because `timezones` is a map of country IDs to timezone objects, while `countries` is a map of country IDs to country objects. Using `timezones[country.id]` would return a timezone object if the country has a corresponding timezone, or `undefined` if the country does not have a corresponding timezone.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const timezone = getTimezone(country.id);
+if (timezone

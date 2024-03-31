@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit(err)
+```
+This would result in different behavior because it would emit the error without checking if there are any callbacks in `cbs`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cbs[0](err)
+```
+This would result in different behavior because it would only call the first callback in `cbs`, instead of calling all of them.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', err)
+```
+This would result in different behavior because it would emit the error with the event name `'error'`, instead of using the `key` and `val` properties from the `row` object.
+
+DONE.

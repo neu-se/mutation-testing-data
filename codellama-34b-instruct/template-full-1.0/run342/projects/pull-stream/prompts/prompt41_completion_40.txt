@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pull.call(null, null)
+```
+This would result in different behavior because `pull.call` is a different function than `pull.apply`, and it would execute the function with `null` as the `this` context and `null` as the first argument, whereas `pull.apply` would execute the function with `this` set to the global object and the arguments passed as an array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pull.bind(null, null)()
+```
+This would result in different behavior because `pull.bind` returns a new function with a specific `this` context and arguments, whereas `pull.apply` executes the function immediately. In this case, `pull.bind(null, null)` would return a new function with `this` set to `null` and the arguments set to `null`, and then immediately execute that function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pull.bind(null, null)
+```
+This would result in

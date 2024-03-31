@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+absoluteUrl.replace(/\/+(?:=)*/g, "")
+```
+This would result in different behavior because it removes additional forward slashes and equal signs after the domain name, which may not be desired.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+require('url').resolve(parsedBaseUrl, parsedUrl)
+```
+This would result in different behavior because it resolves the URL with respect to the base URL, which may not be the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{ ...absoluteUrl, pathname: absoluteUrl.pathname.replace(/^\/?/, "/") }
+```
+This would result in different behavior because it adds a leading forward slash to the pathname if it is missing, which may not be desired.
+
+DONE.

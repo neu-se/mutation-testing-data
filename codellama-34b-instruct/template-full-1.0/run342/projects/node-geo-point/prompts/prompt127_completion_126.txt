@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.longitude
+```
+This would result in different behavior because `GeoPoint.calculateDistance` is expecting a `GeoPoint` object as its second argument, but `point.longitude` is a number.
+Option 2: The PLACEHOLDER can be replaced with:
+```
+GeoPoint.fromLatLngArray([point.longitude, point.latitude])
+```
+This would result in different behavior because `GeoPoint.fromLatLngArray` requires a `[longitude, latitude]` array, but the parameters passed to `calculateDistance` are in the format `[latitude, longitude]`.
+Option 3: The PLACEHOLDER can be replaced with:
+```
+GeoPoint.calculateDestination(point, 0, 180)
+```
+This would result in different behavior because `GeoPoint.calculateDestination` calculates the destination point based on the starting point, distance, and bearing, but the starting point is not being passed to the function.
+
+DONE.

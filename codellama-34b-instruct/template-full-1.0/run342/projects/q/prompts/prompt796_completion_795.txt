@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, null, progressed);
+```
+This would result in different behavior because the `then` method takes three arguments: `onFulfilled`, `onRejected`, and `onNotified`. The original code fragment, `progressed`, is used as the `onNotified` argument, which calls the `progress` method on the promise. However, the buggy code fragment replaces `progressed` with `null`, causing the `then` method to be called with `onNotified` set to `null`, which would not call the `progress` method on the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.delay(1000).then(null, null, progressed);
+```
+This would result in different behavior because the `delay` method delays the resolution of the promise by 1000 milliseconds. This would cause the `then` method to be called with a delay, which would result in different behavior than the original code fragment.
+
+Option 

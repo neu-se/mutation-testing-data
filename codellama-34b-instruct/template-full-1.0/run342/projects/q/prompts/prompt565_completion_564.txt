@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+    return reject({});
+```
+This would result in different behavior because an empty object is not an error, so it would not be caught by the `errback` function and the promise would not be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+    return reject(function() {
+        throw new Error('Error');
+    });
+```
+This would result in different behavior because the `reject` function would be called with a function that throws an error when called, which could result in an uncaught error depending on how the promise is handled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+    return reject('Error');
+```
+This would result in different behavior because the `reject` function would be called with a string, which is not an error, so it would not be caught by the `errback` function and the promise would not be rejected.
+
+DONE.

@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]+$/, '\''
+```
+This would result in different behavior because the regular expression pattern is not escaped properly, which could lead to unexpected results when the `parse()` function is called with a URL containing a path that ends with "/index.xxxxx" (where "xxxx" is a suffix that matches the regular expression).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]+$/, ' '
+```
+This would result in different behavior because the regular expression pattern is not escaped properly, which could lead to unexpected results when the `parse()` function is called with a URL containing a path that ends with "/index.xxxxx" (where "xxxx" is a suffix that matches the regular expression). The space character at the end of the replacement string would also cause the function to return a different result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]+$/, 'some_random_string'
+```

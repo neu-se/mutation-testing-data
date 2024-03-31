@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q().makeNodeResolver();
+```
+This would result in different behavior because `Q().makeNodeResolver()` would create a new node resolver, rather than using the one provided as an argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+void 0;
+```
+This would result in different behavior because `void 0` is a null pointer, so the node resolver would not be used at all.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because `Q.fapply(nodeArgs)` would apply the function `nodeArgs` to `Q`, whereas the original code applied the function `Q` to `nodeArgs`. Additionally, `deferred.reject` would be called with the result of the application, rather than being passed as an argument to the application.
+
+DONE.

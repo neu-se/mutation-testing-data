@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule('die', 'dice')
+```
+This would result in different behavior because the buggy code fragment would add a rule for the word 'die' that maps it to the same form as the original word 'die', while the original code fragment would map 'die' to the plural form 'dice'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule('dice', 'die')
+```
+This would result in different behavior because the buggy code fragment would add a rule for the word 'dice' that maps it to the same form as the original word 'die', while the original code fragment would map 'dice' to the plural form 'dice'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/(die|dice)$/i, function(w) { return w.substr(0, w.length - 3) + 'ice' })
+```
+This would result in different behavior because the buggy code fragment would add a rule

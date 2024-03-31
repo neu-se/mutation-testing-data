@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.push(thisIter.next());
+```
+This would result in different behavior because it would push the next operation from `this` onto the `delta` rather than the corresponding operation from `other`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const op = otherIter.next();
+delta.push(op.insert ? op : { insert: op.delete });
+```
+This would result in different behavior because it would push the next operation from `other` onto the `delta` and if it is an insert operation, it would be pushed as is, but if it is a delete operation, it would be pushed as an insert operation with the same length.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const op = otherIter.next();
+delta.push({ insert: op.insert, attributes: op.attributes });
+```
+This would result in different behavior because it would push the next operation from `other` onto the `delta` and if it is an insert operation, it would be

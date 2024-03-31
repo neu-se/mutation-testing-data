@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Delta([newOp]).concat(rest).chop
+```
+This would result in different behavior because it would create a new Delta object with the newOp and then concatenate it with the rest of the ops, rather than pushing the newOp onto the end of the existing Delta object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.concat(new Delta([newOp])).chop
+```
+This would result in different behavior because it would create a new Delta object with the newOp and then concatenate it with the existing Delta object, rather than pushing the newOp onto the end of the existing Delta object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Delta([...thisIter.rest(), newOp]).chop
+```
+This would result in different behavior because it would create a new Delta object with the remaining ops and the newOp, rather than pushing the newOp onto the end of the existing Delta object.
+
+DONE

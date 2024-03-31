@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+NaN
+```
+This would result in different behavior because the `Q.finally` method expects a promise as its first argument, and `NaN` is not a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(object)
+```
+This would result in different behavior because the `Q.finally` method expects a promise as its first argument, and `Promise.resolve(object)` creates a new promise that resolves with `object`, which may not be the same promise that is passed to the `Q.finally` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.then(function () {
+    throw Error("This is a bug");
+})
+```
+This would result in different behavior because it would cause the promise to be rejected with an error message, which would not occur with the original code fragment.
+
+DONE.

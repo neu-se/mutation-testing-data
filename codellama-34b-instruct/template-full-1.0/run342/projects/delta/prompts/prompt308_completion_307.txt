@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+line.retain(
+    Op.length(line),
+    AttributeMap.invert(thisOp.attributes, otherOp.attributes),
+);
+```
+This would result in different behavior because it changes the attribute map of the line, which could cause issues downstream in the code that uses the `AttributeMap` class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retain(line, null, i);
+```
+This would result in different behavior because it sets the attribute map of the line to null, which could cause issues downstream in the code that uses the `AttributeMap` class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retain(line, {}, i);
+```
+This would result in different behavior because it sets the attribute map of the line to an empty object, which could cause issues downstream in the code that uses the `AttributeMap` class.
+
+DONE.

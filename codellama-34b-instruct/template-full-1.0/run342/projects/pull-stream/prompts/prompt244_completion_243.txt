@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```js
+read(abort, function(err) {
+  cb(err || abort)
+})
+```
+This would result in different behavior because it would cause the `read` function to be called with the `abort` argument, which would cause the stream to be aborted immediately, rather than waiting for the `_read` function to be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```js
+read(abort, function(err) {
+  cb(err && abort)
+})
+```
+This would result in different behavior because it would short-circuit the `read` function if both `err` and `abort` are truthy, causing the stream to be aborted immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```js
+read(abort, function(err) {
+  cb(err ? abort : null)
+})
+```
+This would result in different behavior because it would cause the `read` function to be called with the `abort` argument if

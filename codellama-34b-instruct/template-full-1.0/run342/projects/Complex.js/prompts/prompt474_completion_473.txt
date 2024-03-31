@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with `isFinite`
+
+This would result in different behavior because `isFinite` only checks if its argument is a finite number, whereas `isNaN` checks if its argument is the `NaN` value. Using `isFinite` would allow infinite values, but not `NaN` values, to be passed to the `Complex` constructor.
+
+Option 2: The PLACEHOLDER can be replaced with `!isFinite`
+
+This would result in different behavior because `!isFinite` checks if its argument is not a finite number, whereas `isNaN` checks if its argument is the `NaN` value. Using `!isFinite` would allow `NaN` values, but not infinite values, to be passed to the `Complex` constructor.
+
+Option 3: The PLACEHOLDER can be replaced with `Object.is(Number(a), NaN)`
+
+This would result in different behavior because `Number` is a function that takes a string argument and returns its numeric representation. Calling `Number` on an argument of `NaN` would return `

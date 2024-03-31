@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!<PLACEHOLDER>
+```
+This would result in different behavior because the `!` operator used with a boolean expression will return the opposite value, so if `cb` is a function, it will be called regardless of whether the `_data` instance has the key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER> === false
+```
+This would result in different behavior because the `===` operator is used for identity comparison, and it will return `true` if and only if both operands have the same type and value. In this case, if `_data.get(key)` returns a value of a different type than `cb`, the expression will evaluate to `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>()
+```
+This would result in different behavior because the `()` operator is used to call a function, and it will evaluate to the return value of the function. In this case, if `cb` is a

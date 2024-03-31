@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(deferred.reject).nfapply(nodeArgs)
+```
+This would result in different behavior because `Q(deferred.reject)` would cause the resulting promise to reject unconditionally, while `Q(nodeArgs)` would attempt to call `nodeArgs` as a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(null).fapply(nodeArgs)
+```
+This would result in different behavior because `Q(null)` would cause the resulting promise to reject unconditionally, while `Q(callback).fapply` would attempt to call `callback` with `nodeArgs` as the argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(Q).nfapply(nodeArgs)
+```
+This would result in different behavior because `Q(Q)` would cause the resulting promise to resolve to the `Q` function, while `Q(callback).fapply` would attempt to call `callback` with `nodeArgs` as the argument.

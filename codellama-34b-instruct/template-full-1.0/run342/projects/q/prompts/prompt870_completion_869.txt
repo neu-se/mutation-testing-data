@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).fail
+```
+This would result in different behavior because the `fail` method would be called on the promise returned by `nfapply`, which would reject the promise if the first argument is a failure reason, and the `.nfapply(args)` already includes a `.fail` method as the last argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).fin
+```
+This would result in different behavior because the `fin` method does not exist on the promise returned by `nfapply`, it would raise an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfcall(args).fail
+```
+This would result in different behavior because the `fail` method would be called on the promise returned by `nfcall`, which would reject the promise if the first argument is a failure reason, and the `.nfcall(args)` already includes a `.fail` method as the last

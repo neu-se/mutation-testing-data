@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+  if (typeof op.retain === 'number' && op.attributes == null) {
+    inverted.retain(op.retain);
+    return baseIndex + op.retain + 1; // Increment by 1
+  }
+```
+This would result in different behavior because the `retain` method is called with an additional `+1` argument in the `return` statement, which would cause the function to retain one more operation than it should.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+  if (op.delete || typeof op.retain === 'number') {
+    const length = (op.delete || op.retain) as number;
+    const slice = base.slice(baseIndex, baseIndex + length - 1); // Decrement by 1
+    slice.forEach((baseOp) => {
+      if (op.delete) {
+        inverted.push(baseOp);
+      } else if (op.retain && op.attributes) {

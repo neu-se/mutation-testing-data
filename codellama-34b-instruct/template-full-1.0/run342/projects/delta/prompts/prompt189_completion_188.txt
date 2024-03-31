@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes == null
+```
+This would result in different behavior because the original code checks if `attributes` is falsy using the `!` operator, while this replacement checks if `attributes` is strictly equal to `null`. This could cause the resulting delta to include additional retain ops that would not have been included in the original.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes.length == 0
+```
+This would result in different behavior because the original code checks if `attributes` is falsy using the `!` operator, while this replacement checks if `attributes` is an empty array. This could cause the resulting delta to include additional retain ops that would not have been included in the original.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof attributes != 'object'
+```
+This would result in different behavior because the original code checks if `attributes` is falsy using the `!` operator, while this replacement checks if `attributes` is not an object. This could cause the

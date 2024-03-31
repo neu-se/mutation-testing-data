@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+value.inspect().state === "rejected"
+```
+This would result in different behavior because the `inspect` method returns the internal state of the promise, and the `state` property is always "rejected" for a rejected promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+value.inspect().state === "pending"
+```
+This would result in different behavior because the `inspect` method returns the internal state of the promise, and the `state` property is always "pending" for a pending promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value.then(function() { return value; })
+```
+This would result in different behavior because the `then` method is used to handle the rejection of a promise, and the function passed to it will be executed only if the promise is rejected. In this case, the function returns the original value, which means that the promise will be fulfilled and the rejection will be ignored.
+
+DONE

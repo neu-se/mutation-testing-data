@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function () {
+    throw new Error();
+}
+```
+This would result in different behavior because the function that is being passed as the `task` argument to `flush()` would always throw an error, regardless of the value of `flushing`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (task) {
+    task();
+    throw new Error();
+}
+```
+This would result in different behavior because the function that is being passed as the `task` argument to `flush()` would always throw an error, regardless of the value of `flushing`, and it would also cause the `runSingle()` function to throw an error, which could potentially impact the behavior of the `Q` library.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () {
+    setTimeout(function () {}, 0);
+}
+```
+This would result in different behavior because the function that is being passed as the `task` argument to `flush()` would always schedule a new task to be executed in the

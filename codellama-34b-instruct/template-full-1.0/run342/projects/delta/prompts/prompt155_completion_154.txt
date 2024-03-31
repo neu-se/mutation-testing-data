@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return false
+```
+This would result in different behavior because it would cause the `concat` method to return an empty `Delta` object, even if there are more ops to concatenate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return otherIter.peekType() !== 'insert'
+```
+This would result in different behavior because it would cause the `concat` method to skip over any `insert` operations in the `other` `Delta` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return otherIter.peekLength() > thisIter.peekLength()
+```
+This would result in different behavior because it would cause the `concat` method to only append operations from the `other` `Delta` object if the current operation in the `this` `Delta` object is shorter in length than the current operation in the `other` `Delta` object.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path + ctx
+```
+This would result in different behavior because '+' operator has higher precedence than ',' operator, and it would concatenate path and ctx before passing it to the matches function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+policy. matches(path, ctx)
+```
+This would result in different behavior because it would call the matches function on the policy object with two arguments, rather than one, which would result in a TypeError since the matches function only takes one argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, ctx, undefined
+```
+This would result in different behavior because it would pass three arguments to the matches function, which would result in a TypeError since the matches function only takes one argument.
+
+DONE.

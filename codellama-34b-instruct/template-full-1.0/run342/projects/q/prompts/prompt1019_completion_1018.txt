@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("orost", [name, nodeArgs]).fail(deferred.reject)
+```
+This would result in the promise rejection described in the bug report, even when the expected exception is not raised, because it correctly identifies the problem in the original code: the method for dispatching the `post` event is called incorrectly, with an incorrect event type and no callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).orost(deferred.reject)
+```
+This would result in the promise never being rejected, even when the expected exception is raised, because it disables the correct event type check in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).dost(deferred.resolve)
+```
+This would result in the promise never being rejected, even when the expected exception is raised, and the promise always resolving to `undefined`, because it

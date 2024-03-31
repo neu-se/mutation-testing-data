@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob(src)
+```
+This would result in different behavior because a negated glob expression would match a file instead of skip it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split(',').forEach(() => {});
+```
+This would result in different behavior because the callback function is empty, so the glob expressions would not be processed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.split('').forEach((globPart) => {});
+```
+This would result in different behavior because the glob expressions would be split at every character, so only single-character glob expressions would be matched.
+
+DONE.

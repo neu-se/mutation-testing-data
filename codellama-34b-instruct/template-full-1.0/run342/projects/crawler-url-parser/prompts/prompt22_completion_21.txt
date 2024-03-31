@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with: 
+```
+'http://example.com'
+```
+This would result in different behavior because the original code fragment replaces the protocol-relative URL with an HTTP scheme, while this replacement would just hardcode the domain name.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^\/\/example.com$/, 'http://example.com'
+```
+This would result in different behavior because the original code fragment matches any protocol-relative URL, while this replacement only matches URL's with the domain name 'example.com'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?!\/\/example.com).*$/, ''
+```
+This would result in different behavior because the original code fragment converts any protocol-relative URL to HTTP scheme, while this replacement just removes any URL's that do not contain 'example.com'.

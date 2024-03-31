@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.emit.bind(null, 'unhandledRejection', reason, promise)
+```
+This would result in different behavior because it would invoke the `emit` method with the given arguments, rather than passing a function to run after the next tick.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.emit.call(null, 'unhandledRejection', reason, promise)
+```
+This would result in different behavior because it would invoke the `emit` method with the given arguments, rather than passing a function to run after the next tick.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.emit.apply(null, ['unhandledRejection', reason, promise])
+```
+This would result in different behavior because it would invoke the `emit` method with the given arguments, rather than passing a function to run after the next tick.
+
+DONE.

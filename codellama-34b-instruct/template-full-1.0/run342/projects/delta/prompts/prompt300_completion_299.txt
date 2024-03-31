@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.next(2).attributes || {}
+```
+This would result in different behavior because it would change the number of ops being iterated, potentially causing the loop to skip over an op.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.next(1).attributes.slice() || {}
+```
+This would result in different behavior because it would create a copy of the op's attributes, potentially causing a mutation of the op's attributes without the intention to do so.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delete iter.next(1).attributes['bold']
+```
+This would result in different behavior because it would remove the 'bold' attribute from the op's attributes, potentially changing the behavior of the code that uses these attributes.
+
+DONE.

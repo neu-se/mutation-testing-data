@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected, onProgress)
+```
+This would result in different behavior because it would change the order of the callbacks. The original code fragment passes the callbacks in the order `onFulfilled`, `onRejected`, `onProgress`, while this new code fragment passes them in the order `onFulfilled`, `onRejected`, `onProgress`. This could cause issues if the callbacks rely on a specific order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(onRejected, onFulfilled, onProgress)
+```
+This would result in different behavior because it would swap the order of the `onFulfilled` and `onRejected` callbacks. This could cause issues if the callbacks rely on a specific order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(onProgress, onFulfilled, onRejected)
+```

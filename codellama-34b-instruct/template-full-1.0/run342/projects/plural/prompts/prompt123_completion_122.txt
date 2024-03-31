@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/\b(?:tea|sugar|water|air|rice|knowledge|beauty|anger|fear|love|money|research|safety|evidence)\b/i.test(word)
+```
+This would result in different behavior because the test always returns `false`, even if the word is uncountable, because the `test` method returns a boolean indicating whether or not the regular expression matches the entire string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/(?!\b(?:tea|sugar|water|air|rice|knowledge|beauty|anger|fear|love|money|research|safety|evidence)\b)\b/i.test(word)
+```
+This would result in different behavior because the negative lookahead assertion `(?!\b...\b)` ensures that the match can only occur if the word is not followed by any of the uncountable words, and the `test` method returns

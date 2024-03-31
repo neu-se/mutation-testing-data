@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.nextTick().then(flush);
+```
+This would result in different behavior because `process.nextTick()` returns a promise, and by using `then()`, we are essentially wrapping the `flush` function in a new promise. This would cause the `flush` function to be executed asynchronously, which could result in the event loop being blocked, leading to unintended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(flush);
+```
+This would result in different behavior because `process.nextTick()` accepts a function as its argument, and by passing `flush` directly, we are essentially passing a reference to the `flush` function itself, rather than a function that calls `flush`. This could result in the `flush` function being executed immediately, rather than asynchronously, which could cause the event loop to be blocked.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(function(){flush()});
+```
+This would

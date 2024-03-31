@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the article states that:
+```
+"When a promise is rejected, that rejection is propagated through the promise chain without stopping; when a promise is fulfilled, the fulfillment value is propagated through the promise chain until any promise that this value encounters is not fulfilled, then that promise becomes ***REJECTED.***"
+```
+If the promise given to the makeNodeResolver function is never fulfilled or rejected, then the nodeResolver will never be executed and this would result in different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the article states that:
+```
+"Providing `undefined` as the first argument to any `then()` method becomes and remains an unresolved promise chain until it is joined by another unresolved chain or an already-resolved one."
+```
+If the promise given to the makeNodeResolver function is never fulfilled or rejected, then the nodeResolver will never be executed and

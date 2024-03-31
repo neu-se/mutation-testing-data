@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `Q(null)` does not have a `nfapply` method, which would cause a different error to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because `Q(undefined)` has a `nfapply` method, but attempting to use it with a non-function value would cause a different error to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.reject('error')
+```
+This would result in different behavior because `Q.reject('error')` is a rejected promise, which would cause the `nfapply` method to immediately reject with the given reason.
+
+DONE.

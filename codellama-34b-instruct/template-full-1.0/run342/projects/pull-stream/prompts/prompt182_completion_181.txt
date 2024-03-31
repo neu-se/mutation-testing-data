@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- cb, abort, onAbort
++ cb, null, onAbort
+```
+This would result in different behavior because the `abort` parameter is being set to `null`, which would cause the `abortCb` function to not be called with the correct arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- cb, abort, onAbort
++ cb, () => {}, onAbort
+```
+This would result in different behavior because the `abort` parameter is being set to a function that returns an empty object, which would cause the `abortCb` function to not be called with the correct arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```diff
+- cb, abort, onAbort
++ cb, undefined, onAbort
+```
+This would result in different behavior because the `abort` parameter is being set to `undefined`, which would cause the `abortCb` function to not be called with the correct arguments.
+

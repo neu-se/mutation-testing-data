@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (exception) {
+  return reject(exception);
+}
+```
+This would result in different behavior because `reject` is not defined in this scope, and would cause a `ReferenceError` to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (exception) {
+  return resolve(exception);
+}
+```
+This would result in different behavior because `resolve` is not defined in this scope, and would cause a `ReferenceError` to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (exception) {
+  return Q(exception);
+}
+```
+This would result in different behavior because `Q(exception)` creates a rejected promise, but the `promiseDispatch` method is expecting a fulfilled promise.
+
+DONE.

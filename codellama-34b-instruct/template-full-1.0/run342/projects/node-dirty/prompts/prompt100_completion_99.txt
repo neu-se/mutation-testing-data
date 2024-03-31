@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', 'Could not load corrupted row: ' + rowStr
+```
+This would result in different behavior because the original code throws an `Error` object with a message that includes the `rowStr` string, while this replacement code merely concatenates the string and throws nothing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'write', rowStr
+```
+This would result in different behavior because the original code throws an error during reading, while this replacement code writes the `rowStr` to the write stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', new TypeError(`Could not parse corrupted row: ${rowStr}`)
+```
+This would result in different behavior because the original code throws an `Error` object with a message that includes the `rowStr` string, while this replacement code throws a `TypeError` object with a slightly different message.

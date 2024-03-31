@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+let currentUrl = parse(href, baseUrlStr).url;
+if (urlMap.has(currentUrl)) { ... }
+```
+This would result in different behavior because the `url` property is included in the key, so duplicate URLs with different query parameters or fragments would be considered equal.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+if (urlMap.has(href)) { ... }
+```
+This would result in different behavior because the URL is used as the key without being parsed, so URLs with different protocols, hosts, or paths would be considered equal.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+if (urlMap.has(href.split("?")[0])) { ... }
+```
+This would result in different behavior because the URL is parsed and the query string is removed before being used as the key, so only the protocol, host, and path are considered when checking for duplicates.
+
+DONE.

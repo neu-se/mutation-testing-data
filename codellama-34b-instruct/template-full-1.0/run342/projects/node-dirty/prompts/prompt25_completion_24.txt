@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(() => { if (cb) return; this.emit('drain'); });
+```
+This would result in different behavior because the `setImmediate` callback would never be called, since `cb` is always truthy when passed to `setImmediate`. Therefore, the `drain` event would never be emitted, even if there are no more writes to be done.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(() => { if (cb) cb(); this.emit('drain'); });
+```
+This would result in different behavior because the `cb` function would be called twice in the `setImmediate` callback, which could cause it to be executed more times than intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(() => { if (cb) callback(); this.emit('drain'); });
+```
+This would result in different behavior because the `cb` function would be called twice in the `setImmediate

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => seg + acc, ''
+```
+This would result in different behavior because it would remove the trailing slash from the generated regex, which could cause the matcher to match unnecessarily simple paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => seg + acc + '$'
+```
+This would result in different behavior because it would add a trailing slash to the generated regex, which could cause the matcher to not match paths that should be matched.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => acc + seg + '$'
+```
+This would result in different behavior because it would reverse the order of the segments in the generated regex, which could cause the matcher to match paths that should not be matched, or fail to match paths that should be matched.
+
+DONE.

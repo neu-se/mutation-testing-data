@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(null);
+```
+This would result in different behavior because it would create a new promise that is not resolved, causing the "get" method to hang indefinitely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(Q.reject("error"));
+```
+This would result in different behavior because it would create a new promise that is rejected, causing the "get" method to throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(new Error("error"));
+```
+This would result in different behavior because it would create a new object that is not a promise, causing the "get" method to throw an error.
+
+DONE.

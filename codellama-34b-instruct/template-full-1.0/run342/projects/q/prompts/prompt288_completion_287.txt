@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return deferred.resolve(Q(value));
+```
+This would result in different behavior because it would resolve the promise with the literal string `'Q(value)'` instead of the resolved value of the promise returned by `Q(value)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return deferred.notify(fulfill(value));
+```
+This would result in different behavior because it would notify the progress listeners with the resolved value of the promise returned by `fulfill(value)` instead of the original value passed to `fulfill()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return deferred.reject(reject(reason));
+```
+This would result in different behavior because it would reject the promise with the literal string `'reject(reason)'` instead of the rejected value of the promise returned by `reject(reason)`.
+
+DONE.

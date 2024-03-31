@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule('/[^aeiouy]y$/i', function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because it would incorrectly pluralize words that end with "y".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule('\b(?:bison|cod|deer|fowl|halibut|moose|sheep)\b/i', function(w) { return w })
+```
+This would result in different behavior because it would not pluralize singular words that should be pluralized.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/ies$/i, function(w) { return w.substr(0, w.length - 3) + 'y' })
+```
+This would result in different behavior because it would incorrectly pluralize words that end with "ies".
+
+DONE.

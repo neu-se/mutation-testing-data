@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+loop
+```
+This would result in different behavior because `loop` is always truthy, so the loop would never exit.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!cbed
+```
+This would result in different behavior because `cbed` is initialized to `false` and is only set to `true` within the `read()` callback. If `!cbed` is used as the loop condition, the loop would exit after the first iteration, regardless of whether the read operation is complete or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read
+```
+This would result in different behavior because `read` is a function that returns a value, but in this context, it is being used as a boolean expression. If the `read` function returns a falsy value (such as `null` or `undefined`), the loop would exit, even if the read operation is not complete.
+
+DONE.

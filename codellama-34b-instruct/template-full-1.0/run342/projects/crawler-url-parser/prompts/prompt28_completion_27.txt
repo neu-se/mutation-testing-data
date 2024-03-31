@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^(?!localhost)\w+:*/.test
+```
+This would result in different behavior because the regular expression pattern is now greedy, matching zero or more occurrences of the colon character rather than one or more. This could cause the entire domain name to be consumed by the pattern, leading to incorrect parsing of the URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?!localhost)\w+:*/✓.test
+```
+This would result in different behavior because the regular expression pattern is now "negative lookahead" instead of "lookahead", meaning that it excludes strings starting with the word "localhost". This could cause URLs starting with "localhost" to be included in the parsing result, leading to incorrect parsing of the URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?!localhost)\w+:(?:https|http):(?:\/\/)/.test
+```
+This would result in different behavior because the regular expression pattern now includes two non-capturing

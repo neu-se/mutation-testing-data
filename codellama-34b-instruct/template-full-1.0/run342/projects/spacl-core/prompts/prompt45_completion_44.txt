@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+part.match(/:.+/) === null
+```
+This would result in different behavior because this code fragment would check if the part does not match any string starting with a colon, which is the opposite of the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+part.slice(1).match(/:.+/) !== null
+```
+This would result in different behavior because this code fragment would check if the part, minus its first character, matches any string starting with a colon, which is different from the original code fragment that checks if the part matches any string starting with a colon.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const matches = part.match(/:.+/);
+matches && matches[1].startsWith(':')
+```
+This would result in different behavior because this code fragment would extract the first match group of the part matching any string starting with a colon, and then check if the first character of that match group is a colon, which is different from the original code

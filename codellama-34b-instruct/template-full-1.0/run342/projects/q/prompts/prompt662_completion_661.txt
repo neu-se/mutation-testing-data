@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+[name, array_slice(promises, 1)]
+```
+This would result in different behavior because `arguments` is a special built-in object in JavaScript, while `promises` is a local variable that refers to the array passed to the `all()` function. Using `promises` in this context would cause the function to resolve with a different value than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+[name, array_slice(arguments, 2)]
+```
+This would result in different behavior because it is skipping the first element of the `arguments` object, which contains the `name` parameter. This would cause the function to resolve with a different value than expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+[name, promises[1]]
+```
+This would result in different behavior because it is hardcoding the index of the `promises` array instead of using `array_slice()`. This would cause the function to resolve with a different value than expected.

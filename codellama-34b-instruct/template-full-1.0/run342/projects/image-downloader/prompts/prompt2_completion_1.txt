@@ -1,0 +1,28 @@
+  Sure, here are three options for replacing the PLACEHOLDER:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+  if (!options.dest) {
+    return Promise.reject(new Error('The options.dest is required'));
+  }
+  // replaced code
+  var dest = options.dest.split('.')[0];
+  if (dest.length === 0) {
+    dest = 'unnamed';
+  }
+  // end of replaced code
+
+  if (extractFilename) {
+    if (!path.extname(options.dest)) {
+      const url = new URL(options.url);
+      const pathname = url.pathname;
+      const basename = path.basename(pathname);
+      const decodedBasename = decodeURIComponent(basename);
+
+      options.dest = path.join(options.dest, decodedBasename);
+    }
+  }
+
+  if (!path.isAbsolute(options.dest)) {
+    options.dest = path.resolve(__dirname, options.dest);
+ 

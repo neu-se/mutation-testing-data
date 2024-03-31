@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op.delete != null
+```
+This would result in different behavior because `op.delete` could be a truthy value that is not a number, while `typeof op.delete === 'number'` would only detect numbers.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.delete > 0
+```
+This would result in different behavior because `op.delete` could be a negative number, while `op.delete > 0` would only detect positive numbers.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!Number.isNaN(op.delete)
+```
+This would result in different behavior because `typeof op.delete === 'number'` would not detect `NaN`, while `!Number.isNaN(op.delete)` would detect `NaN` as a number.
+
+DONE.

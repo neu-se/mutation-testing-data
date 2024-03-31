@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Buggy code fragment 1!");
+```
+This would result in different behavior because the original code fragment rethrows the `exception` which is useful for debugging, but the new code fragment will throw a different error message which may cause confusion.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw 42;
+```
+This would result in different behavior because the original code fragment rethrows the `exception` which may be useful for debugging, but the new code fragment will throw an unrelated integer value which may cause confusion.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+  throw reason;
+});
+```
+This would result in different behavior because the original code fragment has a dangling `then` which is never used, but the new code fragment uses the `then` method to append a new callback function which will also be called when the promise is resolved.
+
+DONE.

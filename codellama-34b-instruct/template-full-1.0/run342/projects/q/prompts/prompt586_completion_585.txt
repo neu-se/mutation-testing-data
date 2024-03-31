@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+makeGenerator();
+```
+This would result in different behavior because the `Q.async` function is being called with the same arguments as the original code fragment, but the promise returned by `Q.async` is not being chained to the next generation. This could cause issues if the `makeGenerator` function is expected to be called again before the first generator completes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(makeGenerator());
+```
+This would result in different behavior because the `Q.when` function is being used to synchronously resolve the promise returned by `Q.async`, but the promise is not being awaited. This could cause issues if the `makeGenerator` function is expected to be called again before the first generator completes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.reject(makeGenerator());
+```
+This would result in different behavior because the `Q.reject` function is being used to synchronously reject the promise returned by `Q.async

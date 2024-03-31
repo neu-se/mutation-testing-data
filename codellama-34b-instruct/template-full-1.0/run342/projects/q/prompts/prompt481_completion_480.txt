@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.splice(<Promise.reject(reason)>, 1);
+```
+This would result in different behavior because it would remove the rejected reason from the `unhandledReasons` array, even if the rejection has not been handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.splice(<unhandledRejections.length>, 1);
+```
+This would result in different behavior because it would remove the last unhandled rejection from the `unhandledReasons` array, even if the rejection has been handled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.splice(<process.emit("rejectionHandled", reason, promise)>, 1);
+```
+This would result in different behavior because it would remove the handled rejection from the `unhandledReasons` array, even if the rejection has been handled.
+
+DONE.

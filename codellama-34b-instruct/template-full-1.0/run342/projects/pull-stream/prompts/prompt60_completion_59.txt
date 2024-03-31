@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+    if(err && err === true)
+        cb = null, err = null
+    abort = err || true
+    if(read) return read(abort, cb || function () {})
+}
+```
+This would result in different behavior because the original code checks if the first argument is a function using the `typeof` operator, but this code checks if it's a `true` value using `err === true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+    if(err && err === false)
+        cb = null, err = null
+    abort(err)
+}
+```
+This would result in different behavior because the original code checks if the first argument is a function using `typeof`, but this code checks if it's a `false` value using `err === false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+s

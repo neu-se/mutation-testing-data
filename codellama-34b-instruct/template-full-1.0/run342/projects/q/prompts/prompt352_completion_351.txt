@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolve
+```
+This would result in different behavior because `resolve()` would be called with the rejected value, whereas the original code would call `reject()` with the same value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (exception) { 
+  reject(exception); 
+ } else { 
+  resolve(value); 
+ }
+```
+This would result in different behavior because it would only call `reject()` if there is an exception and would otherwise call `resolve()`, whereas the original code would always call `reject()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (typeof value === "object") { 
+  reject(new Error("Cannot resolve object")); 
+ } else { 
+  resolve(value); 
+ }
+```
+This would result in different behavior because it would only call `reject()` if the value is an object and would otherwise call `resolve()`, whereas the original code would always call `reject()`.
+
+DONE.

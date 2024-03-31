@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because `Q` is a constructor and `{}` is an empty object, which is not a valid argument for `Q`. The original code fragment `Q(object)` creates a promise for the object, which is not the same behavior as an empty object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick()
+```
+This would result in different behavior because `Q.nextTick()` is a function that queues a function to be called on the next cycle of the event loop, whereas `Q(object).nodeify` is a function that takes a nodeback argument and returns a promise for the object. The original code fragment `Q(object).nodeify` creates a promise for the object and then calls the nodeback function with the result or error. `Q.nextTick()` does not have this behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(object)
+```
+This would result in different behavior

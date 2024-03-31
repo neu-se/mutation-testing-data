@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ops != null && Array.isArray(ops)
+```
+This would result in different behavior because the check is now performed on the `ops` variable directly, rather than the `ops` property of the `ops` object. If the `ops` variable is an array, this check will pass, even if the `ops` object does not have an `ops` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ops != null && typeof ops.ops === 'array'
+```
+This would result in different behavior because the check is now performed on the `ops` object, rather than the `ops` variable. This check will pass if the `ops` object has an `ops` property that is an array, regardless of the value of the `ops` variable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ops != null && ops.hasOwnProperty('ops') && Array.isArray(ops.ops)
+```
+This would result in different behavior because the check is

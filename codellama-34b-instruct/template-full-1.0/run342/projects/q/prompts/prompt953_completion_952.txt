@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(Q.Error);
+```
+This would result in different behavior because when `Q(bound).fapply(nodeArgs).fail` is called, it will try to apply the `fail` method to the result of `fapply`, but if we replace it with `deferred.reject(Q.Error)`, it will reject the promise with an error instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.pop()(null, deferred.resolve);
+```
+This would result in different behavior because when `Q(bound).fapply(nodeArgs).fail` is called, it will try to apply the `fail` method to the result of `fapply`, but if we replace it with `nodeArgs.pop()(null, deferred.resolve)`, it will try to call the last function in the `nodeArgs` array with `null` as the error and `deferred.resolve` as the result, which would result in a different behavior.
+
+Option 3: The PLACEH

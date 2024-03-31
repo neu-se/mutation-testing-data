@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer().fail
+```
+This would result in different behavior because `Q.defer()` returns a promise that is already resolved, whereas `Q.defer().fail` returns a promise that is rejected. This means that the `get` method would return a rejected promise when it tries to resolve the `ends.promise`, causing the queue to be closed and returning an error instead of returning the next value in the queue.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer().then
+```
+This would result in different behavior because `Q.defer().then` returns a promise that is resolved with the value of `Q.defer()`, whereas `Q.defer()` returns a promise that is resolved with the value of `Q.defer().promise`. This means that the `get` method would return a promise that is resolved with the value of `Q.defer()` instead of returning a promise that is resolved with the value of `Q.defer().promise`, which would result in the queue being closed

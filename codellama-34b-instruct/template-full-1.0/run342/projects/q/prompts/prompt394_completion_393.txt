@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `Q.when` expects a promise to be passed as the first argument, and `null` is not a promise. This would cause an error to be thrown when `Q.when` tries to call `value.inspect()` on `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because `Q.when` would treat `undefined` as a resolved promise with a value of `undefined`. This could cause unexpected behavior in the code that uses the returned promise, as it would expect a rejection instead.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"foo"
+```
+This would result in different behavior because `Q.when` would treat the string "foo" as a resolved promise with a value of "foo". This could cause unexpected behavior in the code that uses the returned promise, as it would expect a rejection instead.
+
+DONE.

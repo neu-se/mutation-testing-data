@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, function(err) {
+  if (err) {
+    read(true, function(abortErr) {
+      cb(abortErr);
+    })
+  } else {
+    cb(err);
+  }
+})
+```
+This would result in different behavior because it would call the `read` function with the `true` value as the first argument, which would trigger the `read` function to return an error, but it would not stop the execution of the rest of the code in the `nextChunk` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err) {
+  if (err) {
+    cb(err);
+  } else {
+    read(null, function(data) {
+      if (data) {
+        cb(null, data);
+      } else {
+        cb(null);
+      }
+    });
+  }
+})
+```
+This would result in different behavior because it would call the `read

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\//) === null
+```
+This would result in different behavior because it would cause the code to throw an error if the spec does not end with a slash, regardless of whether it is a valid URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/(?!$)/) === null
+```
+This would result in different behavior because it would cause the code to throw an error if the spec ends with a slash, regardless of whether it is a valid URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/(?!\/)/) === null
+```
+This would result in different behavior because it would cause the code to throw an error if the spec ends with a slash followed by a non-slash character, regardless of whether it is a valid URL.
+
+DONE.

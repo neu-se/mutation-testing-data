@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled(false);
+```
+This would result in different behavior because the `allSettled` method should be called on an array of promises, not a boolean value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled(array_map(promises, function (promise) {
+        return when(promise, noop, noop);
+    }));
+```
+This would result in different behavior because the `allSettled` method should be called on an array of promises, not an array of functions that return promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allSettled([Q(promises)]);
+```
+This would result in different behavior because the `allSettled` method should be called on an array of promises, not an array containing a single promise.
+
+DONE.

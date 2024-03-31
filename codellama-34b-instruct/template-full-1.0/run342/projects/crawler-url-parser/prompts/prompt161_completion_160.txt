@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part != pageurl_without_last_part
+```
+This would result in different behavior because the original code checks for equality, while this replacement checks for inequality. This change would cause the `samelevel` type to be returned for URLs that are not equal, even if they have the same number of path components.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part.length > pageurl_without_last_part.length
+```
+This would result in different behavior because the original code checks for equality, while this replacement checks for greater than. This change would cause the `samelevel` type to be returned for URLs that have more path components than the base URL, even if they are not equal.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part.split("/").length > pageurl_without_last_part.split("/").length
+```
+This would result in different behavior because the original code checks

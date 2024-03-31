@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/([.[^x]][^b])$/g
+```
+This would result in different behavior because the original line `/([.$])/g` matches any single character that is a dot or a dollar sign, but this new line matches a dot followed by any character that is not a dollar sign or a backspace (i.e. any character other than those two), followed by a dollar sign or a backspace. This would change the behavior of the matcher.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/([ao]/alls)?/:([-]+)?(\\+{2})?\\ $[1-9]+$/g
+```
+This would result in different behavior because the original line `/([.$])/g` matches any single character that is a dot or a dollar sign, but this new line matches a character that is either a letter 'a' or a letter 'o', followed by the string "alls" and then an optional sequence of dashes, and then an optional sequence of two or more backslash

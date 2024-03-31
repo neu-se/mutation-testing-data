@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(void 0);
+```
+This would result in different behavior because it would pass `undefined` as the first argument to `defer`, which would cause `defer` to throw an error when it tries to call `deferred.reject` with an undefined reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(null);
+```
+This would result in different behavior because it would pass `null` as the first argument to `defer`, which would cause `deferred.reject` to be called without a reason, resulting in an unhelpful `Promise rejected` message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(false);
+```
+This would result in different behavior because it would pass `false` as the first argument to `defer`, which would cause `deferred.reject` to be called with a reason of `false`, resulting in a less informative error message.
+
+DONE.

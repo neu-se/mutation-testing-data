@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reject(null)
+```
+This would result in different behavior because `reject` expects an Error object as its argument, and passing `null` would result in an uncaught error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reject(new Error("Some other error"))
+```
+This would result in different behavior because a different error message would be thrown, and the fact that the error is passed to `reject` would still result in the promise being rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return reject(new Error(exception))
+```
+This would result in different behavior because the error would be wrapped in a new Error object, and the fact that `return` is used would result in the function returning the rejected promise, rather than the original code fragment which would simply throw the error.
+
+DONE.

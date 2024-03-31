@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var wrongCallback = function() {
+    if (newValue) {
+        deferred.notify(newValue);
+    }
+}
+```
+This would result in different behavior because the `if` statement is missing a closing `}` brace, causing a syntax error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var wrongCallback = function() {
+    deferred.notify("wrong value");
+}
+```
+This would result in different behavior because the `deferred.notify()` method is being called with a hardcoded string value, rather than the `newValue` variable that is passed into the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var wrongCallback = function() {
+    deferred.reject(new Error("rejected"));
+}
+```
+This would result in different behavior because the `deferred.reject()` method is being called with an error object, which will cause the promise to be rejected, rather than the `deferred.notify()`

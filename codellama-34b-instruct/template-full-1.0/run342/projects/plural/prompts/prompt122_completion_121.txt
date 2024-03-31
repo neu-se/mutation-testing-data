@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/\b(?:tea|sugar|water|air)\b/i, function(w) { return w + 's' }
+```
+This would result in different behavior because the function would always add an "s" to the end of the word, even if it was already plural.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/\b(?:tea|sugar|water|air)\b/i, function(w) { return w + 'es' }
+```
+This would result in different behavior because the function would add "es" to the end of the word, even if it was already plural.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\b(?:tea|sugar|water|air)\b/i, function(w) { return w.replace(/s$/i, '') }
+```
+This would result in different behavior because the function would remove any "s" that appears at the end of the word,

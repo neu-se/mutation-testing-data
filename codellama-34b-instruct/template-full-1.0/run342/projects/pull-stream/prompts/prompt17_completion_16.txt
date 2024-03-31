@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read.apply(ref[1](read, ref[0]))
+```
+This would result in different behavior because `read` is applied to the result of `ref[1]` which is a function, instead of the result of `read` being passed as an argument to `ref[0]`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read.apply(null, ref.map(x => x))
+```
+This would result in different behavior because `read` is applied to `null` instead of `ref`, and the `ref` array is mapped to a new array of the same length but with the elements in the opposite order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read = ref.reduce((a, b) => a ? b : a(read), null)
+```
+This would result in different behavior because `read` is set to the result of a reduce operation on `ref`, where the initial value is `null` and the callback function returns the result of calling the element

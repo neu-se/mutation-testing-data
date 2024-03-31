@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => this._readStream.destroy()
+```
+This would result in different behavior because the `_writeStream` would not be destroyed, and the data written to the stream would not be deleted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => this._data.clear()
+```
+This would result in different behavior because the `_data` map would be cleared, and the data written to the stream would not be deleted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.write(JSON.stringify({key, val: null}))
+```
+This would result in different behavior because the `_data` map would be updated with a `null` value, and the data written to the stream would not be deleted.
+
+DONE.

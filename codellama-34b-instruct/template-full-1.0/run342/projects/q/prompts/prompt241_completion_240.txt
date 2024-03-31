@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (error && error instanceof Promise) {
+```
+This would result in different behavior because the original code only checked if `error` was truthy, while the new code checks if `error` is an instance of `Promise`. If `error` is a promise, the new code will evaluate to `false` when trying to call `.stack`, causing a second error to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (error && !(error instanceof Promise)) {
+```
+This would result in different behavior because the original code only checked if `error` was falsy, while the new code checks if `error` is not an instance of `Promise`. If `error` is not a promise, the new code will evaluate to `true` when trying to call `.stack`, causing a second error to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (error && error.name === "AssertionError") {
+```
+This would result in different behavior because

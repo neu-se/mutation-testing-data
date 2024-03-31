@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain') };
+```
+This would result in different behavior because the original code uses `setImmediate` to schedule the callback, which would allow the event loop to process other tasks before executing the callback. Replacing it with an empty function would execute the callback immediately, potentially causing the event loop to become blocked.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { this.emit('drain'); if (cb) cb() };
+```
+This would result in different behavior because the original code emits the `drain` event before executing the callback, while the replacement code emits the event after executing the callback. This could cause the `drain` event to be emitted before the callback is executed in the original code, potentially leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fn => () => { if (cb) cb(); this.emit('drain'); };
+```
+This would result in different

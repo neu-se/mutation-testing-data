@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport - 1
+```
+This would result in different behavior because the `splice` method would remove one element from the `reportedUnhandledRejections` array before the `atReport` index. This could cause the `unhandledRejections` and `unhandledReasons` arrays to fall out of sync.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.length - 1
+```
+This would result in different behavior because the `splice` method would remove one element from the `reportedUnhandledRejections` array after the `atReport` index. This could cause the `unhandledRejections` and `unhandledReasons` arrays to fall out of sync.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+atReport < reportedUnhandledRejections.length - 1
+```
+This would result in different behavior because the `splice` method would remove multiple elements from the `reportedUnhandled

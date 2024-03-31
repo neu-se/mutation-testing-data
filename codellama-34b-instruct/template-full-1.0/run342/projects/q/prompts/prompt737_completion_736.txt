@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.length > 0
+```
+This would result in different behavior because the `any` function would at least return one fulfilled promise even if that promise is not the first one in the array, whereas the original implementation would only return a fulfilled promise if it was the first one in the array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!promises.includes(null)
+```
+This would result in different behavior because the `all` function would return a fulfilled promise if the array contained one or more null values, whereas the original implementation would only return a fulfilled promise if all the promises in the array were resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function isPromise(value) {
+    return value && typeof value.then === "function";
+}
+
+isPromise(promises[0])
+```
+This would result in different behavior because the `any` function would only check if the first promise in the array is a valid promise, whereas the original

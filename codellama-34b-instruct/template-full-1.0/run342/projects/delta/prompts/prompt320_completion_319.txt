@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op.insert
+```
+This would result in different behavior because `op.insert` is a different value than `op.retain`. The `insert` property contains the actual inserted value, while the `retain` property contains the length of the retained region. If the `retain` property is used instead, the transformed delta would contain the wrong length information.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op['retain']
+```
+This would result in different behavior because `op['retain']` is a different value than `op.retain`. The `['retain']` property contains the same value as the `retain` property, but in a different form. If the `['retain']` property is used instead, the transformed delta would contain the wrong length information.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!op.insert
+```
+This would result in different behavior because `!op.insert` is a negation of the `insert` property, which would

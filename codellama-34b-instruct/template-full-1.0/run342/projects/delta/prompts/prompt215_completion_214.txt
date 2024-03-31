@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops + other.ops
+```
+This would result in different behavior because the code would be concatenating the `ops` arrays of the two deltas directly, rather than using the `concat` method, which would result in a different resulting delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(<Op>[])delta.ops.concat(other.ops)
+```
+This would result in different behavior because the code would be casting the result of the concatenation to an array of `Op` objects, which would change the resulting delta's `ops` field.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ops.concat(_.cloneDeep(other.ops))
+```
+This would result in different behavior because the code would be using the `cloneDeep` function to create a deep copy of the `other.ops` array, which would result in a different resulting delta.
+
+DONE.

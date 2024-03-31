@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejected, fulfilled, progress
+```
+This would result in different behavior because the order of the callbacks is reversed, which could cause the callbacks to be triggered in the wrong order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+[null, fulfilled, rejected]
+```
+This would result in different behavior because the callbacks are now wrapped in an array, which could cause issues if the function expects the callbacks to be passed as individual arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.allSettled([fulfilled, rejected, progress])
+```
+This would result in different behavior because the callbacks are now wrapped in a promise that waits for all of the callbacks to settle, which could cause the function to behave differently if it expects the callbacks to be triggered immediately.
+
+DONE.

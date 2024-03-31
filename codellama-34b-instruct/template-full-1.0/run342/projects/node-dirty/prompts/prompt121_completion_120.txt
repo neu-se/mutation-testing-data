@@ -1,0 +1,19 @@
+  Option 1:
+```
+this._emit('drain')
+```
+This would result in different behavior because it would call `_emit` instead of `emit`, which is a different method in the `Dirty` class.
+
+Option 2:
+```
+emit('write_close')
+```
+This would result in different behavior because it would emit a different event than the original code, which could cause confusion and unexpected behavior in the test suite.
+
+Option 3:
+```
+this.emit('close')
+```
+This would result in different behavior because it would emit a different event than the original code, which could cause confusion and unexpected behavior in the test suite.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return sync ? loop = false : next(end, cb)
+```
+This would result in different behavior because the original code fragment `cb` is a function call, while the new code fragment `sync ? loop = false : next(end, cb)` is a conditional expression.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return loop ? sync ? loop = false : next(end, cb) : next(end, cb)
+```
+This would result in different behavior because the original code fragment `cb` is a function call, while the new code fragment `return loop ? sync ? loop = false : next(end, cb) : next(end, cb)` is a conditional expression that depends on the value of the `loop` variable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return sync ? loop = false : next(end, cb)
+```
+This would result in different behavior because the original code fragment `cb` is a function call, while the new code fragment `sync ? loop =

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+        last ? cb(null, data) : terminate(cb)
+```
+This would result in different behavior because the `last` variable is not being checked anymore, so the `terminate` function will be called unconditionally.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+        cb(null, ended ? data : null)
+```
+This would result in different behavior because the `ended` variable is being checked, but the `cb` function is being called with `null` as the first argument instead of `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+        cb(ended ? data : null, ended)
+```
+This would result in different behavior because the `ended` variable is being checked, but the `cb` function is being called with `null` as the first argument instead of `true`, and the `ended` variable is being passed as the second argument instead of `true`.
+
+DONE.

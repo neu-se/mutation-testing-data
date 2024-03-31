@@ -1,0 +1,14 @@
+  
+Option 1: The PLACEHOLDER can be replaced with: `process.nextTick(flush);2`;
+
+This would result in different behavior because the first argument to `nextTick` should be a function, not a number.
+
+Option 2: The PLACEHOLDER can be replaced with: `process.nextTick(flush).then(console.log("hello"));`
+
+This would result in different behavior because the `nextTick` function does not return a promise, so calling `then` on its return value would result in an error.
+
+Option 3: The PLACEHOLDER can be replaced with: `process.nextTick(flush);flush();`
+
+This would result in different behavior because the second call to `flush` would result in the queue being processed twice, which could cause race conditions and other issues.
+
+DONE.

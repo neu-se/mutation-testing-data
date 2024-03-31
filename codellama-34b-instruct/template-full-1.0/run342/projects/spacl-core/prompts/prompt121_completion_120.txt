@@ -1,0 +1,17 @@
+  Options 1: The PLACEHOLDER can be replaced with `ctx.path`
+
+This would result in different behavior because it would use the `path` property of the `ctx` object, which may not be present or may have a different value than the `path` argument.
+```
+if (this.matches(ctx.path, ctx) && verb in this.verbs) {
+  return this.verbs[verb]
+}
+```
+Option 2: The PLACEHOLDER can be replaced with `ctx.getProp(this.regex.props[index])`
+
+This would result in different behavior because it would use the `getProp` method of the `ctx` object to retrieve the value of the property at the current index, which may not be present or may have a different value than the value at the current index in the `path` argument.
+```
+if (this.matches(path.split("/")[index], ctx) && verb in this.verbs) {
+  return this.verbs[verb]
+}
+```
+Option 3: The PLACEHOLDER can be replaced with `this

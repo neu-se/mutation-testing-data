@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` will call the `nextStream` function immediately, while `nextChunk` will be passed as an argument to the `read` function and executed later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, data)
+```
+This would result in different behavior because `cb(null, data)` will call the `cb` function immediately with the data from the current stream, while `nextChunk()` will call the `nextChunk` function later.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, nextStream)
+```
+This would result in different behavior because `read(null, nextStream)` will pass the `nextStream` function as an argument to the `read` function and execute it later, while `nextChunk()` will call the `nextChunk` function immediately.
+
+DONE.

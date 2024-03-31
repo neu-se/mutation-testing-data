@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'data', resolve
+```
+This would result in different behavior because `data` is a different event that is emitted by a stream than `close`, and would cause the `resolve` callback to be called with the data event instead of the close event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'finish' () => { resolve() }
+```
+This would result in different behavior because `finish` is a different event that is emitted by a stream than `close`, and the callback would be called when the stream has finished writing data, but the `resolve` callback would not be called with the close event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', reject
+```
+This would result in different behavior because `error` is a different event that is emitted by a stream than `close`, and the `reject` callback would be called when an error occurs in the stream, but the `resolve` callback would not be called with the close event.
+
+DONE

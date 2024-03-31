@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(new Error('Dummy error'))
+```
+This would result in different behavior because the `Error` object would be passed to the callback, causing the callback to fail instead of succeeding as in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (cb) cb(new Error('Dummy error')); else console.log('calls it!');
+```
+This would result in different behavior because the callback would be called with an `Error` object as its argument, instead of being silently ignored as in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(null, 'Dummy value')
+```
+This would result in different behavior because the callback would be called with a `null` error argument and a 'Dummy value' for the data argument, causing the callback to succeed with a different value than the original code.
+
+DONE.

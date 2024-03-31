@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+onAbort && onAbort(abort)
+```
+This would result in different behavior because the callback function `onAbort` would be called with the `abort` variable, which is an Object that contains the abort signal, rather than the original code, which passed the actual abort signal (`abort === true ? null : abort`) to the callback function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onAbort && onAbort(abort())
+```
+This would result in different behavior because the `abort()` function would be called, which would cause the code to abort the current operation, rather than the original code, which would pass the abort signal to the callback function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onAbort && onAbort(abort.signal)
+```
+This would result in different behavior because the `abort.signal` property would be passed to the callback function, which would be an Object that contains the abort signal, rather than the original code

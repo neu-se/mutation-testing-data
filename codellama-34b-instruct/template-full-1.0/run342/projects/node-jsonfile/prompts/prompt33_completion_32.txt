@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `fs.writeFileSync` is a synchronous function that writes the file and returns nothing, while `universalify.fromCallback(fs.writeFile)` is an asynchronous function that takes a callback function as its last argument and returns a promise. Replacing `universalify.fromCallback(fs.writeFile)` with `universalify.fromCallback(fs.writeFileSync)` would cause the function to behave synchronously instead of asynchronously, which could potentially cause issues with the rest of the program.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs))
+```
+This would result in different behavior because `fs.writeFile` is a method of the `graceful-fs` module, while `universalify.fromCallback` expects a function as its argument. Replacing `universalify.fromCallback(fs.writeFile)` with

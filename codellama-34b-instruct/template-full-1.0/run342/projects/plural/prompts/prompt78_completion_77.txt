@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/\b(?:bison|cod|deer|fowl|halibut|moose|sheep)\b/i, function(w) { return w + 's' })
+```
+This would result in different behavior because the original rule only applies to singular nouns, while this new rule applies to plural nouns as well. The new rule would result in the word "sheep" being pluralized to "sheeps", which is not a valid word.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[aeiouy]o$/i, function(w) { return w.substr(0, w.length - 1) + 'oes' })
+```
+This would result in different behavior because the original rule only applies to words ending in -o, while this new rule applies to words ending in -o that also have a vowel before the -o. This would result in words like "canto" and "hero" being pluralized to

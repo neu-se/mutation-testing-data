@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!lastOp
+```
+This would result in different behavior because it would always evaluate to `true` when `lastOp` is an object. Therefore, it would insert the new operation at the beginning of the operations array even if `lastOp` has non-zero length.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp.delete
+```
+This would result in different behavior because it would always evaluate to the number of elements deleted by the last operation, regardless of whether `lastOp` is an object or not. Therefore, it would insert the new operation after the last operation if the last operation has non-zero length.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+lastOp.retain
+```
+This would result in different behavior because it would always evaluate to the number of elements retained by the last operation, regardless of whether `lastOp` is an object or not. Therefore, it would insert the new operation after the last operation if the last operation has non-zero length.
+
+DONE.

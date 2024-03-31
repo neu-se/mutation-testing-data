@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(function (value) {
+    return callback.fcall().return(value);
+}, function (reason) {
+    // TODO attempt to recycle the rejection with "this".
+    return callback.fcall().throw(reason);
+});
+```
+This would result in different behavior because the "reject" method is replaced with "throw", which would cause the rejection to be thrown as an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(function (value) {
+    return callback.fcall().done(value);
+}, function (reason) {
+    // TODO attempt to recycle the rejection with "this".
+    return callback.fcall().done(reason);
+});
+```
+This would result in different behavior because the "reject" method is replaced with "done", which would cause the rejection to be handled as a success.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return

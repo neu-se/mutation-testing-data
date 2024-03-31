@@ -1,0 +1,33 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+...
+(attributes).reduce<AttributeMap>((copy, key) => {
+  if(attributes[key] != null) {
+    copy[key] = attributes[key];
+  }
+  return copy;
+}, {});
+...
+```
+This would result in different behavior because it would not consider null values during the reduction.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...
+(attributes).reduce<AttributeMap>((copy, key) => {
+  if(attributes[key] === undefined) {
+    copy[key] = attributes[key];
+  }
+  return copy;
+}, {});
+...
+```
+This would result in different behavior because it would not consider undefined values during the reduction.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+...
+(attributes).reduce<AttributeMap>((copy, key) => {
+  if(attributes[key] !== null) {
+    copy[key] = attributes[key];
+  }

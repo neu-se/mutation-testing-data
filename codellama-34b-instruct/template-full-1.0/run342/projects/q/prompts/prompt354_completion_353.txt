@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return fulfilled(exception);
+```
+This would result in different behavior because the `fulfilled` callback is not defined in the current context, so it would throw an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return reject(exception);
+```
+This would result in different behavior because the `reject` function is not defined in the current context, so it would throw an exception.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new Promise(function (resolve, reject) {
+  resolve(exception);
+});
+```
+This would result in different behavior because the promise is resolved with the exception, which would result in a different resolution value than the original code.
+
+DONE.

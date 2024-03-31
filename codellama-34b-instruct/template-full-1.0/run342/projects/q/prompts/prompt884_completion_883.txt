@@ -1,0 +1,12 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+   this.fapply(nodeArgs).ensure(deferred.reject);
+```
+This would result in different behavior because `this.fapply(nodeArgs)` would still call the `nodeArgs.push(deferred.makeNodeResolver())` statement, but `ensure` would ensure that the `deferred.reject` statement is executed regardless of whether `this.fapply(nodeArgs)` fails or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+   this.fapply(nodeArgs).then(deferred.resolve).fail(deferred.reject);
+
+```
+This would result in different behavior because `this.fapply(nodeArgs)` would still call the `nodeArgs.push(deferred.makeNodeResolver())` statement, but `then` would ensure that the `deferred.resolve` statement is executed if `this.fapply(nodeArgs)` is successful, whereas `fail` would ensure that the `deferred.reject` statement is executed if `this.fapply(nodeArgs

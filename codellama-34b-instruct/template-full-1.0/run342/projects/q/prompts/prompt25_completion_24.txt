@@ -1,0 +1,30 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+if (domain) {
+    head.domain = void 0;
+    domain.enter();
+}
+domain.exit();
+```
+This would result in different behavior because it would remove the `domain` variable from the `head` object, and then exit the `domain` regardless of whether it was entered.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+if (domain) {
+    head.domain = void 0;
+    domain.exit();
+} else {
+    domain.enter();
+}
+```
+This would result in different behavior because it would only exit the `domain` if it was entered, and then set `head.domain` to `void 0`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+if (domain) {
+    head.domain = void 0;
+    domain.exit();
+}
+head.domain = domain;
+```
+This would result in different behavior because it would only exit the `domain` if it was

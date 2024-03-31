@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(fulfill(value).then(function(){}))
+```
+This would result in different behavior because `fulfill(value).then(function(){})` is a promise that will eventually resolve with the value returned by the `then` method, which is undefined, regardless of the actual value resolved by the `fulfill` promise. This will cause the `deferred.promise` to resolve with `undefined` instead of the original value, leading to different behavior in the overall program.
+
+Option 2: The PLACEHOLER can be replaced with:
+```
+become(fulfill(value).catch(function(){}))
+```
+This would result in different behavior because `fulfill(value).catch(function(){})` is a promise that will eventually reject with the value returned by the `catch` method, which is undefined, regardless of the actual value rejected by the `fulfill` promise. This will cause the `deferred.promise` to reject with `undefined` instead of the original value, leading to different behavior in the overall program.
+
+Option 3

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).on('error', reject).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `once()` method is called on the `createWriteStream()` instance, which is not what the original code does. The `once()` method is used to register an event handler that will be called once and then removed, so it would prevent the `resolve()` function from being called multiple times, which could cause the promise to never resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).on('error', resolve).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `resolve()` function is called instead of the `reject()` function, so the promise would always resolve instead of rejecting when an error occurs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).on('error', reject).on('close', () => resolve({

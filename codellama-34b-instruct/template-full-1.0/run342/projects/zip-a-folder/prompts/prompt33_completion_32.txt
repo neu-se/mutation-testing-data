@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+accept
+```
+This would result in different behavior because `accept` and `reject` are two different methods in the `output` stream, and calling `accept` instead of `reject` would cause the promise to be fulfilled instead of rejected, which could lead to unexpected consequences if the code depends on the promise being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.reject(new Error('Some error message'))
+```
+This would result in different behavior because it explicitly rejects the promise with an error message, which could cause the code to throw an error and prevent the rest of the code from running.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.resolve(null)
+```
+This would result in different behavior because it explicitly resolves the promise with a `null` value, which could cause the code to think the promise was fulfilled and proceed with processing the null value, which could lead to unexpected consequences.
+
+DONE.

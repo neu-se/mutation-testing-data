@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+-Q.get(promise)
+```
+This would result in different behavior because `Q.get()` returns a promise that is resolved with the value of the first promise that is resolved, while `Q` returns a new promise that is resolved with the value of the first promise that is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.thenResolve()
+```
+This would result in different behavior because `thenResolve()` returns a promise that is resolved with the value of the first promise that is resolved, while `Q` returns a new promise that is resolved with the value of the first promise that is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function(){return Q(promise)}, function(){return Q(promise)})
+```
+This would result in different behavior because it creates a new promise that is resolved with the value of the first promise that is resolved, while `Q` returns a new promise that is resolved with the value of the first promise

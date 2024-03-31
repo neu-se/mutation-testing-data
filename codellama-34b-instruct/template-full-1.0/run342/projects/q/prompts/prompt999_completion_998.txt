@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", nodeArgs).fail
+```
+This would result in different behavior because the `name` param is missing, which is crucial for `Q.nsend` to work properly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object)[deferred.reject](name, nodeArgs)
+```
+This would result in different behavior because the `dispatch` method is not called, and instead, the `deferred.reject` method is called directly on the object, which is not intended and would cause the function to return an unexpected result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).reject
+```
+This would result in different behavior because the `fail` method is not called, and instead, the `reject` method is called directly on the resulting promise, which would cause the function to resolve, and not reject, when an error occurs.
+
+DONE.

@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```ruby
+</>
+```
+This would result in different behavior because a different method would be called, which could lead to different parsing rules being applied.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```ruby
+const { stringify, stripBom } = require('./utils')
+
+async function _readFile (file, options = {}) {
+  if (typeof options === 'string') {
+    options = { encoding: options }
+  }
+
+  const fs = options.fs || _fs
+
+  const shouldThrow = 'throws' in options ? options.throws : true
+
+  let data = await universalify.fromCallback(fs.readFile)(file, options)
+
+  data = data[stripBom]()
+
+  let obj
+  try {
+    obj = JSON.parse(data, options ? options.reviver : null)
+  } catch (err) {
+    if (shouldThrow) {
+      err.message = `${file}: ${err.message}`

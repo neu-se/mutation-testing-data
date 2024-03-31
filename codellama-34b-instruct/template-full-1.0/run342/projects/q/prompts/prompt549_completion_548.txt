@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!result.done
+```
+This would result in different behavior because `result.done` is `false` when the promise is pending, but `!result.done` is `true` when the promise is pending, causing the `if` block to be executed even when the promise is pending.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result.value === undefined
+```
+This would result in different behavior because `result.value` is undefined when the promise is pending, so `result.value === undefined` would be `false` when the promise is pending, causing the `if` block to be executed even when the promise is pending.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result.value === 'rejected'
+```
+This would result in different behavior because `result.value` is `'rejected'` when the promise is rejected, so `result.value === 'rejected'` would be `true` when the promise is rejected, causing the `if` block to be

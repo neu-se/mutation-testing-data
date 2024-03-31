@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.inspect("rejected").state === "rejected"
+```
+This would result in different behavior because the `inspect` method returns a string, so the comparison would always evaluate to false and the `if` block would never be executed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object.inspect().state === "rejected" && object.inspect().reason === reason
+```
+This would result in different behavior because the `inspect` method returns an object with properties `state` and `reason`, and the comparison is now checking if the `reason` property is equal to the `reason` argument passed to the `isRejected` function. If it is, then the method will return true, otherwise it will return false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.inspect().state === "rejected" && object.inspect().reason === reason && Object.prototype.toString.call(reason) === "[object Error]"
+```

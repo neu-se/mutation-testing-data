@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done)
+```
+This would result in different behavior because the original code uses `done || function () {}` to provide a default callback function when `done` is not provided, while the mutated code simply passes `done` as the second argument to `read()`, which could be `undefined` and lead to an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, function (err) { console.warn(err); throw err; })
+```
+This would result in different behavior because the original code uses `done || function () {}` to provide a default callback function that logs a warning message and rethrows the error, while the mutated code provides a different callback function that logs a warning message but does not rethrow the error, which could cause the error to be silently ignored.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, function (err) { console.warn(err); abort = true;

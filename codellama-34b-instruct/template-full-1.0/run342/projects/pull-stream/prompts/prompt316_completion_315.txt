@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+terminate(null, cb)
+```
+This would result in different behavior because the original code calls `terminate` with the `read` callback as the second argument, while this replacement calls it with `null` and `cb` as the second and third arguments, respectively. The `null` value would be interpreted as a falsy value, which would cause the `read` callback to be called with an error instead of the expected data value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+terminate(!ended, cb)
+```
+This would result in different behavior because the original code calls `terminate` with the `read` callback as the second argument, while this replacement calls it with the `ended` flag and the `cb` callback as the second and third arguments, respectively. This means that if `ended` is false, the `terminate` function will be called with a falsy value and the `cb` callback as the second and third arguments, respectively. This could cause the `read` callback to be called with an error instead

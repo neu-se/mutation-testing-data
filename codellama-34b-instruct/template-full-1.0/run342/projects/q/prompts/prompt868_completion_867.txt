@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.reject;
+```
+This would result in different behavior because it would cause the promise to be rejected, which would trigger the rejection handler instead of the fulfillment handler.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.resolve.bind(promise);
+```
+This would result in different behavior because it would cause the function to return a bound version of the `resolve` method, which would ignore the `promise` parameter and always use the `promise` object from the outer scope.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.delay(promise, 0);
+```
+This would result in different behavior because it would delay the resolution of the promise by 0 milliseconds, which would allow any queued handlers to run before the promise is resolved.
+
+DONE.

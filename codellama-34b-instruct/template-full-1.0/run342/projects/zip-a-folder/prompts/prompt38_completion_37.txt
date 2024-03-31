@@ -1,0 +1,13 @@
+  Sure, here are three options for mutating the `ZipAFolder` class:
+
+Option 1: The `PLACEHOLDER` can be replaced with:
+```
+if (glob.sync(src).length === 0)
+```
+This would result in different behavior because `glob.sync` returns a list of all files that match the given glob pattern, while `isGlob` simply checks whether a string is a glob pattern. If the `src` variable contains a glob pattern, `isGlob` will return `true`, while `glob.sync` will return a list of matching files.
+
+Option 2: The `PLACEHOLDER` can be replaced with:
+```
+if (typeof src === 'string' && !src.match(/[*?[]/))
+```
+This would result in different behavior because `src.match(/[*?[]/)` checks whether the `src` variable contains any special characters that are used in glob patterns, such as `*` or `?`. If the `src` variable contains a glob pattern, `isGlob` will return `true`, while the above code will return `false

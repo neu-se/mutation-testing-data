@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+let <variable> = descriptor[op](args);
+```
+This would result in different behavior because it would call the function stored in the `op` property of the `descriptor` object, which may not be the same as the `apply` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+let <variable> = descriptor[op];
+```
+This would result in different behavior because it would assign the function stored in the `op` property of the `descriptor` object to a new variable, instead of calling it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+let <variable> = descriptor[op] && descriptor[op].apply(this, args);
+```
+This would result in different behavior because it would only call the `apply` method if the `op` property of the `descriptor` object is not null or undefined.
+
+DONE.

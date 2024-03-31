@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.next().reverse()
+```
+This would result in different behavior because the `reverse()` method called on the op returned by `thisIter.next()` would mutate the op and cause it to have a different effect on the document. 
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.next()
+```
+This would result in different behavior because the `otherIter.next()` method would return an op from the other delta, leading to different behavior in the `compose` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const op = thisIter.next();
+op.length = null;
+return op;
+```
+This would result in different behavior because the `length` property of the op returned by `thisIter.next()` would be set to null which would cause the op to have no effect on the document.
+
+DONE.

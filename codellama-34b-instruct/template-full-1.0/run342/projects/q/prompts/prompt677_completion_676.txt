@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"apply", [this, args]
+```
+This would result in different behavior because `this` would be bound to the `Promise` object, while `void 0` would result in `undefined` being bound.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"apply", [globalThis, args]
+```
+This would result in different behavior because `globalThis` would be bound to the global object (or undefined in strict mode), while `void 0` would result in `undefined` being bound.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"call", [object, args]
+```
+This would result in different behavior because `object` would be passed as the `this` context, while `void 0` would result in `undefined` being passed.
+
+DONE.
