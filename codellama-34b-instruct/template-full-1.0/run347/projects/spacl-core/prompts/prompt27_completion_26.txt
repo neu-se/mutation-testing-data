@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(any ? min < 2 ? min < 1 ? '(?:/[^/]+)*' : '(?:/[^/]+)+' : `(?:/[^/]+){${min},}`)
+```
+This would result in different behavior because `any` is true, which means the regex will match any number of path segments. However, the original code fragment only matches one or two path segments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(max === 1 ? min === 1 ? '/[^/]+' : '(?:/[^/]+)?' : min === max ? `(?:/[^/]+){${min}}` : `(?:/[^/]+){${min},${max}}`)
+```
+This would result in different behavior because it changes the way the regex matches path segments. The original code fragment matches one or two path segments, but this modified code fragment matches one or several path segments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(any ? '(?:/[^

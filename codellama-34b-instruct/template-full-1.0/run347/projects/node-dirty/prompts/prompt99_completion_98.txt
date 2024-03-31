@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { stack: '' })
+```
+This would result in different behavior because the original code fragment does not pass any options to the `Error` constructor, while the mutated code fragment passes `{ stack: '' }`, which would prevent the error from including a stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'EINVAL' })
+```
+This would result in different behavior because the original code fragment does not pass any options to the `Error` constructor, while the mutated code fragment passes `{ code: 'EINVAL' }`, which would set the error code to "EINVAL" instead of the default "unknown".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { cause: new Error('some other error') })
+```
+This would result in different behavior

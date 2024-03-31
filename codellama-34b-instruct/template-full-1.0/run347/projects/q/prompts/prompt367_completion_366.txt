@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw exception;
+```
+This would result in different behavior because `throw exception` will cause the promise to be rejected with the given exception, whereas `_rejected(exception)` will call the `rejected` callback with the exception as an argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return reject(exception);
+```
+This would result in different behavior because `return reject(exception)` will cause the promise to be rejected with the given exception, whereas `_rejected(exception)` will call the `rejected` callback with the exception as an argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new TypeError('Promise was rejected with a non-exception value');
+```
+This would result in different behavior because it will cause the promise to be rejected with a `TypeError` exception, whereas `_rejected(exception)` will call the `rejected` callback with the exception as an argument.
+
+DONE.

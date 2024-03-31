@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var attempt1 = /at .+ \((.+):(\d+):(?:\d+)\)$/.exec(stackLine);
+if (attempt1.length > 0) {
+    return [attempt1[1], Number(attempt1[2])];
+}
+```
+This would result in different behavior because `exec()` would always return an array, but `attempt1` would be `null` when there is no match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var attempt1 = /at .+ \((.+):(\d+):(?:\d+)\)$/.exec(stackLine);
+if (attempt1[1] === undefined || attempt1[2] === undefined) {
+    return;
+}
+return [attempt1[1], Number(attempt1[2])];
+```
+This would result in different behavior because `attempt1` would be an empty array instead of `null` when there is no match.
+
+Option 3: The

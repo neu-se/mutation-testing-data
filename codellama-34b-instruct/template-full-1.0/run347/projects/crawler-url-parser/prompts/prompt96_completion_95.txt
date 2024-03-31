@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- href, baseUrlStr
++ href || baseUrlStr
+```
+This would result in different behavior because `||` is a logical operator that returns the first truthy value in the list, so if `href` is not null, it will be returned and `baseUrlStr` will be ignored.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- href, baseUrlStr
++ href ?? baseUrlStr
+```
+This would result in different behavior because `??` is a nullish coalescing operator that returns the first non-nullish value in the list, so if `href` is null or undefined, `baseUrlStr` will be returned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```diff
+- href, baseUrlStr
++ href + baseUrlStr
+```
+This would result in different behavior because `+` is a string concatenation operator, so it will combine the `href` and `baseUrlStr` values into a single string.
+
+DONE.

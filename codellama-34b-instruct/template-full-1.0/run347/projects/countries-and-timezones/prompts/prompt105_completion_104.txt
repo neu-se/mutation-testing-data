@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: tzs[key] + 1 }
+```
+This would result in different behavior because the added "1" would cause the condition "!tzs[key].deprecated" to always be false, thus including all time zones, deprecated or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: tzs[anotherKey] }
+```
+This would result in different behavior because the "anotherKey" variable would be different from the "key" variable, thus potentially including a different time zone or none at all.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prev, { [anotherKey]: tzs[key] }
+```
+This would result in different behavior because the "anotherKey" variable would be different from the "key" variable, thus potentially including a different time zone or none at all, and also potentially changing the keys of the returned object.
+
+DONE.

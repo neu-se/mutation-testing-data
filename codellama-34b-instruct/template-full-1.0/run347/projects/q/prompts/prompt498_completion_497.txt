@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.push(reason);
+```
+This would result in different behavior because the original code pushed `promise` to `unhandledRejections`, while this alternative pushes `reason`. This change could potentially cause a scenario where `promise` is pushed more times than intended, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.push(promise);
+```
+This would result in different behavior because the original code pushed `reason` to `unhandledReasons`, while this alternative pushes `promise`. This change could potentially cause a scenario where `reason` is pushed more times than intended, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.push(promise, reason);
+```
+This would result in different behavior because the original code pushed `promise` and `reason` to `unhandledRejections` in separate steps, while this alternative pushes both values in

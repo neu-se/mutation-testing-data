@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+)/'
+```
+This would result in different behavior because it would match any string that contains a slash followed by one or more non-slash characters. In the original code, the PLACEHOLDER only matches the part of the path after the last slash.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+?)/'
+```
+This would result in different behavior because the `?` makes the `+` non-greedy, so it would match the shortest possible string that is one or more non-slash characters. In the original code, the PLACEHOLDER matches the longest possible string that is one or more non-slash characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'/([^/]+.)/'
+```
+This would result in different behavior because the `.` matches any single character except for a slash, while the `+` matches one or more of the previous character. In the original code, the PLACEH

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.indexOf(promise)
+```
+This would result in different behavior because `indexOf` returns -1 if the element is not found, which would cause the `untrackRejection` function to not remove any elements from the `unhandledRejections` array, leading to incorrect tracking of unhandled rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.filter(function (p) {return p !== promise;}).length
+```
+This would result in different behavior because `filter` returns a new array with only the elements that pass the test implemented by the provided function, which in this case is the element that is not equal to the `promise` argument. The `length` property of the resulting array is then returned, which would cause the `untrackRejection` function to always return 0, leading to incorrect tracking of unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length -

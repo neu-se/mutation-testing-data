@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is not a `Promise` object, so it would not have a `promiseDispatch` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because `undefined` is not a `Promise` object, so it would not have a `promiseDispatch` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q().then(function() { return Q(); })
+```
+This would result in different behavior because it changes the timing of the `promiseDispatch` call. Instead of being called immediately, it would be called after a tick, which could be significant if the function expected to be called synchronously.
+
+DONE.

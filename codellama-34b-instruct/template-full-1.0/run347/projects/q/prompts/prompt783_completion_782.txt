@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).cannot
+```
+This would result in different behavior because `Q(object)` returns a promise and `cannot` is not a property or method of a promise. This would cause the code to throw a `TypeError` at runtime.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function () { return this; }
+```
+This would result in different behavior because `this` is bound to the function scope, not the promise scope. The function would return a new promise that resolves to the current promise, rather than the current promise itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.when(object).then
+```
+This would result in different behavior because `Q.when` returns a new promise that resolves to the value of the given promise or value. This would cause the code to behave differently - instead of a promise that is fulfilled or rejected with the result of calling the given promisify function, it would create a new promise that

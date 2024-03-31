@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+tokens[i + 1] !== ' ' && !isNaN(tokens[i + 1]) && tokens[i + 1] !== null
+```
+This would result in different behavior because it would also check if the next token is not equal to null, which would cause the check for Infinity to be ignored.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+tokens[i + 1] !== ' ' && !isNaN(tokens[i + 1]) && tokens[i + 1].length === 1
+```
+This would result in different behavior because it would also check if the next token has length 1, which would cause Infinity to be ignored.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+tokens[i + 1] !== ' ' && !isNaN(tokens[i + 1]) && tokens[i + 1].trim() !== ''
+```
+This would result in different behavior because it would also check if

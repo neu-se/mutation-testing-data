@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with: 
+```
+module.exports.addRule = function (match, result) { rules.push([match, result]) }
+```
+This would result in different behavior because `addRule` would not be adding rules at the beginning of the array anymore.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+module.exports.addRule = function (match, result) { rules.push([result, match]) }
+```
+This would result in different behavior because `addRule` would be swapping the order of the `match` and `result` arguments in the generated rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+module.exports.addRule = function (match, result) { rules.splice(0, 1, [match, result]) }
+```
+This would result in different behavior because `addRule` would be replacing the first element of the `rules` array with the new rule, rather than adding it to the beginning.
+
+DONE.

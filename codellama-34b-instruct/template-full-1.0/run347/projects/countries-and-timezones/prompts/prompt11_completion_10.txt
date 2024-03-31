@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Object.assign(result[country], { current: tz.current || [], all: tz.all || [] })
+```
+This would result in different behavior because it assigns the `current` and `all` properties of the `tz` object to the `result` object, instead of the `result` object's own properties. This would cause the function to behave differently when the `tz` object is empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Object.keys(tz).forEach((key) => result[country][key] = tz[key] || []);
+```
+This would result in different behavior because it iterates over the keys of the `tz` object and assigns each key-value pair to the `result` object's corresponding property. This would cause the function to behave differently when the `tz` object has extra properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Object.assign(result[country], tz, { current

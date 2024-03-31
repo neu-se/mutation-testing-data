@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row: ${this.kv.get(rowStr)}`)
+```
+This would result in different behavior because it would attempt to get the value of the corrupted row from the cache, which would not exist.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row: ${rowStr.val}`)
+```
+This would result in different behavior because it would attempt to get the value of the corrupted row from the row object, which would not exist.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row: ${this.emit.get(rowStr)}`)
+```
+This would result in different behavior because it would attempt to get the value of the corrupted row from the `emit` function, which would not exist.
+
+DONE.

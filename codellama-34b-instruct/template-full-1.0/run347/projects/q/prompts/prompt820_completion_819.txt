@@ -1,0 +1,26 @@
+  Option 1:
+The PLACEHOLDER can be replaced with:
+```
+rejected, fulfilled, progress
+```
+This would result in different behavior because the order of the arguments is switched, which could cause the callback function to be called with the wrong arguments.
+
+Option 2:
+The PLACEHOLDER can be replaced with:
+```
+function (err) {
+    throw err;
+}
+```
+This would result in different behavior because the 'fulfilled' and 'progress' callbacks would not be called, and any error would be thrown instead.
+
+Option 3:
+The PLACEHOLDER can be replaced with:
+```
+function (err) {
+    return err.message;
+}
+```
+This would result in different behavior because the 'fulfilled' and 'progress' callbacks would not be called, and the error message would be returned instead.
+
+DONE.

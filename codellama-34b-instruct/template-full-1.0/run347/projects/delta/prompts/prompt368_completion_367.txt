@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.nextType
+```
+This would result in different behavior because `nextType` is a method that advances the iterator to the next op in the delta, whereas `peekType` only returns the type of the current op without advancing the iterator. Using `nextType` would change the logic of the loop and cause it to skip over ops in the delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType
+```
+This would result in different behavior because it would cause the loop to check the type of the current op in the delta of the `this` Delta, whereas the original code fragment checks the type of the current op in the `other` Delta. This would cause the loop to process the ops in the wrong delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+opIter.peekType
+```
+This would result in different behavior because it would cause the loop to check the type of the current op in a new iterator `opIter`,

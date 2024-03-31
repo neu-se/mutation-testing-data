@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/[^aeiouy]y$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' }
+```
+This would result in different behavior because the regular expression pattern is different from the original, the new pattern doesn't match words that end with "quy".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[aeiou]y$|quy$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' }
+```
+This would result in different behavior because the regular expression pattern matches words that end with "quy" as well.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^aeiouy]y$/i, function(w) { return w.replace(/y$/, 'ies') }
+```
+This would result in different behavior because the regular expression pattern is different from the original, and the new pattern uses the

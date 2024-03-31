@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+    if (err) this.emit('error', err);
+    for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because the original code has `if (!cbs.length && err !== null) this.emit('error', err);`, which checks whether the error is null before emitting an error event, but the replacement code does not have this check, which may lead to inconsistent behavior when an error occurs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+    if (err) this.emit('error', err);
+    for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because the original code has `if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');`, which checks whether all in-

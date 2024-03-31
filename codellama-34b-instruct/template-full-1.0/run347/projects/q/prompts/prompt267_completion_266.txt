@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(reject(reason));
+```
+This would result in different behavior because `reject` is called on the wrong promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.reject(reason);
+```
+This would result in different behavior because `reject` is called on the already resolved promise, and not the deferred promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(reason);
+```
+This would result in different behavior because `deferred.reject` is called on the deferred promise, rather than `become` being called on the resolved promise.
+
+DONE.

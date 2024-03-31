@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+part_count_diff !== 0
+```
+This would result in different behavior because "!===" checks for inequality instead of equality, so if there is a difference in the number of path parts, the code would execute differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!pageurl_parts[0].includes(linkurl_parts[linkurl_parts.length - 1])
+```
+This would result in different behavior because it would check if the last path part of the link URL is not included in the first path part of the page URL, instead of checking if the number of path parts is the same.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.split("/").filter(function (elem, index, array) { return elem.length > 0 && !elem.includes("."); }).length !== pageurl_path.split("/").filter(function (elem, index, array) { return elem.length > 0 && !elem.includes("."); }).

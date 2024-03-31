@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `deferred.reject` function would be called twice, whereas in the original code it is only called once.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(function(){return deferred.reject;});
+```
+This would result in different behavior because the `deferred.reject` function would be wrapped in an anonymous function, which would cause it to be called with a different `this` context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because the `deferred.resolve` function would be called instead of the `deferred.reject` function, causing the promise to be resolved instead of rejected.
+
+DONE.

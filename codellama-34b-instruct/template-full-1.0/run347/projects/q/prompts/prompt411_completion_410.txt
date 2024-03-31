@@ -1,0 +1,28 @@
+  Option 1:
+
+The PLACEHOLDER can be replaced with:
+```
+return Q.delay(value);
+```
+
+This would result in different behavior because `Q.delay` will create a new async function that returns a promise that resolves with `value` after a delay of 0 milliseconds, whereas the original code returns `Q.resolve(value)` which returns a promise that resolves with `value` immediately.
+
+Option 2:
+
+The PLACEHOLDER can be replaced with:
+```
+return Q.reject(value);
+```
+
+This would result in different behavior because `Q.reject` will create a promise that is rejected with the reason `value`, whereas the original code returns `Q.resolve(value)` which resolves the promise.
+
+Option 3:
+
+The PLACEHOLDER can be replaced with:
+```
+return value;
+```
+
+This would result in different behavior because `value` is a promise, so returning it would cause the function to return a thenable, whereas the original code resolves the promise and returns its value.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q("bad value").fapply(nodeArgs).fail
+```
+This would result in different behavior because "bad value" is not a valid Q promise object, the fapply method will not be defined for it, and the code will throw an error when trying to access it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(this.reject)
+```
+This would result in different behavior because the reject function is not being called with the correct context, the error will be swallowed, and the code will continue execution without knowing that an error occurred.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(deferred.resolve).fapply(nodeArgs).fail
+```
+This would result in different behavior because `deferred.resolve` is a function, the fapply method will not be defined for it, and the code will throw an error when trying to access it.
+
+DONE.

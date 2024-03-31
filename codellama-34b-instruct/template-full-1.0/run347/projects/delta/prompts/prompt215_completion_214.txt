@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops.slice()
+```
+This would result in different behavior because `slice()` returns a shallow copy of a portion of an array, while `concat()` returns a new array that is the result of concatenating two or more arrays. This change could cause the `concat` method to return an unexpected result if it is called on a Delta object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.ops.filter(op => op.insert != null)
+```
+This would result in different behavior because `filter` method creates a new array with all elements that pass the test implemented by the provided function. This change could cause the `concat` method to remove some ops from the array before concatenating it, which could change the result of the `diff` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ops.reverse()
+```
+This would result in different behavior because `reverse` method reverses the order of the elements in an array. This change could cause the `

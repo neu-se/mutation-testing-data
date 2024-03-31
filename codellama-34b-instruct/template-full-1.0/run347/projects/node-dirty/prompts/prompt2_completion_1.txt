@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, { ... val });
+```
+This would result in different behavior because it would create a new object with the same properties as `val`, rather than setting the property directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, JSON.stringify(val));
+```
+This would result in different behavior because it would set the property to a string representing the object, rather than the object itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, typeof val === 'function' ? val() : val);
+```
+This would result in different behavior because it would invoke the function if `val` is a function, and set the property to the return value of the function, rather than setting the property to the function itself.
+
+DONE.

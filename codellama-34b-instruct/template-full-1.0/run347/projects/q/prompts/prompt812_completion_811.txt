@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    throw reason;
+}).catch(() => {
+    throw reason;
+});
+```
+This would result in different behavior because the original code only throws the reason when `callback.fcall()` is rejected, while the modified code always throws the reason after calling `callback.fcall()`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    throw reason;
+}).then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the original code only throws the reason when `callback.fcall()` is rejected, while the modified code always throws the reason after calling `callback.fcall()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    throw reason;
+}).then(function () {
+    return reason;
+});
+```
+This would result in different behavior because the original code only throws the

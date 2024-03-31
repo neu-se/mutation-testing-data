@@ -1,0 +1,32 @@
+  Please note that this expert in mutation testing was initialized with the following prompt:
+
+Your task is to apply mutation testing to the following code:
+```
+'use strict';
+
+const fs = require('fs');
+const EventEmitter = require('events').EventEmitter;
+
+class Dirty extends EventEmitter {
+  constructor(path) {
+    super();
+
+    this.path = path;
+
+    this._data = new Map();
+    this._queue = new Map(); // Maps key to a list of callbacks.
+    this._readStream = null;
+    this._writeStream = null;
+    this._waitForDrain = false;
+    this._inFlightWrites = 0;
+
+    this._load();
+  }
+
+  /**
+   * set() stores a JSON object in the database at key
+   * cb is fired when the data is persisted.
+   * In memory, this is immediate - on disk, it will take some time.
+   */
+  set(key, val, cb) {
+    if (val === undefined) {

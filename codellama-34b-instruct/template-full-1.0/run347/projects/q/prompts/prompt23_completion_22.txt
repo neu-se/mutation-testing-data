@@ -1,0 +1,34 @@
+  Option 1:
+```
+if (domain) {
+    domain.exit();
+}
+
+setTimeout(flush, 0);
+
+if (domain) {
+    domain.enter();
+}
+```
+This would result in different behavior because the `domain` is exited and entered again before the `flush` is called with a `setTimeout` of 0 milliseconds, which may cause race conditions or unintended behavior.
+
+Option 2:
+```
+if (domain) {
+    domain.exit();
+    setTimeout(flush, 0);
+    domain.enter();
+}
+```
+This would result in different behavior because the `setTimeout` is only called if `domain` is defined, and the `domain` is only exited and entered when the `setTimeout` is called.
+
+Option 3:
+```
+if (domain) {
+    domain.exit();
+    setTimeout(flush, 0);
+} else {
+    domain.enter();
+}
+```
+This would result in different behavior because the `setTimeout` is only called if `domain` is defined, and the `domain` is

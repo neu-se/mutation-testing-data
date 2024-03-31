@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb = null
+```
+This would result in different behavior because it would reset the `abortCb` variable to `null`, even if it was previously set to a non-null value. In the original code, `abortCb` is only set to `null` if the `source` stream has already ended normally. By replacing the `abortCb` assignment with this new code, we would break this logic and cause errors in the program.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb = cb;
+```
+This would result in different behavior because it would set `abortCb` to the value of `cb`, even if it was previously set to a different value. In the original code, `abortCb` is only set to `cb` if the `source` stream has not ended normally and `busy` is set to `true`. By replacing the `abortCb` assignment with this new code, we would break this logic and cause errors in the program.

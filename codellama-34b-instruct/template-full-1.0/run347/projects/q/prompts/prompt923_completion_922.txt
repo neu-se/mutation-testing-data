@@ -1,0 +1,25 @@
+  Option 1:
+```
+var arr = [];
+for (let i = 0; i > (x, x = arr[i]); i++) {
+    arr.push(i);
+    arr[i] = arr[i] + 1;
+}
+
+```
+This would result in infinite loop in the `for` loop because the condition `i === arr[1]-1` is never met since `arr[i] = arr[i] + 1` changes the value of `arr` and `x` is never updated inside the loop.
+
+Option 2:
+```
+let x = 0;
+for (let i = 0; i < arr.length; i++) {
+    if (x === arr[1]-1) break;
+    arr.push(i);
+    arr[i] = arr[i] + 1;
+}
+```
+This would result in the loop iterating forever because `x` is never assigned a value, so `x === arr[1]-1` is always false.
+
+Option 3:
+```
+let x = 0;

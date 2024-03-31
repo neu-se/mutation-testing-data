@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return { state: "fulfilled", value: value };
+```
+This would result in different behavior because it would replace the `inspect` function with a function that always returns the same `{ state: "fulfilled", value: value }` object, regardless of the actual state of the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return { state: "pending", reason: undefined };
+```
+This would result in different behavior because it would replace the `inspect` function with a function that always returns a pending promise with no reason, regardless of the actual state of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return { state: "rejected", reason: new Error("intentional") };
+```
+This would result in different behavior because it would replace the `inspect` function with a function that always returns a rejected promise with a new `Error` object as the reason, regardless of the actual state of the promise.
+
+DONE.

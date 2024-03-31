@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'insert'
+```
+This would result in different behavior because the original code checks if the next operation in `other` is an insertion, whereas this change checks if it is not an insertion. This means that if the next operation is a deletion or a retain, the current operation in `this` will be pushed to the resulting delta, which is not the case in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain'
+```
+This would result in different behavior because the original code checks if the next operation in `other` is an insertion, whereas this change checks if it is a retain. This means that if the next operation is a retain, the current operation in `this` will be pushed to the resulting delta, which is not the case in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!otherIter.equals(thisIter)
+```
+This would result in

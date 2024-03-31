@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end, null
+```
+This would result in different behavior because the `null` value would be passed to the `cb` function as the `data` argument, regardless of whether the stream is ending or not. This would cause the `op` function to be called with a `null` argument, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end, data && data.length > 0)
+```
+This would result in different behavior because the `cb` function would only be called with the `end` argument if the `data` argument is not `null` and has a length greater than 0. This would cause the `op` function to be called with a different set of arguments, depending on whether the stream is ending or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end, data && data.length > 0 ? data.length - 1 : 0
+```
+This would result in different behavior because the `cb` function would only

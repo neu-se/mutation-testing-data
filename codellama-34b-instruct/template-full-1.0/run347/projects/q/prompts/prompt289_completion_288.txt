@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (!resolvedPromise) {
+    become(Q(value));
+}
+```
+This would result in different behavior because it would always call `become` with a resolved promise, regardless of whether the promise is already resolved or not. In the original code, `resolvedPromise` is only set to true once, so `become` will only be called once per promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (resolvedPromise) {
+    become(reject(value));
+}
+```
+This would result in different behavior because it would call `become` with a rejected promise instead of a resolved one. In the original code, `become` is called with a resolved promise if the promise is already resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (resolvedPromise) {
+    become(fulfill(value));
+}
+```
+This would result in different behavior because it would call `fulfill` instead of `re

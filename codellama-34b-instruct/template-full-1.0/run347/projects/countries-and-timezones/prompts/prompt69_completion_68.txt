@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+timezones[name] === undefined
+```
+This would result in different behavior because the original code checks whether the `timezones[name]` item is falsy, while this new code checks whether it is explicitly `undefined`. This change would cause the `memoizeTimezone` function to run for items that are `null` or `undefined`, which may not be expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!timezones.hasOwnProperty(name)
+```
+This would result in different behavior because the original code checks whether the `timezones` object has a property with the given name, while this new code checks whether the property is an own property of the `timezones` object. This change would cause the `memoizeTimezone` function to not run for inherited properties, which may not be intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+timezones[name] == null
+```
+This would result in different behavior because the original code

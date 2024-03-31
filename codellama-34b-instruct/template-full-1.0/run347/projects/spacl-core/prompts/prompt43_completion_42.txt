@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+flatten(false)
+```
+This would result in different behavior because `flatten(false)` would cause the `parts` array to be flattened only once, regardless of the final segment of the path, whereas the original code would flatten `parts` multiple times if the final segment was a wildcard.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parts.push('/(:[^/]+)')
+```
+This would result in different behavior because `parts.push('/(:[^/]+)')` would add a pattern to the `parts` array that matches a single character between `/` and `/`, whereas the original code would add a pattern that matches multiple characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parts.push('/([^/+])')
+```
+This would result in different behavior because `parts.push('/([^/+])')` would add a pattern to the `parts` array that matches a single character between `/` and `/`, whereas the original code would add a pattern

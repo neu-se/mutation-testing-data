@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/\w+y$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because it incorrectly pluralizes words that end in -y but are not preceded by a consonant, such as "city".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiouy]o$/i, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly pluralizes words that end in -o but are not preceded by a consonant, such as "tomato".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/o$/i, function(w) { return w.substr(0, w.length - 1) + 'os' })
+```
+This would result in different behavior because it incorrectly pluralizes words that end in -o, such

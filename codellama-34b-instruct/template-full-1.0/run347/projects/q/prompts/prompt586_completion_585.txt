@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)()
+```
+This would result in different behavior because it would return a promise for the return value of the generator or the first rejected promise among those yielded, rather than a promise for the return value of the generator or the first rejected promise among those yielded and settled, as in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then()
+```
+This would result in different behavior because it would return a promise for the return value of the generator, rather than a promise for the return value of the generator or the first rejected promise among those yielded and settled, as in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().all()
+```
+This would result in different behavior because it would return a promise for the return value of the generator or the first rejected promise among those yielded and settled, rather than a promise for the return value of the generator or the first rejected promise

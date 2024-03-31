@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const adjust = (input: number) => parseFloat(input.toFixed(precision - 1));
+```
+This would result in different behavior because the `toFixed` method rounds the number to a specified number of decimals, but the `- 1` makes it round to one fewer decimal places than requested, which could cause the calculation to be off by a significant amount.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const adjust = (input: number) => parseFloat(input.toFixed(precision + 1));
+```
+This would result in different behavior because the `toFixed` method rounds the number to a specified number of decimals, but the `+ 1` makes it round to one more decimal place than requested, which could cause the calculation to be off by a significantly smaller amount.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const adjust = (input: number) => Math.round(input * Math.pow(10, precision)) /

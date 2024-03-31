@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+array_slice(arguments, 2).concat(args)
+```
+This would result in different behavior because the replaced code fragment doesn't slice the `args` array, resulting in different argument behavior in the `nfbind` and `denodeify` methods.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(args)
+```
+This would result in different behavior because the replaced code fragment always resolves with the `args` array, regardless of the arguments passed to `nfbind` and `denodeify`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.reject(args)
+```
+This would result in different behavior because the replaced code fragment always rejects with the `args` array, regardless of the arguments passed to `nfbind` and `denodeify`.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.reason
+```
+This would result in different behavior because `promise.reason` would return the rejection reason, whereas `promise` would return the rejected promise. This change would cause the unhandled rejection tracking to not work correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reason
+```
+This would result in different behavior because `reason` is a local variable in the `reject` function, whereas `promise` is a parameter. This change would cause the unhandled rejection tracking to not work correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.fulfill(promise.reason)
+```
+This would result in different behavior because `Q.fulfill` would return a fulfilled promise with the rejection reason, whereas `promise` would return a rejected promise. This change would cause the unhandled rejection tracking to not work correctly.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && !_has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because if the `baseUrlStr` contains illegal characters, the current code would return `null`, but the replaced code would return the parsed URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!(baseUrlStr && _has_illegal_chars(baseUrlStr))
+```
+This would result in different behavior because if the `baseUrlStr` contains illegal characters, the current code would return `null`, but the replaced code would return the parsed URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && !_has_illegal_chars(baseUrlStr) && baseUrlStr.length > 0
+```
+This would result in different behavior because if the `baseUrlStr` contains illegal characters, the current code would return `null`, but the replaced code would return the parsed URL only if the `baseUrlStr` is not empty.

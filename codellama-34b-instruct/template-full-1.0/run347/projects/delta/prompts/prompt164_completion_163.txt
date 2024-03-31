@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert'
+```
+This would result in different behavior because the original code fragment checks if the current operation in `thisIter` is a `delete`, while replacing it with `otherIter.peekType() === 'insert'` would check if the current operation in `otherIter` is an `insert`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof thisOp.delete === 'number'
+```
+This would result in different behavior because the original code fragment checks if the current operation in `thisIter` is a `delete`, while replacing it with `typeof thisOp.delete === 'number'` would check if the current operation in `thisIter` is a `delete` and its `delete` attribute is a number.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const otherOp = otherIter.next();
+otherOp && typeof otherOp.retain === 'number'
+```
+This would result in different behavior because the original code fragment checks if the current

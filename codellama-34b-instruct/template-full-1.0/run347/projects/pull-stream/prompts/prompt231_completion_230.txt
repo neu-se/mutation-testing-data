@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+while (!loop) {
+  loop = false;
+  sync = true;
+  read(end, function(end, data) {
+    if (!end && !test(data))
+      return sync ? loop = true : next(end, cb);
+    cb(end, data);
+  });
+  sync = false;
+}
+```
+This would result in different behavior because the `while` loop condition is now negated, causing the loop to continue even when `loop` is set to `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+while (!test(data)) {
+  loop = false;
+  sync = true;
+  read(end, function(end, data) {
+    if (!end && !test(data))
+      return sync ? loop = true : next(end, cb);
+    cb(end, data);
+  });
+  sync = false;
+}
+```
+This would result in different behavior because the loop condition is now based on the result of the `

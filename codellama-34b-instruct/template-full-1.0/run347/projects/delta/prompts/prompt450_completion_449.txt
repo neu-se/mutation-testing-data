@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' ||
+        (typeof op.retain === 'object' && op.retain !== null) ||
+        (typeof op.insert === 'string')
+```
+This would result in different behavior because the additional condition `typeof op.insert === 'string'` would cause the branch to always evaluate to `true`, regardless of the value of `op.retain`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' &&
+        (typeof op.retain === 'object' || op.retain !== null)
+```
+This would result in different behavior because the additional condition `typeof op.retain === 'object' || op.retain !== null` would cause the branch to always evaluate to `false`, regardless of the value of `op.retain`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' &&
+        op.retain !== null ||
+        op

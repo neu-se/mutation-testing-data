@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error(reason);
+```
+This would result in different behavior because `reason` is not defined and will throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(this).then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because `this` is used instead of `callback` and will throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(reason).then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because `reason` is passed as an argument to `fcall` and will throw an error.
+
+DONE.

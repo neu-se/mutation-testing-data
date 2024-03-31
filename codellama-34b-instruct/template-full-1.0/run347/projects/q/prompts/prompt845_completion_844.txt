@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+-ms, error
+```
+This would result in different behavior because it would cause the `timeoutId` to not be cleared, resulting in the error being thrown after the timeout instead of immediately.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`ms * 2, error
+```
+This would result in different behavior because it would cause the `timeoutId` to be cleared after twice the desired timeout, resulting in the promise being rejected after twice the desired time instead of immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+error, ms
+```
+This would result in different behavior because it would cause the `error` to be passed as the first argument to `reject`, instead of the second argument as intended. This would not result in the error being thrown immediately, but instead would cause the promise to be rejected after the timeout.
+
+DONE.

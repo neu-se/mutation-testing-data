@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(op: Op, index: number) => op.retain !== otherOp.retain
+```
+This would result in different behavior because it would filter out any operation that has the same retain value as the current operation in `otherOp`, rather than filtering out any operation that has the same retain value as the current operation in `otherOp` and the same attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(op: Op, index: number) => op.retain !== otherOp.retain || op.attributes !== otherOp.attributes
+```
+This would result in different behavior because it would filter out any operation that has the same retain value as the current operation in `otherOp` and also has the same attributes, rather than filtering out any operation that has the same retain value as the current operation in `otherOp`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(op: Op, index: number) => otherOp.attributes !== otherOp.attributes
+```
+This would result in

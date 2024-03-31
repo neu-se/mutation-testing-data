@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+        self.promiseDispatch(deferred.resolve)
+    });
+```
+This would result in different behavior because the promiseDispatch method is never called, so the dispatch method never returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var args = [key];
+return Q(object).dispatch("get", args);
+```
+This would result in different behavior because the method expects an array of property values, but instead receives an array of key-value pairs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).dispatch("get", key);
+```
+This would result in different behavior because the method expects an array of property values, but instead receives a single key.
+
+DONE.

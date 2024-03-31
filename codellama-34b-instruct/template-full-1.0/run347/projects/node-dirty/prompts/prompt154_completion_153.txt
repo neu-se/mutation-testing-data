@@ -1,0 +1,24 @@
+  Option 1:
+```
+this._writeStream.uncork(this._inFlightWrites);
+```
+This would result in different behavior because it would not use the
+`PLACEHOLDER` parameter and would always uncork the write stream with a value of 1,
+regardless of the number of in-flight writes.
+
+Option 2:
+```
+this._writeStream.uncork(this._inFlightWrites - 1);
+```
+This would result in different behavior because it would decrement the
+`_inFlightWrites` counter before uncorking the write stream, which could
+potentially cause the write stream to be uncorked too soon, resulting in data
+loss or corruption.
+
+Option 3:
+```
+this._writeStream.uncork(this._inFlightWrites * 2);
+```
+This would result in different behavior because it would double the value of the
+`_inFlightWrites` counter before uncorking the write stream, which could
+potentially cause the write stream to be uncork

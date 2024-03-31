@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops.splice(1)
+```
+This would result in different behavior because `splice()` modifies the array in place, whereas `slice()` creates a new array without modifying the original. In this case, it is important that a new array is created, as the code later assumes that `delta.ops` is a new array that can be modified without affecting the original `other.ops`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+other.ops.concat().slice(1)
+```
+This would result in different behavior because `concat()` creates a new array, but `slice()` is called on the new array, which only includes the elements after the first one. This would result in a different array than the original `other.ops.slice(1)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+other.ops.slice(1).concat()
+```
+This would result in different behavior because `slice()` creates a new array, but `concat()` is called on the new

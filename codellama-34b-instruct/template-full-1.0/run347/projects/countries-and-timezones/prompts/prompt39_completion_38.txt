@@ -1,0 +1,25 @@
+  DONE.  
+
+  Option 1: The PLACEHOLDER can be replaced with 'Object.values(data.countries)':
+```
+import data from './data.json';
+import buildCountry from './build-country';
+import buildTimezone from './build-timezone';
+
+const totalTimezones = Object.keys(data.timezones).length;
+const countries = {};
+const timezones = {};
+let memoizedTimezones = 0;
+
+export function getAllCountries(options = {}) {
+  return Object.values(data.countries).reduce((prev, id) => {
+    return Object.assign(prev, { [id]: getCountry(id, options) });
+  }, {});
+}
+
+export function getAllTimezones(options = {}) {
+  if (totalTimezones !== memoizedTimezones) Object.keys(data.timezones).forEach(getTimezone);
+  return deliverTimezones(timezones, options);
+}
+
+export function getCountry(id, options = {}) {

@@ -1,0 +1,17 @@
+  Option 1: The placeholder can be replaced with:
+```
+/bacteria$/i.test(w) ? 'bacteria' : 'bacterium'
+```
+As this code pluralizes bacteria to bacteria, false is returned, if the word 'bacteria' is not matched by the regular expression. If bacterium is passed to the plugin, it returns true, thus returning the word 'bacteria.'. This would result in code that fails unit tests for bacterium, but works for bacteria.
+
+Option 2: The placeholder can be replaced with:
+```
+w === 'bacteria' ? 'bacteria' : 'bacterium'
+```
+This code pluralizes bacteria as bacteria always. No condition is looked at. Results in true for bacteria, code works but results in false and returned bacteria for bacterium.
+
+Option 3: The placeholder can be replaced with:
+```
+'bacterium'
+```
+Everything seems to make sense(use of quotes). Intended function for the string in, so it returns true

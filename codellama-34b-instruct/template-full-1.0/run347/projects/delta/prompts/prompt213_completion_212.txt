@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.push({ retain: 0 });
+```
+This would result in an infinite loop because the `concat` function would constantly be adding a new delta with a zero retain length to the end of the `ops` array, causing the loop to never terminate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(new Delta());
+```
+This would result in an error because the `concat` function is expecting a delta with at least one operation, but the new delta would have zero operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.next());
+```
+This would result in different behavior because it would be adding the next operation from the `other` delta to the `ops` array, rather than the same operation as in the original code.
+
+DONE.

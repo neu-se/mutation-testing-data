@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(a < 3001 || b < 3001)
+
+```
+This would result in different behavior because it is a different condition for the later ```return``` and it introduces an off-by-one error. The original condition test can execute the ```return``` if neither a nor b are smaller than 3000. In contrast, this new condition is true if either a or b are smaller than 3001. The difference is subtle but it can lead to surprising results when evaluating an expected return value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(a >= 3000 || b >= 3000)
+
+```
+This would result in different behavior because it is the negation of the original condition. It would test if either a or b are **greater than** 3000. In which case, the ```return``` statement with ```cosHypot``` would evaluate. The original function would return ```hypot``` in the same situation.  As

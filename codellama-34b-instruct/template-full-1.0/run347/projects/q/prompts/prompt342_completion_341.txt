@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(value);
+```
+This would result in different behavior because the `deferred.resolve` call would be moved outside of the `try` block, potentially causing the promise to be resolved even if an error is thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(exception);
+```
+This would result in different behavior because the `deferred.reject` call would be moved outside of the `try` block, potentially causing the promise to be rejected even if no error is thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    deferred.resolve(value);
+});
+```
+This would result in different behavior because the `deferred.resolve` call would be scheduled to run on the next tick of the event loop, potentially causing the promise to be resolved after additional code has run.
+
+DONE.

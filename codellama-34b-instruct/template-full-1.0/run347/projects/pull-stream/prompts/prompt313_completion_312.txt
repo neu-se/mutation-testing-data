@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because `undefined` is a falsy value, while `null` is a special value used to represent the absence of data. In the original code, if `ended` is `true`, `cb(null, data)` is called, which passes the data on to the next step. If we replace `null` with `undefined`, the function would instead call `cb(undefined, data)`, which could potentially cause issues if the next step is expecting a specific value (such as `null`) rather than a falsy value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+''
+```
+This would result in different behavior because an empty string is a falsy value, while `null` is a special value used to represent the absence of data. In the original code, if `ended` is `true`, `cb(null, data)` is called, which passes the data on to the next step. If we replace `null` with `''`, the function would instead call `cb('', data)`,

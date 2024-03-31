@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {
+    return promise;
+};
+```
+This would result in different behavior because the `descriptor[op]` function now always returns a resolved promise, rather than a value or a promise. This would cause the `promiseDispatch` function to resolve the promise prematurely, leading to unexpected behavior in the rest of the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {
+    return reject;
+};
+```
+This would result in different behavior because the `descriptor[op]` function now always returns a rejected promise, rather than a value or a promise. This would cause the `promiseDispatch` function to reject the promise prematurely, leading to unexpected behavior in the rest of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {
+    throw new Error("Not Implemented");
+};
+```
+This would result in different behavior because the `des

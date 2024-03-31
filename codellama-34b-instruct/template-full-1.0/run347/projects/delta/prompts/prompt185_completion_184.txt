@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof thisOp.retain === 'number'
+```
+This would result in different behavior because `thisOp.retain` is always a number when `typeof otherOp.retain === 'number'`, but it may not always be a number when `typeof otherOp.retain === 'object'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherOp.retain != null
+```
+This would result in different behavior because `otherOp.retain` may not always be `null` when `typeof otherOp.retain === 'object'`, but it always will be `null` when `typeof otherOp.retain === 'number'`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof thisOp.retain === 'object' && thisOp.retain != null
+```
+This would result in different behavior because `thisOp.retain` may not always be an object when `typeof otherOp.retain === 'number'`, but it always will be an object

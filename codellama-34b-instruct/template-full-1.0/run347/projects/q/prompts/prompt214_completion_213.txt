@@ -1,0 +1,18 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromiseAlike(value) || value === "current"
+```
+This would result in different behavior because the additional condition `value === "current"` would allow passing the string "current" as a resolution value, which is not a promise and would not be caught by the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof value === "function"
+```
+This would result in different behavior because it would allow passing any function as a resolution value, regardless of whether it is a promise or not. However, it would not be able to pass `isPromiseAlike` as a resolution value, which is a function that returns a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value && isPromiseAlike(value)
+```
+This would result in different behavior because the additional condition `value &&` would allow passing falsy values as a resolution value, which would not be caught by the original code. However, it would not be able to pass `isPromise

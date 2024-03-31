@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(this)
+```
+This would result in different behavior because `this` refers to the global object in the scope of the `async` function, rather than the generator object. This would cause the `verb` argument passed to `generator[verb]` to be `undefined`, leading to a `TypeError` when the generator tries to access the `done` property of the `undefined` value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(generator)
+```
+This would result in different behavior because `generator` is a local variable defined in the `async` function and is not the same as `this`. This would cause the `verb` argument passed to `generator[verb]` to be `undefined`, leading to a `TypeError` when the generator tries to access the `done` property of the `undefined` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(generator, "next")
+```
+This would result in

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).call("dispatch", ["post", [name, array_slice(arguments, 1)]])
+```
+This would result in different behavior because `Q.post` is a shorthand for `Q.dispatch("post", ...)`, and `Q.call` is a shorthand for `Q.dispatch("call", ...)`. By calling `Q.post` instead of `Q.dispatch`, the function will be invoked immediately, rather than returning a promise to be invoked later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).apply("dispatch", ["post", [name, array_slice(arguments, 1)]])
+```
+This would result in different behavior because `Q.apply` is a shorthand for `Q.dispatch("apply", ...)`, and `Q.apply` is a shorthand for `Q.dispatch("apply", ...)`. By calling `Q.apply` instead of `Q.dispatch`, the function will be invoked immediately, rather than returning a promise to be invoked later

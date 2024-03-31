@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport
+```
+This would result in different behavior because it would return the unhandled rejection reason object without removing it from the unhandledRejections array and reportedUnhandledRejections array, which could cause the process to emit an "unhandledRejection" event multiple times for the same rejection, and could cause the "rejectionHandled" event to never be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length
+```
+This would result in different behavior because it would remove the last unhandled rejection reason object from the unhandledReasons array, rather than the specific one that was just handled, which could cause the process to fail to emit an "unhandledRejection" event for a rejection that should have been unhandled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.pop()
+```
+This would result in different behavior because it would remove the first unhandled rejection reason

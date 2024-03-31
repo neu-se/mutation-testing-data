@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeRejector
+```
+This would result in different behavior because `makeNodeRejector` creates a function that rejects the promise, instead of resolving it. This would cause any promises that use the modified `denodeify` function to immediately reject, even if the underlying function is expected to return a successful value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.createNodeResolver
+```
+This would result in different behavior because `this.createNodeResolver` may refer to a different function than the intended `deferred.makeNodeResolver`. This could cause the promise to be resolved with an unexpected value or with an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+DELAY.makeNodeResolver
+```
+This would result in different behavior because `DELAY.makeNodeResolver` creates a function that resolves the promise with a value that is not the same as the one returned by the original function. This could cause any promises that use the modified `denodeify`

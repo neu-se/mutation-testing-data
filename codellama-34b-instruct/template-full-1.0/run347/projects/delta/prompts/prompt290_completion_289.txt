@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext()
+```
+This would result in different behavior because it would cause the loop to exit early, since `hasNext` checks if there is a next element, whereas `next` retrieves the next element.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peek()
+```
+This would result in different behavior because it would retrieve the next element without advancing the iterator, which could result in an infinite loop if the iterator is not advanced in the `while` loop condition.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (iter.peekType() === 'insert') { delta.retain(Op.length(iter.next())); }
+```
+This would result in different behavior because it would check the type of the next element without advancing the iterator, and if the type is `insert`, it would advance the iterator and retain the length of the next element. This would potentially result in retaining the wrong length if the next element is not an `insert` operation.

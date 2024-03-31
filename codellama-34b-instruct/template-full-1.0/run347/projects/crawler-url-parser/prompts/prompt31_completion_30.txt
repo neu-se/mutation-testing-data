@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^https?:\/\//
+```
+This would result in different behavior because a string starting with `http://` or `https://` would be considered an absolute URL, and would not be rewritten with `http://`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(\/\/|www\.)/
+```
+This would result in different behavior because a string starting with `www.` or `//` would be considered a protocol-relative URL, and would be rewritten with `http://`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?<!(http|https):\/\/)/
+```
+This would result in different behavior because a string not starting with `http://` or `https://` would be considered a relative URL, and would be rewritten with `http://`.
+
+DONE.

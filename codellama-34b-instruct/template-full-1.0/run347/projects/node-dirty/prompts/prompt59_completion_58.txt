@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.close();
+```
+This would result in different behavior because it would close the dirty DB file streams immediately, rather than waiting for the writes to complete.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('close');
+```
+This would result in different behavior because it would emit a 'close' event immediately, rather than waiting for the writes to complete.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites = 0;
+```
+This would result in different behavior because it would set `_inFlightWrites` to 0 immediately, rather than waiting for the writes to complete.
+
+DONE.

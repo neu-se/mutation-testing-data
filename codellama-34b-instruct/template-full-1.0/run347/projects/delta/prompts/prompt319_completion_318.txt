@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.delete
+```
+This would result in different behavior because `inverted.delete` would delete the characters in the `otherOp` instead of retaining them with attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retain(
+  transformedData,
+  AttributeMap.transform(
+    thisOp.attributes,
+    otherOp.attributes,
+    !priority,
+  ),
+)
+```
+This would result in different behavior because `!priority` would invert the priority flag, which would cause the attributes to be transformed in the opposite way.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retain(
+  transformedData,
+  AttributeMap.transform(
+    thisOp.attributes,
+    otherOp.attributes,
+    otherOp.attributes,
+  ),
+)
+```
+This would result in different behavior because `otherOp.attributes` is being used as the priority flag, which would cause the attributes to be transformed in the opposite way

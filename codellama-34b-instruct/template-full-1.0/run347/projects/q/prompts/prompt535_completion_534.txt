@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejected, fulfilled
+```
+This would result in different behavior because the order of the arguments to `then` is swapped, which would cause the reject callback to be called with the fulfilled value and the fulfill callback to be called with the rejected reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+partial(fulfilled, rejected)
+```
+This would result in different behavior because `partial` is a function that returns a new function that, when called, calls the given function with the given arguments. In this case, it would result in the fulfill callback being called with the rejected reason and the reject callback being called with the fulfilled value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+void 0, fulfilled
+```
+This would result in different behavior because `void 0` is a way of writing `undefined` in JavaScript. In this case, it would result in the fulfill callback being called with `undefined` instead of the rejected reason and the reject callback being called with the

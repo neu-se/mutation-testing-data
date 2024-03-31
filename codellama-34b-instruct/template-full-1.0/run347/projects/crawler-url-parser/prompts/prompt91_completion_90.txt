@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^(javascript|mailto|ftp|file):|data:[^;]*?;/ig.test
+```
+This would result in different behavior because this regular expression also matches the "file" protocol, allowing for the addition of vulnerabilities such as File inclusion attacks.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(javascript|(mailto|ftp):))/ig.test
+```
+This would result in different behavior because this regular expression matches either the "javascript" or "mailto" protocol, allowing for vulnerabilities such as script execution or mail bomber attacks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^[^:]+:\/\//ig.test
+```
+This would result in different behavior because this regular expression matches any string that begins with a protocol, allowing for vulnerabilities including Injection attacks.
+
+DONE.

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(tzs).filter((key) => !tzs[key].deprecated).reduce((prev, key) => prev[key] = tzs[key], {});
+```
+This would result in different behavior because it filters out deprecated timezones before reducing the object, whereas the original code reduces the object first and then filters out deprecated timezones.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.values(tzs).filter((timezone) => !timezone.deprecated).reduce((prev, timezone) => prev[timezone.name] = timezone, {});
+```
+This would result in different behavior because it filters out deprecated timezones before reducing the object, whereas the original code reduces the object first and then filters out deprecated timezones.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.entries(tzs).filter(([, timezone]) => !timezone.deprecated).reduce((prev, [key, timezone]) => prev

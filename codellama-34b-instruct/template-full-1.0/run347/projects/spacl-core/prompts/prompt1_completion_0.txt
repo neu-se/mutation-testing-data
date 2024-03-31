@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^[a-zA-Z0-9_/:^.$+*-]*$/) === null
+```
+This would result in different behavior because the caret (^) is added to the character class, which would match any character except the ones specified in the class, making the regular expression more permissive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^[a-zA-Z0-9_/:~.$+*-]{4,12}$/) === null
+```
+This would result in different behavior because the regular expression is now checking for a specific number of characters between 4 and 12, which would fail for inputs that are not within that range.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^[a-zA-Z0-9_/:~.$+*-]*$/.repeat(2)) === null
+```
+This would result in different behavior because the regular expression is now repeating the character

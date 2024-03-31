@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, null]
+```
+This would result in different behavior because the `query` method would always return `null` instead of the actual policy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, new Policy(policy.name, "")]
+```
+This would result in different behavior because the `query` method would return a new policy with an empty rule set instead of the actual policy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, (policy.flags & Policy.Flag.ENABLED) ? policy.flags | Policy.Flag.DISABLED : policy.flags & ~Policy.Flag.ENABLED]
+```
+This would result in different behavior because the `query` method would return a policy with its flags inverted, allowing the action to be performed even if it is not explicitly allowed by the policy.
+
+DONE.

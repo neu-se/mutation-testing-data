@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^(?:wo)?man$/i, function(w) { return w.replace(/a/, 'e') }
+```
+This would result in different behavior because it would not match the word "woman" in all cases, e.g., "woMan".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?:wo)?man$/i, function(w) { return w + 's' }
+```
+This would result in different behavior because it would add an "s" to the end of the word regardless of the number of syllables, e.g., "woman" would become "womans".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?:wo)?man$/i, function(w) { return w.slice(0, w.length - 1) + 'ies' }
+```
+This would result in different behavior because it would remove the last letter of the word and add "ies" to the end

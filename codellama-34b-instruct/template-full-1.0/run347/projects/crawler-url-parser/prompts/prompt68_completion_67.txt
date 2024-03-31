@@ -1,0 +1,28 @@
+  Mutation Testing:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+if(baseUrl){
+    let parsedHost = psl.parse(ret.host);
+    ret.domain = parsedHost.domain;
+    ret.subdomain = parsedHost.subdomain;
+}
+```
+This would result in different behavior because the `psl` library is not being used in the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if(baseUrl){
+    let parsedBaseUrl = URL.parse(baseUrl);
+    delete parsedUrl.hash;
+    ret.baseurl = URL.format(parsedBaseUrl);
+}
+```
+This would result in different behavior because the `URL.parse()` and `URL.format()` methods are not being used in the original code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if(baseUrl){
+    let parsedBaseUrl = URL.parse(baseUrl);
+    delete parsedUrl.hash;
+    ret.baseurl =

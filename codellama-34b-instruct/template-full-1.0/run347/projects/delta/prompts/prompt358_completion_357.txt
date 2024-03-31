@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+priority && 1
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `+` operator, so the expression would be evaluated as `(priority && 1) + 1`, which would always return `2` if `priority` is truthy and `1` if `priority` is falsy, regardless of the value of `offset`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+offset + (priority > 0 ? 1 : 0)
+```
+This would result in different behavior because the conditional expression `priority > 0 ? 1 : 0` would return `1` if `priority` is greater than `0` and `0` otherwise, so the resulting expression would be `offset + 1` if `priority` is greater than `0` and `offset` otherwise, which would change the behavior of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+offset + (

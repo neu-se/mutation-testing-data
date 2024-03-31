@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ () => {
+  throw new Error('Dummy error');
+}
+```
+This would result in different behavior because the original code fragment `Delta.getHandler` is a function that retrieves a handler for a given embed type, but this replacement code fragment is a function that always throws an error, regardless of the embed type.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ (embedType) => {
+  return {
+    [embedType]: undefined
+  };
+}
+```
+This would result in different behavior because the original code fragment `Delta.getHandler` is a function that retrieves a handler for a given embed type, but this replacement code fragment is a function that always returns an object with an undefined property corresponding to the embed type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ (embedType, data) => {
+  return data ? data[embedType] : undefined;
+}
+```
+This would result in different behavior because the original code fragment `Delta.getHandler`

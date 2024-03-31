@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/at .+ \((.+):(\d+):(?:\d+)\)$/i.exec
+```
+This would result in different behavior because the `i` flag at the end of the regular expression makes the match case-insensitive, which would cause the `getFileNameAndLineNumber` function to return incorrect results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/at .+ \((.+):(\d+):(?:\d+)\)$/.test
+```
+This would result in different behavior because the `.test` method would return a boolean value indicating whether the regular expression matches the string, rather than returning the matched groups.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/at .+ \((.+):(\d+):(?:\d+)\)$/g.exec
+```
+This would result in different behavior because the `g` flag at the end of the regular expression makes the match global, which would return an array of all matches in the string, rather

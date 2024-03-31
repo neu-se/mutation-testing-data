@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `isPromise` function expects a promise object, but `false` is a boolean value and will not have an `inspect` method. This will cause an error to be thrown when the `nearer` function is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{
+    then: function (onFulfilled, onRejected) {
+        onFulfilled(42);
+    }
+}
+```
+This would result in different behavior because the replaced code is a promise object with a custom `then` method that always fulfills with the value `42`. This will cause the `nearer` function to always return `42`, regardless of the input.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.reject(new Error("test"))
+```
+This would result in different behavior because the replaced code is a promise object that is rejected with an error. This will cause the `near

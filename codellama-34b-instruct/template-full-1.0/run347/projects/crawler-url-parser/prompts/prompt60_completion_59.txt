@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, false, false)
+```
+This would result in different behavior because the `decodeURIComponent` flag is set to `false`, which means that query strings in the URL will not be decoded, which can lead to different parsing results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, true, true, {})
+```
+This would result in different behavior because the `resolveObject` flag is set to `true`, which means that the `URL.resolve()` method will be used to resolve the URL, rather than the `parse()` method. This can lead to different results if the URL is relative or if there are multiple redirects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(currentUrlStr, true, true, function(err) {
+  console.error(err);
+})
+```
+This would result in different behavior because the `callback` parameter is specified, which means that any errors that occur during parsing

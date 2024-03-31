@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!err && !abort
+```
+This would result in different behavior because the original code fragment has short-circuit evaluation, meaning that if `err` is truthy, `abort` is not evaluated. However, the new code fragment does not have short-circuit evaluation, so even if `err` is truthy, `abort` will still be evaluated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err && abort
+```
+This would result in different behavior because the original code fragment only aborts the current stream if `err` is truthy, while the new code fragment aborts both the current stream and the stream of streams.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err || abort
+```
+This would result in different behavior because the original code fragment only aborts the current stream if `err` is truthy, while the new code fragment aborts both the current stream and the stream of streams if `err` is falsy.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const [key, cbs] of this._queue
+```
+This would result in different behavior because `this._queue` is an instance of `Map`, and `Map.prototype.values()` returns an iterator that only iterates over the values of the map, not the keys.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const [key, cbs] of this._queue.entries()
+```
+This would result in different behavior because `Map.prototype.entries()` returns an iterator that iterates over the key-value pairs of the map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const [key, cbs] of [...this._queue.keys()]
+```
+This would result in different behavior because `[...this._queue.keys()]` creates an array of the keys of the map, which are then iterated over by the `for...of` loop.
+
+DONE.

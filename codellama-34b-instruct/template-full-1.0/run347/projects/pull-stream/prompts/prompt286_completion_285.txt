@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because `!end` is always truthy, so the code would always execute the `return cb(err)` statement, regardless of whether an error occurred or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (end) data = mapper(data)
+```
+This would result in different behavior because the `if` statement would only execute the `data = mapper(data)` statement if `end` is truthy, so the code would only call `mapper` on `data` if `end` is falsey.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end ? mapper(data) : data
+```
+This would result in different behavior because the ternary operator would only execute the `mapper(data)` statement if `end` is truthy, so the code would only call `mapper` on `data` if `end` is falsey.
+
+DONE.

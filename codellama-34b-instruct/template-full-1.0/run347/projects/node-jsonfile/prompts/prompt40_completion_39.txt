@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback
+```
+This would result in different behavior because `universalify.fromCallback` returns a promisified version of a function, but the original code is using `universalify.fromPromise`, which returns a promised version of a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise(fs.readFile)
+```
+This would result in different behavior because `fs.readFile` is a function that takes a file path and an options object as arguments, but `universalify.fromPromise` expects a function that takes a single argument, which is the resolved value from the previous async operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise(fs.writeFile)
+```
+This would result in different behavior because `fs.writeFile` is a function that takes a file path, data, and options object as arguments, but `universalify.fromPromise` expects a function

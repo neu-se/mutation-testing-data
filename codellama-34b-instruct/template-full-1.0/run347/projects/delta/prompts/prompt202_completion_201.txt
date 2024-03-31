@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(otherOp).delete(opLength);
+```
+This would result in different behavior because it would push the `otherOp` onto the `retDelta` array and then delete `opLength` characters from the `retDelta` array, without checking if the `otherOp` has any insert operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(opLength, AttributeMap.diff(thisOp.attributes, otherOp.attributes));
+```
+This would result in different behavior because it would retain `opLength` characters from the `retDelta` array and apply the `AttributeMap.diff` function to the `thisOp` and `otherOp` attributes, without checking if the `otherOp` has any insert operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.delete(opLength);
+```
+This would result in different behavior because it would delete `opLength` characters from the `retDelta` array without checking if the `other

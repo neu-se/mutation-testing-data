@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+// Incorrectly checks whether a character is a newline
+const isNewline = op => {
+  return op.toString() === '\n';
+}
+```
+This would result in different behavior because the original code checks for the presence of a newline character in a more robust way, by using the `startsWith('\n')` method. The replacement code uses `===` to check for equality, which can lead to false negatives if the string representation of the character is not exactly equal to the newline character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+// Incorrectly checks whether an operation is a deletion
+const isDeletion = op => {
+  return op.length() > 0 && op.peek() === '';
+}
+```
+This would result in different behavior because the original code checks whether an operation is a deletion by looking at its `attributes` property. The replacement code uses a length check and a condition to check for the presence of an empty string, which can lead to false positives if there are operations with a

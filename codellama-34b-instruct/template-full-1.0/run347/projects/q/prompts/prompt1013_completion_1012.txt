@@ -1,0 +1,19 @@
+  Option 1:  The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the original code calls `dispatch` on the promise returned by `Q(object)`, whereas this code calls it on the promise returned by `this.dispatch("post", [name, nodeArgs])`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because the original code rejects the promise with the error, whereas this code resolves it with a value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(function() {});
+```
+This would result in different behavior because the original code passes the error to the `fail` callback, whereas this code passes a no-op function.
+
+DONE.

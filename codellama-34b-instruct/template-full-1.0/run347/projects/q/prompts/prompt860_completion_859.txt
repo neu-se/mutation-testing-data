@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Q can't apply finally callback"));
+```
+This would result in different behavior because the original code fragment throws a custom error message with the `Q.onerror` function, while this replacement throws a generic `Error` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(error);
+```
+This would result in different behavior because the original code fragment first calls `makeStackTraceLong` on the error object, which may attach a long stack trace to the error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(error.message);
+```
+This would result in different behavior because the original code fragment throws the error object itself, while this replacement throws only the error message.
+
+DONE.

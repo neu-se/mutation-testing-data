@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches(path, ctx) && verb in this.verbs
+```
+This would result in different behavior because the `!` operator negates the result of `this.matches()`, causing the condition to be true when the path does not match the rule, rather than when it does. This would allow the query to return a result, even if the path is not governed by the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) || verb in this.verbs
+```
+This would result in different behavior because the `||` operator combines the result of `this.matches()` and `verb in this.verbs`, causing the condition to be true if either condition is true. This would allow the query to return a result, even if the path is not governed by the rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && !(verb in this.verbs)
+```
+This would result

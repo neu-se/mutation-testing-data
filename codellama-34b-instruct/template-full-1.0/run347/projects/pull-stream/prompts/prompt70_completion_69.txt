@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op && true === op(data) || abort
+```
+This would result in different behavior because the `=== true` check will always evaluate to `false` unless the `op` function returns `true`, whereas the original code fragment would evaluate to `true` if the `op` function returns any truthy value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op && false === op(data) || !abort
+```
+This would result in different behavior because the `!abort` check will always evaluate to `true` unless the `abort` variable is `true`, whereas the original code fragment would evaluate to `true` if the `abort` variable is `true` or if the `op` function returns any truthy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op && true === op(data) || abort == true
+```
+This would result in different behavior because the `abort == true` check will always evaluate to `true` unless the `abort`

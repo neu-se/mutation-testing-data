@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(Q.defer());
+```
+This would result in different behavior because `Q.defer()` returns a new deferred object, while `ends.resolve` is a function that resolves a promise with a given value. In this case, we are resolving the promise with a deferred object, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(Q.defer().promise);
+```
+This would result in different behavior because we are resolving the promise with the promise of a deferred object, which is not the same as resolving the promise with the deferred object itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(Q.defer().promise.get("head"));
+```
+This would result in different behavior because we are resolving the promise with the head of the deferred object's promise, which is not the same as resolving the promise with the deferred object itself.
+

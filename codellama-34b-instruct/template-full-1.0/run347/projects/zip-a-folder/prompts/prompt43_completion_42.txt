@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart, { cwd: path.dirname(targetFilePath) });
+```
+This would result in different behavior because `glob()` would search for files in the directory of the target file, which differs from the original behavior of searching in the current working directory.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart, { ignore: [ targetFilePath ] });
+```
+This would result in different behavior because the target file would be excluded from the search results, which differs from the original behavior of including it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart, { dot: true });
+```
+This would result in different behavior because `glob()` would include hidden files and directories, which differs from the original behavior of excluding them.
+
+DONE.

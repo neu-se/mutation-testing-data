@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const str = "Hello, world!"
+new Delta({ ops: [ { insert: str } ] });
+```
+This would result in different behavior because it would create a new Delta object with the string "Hello, world!" as the inserted text, whereas the original code created a new Delta object with the result of the `otherIter.next(opLength)` call as the inserted text.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const len = otherIter.peekLength();
+new Delta({ ops: [ { insert: otherIter.next(len) } ] });
+```
+This would result in different behavior because it would create a new Delta object with the result of the `otherIter.next(len)` call as the inserted text, whereas the original code created a new Delta object with the result of the `otherIter.next(opLength)` call as the inserted text.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const ops = otherIter.

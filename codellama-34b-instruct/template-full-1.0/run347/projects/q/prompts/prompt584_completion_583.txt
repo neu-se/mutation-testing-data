@@ -1,0 +1,20 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return reject(exception);
+```
+This would result in different behavior because it would return a rejected promise instead of a fulfilled promise, which could cause the continuation to run the errback instead of the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value);
+```
+This would result in different behavior because it would return a promise for the value returned by the generator's next function, which may be different from the promise returned by the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value).then(callback, errback);
+```
+This would result in different behavior because it would return a promise for the value returned by the generator's next function, and then the callback or errback would be called depending on whether the promise is fulfilled or rejected, which could cause the continuation to run the callback or errback instead of the original callback.
+
+DONE.

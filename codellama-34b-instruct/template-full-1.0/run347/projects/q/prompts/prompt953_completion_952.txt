@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(bound).fapply(nodeArgs).fail
+```
+This would result in different behavior because `Q.resolve()` is a static method that returns a promise that is already fulfilled with the given value. In this case, the value is the bound function, which is then passed to `fapply` to invoke it. The original code uses `Q(bound)` to create a promise for the bound function and then invoke it, which is a more common and idiomatic way of doing it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(nodeArgs).fail
+```
+This would result in different behavior because the `fail` method is called on the promise returned by `Q(bound)`, which is different from the original code where it is called on the promise returned by `fapply`. The `fail` method is used to catch and handle errors, so this change would affect how errors are handled in the resulting promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

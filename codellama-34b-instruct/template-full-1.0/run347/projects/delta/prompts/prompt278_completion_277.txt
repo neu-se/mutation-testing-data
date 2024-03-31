@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const thisOp = iter.peek(true);
+```
+This would result in different behavior because it would peek at the next operation in the delta, but only if it is an insert operation. If the next operation is not an insert, the peek would return `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const thisOp = iter.peek(false);
+```
+This would result in different behavior because it would peek at the next operation in the delta, but only if it is not an insert operation. If the next operation is an insert, the peek would return `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const thisOp = iter.peek(iter.hasNext());
+```
+This would result in different behavior because it would peek at the next operation in the delta, but only if there is a next operation. If there is no next operation, the peek would return `null`.
+
+DONE.

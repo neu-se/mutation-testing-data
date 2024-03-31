@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb ? abort : null
+```
+This would result in different behavior because if the `abortCb` callback is provided, it will be called with `abort` as an argument, otherwise it will be called with `null`. In the original code, the `abortCb` callback is always called with `abort`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb ? abort : read
+```
+This would result in different behavior because if the `abortCb` callback is provided, it will be called with `abort` as an argument, otherwise it will be called with the result of `read(abort, cb)`. In the original code, the `abortCb` callback is always called with `abort`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb ? abort : map.source(abort, cb)
+```
+This would result in different behavior because if the `abortCb` callback is provided

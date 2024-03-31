@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, cb)
+```
+This would result in different behavior because the original code was passing `abort` as the first argument to `read`, while this code fragment would pass `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  cb(err, null)
+})
+```
+This would result in different behavior because the original code was passing `null` as the second argument to `read`, while this code fragment would pass a function that would call `cb` with `err` as the first argument and `null` as the second argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) {
+  if (err) {
+    return cb(err)
+  }
+  cb(null, data)
+})
+```
+This would result in different behavior because the original code was passing `data` as the second argument to `cb`, while this code fragment would pass a function that

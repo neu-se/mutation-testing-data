@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator negates the truthiness of `abort`, causing the `if` statement to evaluate to `true` even when `abort` is set to `true`. This would cause the stream to continue draining even when `abort` has been requested.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+++abort
+```
+This would result in different behavior because the `++` operator increments the value of `abort` by 1, causing the `if` statement to evaluate to `true` even when `abort` is set to `false`. This would cause the stream to continue draining even when `abort` has not been requested.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+1
+```
+This would result in different behavior because the constant `1` is always truthy, causing the `if` statement to evaluate to `true` regardless of the value of `abort`. This would cause

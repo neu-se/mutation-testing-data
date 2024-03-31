@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `process.emit()` function would not be called, resulting in any rejections not being tracked.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"error"
+```
+This would result in different behavior because the `process.emit()` function would be called with the string "error" instead of the reason for the rejection, which could cause issues if the consumer of the library is expecting a specific format for the rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.fulfill("error")
+```
+This would result in different behavior because the `process.emit()` function would be called with the result of `Q.fulfill("error")` instead of the reason for the rejection, which could cause issues if the consumer of the library is expecting a specific format for the rejection reason.
+
+DONE.

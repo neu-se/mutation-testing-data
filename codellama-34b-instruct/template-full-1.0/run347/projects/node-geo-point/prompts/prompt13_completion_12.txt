@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!Array.isArray(point.coordinates) || point.coordinates.length <= 2
+```
+This would result in different behavior because it would allow for arrays of length 2 or less, rather than requiring arrays of length exactly 2.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!Array.isArray(point.coordinates) || point.coordinates.length !== 2 || point.coordinates[0] > 180 || point.coordinates[1] > 90
+```
+This would result in different behavior because it would allow for arrays of length 2 or less, and would also allow for coordinate values outside of the normal ranges of -180 to 180 for longitude and -90 to 90 for latitude.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!Array.isArray(point.coordinates) || point.coordinates.length !== 2 || point.coordinates[0] > 360 ||

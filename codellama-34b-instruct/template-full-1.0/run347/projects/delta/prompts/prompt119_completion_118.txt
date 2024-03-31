@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(<PLACEHOLDER>) => {
+  return {
+    retain: max(0, elem.retain - 1),
+  };
+}
+```
+This would result in different behavior because it would decrease the `retain` value of the current op by 1, regardless of the previous op's attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(<PLACEHOLDER>) => {
+  return {
+    retain: max(0, elem.retain),
+  };
+}
+```
+This would result in different behavior because it would retain the `retain` value of the current op, regardless of the previous op's attributes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(<PLACEHOLDER>) => {
+  return {
+    retain: max(0, elem.retain + 1),
+  };
+}
+```
+This would result in different behavior because it would increase the `retain` value of

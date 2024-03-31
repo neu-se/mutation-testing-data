@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions && {}
+```
+This would result in different behavior because `archiverOptions && {}` is always truthy, while `archiverOptions || {}` is falsy when `archiverOptions` is an empty object. This could cause the `zipArchive.finalize()` method to be called with an unexpected argument, leading to unexpected results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions ? {} : null
+```
+This would result in different behavior because `archiverOptions ? {} : null` is always falsy, while `archiverOptions || {}` is truthy when `archiverOptions` is an empty object. This could cause the `zipArchive.finalize()` method to be called with an unexpected argument, leading to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions || archiver.getDefaultOptions()
+```
+This would result in different behavior because `archiver.getDefaultOptions()`

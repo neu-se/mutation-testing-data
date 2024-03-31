@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(absoluteUrl)
+```
+This would result in different behavior because `.parse()` will return an object with the url parts, unlike `.format()` that returns a string. The remaining code expects a string, and would throw a TypeError.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.format(absoluteUrl) + '#id'
+```
+This would result in different behavior because an additional `#id` would be appended to the string, which the code doesn't handle properly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.resolve(parsedBaseUrl, parsedUrl)
+```
+This would result in different behavior because `.resolve()` returns a URL object, not a string, which would throw an error.
+
+DONE.

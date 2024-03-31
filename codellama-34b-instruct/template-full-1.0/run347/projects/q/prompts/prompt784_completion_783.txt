@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (error) {
+    throw new Error("Testing 123");
+}
+```
+This would result in different behavior because the error message would be different.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (error) {
+    error.message = "Testing 123";
+    throw error;
+}
+```
+This would result in different behavior because the error message would be different, and the error would be thrown with a modified message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (error) {
+    throw new Error("Testing 123", { cause: error });
+}
+```
+This would result in different behavior because the error message would be different, and the original error would be included as the cause of the new error.
+
+DONE.

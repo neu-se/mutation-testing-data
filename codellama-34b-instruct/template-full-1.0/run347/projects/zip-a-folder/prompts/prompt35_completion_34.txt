@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.unpipe(output);
+```
+This would result in different behavior because `unpipe` would detach the archive stream from the output stream, leading to an error in the promise chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, { end: false });
+```
+This would result in different behavior because `end` is set to `false`, meaning that the output stream would not be closed after the archive is finalized, leading to an error in the `close` event handler.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, { read: false });
+```
+This would result in different behavior because `read` is set to `false`, meaning that the output stream would not be readable, leading to an error in the `close` event handler.
+
+DONE.

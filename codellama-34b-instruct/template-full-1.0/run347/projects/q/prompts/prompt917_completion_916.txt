@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.unshift(deferred.makeNodeResolver());
+```
+This would result in different behavior because `unshift` will add the element at the beginning of the array, whereas `push` will add it at the end. This change would cause the callback passed to the function to be executed before the promise resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply([deferred.makeNodeResolver()]);
+```
+This would result in different behavior because `fapply` expects the callback to be a promise, while `makeNodeResolver()` returns a function. This change would cause the callback to be executed immediately, instead of waiting for the promise to be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver()());
+```
+This would result in different behavior because `makeNodeResolver()` returns a function, while `push` expects an element to add to the array. This change would cause the callback to be executed immediately and

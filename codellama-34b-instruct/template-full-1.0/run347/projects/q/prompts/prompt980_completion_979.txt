@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because `deferred.reject` is a function that when invoked will reject the promise with the given reason. In contrast, `deferred.makeNodeResolver()` is a function that creates a new resolver function that can be used to resolve the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(null)
+```
+This would result in different behavior because `deferred.makeNodeResolver(null)` is a function that creates a new resolver function that will resolve the promise with the value `null`. In contrast, `deferred.makeNodeResolver()` creates a new resolver function that will resolve the promise with the value returned by the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => deferred.reject(new Error('test'))
+```
+This would result in different behavior because the new arrow function will reject the promise with the error 'test', while `deferred.makeNode

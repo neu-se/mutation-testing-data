@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+line.push(iter.next())
+```
+This would result in different behavior because it would push an op onto the line, even if the peeked op is not an insert.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.next(1)
+```
+This would result in different behavior because it would consume an op from the iterator, even if it is not an insert.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.peekLength() > 1 ? iter.next(1) : iter.next()
+```
+This would result in different behavior because it would consume an op from the iterator only if the peeked op has a length greater than 1, otherwise it would consume the entire peeked op.
+
+DONE.

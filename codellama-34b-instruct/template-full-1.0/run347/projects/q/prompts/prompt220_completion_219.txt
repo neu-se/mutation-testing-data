@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.env.Q_DEBUG = true;
+```
+This would result in different behavior because `process.env.Q_DEBUG` is always true, even if it was not previously defined. This would cause the code to behave differently because it would always enable long stack traces, even if the `Q.longStackSupport` variable is set to false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.env.Q_DEBUG = false;
+```
+This would result in different behavior because `process.env.Q_DEBUG` is always false, even if it was not previously defined. This would cause the code to behave differently because it would always disable long stack traces, even if the `Q.longStackSupport` variable is set to true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.env.Q_DEBUG = !process.env.Q_DEBUG;
+```
+This would result in different behavior because it would invert the value of `process.env.Q_DEBUG`, causing

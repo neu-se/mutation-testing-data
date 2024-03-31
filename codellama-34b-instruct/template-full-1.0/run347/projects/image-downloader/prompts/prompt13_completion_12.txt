@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+decodeURI
+```
+This would result in different behavior because `decodeURI` does not decode all the special characters, unlike `decodeURIComponent`, which decodes all special characters. This would lead to incorrect file name being created in the `options.dest` path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+encodeURIComponent
+```
+This would result in different behavior because `encodeURIComponent` would encode the special characters in the file name, which would lead to a different file name being created in the `options.dest` path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+let decodedBasename = decodeURIComponent(basename);
+```
+This would result in different behavior because it would use the `decodeURIComponent` function on the `basename` variable twice, which would lead to the file name being created in the `options.dest` path to be incorrect.
+
+DONE.

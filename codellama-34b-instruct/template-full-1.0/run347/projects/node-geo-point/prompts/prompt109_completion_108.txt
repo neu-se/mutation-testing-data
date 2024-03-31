@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+<180 * Math.pow(2, zoom)
+```
+This would result in different behavior because it would cause the longitude value to be wrapped around the 180th meridian, which is not the desired behavior for a geographic coordinate system.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<Math.pow(2, zoom) * 360
+```
+This would result in different behavior because it would cause the longitude value to be multiplied by a larger factor than necessary, resulting in an incorrect tile position.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<Math.pow(2, zoom - 1) * 180
+```
+This would result in different behavior because it would cause the longitude value to be multiplied by a smaller factor than necessary, resulting in an incorrect tile position.
+
+DONE.

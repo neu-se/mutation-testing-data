@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"unhandledRejection"
+```
+This would result in different behavior because the event name is incorrect and there is no event listener attached to it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"process.emit('unhandledRejection', reason, promise)"
+```
+This would result in different behavior because it would directly call the `emit` method and `reason` and `promise` would be passed as arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"process.on('unhandledRejection', (reason, promise) => { console.log(reason, promise) })"
+```
+This would result in different behavior because it would create a listener for the `unhandledRejection` event and log the `reason` and `promise` every time the event is emitted.
+
+DONE.

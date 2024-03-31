@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).reject
+```
+This would result in different behavior because `reject` instead of `fail` is called on the promise. `reject` will immediately reject the promise with the argument it receives without attempting to recover, while `fail` will attempt to handle and recover from the error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).catch(function () {})
+```
+This would result in different behavior because the error is handled and recovered from instead of being rejected immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).then(function () {}, function () {})
+```
+This would result in different behavior because the error is handled and recovered from instead of being rejected immediately. It also adds an additional `then` call, which could potentially cause additional behavioral changes.
+
+DONE.

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER in the original code fragment:
+```
+return delta.concact(other);
+```
+can be replaced with:
+```
+return delta.concat(new Delta({ ops: [ { retain: 1 } ] }));
+```
+This would result in different behavior because the original fragment would combine `delta` and `other` and return the resulting delta, while the modified fragment would combine `delta` and an empty delta with a retain of 1, and then return the resulting delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return delta.delete(other);
+```
+This would result in different behavior because the original fragment would combine `delta` and `other` and return the resulting delta, while the modified fragment would delete the contents of `other` from `delta` and return the resulting delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return delta.retain(other);
+```
+This would result in different behavior because the original fragment would combine `delta` and `other` and return the resulting delta,

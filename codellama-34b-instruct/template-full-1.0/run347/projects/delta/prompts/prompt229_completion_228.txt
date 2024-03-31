@@ -1,0 +1,28 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+...
+      case diff.DELETE:
+        opLength = Math.min(otherIter.peekLength() * 2, length, thisIter.peekLength());
+...
+```
+This would result in different behavior because the comparison operator used for the Math.min() function has changed from '<=' to '<'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...
+      case diff.DELETE:
+        if (length < thisIter.peekLength()) {
+          opLength = Math.min(thisIter.peekLength(), length);
+        } else {
+          opLength = otherIter.peekLength();
+        }
+...
+```
+This would result in different behavior because a conditional statement has been introduced to determine the size of the deleted text, which would change the outcome of the calculation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+...
+      case diff.DELETE:
+        opLength = length + otherIter.peekLength();

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (!embedBaseUrl) {
+  embedBaseUrl = URL.parse(URL.resolve(parsedBaseUrl, parsedUrl));
+}
+```
+This would result in different behavior because the condition `!embedBaseUrl` is always true, so the `URL.parse` and `URL.resolve` methods will always be called, regardless of whether `embedBaseUrl` is set or not. In the original code, `embedBaseUrl` is set to the result of `URL.parse(baseUrlStr)` if `baseUrlStr` is non-empty, so the condition `!embedBaseUrl` is only true if `baseUrlStr` is empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (embedBaseUrl && URL.parse(embedBaseUrl) !== parsedUrl) {
+  ret.baseurl = URL.format(parse(embedBaseUrl));
+} else {
+  ret.baseurl = null;
+}
+```
+This would result in different behavior because the condition `URL.parse(embed

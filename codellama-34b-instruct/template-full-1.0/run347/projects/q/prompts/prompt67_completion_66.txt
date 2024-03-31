@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+flush();
+```
+This would result in different behavior because `flush` would be called immediately after `setImmediate`, rather than after the current task has completed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+runSingle(flush);
+```
+This would result in different behavior because `flush` would be called as a task, rather than immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+laterQueue.push(flush);
+```
+This would result in different behavior because `flush` would be added to the `laterQueue`, rather than being called immediately.
+
+DONE.

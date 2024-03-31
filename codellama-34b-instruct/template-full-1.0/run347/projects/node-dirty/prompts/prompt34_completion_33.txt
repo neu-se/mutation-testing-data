@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because `rm` expects a callback function, passing `false` would cause the callback to be ignored, and the data would remain in the database.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => {}
+```
+This would result in different behavior because `rm` expects a callback function, passing an empty function would cause the callback to be called immediately, without deleting the data from the database.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(key, cb) => Object.getOwnPropertyNames(this._data[key]).indexOf(cb) === -1 ? cb : undefined
+```
+This would result in different behavior because `rm` expects a callback function, passing a function that checks if the callback is already present in the object's properties would cause the callback to be called only once, even if it is called multiple times.
+
+DONE.

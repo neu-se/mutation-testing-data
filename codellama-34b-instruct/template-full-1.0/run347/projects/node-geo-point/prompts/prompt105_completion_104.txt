@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 179) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because 179 is closer to the antipode of the coordinate, which would cause a different tile to be selected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 181) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because 181 is farther from the antipode of the coordinate, which would cause a different tile to be selected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 180.0001) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because adding a small decimal value to the coordinate would cause a different tile to be selected due to the precision of the calculation.
+
+DONE.

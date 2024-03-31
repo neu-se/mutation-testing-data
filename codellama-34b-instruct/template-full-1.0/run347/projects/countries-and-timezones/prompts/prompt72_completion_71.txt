@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+buildTimezone.bind(null, data, name)
+```
+This would result in different behavior because `bind` returns a new function with a bound context and arguments, but the original function is not called. In this case, `buildTimezone` is not called and would return undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => buildTimezone(data, name)
+```
+This would result in different behavior because `() =>` creates a new function that returns the result of calling `buildTimezone` with `data` and `name`, but the original function is not called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var timezone = buildTimezone(data, name);
+return timezone ? { ...timezone } : null;
+```
+This would result in different behavior because it would call `buildTimezone` with `data` and `name`, and then return a new object based on the result, but the original function is not called.
+
+DONE.

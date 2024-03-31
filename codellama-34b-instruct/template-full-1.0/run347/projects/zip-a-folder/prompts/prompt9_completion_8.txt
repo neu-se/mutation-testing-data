@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isGlob(src)
+```
+This would result in different behavior because it would invert the conditional, allowing the `src` to be treated as a glob even if it's not. It would cause the `directory(src, false)` method to be called instead of `glob(src)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src && isGlob(src)
+```
+This would result in different behavior because it would add an additional check for the truthiness of `src` before checking if it's a glob. If `src` is falsy, the `isGlob(src)` check would not be performed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Number.isInteger(src)
+```
+This would result in different behavior because it would check if `src` is an integer, instead of checking if it's a glob. It would cause the `directory(src, false)` method to be called instead of `glob(src)`.
+
+DONE.

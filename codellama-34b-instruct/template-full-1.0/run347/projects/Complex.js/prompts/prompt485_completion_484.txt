@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- typeof exports === 'object'
++ typeof define === 'function'
+```
+This would result in different behavior because `define` is a function that is typically used to define modules in an AMD loader, while `exports` is an object that is used to export values in CommonJS. Replacing `typeof exports === 'object'` with `typeof define === 'function'` would cause the code to erroneously report that the code is running in an AMD loader, when it is actually running in CommonJS.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- typeof exports === 'object'
++ typeof module === 'object'
+```
+This would result in different behavior because `module` is an object that is used to export values in CommonJS, while `exports` is an alias for `module.exports`. Replacing `typeof exports === 'object'` with `typeof module === 'object'` would cause the code to correctly check if the code is running in CommonJS, but it would not correctly check if the code is running in an

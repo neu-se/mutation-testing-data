@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(false);
+```
+This would result in different behavior because the original code expects a promise to be passed to `Q.defer()`, but `false` is not a promise. In this case, the `put` method will always resolve the promise returned by `ends.promise` immediately, since `false` is a synchronous value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(null);
+```
+This would result in different behavior because the original code expects a promise to be passed to `Q.defer()`, but `null` is not a promise. In this case, the `put` method will always resolve the promise returned by `ends.promise` immediately, since `null` is a synchronous value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(Q.defer().promise);
+```
+This would result in different behavior because the original code expects a promise to

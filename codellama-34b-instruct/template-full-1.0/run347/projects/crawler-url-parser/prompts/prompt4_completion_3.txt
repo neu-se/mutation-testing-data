@@ -1,0 +1,22 @@
+  DONE.
+
+Option 1:
+```
+const BLACKLISTED_PROTOCOLS = ['javascript:', 'mailto:', 'ftp'];
+const baseUrl = parse(sourceUrl);
+const url = new URL(currentUrlStr, baseUrl);
+const isBlacklisted = BLACKLISTED_PROTOCOLS.includes(url.protocol);
+```
+This would result in different behavior because the blacklisted protocols are hardcoded in the first line, and the use of `new URL()` constructor will throw an error if the protocol is not supported.
+
+Option 2:
+```
+const baseUrl = parse(sourceUrl);
+const url = new URL(currentUrlStr, baseUrl);
+const isBlacklisted = url.protocol === 'javascript:' || url.protocol === 'mailto:' || url.protocol === 'ftp';
+```
+This would result in different behavior because the blacklisted protocols are checked using a different syntax, and the use of `new URL()` constructor will throw an error if the protocol is not supported.
+
+Option 3:
+```
+const baseUrl = parse(

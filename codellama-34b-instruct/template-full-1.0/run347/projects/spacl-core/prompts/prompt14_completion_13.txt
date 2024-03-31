@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/) == null
+```
+This would result in different behavior because the `!==` operator checks for strict equality, while the `==` operator checks for abstract equality. If the patter matches, the result would be `true`, which is not strictly equal to `null`. However, `true` is abstractly equal to `null` in JavaScript.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/) !== undefined
+```
+This would result in different behavior because the `!==` operator checks for strict equality, while the `!=` operator checks for abstract equality. If the pattern does not match, the result would be `undefined`, which is not strictly equal to `null`. However, `undefined` is abstractly equal to `null` in JavaScript.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/)?.length > 0
+```
+This would result in different behavior because the `?.`

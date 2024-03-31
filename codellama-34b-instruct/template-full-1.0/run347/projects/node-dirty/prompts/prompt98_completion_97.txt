@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+      this.emit('invalid_key_error', new Error(`Could not load corrupted row: ${rowStr}`));
+```
+This would result in different behavior because the `emit` method is being called with a different event name, which would not be handled by any of the existing event listeners.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+      this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`), 'invalid_key');
+```
+This would result in different behavior because the `emit` method is being called with an extra argument, which would not be expected by any of the existing event listeners.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+      this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`), {code: 'invalid_key'});
+```
+This would result in different behavior because the `emit` method is being called with an object argument, which would not be expected by any of the

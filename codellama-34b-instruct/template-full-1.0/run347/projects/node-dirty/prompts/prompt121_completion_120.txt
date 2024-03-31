@@ -1,0 +1,24 @@
+  Sure, here are three options for replacing the `PLACEHOLDER` in the `Dirty` class code with different logic that would result in different behavior:
+
+Option 1: The `PLACEHOLDER` can be replaced with:
+```
+this._writeStream.close()
+```
+This would result in the write stream being closed immediately after the first write operation, instead of waiting for all the write operations to complete.
+
+Option 2: The `PLACEHOLDER` can be replaced with:
+```
+this._readStream.pipe(this._writeStream)
+```
+This would result in the read stream being piped to the write stream, instead of writing the data to the file directly.
+
+Option 3: The `PLACEHOLDER` can be replaced with:
+```
+this._writeStream.write(data, () => {
+    this._inFlightWrites--;
+    if (this._inFlightWrites <= 0) {
+        this.emit('drain');
+    }
+});
+```
+This would result in the write stream being closed after all the write operations

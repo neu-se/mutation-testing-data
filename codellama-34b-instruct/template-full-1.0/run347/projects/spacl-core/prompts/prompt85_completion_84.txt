@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(null, false)
+```
+This would result in different behavior because it would create a deep copy of the `rules` array without actually cloning the `Rule` objects themselves, which could cause unexpected behavior in the `query` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(null, true)
+```
+This would result in different behavior because it would create a deep copy of the `rules` array and also clone the `Rule` objects themselves, which could cause unexpected behavior in the `matches` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(null, rule.name)
+```
+This would result in different behavior because it would create a deep copy of the `rules` array and also clone the `Rule` objects themselves, using the `name` property of the `Rule` object as the name for the cloned `Rule`. This could cause unexpected behavior in the `query`

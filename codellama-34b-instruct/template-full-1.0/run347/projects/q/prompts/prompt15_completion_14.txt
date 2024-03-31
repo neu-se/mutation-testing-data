@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+    domain.exit();
+}
+setImmediate(flush);
+```
+This would result in different behavior because `setImmediate()` will schedule the `flush()` function to be executed at the end of the current turn of the event loop, whereas `setTimeout(flush, 0)` will schedule it to be executed at the end of the next turn.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+    domain.exit();
+}
+process.nextTick(flush);
+```
+This would result in different behavior because `process.nextTick()` will schedule the `flush()` function to be executed in the next tick of the event loop, whereas `setImmediate()` will schedule it to be executed in the next turn of the event loop.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+    domain.exit();
+}
+setTimeout(flush, 1);
+```
+This would result in different behavior

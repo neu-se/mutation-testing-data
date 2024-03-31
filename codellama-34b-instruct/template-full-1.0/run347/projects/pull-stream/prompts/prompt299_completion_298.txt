@@ -1,0 +1,26 @@
+  Option 1:
+===========================
+
+The PLACEHOLDER can be replaced with:
+```
+cb(true)
+```
+
+This would result in different behavior because it would unconditionally call the callback with a value of `true`, regardless of whether the data passed the test or not. In the original code, the callback will only be called with `true` if `last` is `true` and `ended` is `false`, otherwise it will be called with `null`.
+
+Option 2:
+=============
+
+The PLACEHOLDER can be replaced with:
+```
+cb(null, data)
+```
+
+This would result in different behavior because it would unconditionally call the callback with a value of `null` and the data, regardless of whether the data passed the test or not. In the original code, the callback will only be called with `null` if `last` is `true` and `ended` is `false`, otherwise it will be called with the data.
+
+Option 3:
+=============
+
+The PLACEHOLDER can be replaced with:
+```
+cb(if(ended

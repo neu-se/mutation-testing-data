@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setTimeout(function () {
+        if (!error || "string" === typeof error) {
+            error = new Error(error || "Timed out after " + ms + " ms");
+            error.code = "ETIMEDOUT";
+        }
+        throw error;
+    }, ms);
+```
+This would result in different behavior because `throw` will cause the `Q.timeout` method to reject the promise, whereas the original code would simply call the `reject` method on the deferred object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (typeof process === "object" && process && process.domain) {
+        onUnhandledError = process.domain.bind(process.domain.error);
+    }
+```
+This would result in different behavior because `process.domain.error` is a different function than `process.domain.bind()`. The original code would bind the `process.domain.bind()` function to the `process.domain` object, which would allow the `onUnhand

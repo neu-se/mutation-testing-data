@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return deferred.reject
+```
+This would result in different behavior because the promise returned by `Q.nsend` would be rejected instead of resolved, causing any chained methods to be skipped.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return undefined
+```
+This would result in different behavior because the promise returned by `Q.nsend` would be resolved with `undefined` instead of the expected value, causing any chained methods to be called with the wrong argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+throw new Error()
+```
+This would result in different behavior because the promise returned by `Q.nsend` would be rejected with the thrown error, causing any chained methods to be skipped.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because by resolving the promise with an error, it would fail any subsequent chained `.then` callbacks that were expecting a successful resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify("oh no")
+```
+This would result in different behavior because it would cause any subsequent chained `.progress` callbacks to be invoked with the string "oh no", which could cause them to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(function() { deferred.resolve(value); }, 10000)
+```
+This would result in different behavior because it would introduce a 10-second delay before the promise is resolved, which could cause any subsequent chained `.then` callbacks to be invoked much later than expected.
+
+DONE.

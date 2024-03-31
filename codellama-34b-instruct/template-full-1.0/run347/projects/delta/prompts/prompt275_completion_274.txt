@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+let op = otherIter.peek();
+if (op && op.delete) {
+  delta.push(otherIter.next());
+} else {
+  delta.retain(Op.length(thisIter.next()));
+}
+```
+This would result in different behavior because the `otherIter.peek()` check is not present in the original code, which would prevent the `delta.push()` operation from occurring if the next op is a delete.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+let op = otherIter.peek();
+if (op && op.delete) {
+  delta.retain(Op.length(thisIter.next()));
+} else {
+  delta.push(otherIter.next());
+}
+```
+This would result in different behavior because the order of operations is reversed, with the `delta.push()` operation occurring before the `delta.retain()` operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const

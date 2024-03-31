@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(!!object).dispatch
+```
+This would result in different behavior because the extra `!` operator would convert the object to a boolean value, which would cause the dispatch method to fail if the object is not already a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispathc.call(null, object)
+```
+This would result in different behavior because the `call` method is being used to explicitly set the value of `this` inside the `dispatch` method to `null`, which would cause the method to fail if it relies on the `this` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object)["dispatch"]();
+```
+This would result in different behavior because the indexing operator is being used instead of the dot notation, which could cause confusion if the `dispatch` method is overwritten or modified.
+
+DONE.

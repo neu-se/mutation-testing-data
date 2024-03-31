@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+requestPortTick()
+
+This would result in different behavior because requestPortTick() calls the requestPortTick function, which in turn posts a message to the channel's port1. On the other hand, requestPortTick only posts a message to the channel's port2.
+
+Option 2: The PLACEHOLDER can be replaced with:
+channel.port2.postMessage()
+
+This would result in different behavior because it would post a message to the channel's port2, but requestPortTick posts a message to both port1 and port2.
+
+Option 3: The PLACEHOLDER can be replaced with:
+setImmediate(requestPortTick)
+
+This would result in different behavior because it uses setImmediate to call requestPortTick, which is different from requestPortTick() and channel.port2.postMessage().
+
+DONE.

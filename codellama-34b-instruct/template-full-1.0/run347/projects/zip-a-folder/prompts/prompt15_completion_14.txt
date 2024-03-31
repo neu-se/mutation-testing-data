@@ -1,0 +1,21 @@
+  DONE.
+
+I have inserted bugs into the code provided. 
+
+Option 1:  I replaced the PLACEHOLDER with:
+```
+"", fs.constants.R_OK
+```
+This would result in an error because the first argument of `access()` is expected to be a `path` but is instead the empty string. This would be a different error and failure than the intended behavior as it would cause the function to expect a path instead of receiving it.
+
+Option 2: I replaced the PLACEHOLDER with:
+```
+src, fs.constants.W_OK | fs.constants.X_OK
+```
+This would result in different behavior because the `X_OK` flag adds the `execute` permission, which may not be intended for the file being read. This would cause the function to check for the execute permission and potentially allow and deny access based on whether the file can be executed, which is not intended.
+
+Option 3: I replaced the PLACEHOLDER with:
+```
+src, fs.constants.F_OK
+```
+This would result in different behavior because the

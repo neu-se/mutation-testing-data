@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve
+```
+This would result in different behavior because the `resolve` method returns a resolved promise with the given value, whereas the `reject` method returns a rejected promise with the given reason. In this case, if the `dest` property is not provided, the `request` function would still be called with an invalid `dest` value, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error
+```
+This would result in different behavior because `throw` will raise an error, whereas `return` will return a rejected promise. In this case, if the `dest` property is not provided, the `request` function would not be called at all, and the error would propagate up the call stack.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return undefined
+```
+This would result in different behavior because `return` with a value of `undefined` would not return a rejected promise, but would instead return `undefined`. In this case, if

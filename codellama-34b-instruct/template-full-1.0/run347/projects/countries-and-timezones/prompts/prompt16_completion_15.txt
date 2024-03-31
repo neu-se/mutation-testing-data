@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- result[country].current.push(id);
++ result[country].current = result[country].current.concat(id);
+```
+This would result in different behavior because `concat` returns a new array, whereas `push` mutates the existing array. In this case, the `result[country]` object is mutated, which could cause issues if the object is being used in other parts of the codebase.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- result[country].current.push(id);
++ result[country].all.push(id);
+```
+This would result in different behavior because `result[country].all` is a nested object property, whereas `result[country].current` is a direct property of the `result` object. This could cause issues if the `all` property is being used in other parts of the codebase, as it would be overwritten by the new value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```diff
+-

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(x);
+```
+This would result in different behavior because `deferred.resolve` would be called even if `Q(bound).apply(nodeArgs).fail(deferred.reject)` throws an error, which could cause the promise to be resolved with an unexpected value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error("This is a bug");
+```
+This would result in different behavior because it would throw an error and reject the promise, even if the function was called with a valid argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(function () { deferred.reject(new Error("This is a bug")); }, 0);
+```
+This would result in different behavior because it would reject the promise with an error after a timeout of 0 milliseconds, which could cause the promise to be rejected out of order.
+
+DONE.

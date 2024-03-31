@@ -1,0 +1,20 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/(index\.)[a-z]$/, '$1'
+```
+This would result in different behavior because the original code fragment uses the `$&` placeholder to replace the entire match, while the new code fragment uses `$1` to replace only the first capturing group.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/(index\.)[a-z]/, '$& $&'
+```
+This would result in different behavior because the original code fragment uses the `$&` placeholder to replace the entire match, while the new code fragment uses `$&` to replace the entire match concatenated with a space and another copy of the match.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/(index\.)[a-z]/, 'ø/'
+```
+This would result in different behavior because the original code fragment uses the `$&` placeholder to replace the entire match, while the new code fragment uses the literal string `ø/` to replace the match.
+
+DONE.

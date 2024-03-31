@@ -1,0 +1,18 @@
+  I have completed mutation testing the given code, and have found three different placeholders to replace:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+	let linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/i, "/");
+```
+This would result in different behavior because the original code only replaces path segments that start with "index." but the new code replaces any path segment that ends with ".pdf" in a case-insensitive manner.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+	return " external ";
+```
+This would result in different behavior because the original code returns different values for internal and external URLs, while the new code always returns "external'. This could cause issues if the calling method is expecting specific return values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+	let linkurl_parts = linkurl_path.split("/").filter(function (elem, index, array) {
+		return elem.length > 0 && elem !== "index

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(nodeArgs.push(deferred.makeNodeResolver()));
+```
+This would result in different behavior because `deferred.resolve` would be called with the return value of `nodeArgs.push`, which is the new length of the `nodeArgs` array, instead of the original code where `nodeArgs.push` is called separately from `deferred.resolve`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(nodeArgs.push(deferred.makeNodeResolver()));
+```
+This would result in different behavior because `deferred.reject` would be called with the return value of `nodeArgs.push`, which is the new length of the `nodeArgs` array, instead of the original code where `nodeArgs.push` is called separately from `deferred.reject`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver()) + 1;
+```
+This would result in different

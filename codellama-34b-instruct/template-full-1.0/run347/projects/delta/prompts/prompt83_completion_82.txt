@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.is(newOp.attributes, lastOp.attributes)
+```
+This would result in different behavior because `Object.is()` is a strict comparison method that checks for both value and type equality, whereas `isEqual()` only checks for value equality. This could cause the algorithm to produce different results if the attributes have different types but the same value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+JSON.stringify(newOp.attributes) === JSON.stringify(lastOp.attributes)
+```
+This would result in different behavior because `JSON.stringify()` converts the attributes to a string representation before comparing them, whereas `isEqual()` compares the attributes as objects. This could cause the algorithm to produce different results if the attributes have different internal structures but the same string representation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes === lastOp.attributes
+```
+This would result in different behavior because it would replace the `isEqual()` comparison with a direct reference comparison. This would cause the

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.push
+```
+This would result in different behavior because it would not remove the promise from the unhandledRejections array even if it has been handled. It will keep pushing new unhandled promises to the array, which can cause memory leaks and performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.splice(0, 1)
+```
+This would result in different behavior because it would remove the first promise from the unhandledRejections array even if it has not been handled. It may cause unintended consequences, such as removing a promise that was previously handled, or not removing a promise that was never handled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.pop()
+```
+This would result in different behavior because it would remove the last promise from the unhandledRejections array even if it has not been handled. It may cause unintended consequences, such as removing a promise that was previously

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setImmediate(process.nextTick);
+```
+This would result in different behavior because `process.nextTick` would be called immediately, rather than in the next tick of the Node.js event loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setImmediate(function () {
+    throw new Error("sync");
+});
+```
+This would result in different behavior because an error would be thrown synchronously, rather than asynchronously.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(flush.bind(null, false));
+```
+This would result in different behavior because `flush` would be called with the second argument set to `false`, rather than the default of `true`.
+
+DONE.

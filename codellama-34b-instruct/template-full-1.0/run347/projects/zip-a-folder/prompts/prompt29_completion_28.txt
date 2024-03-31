@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.on('close', reject);
+```
+This would result in different behavior because the `resolve` function would not be called when the output stream is closed, causing the returned promise to never resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('close', () => {});
+```
+This would result in different behavior because the `resolve` function would not be called when the output stream is closed, causing the returned promise to never resolve.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('close', () => resolve('success'));
+```
+This would result in different behavior because the `resolve` function would be called with the string `'success'` when the output stream is closed, causing the returned promise to resolve with the value `'success'`.
+
+DONE.

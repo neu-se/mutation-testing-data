@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error
+```
+This would result in different behavior because the original code fragment checked if the `deferred.promise` was resolved, while this new code fragment checks if the `deferred` is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (resolvedPromise) {
+    become(Q(value));
+}
+```
+This would result in different behavior because the original code fragment used `become(fulfill(value))` which would resolve the promise with the value, while this new code fragment uses `become(Q(value))` which would wrap the value in a new promise and resolve it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (error) {
+    return;
+}
+```
+This would result in different behavior because the original code fragment would reject the promise with the error, while this new code fragment would simply return and do nothing.
+
+DONE.

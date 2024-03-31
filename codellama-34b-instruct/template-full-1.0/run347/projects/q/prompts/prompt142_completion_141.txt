@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+p = p.source.promise
+```
+This would result in different behavior because `p = p.source` changes the value of `p` to the source of the promise, while `p = p.source.promise` changes the value of `p` to the promise itself. This could potentially cause the loop to exit prematurely if the `source` property of the promise is not a promise itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+p = p.then
+```
+This would result in different behavior because `p = p.then` changes the value of `p` to the `then` function of the promise, while `p = p.source.promise` changes the value of `p` to the promise itself. This could potentially cause the loop to never exit if the `then` function of the promise is not a promise itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+p = p.source && p.source.promise
+```
+This would

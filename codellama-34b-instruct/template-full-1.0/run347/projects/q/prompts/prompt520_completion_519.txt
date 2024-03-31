@@ -1,0 +1,20 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolveUnsafe()
+```
+This would result in different behavior because the `resolveUnsafe` function is not defined in the `Q` library and would cause a runtime error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(rejection)
+```
+This would result in different behavior because the `reject` method is called with the `rejection` argument, while the `resolve` method is called with the `deferred` promise, which would result in a mismatch between the returned promise and the actual resolved value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(rejection)
+```
+This would result in different behavior because the `notify` method is called with the `rejection` argument, which would trigger the notification flow, while the `resolve` method is called with the `deferred` promise, which would resolve the promise with the rejected value.
+
+DONE.

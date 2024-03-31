@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+dest.end()
+```
+This would result in different behavior because the `end` method on a destination file stream signals that all data has been written and closes the stream, whereas the `createWriteStream` method creates a new write stream and does not automatically close it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+let stream = createWriteStream(dest);
+stream.write(res.body);
+```
+This would result in different behavior because the `write` method on a write stream writes data to the stream, whereas the `pipe` method pipes data from a read stream to a write stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+createWriteStream().once('finish', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `once` method on a read stream will emit the `'finish'` event after the stream has been closed, whereas the `pipe` method will emit the `'close'` event after the stream has been closed and fl

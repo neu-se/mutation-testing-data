@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest)
+```
+This would result in different behavior because `path.dirname` returns the directory name of a path, whereas `path.basename` returns the file name. If the `options.dest` value does not contain a file name, the behavior of the `path.basename` call would be different from `path.dirname`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.basename(options.dest, path.extname(options.dest))
+```
+This would result in different behavior because `path.basename` returns the file name without the extension, whereas `path.extname` returns the file extension without the filename. If the `options.dest` value does not contain a file name, the behavior of the `path.basename` call would be different from `path.extname`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.basename(path.dirname(options.dest))
+```
+This would result in

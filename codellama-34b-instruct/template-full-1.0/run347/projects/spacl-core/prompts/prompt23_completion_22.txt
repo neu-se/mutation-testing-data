@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+super['symbol.match'](string)
+```
+This would result in different behavior because it would use the `Symbol.match` property from the parent class, regardless of whether the `Matcher` class has a `Symbol.match` property or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+super[Symbol['match']](string)
+```
+This would result in different behavior because it would use the `Symbol.match` property from the parent class, but with the `Symbol` object being looked up dynamically at runtime, rather than statically at compile time.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+super[Symbol.prototype.match](string)
+```
+This would result in different behavior because it would use the `match` property from the `Symbol.prototype` object, rather than from the `Matcher` class itself.
+
+DONE.

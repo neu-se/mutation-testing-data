@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(null, function (error) { throw error; })
+```
+This would result in different behavior because the `then` method will always throw an error, regardless of whether the original promise was resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function () {}, function (error) { throw error; })
+```
+This would result in different behavior because the `then` method will always throw an error, but the returned promise will be resolved with an empty value, regardless of whether the original promise was resolved or rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(null, function () { return Q(value); })
+```
+This would result in different behavior because the `then` method will always return a resolved promise with the original value, regardless of whether the original promise was resolved or rejected.
+
+DONE.

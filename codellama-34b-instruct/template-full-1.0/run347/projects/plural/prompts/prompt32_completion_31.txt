@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/(?:thesis|crisis)$/i, function(w) { return w.substr(0, w.length - 2) + 'es' }
+```
+This would result in different behavior because it adds the non-capturing group parentheses `(?:)` around `thesis|crisis`, making the `s` at the end of the regex optional.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/(?!thesis|crisis)$/i, function(w) { return w.substr(0, w.length - 2) + 'es' }
+```
+This would result in different behavior because it adds a negative lookahead `(?!)` to the regex, making the regex only match words that do not end with `thesis` or `crisis`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^thesis|crisis$/i, function(w) { return w.substr(0, w.length - 2)

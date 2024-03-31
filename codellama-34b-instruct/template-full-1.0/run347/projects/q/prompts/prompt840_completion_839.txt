@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw error
+```
+This would result in different behavior because the original code fragment only calls the `onUnhandledError` function, but with `throw error`, the function is called and the error is thrown, which would cause the rejection to be handled differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject(error)
+```
+This would result in different behavior because the original code fragment only calls the `onUnhandledError` function, but with `Q.reject(error)`, the function is called and the rejection is forwarded to the next `then` in the chain, which could potentially handle the rejection differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.lua.error(error)
+```
+This would result in different behavior because the original code fragment only calls the `onUnhandledError` function, but with `Q.lua.error(error)`, the function is called and the error is thrown as a lua error, which would cause

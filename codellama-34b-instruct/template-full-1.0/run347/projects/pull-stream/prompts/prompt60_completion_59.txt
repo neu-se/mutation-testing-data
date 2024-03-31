@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return read(abort, done)
+```
+This would result in different behavior because the original function calls `sink.abort` with two arguments, `err` and `cb`, while the replaced code only calls it with one argument, `abort`. This may cause the mutated code to behave differently in certain scenarios.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return read(abort, done || function () {})
+```
+This would result in different behavior because the original function calls `sink.abort` with two arguments, `err` and `cb`, while the replaced code only calls it with the first argument, `abort`. Additionally, the replaced code uses a ternary operator to set `cb` to a empty function if it is falsy, which may cause the mutated code to behave differently in certain scenarios.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return read(abort, cb || function () {})
+```
+This would result in different behavior

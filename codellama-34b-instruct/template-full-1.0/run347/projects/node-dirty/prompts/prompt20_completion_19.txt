@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```js
+if (this._inFlightWrites <= 0) this.emit('drain');
+```
+This would result in different behavior because it would only emit the 'drain' event when the number of in-flight writes is exactly 0, whereas the original code emits the event when the number of in-flight writes is less than or equal to 0.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```js
+this._inFlightWrites++;
+```
+This would result in different behavior because it would increment the number of in-flight writes by 1, whereas the original code does not modify the number of in-flight writes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```js
+this._writeStream.write(key + ': ' + JSON.stringify(val) + '\n');
+```
+This would result in different behavior because it would write the key-value pair to the write stream in a different format than the original code, which writes the

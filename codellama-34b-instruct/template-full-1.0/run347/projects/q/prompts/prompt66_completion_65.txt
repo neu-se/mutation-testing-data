@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && !(window.MessageChannel && typeof window.MessageChannel === "function")
+```
+This would result in different behavior because it would only evaluate to true if the browser does not have a MessageChannel function, even if it does have the MessageChannel object. This would cause the code to use the slower fallback method for browsers that support MessageChannel but do not have the function defined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && !window.MessageChannel
+```
+This would result in different behavior because it would only evaluate to true if the browser does not have the MessageChannel object defined, even if it does have the function defined. This would cause the code to use the faster method for browsers that support MessageChannel and have the function defined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof MessageChannel !== "undefined" && !window.MessageChannel()
+```
+This would result in different behavior because it would only evaluate to true if the

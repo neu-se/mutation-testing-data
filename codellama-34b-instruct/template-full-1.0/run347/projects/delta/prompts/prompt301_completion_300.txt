@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+        return typeof thisOp.insert === 'string' ? otherOp.insert : NULL_CHARACTER;
+```
+This would result in different behavior because if `otherOp.insert` is not a string, then `thisOp.insert` would still be used, but `otherOp.insert` would be used instead of `NULL_CHARACTER`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+        return otherIter.peekLength();
+```
+This would result in different behavior because `otherIter.peekLength()` would return the length of the next operation in the `other` delta, rather than the length of the current operation, which is what `other.ops.length` would do.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+        return thisIter.peekLength();
+```
+This would result in different behavior because `thisIter.peekLength()` would return the length of the next operation in the `this` delta, rather than the length of the current operation,

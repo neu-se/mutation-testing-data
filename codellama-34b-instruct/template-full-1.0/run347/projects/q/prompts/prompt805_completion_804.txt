@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"](function() { throw new Error("Intentional bug"); })
+```
+This would result in different behavior because the `finally` function is now returning a rejected promise, which will be propagated to the outer promise. In the original code, the `finally` function returns the invoked promise, which will be resolved with the return value of the callback function (if any) or rejected with the reason of the promise (if any).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object)["finally"](function() { return Q().reject("Intentional bug"); })
+```
+This would result in different behavior because the `finally` function is now returning a rejected promise with the reason "Intentional bug", which will be propagated to the outer promise. In the original code, the `finally` function returns the invoked promise, which will be resolved with the return value of the callback function (if any) or rejected with the reason of the promise (if any).
+
+Option 3:

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!cb
+```
+This would result in different behavior because the `!` operator negates the value of `cb`, so if `cb` is a truthy value, `!cb` would be falsey, and vice versa. In the original code, `cb` is only called if `ended` is false, so if `cb` is negated, `cb` could be called even if `ended` is true, which could cause a bug.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(err, null)
+```
+This would result in different behavior because `cb(err, null)` would call the `cb` function with `err` and `null` as arguments, regardless of whether `err` is truthy or falsey. In the original code, `cb` is only called if `err` is truthy, so `cb` could be called with `null` as an argument if `err` is falsey, which could cause a bug.
+
+Option 3: The PLACEHOLDER can

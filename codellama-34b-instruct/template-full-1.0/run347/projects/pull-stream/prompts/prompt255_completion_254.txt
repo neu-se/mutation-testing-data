@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read ? nextStream() : nextChunk()
+```
+This would result in different behavior because the original code fragment checks if `_read` is truthy, but this new code fragment checks if `_read` is falsy, which could result in `nextChunk()` being called when it wasn't intended to be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read && nextStream()
+```
+This would result in different behavior because the original code fragment checks if `_read` is falsy, but this new code fragment checks if `_read` is truthy, which could result in `nextStream()` being called when it wasn't intended to be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, nextChunk)
+```
+This would result in different behavior because the original code fragment recursively calls `nextStream` or `nextChunk` until a value is returned, but this new code fragment calls `nextChunk` only once and then returns

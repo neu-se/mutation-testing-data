@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(Buffer.from([]))
+```
+This would result in different behavior because `Buffer.from([])` creates an empty buffer, which is not a writable stream, so `zipArchive.finalize()` will throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output.pipe(process.stdout))
+```
+This would result in different behavior because `output.pipe(process.stdout)` creates a new pipe and replaces the original output stream, so `zipArchive.finalize()` will write the archive to the standard output instead of the original file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(fs.createWriteStream('/dev/null'))
+```
+This would result in different behavior because `/dev/null` is a sink that discards all data written to it, so `zipArchive.finalize()` will write the archive to `/dev/null` instead of the original file
