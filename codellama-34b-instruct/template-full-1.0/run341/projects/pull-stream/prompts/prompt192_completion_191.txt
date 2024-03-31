@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+map(data, function (err, data) {
+    busy = false
+    if(aborted) {
+        cb(aborted)
+        abortCb && abortCb(aborted)
+    }
+    else if(err) next (err, cb)
+    else cb(null, data)
+})
+```
+This would result in different behavior because the callback function passed to `map` is not the same as the original. The original callback checks for `err` first, but the new one checks for `aborted` first, which could result in a different control flow if `err` and `aborted` are both defined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+map(data, function (err, data) {
+    busy = false
+    if(aborted) {
+        cb(aborted)
+        abortCb && abortCb(aborted)
+    }
+    else if(err) next (err, cb)
+    else cb(null, data)
+})

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+timezones[name] = buildTimezone(data, name);
+```
+This would result in different behavior because it would add the newly built timezone to the `timezones` object, but it would not memoize it. This means that the `timezones` object would not be updated with the new timezone, and it would not be returned by the `getTimezone` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+timezones[name] = null;
+```
+This would result in different behavior because it would remove the timezone from the `timezones` object, and it would not memoize it. This means that the `timezones` object would not be updated with the new timezone, and it would not be returned by the `getTimezone` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+timezones[name] = { ...timezones[name], name };
+```
+This would result in different behavior because it would update the

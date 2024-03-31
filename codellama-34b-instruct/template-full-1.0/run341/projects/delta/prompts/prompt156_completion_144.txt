@@ -1,0 +1,18 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+length - otherIter.peek().retain - 1
+```
+This would result in different behavior because the `otherIter.peek().retain` value is the number of characters to retain in the next operation, taking the `1` into account would cause the iteration to start at the wrong position.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+length + otherIter.peek().retain - 1
+```
+This would result in different behavior because adding the `retain` value to the `length` would cause the iteration to start at the wrong position, further off from the correct result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.max(0, length - otherIter.peek().retain)
+```
+This would result in different behavior because the `Math.max(0, length - otherIter.peek().retain)` would ensure that the iteration starts at the correct position, by taking the `retain` value into account and preventing negative values

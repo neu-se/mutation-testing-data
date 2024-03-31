@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reject
+```
+This would result in different behavior because now the `output.on('close')` event will call the `reject` function instead of the `resolve` function, which means that the Promise will now reject instead of resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error('Intentional error')
+```
+This would result in different behavior because now the `output.on('close')` event will throw an error instead of calling the `resolve` function, which means that the Promise will now reject with an error instead of resolve.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const result = zipArchive.finalize();
+resolve(result);
+```
+This would result in different behavior because now the `output.on('close')` event will call the `resolve` function with the result of the `finalize()` method, which is a boolean value indicating whether the archive was formed successfully. If an error occurs during the finalization process, the `resolve` function will not be called

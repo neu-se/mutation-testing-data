@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK);
+```
+This would result in different behavior because the `fs.constants.W_OK` flag is missing, which means that the function will only check for reading permission and not writing permission.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.W_OK);
+```
+This would result in different behavior because the `fs.constants.R_OK` flag is missing, which means that the function will only check for writing permission and not reading permission.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.X_OK);
+```
+This would result in different behavior because the `fs.constants.X_OK` flag is used instead of `fs.constants.R_OK` or `fs.constants.W_OK`, which allows the function to check for the

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^(?!(?:\w+:)?\/\/)/g, 'http://'
+```
+This would result in different behavior because the `g` flag is added, causing the regex to match multiple instances of the pattern instead of just the first one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?!(?:\w+:)?\/\/)/, 'http://'
+```
+Within the code, the expression is not part of a `"..."` or `'...'` string literal, so the `'http://'` will be treated as a constant string, causing the expression to evaluate to a string result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?!(?:\w+:)?\/\/)/, parse(baseUrl).protocol
+```
+Within the code, the expression is used as part of a string template, so the `parse(baseUrl).protocol` is evaluated to its value and result the expression into a URL protocol.
+
+DONE.

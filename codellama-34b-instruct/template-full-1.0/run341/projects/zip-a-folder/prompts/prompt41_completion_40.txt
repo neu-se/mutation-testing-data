@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+&&
+```
+This would result in different behavior because `&&` is a logical AND operator, which returns the second operand if the first operand is truthy, and the first operand if it is falsy. In the original code, `','` is a string literal, so it would always be truthy, and the result of the expression would always be the second operand, which is `src.split(<PLACEHOLDER>)`. Using `&&` instead would result in the expression being evaluated as `src.split(<PLACEHOLDER>) && <PLACEHOLDER>`, which would only return the second operand if `src.split(<PLACEHOLDER>)` is falsy, and the first operand otherwise. This could cause the `zip` and `tar` functions to behave differently if the `src` parameter is a glob pattern that starts with a character that is not a valid glob character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+||
+```
+This would result in

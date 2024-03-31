@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject()
+```
+This would result in different behavior because `deferred.reject()` would cause the promise to be immediately rejected, regardless of whether the original code inside the `Q.nbind` callback function ran successfully or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve()
+```
+This would result in different behavior because `deferred.resolve()` would cause the promise to be immediately resolved with the value `undefined`, regardless of whether the original code inside the `Q.nbind` callback function ran successfully or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(deferred.resolve())
+```
+This would result in different behavior because `setTimeout(deferred.resolve())` would call the `resolve` method of the `deferred` object asynchronously after a delay of 0 milliseconds, meaning that the promise would be resolved with the value `undefined` asynchronously after the original code inside the `Q.nbind`

@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.inspect() !== void 0 &&
+                (snapshot = promise.inspect()).state === "fulfilled"
+```
+This would result in different behavior because it would always evaluate to `true` if `promise.inspect()` returns a value other than `undefined`, even if the promise is not fulfilled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isObject(promise) &&
+                (snapshot = promise.inspect()).state === "fulfilled"
+```
+This would result in different behavior because it would check if `promise` is an object before calling `inspect()`, but it would still evaluate to `true` if the promise is not fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise(promise) &&
+                (snapshot = promise.inspect()).state !== "fulfilled"
+```
+This would result in different behavior because it would evaluate to `true` if the promise is not fulfilled, but it

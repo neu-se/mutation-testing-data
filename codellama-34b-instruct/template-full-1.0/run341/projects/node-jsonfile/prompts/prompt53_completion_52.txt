@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function stringify (obj, { EOL = '\n', finalEOL = true, replacer = null, spaces } = {}) {
+  const EOF = finalEOL ? EOL : ''
+  const str = JSON.stringify(obj, replacer || function(key, value) {
+    if (typeof value === 'string') {
+      return value.toUpperCase();
+    }
+    return value;
+  }, spaces)
+
+  return str.replace(/\n/g, EOL) + EOF
+}
+```
+This would result in different behavior because the original replacer function was not called, and the stringify function now returns the object's properties and values in uppercase.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function stringify (obj, { EOL = '\n', finalEOL = true, replacer = null, spaces } = {}) {
+  const EOF = finalEOL ? EOL : ''
+  const str = JSON.stringify(obj,

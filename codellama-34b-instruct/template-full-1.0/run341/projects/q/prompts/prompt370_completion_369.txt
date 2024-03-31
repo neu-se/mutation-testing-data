@@ -1,0 +1,34 @@
+  Option 1:
+```
+d.promiseDispatch(function (value) {
+    return _fulfilled(value);
+});
+```
+This would result in different behavior because it would cause the promise to resolve with a different value than the original implementation.
+
+Option 2:
+```
+additionalProgressed = function (value) {
+    var newValue;
+    var threw = false;
+    try {
+        newValue = _progressed(value);
+    } catch (e) {
+        threw = true;
+        if (Q.onerror) {
+            Q.onerror(e);
+        } else {
+            throw e;
+        }
+    }
+    return newValue;
+};
+deferred.notify(additionalProgressed(value));
+```
+This would result in different behavior because it would call the `additionalProgressed` callback with the value from the original implementation's `progressed` callback.
+
+Option 3:
+```
+deferred.notify(value);
+```
+This would result in different behavior because it would cause the promise to notify the given value without calling the `progress

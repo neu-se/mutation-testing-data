@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result, { [country.toLowerCase()]: { current: [], all: [] } }
+```
+This would result in different behavior because it uses the `toLowerCase()` method on the `country` string, which could potentially change the key used in the `result` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result, { [country.split(' ').slice(0, -1).join(' ')]: { current: [], all: [] } }
+```
+This would result in different behavior because it splits the `country` string on spaces, removes the last element, and then joins the remaining elements back together. This could potentially change the key used in the `result` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result, { [country.replace(/[A-Z]/g, '')]: { current: [], all: [] } }
+```
+This would result in different behavior because it replaces all uppercase characters in the `country` string with empty

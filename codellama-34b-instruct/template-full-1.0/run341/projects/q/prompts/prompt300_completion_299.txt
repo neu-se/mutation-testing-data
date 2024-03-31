@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+none
+```
+This would result in different behavior because it would make the function return an empty promise instead of a promise that resolves to `this`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(Q.resolve)
+```
+This would result in different behavior because it would make the function return a promise that resolves to the parent promise, instead of immediately returning the parent promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return this }.call(this)
+```
+This would result in different behavior because it would make the function return a promise that resolves to the parent promise, instead of immediately returning the parent promise, and it also would create a new scope for the `this` keyword.
+
+DONE.

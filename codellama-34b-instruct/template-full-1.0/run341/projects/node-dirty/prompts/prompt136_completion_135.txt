@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{key, val: this._data.get(key) + 5}
+```
+This would result in different behavior because it would modify the value stored in the database, causing the database to become corrupted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{key: key + '_suffix', val: this._data.get(key)}
+```
+This would result in different behavior because it would modify the key used to store the value in the database, causing the database to become corrupted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{key, val: this._data.get(key) || null}
+```
+This would result in different behavior because it would replace the value with null if it's falsy, which would cause the database to become corrupted.
+
+DONE.

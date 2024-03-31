@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+``` 
+This would result in different behavior because in the original code, if `abort` is true, `abort` is passed to `onAbort`. In the modified code, `null` is passed to `onAbort`. This change could cause a null pointer exception if the function `onAbort` expects a non-null value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because in the original code, if `abort` is true, `onAbort` is called with `null`. In the modified code, `onAbort` is called with `!abort`, which is always true. This change could cause the function `onAbort` to be called when it should not be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because in the original code, if `abort` is true, `onAbort` is called with `null`.

@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null, data[0])
+```
+This would result in different behavior because `cb` is called with only the first element of `data` instead of the entire array, which could cause the test to pass even if the function is not working correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(new Error('Something went wrong'))
+```
+This would result in different behavior because `cb` is called with a different error message than the one originally passed to the function, which could cause the test to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) return nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior

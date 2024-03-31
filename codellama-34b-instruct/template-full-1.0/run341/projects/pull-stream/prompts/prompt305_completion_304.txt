@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!ended, cb
+```
+This would result in different behavior because the `!` operator negates the `ended` variable, causing the function to always return `true` if the `ended` variable is `false` or `null` (which it is initially), regardless of the value of `cb`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended && cb
+```
+This would result in different behavior because the `&&` operator only returns the result of the second operand if the first operand is truthy, which would cause the function to always return `null` if `ended` is `false` or `null` (which it is initially), regardless of the value of `cb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended || cb
+```
+This would result in different behavior because the `||` operator returns the result of the first operand if it is truthy, and the result of the second operand if the first operand is falsy. If `ended`

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'insert'
+```
+This would result in different behavior because if the peeked type is not 'insert', the code would enter the `if` block and push the next operation from `otherIter` to `delta`, even if it is a retain operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain'
+```
+This would result in different behavior because if the peeked type is 'retain', the code would enter the `if` block and push the next operation from `otherIter` to `delta`, even if it is an insert operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'retain'
+```
+This would result in different behavior because if the peeked type is not 'retain', the code would enter the `if` block and push the next operation from `otherIter` to `delta`, even if it is a delete operation

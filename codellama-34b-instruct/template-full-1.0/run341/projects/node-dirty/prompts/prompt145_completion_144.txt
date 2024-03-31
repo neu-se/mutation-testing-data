@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```js
+this._writeStream.on('drain', () => {
+  this._waitForDrain = false;
+  if (!this._queue.size) {
+    if (this._inFlightWrites > 0) this.emit('drain');
+  } else {
+    this._flush();
+  }
+});
+```
+This would result in different behavior because the original code checks if `this._inFlightWrites` is less than or equal to 0, while the replaced code checks if it is greater than 0.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```js
+this._writeStream.on('drain', () => {
+  this._waitForDrain = false;
+  if (!this._queue.size) {
+    if (this._inFlightWrites <= 0) this.emit('drain');
+  } else {
+    this._flush();
+  }
+});
+```
+This would result in different behavior because the original code checks

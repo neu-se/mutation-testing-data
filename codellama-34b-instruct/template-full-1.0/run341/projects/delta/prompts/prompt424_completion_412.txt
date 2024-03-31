@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+offset > index && priority
+```
+This would result in different behavior because it would cause the `nextType` check to be inverted, so the `insert` branch would be taken even if `nextType` is not equal to `insert`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextType !== 'insert' || offset >= index
+```
+This would result in different behavior because it would cause the `insert` branch to be taken if `nextType` is not equal to `insert`, regardless of the value of `offset`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+offset < index || nextType !== 'insert'
+```
+This would result in different behavior because it would cause the `insert` branch to be taken if the offset is less than the index, regardless of the value of `nextType`.
+
+DONE.

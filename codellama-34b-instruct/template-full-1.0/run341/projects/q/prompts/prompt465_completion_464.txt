@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections
+```
+This would result in different behavior because `reportedUnhandledRejections` and `unhandledRejections` are different arrays containing different values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons
+```
+This would result in different behavior because `reportedUnhandledRejections` and `unhandledReasons` are used for different purposes, the former is used to track unhandled rejections and the latter is used to track reasons for unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`Promise.resolve(process.on("unhandledRejection"))`
+```
+This would result in different behavior because it would not use the `process.on("unhandledRejection")` event for tracking unhandled rejections, instead it would create a new promise that resolves to the `process.on("unhandledRejection")` event.
+
+DONE.

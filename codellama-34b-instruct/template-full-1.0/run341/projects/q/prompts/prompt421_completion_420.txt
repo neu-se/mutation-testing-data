@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromise === false
+```
+This would result in different behavior because the `isPromise` method is now always considered to be `false`, which means that the rejected promise will always be created, even if the `value` parameter is a promise that has already been resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isPromise !== true
+```
+This would result in different behavior because the `isPromise` method is now always considered to be `false` when the `value` parameter is a promise that has already been resolved. When the `value` parameter is a promise that has not yet been resolved, the `isPromise` method will still return `true`, which means that the rejection handler will not be invoked.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise && !promise.inspect().state === "fulfilled"
+```
+This would result in different behavior because the rejected promise will only be created when the `value` parameter is a promise that has not

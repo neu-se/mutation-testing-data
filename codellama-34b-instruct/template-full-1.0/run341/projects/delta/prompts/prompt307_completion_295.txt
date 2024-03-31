@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+        const [embedType, opData, baseOpData] = getEmbedTypeAndData(
+          op.retain,
+          baseOp.insert,
+        );
+```
+This would result in different behavior because the function call `getEmbedTypeAndData` returns a tuple, but the variable `embedType` is not declared with a type that matches the expected return type of the function. If the return type of `getEmbedTypeAndData` is not correctly inferred or checked, this could lead to unexpected behavior or errors in the surrounding code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+        const embedType = Object.keys(thisData)[0];
+```
+This would result in different behavior because the variable `embedType` is declared with a value that is a string, but the function `getEmbedTypeAndData` expects its first argument to be an object with properties that match the keys of the object returned by `Object.keys(thisData)`. If the wrong argument is passed to `getEmbedTypeAnd

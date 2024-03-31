@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && this._inFlightWrites > 0
+```
+This would result in different behavior because the `&&` operator has a higher precedence than `||`, so the expression `this._queue.size || this._inFlightWrites > 0` would be evaluated as `this._queue.size || (this._inFlightWrites > 0)` which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size || this._inFlightWrites < 0
+```
+This would result in different behavior because the `<` operator has a higher precedence than `||`, so the expression `this._queue.size || this._inFlightWrites > 0` would be evaluated as `this._queue.size || (this._inFlightWrites > 0)` which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.

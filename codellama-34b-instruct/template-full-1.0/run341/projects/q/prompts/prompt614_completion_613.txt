@@ -1,0 +1,16 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.reject()
+```
+This would result in different behavior because:
+ The original code fragment `Q` is a promise to resolve `object` and pass the resulting value as a phase 1 argument to the `.dispatch()` method.
+The current code fragment `Q.reject()` will immediately reject `object` and pass the error as a rejection reason to the `.dispatch()` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.promiseDispatch(reject, op, args);
+```
+This would result in different behavior because:
+The original code fragment `Q.promiseDispatch(resolve, op, args)` will schedule a task to dispatch the message to the result of `self.promise(object)`, passing the result as a phase 1 argument to the `.dispatch()` method.
+The current code fragment `Q.promiseDispatch(reject, op, args)` would Schedule a task to dispatch the message to the result of `self.promise(object)`, passing the error as a rejection reason to

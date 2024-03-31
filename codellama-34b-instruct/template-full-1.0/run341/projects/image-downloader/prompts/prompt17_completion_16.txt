@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`options.dest = path.join(options.dest, basename);
+```
+This would result in different behavior because it would join the `dest` path with the original `basename`, rather than the `decodedBasename`, which may produce a different file path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`options.dest = path.join(options.dest, path.basename(options.url));
+```
+This would result in different behavior because it would join the `dest` path with the `basename` of the `url`, rather than the `decodedBasename`, which may produce a different file path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`options.dest = path.join(options.dest, path.dirname(options.url));
+```
+This would result in different behavior because it would join the `dest` path with the `dirname` of the `url`, rather than the `decodedBasename`, which may produce a different file path

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+    .on('error', resolve)
+    .once('close', () => reject(new Error('Request Failed.\n' +
+                         `Status Code: ${res.statusCode}`)));
+```
+This would result in different behavior because the `resolve` and `reject` functions have been swapped, causing the promise to fulfill with an error instead of rejecting with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+    .on('error', () => reject(new Error('Request Failed.\n' +
+                         `Status Code: ${res.statusCode}`))
+    .once('close', () => resolve({ filename: dest })));
+```
+This would result in different behavior because the `reject` function has been moved to the `on('error')` event handler, causing the promise to fulfill with an error instead of rejecting with an error.
+
+Option 3: The PLACEH

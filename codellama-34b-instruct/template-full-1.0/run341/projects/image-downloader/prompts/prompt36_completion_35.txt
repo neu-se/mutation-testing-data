@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).
+```
+This would result in different behavior because it would create a new write stream for every chunk of the response, instead of reusing the same stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(null)).
+```
+This would result in different behavior because it would create a new write stream with a null filename, which would cause an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest + '.tmp')).
+```
+This would result in different behavior because it would create a new write stream with a different filename, which would cause the file to be written to a different location.
+
+DONE.

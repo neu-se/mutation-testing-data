@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(reportedUnhandledRejections, promise) != -2
+```
+This would cause the `if` statement to always evaluate to `true`, meaning that the `process.emit()` function would be called every time, even if the promise was not unhandled. This would result in unncessesary processing and potential errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections[at] != promise
+```
+This would cause the `if` statement to evaluate to `true` if the promise is not found in the `unhandledRejections` array, which would mean that it was handled or already reported. This would result in unnecessary processing and potential errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.isFulfilled()
+```
+This would cause the `if` statement to evaluate to `true` if the promise is fulfilled, which would mean that it was already handled. This would result in unnecessary processing and potential errors.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._flush()
+```
+This would result in different behavior because it would call the `_flush` method recursively, leading to an infinite loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.flush
+```
+This would result in different behavior because it would reference the `flush` property of the `Dirty` object, which does not exist.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Dirty.prototype.flush()
+```
+This would result in different behavior because it would call the `flush` method on the `Dirty` prototype, which is not the same as calling the method on the current instance of `Dirty`.
+
+DONE.

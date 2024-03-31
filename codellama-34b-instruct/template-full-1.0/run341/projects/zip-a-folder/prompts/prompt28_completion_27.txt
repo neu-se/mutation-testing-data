@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'end'
+```
+This would result in different behavior because `'end'` is an event that is emitted when the archive has been finalized and all data has been flushed to the output stream, whereas `'close'` is an event that is emitted when the underlying output stream has been closed. If the PLACEHOLDER is replaced with `'end'`, the `zipArchive.finalize()` method will be called after all data has been flushed to the output stream, which may result in a different final output.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'finish'
+```
+This would result in different behavior because `'finish'` is an event that is emitted when all data has been flushed to the output stream, whereas `'close'` is an event that is emitted when the underlying output stream has been closed. If the PLACEHOLDER is replaced with `'finish'`, the `zipArchive.finalize()` method will be called after all data has been flushed to the output stream, which may result in

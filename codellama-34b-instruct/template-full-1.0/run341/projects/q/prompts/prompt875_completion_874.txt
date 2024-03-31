@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer(null);
+```
+This would result in different behavior because the `defer` function is not called with any argument, which means that the returned promise is not resolved with the expected value. In the original code, the `defer` function is called with the `TypeError` object, which causes the promise to be rejected with the corresponding error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer(42);
+```
+This would result in different behavior because the `defer` function is called with the argument `42`, which means that the returned promise is resolved with the value `42`. In the original code, the `defer` function is called with the `TypeError` object, which causes the promise to be rejected with the corresponding error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer(function(resolve, reject) {
+    reject(new Error('Not a promise'));
+});
+```

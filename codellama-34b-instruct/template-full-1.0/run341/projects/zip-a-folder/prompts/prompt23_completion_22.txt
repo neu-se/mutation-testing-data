@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+archiver.finish
+```
+This would result in different behavior because `finish` is a different method from `archiver` that creates a finalize stream for the archive, and using it would cause the `compress` method to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+archiver.drain
+```
+This would result in different behavior because `drain` is a different method from `archiver` that finishes the archive when all files are streamed in, and using it would cause the `compress` method to finish the archive too early.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+archiver.finalize
+```
+This would result in different behavior because `finalize` is a different method from `archiver` that finalizes the archive and pipes it to the output stream, and using it would cause the `compress` method to pipe the archive to the output stream too early.
+
+DONE.

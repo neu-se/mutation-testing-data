@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+urlMap.keys
+```
+This would result in different behavior because `values` returns an iterator containing the values in the `Map` object, while `keys` returns an iterator containing the keys in the `Map` object. The `extract` function is iterating over the `Map` object to extract the links and their corresponding text, so replacing `values` with `keys` would cause the function to iterate over the wrong data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+urlMap.values()
+```
+This would result in different behavior because `values` returns an iterator containing the values in the `Map` object, while `values()` returns an array of the values in the `Map` object. The `extract` function is expecting an iterator and would throw an error if it receives an array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+urlMap[Symbol.iterator]()
+```
+This would result in different behavior because `Symbol.iterator` is a well-known symbol used to retrieve an

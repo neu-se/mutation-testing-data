@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const WHITELIST = ['http', 'https'];
+if (WHITELIST.includes(parsedUrl.protocol)) {
+  currentUrlStr = URL.format(parsedUrl);
+} else {
+  currentUrlStr = URL.resolve(baseUrlStr, parsedUrl);
+}
+```
+This would result in different behavior because only 'http' and 'https' protocols are allowed, if the protocol is not in the whitelist the URL is resolved using the base URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const REGEX = /^[a-zA-Z0-9:]*$/;
+if (REGEX.test(parsedUrl.protocol)) {
+  currentUrlStr = URL.format(parsedUrl);
+} else {
+  currentUrlStr = URL.resolve(baseUrlStr, parsedUrl);
+}
+```
+This would result in different behavior because only protocols with alpha-numeric characters and ':' are allowed, if the protocol does not match the

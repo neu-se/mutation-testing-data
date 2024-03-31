@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!rejected
+```
+This would result in different behavior because the `!` operator negates the Boolean value of `rejected`, so the `untrackRejection` function would be called even if the promise is fulfilled, which would cause the `unhandledRejections` array to grow indefinitely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rejected && false
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `!` operator, so `rejected` will be first be coerced to a Boolean value, and then the result will be negated. This would cause the `untrackRejection` function to be called only if `rejected` is `false`, which would cause the `unhandledRejections` array to grow indefinitely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rejected || false
+```
+This would result in different behavior because the `||` operator has

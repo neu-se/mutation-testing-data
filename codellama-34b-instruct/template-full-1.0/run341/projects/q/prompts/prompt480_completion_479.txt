@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.pop()
+```
+This would result in different behavior because `pop()` removes the last element of an array, whereas `splice()` removes elements from a specific index and returns the removed elements. This change would cause the test suite to fail because the `trackUnhandledRejections` functionality would not be working as expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.shift()
+```
+This would result in different behavior because `shift()` removes the first element of an array, whereas `splice()` removes elements from a specific index and returns the removed elements. This change would cause the test suite to fail because the `trackUnhandledRejections` functionality would not be working as expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var reasons = unhandledReasons.slice();
+reasons.pop();
+```
+This would result in different behavior because `slice()` creates a shallow copy of the array, and then `pop()` removes

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+a || !op
+```
+This would result in different behavior because `a` is a variable that is only set to `true` if `onEnd` is called, but in this modified code, `op` is never called. This means that the `once` function will never be executed, and the `onEnd` function will never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a && !onEnd
+```
+This would result in different behavior because the `&&` operator has higher precedence than `||`, so the `!onEnd` expression will be evaluated first, and then the result of that expression will be `&&` with `a`. This means that if `onEnd` is not called, the `once` function will never be executed, and the `onEnd` function will never be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!a && onEnd
+```
+This would result in different behavior because the `!a` expression will be evaluated first,

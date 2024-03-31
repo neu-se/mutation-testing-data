@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.func(path, verb, ctx)
+```
+This would result in different behavior because the call to `func()` would change the result of the `query()` method, potentially causing the test to pass when it should fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.prop
+```
+This would result in different behavior because the `prop` property of the `ctx` object is not necessarily the same as the `path` argument passed to the `query()` method, so the test could potentially pass when it should fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.method(path, verb)
+```
+This would result in different behavior because the `method()` method of the `ctx` object could potentially have a different implementation than the `query()` method, causing the test to pass when it should fail.
+
+DONE.

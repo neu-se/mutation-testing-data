@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.emit
+```
+This would result in different behavior because the getter method `emit` is not defined for the `ReadStream` class, whereas the `WriteStream` class does have an `emit` method defined. Using `this._writeStream.emit` would therefore result in a `TypeError` exception being thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._readStream.emit
+```
+This would result in different behavior because the `emit` method is not defined for the `WriteStream` class, whereas the `ReadStream` class does have an `emit` method defined. Using `this._readStream.emit` would therefore result in a `TypeError` exception being thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit(new Error('error message')
+```
+This would result in different behavior because the `emit` method is not defined for the `WriteStream` class, whereas the `ReadStream` class does have an `emit`

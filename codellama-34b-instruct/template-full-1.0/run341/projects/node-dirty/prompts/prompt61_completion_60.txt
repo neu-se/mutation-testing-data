@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._readStream.close()
+```
+This would result in different behavior because `close()` will stop the read stream immediately, whereas `destroy()` will only stop the stream if it's not already reading.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._readStream.pause()
+```
+This would result in different behavior because `pause()` will stop the read stream, but it can be resumed later using `resume()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._readStream.unpipe()
+```
+This would result in different behavior because `unpipe()` will stop the read stream and remove it from the pipeline, making it impossible to read from the stream anymore.
+
+DONE.

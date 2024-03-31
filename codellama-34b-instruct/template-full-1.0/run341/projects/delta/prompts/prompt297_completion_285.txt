@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+predicate(line, { text: 'Some different text' }, i) === false;
+```
+This would result in different behavior because the attributes object that is passed to the `predicate` function has a different `text` property than the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+predicate(line, other.next(1).attributes || {}, i) === false;
+```
+This would result in different behavior because the `other` variable is undefined, causing the code to throw a `ReferenceError` when attempting to call the `next` method on it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return;
+```
+This would result in different behavior because the `eachLine` method would exit early, without calling the `predicate` function on the remaining lines.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"fulfilled", Promise.resolve()
+```
+This would result in different behavior because it would change the event emitted by `process.emit()` from `"unhandledRejection"` to `"fulfilled"`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"rejectionHandled", unhandledReasons[at], unhandledRejections[at]
+```
+This would result in different behavior because it would change the parameters passed to `process.emit()` to refer to the wrong values from the `unhandledReasons` and `unhandledRejections` arrays.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"rejectionHandled", unhandledReasons[at], unhandledRejections[at + 1]
+```
+This would result in different behavior because it would change the parameter passed to `process.emit()` to refer to the wrong value from the `unhandledReasons` array.
+
+DONE.

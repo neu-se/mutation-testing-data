@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.fulfill, deferred.fulfill, deferred.notify
+```
+This would result in different behavior because the `fulfill` method is called instead of `resolve`, which would cause the promise to be fulfilled with a new promise created by `Q(value)` instead of being resolved with the original value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject, deferred.reject, deferred.notify
+```
+This would result in different behavior because the `reject` method is called instead of `resolve`, which would cause the promise to be rejected with the error instead of being resolved with the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify, deferred.notify, deferred.notify
+```
+This would result in different behavior because the `notify` method is called three times instead of `resolve`, which would cause the promise to be notified of progress instead of being resolved with the original value.
+
+DONE.

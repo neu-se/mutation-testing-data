@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!err && !abort
+```
+This would result in different behavior because the `!` operator would negate the truthiness of the `err` and `abort` variables, causing the conditional to always evaluate to `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null || abort
+```
+This would result in different behavior because `null` is a falsy value, so the `||` operator would short-circuit and return `abort`, which may not be the desired behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null
+```
+This would result in different behavior because the `? :` ternary operator would evaluate `err` and return `abort` if it is truthy, or `null` if it is falsy. This would cause the code to behave differently in the event that `err` is not a boolean value.
+
+DONE.

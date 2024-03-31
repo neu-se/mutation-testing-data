@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+JSON.stringify(content) !== "\\ufeff"
+```
+This would result in different behavior because `JSON.stringify` always returns a string or object representation of the passed value, regardless of whether the value is a buffer or not. Therefore, this condition would always evaluate to `false` if `content` is a buffer, regardless of the presence of the BOM.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!Buffer.isBuffer(content) && Reflect.apply(JSON.stringify, content) !== "\\ufeff"
+```
+This would result in different behavior because `Reflect.apply` can be used to call a function with a specified `this` value and arguments list. In this case, we are using it to call `JSON.stringify` with `content` as the `this` value and an empty arguments list (`[]`). This means that if `content` is a buffer, `Reflect.apply` will convert it to a string before calling `JSON.stringify` and then compare the result to the expected BOM

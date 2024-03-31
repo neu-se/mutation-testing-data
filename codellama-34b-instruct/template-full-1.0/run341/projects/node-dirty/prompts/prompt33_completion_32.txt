@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would cause the `this._data.delete(key)` line to fail, as `null` is not a valid key for the map. This would cause the `key` to be persisted in-memory, even if it was meant to be deleted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+JSON.stringify(val)
+```
+This would result in different behavior because it would cause the data to be stored as a JSON string, rather than a JavaScript object. This would mean that the `get` method would need to use `JSON.parse` to retrieve the data, rather than just accessing it from the map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._data.remove(key)
+```
+This would result in different behavior because `remove` is not a valid method for JavaScript maps. This would cause an error to be thrown, which would prevent the `set` method from completing successfully.
+
+DONE.

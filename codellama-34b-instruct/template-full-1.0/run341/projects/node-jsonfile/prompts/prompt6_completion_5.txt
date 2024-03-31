@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile)
+```
+This would result in different behavior because `universalify.fromCallback` is a function that wraps a callback-based function in a promise, but `fs.writeFile` is not a callback-based function, it's a synchronous function. Replacing the PLACEHOLDER with this code fragment would cause the program to throw an error because `universalify.fromCallback` is expecting a callback function as its first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.writeFile.bind(fs)
+```
+This would result in different behavior because `fs.writeFile` is a bound method that is called on the `fs` object, but `bind` is a method that creates a new function that is bound to a specific `this` context. Replacing the PLACEHOLDER with this code fragment would cause the program to throw an error because `fs.writeFile` is not a function that can be bound to a specific `this

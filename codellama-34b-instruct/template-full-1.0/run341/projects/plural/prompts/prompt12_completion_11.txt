@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]y$|quy$/g, function(w) { return w.substr(0, w.length - 1) + 'i' }
+```
+This would result in different behavior because the use of the `g` flag instead of the `i` flag would cause the regular expression to match all occurences of the pattern, rather than just the first.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]y$|quy$/i, function(w) { return w.substr(0, w.length - 1) + 'is' }
+```
+This would result in different behavior because the string `'is'` is added after the substr method, which would result in the word "quy" being pluralized as "quies" instead of "quies".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]y$|quy$/i, function(w) { return

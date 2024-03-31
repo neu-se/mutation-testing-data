@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Could not load corrupted row: ${rowStr}`)`
+```
+This would result in different behavior because this error message would be reported regardless of whether the row is corrupted or not, whereas the original code only reports this error for corrupted rows.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Could not load row: ${rowStr}`)`
+```
+This would result in different behavior because this error message would be reported for any row that is not corrupted, whereas the original code only reports this error for corrupted rows.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'info', `Finished loading row: ${rowStr}`)`
+```
+This would result in different behavior because this message would be reported every time a row is loaded, regardless of whether the row is corrupted or not, whereas the original code only reports this message when the database has finished loading.
+
+DONE.

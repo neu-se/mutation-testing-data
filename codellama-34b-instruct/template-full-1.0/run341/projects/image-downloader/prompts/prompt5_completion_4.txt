@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` returns a resolved promise, whereas `Promise.reject` returns a rejected promise. In this case, the code would return a resolved promise even if the `options.url` is invalid, which could lead to incorrect behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.reject('The options.url is not valid')
+```
+This would result in different behavior because `Promise.reject` throws an error with the given message, whereas `Promise.resolve` returns a resolved promise. In this case, the code would throw an error if `options.url` is invalid, which could lead to incorrect behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return request(Object.assign({}, options, { url: options.url + 'dummy' }))
+```
+This would result in different behavior because it would append the string 'dummy' to the `options.

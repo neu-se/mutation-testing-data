@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rejection => {
+  deferred.reject(rejection);
+})
+```
+This would result in different behavior because it changes the function signature and behavior of the `onProgress` function, so any test that depends on this function would fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => {
+  deferred.reject(new Error("Progress rejected"));
+}
+```
+This would result in different behavior because it would always reject the progress promise with the same error message, regardless of the actual progress updates. This would cause tests that depend on the success or failure of the progress promise to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(progress => {
+  if (progress.status === "rejected") {
+    deferred.reject(new Error("Progress rejected"));
+  } else {
+    deferred.notify(progress);
+  }
+})
+```
+This would result in different behavior because it would reject the progress promise with a custom

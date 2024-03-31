@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(n, ctx)
+```
+This would result in different behavior because the original code fragment `ctx` refers to the `ctx` object, but the new fragment `(n, ctx)` is a tuple of two values, the first being the `n` object, which is not defined anywhere in the code, and the second being the `ctx` object. This change would likely cause the `matches` method to fail because it expects two arguments, but is now receiving only one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the original code fragment `ctx` evaluates to the `ctx` object, which is defined as a parameter of the `matches` method, but the new fragment `undefined` evaluates to the `undefined` value, which is not defined as a parameter of the `matches` method. This change would likely cause the `matches` method to fail because it expects a `QueryContext` object, but is now receiving `undefined`.
+
+Option 3: The PLACEHOLDER can

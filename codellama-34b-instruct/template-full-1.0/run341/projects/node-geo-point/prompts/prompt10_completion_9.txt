@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty
+```
+This would result in different behavior because it would invert the result of the `hasOwnProperty` check, potentially allowing for the creation of a `GeoPoint` object with invalid properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty.call(point, 'coordinates')
+```
+This would result in different behavior because it would use the `Function.prototype.call` method to call the `hasOwnProperty` method with a different `this` object, potentially causing the check to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty('foo')
+```
+This would result in different behavior because it would check for the existence of a property named `'foo'` instead of `'coordinates'`, which would likely cause the `GeoPoint` constructor to fail.
+
+DONE.

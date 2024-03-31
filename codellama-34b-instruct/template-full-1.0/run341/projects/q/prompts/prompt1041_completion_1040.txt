@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(next.promise);
+```
+This would result in different behavior because the original code resolves `ends.resolve` with an object containing the `head` and `tail` properties, but this code resolves `ends.resolve` with the `next.promise` object itself, which is a different object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: Q.resolve(next)
+});
+```
+This would result in different behavior because the original code resolves `ends.resolve` with an object containing the `head` and `tail` properties, but this code resolves `ends.resolve` with an object containing the `head` and `tail` properties, but also resolves `next` with a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: Q.resolve(next).then(function(result) {
+       

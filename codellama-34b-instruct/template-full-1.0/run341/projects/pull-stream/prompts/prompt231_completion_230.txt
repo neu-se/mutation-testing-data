@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+while (loop) {
+  loop = true;
+  read(end, (end, data) => {
+    if (end || test(data)) {
+      sync = false;
+      next(end, cb);
+    }
+  });
+}
+```
+This would result in different behavior because the modification to the `loop` variable would cause the loop to iterate infinitely, and the `sync` variable would never be set to `false`, resulting in an infinite loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+while (loop) {
+  loop = false;
+  sync = false;
+  read(end, (end, data) => {
+    if (end || test(data)) {
+      next(end, cb);
+    }
+  });
+}
+```
+This would result in different behavior because the modification to the `loop` and `sync` variables would cause the loop to exit after only one iteration, and the `next()` function would never be called.
+
+Option 3: The

@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{
+  ...nextOp,
+  offset: Math.random(),
+}
+```
+This would result in different behavior because `Math.random()` would return a random number each time it is called, which would result in a different `offset` value each time the `next()` method is called. This would cause the `hasNext()` method to return a different value than it would if the original `nextOp` object were used, potentially causing unexpected behavior in the caller.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{
+  ...nextOp,
+  offset: nextOp.offset + 1,
+}
+```
+This would result in different behavior because `nextOp.offset + 1` would always be 1 greater than the original `offset` value, which would cause the `hasNext()` method to always return a different value than it would if the original `nextOp` object were used. This could cause unexpected behavior in the caller.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

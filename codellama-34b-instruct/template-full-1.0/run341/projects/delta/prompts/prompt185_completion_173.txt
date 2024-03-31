@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherOp.retain === 'retain'
+```
+This would result in different behavior because it would evaluate to `false` if `otherOp.retain` is a number, and would evaluate to `true` if it is the string `'retain'`. This could cause the inserted value to be concatenated with the existing value rather than replacing it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!typeof otherOp.retain
+```
+This would result in different behavior because it would convert `otherOp.retain` to a boolean and negate it. If `otherOp.retain` is a number, it would convert it to `true`. If it is a string, it would convert it to `false`. This could cause the inserted value to be dropped if `otherOp.retain` is a number.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherOp.retain instanceof Array
+```
+This would result in different behavior because it would check if `otherOp.ret

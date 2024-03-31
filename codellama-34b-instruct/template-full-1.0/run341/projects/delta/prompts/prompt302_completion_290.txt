@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+line, otherIter.next(1).attributes || {}, i
+```
+This would result in different behavior because the `iter` object is being used instead of `otherIter` to retrieve the attributes, which could cause the `eachLine` method to iterate over the wrong attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+line, null, i
+```
+This would result in different behavior because the `attributes` parameter is being set to `null` instead of the attributes of the current line, which could cause the `eachLine` method to skip over certain attributes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+line, iter.next(1).attributes || {}, i - 1
+```
+This would result in different behavior because the `iter` object is being used to retrieve the attributes, but the `i` variable is being decremented instead of incremented, which could cause the `eachLine` method to iterate over the wrong line.
+
+DONE.

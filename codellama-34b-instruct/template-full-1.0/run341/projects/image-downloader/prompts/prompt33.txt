@@ -1,0 +1,60 @@
+Your task is to apply mutation testing to the following code:
+```
+const { createWriteStream } = require('fs');
+const { TimeoutError } = require('./TimeoutError');
+const { http, https } = require('follow-redirects');
+
+module.exports = ({ url, dest, ...options }) => new Promise((resolve, reject) => {
+  const request = url.trimLeft().startsWith('https') ? https : http;
+
+  request
+    .get(url, options, (res) => {
+      if (res.statusCode !== 200) {
+        // Consume response data to free up memory
+        <PLACEHOLDER>();
+        reject(new Error('Request Failed.\n' +
+                         `Status Code: ${res.statusCode}`));
+
+        return;
+      }
+
+      res.pipe(createWriteStream(dest))
+        .on('error', reject)
+        .once('close', () => resolve({ filename: dest }));
+    })
+    .on('timeout', () => reject(new TimeoutError()))
+    .on('error', reject);
+});
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+res.resume
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

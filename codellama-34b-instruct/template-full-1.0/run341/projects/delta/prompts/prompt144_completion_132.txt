@@ -1,0 +1,15 @@
+  
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && thisIter.peekLength() < firstLeft
+```
+This would result in different behavior because if the first element in the delta is an insert operation that is longer than the length of the first element in the other delta, the insert operation would become a no-op. In the original code fragment, the insert operation is skipped if the element is an insert operation and the length of the element is less than the length of the first element in the other delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+firstOther.retain - firstLeft > 0
+```
+This would result in different behavior because if the first element in the other delta is a retain operation and the length of the element is greater than zero, the other delta would be shortened by the length of the element. In the original code fragment, the other delta is shortened only if the element is an insert operation and the length of the element is greater than zero.
+
+Option 3: The PLACEHOLDER can

@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+array_resolve(promise, function (value) {
+    promises[index] = value;
+    if (--pendingCount === 0) {
+        deferred.resolve(promises);
+    }
+}, function () {
+    pendingCount--;
+    if (pendingCount === 0) {
+        deferred.reject();
+    }
+});
+```
+This would result in different behavior because the original code fragment uses `when` which returns a promise and calls the `then` method on it, while the modified code fragment uses `array_resolve` which resolves the promise and calls the `resolve` method on it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    promises[index] = value;
+    if (--pendingCount === 0) {
+        deferred.resolve(promises);
+    }
+}, function () {
+    pendingCount--;
+    if (pendingCount === 0) {
+       

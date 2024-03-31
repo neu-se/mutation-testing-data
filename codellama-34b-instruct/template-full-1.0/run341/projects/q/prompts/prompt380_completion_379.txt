@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return promise.thenResolve(callback(value))
+```
+This would result in different behavior because `thenResolve()` creates a new promise that is resolved with the return value of `callback(value)`, whereas `return callback(value)` directly returns the return value of `callback(value)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return promise.thenReject(callback(value))
+```
+This would result in different behavior because `thenReject()` creates a new promise that is rejected with the return value of `callback(value)`, whereas `return callback(value)` directly returns the return value of `callback(value)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return deferred.reject(callback(value))
+```
+This would result in different behavior because `deferred.reject()` rejects the `deferred` promise with the return value of `callback(value)`, whereas `return callback(value)` directly returns the return value of `callback(value)`.
+
+DONE.

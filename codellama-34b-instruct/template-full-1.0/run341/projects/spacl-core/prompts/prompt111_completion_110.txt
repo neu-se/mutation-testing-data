@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+let verbs = this.verbs;
+```
+This would result in different behavior because the `for...in` loop would iterate over all properties of the `verbs` object, including its prototype chain and non-enumerable properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+let verbs = Object.keys(this.verbs);
+```
+This would result in different behavior because `Object.keys()` returns an array of all own enumerable property keys, but the `for...in` loop would also iterate over inherited enumerable properties and non-enumerable properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+let verbs = Object.getOwnPropertyNames(this.verbs);
+```
+This would result in different behavior because `Object.getOwnPropertyNames()` returns an array of all own property names, including non-enumerable properties.
+
+DONE.

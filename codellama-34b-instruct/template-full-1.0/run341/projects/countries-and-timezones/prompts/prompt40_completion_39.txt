@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(prev).reduce((prev, key) => {
+  return Object.assign(prev, { key: buildCountry(data, key) });
+}, {});
+```
+This would result in different behavior because `Object.keys(prev)` would return an array of keys in the `prev` object, and `reduce()` would iterate over this array. The buggy code would result in an array of `buildCountry()` return values, instead of an object with keys and values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev.map((key) => buildCountry(data, key));
+```
+This would result in different behavior because `map()` would return an array of `buildCountry()` return values, instead of an object with keys and values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prev.reduce((prev, key) => {
+  return Object.assign(prev, { key });
+}, {});
+```
+This would result in different behavior because `reduce()`

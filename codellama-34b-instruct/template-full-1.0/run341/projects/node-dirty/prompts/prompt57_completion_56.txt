@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'drain', () => { if (this._queue.size > 0) { this.close(); } }
+```
+This would result in different behavior because the event handler is only called when the queue size is greater than 0, which means that the close() method will only be called when there are still items in the queue. In the original code, the close() method is called whenever the 'drain' event is emitted, regardless of the queue size.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain', () => { if (this._inFlightWrites > 0) { this.close(); } }
+```
+This would result in different behavior because the event handler is only called when there are still in-flight writes, which means that the close() method will only be called when there are still writes in progress. In the original code, the close() method is called whenever the 'drain' event is emitted, regardless of the number of in-flight writes.
+
+Option 3:

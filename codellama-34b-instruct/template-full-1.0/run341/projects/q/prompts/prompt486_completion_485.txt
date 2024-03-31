@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.stopUnhandledRejectionTracking = function() {
+    untrackRejection();
+    resetUnhandledRejections();
+};
+```
+This would result in different behavior because the previous implementation of `Q.stopUnhandledRejectionTracking` would only call `resetUnhandledRejections`, which would reset the `unhandledReasons` and `unhandledRejections` arrays, but not actually stop the tracking. The new implementation also calls `untrackRejection()`, which would stop the tracking of unhandled rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.stopUnhandledRejectionTracking = function() {
+    process.emit("unhandledRejection", null, null);
+};
+```
+This would result in different behavior because the previous implementation of `Q.stopUnhandledRejectionTracking` would reset the `unhandledReasons` and `unhandledRejections` arrays, but the new implementation calls `process.emit("unhandled

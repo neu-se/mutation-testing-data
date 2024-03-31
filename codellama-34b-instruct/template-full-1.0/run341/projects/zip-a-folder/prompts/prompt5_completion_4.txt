@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream && !targetFilePath
+```
+This would result in different behavior because the `zipAFolderOptions` object is checked for a `customWriteStream` property, but the `targetFilePath` is checked for a falsy value, which would result in the `compress` function being called with a `customWriteStream` and no `targetFilePath`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!zipAFolderOptions?.customWriteStream && !targetFilePath
+```
+This would result in different behavior because both the `zipAFolderOptions` object and the `targetFilePath` are checked for falsy values, which would result in the `compress` function being called with no `customWriteStream` and no `targetFilePath`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream || !targetFilePath
+```
+This would result in different behavior because the `zipAFolderOptions` object is checked

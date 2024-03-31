@@ -1,0 +1,15 @@
+  As an expert in mutation testing, I have identified several possible code fragments that can be used to replace the PLACEHOLDER in the given code to produce different behavior.
+
+Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- thisIter.peekType(<PLACEHOLDER>) === 'insert'
++ thisIter.peekType(<PLACEHOLDER>) !== 'insert'
+```
+This would result in different behavior because the `peekType()` method would now return `false` for insert operations, which would cause the `while` loop to iterate over the `other` delta instead of the `this` delta. This would effectively swap the order of the two deltas being composed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- thisIter.peekLength() <= firstLeft
++ thisIter.peekLength() > firstLeft
+```
+This would result in different behavior because the `peekLength()` method would now return a value greater than `firstLeft`, which would cause the `while` loop to iterate over the `other`

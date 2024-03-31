@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.hasStacks = Q.longStackSupport && hasStacks
+```
+This would result in different behavior because it would cause the `hasStacks` property to always be `false`, which would skip the `try`/`catch` block and prevent the error from being caught.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.hasStacks = !Q.longStackSupport || !hasStacks
+```
+This would result in different behavior because it would cause the `hasStacks` property to always be `true`, which would cause the `try`/`catch` block to always be executed, regardless of whether or not the error was caught.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.hasStacks = Q.longStackSupport && typeof hasStacks !== 'undefined'
+```
+This would result in different behavior because it would cause the `hasStacks` property to be `undefined` if `Q.longStackSupport` is falsy, which would cause the

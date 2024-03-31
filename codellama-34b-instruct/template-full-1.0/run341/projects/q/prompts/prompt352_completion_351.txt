@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw reject
+```
+This would result in different behavior because `reject` is a function that when called, it creates a new rejected promise. In the original code, it was being called with the `exception` argument, which is assumed to be a function that throws an error. However, with the code change, `reject` would be called with no arguments, which would result in a rejected promise with no error. This would cause the test suite to fail to detect the error that was intended to be caught.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reject(newError)
+```
+This would result in different behavior because it would change the error that is thrown. Instead of throwing the `exception` that was passed to the `_rejected` function, it would throw a new `newError` that has a different message and stack trace. The test suite would not be able to detect this new error, and would not fail the tests as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Prom

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deliverTimezones(timezones, { deprecated: true });
+```
+This would result in different behavior because the original code returns a filtered list of time zones without the deprecated ones, but this replaced code fragment returns the full list of time zones, including the deprecated ones.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deliverTimezones(Object.keys(timezones).reduce((prev, key) => {
+  if (timezones[key].deprecated) Object.assign(prev, { [key]: timezones[key] });
+  return prev;
+}, {}), options);
+```
+This would result in different behavior because the original code returns a filtered list of time zones without the deprecated ones, but this replaced code fragment returns a list of time zones where each deprecated one is replaced with an empty object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deliverTimezones(timezones.reduce((prev, timezone) => {
+  if (!

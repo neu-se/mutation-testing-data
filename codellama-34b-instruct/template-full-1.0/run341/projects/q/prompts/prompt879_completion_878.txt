@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.reject
+```
+This would result in different behavior because `this.reject` is a reference to the `reject` method on the current object, which is not the same as the `reject` method on the `deferred` object. Using `this.reject` would cause the `nfapply` method to call the wrong `reject` method and potentially cause unintended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` is a reference to the `resolve` method on the `deferred` object, which is not the same as the `reject` method. Using `deferred.resolve` would cause the `nfapply` method to call the wrong method and potentially cause unintended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (error) { throw error; }
+```
+This would result in different behavior because using a function that throws

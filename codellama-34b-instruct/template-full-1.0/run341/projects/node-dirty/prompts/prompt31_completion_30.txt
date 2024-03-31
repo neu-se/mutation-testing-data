@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, (e) => { if (e) this.emit('error', e) });
+```
+This would result in different behavior because it would cause the `set` method to emit an error event when the callback function is called with an error, which is not the intended behavior for this method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, () => { this._queue.delete(key) });
+```
+This would result in different behavior because it would cause the `set` method to delete the key from the queue without waiting for the data to be persisted to the database, which could cause data loss in the event of an unexpected shutdown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, () => { this._queue.clear() });
+```
+This would result in different behavior because it would cause the `set` method to clear the entire queue of pending writes, even if some of them

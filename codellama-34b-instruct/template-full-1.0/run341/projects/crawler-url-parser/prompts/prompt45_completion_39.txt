@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr, false, true
+```
+This would result in different behavior because the `baseUrlStr` would be resolved using the `URL.resolve()` method with the `parsedBaseUrl` object, but without the `parsedUrl.search` property (as the second argument is set to `false`).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr, true, false
+```
+This would result in different behavior because the `baseUrlStr` would be resolved using the `URL.resolve()` method with the `parsedBaseUrl` object, but without the `parsedUrl.hash` property (as the third argument is set to `false`).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(baseUrlStr, true, true)
+```
+This would result in different behavior because the `URL.parse()` method would be called on the `baseUrlStr` string directly, which may produce different results than resolving the `baseUrlStr` using the `

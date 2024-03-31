@@ -1,0 +1,15 @@
+  Thank you for the question. I'm happy to help you with mutation testing.
+
+Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- this.then
++ deferred.resolve
+```
+This would result in different behavior because the resolved value of the promise would be different. In the original code, the resolved value of the promise would be the value returned by the callback function passed to `then`, but if we replace `this.then` with `deferred.resolve`, the resolved value of the promise would be `undefined`, since `deferred.resolve` doesn't return anything.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- this.then
++ this.when
+```
+This would result in different behavior because `then` and `when` are two different methods. `then` is used to define the chain of async operations, while `when` is used to execute the chain of async operations. If we replace `then` with `when`, the code would not have the same behavior, since `when` does not create a new promise like `then` does.

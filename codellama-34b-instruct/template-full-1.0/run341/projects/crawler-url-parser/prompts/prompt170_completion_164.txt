@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl.domain != pageurl.domain
+```
+This would result in different behavior because in the original code, the `domain` property of both `linkurl` and `pageurl` are checked to be the same, but in this new code, the test will pass if they are not the same, which is the opposite of the original intention.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl.subdomain && pageurl.subdomain && linkurl.subdomain != pageurl.subdomain
+```
+This would result in different behavior because in the original code, the `subdomain` property of both `linkurl` and `pageurl` are checked to be the same, but in this new code, the test will pass if both `subdomain` properties are truthy and not equal to each other, which is not equivalent to checking if they are the same.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!/^.+\./.test(linkurl.domain) && /^.

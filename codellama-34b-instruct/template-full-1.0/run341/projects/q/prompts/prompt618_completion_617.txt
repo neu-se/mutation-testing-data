@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+[value]
+```
+This would result in different behavior because `get` returns a promise for the property value, while `dispatch` returns a promise for the return value of the operation. Using `value` instead of `key` would reflect this semantic difference.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+[object[key]]
+```
+This would result in different behavior because it would reference the property value directly instead of returning a promise for it. This would only work if `object` and `key` are both immediate references and not promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+[key.valueOf()]
+```
+This would result in different behavior because it would return the result of calling `valueOf` on the key instead of the key itself. This would only work if `key` is an object with a `valueOf` function that has a significant return value.
+
+DONE.

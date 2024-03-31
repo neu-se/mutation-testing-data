@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(ended)
+```
+This would result in different behavior because the `terminate` function would be called when `last` is true, but the `cb` function would be called when `last` is false. In the original code, the `cb` function is only called when `ended` is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!last ? terminate(cb) : cb(ended)
+```
+This would result in different behavior because the `terminate` function would be called when `last` is false, but the `cb` function would be called when `last` is true. In the original code, the `cb` function is only called when `ended` is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(ended && last) ? cb(ended) : terminate(cb)
+```
+This would result in different behavior because the `cb` function would be called only when `ended` and `last` are both

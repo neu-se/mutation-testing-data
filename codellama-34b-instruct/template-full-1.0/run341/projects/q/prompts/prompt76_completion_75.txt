@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = flush;
+```
+This would result in different behavior because it would cause the `onmessage` event handler to be called synchronously, potentially causing problems if the handler takes a long time to execute.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = setTimeout(flush, 0);
+```
+This would result in different behavior because it would cause the `onmessage` event handler to be called asynchronously, potentially causing problems if the handler is not able to complete before the next tick.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+channel.port1.onmessage = requestPortTick;
+```
+This would result in different behavior because it would cause the `onmessage` event handler to be called asynchronously, and it would also cause the `requestPortTick` function to be called, which could potentially cause problems if the function is not able to complete before the next tick.
+
+DONE.

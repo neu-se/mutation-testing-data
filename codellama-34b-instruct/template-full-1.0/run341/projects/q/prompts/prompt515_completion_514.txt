@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick.runAfter(function () {
+    var atReport = array_indexOf(reportedUnhandledRejections, promise);
+    if (atReport !== -1) {
+        process.emit("rejectionHandled", unhandledReasons[at], promise);
+        reportedUnhandledRejections.splice(atReport, 1);
+    }
+});
+```
+This would result in different behavior because the original code uses `Q.nextTick` to delay the execution of the callback function, while the replaced code executes it immediately.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var atReport = array_indexOf(reportedUnhandledRejections, promise);
+if (atReport !== -1) {
+    process.emit("rejectionHandled", unhandledReasons[at], promise);
+    reportedUnhandledRejections.splice(atReport, 1);
+}
+```
+This would result in different behavior because the original code uses `Q.

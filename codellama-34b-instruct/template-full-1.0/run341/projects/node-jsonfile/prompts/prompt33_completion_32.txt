@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `writeFileSync` is a synchronous function that does not return a promise, unlike `writeFile` which is an asynchronous function that returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs, file))
+```
+This would result in different behavior because `bind` would create a new function that is bound to `fs.`
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(async (file, data) => {
+  await fs.writeFile(file, data)
+})
+```
+This would result in different behavior because it creates a new async function that awaits the result of `fs.writeFile` before returning.
+
+DONE.

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (this.path) {
+  const cbs = this._queue.get(key) || [];
+  if (cb) cbs.push(cb);
+  this._queue.set(key, cbs);
+  this._flush();
+} else {
+  setImmediate(() => { if (cb) cb(); this.emit('drain'); });
+}
+```
+This would result in different behavior because the `else` block would not be executed if `this.path` is not truthy, which could result in the `cb` callback being called multiple times or not at all.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (this.path) {
+  const cbs = this._queue.get(key) || [];
+  if (cb) cbs.push(cb);
+  this._queue.set(key, cbs);
+  this._flush();
+} else {
+  this.emit('drain');
+  if (cb) cb();
+}
+```

@@ -1,0 +1,10 @@
+  Option 1: The PLACEHOLDER can be replaced with
+```callback !== null``` This would result in different behavior because null is a distinct value from undefined, and other tests may depend on this check to cascade through the code.
+
+Option 2: The PLACEHOLDER can be replaced with
+```typeof callback === "undefined"``` This would result in different behavior because typeof operator returns the string "undefined" even if the variable is not declared, while excluding the other scalar, brackets, objects, and functions.
+
+Option 3: The PLACEHOLDER could be replaced with 
+```callback !== undefined```  This would result in different behavior because this test will pass even if callback has no value, and if this test fails, code execution elsewhere may continue, leading to non-deterministic behavior.
+
+DONE.

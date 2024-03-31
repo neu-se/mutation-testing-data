@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return request().then(() => Promise.reject(new Error('Request failed')));
+```
+This would result in different behavior because the original code fragment returns a rejected promise with a specific error message if the `request()` function fails. In contrast, the modified code fragment returns a rejected promise with a different error message, which could cause issues downstream if the error is not handled correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return request().catch(() => Promise.reject(new Error('Request failed')));
+```
+This would result in different behavior because the original code fragment uses the `then()` method to handle the resolved promise, while the modified code fragment uses the `catch()` method to handle the rejected promise. This could cause issues if the `request()` function returns a resolved promise, as the modified code fragment would still reject the promise with a different error message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return request().then(() => {
+  if (!options.dest) {
+    throw

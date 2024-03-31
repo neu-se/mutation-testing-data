@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+options.url
+```
+This would result in different behavior because it would cause the `request` function to be called with the `options.url` instead of the `options` object, which could result in a different response from the server.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+options.dest = path.resolve(__dirname, options.dest) + "/foo"
+```
+This would result in different behavior because it would add the string "/foo" to the end of the `options.dest` path, which could result in a different file being overwritten.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+options.url = new URL(options.url).href
+```
+This would result in different behavior because it would cause the `request` function to be called with the `options.url` modified to have the `href` property of a new `URL` object, which could result in a different request being made to the server.
+
+DONE.

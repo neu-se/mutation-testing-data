@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ops.push(newOp.retain);
+```
+This would result in different behavior because `newOp.retain` is always `0` when `newOp.insert` is a string, so `ops.push(newOp.retain)` would push `0` onto the `ops` array, whereas the original code pushed the full `newOp` object onto the array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ops.push(lastOp);
+```
+This would result in different behavior because `lastOp` is always the last element of the `ops` array, so `ops.push(lastOp)` would push a copy of the last element onto the end of the array, whereas the original code pushed the full `newOp` object onto the array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ops.push(Object.keys(newOp).filter(x => typeof newOp[x] !== 'object'));
+```
+This would result in different behavior because

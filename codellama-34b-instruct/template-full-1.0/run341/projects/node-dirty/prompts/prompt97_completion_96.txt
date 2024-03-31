@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._otherEmit
+```
+This would result in different behavior because `_otherEmit` is not a valid method in the Dirty class, while `emit` is. Using `this._otherEmit` would throw a SyntaxError.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit.bind(this.callback)
+```
+This would result in different behavior because `bind` creates a new function with a new `this` context. In this case, the new function would have `this.callback` as its context, while the original function has `this` as its context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Function.prototype.apply(this.emit, arguments)
+```
+This would result in different behavior because `Function.prototype.apply` is a function that invokes a function with a given `this` context and parameter list. In this case, `this.emit` would be invoked with `arguments` as its parameter list, which is not the intended behavior

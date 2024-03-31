@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.doResolve()
+```
+This would result in different behavior because `doResolve()` is a private method of `Q.Deferred` that is not intended to be called directly by users. Calling `doResolve()` instead of `makeNodeResolver()` would cause the promise to resolve synchronously with the value `undefined`, instead of returning a function that can be used as a Node.js-style callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.always()
+```
+This would result in different behavior because `Q.always()` is a method that returns a resolved promise with the value `undefined`. Calling `Q.always()` instead of `makeNodeResolver()` would cause the promise to resolve synchronously with the value `undefined`, instead of returning a function that can be used as a Node.js-style callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.reject()
+```
+This would result in different behavior because `Q.reject()` is

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because "resolve" would fulfill the promise, causing the next steps in the promise chain to be executed, instead of rejecting the promise, which would cause the promise to be skipped and the error to be handled by the catch block.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify
+```
+This would result in different behavior because "notify" would send a progress notification to the promise's observers, without resolving or rejecting the promise. This would cause the promise to be in a pending state and the next steps in the promise chain to be skipped.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.callback(reason)
+```
+This would result in different behavior because "callback" would be treated as a function and would be called with the reason for the rejection as an argument, meaning that the rejection would be handled by the catch block, but the next steps in the promise chain would be skipped

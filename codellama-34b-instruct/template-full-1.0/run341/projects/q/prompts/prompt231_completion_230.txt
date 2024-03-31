@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>(operands[1], progressListeners);
+```
+This would result in different behavior because `progressListeners` would be passed as an additional argument to the `operands[1]` function, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>(progressListeners[0](operands[1]));
+```
+This would result in different behavior because the first element of the `progressListeners` array would be called with `operands[1]` as an argument, instead of `operands[1]` being called with the first element of `progressListeners`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>(resolve(operands[1], progressListeners));
+```
+This would result in different behavior because `resolve` would be called with `operands[1]` and `progressListeners` as arguments, instead of `operands

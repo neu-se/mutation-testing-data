@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/\b(?:mouse|man)\b/i, function(w, regex) { return ("man" === w) ? w.replace(regex, 's') : w + 's' }))
+```
+This would result in different behavior because the original code fragment `addRule('mouse', 'mice')` used a literal string 'mouse' as the first argument, while this replacement uses a parameterized regular expression `/\b(?:mouse|man)\b/i` as the first argument, and a function that checks the value of the parameter 'w' before deciding whether to replace 'mouse' or 'man' with the plural suffix 's'. 
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/\b(?:mouse)\b/i, function(w, regex) { return w.replace(regex, 'i') }))
+```
+This would result in different behavior because the original code fragment `addRule('mouse', 'mice')` used a literal string 'mouse' as the first

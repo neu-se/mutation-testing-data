@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextOp.insert.substr(offset + length - 1)
+```
+This would result in different behavior because it would return a substring from the `insert` property of `nextOp`, starting from the `offset + length - 1` character, instead of starting from the `offset` character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextOp.insert.split('').slice(offset, offset + length).join('')
+```
+This would result in different behavior because it would split the `insert` property of `nextOp` into an array of characters, take a slice of `length` characters starting from the `offset` character, and then join the array back into a string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextOp.insert.substr(offset).repeat(length)
+```
+This would result in different behavior because it would repeat the `substr` method `length` times, starting from the `offset` character, instead of taking a substring of length `length`

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```currentUrl.href```
+This would result in different behavior because `currentUrl.href` includes the fragment identifier and query string in the URL, whereas `currentUrl.url` does not. This could cause the test to fail if the fragment identifier or query string is an important part of the URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```currentUrl.path```
+This would result in different behavior because `currentUrl.path` only includes the path part of the URL, whereas `currentUrl.url` includes the entire URL. This could cause the test to fail if the path part of the URL is an important part of the test.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```URL.format(currentUrl)```
+This would result in different behavior because `URL.format` takes a `URL` object and returns a string representation of the URL, whereas `currentUrl.url` returns a string representation of the URL. This could cause the test to fail if the format of the URL is important for the test.

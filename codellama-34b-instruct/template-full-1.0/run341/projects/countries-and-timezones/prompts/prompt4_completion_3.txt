@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+! timezonesMap && {}
+```
+This would result in different behavior because it would always create a new empty object, regardless of the value of `timezonesMap`, whereas the original code only created a new object if `timezonesMap` was falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+timezonesMap || {}
+```
+This would result in different behavior because it would always return `timezonesMap` if it was truthy, and otherwise return a new empty object. The original code only returned a new empty object if `timezonesMap` was falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(typeof timezonesMap !== 'undefined') && !timezonesMap
+```
+This would result in different behavior because it would only create a new empty object if `timezonesMap` was defined and falsy, whereas the original code created a new object if `timezonesMap` was falsy regardless of whether it was

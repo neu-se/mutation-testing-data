@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output.pipe());
+```
+This would result in different behavior because the `pipe()` method is being called on the `output` stream instead of the `zipArchive` stream. This would cause the compressed data to be written to the `output` stream twice, which would result in a corrupt output file.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output.end());
+```
+This would result in different behavior because the `end()` method is being called on the `output` stream instead of the `zipArchive` stream. This would cause the compressed data to be written to the `output` stream and then immediately closed, resulting in a truncated output file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output.unpipe());
+```
+This would result in different behavior because the `unpipe()` method is being called on the `output` stream instead of the `zipArchive` stream.

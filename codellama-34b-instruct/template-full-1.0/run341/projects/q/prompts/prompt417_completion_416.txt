@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.inspected
+```
+This would result in different behavior because the `inspect` method is not defined on the `object` and would cause a runtime error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object[Symbol.toStringTag] = ' inspect'
+```
+This would result in different behavior because it would change the `Symbol.toStringTag` property of the `object` to `' inspect'`, which would affect the result of the `toString` method but not the behavior of the `inspect` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.inspected = function() { return ' inspect'; }
+```
+This would result in different behavior because it would define a new `inspected` method on the `object` that returns the string `' inspect'` instead of the original behavior of the `inspect` method.
+
+DONE.

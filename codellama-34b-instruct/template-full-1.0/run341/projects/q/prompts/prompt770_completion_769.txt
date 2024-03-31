@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is not a valid value for a promise and would cause an error when it is passed to `allResolved()`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject()
+```
+This would result in different behavior because `Q.reject()` creates a rejected promise, which would cause the `allResolved()` function to immediately return a rejected promise, rather than waiting for all of the other promises to be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.all([]).then(() => {
+    throw new Error();
+})
+```
+This would result in different behavior because it creates a promise that is resolved with an error, which would cause the `allResolved()` function to immediately return a rejected promise, rather than waiting for all of the other promises to be resolved.
+
+DONE.

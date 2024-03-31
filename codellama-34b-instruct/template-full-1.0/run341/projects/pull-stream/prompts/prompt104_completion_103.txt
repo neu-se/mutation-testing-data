@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'!' + drain
+```
+This would result in different behavior because the `!` operator flips the truthiness of the result of `drain`, which could cause the callback to be called with an unexpected argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'undefined' + drain
+```
+This would result in different behavior because the string concatenation operator `+` will not throw an error if `drain` is undefined, but it will return `NaN` instead of a meaningful value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null + drain
+```
+This would result in different behavior because `null` is a primitive value, and when used as an operand in the `+` operator, it will be converted to a number (0), which could cause the callback to be called with an unexpected argument.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' && op.attributes != null
+```
+This would result in different behavior because the `attributes` property is now checked for `null` instead of `null` or `undefined`. If the `attributes` property is not `null`, the `retain` operation will not be skipped, even if it is a number.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' && !op.attributes
+```
+This would result in different behavior because the `retain` operation will not be skipped if the `attributes` property is falsy (e.g., `0`, `false`, etc.).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof op.retain === 'number' && op.attributes !== 'object'
+```
+This would result in different behavior because the `retain` operation will not be skipped if the `attributes` property is not an object (e.g., a string, number

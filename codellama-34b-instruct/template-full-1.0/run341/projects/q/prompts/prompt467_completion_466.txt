@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.emit("unhandledRejection", unhandledReasons[at], promise);
+```
+This would result in different behavior because it would emit an "unhandledRejection" event with the reason for the rejection, rather than the reason and the promise, which might be unexpected by the listening code and could lead to unexpected bugs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.emit("unhandledRejection", reason, unhandledReasons[at]);
+```
+This would result in different behavior because it would emit an "unhandledRejection" event with the reason for the rejection and the promise, rather than the reason and the promise, which might be unexpected by the listening code and could lead to unexpected bugs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.emit("unhandledRejection", "different reason");
+```
+This would result in different behavior because it would emit an "unhandledRejection" event with a different reason,

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise
+```
+This would result in different behavior because it would resolve the promise immediately, without waiting for the resolver function to be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise.then()
+```
+This would result in different behavior because it would create a new promise that is resolved when the original promise is resolved, but it would not have the same value as the original promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return deferred.promise.then(function() { throw new Error('fail'); })
+```
+This would result in different behavior because it would create a new promise that is rejected immediately with the error 'fail', instead of waiting for the resolver function to be called.
+
+DONE.

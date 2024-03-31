@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'write_close'
+```
+This would result in different behavior because the event `'read_close'` is only emitted when the read stream is closed, whereas the event `'write_close'` is only emitted when the write stream is closed. By replacing `'read_close'` with `'write_close'`, the event handler will only be called when the write stream is closed, which could cause unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain'
+```
+This would result in different behavior because the event `'read_close'` is only emitted when the read stream is closed, whereas the event `'drain'` is emitted when the write stream is closed and all data has been written. By replacing `'read_close'` with `'drain'`, the event handler will be called whenever all data has been written to the write stream, which could cause unintended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'close'
+```
+This would result in different behavior

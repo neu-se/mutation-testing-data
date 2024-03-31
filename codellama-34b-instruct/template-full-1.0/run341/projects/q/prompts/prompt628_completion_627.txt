@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q["return"] = function () {};
+```
+This would result in different behavior because the `return` function would always return immediately, rather than waiting for the promise to be settled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q["return"] = function (value) {
+    throw value;
+};
+```
+This would result in different behavior because the `return` function would throw the given value, rather than returning it as a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q["return"] = function (value) {
+    return Q(value)
+        .then(function (value) {
+            return value;
+        });
+};
+```
+This would result in different behavior because the `return` function would return a promise that resolves to the given value, rather than returning the value directly.
+
+DONE.

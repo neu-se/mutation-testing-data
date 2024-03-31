@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+clearInterval(timeoutId);
+```
+This would result in different behavior because `clearInterval` is a function that stops the repeated execution of a function at specified intervals, while `clearTimeout` is a function that cancels a previously set timeout, which is not what is intended in this context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var timeoutId = setTimeout(function () {
+    deferred.reject("Timed out after " + ms + " ms");
+}, ms);
+```
+This would result in different behavior because it would create a new timeout that would reject the promise after the specified time, even if the original promise had already resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (Math.random() < 0.5) {
+    clearTimeout(timeoutId);
+}
+```
+This would result in different behavior because it would randomly decide whether to clear the timeout or not, which would cause the promise to be either resolved or rejected in a non-determ

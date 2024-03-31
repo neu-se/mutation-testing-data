@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+tz.r == null
+```
+This would result in different behavior because the `== null` check would also match if `tz.r` is `undefined`, `null`, or an empty string, whereas the original `=== undefined` check would only match if `tz.r` is strictly equal to `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!tz.r
+```
+This would result in different behavior because the `!tz.r` check would be true if `tz.r` is falsy, including if it's `undefined`, `null`, `false`, `0`, `-0`, `0n`, or an empty string. The original `=== undefined` check would only be true if `tz.r` is strictly equal to `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+tz.r != undefined
+```
+This would result in different behavior because the `!= undefined` check would be true if `tz.r` is not strictly equal to `

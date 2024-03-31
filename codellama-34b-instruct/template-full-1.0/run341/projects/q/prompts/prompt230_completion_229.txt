@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op === "when" && operands[2]
+```
+This would result in different behavior because it would check the second operand instead of the first, which could cause the code to misbehave if the second operand is not a thenable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op === "when" && !operands[1]
+```
+This would result in different behavior because it would check for the opposite condition (i.e., the first operand is not a thenable), which could cause the code to misbehave if the first operand is a thenable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op !== "when" || operands[1]
+```
+This would result in different behavior because it would check for the opposite condition (i.e., the operation is not "when" or the first operand is not a thenable), which could cause the code to misbehave if the operation is "when" and the first operand is a then

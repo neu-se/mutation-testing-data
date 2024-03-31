@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+...
+return spread(value, fulfilled, new Object());
+```
+This would result in different behavior because the third argument to `spread()` would be an object instead of a function, which would cause `spread()` to return a rejected promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...
+return spread(value, fulfilled, Promise.reject());
+```
+This would result in different behavior because the third argument to `spread()` would be a rejected promise, which would cause `spread()` to return a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+...
+return spread(value, fulfilled, function() { throw new Error('something'); });
+```
+This would result in different behavior because the third argument to `spread()` would be a function that throws an error, which would cause `spread()` to return a rejected promise.
+
+DONE.

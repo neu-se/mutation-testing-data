@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [key]);
+```
+This would result in a promise that resolves to `undefined`, because the `get` method is not defined for promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("promiseDispatch", [deferred.resolve, op, args]);
+```
+This would result in a promise that resolves to the result of the `promiseDispatch` method, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("resolve", [value]);
+```
+This would result in a promise that resolves to `value`, regardless of the actual behavior of the `resolve` method.
+
+DONE.

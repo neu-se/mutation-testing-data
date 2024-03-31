@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedBaseUrl)
+```
+This would result in different behavior because `URL.parse` returns a URL object rather than a string, and the code that uses the result of `URL.format` assumes that it is dealing with a string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedBaseUrl.href
+```
+This would result in different behavior because `parsedBaseUrl.href` refers to the original URL string that was parsed, whereas the original code uses the result of `URL.parse` which is a URL object that contains more information than just the URL string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the code that uses the result of `URL.format` would receive `null` instead of a URL object, which would cause the function to throw an error.
+
+DONE.

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```diff
+- if (this['isInfinite'](<PLACEHOLDER>) && z['isInfinite']()) {
++ if (this['isInfinite']() || z['isInfinite']()) {
+```
+This would result in different behavior because the `||` operator checks if either operand is `true`, whereas the `&&` operator checks if both operands are `true`. In the case of integer division, if either operand is `0`, the result will be `NaN`, regardless of the other operand.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```diff
+- if (this['isInfinite'](<PLACEHOLDER>) && z['isInfinite']()) {
++ if (this['isInfinite']() || z['isInfinite']() || z['isZero']()) {
+```
+This would result in different behavior because the `||` operator checks if either operand is `true`, whereas the `&&` operator checks if both operands are `true`. In the case

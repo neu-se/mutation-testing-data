@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args)
+```
+This would result in different behavior because the original code called `nfapply` on the promise returned by `Q(callback)`, but this option calls `nfapply` directly on `callback`, which is a function that is not a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(args).then(function(value) { return Q(value); })
+```
+This would result in different behavior because the original code returned a promise and this option returns a promise that resolves to a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.fapply(Q(callback), args)
+```
+This would result in different behavior because the original code called `nfapply` on the promise returned by `Q(callback)`, but this option calls `fapply` directly on `Q(callback)`, which is a promise.
+
+DONE.

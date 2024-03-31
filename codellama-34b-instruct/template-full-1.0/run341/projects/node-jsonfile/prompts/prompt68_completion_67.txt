@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/\uFEFF/
+```
+This would result in different behavior because the `^` anchor matches the beginning of a line, but the `/\uFEFF/` pattern matches the Unicode Byte Order Mark (BOM) anywhere in the string. Omitting the anchor may cause the replacement to occur in more places than intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?!\uFEFF).*/
+```
+This would result in different behavior because the `/^(?!\uFEFF).*/` pattern matches any string that starts with something other than the BOM, whereas the original pattern matches the BOM specifically. Omitting the negative lookahead assertion may cause the replacement to occur even if the string starts with the BOM.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\uFEFF{2,}/
+```
+This would result in different behavior because the `/\uFEFF{2,}/` pattern matches two or more consecutive BOM characters, whereas the original pattern matches only one

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is a primitive value that is not an instance of `Error`, whereas `newException` is an instance of `Error`. If the untrusted promise makes a call to `_rejected()`, passing `null` as the argument would result in a different behavior than the original code fragment, which would reject the promise with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error("Different error message")
+```
+This would result in different behavior because a new error with a different message would be created, which would be passed to the reject function. The original code fragment threw an error with the message "Promise does not support operation: " + op".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q
+```
+This would result in different behavior because `Q` is a different value than `newException`. If the untrusted promise makes a call to `_rejected()`, passing `Q` as the argument would result in a

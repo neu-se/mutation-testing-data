@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+aborted !== null
+```
+This would result in different behavior because the original code fragment checks if `aborted` is truthy, but this change checks if it is not strictly equal to `null`. If `aborted` is any other falsy value (such as `false` or `0`), the original code would continue executing, but this change would stop it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+aborted && abortCb
+```
+This would result in different behavior because the original code fragment checks if `aborted` is truthy and `abortCb` is defined, but this change checks if `aborted` is truthy and `abortCb` is defined, but then also checks if `abortCb` is also truthy (because of the double ampersand). If `aborted` is truthy and `abortCb` is defined, but `abortCb` is falsy, the original code would continue executing, but this change would stop it.
+
+Option 

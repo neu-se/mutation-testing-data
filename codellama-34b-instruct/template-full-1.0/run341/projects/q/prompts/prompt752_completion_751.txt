@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rejection.cause
+```
+This would result in different behavior because `rejection.cause` is not a valid property of the `Error` object, while `rejection` is. This would cause a runtime error and the test would fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delete rejection
+```
+This would result in different behavior because deleting the `rejection` variable would remove the error object from the promise's rejection handling mechanism. This would cause the promise to settle instead of being rejected, and the test would fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is not an instance of `Error`, while `rejection` is. This would cause a different type of object to be thrown, and the test would fail.
+
+DONE.

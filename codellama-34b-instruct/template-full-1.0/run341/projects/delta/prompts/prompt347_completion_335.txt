@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+  let baseOpData = <PLACEHOLDER>;
+  if (typeof op.retain === 'object' && op.retain !== null) {
+    const slice = base.slice(baseIndex, baseIndex + 1);
+    const baseOp = new OpIterator(slice.ops).next();
+    const [embedType, opData, baseOpData] = getEmbedTypeAndData(
+      op.retain,
+      baseOp.insert,
+    );
+    const handler = Delta.getHandler(embedType);
+    inverted.retain(
+      { [embedType]: handler.invert(opData, baseOpData) },
+      AttributeMap.invert(op.attributes, baseOp.attributes),
+    );
+    return baseIndex + 1;
+  }
+```
+This would result in different behavior because `baseOpData` would be initialized with the value of `<PLACEHOLDER>`, which would be different from the original assignment `baseOp = new OpIterator(slice.ops

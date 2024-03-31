@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(end, function (end, data) {
+  if(!end) op && op(data)
+  else once(end)
+  cb(null, data)
+})
+```
+This would result in different behavior because it always passes `null` as the first argument to `cb()`, regardless of whether `end` is true or false. In the original code, the first argument to `cb()` is determined by the value of `end`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(end, function (end, data) {
+  if(!end) op && op(data)
+  else once(end)
+  cb(end, data)
+})
+```
+This would result in different behavior because it always passes the `end` value as the first argument to `cb()`, regardless of whether `end` is true or false. In the original code, the first argument to `cb()` is determined by whether `end` is true or false.
+
+Option 3: The PLACEHOLDER can be

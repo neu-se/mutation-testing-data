@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because `deferred.resolve` instead of `deferred.reject` is called on failure, which would cause the promise to be resolved with the error instead of rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).then(function() {
+    deferred.reject();
+});
+```
+This would result in different behavior because an empty rejection callback is added to the promise chain, which would cause the promise to be rejected with a undefined error instead of resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).then(function(result) {
+    deferred.reject(result);
+});
+```
+This would result in different behavior because an empty rejection callback is added to the promise chain, which would cause

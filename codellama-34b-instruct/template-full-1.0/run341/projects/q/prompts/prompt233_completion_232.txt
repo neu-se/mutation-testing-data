@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.then.apply
+```
+This would result in different behavior because `promiseDispatch` and `then` are different methods that serve different purposes. `promiseDispatch` is an internal method used to dispatch promises, while `then` is a public method used to register callbacks for a promise. Replacing `promiseDispatch` with `then` would potentially break the functionality of the promise, causing it to not resolve or reject properly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.reject.apply
+```
+This would result in different behavior because `reject` is a method that is used to explicitly reject a promise, while `promiseDispatch` is an internal method used to dispatch promises. Calling `reject` instead of `promiseDispatch` would cause the promise to be rejected, potentially causing unintended consequences.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch.bind(resolvedPromise).apply

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name.toLowerCase(), policy]
+```
+This would result in different behavior because the code now converts the policy name to lowercase before using it as the key in the map. This means that the `get()` method will not be able to find the policy by its original name, and will instead return `null` even if the policy exists.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name.split(' ').join(''), policy]
+```
+This would result in different behavior because the code now removes any spaces from the policy name before using it as the key in the map. This means that policies with the same name but different spacing will be treated as the same policy, and the map will not be able to store both policies.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name.slice(1), policy]
+```
+This would result in different behavior because the code now uses only the first letter

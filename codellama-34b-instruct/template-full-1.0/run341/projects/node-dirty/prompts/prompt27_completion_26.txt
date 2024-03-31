@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit
+```
+This would result in different behavior because it would emit an event even if the key already exists in the map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit.apply(this._data, [key])
+```
+This would result in different behavior because it would emit an event with the key as the only argument, whereas the original code fragment emits an event with no arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit.apply(this._queue, [key])
+```
+This would result in different behavior because it would emit an event from the `_queue` map, whereas the original code fragment emits an event from the `this` object.
+
+DONE.

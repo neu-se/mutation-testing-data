@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+[options.deprecated]
+```
+This would result in different behavior because `options.deprecated` is undefined, and `undefined` is not equal to `true` in JavaScript. Therefore, the `if (deprecated === true) return tzs;` check in the `deliverTimezones` function would not work as intended, and the function would return the full list of timezones instead of only the non-deprecated ones.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!(options.deprecated)
+```
+This would result in different behavior because `options.deprecated` would be negated, and the `if (deprecated === true) return tzs;` check in the `deliverTimezones` function would still work as intended, but it would have the opposite effect. The function would return only the deprecated timezones instead of the non-deprecated ones.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+options.deprecated

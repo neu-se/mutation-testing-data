@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor['valueOf'] = function () {
+            var inspected = inspect();
+            if (inspected.state === "pending" ||
+                inspected.state === "rejected") {
+                return promise;
+            }
+            return inspected.value;
+        };
+```
+This would result in different behavior because the `valueOf` method would be overwritten, which could cause issues with the promise's behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor['inspect'] = function (inspected) {
+            if (inspected.state === "rejected") {
+                return "rejected";
+            } else {
+                return "pending";
+            }
+        };
+```
+This would result in different behavior because the `inspect` method would be overwritten, which could cause issues with the promise's behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor['reject'] = function (reason)

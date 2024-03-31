@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^index\.[a-z]+$/
+```
+This would result in different behavior because the caret `^` matches the start of the string, so the regular expression would only match if the string starts with "/index.".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]+\/.*$/
+```
+This would result in different behavior because the `.*` at the end of the regular expression would match any character (including forward slashes) until the end of the string, so the regular expression would match even if the string has additional characters after "index.".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]+\/?.*/
+```
+This would result in different behavior because the `?` after the `.*` makes the previous token optional, so the regular expression would match even if the string does not have any additional characters after "index.".
+
+DONE.

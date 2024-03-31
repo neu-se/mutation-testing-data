@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+.test(w.slice(0, -1))
+```
+This would result in different behavior because the `String.prototype.slice()` method returns a new string, and the `RegExp.prototype.test()` method takes a string argument. By slicing the word before testing it, we are passing a different string to the `test()` method, which would cause it to return `false` even if the word matches the regular expression, because it is a different string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+.test(w.replace(/e$/, ''))
+```
+This would result in different behavior because the `String.prototype.replace()` method returns a new string, and the `RegExp.prototype.test()` method takes a string argument. By replacing the last letter of the word with an empty string before testing it, we are passing a different string to the `test()` method, which would cause it to return `false` even if the word matches the regular expression, because it is a different string.
+
+Option 3

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end()
+```
+This would result in different behavior because `this._writeStream.end()` will close the write stream immediately, instead of waiting for the current write to finish.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.destroy()
+```
+This would result in different behavior because `this._writeStream.destroy()` will close the write stream immediately, instead of waiting for the current write to finish.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.pipe(this)
+```
+This would result in different behavior because `this._writeStream.pipe(this)` will cause the write stream to pipe its output to the current object, instead of waiting for the current write to finish.
+
+DONE.

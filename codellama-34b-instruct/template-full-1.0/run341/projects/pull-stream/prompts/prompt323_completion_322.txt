@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!onEnd
+```
+This would result in different behavior because `!onEnd` will always be truthy, even if `onEnd` is falsy, which can cause the `once` function to be called even if it wasn't meant to be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onEnd === null
+```
+This would result in different behavior because `onEnd === null` will only be true if `onEnd` is null, which can cause the `once` function to be called even if it wasn't meant to be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onEnd && onEnd()
+```
+This would result in different behavior because `onEnd && onEnd()` will only call `onEnd` if it is both truthy and a function, which can cause the `once` function to be called even if it wasn't meant to be called.
+
+DONE.

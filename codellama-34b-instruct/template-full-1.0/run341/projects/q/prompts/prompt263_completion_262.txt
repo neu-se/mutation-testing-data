@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(Q.reject(value))
+```
+This would result in different behavior because `Q.reject` returns a rejected promise, whereas `Q(value)` returns a fulfilled promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+become(Q(reject(value)))
+```
+This would result in different behavior because `reject` is a different function from `Q.reject`, and it is not clear what the desired behavior should be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+become(Q(value).reflect())
+```
+This would result in different behavior because ` reflect()` returns a promise that is settled in the same way as the original promise, but with a null value.
+
+DONE.

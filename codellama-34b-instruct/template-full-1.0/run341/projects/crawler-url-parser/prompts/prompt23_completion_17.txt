@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
+```
+This would result in different behavior because it would incorrectly prepend "http://" to URLs that start with "//", when it should only prepend it to URLs that start with a scheme like "http://".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr.replace(/\/\/$/, '');
+```
+This would result in different behavior because it would incorrectly remove the last occurrence of "//" in a URL, when it should only remove it if it appears at the beginning of the URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr.replace(/^http:/, 'https:');
+```
+This would result in different behavior because it would incorrectly convert "http://" to "https://" at the beginning of a URL, when it should only do so if the URL is not a local path.
+
+DONE.

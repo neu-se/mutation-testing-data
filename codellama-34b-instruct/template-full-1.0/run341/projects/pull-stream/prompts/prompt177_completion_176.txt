@@ -1,0 +1,17 @@
+  *Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+abort || abortCb
+```
+This would result in the `abortCb` function being called every time `abort` is truthy, even if it's not a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+abort && abortCb
+```
+This would result in the `abortCb` function being called only when `abort` is truthy, and `abortCb` is also truthy. If `abortCb` is falsy, the function would return `true` instead of calling `abortCb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+abort || (abortCb && abortCb())
+```
+This would result in the `abortCb` function being called only when `abort` is truthy, but also allow `abortCb` to be falsy and still return `true`. If `abort` is falsy, the function

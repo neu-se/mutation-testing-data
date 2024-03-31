@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+for (const [key, cbs] of Object.values(this._queue))
+```
+This would result in different behavior because `Object.values(this._queue)` will return an array of values of the queue, but `this._queue` is a Map object, so the `for` loop will not iterate over the key-value pairs of the queue as intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+for (const [key, cbs] of this._queue.entries())
+```
+This would result in different behavior because `this._queue.entries()` will return an iterator over the key-value pairs of the queue, but the `for` loop is not iterating over the iterator, so it will not iterate over the queue as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+for (const [key, cbs] of this._queue.keys())
+```
+This would result in different behavior because `this._queue.keys()` will return an iterator over the keys

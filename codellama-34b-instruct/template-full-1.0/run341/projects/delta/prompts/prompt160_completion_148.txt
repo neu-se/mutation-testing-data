@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.push({ insert: delta.ops[index] });
+```
+This would result in different behavior because the `push` method is called on `retDelta` instead of `delta`, which would insert the new element at the end of `retDelta` instead of at the current index.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.splice(index, 0, { insert: delta.ops[index] });
+```
+This would result in different behavior because the `splice` method is called on `retDelta` instead of `delta`, which would insert the new element at the current index and move the following elements over.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.ops.splice(index, 0, { insert: delta.ops[index] });
+```
+This would result in different behavior because the `ops` array is accessed directly and the `splice` method is called with the current index, but the new element is not inserted at

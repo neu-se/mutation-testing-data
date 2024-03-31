@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.nextTick(deferred.resolve);
+```
+This would result in different behavior because the `deferred.resolve` function would be called immediately instead of being passed as an argument to `nextTick`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.nextTick(function() { return deferred.resolve.apply(this, arguments); });
+```
+This would result in different behavior because the `deferred.resolve` function would be called with the wrong `this` value and arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q.nextTick(function() { return deferred.resolve(promise); });
+```
+This would result in different behavior because the `deferred.resolve` function would be called with the wrong argument.
+
+DONE.

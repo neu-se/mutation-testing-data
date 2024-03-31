@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(Op.length(baseOp))
+```
+This would result in different behavior because the `delete` method on the `inverted` delta would remove the op from the delta, rather than inserting it as intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.push(baseOp)
+```
+This would result in different behavior because the `push` method on the `inverted` delta would insert the op at the end of the delta, rather than retaining it as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(baseOp), AttributeMap.invert(op.attributes, baseOp.attributes))
+```
+This would result in different behavior because the `retain` method on the `inverted` delta would retain the op but invert its attributes, rather than inserting it as intended.
+
+DONE.

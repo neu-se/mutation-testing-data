@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (data) { return !!test(data) }
+```
+This would result in different behavior because the double negation `!!` would always return the boolean opposite of the result of `test(data)`, regardless of whether `test(data)` is a boolean or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (data) { return test(data) || false }
+```
+This would result in different behavior because the `|| false` part would always return `false` if `test(data)` is falsy, regardless of the return value of `filter(test)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (data) { return data.hasOwnProperty('test') ? test(data) : !test(data) }
+```
+This would result in different behavior because it would return the negation of `test(data)` if `data` has a property called `test`, regardless of the return value of `filter(test)`.
+
+DONE.

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).throw(name, nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the original code calls the `dispatch()` method, which is presumably a method of the `object` argument, with a single string argument `name` and an array of arguments `nodeArgs`. In contrast, the modified code calls the `throw()` method with a single string argument `name` and an array of arguments `nodeArgs`, which is not the same as the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).nodeify(deferred.makeNodeResolver()).fail(deferred.reject);
+```
+This would result in different behavior because the original code calls the `dispatch()` method with a single string argument `name` and an array of arguments `nodeArgs`, whereas the modified code calls the `nodeify()` method with a single argument `deferred.makeNodeResolver()` and then calls the `fail()` method with a single argument `deferred.reject` on

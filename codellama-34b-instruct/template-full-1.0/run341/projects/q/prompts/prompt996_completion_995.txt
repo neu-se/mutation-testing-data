@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the callback would be called with `null` instead of a resolver function, which would cause the promise to never resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver().bind(null)
+```
+This would result in different behavior because the callback would be called with a bound resolver function instead of an unbound one, which would cause the promise to resolve with the wrong value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver().toString()
+```
+This would result in different behavior because the callback would be called with the string representation of the resolver function instead of the function itself, which would cause the promise to never resolve.
+
+DONE.

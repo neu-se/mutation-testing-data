@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+urlMap.get(currentUrl.url) === undefined
+```
+This would result in different behavior because `Map.prototype.has()` returns a boolean indicating whether the map contains the specified element, while `Map.prototype.get()` returns the element associated with the specified key or `undefined` if the key can't be found. In this case, the `urlMap` is being used to keep track of the unique URL strings that are encountered, so if a URL is already in the map, the test `urlMap.has(currentUrl.url)` will return `true` even if the URL is associated with a different text value. By using `urlMap.get(currentUrl.url) === undefined`, the code will only consider a URL to be unique if it is not present in the map at all, rather than if it is present but with a different text value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+urlMap.size == 0
+```
+This would result in different behavior because `Map.prototype.size` returns the number

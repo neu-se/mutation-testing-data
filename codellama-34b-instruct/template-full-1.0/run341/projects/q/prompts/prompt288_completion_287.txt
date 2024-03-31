@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer = function (promise, longStackTraces) {
+    var messages, progressListeners;
+    promise = promise || new Promise();
+    progressListeners = [];
+    messages = [];
+    if (longStackTraces) {
+        var e = new Error();
+        if (typeof captureStackTrace === 'function') {
+            captureStackTrace(e, become);
+        }
+        promise.stack = e.stack.substring(e.stack.indexOf("\n") + 1);
+    }
+    promise.promiseDispatch = function (progress) {
+        if (resolvedPromise) {
+            return;
+        }
+        if (progress) {
+            array_reduce(progressListeners, function (undefined, progressListener) {
+                Q.nextTick(function () {
+                    progressListener(progress);
+                });
+            }, void 0);
+        } else {
+            array_reduce(messages, function (undefined, message) {
+                Q.nextTick(function () {

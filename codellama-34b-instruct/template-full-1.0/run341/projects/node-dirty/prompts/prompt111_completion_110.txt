@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Empty row at the end of the db: ${buffer}`)
+```
+This would result in different behavior because the error message would indicate that the row is empty, rather than corrupted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Invalid row at the end of the db: ${buffer}`)
+```
+This would result in different behavior because the error message would indicate that the row is invalid, rather than corrupted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+throw new Error(`Database corrupted: ${buffer}`)
+```
+This would result in different behavior because the error message would indicate that the entire database is corrupted, rather than just the row at the end.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver().fail(deferred.reject));
+```
+This would result in different behavior because the `fail` method would be called twice on the `deferred.makeNodeResolver()` object, which is not the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(deferred.reject));
+```
+This would result in different behavior because the `deferred.reject` function would be called immediately, which is not the desired behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver().then(deferred.reject));
+```
+This would result in different behavior because the `then` method would be called on the `deferred.makeNodeResolver()` object, which is not the desired behavior.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+chunk.lastIndexOf('\n') > 0
+```
+This would result in different behavior because it would cause the code to always enter the `if` block, even if the chunk does not contain a newline character. This would lead to an infinite loop and the `this.emit('drain')` event would never be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+chunk.lastIndexOf('\n') < 0
+```
+This would result in different behavior because it would cause the code to always skip the `if` block, even if the chunk contains a newline character. This would lead to the `this.emit('drain')` event being emitted too early, before the entire chunk has been processed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+chunk.lastIndexOf('\n') !== -1
+```
+This would result in different behavior because it would cause the code to always enter the `if` block, even if the chunk does not contain a newline character. This would lead

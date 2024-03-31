@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+-1
+```
+This would result in different behavior because the `array_indexOf` method checks if `promise` is present in `unhandledRejections`, and if it is, it emits an `unhandledRejection` event with the reason and promise. If `atReport` is replaced with `-1`, the `array_indexOf` method will always return `-1`, even if `promise` is present in `unhandledRejections`, which would result in the `unhandledRejection` event never being emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(unhandledRejections, promise) + 1
+```
+This would result in different behavior because the `array_indexOf` method checks if `promise` is present in `unhandledRejections`, and if it is, it emits an `unhandledRejection` event with the reason and promise. If `atReport` is replaced with `array_indexOf(unhandledRejections, promise) + 1

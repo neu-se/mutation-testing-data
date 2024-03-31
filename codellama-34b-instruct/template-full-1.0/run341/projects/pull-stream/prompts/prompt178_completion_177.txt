@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb(cb, abort, onAbort)
+```
+This would result in different behavior because the original code fragment returned a function that takes three arguments, while this replacement code fragment calls the `abortCb` function immediately with three arguments and returns its return value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb.bind(null, cb, abort, onAbort)
+```
+This would result in different behavior because the original code fragment returned a function that takes three arguments, while this replacement code fragment returns a bound function that always takes a single argument and ignores any additional arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb.bind(null, abort, onAbort)
+```
+This would result in different behavior because the original code fragment returned a function that takes three arguments, while this replacement code fragment returns a bound function that always returns the same value (the `abort` and `onAbort` arguments) and ignores any additional arguments.

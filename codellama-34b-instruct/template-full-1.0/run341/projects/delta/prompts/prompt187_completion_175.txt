@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => {
+  throw new Error('Not implemented');
+}
+```
+This would result in different behavior because the original implementation would return a function that can handle the embed type, but the new implementation would throw an error instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => {
+  return (data) => {
+    return data;
+  }
+}
+```
+This would result in different behavior because the original implementation would return a function that can handle the embed type, but the new implementation would return a function that simply returns the input data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => {
+  let handler = null;
+  for (let key in handlers) {
+    if (handlers.hasOwnProperty(key)) {
+      let value = handlers[key];
+      if (value.type === embedType) {
+        handler = value.handler;
+        break;

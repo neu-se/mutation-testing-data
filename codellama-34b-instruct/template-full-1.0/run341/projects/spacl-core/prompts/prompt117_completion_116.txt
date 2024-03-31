@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches(path, ctx) || !(verb in this.verbs)
+```
+This would result in different behavior because the `!` operator negates the expression, so if the original code fragment evaluates to `true`, the mutated code fragment would evaluate to `false`, and vice versa.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && !(verb in this.verbs)
+```
+This would result in different behavior because the `!` operator negates the expression, so if the original code fragment evaluates to `false`, the mutated code fragment would evaluate to `true`, and vice versa.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) || verb in this.verbs
+```
+This would result in different behavior because the `||` operator would evaluate to `true` if either of the operands is `true`, so if the original code fragment evaluates to `true`

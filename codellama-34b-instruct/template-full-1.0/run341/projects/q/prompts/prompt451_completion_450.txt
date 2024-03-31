@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.push("(no stack) " + reason.stack);
+```
+This would result in different behavior because it references the `stack` property of the `reason` object, which is likely a string, so concatenating it with the string "(no stack)" would result in an unexpected and possibly incorrect behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.push("(no stack) " + reason.message);
+```
+This would result in different behavior because it references the `message` property of the `reason` object, which is likely a string, so concatenating it with the string "(no stack)" would result in an unexpected and possibly incorrect behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons.unshift("(no stack) " + reason.stack);
+```
+This would result in different behavior because it uses the `unshift` method instead of `push`, which would add the new string to the beginning of the

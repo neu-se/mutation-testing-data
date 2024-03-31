@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return defer.promise.then(
+    function (value) {
+        return fulfilled ? fulfilled(value) : value;
+    },
+    function (exception) {
+        return rejected ? rejected(exception) : reject(exception);
+    },
+    function (value) {
+        return progressed ? progressed(value) : value;
+    }
+);
+```
+This would result in different behavior because the `defer.promise.then` method
+is not guaranteed to be called with exactly three arguments, so the code would
+not work correctly if there are fewer or more arguments passed to the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer.promise.then(fulfilled, rejected, progressed);
+```
+This would result in different behavior because the `defer.promise.then`
+method is not guaranteed to be called with exactly three arguments, so the
+code would not work correctly if there are fewer or more arguments passed to
+the function.
+
+Option 3

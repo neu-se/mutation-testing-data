@@ -1,0 +1,9 @@
+  Mutation testing is a software testing technique that involves introducing deliberate faults or mutations into a program's source code to assess the effectiveness of its test suites. Once the mutations are made, the tests are run again to detect any defects in the test suites following the mutations. Implementing mutation testing could help find and fix the faults in the error handling section of the given code.
+
+Here is a mutant that can be introduced in order to test the error handling:
+
+* Option 1: Replace `throw new Error('diff() called ' + prep + ' non-document')` with `throw new Error('diff() called on non-document')`
+This would result in a different exception being thrown, so any tests that are expecting the original error would fail.
+* Option 2: Replace `const iter = new OpIterator(this.ops);` with `const iter = new OpIterator([new Op(), new Op()]);`
+This would change the input to the OpIterator constructor, so any tests that are expecting the original input would fail.
+* Option 3: Replace `if (iter.hasNext())` with `if (

@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.dispatch("post", [name, array_slice(arguments, 2)], "empty")
+```
+
+By appending the argument "empty" to the dispatch call, the code will fail when trying to access Promise.prototype.empty, which does not exist. This would result in different behavior because the dispatch call would be unsuccessful, triggering the promise to reject rather than resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.dispatch("post", [name, array_slice(arguments, 2)], "resolve")
+```
+By appending the argument "resolve" to the dispatch call, the code will result in different behavior because the promise will resolve to the return value of the dispatch call, rather than the default behavior of resolving to Promise.prototype.post.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.dispatch("post", [name, array_slice(arguments, 2)], "then")
+```
+By appending the argument

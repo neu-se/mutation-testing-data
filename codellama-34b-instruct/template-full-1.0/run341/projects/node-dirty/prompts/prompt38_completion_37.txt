@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+for (const [key, val] of this._data[key])
+```
+This would result in different behavior because the `key` property is not guaranteed to be an interable object, and the `for...of` loop would throw an error if it is not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+for (const [key, val] of Object.entries(this._data))
+```
+This would result in different behavior because `Object.entries()` returns an array of key-value pairs, rather than an iterable object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+for (const [key, val] of this._data.values())
+```
+This would result in different behavior because `Map.prototype.values()` returns an iterable object that contains only the values of the `Map`, rather than key-value pairs.
+
+DONE.

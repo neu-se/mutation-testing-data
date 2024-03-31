@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```targetFilePath.slice(1)```
+This would result in different behavior because the original code is checking for a malicious path, but this new code would not detect a malicious path that starts with a forward slash.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```targetFilePath.split('/')[0] + '/..'```
+This would result in different behavior because the original code is checking for a malicious path by comparing it to the source directory, but this new code would allow a malicious path to be created in a parent directory of the source directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```targetFilePath.split('/').reverse()[0]```
+This would result in different behavior because the original code is checking for a malicious path by comparing it to the source directory, but this new code would allow a malicious path to be created in a sibling directory of the source directory.
+
+DONE.

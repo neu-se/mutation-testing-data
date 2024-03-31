@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone()));
+```
+This would result in different behavior because it would always clone the rules, regardless of the value of the `deep` parameter.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone(ctx)));
+```
+This would result in different behavior because it would always pass the `ctx` parameter to the `clone` method of the rule, regardless of whether it was intended to be used as a deep or shallow copy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new Policy(name, ...this.rules.map((rule) => rule.clone({ ctx: ctx })));
+```
+This would result in different behavior because it would always pass an object with a `ctx` property as the argument to the `clone` method of the rule, regardless of whether it was intended to be used as a deep or shallow
