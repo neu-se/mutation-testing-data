@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(continuer, "throw", arg)
+```
+This would result in different behavior because the original code passes the `errback` function, which is a bound version of `continuer` with the `"throw"` verb, to `Q.when`. However, this replacement code would pass a function that is the result of calling `continuer` with the `"throw"` verb and `arg` as arguments, which would not have the desired effect.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (verb, arg) {
+    return continuer.apply(continuer, [verb, arg]);
+}
+```
+This would result in different behavior because the original code passes the `errback` function, which is a bound version of `continuer` with the `"throw"` verb, to `Q.when`. However, this replacement code would pass a function that is the result of calling `continuer.apply` with `verb` and `arg` as arguments, which would not have the desired

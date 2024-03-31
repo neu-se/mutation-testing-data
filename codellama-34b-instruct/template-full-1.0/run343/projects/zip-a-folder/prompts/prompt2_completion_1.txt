@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ZipAFolder.zip
+```
+This would result in different behavior because the `zip` method is different from the `compress` method in terms of the logic it uses to create the compressed archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ZipAFolder.compress.bind(this, tarFilePath)
+```
+This would result in different behavior because the `this` context of the `compress` method would be different when called with `bind`, potentially causing errors or unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(() => ZipAFolder.compress({ src, targetFilePath: tarFilePath, format: 'zip', zipAFolderOptions }))()
+```
+This would result in different behavior because the `compress` method would be called immediately, rather than being called later in the control flow, potentially causing errors or unexpected behavior.
+
+DONE.

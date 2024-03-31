@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'open', resolve
+```
+This would result in different behavior because the event `'open'` is emitted when the file is opened, not when the file is closed, which is what the original code is waiting for. As a result, the promise would resolve prematurely, potentially causing the program to behave unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', reject
+```
+This would result in different behavior because the event `'error'` is emitted when there is an error while writing to the file, whereas the original code is waiting for the `'close'` event to resolve the promise. With this change, the promise would be rejected prematurely, potentially causing the program to behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'finish', resolve
+```
+This would result in different behavior because the event `'finish'` is emitted when the file has been written to and the writing has finished, whereas the original code is waiting for the `'close'` event to resolve the promise

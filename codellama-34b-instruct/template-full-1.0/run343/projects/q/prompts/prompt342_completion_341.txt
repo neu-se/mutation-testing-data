@@ -1,0 +1,32 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    self.promiseDispatch(function (value) {
+        if (done) {
+            return;
+        }
+        done = true;
+
+        deferred.resolve(fulfilled(value));
+    }, "when", [
+        function (exception) {
+            if (done) {
+                return;
+            }
+            done = true;
+
+            deferred.resolve(rejected(exception));
+        }
+    ]);
+});
+```
+This would result in different behavior because `Q.nextTick` is used to ensure that the callbacks are invoked asynchronously, which can cause the promise to be resolved or rejected with a different value or reason than what was originally intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var resolved = false;
+deferred.resolve(Q.all(
+    self.promiseDispatch(function (value) {
+        if (!resolved) {
+            resolved = true;
+            return ful

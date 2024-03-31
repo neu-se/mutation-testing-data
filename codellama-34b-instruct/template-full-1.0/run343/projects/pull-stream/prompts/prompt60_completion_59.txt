@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink.abort(abort, cb || function () {})
+```
+This would result in different behavior because `sink.abort` is called with the `abort` argument set to `true` instead of the original code which passed `null` as the first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if(op && false === op(data)) {
+```
+This would result in different behavior because the `op` function is now called with the `data` argument instead of the original code which called `op` with a hard-coded `null` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+sink.abort(true, cb || function () {})
+```
+This would result in different behavior because `sink.abort` is called with the `true` value instead of the original code which passed the `abort` argument.
+
+DONE.

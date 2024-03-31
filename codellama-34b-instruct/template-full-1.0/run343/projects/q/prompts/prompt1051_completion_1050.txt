@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve(end);
+```
+This would result in different behavior because `ends.resolve` is called with a different argument, which would cause the `put` method to behave differently. Specifically, `put` would no longer update the `ends` deferred object with the latest value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({head: next.promise, tail: end});
+```
+This would result in different behavior because `ends.resolve` is called with a different argument, which would cause the `get` method to behave differently. Specifically, `get` would return a promise that resolves to a value other than the latest value stored in the queue.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({head: next.promise, tail: end});
+```
+This would result in different behavior because `ends.resolve` is called with a different argument, which would cause the `close` method to behave differently. Specifically, `close` would return

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(value).thenResolve(value);
+```
+This would result in different behavior because `thenResolve` returns a new promise that is resolved with the given value, whereas `fcall` calls a function with the given value and returns the result of that function call. Using `thenResolve` instead of `fcall` would cause the promise returned by the `then` method to always resolve with the value of `value`, regardless of the return value of the `callback` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall(promise).thenResolve(value);
+```
+This would result in different behavior because `fcall` calls a function with the given value and returns the result of that function call, whereas `thenResolve` returns a new promise that is resolved with the given value. Using `promise.fcall` instead of `callback.fcall` would cause the promise returned by the `then` method to always resolve with the value of `promise`, regardless of the

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)
+```
+This would result in different behavior because the function would not be called, and therefore the promise would never be resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).dispatch('resolve')
+```
+This would result in different behavior because the dispatch method would not be called on the promise, and therefore the promise would not be resolved or rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(function () {
+    throw new Error('test');
+})
+```
+This would result in different behavior because the generated error would not be caught by the `when` function, and therefore the promise would not be rejected.
+
+DONE.

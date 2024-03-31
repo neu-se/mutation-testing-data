@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` would resolve the promise instead of rejecting it, which would cause the `fail` method to not be called, and the test to pass even though there is an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is not a function and would cause an error to be thrown when the `deferred.reject` method is called. This error would be caught by the `fail` method, causing it to be ignored, and the test to pass even though there is an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject("error")
+```
+This would result in different behavior because it would cause the `deferred.reject` method to be called with a reason for the rejection, which would be caught by the `fail` method and reported as a failure.
+
+DONE.

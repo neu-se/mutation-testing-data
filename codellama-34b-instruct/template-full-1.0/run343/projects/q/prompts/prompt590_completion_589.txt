@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+makeGenerator.apply(this, arguments);
+```
+This would result in different behavior because it would call the `apply` method on `makeGenerator` with the current `this` context and `arguments` object, which could potentially break the functionality of the `Q.spawn` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(makeGenerator())();
+```
+This would result in different behavior because it would create a new promise that resolves to the value returned by `makeGenerator()` and then immediately call the promise with `()`. This could potentially cause the `Q.spawn` function to execute the generator function more than once, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { return makeGenerator(); }();
+```
+This would result in different behavior because it would create a new function that returns the value returned by `makeGenerator()` and then immediately call the function with `()`. This could potentially cause the `Q.spawn` function to execute the

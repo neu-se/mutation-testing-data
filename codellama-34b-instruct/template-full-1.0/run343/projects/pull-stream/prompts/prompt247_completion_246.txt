@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort && err
+```
+This would result in different behavior because the original code fragment was `err || abort`, which would only continue flow when `err` or `abort` is truthy. In contrast, the new fragment `abort && err` would only continue flow when both `abort` and `err` are truthy. This change would make the code behave differently in the event that `err` and/or `abort` are falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!abort || !err
+```
+This would result in different behavior because the original code fragment was `err || abort`, which would only continue flow when `err` or `abort` is truthy. In contrast, the new fragment `!abort || !err` would only continue flow when at least one of `abort` or `err` is falsy. This change would make the code behave differently in the event that `abort` and `err` are both truthy.
+
+Option 3: The

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.dispatch("post", [name, nodeArgs])
+```
+This would result in different behavior because `promise.dispatch("post", [name, nodeArgs])` is a different expression than `Q(callback).fapply(nodeArgs)`. The former is a method call on a promise object, while the latter is a call to the `fapply` method of the `Q` function with a promise object as its first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fapply(nodeArgs)
+```
+This would result in different behavior because `callback.fapply(nodeArgs)` is a different expression than `Q(callback).fapply(nodeArgs)`. The former is a method call on a callback function object, while the latter is a call to the `fapply` method of the `Q` function with a callback function object as its first argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver().fapply(nodeArgs)

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isStopIteration(exception)
+```
+This would result in different behavior because the not operator (!) would cause the exception to be evaluated as truthy, regardless of whether it is a StopIteration exception. This would cause the else branch to be taken, which returns a rejected promise with the exception, rather than the if branch, which returns a Q promise for the exception's value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+exception !== undefined
+```
+This would result in different behavior because the exception would only be considered "true" if it is defined, which means that the else branch would be taken if the exception is undefined, rather than the if branch, which returns a Q promise for the exception's value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof exception === "object"
+```
+This would result in different behavior because the exception would only be considered "true" if it is an object, which means that the else branch would be taken if the exception is not an object, rather

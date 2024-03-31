@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inspected.state !== "fulfilled"
+```
+This would result in different behavior because it would only evaluate to true if the inspected state is not "fulfilled", whereas the original code would also evaluate to true if the state is "rejected". This change would result in the callback being executed even if the promise is rejected, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inspected.state === "pending"
+```
+This would result in different behavior because it would only evaluate to true if the inspected state is "pending", whereas the original code would also evaluate to true if the state is "rejected". This change would result in the callback being executed only if the promise is still pending, and not if it has already been resolved or rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inspected.state === "settled"
+```
+This would result in different behavior because it would only evaluate to true if the inspected state is "

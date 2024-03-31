@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (resolution, message) {
+    if (deferred.promise !== undefined) {
+        deferred.resolver(resolution, message);
+    } else {
+        deferred.promise = Q.reject(message);
+    }
+}
+```
+This would result in different behavior because it would cause the nodeArgs array to be pushed onto the array of arguments passed to `nodeArgs.push()`, which would result in an incorrect number of arguments being passed to the `makeNodeResolver()` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (resolution, message) {
+    if (deferred.promise !== undefined) {
+        deferred.resolver(resolution, message);
+    } else {
+        deferred.promise = Q.reject(message);
+    }
+}
+```
+This would result in different behavior because it would cause the `makeNodeResolver()` function to be called with the wrong number of arguments, which would result in an error being thrown.

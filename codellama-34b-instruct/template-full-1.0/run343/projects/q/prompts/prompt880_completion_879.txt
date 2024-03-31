@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(null)
+```
+This would result in different behavior because `bind(null)` creates a new function that always uses `null` as the `this` value when called, whereas the original code uses the `deferred` object as the `this` value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => deferred.makeNodeResolver()
+```
+This would result in different behavior because the arrow function creates a new function that calls `deferred.makeNodeResolver()` only when the arrow function is called, whereas the original code calls `deferred.makeNodeResolver()` at the time of function creation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(deferred)
+```
+This would result in different behavior because `bind(deferred)` creates a new function that uses `deferred` as the `this` value when called, whereas the original code uses the original `this` value (the `deferred`

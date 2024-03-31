@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const totalLength = delta.ops.reduce((length, op) => {
+  if (op.retain) {
+    length += op.retain;
+  } else if (op.insert) {
+    length += Op.length(op.insert);
+  }
+  return length;
+}, 0);
+return delta.chop(totalLength);
+```
+This would result in different behavior because the `totalLength` variable would be calculated based on the `delta.ops` array, which may not reflect the actual length of the delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const totalLength = delta.reduce((length, op) => {
+  if (op.retain) {
+    length += op.retain;
+  } else if (op.insert) {
+    length += Op.length(op.insert);
+  }
+  return length;
+}, 0);
+return delta.chop(totalLength);
+```
+This would result in different behavior because the

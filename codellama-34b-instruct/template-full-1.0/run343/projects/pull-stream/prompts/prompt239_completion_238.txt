@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if(end && !test(data))
+  return sync ? loop = true : next(end, cb)
+```
+This would result in different behavior because the `if` statement would always evaluate to `false` if `end` is `true`, as `test(data)` can never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if(end || !test(data))
+  return sync ? loop = true : next(end, cb)
+```
+This would result in different behavior because the `if` statement would always evaluate to `true` if `end` is `true`, as `test(data)` can never be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if(end && !test(data))
+  return sync ? loop = false : next(end, cb)
+```
+This would result in different behavior because the `if` statement would always evaluate to `true` if `end` is `true`, as `test(data)` can

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+__filename
+```
+This would result in different behavior because `__filename` is the filename of the current module, whereas `__dirname` is the directory name of the current module. Using `__filename` instead of `__dirname` would result in the code joining the current filename with the destination directory, which would likely cause a different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest)
+```
+This would result in different behavior because `path.dirname()` returns the parent directory of the given path, whereas `__dirname` returns the current working directory. Using `path.dirname()` instead of `__dirname` would result in the code joining a different directory with the destination directory, which would likely cause a different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.cwd()
+```
+This would result in different behavior because `process.cwd()` returns the current working directory, whereas `__dirname` returns the directory name of the current module. Using `process.cwd()` instead of

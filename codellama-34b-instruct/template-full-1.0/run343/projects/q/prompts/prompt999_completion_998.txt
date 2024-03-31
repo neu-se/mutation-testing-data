@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [name, nodeArgs]).fail
+```
+This would result in different behavior because it would change the HTTP method used to "get" instead of "post", which could cause the API to return a different response.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).success
+```
+This would result in different behavior because it would be using the "success" method instead of "fail", which could cause the resolver to be called with a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).then(function(){deferred.reject();});
+```
+This would result in different behavior because it would be adding an extra step to the promise chain, which could cause the promise to be resolved or rejected differently.
+
+DONE.

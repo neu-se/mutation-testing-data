@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.delete
+```
+This would result in different behavior because `delete` would remove the first element of `other.ops`, while `push` would append it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(other.ops[0], { remove: true })
+```
+This would result in different behavior because the `remove` attribute would cause the first element of `other.ops` to be removed when the delta is composed, while `push` would append it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(other.ops[0], { fail: true })
+```
+This would result in different behavior because the `fail` attribute would cause the delta to throw an error when the first element of `other.ops` is pushed onto it, while `push` would append it.
+
+DONE.

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!(a.ops)
+```
+This would result in different behavior because the `!` operator negates the expression `(a.ops)`, so if `a.ops` is truthy, the resulting expression will be false, and if `a.ops` is falsy, the resulting expression will be true. This would cause the `if (ops != null && <PLACEHOLDER>(ops.ops)) { ... }` check to fail in the `Delta` class constructor, which could lead to a misbehaving application.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a.ops.length
+```
+This would result in different behavior because the `length` property of an array is always greater than or equal to zero, so if `a.ops` is empty, the resulting expression will be zero. This would cause the `if (ops != null && <PLACEHOLDER>(ops.ops)) { ... }` check to evaluate to false, which could cause the `Delta` class constructor to behave differently than expected.
+
+Option

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { this.close(); this.destroy(); }
+```
+This would result in different behavior because the additional `destroy()` method call would cause the dirty database to be closed and destroyed immediately after it's closed, rather than waiting for the 'drain' event to be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { this.on('drain', this.close); }
+```
+This would result in different behavior because the `on()` method is called with a different first argument, which is the event to listen for. This would cause `close()` to be called only when the 'drain' event is emitted, rather than immediately after the dirty database is closed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { this.once('drain', this.close); }
+```
+This would result in different behavior because the `once()` method is used instead of `on()`, which means that `close()` will be called at most once for the 'd

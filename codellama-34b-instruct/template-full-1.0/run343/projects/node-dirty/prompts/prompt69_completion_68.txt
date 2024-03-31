@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit.bind(this, 'load', 0)()
+```
+This would result in different behavior because `emit` would be invoked immediately rather than being passed as a callback to `process.nextTick`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setImmediate(this.emit.bind(this, 'load', 0))
+```
+This would result in different behavior because `setImmediate` would be used instead of `process.nextTick`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit.bind(this, 'load', 1)()
+```
+This would result in different behavior because the value `1` would be passed as the second argument to `emit` instead of `0`.
+
+DONE.

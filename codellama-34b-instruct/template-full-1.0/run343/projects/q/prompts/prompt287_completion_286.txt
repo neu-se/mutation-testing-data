@@ -1,0 +1,18 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+let deferred = Q.defer();
+```
+This would result in different behavior because `Q.defer()` is not a function, and it would cause a `TypeError` when calling `promise` on the undefined `deferred` variable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+let deferred = function() { return { promise: function(resolve, reject) { resolve() } } };
+```
+This would result in different behavior because the `deferred` variable is now a function that returns an object with a `promise` method that immediately resolves when called. This would cause the `resolvedPromise` variable to be set to a promise that resolves immediately, which would change the behavior of the `become` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+let deferred = { promise: function(resolve, reject) { resolve() } };
+```
+This would result in different behavior because `deferred` is now an object with a `prom

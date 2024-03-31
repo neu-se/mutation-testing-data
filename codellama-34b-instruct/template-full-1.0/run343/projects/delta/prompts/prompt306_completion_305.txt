@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const lo = 0 - <PLACEHOLDER>()
+```
+This would result in a negative usage of the given placeholder function, and would cause the inserted text to have a negative length.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>() + 1
+```
+This would shift the window of the index being considered to start from the next character after the index, potentially causing indexing errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>() > Indexing.LENGTH_MAX - 1 ? 0 : <PLACEHOLDER>() + 1
+```
+This would cause the inserted text to have a length of 0 when the placeholder exceeds the maximum length of a Delta, resulting in an incorrect Delta being generated.
+
+DONE.

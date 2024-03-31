@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"foo"
+```
+This would result in different behavior because "foo" is not a function and will cause a type error when `makeNodeResolver` is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` is a function, but it is not the same as `makeNodeResolver`, and it will resolve the promise with `undefined` instead of calling the node-style function with the provided arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because `deferred.reject` is a function, but it is not the same as `makeNodeResolver`, and it will reject the promise with `undefined` instead of calling the node-style function with the provided arguments.
+
+DONE.

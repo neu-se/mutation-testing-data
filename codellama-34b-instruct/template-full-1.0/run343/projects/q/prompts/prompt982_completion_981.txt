@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(<somemaliciousfunction>)
+```
+This would result in different behavior because malicious function would be called, and it could lead to a vulnerability in the system calling the deferred.makeNodeResolver() function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(function(calculation) { return 1/0; })
+```
+This would result in different behavior because, when the calculation result is retrieved using `makeNodeResolver`, the application will throw a division-by-zero error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(function(calculation) { while(true); })
+```
+This would result in different behavior because, when the application calls `makeNodeResolver`, the function will enter an infinite loop, causing the application to crash.
+
+DONE.

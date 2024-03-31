@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+channel.port1.postMessage
+```
+This would result in different behavior because `channel.port1` is the other port of the MessageChannel, and `postMessage` would send a message through that port instead of `channel.port2`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+channel.port2.onmessage = function(event) { throw new Error("fake"); };
+```
+This would result in different behavior because `onmessage` is the event handler for when a message is received through `channel.port2`, and it would throw an error unconditionally, which would interrupt the execution of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+channel.port2.close()
+```
+This would result in different behavior because `close()` is a method that closes the channel, and it would cause the channel to be closed immediately, which would prevent any more messages from being sent or received through it.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions !== null && zipAFolderOptions.customWriteStream
+```
+This would result in different behavior because `zipAFolderOptions !== null` would allow for a non-null value but still undefined, while `zipAFolderOptions && zipAFolderOptions.customWriteStream` only checks for truthy values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof zipAFolderOptions !== 'undefined' && zipAFolderOptions.customWriteStream
+```
+This would result in different behavior because `typeof zipAFolderOptions !== 'undefined'` would check for both null and undefined values, while `zipAFolderOptions && zipAFolderOptions.customWriteStream` only checks for truthy values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream
+```
+This would result in different behavior because `zipAFolderOptions?.customWriteStream` uses the optional chaining operator `?.` to access the `customWriteStream` property only if `zipAFolderOptions

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pageurl.host != linkurl.host
+```
+This would result in different behavior because it would only consider links with different hosts, while the original code fragment would consider links with the same host but different domains as internal.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pageurl.domain != linkurl.domain
+```
+This would result in different behavior because it would only consider links with different domains, while the original code fragment would consider links with the same domain but different subdomains as subdomain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!linkurl.hash.trim().startsWith('#') || (!pageurl.hash.trim().startsWith('#') && linkurl.hash == pageurl.hash)
+```
+This would result in different behavior because it would consider hash anchors that do not start with '#' or links with the same hash anchor as internal, while the original code fragment would consider them as external.
+
+DONE.

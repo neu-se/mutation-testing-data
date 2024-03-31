@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replaceAll
+```
+This would result in different behavior because `.replaceAll()` replaces all occurrences of the given regular expression in the string, whereas `.replace()` only replaces the first occurrence. If the `linkurl_path` contains multiple occurrences of the regular expression, `.replace()` will not capture all of them, while `.replaceAll()` will.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\\/index\\.[a-z]+$/g, '')
+```
+This would result in different behavior because it uses a different regular expression match pattern. The `/\\/index\\.[a-z]+$/` pattern matches a string that ends with `/index.` followed by one or more letters `a-z`, while the original pattern matches a string that ends with `/default.` followed by one or more letters `a-z`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/(index|default)\.[

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob(src)
+```
+This would result in different behavior because the negation operator `!` would cause the code to enter the `else` branch when the `isGlob` function returns `true`, despite the fact that the `isGlob` function returns `true` when it's a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob(src) && !src.includes(',')
+```
+This would result in different behavior because the additional conditional expression `!src.includes(',')` would cause the code to enter the `if` branch when the `isGlob` function returns `true` and the `src` string doesn't contain a comma, despite the fact that the `isGlob` function returns `true` when it's a glob.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob(src) || src.includes('*')
+```
+This would result in different behavior because the additional conditional expression `src.

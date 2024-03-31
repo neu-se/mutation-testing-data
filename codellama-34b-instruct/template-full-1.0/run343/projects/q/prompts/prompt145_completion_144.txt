@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error.stack = null;
+```
+This would result in different behavior because `error.stack` is used in `makeStackTraceLong` to concatenate the stack trace of the `promise` with the error stack trace, and by setting it to `null`, the `makeStackTraceLong` function would not be able to concatenate the stack traces.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+error.stack = "foo";
+```
+This would result in different behavior because `error.stack` is used in `filterStackString` to remove internal frames, and by setting it to `"foo"`, the `filterStackString` function would not be able to remove internal frames.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+error.stack = function() { throw new Error(); };
+```
+This would result in different behavior because `error.stack` is used in `getFileNameAndLineNumber` to get the file name and line number of the `stackLine`, and by setting it to a function

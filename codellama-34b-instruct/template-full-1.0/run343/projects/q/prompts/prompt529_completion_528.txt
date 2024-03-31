@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).inspect(<some other promise>)
+```
+This would result in different behavior because `inspect` would be called on a different promise than the original one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).inspect() + 1
+```
+This would result in different behavior because `inspect` would be called on the original promise, but the result would be different than the original code because of the `+ 1` addition.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).inspect(Promise.resolve(value))
+```
+This would result in different behavior because `inspect` would be called on a different promise than the original one, and that promise would be resolved with the value of the original promise.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(2).reverse()
+```
+This would result in different behavior because it would skip the first segment of the path, which could cause the regular expression to match a different set of paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).filter(s => s !== '')
+```
+This would result in different behavior because it would filter out any empty segments in the path, which could cause the regular expression to match a different set of paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).map(s => s[0] === '+' ? s.substr(1) : s)
+```
+This would result in different behavior because it would strip any leading '+' characters from each segment of the path, which could cause the regular expression to match a different set of paths.
+
+DONE.

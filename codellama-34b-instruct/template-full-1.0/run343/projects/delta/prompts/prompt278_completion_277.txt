@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+        otherIter.peek() as Op;
+```
+This would result in different behavior because it would return undefined in the case that otherIter has no values left in it, whereas the original code would throw a TypeError because it cannot access the "type" property of undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+        const currentOp = otherIter.next() as Op;
+```
+This would result in different behavior because it would return undefined in the case that otherIter has no values left in it, whereas the original code would throw a RangeError because it cannot read the "type" property of undefined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+        const currentOp = otherIter.peek(1) as Op;
+```
+This would result in different behavior because it would return a reference to the first value in the iterator, whereas the original code would return a copy of the value.
+
+DONE.

@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (promise) {
+    promise.then(function (result) {
+        deferred.resolve(result);
+    });
+}
+```
+This would result in different behavior because it would only handle the fulfilled branch of the promise, and not the rejected branch, meaning that any errors would go unnoticed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (promise) {
+    promise.inspect().state === "rejected" ? deferred.reject(promise.inspect().reason) : deferred.resolve(promise.inspect().value);
+}
+```
+This would result in different behavior because it would only handle the rejected branch of the promise, and not the fulfilled branch, meaning that any successful results would go unnoticed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (promise) {
+    var snapshot = promise.inspect();
+    if (snapshot.state === "fulfilled") {
+       

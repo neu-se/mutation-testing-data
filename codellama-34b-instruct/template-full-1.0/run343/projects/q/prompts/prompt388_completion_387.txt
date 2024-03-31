@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(value).spread(function (value) { return value; });
+```
+This would result in different behavior because `spread` expects an array-based tuple, while `then` expects a single value or a promise for a single value. Using `spread` would cause the code to fail if the promise rejects, since the rejection reason would not be an array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(value).thenResolve(value);
+```
+This would result in different behavior because `thenResolve` expects a promise and a value, while `then` expects a function and an optional value to be passed as arguments. Using `thenResolve` would cause the promise to resolve directly to the value, rather than allowing the function to handle it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(value).then(function (value) { return value; }, function (reason) { return reason; });
+```
+This would result in different

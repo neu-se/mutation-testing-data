@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/index\.[a-z]+$/, '').replace(/\/default\.[a-z]+$/, '/')
+```
+This would result in different behavior because the original code fragment only replaces "/index.xx" at the end of the string, whereas this modified code fragment replaces both "/index.xx" and "/default.xx" at the end of the string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/default\.[a-z]+$/, '')
+```
+This would result in different behavior because the original code fragment only replaces "/index.xx" at the end of the string, whereas this modified code fragment replaces "/default.xx" at the end of the string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.split("/").filter(function(elem, index, array) {
+  return elem.length > 0 && elem.replace(/\

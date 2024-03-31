@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.clone(...this.rules)
+```
+This would result in an infinite loop because the `clone` method would call itself recursively until the call stack exceeds the maximum allowed size.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Rule('allow', 'GET', '/.*/')
+```
+This would result in a different behavior because the new rule would allow all GET requests to pass, despite the fact that the `push` method is only intended to add new rules to the policy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.rules.push(...this.rules)
+```
+This would result in a different behavior because the `push` method would add all the rules in the policy to itself, effectively doubling the number of rules in the policy.
+
+DONE.

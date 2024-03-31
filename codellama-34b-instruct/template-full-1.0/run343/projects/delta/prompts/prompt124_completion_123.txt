@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext() && iter.peekLength() > 0
+```
+This would result in different behavior because it also checks that the next op's length is greater than zero, preventing the while loop from infinite looping when the ops are empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peekLength() > 0
+```
+This would result in different behavior because it only checks that the next op's length is greater than zero, and does not check if there is a next op, leading to an infinite loop when the ops are empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!iter.hasNext()
+```
+This would result in different behavior because it checks if there is no next op, and if that is true, it returns a new Delta with the remainder of the ops from the original iteration.
+
+DONE.

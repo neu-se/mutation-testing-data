@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name) {
+  return {};
+}
+```
+This would result in different behavior because `{}` is an empty object, and the original code would return a timezone object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name) {
+  return data.timezones[name][0];
+}
+```
+This would result in different behavior because the original code would return the _first_ timezone with the given name, while this modified code would return a random timezone.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+getTimezone(name) {
+  return data.timezones[name] && Object.keys(data.timezones[name])[0];
+}
+```
+This would result in different behavior because the original code would return the _first_ timezone with the given name, while this modified code would return a random key from the timezone object.
+
+DONE.

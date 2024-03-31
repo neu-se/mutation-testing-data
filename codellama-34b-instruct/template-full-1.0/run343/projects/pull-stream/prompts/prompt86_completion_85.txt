@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || cb()
+```
+This would result in different behavior because the original code `abort, cb || function () {}` is a comma operator, which evaluates both operands and returns the last one. However, in the proposed replacement `abort || cb()`, the logical OR operator `||` is used, which returns the first operand if it is truthy, and the second operand otherwise. If `abort` is a truthy value, `cb()` will not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && cb()
+```
+This would result in different behavior because the logical AND operator `&&` is used, which returns the first operand if it is truthy, and the second operand otherwise. If `abort` is a falsy value, `cb()` will not be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort ? cb() : null
+```
+This would result in different behavior because the ternary operator

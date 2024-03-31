@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/:/|:\/|:$/) !== null
+```
+This would result in different behavior because the extra `/` in the regex pattern would cause the match to always be successful, even if the path contains invalid characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) !== null
+```
+This would result in different behavior because the `^` character at the beginning of the regex pattern would cause the match to always fail, even if the path is valid.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]*:|:\/|:$/) !== null
+```
+This would result in different behavior because the `*` character at the end of the regex pattern would cause the match to always succeed, even if the path contains invalid characters.
+
+DONE.

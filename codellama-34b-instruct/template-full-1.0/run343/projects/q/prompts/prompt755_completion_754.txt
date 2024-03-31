@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = function () {
+    return Q.when(this).allSettled();
+};
+```
+This would result in different behavior because it would change the method implementation to always return a rejected promise with an error indicating that the `allSettled` method is not a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = function () {
+    return when(Promise.allSettled(this));
+};
+```
+This would result in different behavior because it would change the method implementation to always return a resolved promise with an array of promises that are all settled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = function () {
+    return Q.allSettled(this);
+};
+```
+This would result in different behavior because it would change the method implementation to always return a resolved promise with an array of promises that are all settled.
+
+DONE

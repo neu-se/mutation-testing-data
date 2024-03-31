@@ -1,0 +1,17 @@
+  Option 1: The `isNodeFrame` function can be replaced with:
+```
+function isNodeFrame(stackLine) {
+  return stackLine.includes("(module.js:") || stackLine.includes("(node.js:")
+}
+```
+This would result in different behavior because it would check if the `stackLine` includes "(module.js:" or "(node.js:" instead of checking if the line contains "module.js:" or "node.js:".
+
+Option 2: The `getFileNameAndLineNumber` function can be replaced with:
+```
+function getFileNameAndLineNumber(stackLine) {
+  return [/.*@(.+):(\d+)$/.exec(stackLine), Number(/(filename:lineNumber:columnNumber)$/.exec(stackLine))];
+}
+```
+This would result in different behavior because it would check if the `stackLine` matches the regular expression `/.*@(.+):(\d+)$/` and `filename:lineNumber:columnNumber$`, and if so, return the file name and line number.
+
+Option 3: The `captureLine`

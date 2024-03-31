@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.done(throw _)
+```
+This would result in different behavior because `throw _` would throw an error immediately, while the original `Q.done` would only be called once the promise is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.done(_ => (_ ?  throw x : x))
+```
+This would result in different behavior because `_ => (_ ?  throw x : x)` would throw an error if the argument is truthy, while the original `Q.done` would only be called if the argument is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.done(=> Q.reject(x))
+```
+This would result in different behavior because `Q.reject(x)` would reject the promise immediately, while the original `Q.done` would only be called once the promise is resolved.
+
+DONE.

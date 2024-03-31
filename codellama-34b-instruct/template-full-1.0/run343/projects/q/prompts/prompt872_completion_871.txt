@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).done(fulfilled, rejected, progress);
+```
+This would result in different behavior because it would short-circuit the method chain and return a promise that is resolved with the value of `object`, rather than calling the `done` method on the object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(fulfilled, rejected, progress);
+```
+This would result in different behavior because it would call the `then` method on the object, rather than the `done` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).catch(function (error) {
+    throw error;
+});
+```
+This would result in different behavior because it would catch any errors that occur when processing the promise and re-throw them, rather than calling the `done` method.
+
+DONE.

@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('close', () => {
+  this._writeStream = null;
+  this._writeStream.emit('write_close');
+});
+```
+This would result in different behavior because the original code emits the `write_close` event on `this`, while the modified code emits it on `this._writeStream`, which is the actual stream that is being closed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('close', () => {
+  this._writeStream = null;
+  this.emit('write_close');
+});
+```
+This would result in different behavior because the original code emits the `write_close` event on `this._writeStream`, while the modified code emits it on `this`, which is the instance of the `Dirty` class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('close', () => {
+  this._writeStream = null

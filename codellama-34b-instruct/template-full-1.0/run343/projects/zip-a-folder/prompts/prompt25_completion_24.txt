@@ -1,0 +1,19 @@
+  DONE.
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+archiverOptions || { gzip: true }
+```
+This would result in different behavior because the `gzip` option is always set to `true`, while the original code only sets it to `true` if `zipAFolderOptions.compression` is set to `COMPRESSION_LEVEL.high`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+archiverOptions.gzip
+```
+This would result in different behavior because the `gzip` option is not set at all if the `archiverOptions` object is `undefined`, while the original code always sets it to `true` if `zipAFolderOptions.compression` is set to `COMPRESSION_LEVEL.high`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+archiverOptions?.gzip
+```
+This would result in different behavior because the `gzip` option is not set at all if the `archiverOptions` object is `undefined` or `null`, while

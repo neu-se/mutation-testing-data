@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+tmpUrl.text = `${baseUrlStr} ${text}`;
+```
+This would result in different behavior because it would append the `baseUrlStr` to the `text` even if `text` is null, whereas the original code only appends it if `text` is not null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrl.baseurl = baseUrlStr;
+```
+This would result in different behavior because it would always set the `baseurl` property of the `currentUrl` object, whereas the original code only sets it if `currentUrl.url` is in the `urlMap`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+let retArr = Array.from(urlMap.values());
+```
+This would result in different behavior because it would include all the values in the `urlMap` in the `retArr`, whereas the original code only includes the values where `urlMap.values() != null`.
+
+DONE.

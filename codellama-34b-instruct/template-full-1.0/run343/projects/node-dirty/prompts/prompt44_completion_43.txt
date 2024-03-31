@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.set(key, this.get(key), cb)
+```
+This would result in different behavior because it would cause the database to always set the value of the key to the current value of the key, rather than the new value passed in as `val`. This would result in the database always being behind the actual state of the key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.set(key, undefined, cb)
+```
+This would result in different behavior because it would always set the value of the key to `undefined`, rather than the new value passed in as `val`. This would result in the database losing data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.set(key, someRandomValue(), cb)
+```
+This would result in different behavior because it would always set the value of the key to a random value, rather than the new value passed in as `val`. This would result in the database being unpredictable and possibly incorrect.
+
+DONE.

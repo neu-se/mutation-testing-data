@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+args.concat(array_slice(<index_known_to_cause_exception>))
+```
+This would result in different behavior because the original code fragment makes sure to concatenate only the arguments that are passed after the function name, while this modification would slice the arguments starting from an arbitrary index, which could potentially result in unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array_slice(args, <index_known_to_be_out_of_range>)
+```
+This would result in different behavior because the original code fragment makes sure to slice the arguments starting from the first argument after the function name, while this modification would slice the arguments starting from an index that is known to be out of range, which could result in an empty array being passed to the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+array_slice(<constant_array>)
+```
+This would result in different behavior because the original code fragment makes sure to slice the arguments that are passed to the function

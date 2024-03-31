@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(array)
+```
+This would result in different behavior because `Promise.resolve` 
+returns a promise object even if the resolved value is an undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ Q.resolve(array)
+```
+This would result in different behavior because `Q.resolve` is 
+ the alias of `Promise.resolve` which directly returns the 
+resolved value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+array.map(function(value){
+return Q(value)
+})
+```
+This would result in different behavior because `array.map` 
+iterates over the elements of the array and returns a new 
+array containing the mapped values. 
+
+DONE.

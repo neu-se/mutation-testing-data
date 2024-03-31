@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops
+```
+This would result in different behavior because it would make `delta.ops` a reference to `other.ops`, rather than a copy of it. If the `concat` method is called on `delta`, it would modify `other.ops` as well, since they are referring to the same array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+other.ops.slice().reverse()
+```
+This would result in different behavior because it would concatenate the `other.ops` array in reverse order, rather than in its original order. This could potentially change the final result of the `delta.ops` array, depending on what the `concat` method is doing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+[ ...other.ops ]
+```
+This would result in different behavior because it would create a new array by spreading the elements of `other.ops`, rather than making a shallow copy of the array. This could potentially change the final result of the `delta.

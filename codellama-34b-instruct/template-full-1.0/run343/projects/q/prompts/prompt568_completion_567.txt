@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error('Not implemented');
+```
+This would result in different behavior because it would cause the `condition` variable to be left undefined, potentially causing the `if` statement that uses it to behave unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).promiseDispatch(deferred.resolve, op, args);
+```
+This would result in different behavior because it would cause the `dispatch` method to be called immediately, rather than being scheduled for a future turn. This could potentially cause the `deferred.resolve` callback to be executed in the same turn as the `dispatch` method, rather than in a future turn as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).promiseDispatch(deferred.reject, op, args);
+```
+This would result in different behavior because it would cause the `promiseDispatch` method to be called with the `reject` callback instead of the `resolve` callback. This could cause the

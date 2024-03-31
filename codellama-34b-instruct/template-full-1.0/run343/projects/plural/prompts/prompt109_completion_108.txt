@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new RegExp('\\b(?:' + tools.concat(clothes, games, illnesses, misc).join('|') + ')_i'), function(w) { return w}
+```
+This would result in different behavior because the regular expression is missing the word boundary selector (`\\b`) at the end, which would match the word "pliers" with a trailing underscore.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new RegExp('\\b(?:' + tools.concat(clothes, games, illnesses, misc).join('|') + ')s\\b', 'g'), function(w) { return w}
+```
+This would result in different behavior because the regular expression is now using the global (`g`) flag, which would match all occurrences of the words in the list, not just the first one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new RegExp('\\b(?:' + tools.concat(clothes,

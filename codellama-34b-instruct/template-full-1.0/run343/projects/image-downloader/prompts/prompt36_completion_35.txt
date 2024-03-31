@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest+'.tmp')
+```
+This would result in different behavior because the temporary file would have a different name than the destination file, causing the `on('close', () => resolve({ filename: dest }));` callback to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'wx' })
+```
+This would result in different behavior because the `wx` flag would cause an error to be thrown if the destination file already exists, causing the `reject(new Error('Request Failed.\n' +`<br>`Status Code: ${res.statusCode}'))` callback to be called instead of resolving the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'a' })
+```
+This would result in different behavior because the `a` flag would cause the file to be appended instead of overwritten, causing the file to contain duplicate data.
+
+DONE.

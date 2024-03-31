@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.reject
+```
+This would result in different behavior because "this" would refer to the Promise.prototype object, rather than the deferred object, causing the reject method to be called on the wrong object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolve
+```
+This would result in different behavior because "resolve" is not a variable declared in the scope of the anonymous function, so it would be undefined, and the function would throw a TypeError.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because it would call the resolve method on the deferred object with no arguments, which would cause the promise to be fulfilled with an undefined value, even if the original promise was rejected with an error.
+
+DONE.

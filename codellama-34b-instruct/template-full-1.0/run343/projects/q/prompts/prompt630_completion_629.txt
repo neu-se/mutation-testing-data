@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [key]).then(function(value) {
+    return value + 1;
+});
+```
+This would result in different behavior because the `then` method is not called on the original promise, and the returned value is modified to be one greater than the original.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [key]).then(function(value) {
+    return Q.reject(value);
+});
+```
+This would result in different behavior because the `then` method is not called on the original promise, and the returned value is wrapped in a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [key]).then(function(value) {
+    return Q.resolve(value);
+});
+```
+This would result in different behavior because the `then` method is not called on the original promise, and the returned value is wrapped in a resolved promise

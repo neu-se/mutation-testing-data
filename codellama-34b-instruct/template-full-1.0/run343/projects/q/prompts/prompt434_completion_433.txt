@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+trackUnhandledRejections === false
+```
+This would result in different behavior because `trackUnhandledRejections` is a boolean variable that controls whether or not rejections should be tracked, but the comparison with `false` would always evaluate to `true`, causing rejections to be tracked even when they should not be.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length > 0
+```
+This would result in different behavior because `unhandledRejections` is an array that tracks unhandled rejections, but checking its length with a greater-than comparison would always evaluate to `true`, causing rejections to be tracked even when they should not be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof process !== "object" && typeof process.emit === "function"
+```
+This would result in different behavior because `process.emit` is a function that emits an "unhandledRejection" event when a promise is rejected without being

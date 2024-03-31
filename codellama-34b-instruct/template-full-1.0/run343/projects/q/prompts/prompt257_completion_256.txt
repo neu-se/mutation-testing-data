@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(x);
+```
+This would result in different behavior because `become` is a function that takes a promise as an argument and fulfills the current promise with the value of the resolved promise. However, by replacing `become` with `become(x)`, the promise would be fulfilled with the value of `x` immediately, without waiting for the promise to resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+become(reject(x));
+```
+This would result in different behavior because `reject` is a function that takes a value and returns a rejected promise. By replacing `become` with `become(reject(x))`, the promise would be rejected with the value of `x` immediately, without waiting for the promise to resolve.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    become(Q(x));
+});
+```
+This would result in different behavior because `Q.nextTick

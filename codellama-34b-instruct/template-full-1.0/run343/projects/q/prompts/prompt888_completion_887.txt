@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+...nfcall(FS.readFile, [__filename]).then(funciton(content){})...
+```
+This would result in different behavior because the original code uses `Q.nfcall` which is a method that wraps a NodeJS function and returns a promise, in this case the `FS.readFile` function, which is a NodeJS method that reads the file. In the new code, the `function(content)` is never called because `Q.nfcall` returns a promise and not the actual result of the read operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...nfcall(FS.readFile, __dirname + __filename).then(function(content){})...
+```
+This would result in different behavior because the original code uses `Q.nfcall` which is a method that wraps a NodeJS function and returns a promise, in this case the `FS.readFile` function, which is a NodeJS method that reads the file. In the new code, the `function

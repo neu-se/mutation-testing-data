@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'LineString'
+```
+This would result in different behavior because 'LineString' is a valid type for a geojson point, but the current code would not catch it as it is only checking for the type 'Point'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.coordinates.length > 2
+```
+This would result in different behavior because it would catch cases where the point has more than 2 coordinates, which is not allowed for a geojson point.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.coordinates[0] > 180
+```
+This would result in different behavior because it would catch cases where the first coordinate of the point is greater than 180, which is not allowed for a geojson point.
+
+DONE.

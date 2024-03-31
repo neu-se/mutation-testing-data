@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"BOGUS"
+```
+This would result in different behavior because the expected input for this code fragment is a function, and "BOGUS" is a string. The function would be forced to ignore the input and return a rejected promise, which would not match the expected behavior of the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function() { throw Error("FAKE"); }
+```
+This would result in different behavior because the expected input for this code fragment is a function, and the function defined here would throw an error when called. This would cause the `nextTick` function to reject the promise, which would not match the expected behavior of the original code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => undefined
+```
+This would result in different behavior because the expected input for this code fragment is a function, and the arrow function defined here would return `undefined` when called. This would cause the `nextTick` function to resolve the promise with `undefined`,

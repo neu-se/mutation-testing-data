@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+1 + ctx
+```
+This would result in different behavior because it would change the type of the `ctx` argument from an object to a number, which would likely cause type errors in the `query` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ctx.filter((rule) => rule.name === "<PLACEHOLDER>")
+```
+This would result in different behavior because it would filter the `rules` array to only include rules whose `name` property is equal to "<PLACEHOLDER>", which would likely cause the `query` method to return a different result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ctx.rules = this.rules.map((rule) => rule.clone())
+```
+This would result in different behavior because it would create a new array of `Rule` objects that are identical to the original rules, but are not the same instances. This could cause issues with the `matches` method, which uses the `instanceof` operator to determine if a

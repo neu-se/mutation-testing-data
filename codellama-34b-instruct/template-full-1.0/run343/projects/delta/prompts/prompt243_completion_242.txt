@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function getEmbedTypeAndData(op) {
+  return Object.keys(op.retain).shift();
+}
+```
+This would result in different behavior because the original code fragment is expecting `op.retain` to be an object with a single key, while this code will return the first key in the object regardless of its name.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function getEmbedTypeAndData(op) {
+  return op.retain[Object.keys(op.retain)[0]];
+}
+```
+This would result in different behavior because the original code fragment is expecting `op.retain` to be an object with a single key, while this code will return the value of the first key in the object regardless of its name.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function getEmbedTypeAndData(op) {
+  return op.retain.getType() + op.retain.getData();
+}
+```

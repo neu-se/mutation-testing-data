@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+runSingle("foo");
+```
+This would result in different behavior because the `runSingle` function expects to receive a function as its argument, but in this case, a string is being passed instead. This would cause the function to throw an error when trying to invoke the string as a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+runSingle.bind(null, "foo");
+```
+This would result in different behavior because the `bind` function is creating a new function that, when invoked, will call the `runSingle` function with `"foo"` as its argument. This would cause the `runSingle` function to be called with the expected arguments, but the function would not be executed until the new function created by `bind` is invoked.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+runSingle(function() { throw new Error("foo"); });
+```
+This would result in different behavior because the `runSingle` function expects to receive a function as its argument, but in this case,

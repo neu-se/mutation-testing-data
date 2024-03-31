@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).value.dispatch
+```
+This would result in different behavior because `Q.promised()` returns a function that wraps the original function with additional logic, including a promise resolution mechanism. By calling `Q(object).value` instead of `Q(object)`, we bypass this wrapping and directly call the original function, which would result in the promise being fulfilled or rejected based on the outcome of the function call, rather than a promise that resolves to the actual function call outcome.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).settle().dispatch
+```
+This would result in different behavior because `Q(object).settle()` returns a promise that resolves to `object`, regardless of whether `object` is a promise or an immediate value. By calling `.dispatch` on this settled promise, we get a promise that always resolves to the same value, regardless of whether `object` is a promise or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(

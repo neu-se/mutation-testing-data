@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+self.promiseDispatch(reject, "when", [])
+```
+This would result in different behavior because it would unconditionally reject the promise, regardless of the original fulfilled or rejected state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Something went wrong")
+```
+This would result in different behavior because it would throw an error synchronously, potentially causing the promise to be rejected without going through the normal rejection process.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return deferred.notify(newValue)
+```
+This would result in different behavior because it would notify the promise of progress, potentially causing the promise to be rejected if the rejection handler is not set.
+
+DONE.

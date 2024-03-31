@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver = function(){ return null; };
+```
+This would result in different behavior because it would cause the `makeNodeResolver` function, which is used to create a node-style callback, to always return `null`, which would cause any code that tries to call the callback to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver = function(){ return deferred.resolve; };
+```
+This would result in different behavior because it would cause the `makeNodeResolver` function, which is used to create a node-style callback, to always return the value of `deferred.resolve`, which is a function that resolves the promise, instead of returning the actual node-style callback as expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver = function(){ return undefined; };
+```
+This would result in different behavior because it would cause the `makeNodeResolver` function, which is used to create a node-style callback

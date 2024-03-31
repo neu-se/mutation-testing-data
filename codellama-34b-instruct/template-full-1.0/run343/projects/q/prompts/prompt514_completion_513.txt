@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return {
+    promise: new Promise(() => {}),
+    reject: function (reason) {
+        throw reason;
+    }
+}
+```
+This would result in different behavior because in the original code, the `defer` function is called, which returns an object with a `promise` property that is a new promise instance, and a `reject` method that rejects the promise with the given reason. In this modified code, the `defer` function is not called, and the object that is returned has a `promise` property that is not a promise instance, but a new object that has a `then` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return {
+    then: function (onFulfilled, onRejected) {
+        return onRejected ? onRejected() : ref;
+    }
+}
+```
+This would result in different behavior because in the original code, the `promise` property of the object returned by `defer` is a promise instance

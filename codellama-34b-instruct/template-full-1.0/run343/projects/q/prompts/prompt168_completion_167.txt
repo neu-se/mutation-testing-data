@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isInternalFrame(line) || isNodeFrame(line)
+```
+This would result in different behavior because it would negate the condition, meaning that the lines that were previously excluded would now be included in the filter.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isInternalFrame(line) && !isNodeFrame(line) && !line
+```
+This would result in different behavior because it would additionally filter out empty lines, which may not be desirable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+line.length > 0 && !isInternalFrame(line) && !isNodeFrame(line)
+```
+This would result in different behavior because it would filter out empty lines, which may not be desirable.
+
+DONE.

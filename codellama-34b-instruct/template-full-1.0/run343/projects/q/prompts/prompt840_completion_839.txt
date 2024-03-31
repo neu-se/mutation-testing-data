@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.onerror(error);
+```
+This would result in different behavior because `Q.onerror` would be called instead of `process.domain.bind(onUnhandledError)`, which could potentially alter the program's behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.domain.unbind(onUnhandledError);
+```
+This would result in different behavior because `process.domain.bind(onUnhandledError)` would be replaced with `process.domain.unbind(onUnhandledError)`, which would cause the error handler to be treated differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.onerror(new Error(error));
+```
+This would result in different behavior because a new `Error` object would be created and passed to `Q.onerror`, which could potentially change the program's behavior.
+
+DONE.

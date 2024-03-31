@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'key' in JSON.parse(rowStr)
+```
+This would result in different behavior because `key` would always return true, even if `rowStr` does not contain `key`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'val' in JSON.parse(rowStr)
+```
+This would result in different behavior because `val` would always return true, even if `rowStr` does not contain `val`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(rowStr).hasOwnProperty('key'').
+```
+This would result in different behavior because `hasOwnProperty` checks if the property is on the object itself, not on the prototype chain, which could lead to different results if the object was inherited from another class.
+
+DONE.

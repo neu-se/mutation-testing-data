@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!object
+```
+This would result in different behavior because the `!` operator is the logical NOT operator, which returns `true` if the operand is falsy and `false` if it is truthy. Since `object` is a non-empty object, it is truthy, so the result of `!object` would be `false`. This would cause the `isFulfilled` function to return `false` even if `object` is a fulfilled promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object === null
+```
+This would result in different behavior because the `===` operator checks for strict equality, including both type and value. If `object` is a fulfilled promise, it would not be `null`, so the result of `object === null` would be `false`. This would cause the `isFulfilled` function to return `false` even if `object` is a fulfilled promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof object

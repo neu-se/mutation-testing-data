@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+embedType = Object.keys(opData)[0] ?? '';
+```
+This would result in different behavior because `Object.keys(...)` may return an empty array if `opData` is an empty object or has only symbol keys. In this case, the `embedType` variable would be assigned an empty string, which may cause the `transform` method to behave differently than intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+embedType = Object.values(opData)[0] ?? '';
+```
+This would result in different behavior because `Object.values(...)` returns an array of the object's values, and the `[0]` index would extract the first value from that array. If the object has no values, the `[0]` index would cause an error. In this case, the `embedType` variable would be assigned an empty string, which may cause the `transform` method to behave differently than intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+embedType = Object.keys(

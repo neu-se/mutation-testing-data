@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(null)
+```
+This would result in different behavior because `Q.nodeify` expects a callback function as its second argument, but `null` is being passed instead. In the original code, `Q.nodeify` is only called if `nodeback` is truthy, which means it will not be called if `nodeback` is `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(undefined)
+```
+This would result in different behavior because `Q.nodeify` expects a callback function as its second argument, but `undefined` is being passed instead. In the original code, `Q.nodeify` is only called if `nodeback` is truthy, which means it will not be called if `nodeback` is `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.reject)
+```
+This would

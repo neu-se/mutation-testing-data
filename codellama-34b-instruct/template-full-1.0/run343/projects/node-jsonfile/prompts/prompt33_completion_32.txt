@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `writeFileSync` is a synchronous function that does not have a callback, whereas `writeFile` is an asynchronous function that expects a callback to handle the result. Using `writeFileSync` in this context would cause the program to hang indefinitely, as the callback would never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(null, file))
+```
+This would result in different behavior because using `bind` to bind the `file` argument to the `writeFile` function would cause the function to be called with the wrong arguments, resulting in an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(function (file, data, callback) {
+  fs.writeFile(file, data, callback);
+})
+```
+This would result in different behavior because using a

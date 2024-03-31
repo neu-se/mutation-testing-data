@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.emit("rejectionHandled", unhandledReasons[0], promise);
+```
+This would result in different behavior because it would always emit the first reason in the unhandledReasons array, instead of the specific reason at the index of the rejected promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rejected && array_indexOf(reportedUnhandledRejections, promise) !== -1
+```
+This would result in different behavior because it would not check if the rejected promise was already reported, but instead would always return true as long as the promise was rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!array_indexOf(reportedUnhandledRejections, promise) === -1
+```
+This would result in different behavior because it would not check if the rejected promise was already reported, but instead would always return true as long as the promise was not already reported.
+
+DONE.

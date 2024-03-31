@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!(typeof process === "object" && process && process.env && process.env.Q_DEBUG)
+```
+This would result in different behavior because the `!` operator would invert the boolean value of the expression, causing the long stack traces to be disabled even if the `Q_DEBUG` environment variable is set.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof process !== "object" || !process || !process.env || !process.env.Q_DEBUG
+```
+This would result in different behavior because the expression would be checking for the opposite condition (i.e., if `typeof process` is not an object or any of the other properties are falsy), causing the long stack traces to be disabled even if the `Q_DEBUG` environment variable is set.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof process === "object" && process && process.env && process.env.Q_DEBUG_
+```
+This would result in different behavior because the expression would be checking

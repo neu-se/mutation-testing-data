@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result.value.then(callback, errback);
+```
+This would result in different behavior because `result.value` is a promise, and calling `then` on it will schedule the `callback` and `errback` functions to be called with the eventual resolution of `result.value`. This is different from the original code, which simply passed `result.value` as an argument to `when`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (result.value.isFulfilled()) {
+    callback(result.value.value());
+} else {
+    errback(result.value.reason());
+}
+```
+This would result in different behavior because it uses the `isFulfilled` and `value` methods of the promise to check if it has been resolved, and if so, calls `callback` with the value immediately. If it has not been resolved, it calls `errback` with the reason immediately. This is different from the original code, which used `when` to schedule the callbacks to be

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function() { throw new Error("error"); }
+```
+This would result in different behavior because it would cause an error to be thrown, which would be caught by the `.fail()` method, causing the promise chain to reject.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(function() { throw new Error("error"); }, true)
+```
+This would result in different behavior because it would cause an error to be thrown, but the error would not be caught by the `.fail()` method, causing the promise chain to remain pending indefinitely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(function(reject, resolve) { reject("error"); }, true)
+```
+This would result in different behavior because it would cause the promise to be rejected with the error message "error", which would cause the promise chain to be rejected.
+
+DONE.

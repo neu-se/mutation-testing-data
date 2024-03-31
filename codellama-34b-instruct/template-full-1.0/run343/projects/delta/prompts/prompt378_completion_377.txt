@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain'
+```
+This would result in different behavior because the code is checking if the next operation in the `other` delta is a retain, and if it is, it will skip the `if` block and go to the `else` block, where it will check if the next operation in the `other` delta is an insert.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'delete'
+```
+This would result in different behavior because the code is checking if the next operation in the `this` delta is a delete, and if it is, it will skip the `if` block and go to the `else` block, where it will check if the next operation in the `other` delta is an insert.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain' || thisIter.peekType() === 'delete'
+```
+This would result in different

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops.length < 0
+```
+This would result in different behavior because it would cause the `concat` method to always push the `other` delta's first operation, regardless of its length, which could lead to unexpected side effects in the resulting delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+    other.ops.length > other.length
+```
+This would result in different behavior because it would cause the `concat` method to always push the `other` delta's first operation, even if the `other` delta's length is greater than the `other.ops` length, which could lead to unexpected side effects in the resulting delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+   !other.ops.length
+```
+This would result in different behavior because it would cause the `concat` method to always push the `other` delta's first operation, even if the `other` delta is empty, which could lead to unexpected side effects in the resulting delta.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!countries[id] && countries[id].deprecated
+```
+This would result in different behavior because the `deprecated` property is only checked if the `id` is not in the `countries` object, which would cause the `memoizeCountry` function to run even if the `id` is not deprecated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(countries, id)
+```
+This would result in different behavior because `Object.prototype.hasOwnProperty.call` checks for the existence of a property on an object, rather than checking the value of the property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof countries[id] === 'undefined'
+```
+This would result in different behavior because `typeof` checks for the type of a variable, rather than checking the value of the variable.
+
+DONE.

@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is a falsy value, but `abort` is a truthy value. In the original code, if `abort` is truthy, the function will return `abortCb(cb, abort, onAbort)`, but if it's replaced with `null`, it will return `cb(true)` instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because `!abort` is the negation of `abort`, which means if `abort` is truthy, `!abort` will be falsy, and vice versa. In the original code, if `abort` is truthy, the function will return `abortCb(cb, abort, onAbort)`, but if `!abort` is falsy, it will return `cb(true)` instead.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

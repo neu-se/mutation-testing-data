@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.format(parsedBaseUrl) + parsedUrl.path
+```
+This would result in different behavior because `URL.format` returns a string representing the URL, while `URL.resolve` returns a new `URL` object with the resolved URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedBaseUrl, false, true).path + parsedUrl.path
+```
+This would result in different behavior because `URL.parse` returns a new `URL` object with the parsed URL, while `URL.resolve` returns a new `URL` object with the resolved URL. Additionally, the `false` argument sets the `parseQueryString` option to `false`, which means that the query string will not be parsed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedBaseUrl, false, true).pathname + parsedUrl.path
+```
+This would result in different behavior because `URL.parse` returns a new `URL` object with

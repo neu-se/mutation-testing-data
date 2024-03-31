@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```go
+nodeArgs.push(deferred.makeNodeResolver(null));
+```
+This would result in different behavior because `deferred.makeNodeResolver(null)` would return a new node resolver that is not the same as the original one, which could cause the promise to be resolved with a different value or error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```go
+nodeArgs.push(deferred.makeNodeResolver());
+```
+This would result in different behavior because `deferred.makeNodeResolver()` would return a new node resolver that is not the same as the original one, which could cause the promise to be resolved with a different value or error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(Q.async());
+```
+This would result in different behavior because `Q.async()` returns a new asynchronous function that is not the same as the original one, which could cause the promise to be resolved with a different value or error.
+
+DONE.

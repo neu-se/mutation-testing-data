@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null, distance, bearing
+```
+This would result in different behavior because the `calculateDestination` function expects a `GeoPoint` instance as the first argument, but `null` is not a `GeoPoint` instance.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+coordinate, bearing, distance
+```
+This would result in different behavior because the `calculateDestination` function expects the `distance` argument to be the second argument, but `bearing` is being passed as the second argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+coordinate, distance, bearing + 180
+```
+This would result in different behavior because the `calculateDestination` function assumes that the bearing is passed in degrees, but the value being passed is `bearing + 180`, which is not a valid bearing value.
+
+DONE.

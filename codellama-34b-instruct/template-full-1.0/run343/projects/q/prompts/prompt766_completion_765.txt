@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ return Q.reject(rejection)
+```
+This would result in different behavior because the `onRejected` function is not called, which means that the `deferred.notify` method will not be called, and the promise returned by `allResolved` will not be resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.reject(rejection).progressed()
+```
+This would result in different behavior because the `progressed` method is not called, which means that the `deferred.notify` method will not be called, and the promise returned by `allResolved` will not be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q.reject(new Error('error')).progressed()
+```
+This would result in different behavior because the `new Error('error')` is not passed as an argument to the `onRejected` function, which means that the `deferred.notify` method will not be called, and the

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, Math.random());
+```
+This would result in different behavior because `setTimeout` is asynchronous, meaning that the callback function `flush` may not be executed immediately, and may not be executed at all if the delay is set to `Infinity`. In contrast, `setImmediate` is synchronous, meaning that the callback function `flush` will be executed as soon as possible.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, Date.now() + 1000);
+```
+This would result in different behavior because `setTimeout` accepts a delay in milliseconds, whereas `Date.now()` returns the current timestamp in milliseconds. As a result, the delay passed to `setTimeout` is effectively random, and may be set to a value that is not intended by the developer.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, Math.max(1000, Date.now()));
+```
+This would

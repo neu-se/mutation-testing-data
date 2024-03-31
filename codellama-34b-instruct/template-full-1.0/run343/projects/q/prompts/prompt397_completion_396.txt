@@ -1,0 +1,19 @@
+  Option 1: The `PLACEHOLDER` can be replaced with:
+```
+return promise.thenResolve(value);
+```
+This would result in different behavior because `promise.thenResolve(value)` would be executed immediately, without waiting for the resolution of the promise.
+
+Option 2: The `PLACEHOLDER` can be replaced with:
+```
+return Q(promise).thenResolve(value);
+```
+This would result in different behavior because `Q(promise)` would create a new promise that would be resolved with the value returned by `promise.thenResolve(value)`.
+
+Option 3: The `PLACEHOLDER` can be replaced with:
+```
+return Q.when(promise, value => value);
+```
+This would result in different behavior because `Q.when(promise, value)` would be used instead of `promise.thenResolve(value)`, which would result in a different promise resolution flow.
+
+DONE.

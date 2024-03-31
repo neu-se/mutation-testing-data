@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(data, options.reviver)
+```
+This would result in different behavior because the `reviver` function would not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(data, options.reviver, null)
+```
+This would result in different behavior because the `reviver` function would be called with the `null` value instead of the `options.reviver` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(data, options.reviver, function(k, v) { return k; })
+```
+This would result in different behavior because the `reviver` function would be called for every element in the array, and would return the value of the key instead of the value.
+
+DONE.

@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(function () { return Q.reject("Error: Invalid operation"); });
+```
+This would result in different behavior because it changes the default reject reason from "Can't get value from closed queue" to "Error: Invalid operation", which is more specific and provides more information about the error that occurred.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var closed = Q.defer();
+closed.resolve(true);
+```
+This would result in different behavior because it changes the initialization of the `closed` deferred object, which is used to track the status of the queue. By setting the promise to `true`, it indicates that the queue is initially closed, whereas the original code sets it to a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function Queue() {
+    var ends = Q.defer();
+    var closed = Q.defer();
+    return {
+        put: function (value) {
+            var next =

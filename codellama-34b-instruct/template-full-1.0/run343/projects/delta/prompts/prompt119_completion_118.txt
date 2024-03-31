@@ -1,0 +1,21 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+      typeof lastOp.retain === 'number' &&
+      typeof lastOp.attributes === 'object'
+```
+This would result in different behavior because current code checks for any possible value for `typeof lastOp.attributes`, while replacing it with checking for an object value will only check if it's an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+      typeof lastOp.retain === 'number' &&
+      lastOp.attributes.length > 0
+```
+This would result in different behavior because current code checks for any possible value for `typeof lastOp.attributes`, while replacing it with checking for a length greater than 0 will only check if it's not an empty array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+      typeof lastOp.retain === 'number' &&
+      !isEqual(lastOp.attributes, {})
+```
+This would result in different behavior because current code checks for any possible value for `typeof lastOp.attributes`, while

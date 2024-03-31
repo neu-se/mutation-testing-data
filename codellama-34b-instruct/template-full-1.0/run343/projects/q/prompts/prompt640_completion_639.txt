@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {
+    return obj.dispatch.apply(obj, ["post", [name, args]]);
+});
+```
+This would result in different behavior because it would cause the function to return a promise that resolves to the return value of the `dispatch` method, rather than the return value of the `post` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {
+    return obj.dispatch.apply(obj, ["post", [name, args]]).then(function (result) {
+        return Q(result);
+    });
+});
+```
+This would result in different behavior because it would cause the function to return a promise that resolves to a promise that resolves to the return value of the `post` method, rather than the return value of the `dispatch` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function (obj) {

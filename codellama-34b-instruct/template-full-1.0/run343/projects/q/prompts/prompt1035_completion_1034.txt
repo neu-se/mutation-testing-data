@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return object[name].apply(object, args);
+```
+This would result in different behavior because the original code uses `Q` to make a promise-returning version of `object[name]`. Using `apply` instead would call the function directly and return its result immediately, instead of returning a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).invoke(name, args);
+```
+This would result in different behavior because the original code uses `Q` to make a promise-returning version of `object[name]`. Using `Q.invoke` instead would create a new promise that resolves to the result of the function call, but would not mutate the original `object`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).method(name).apply(args);
+```
+This would result in different behavior because the original code uses `Q` to make a promise-returning version of `object[name]`. Using `Q.method` and `

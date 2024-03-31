@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.makeNodeResolver()
+```
+This would result in different behavior because it would call `makeNodeResolver()` on the wrong `this` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+JSON.stringify(deferred.makeNodeResolver())
+```
+This would result in different behavior because it would convert the `makeNodeResolver()` function to a string, which would cause the `nsend()` method to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+eval("deferred.makeNodeResolver()")
+```
+This would result in different behavior because it would execute the `makeNodeResolver()` function in the global scope, which would cause the `nsend()` method to fail.
+
+DONE.

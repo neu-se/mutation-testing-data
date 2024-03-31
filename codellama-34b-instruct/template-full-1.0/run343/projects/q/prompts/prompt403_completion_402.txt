@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(reason);
+```
+This would result in different behavior because it would cause the `thenReject` method to always return the rejection reason, regardless of whether the promise is rejected or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(promise).then(function() { return reason; });
+```
+This would result in different behavior because it would cause the `thenReject` method to always return a promise that is resolved with the rejection reason, even if the promise is fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(promise).then(null, function() { return reason; });
+```
+This would result in different behavior because it would cause the `thenReject` method to always return a promise that is rejected with the rejection reason, even if the promise is fulfilled.
+
+DONE.

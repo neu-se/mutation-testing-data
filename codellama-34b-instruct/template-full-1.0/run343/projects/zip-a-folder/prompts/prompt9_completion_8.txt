@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (isGlob(src)) {
+    src.split(',').forEach((globPart) => {
+        zipArchive.glob(globPart);
+    });
+} else {
+    zipArchive.directory(src, false);
+}
+```
+This would result in different behavior because the original code was checking if `src` was not a glob, but this code is checking if `src` is a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (isGlob(src)) {
+    src.split(',').forEach((globPart) => {
+        zipArchive.glob(globPart);
+    });
+} else {
+    zipArchive.directory(src, true);
+}
+```
+This would result in different behavior because the original code was passing `false` as the second argument to `zipArchive.directory()`, but this code is passing `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (isGlob(

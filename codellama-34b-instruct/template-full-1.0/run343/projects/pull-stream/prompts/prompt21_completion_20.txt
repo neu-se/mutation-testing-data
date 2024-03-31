@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pull.apply(null, ref)
+```
+This would result in different behavior because `ref` is an array and `pull.apply` expects a function as its first argument, not an array. This would cause an error to be thrown at runtime.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pull.call(null, ref[0], ref[1], ref[2])
+```
+This would result in different behavior because `pull.call` expects the context object (i.e., `this`) as its first argument, not the first element of the `ref` array. This would cause the `pull` function to be called on the wrong context, resulting in unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pull(ref, ref[0], ref[1], ref[2])
+```
+This would result in different behavior because `pull` expects the first argument to be a function, not an array. This would cause `pull` to be called with the wrong argument,

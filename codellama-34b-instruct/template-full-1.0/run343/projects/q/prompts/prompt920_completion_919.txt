@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(`Timed out with ${timeout} ms`);
+```
+This would result in different behavior because the original code resolves the promise with `timeout` whereas the replacement code rejects the promise with a string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(timeout);
+```
+This would result in different behavior because the original code does not use `notify()`, whereas the replacement code would call the `notifier` function if the promise is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+clearTimeout(timeoutId);
+deferred.resolve(object);
+```
+This would result in different behavior because the original code calls `clearTimeout()` and resolves the promise with `value` while the replacement code calls `clearTimeout()` and resolves the promise with `object`.

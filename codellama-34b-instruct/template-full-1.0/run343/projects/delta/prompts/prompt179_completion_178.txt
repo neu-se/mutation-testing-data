@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength()
+```
+This would result in different behavior because it would make the code iterate over the previous element instead of the current one, potentially skipping some elements.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength()
+```
+This would result in different behavior because it would make the code iterate over the previous element instead of the current one, potentially skipping some elements.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const nextOp = thisIter.next();
+if (nextOp.retain) {
+  const newOp: Op = {
+    retain: typeof nextOp.retain === 'number' ? nextOp.retain : nextOp.retain.retain,
+  };
+  retDelta.push(newOp);
+} else if (nextOp.delete) {
+  retDelta.push(nextOp);
+}
+```
+This would result in different behavior because it would make the code create a new `

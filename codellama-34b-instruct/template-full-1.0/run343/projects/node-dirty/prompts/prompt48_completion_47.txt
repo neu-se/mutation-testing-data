@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+key, updater(undefined), cb
+```
+This would result in different behavior because the `_data` map would be updated with `undefined` as the new value for `key`, instead of the result of `updater(this.get(key))`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+key, updater(this.get(key.toLowerCase())), cb
+```
+This would result in different behavior because the `key` argument passed to `updater` would be the lowercase version of the original `key`, instead of the original `key` itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+key, updater(this.get(key).toString()), cb
+```
+This would result in different behavior because the `updater` function would receive the string representation of the value stored at `key`, instead of the value itself.
+
+DONE.

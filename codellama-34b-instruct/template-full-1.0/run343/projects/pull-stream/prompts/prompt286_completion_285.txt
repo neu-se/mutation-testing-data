@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `mapper` function would be called with `data` even if `end` is truthy, whereas the original code would only call `mapper` if `end` is falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && data
+```
+This would result in different behavior because the `mapper` function would be called with `data` only if `end` is truthy, whereas the original code would call `mapper` with `data` if `end` is falsy or if `data` is null or undefined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data || end
+```
+This would result in different behavior because the `mapper` function would be called with `data` only if `data` is truthy, whereas the original code would call `mapper` with `data` if `data` is null or undefined or if `end` is truthy.
+
+DONE

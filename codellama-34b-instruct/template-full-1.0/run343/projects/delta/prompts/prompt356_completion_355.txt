@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+while (thisIter.hasNext() || otherIter.hasNext()) {
+```
+This would result in different behavior because the original code uses `while (thisIter.hasNext() && otherIter.hasNext())`, which results in a different iteration pattern.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const length = Math.min(thisIter.peekLength(), otherIter.peekLength());
+```
+This would result in different behavior because the original code uses `const length = Math.max(thisIter.peekLength(), otherIter.peekLength());`, which results in a different length calculation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (thisOp.delete) {
+  // Our delete either makes their delete redundant or removes their retain
+  continue;
+}
+```
+This would result in different behavior because the original code uses `if (thisOp.delete) {
+  // Our delete either makes their delete redundant or removes their retain
+  throw new Error

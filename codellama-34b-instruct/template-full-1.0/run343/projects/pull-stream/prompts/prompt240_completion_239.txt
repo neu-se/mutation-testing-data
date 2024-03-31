@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `!` operator negates the value of `end`, so the callback would be called with a truthy value instead of a falsy one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && data
+```
+This would result in different behavior because the `&&` operator will only evaluate the second operand if the first operand is truthy, and `data` is always truthy. This would cause the callback to be called with `end` and `data` every time, even if `test(data)` is falsey.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(end || data)
+```
+This would result in different behavior because the `||` operator will only evaluate the second operand if the first operand is falsy, and `data` is always truthy. This would cause the callback to be called with `end` and `data` only if `test(data)` is truthy.

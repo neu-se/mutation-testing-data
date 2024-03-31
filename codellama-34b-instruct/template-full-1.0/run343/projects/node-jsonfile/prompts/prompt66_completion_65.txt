@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^\u0000/
+```
+This would result in different behavior because `\u0000` is not the same as `\uFEFF`. The former is the null character, while the latter is the zero-width no-break space.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^\u0001/
+```
+This would result in different behavior because `\u0001` is not the same as `\uFEFF`. The former is the start of heading character, while the latter is the zero-width no-break space.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^$/
+```
+This would result in different behavior because `^$` matches the start of the string followed by the end of the string, while `\uFEFF` matches the zero-width no-break space character.
+
+DONE.

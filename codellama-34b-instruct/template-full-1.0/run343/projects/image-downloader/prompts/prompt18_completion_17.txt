@@ -1,0 +1,10 @@
+  Option 1: The PLACEHOLDER can be replaced with: `decodedBasename`
+This would result in different behavior because `options.dest` would be replaced with the basename of the URL, without any path information. This would likely cause the file to be saved in the wrong location.
+
+Option 2: The PLACEHOLDER can be replaced with: `path.dirname(decodeBasename)`
+This would result in different behavior because `path.dirname` returns the directory name of a path, while `decodeBasename` would return the basename of the URL, without any path information. This would likely cause the file to be saved in the wrong location.
+
+Option 3: The PLACEHOLDER can be replaced with: `path.join(path.dirname(decodedBasename), options.dest)`
+This would result in different behavior because `path.join` would append the original `options.dest` value to the basename of the URL, without any path information. This would likely cause the file to be saved in the wrong location.
+
+DONE.

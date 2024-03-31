@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because `Q(object).dispatch("post", [name, nodeArgs])` returns a promise that resolves to the result of the POST request, whereas `Q(deferred.makeNodeResolver())` returns a promise that resolves to a Node-style callback function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).post(name, nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because `Q(object).post(name, nodeArgs)` returns a promise that resolves to the response body of the POST request, whereas `Q(deferred.makeNodeResolver())` returns a promise that resolves to a Node-style callback function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () { deferred.reject(); });
+```
+This would

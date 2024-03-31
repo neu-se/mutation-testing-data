@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+    content.replace(/^\uFEFF/, '');
+```
+This would result in different behavior because this code fragment would remove the UTF-8 BOM (Byte Order Mark) from the beginning of the content, but it would not replace it with the EOL character as the original code fragment does.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+    content.replace(/^\uFEFF/g, EOL);
+```
+This would result in different behavior because this code fragment would replace the UTF-8 BOM (Byte Order Mark) from the beginning of the content with the EOL character, but it would do so for all occurrences of the BOM, rather than just the first occurrence as the original code fragment does.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+    content.replace(/^(\uFEFF)+/, EOL);
+```
+This would result in different behavior because this code fragment would replace all occurrences of the UTF-8 BOM (Byte Order Mark) from the beginning

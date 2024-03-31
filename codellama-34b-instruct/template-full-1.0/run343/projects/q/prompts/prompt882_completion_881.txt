@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because `Q.nfapply()` would now treat `deferred.reject` as the callback function and call it with the resolved or rejected value, which would result in an error if the promise is resolved or a double-rejection if the promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function(){}
+```
+This would result in different behavior because `Q.nfapply()` would now treat an empty function as the callback function and call it with the resolved or rejected value, which would never cause an error or any noticeable effect.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+void 0
+```
+This would result in different behavior because `Q.nfapply()` would now treat `void 0` (which is the same as `undefined`) as the callback function and call it with the resolved or rejected value, which would result in an exception if the promise is resolved or a double-rejection if the

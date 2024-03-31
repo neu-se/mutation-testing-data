@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+onAbort, cb, abort
+```
+This would result in different behavior because the order of the arguments is reversed, which could cause the method to behave differently when called with different arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array.length, i
+```
+This would result in different behavior because `array.length` is not the same as `i`, which is the index of the current element being processed. This could cause the method to behave differently when processing arrays of different lengths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const isArray = require('is-array')
+return function (abort, cb) {
+  if (isArray(abort))
+    return abortCb(cb, abort[0], onAbort)
+  if (abort)
+    return abortCb(cb, abort, onAbort)
+  return cb(true)
+}
+```
+This would result in different behavior because the `is-array` module is being

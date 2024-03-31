@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output, { end: false });
+```
+This would result in different behavior because the `end` option is set to `false`, which means that the output stream will not be closed after the archive is finalized. This could cause issues if the output stream is being used for something else after the archiving process is complete.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(null, { end: true });
+```
+This would result in different behavior because `null` is being passed as the output stream, which means that the archive will be finalized, but no data will be written to the output stream. This could cause issues if the code is expecting data to be written to the output stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(new Stream.Writable());
+```
+This would result in different behavior because a new, empty `Writable` stream is being piped to the `zipArchive` stream

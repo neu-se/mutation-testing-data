@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.concat(other.ops).chop
+```
+This would result in different behavior because it would cause the function to return the concatenation of the input delta and the other delta, instead of the expected behavior of returning the input delta with the remaining operations from the other delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.concat(other.ops.slice(1).concat(delta.ops)).chop
+```
+This would result in different behavior because it would cause the function to return the concatenation of the other delta, without the first operation, and the input delta, which would be in the opposite order of the expected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.concat(other.ops.slice().concat(delta.ops)).chop
+```
+This would result in different behavior because it would cause the function to return the concatenation of the other delta and the input delta, without any consideration for the order of the operations.
+
+DONE.

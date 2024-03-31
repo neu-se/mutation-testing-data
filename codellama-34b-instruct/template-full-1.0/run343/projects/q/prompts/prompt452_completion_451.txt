@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!reason.stack
+```
+This would result in different behavior because `!reason.stack` would invert the truthiness of `reason.stack`, which could be a string or an object. If `reason.stack` is an empty string, it would be truthy, so `!reason.stack` would be falsy. If it's a non-empty string, it would be truthy, so `!reason.stack` would be falsy. If it's an object, it would always be truthy, so `!reason.stack` would be falsy. This could cause unintended behavior, such as reporting a rejection as handled when it should be unhandled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reason.stack + 1
+```
+This would result in different behavior because `reason.stack + 1` would concatenate `reason.stack` with the string "1", resulting in a new string that is different from the original `reason.stack`. This could cause unintended behavior

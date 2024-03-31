@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(() => { if (cb) cb(); this.emit('drain'); });
+```
+This would result in different behavior because the `setImmediate` function would be called after all other tasks that are already in the event loop, while `process.nextTick` would be called before any other tasks in the event loop, which could cause the callback to be called earlier than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setTimeout(() => { if (cb) cb(); this.emit('drain'); }, 0);
+```
+This would result in different behavior because the `setTimeout` function would be called after a delay of 0 milliseconds, which would allow other tasks in the event loop to run first, while `process.nextTick` would be called immediately after the current task.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve().then(() => { if (cb) cb(); this.emit('drain'); });
+```

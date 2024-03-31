@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then().then()
+```
+This would result in different behavior because `Q(object).then()` returns a promise, and chaining another `then()` after it would create a new promise that is resolved with the value of the first promise. In the original code, only one `then()` is chained after `Q(object)`, which is sufficient to propagate the result of the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(null, null)
+```
+This would result in different behavior because `null` is not a function and would result in a `TypeError`; whereas in the original code, the `then()` method is called with two functions as arguments, which are used to handle the fulfillment and rejection of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(noop, noop)
+```
+This would result in different behavior because `noop` is a function that returns `undefined` and

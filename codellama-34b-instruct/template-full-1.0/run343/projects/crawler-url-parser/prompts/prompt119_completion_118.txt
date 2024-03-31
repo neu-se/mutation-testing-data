@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with: `baseUrl.toString()`
+
+This would result in different behavior because `URL.parse` expects a string as an input but `baseUrl.toString()` would be a string representing the URL object.
+```
+let currentUrl = parse(href, baseUrl.toString());
+```
+Option 2: The PLACEHOLDER can be replaced with `baseUrl.href`
+
+This would result in different behavior because `baseUrl.href` is the full URL including the protocol and hostname, while `currentUrl.url` is the full URL excluding the protocol and hostname.
+```
+let currentUrl = parse(href, baseUrl.href);
+```
+Option 3: The PLACEHOLDER can be replaced with `baseUrl`
+
+This would result in different behavior because baseUrl is not a string, but an object containing information about the base URL such as protocol, hostname, pathname, search, hash.
+```
+let currentUrl = parse(href, baseUrl);
+```
+Third Option: DONE.

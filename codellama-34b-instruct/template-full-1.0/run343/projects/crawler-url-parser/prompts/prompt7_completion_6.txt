@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.toLowerCase())
+```
+This would result in different behavior because the original code checks if `baseUrlStr` has illegal characters, while the new code checks if `baseUrlStr` converted to lowercase has illegal characters. This could cause some edge cases to be missed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.toUpperCase())
+```
+This would result in different behavior because the original code checks if `baseUrlStr` has illegal characters, while the new code checks if `baseUrlStr` converted to uppercase has illegal characters. This could cause some edge cases to be missed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/[a-z]/g, c => String.fromCharCode(c.charCodeAt(0) +

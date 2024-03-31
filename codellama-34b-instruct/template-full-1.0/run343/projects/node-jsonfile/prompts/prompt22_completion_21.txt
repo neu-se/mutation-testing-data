@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync(file, {
+  encoding: 'utf8',
+  throws: false,
+  reviver: (key, value) => {
+    if (key === '') {
+      return value;
+    } else {
+      return null;
+    }
+  },
+})
+```
+This would result in different behavior because the `reviver` function would be called with the wrong key, causing the JSON parse to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync(file + '.json', options)
+```
+This would result in different behavior because the file extension would be wrong, causing the read operation to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync(file, {
+  encoding: 'utf8',
+  throws: false,
+  reviver: (key, value) => {
+    if (key === '') {
+      return JSON.parse(value);
+   

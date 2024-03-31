@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedBaseUrl, true, true);
+```
+This would result in different behavior because `URL.parse()` returns an object with the parsed URL components, while `URL.format()` converts the URL components back into a string. By using `URL.parse()` in place of `URL.format()`, we are effectively discarding the parsed URL components and replacing them with a new set of components parsed from the `currentUrlStr` string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr.replace(/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]+i, '()');
+```
+This would result in different behavior because the regular expression `[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]` matches any character that is not a letter, digit, or one of the symbols listed, and the `

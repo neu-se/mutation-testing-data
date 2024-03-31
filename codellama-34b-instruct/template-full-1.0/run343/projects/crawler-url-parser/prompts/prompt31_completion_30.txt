@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^\s*(?!(?:\w+:)?\/\/)/
+```
+This would result in different behavior because the addition of the `\s*` at the start would allow for leading whitespace, leading to different matching behavior for some inputs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?!(?:\w+:)?\/\/)|^\s+\^*/
+```
+This would result in different behavior because the addition of `|^\s+\^*` at the end would also match if the string starts with whitespace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?!(?:\w+:)?\/\/)|^\s*?/
+```
+This would result in different behavior because the addition of `?` at the end would make the leading whitespace optional, leading to different matching behavior for some inputs.
+
+DONE.

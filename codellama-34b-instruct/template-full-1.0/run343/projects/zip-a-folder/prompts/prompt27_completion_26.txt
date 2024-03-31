@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+output.once('close', resolve);
+```
+This would result in different behavior because `once` will only call the listener once, whereas `on` will call it every time the event is emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.addEventListener('close', resolve);
+```
+This would result in different behavior because `addEventListener` will add a new event listener that will be called multiple times, whereas `on` will only call the existing listener.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('error', reject);
+```
+This would result in different behavior because `error` is a different event from `close`, and `reject` will be called if there is an error instead of `resolve` when the `close` event is emitted.
+
+DONE.

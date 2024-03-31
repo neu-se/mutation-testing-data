@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`URN.format(parsedUrl)`
+```
+This would result in different behavior because it would return the formatted URL using the `URN` module, which may not produce the same result as using the `URL` module directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://') + '?foo=bar'`
+```
+This would result in different behavior because it would always add the query parameter `?foo=bar` to the URL, regardless of whether it was already present.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://') + '/./abcd?foo=bar'`
+```
+This would result in different behavior because it would always add the extra path component `/./abcd` to the URL, regardless of whether it was already present, and then add the query parameter

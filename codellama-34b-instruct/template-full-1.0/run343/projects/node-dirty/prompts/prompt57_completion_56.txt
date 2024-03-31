@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'data', () => this.close()
+```
+This would result in different behavior because the `'data'` event is emitted every time a chunk of data is received from the file stream, whereas the `'drain'` event is emitted when the write stream is ready to accept more data. By using `'data'` instead of `'drain'`, the `close()` method would be called every time a chunk of data is received, which would cause the file stream to be closed prematurely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', () => this.close()
+```
+This would result in different behavior because the `'error'` event is emitted when there is an error while reading or writing to the file stream. By using `'error'` instead of `'drain'`, the `close()` method would be called if there is an error while writing to the file stream, which could cause data loss or corruption.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'end', () => this

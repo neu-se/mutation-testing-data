@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.get(<PLACEHOLDER>);
+```
+This would result in different behavior because `this.get(<PLACEHOLDER>)` would return undefined, whereas `this.set(<PLACEHOLDER>, undefined, cb)` would set the value of `<PLACEHOLDER>` to undefined in the cache and potentially write it to disk depending on the value of `this.path`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<PLACEHOLDER>()
+```
+This would result in different behavior because `<PLACEHOLDER>()` would return undefined, whereas `this.set(<PLACEHOLDER>, undefined, cb)` would set the value of `<PLACEHOLDER>` to undefined in the cache and potentially write it to disk depending on the value of `this.path`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._data.delete(<PLACEHOLDER>);
+```
+This would result in different behavior

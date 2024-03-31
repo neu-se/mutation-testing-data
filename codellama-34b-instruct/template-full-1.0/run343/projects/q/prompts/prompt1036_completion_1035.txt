@@ -1,0 +1,19 @@
+  DONE.
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer()
+```
+This would result in different behavior because `Q.defer()` creates a new deferred object each time it is called, whereas `Q.defer` is a reference to the same deferred object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(Q.defer())
+```
+This would result in different behavior because `Q.when()` expects a promise as its argument, but `Q.defer()` returns a deferred object. By wrapping the deferred object in a promise using `Q.when()`, we can create a promise that resolves or rejects depending on the deferred object's state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(Q.defer())
+```
+This would result in different behavior because `Q.resolve()` expects a promise as its argument, but `Q.defer()` returns a deferred object. By wrapping the deferred object in a promise using `Q

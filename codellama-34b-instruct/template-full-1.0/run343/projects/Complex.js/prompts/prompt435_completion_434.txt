@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with `0`:
+```js (template literal didn't work)
+places = Math.pow(0, places || 0);
+```
+This would result in divide-by-zero errors in the `floor()` and `round()` methods, as the second argument to `Math.pow()` would be `Infinity`.
+
+Option 2: The PLACEHOLDER can be replaced with `""`, an empty string:
+```js
+places = Math.pow("", places || 0);
+```
+This would result in the same behavior as the original code, but with a string instead of an integer.
+
+Option 3: The PLACEHOLDER can be replaced with `NaN`:
+```js
+places = Math.pow(NaN, places || 0);
+```
+This would result in the same behavior as the original code, but with `NaN` instead of `10`.
+
+DONE.

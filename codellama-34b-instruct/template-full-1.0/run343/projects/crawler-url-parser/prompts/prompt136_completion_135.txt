@@ -1,0 +1,19 @@
+  Let's begin the process of mutation testing by identifying the piece of code we would like to modify to understand the test robustness. Examining the given code fragment, we detect several candidates for mutating. One of them is:
+
+```
+let linkurl_without_last_part_borg = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+```
+
+Due to the comment that indicates this is for testing purposes, we suspect the developers were aware of this code and intended it to be changed. Still, we can attempt to identify a buggy replacement and explain the impact. For instance, Option 1: We might replace the PLACEHOLDER with:
+
+```
+/(/?[^\/]*[\/]?$/
+```
+
+This would result in different behavior because the capturing group includes the forward slash, and when the path ends with multiple slashes, the regular expression will not work as intended. 
+
+Option 2: We can replace the PLACEHOLDER with:
+```
+/(irectory)[\/]?$/
+```
+This would result in different behavior

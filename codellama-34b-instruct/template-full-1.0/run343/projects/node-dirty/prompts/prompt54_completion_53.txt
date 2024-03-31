@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain');
+```
+This would result in different behavior because the original code emits the 'drain' event only when the `_queue` is empty and the in-flight writes are less than or equal to 0. The replaced code fragment would emit the 'drain' event unconditionally, which would break the logic of the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites = -1;
+```
+This would result in different behavior because the original code updates the `_inFlightWrites` property to the current value minus 1. The replaced code fragment would set the `_inFlightWrites` property to -1, which would break the logic of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(this._waitForDrain = false);
+```
+This would result in different behavior because the original code sets the `_waitForDrain` property to `false`

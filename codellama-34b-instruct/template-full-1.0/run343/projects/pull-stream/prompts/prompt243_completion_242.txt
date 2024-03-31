@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator negates the `abort` variable, causing the `if` statement to always evaluate as `false`. Therefore, the code would never enter the block that aborts the current stream and streams of streams.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort + 1
+```
+This would result in different behavior because the `+` operator adds 1 to the `abort` variable, which would cause the `if` statement to evaluate as `true` if `abort` is 0 or any other falsy value. This would result in the code always aborting the current stream and streams of streams, even if it was not supposed to.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || true
+```
+This would result in different behavior because the `||` operator checks if either `abort` or `true` is truthy. Since `true` is always truthy, this would

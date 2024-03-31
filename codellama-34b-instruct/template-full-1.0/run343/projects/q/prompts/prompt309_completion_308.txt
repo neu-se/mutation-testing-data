@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reject(exception).then(resolve, resolve);
+```
+This would result in different behavior because it would cause the promise to be rejected twice, once with the original exception and again with a new exception created by `then`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+().then(resolve, reject);
+```
+This would result in different behavior because it would cause the promise to be immediately resolved with the value `undefined`, bypassing the `deferred.reject` call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.reject(exception);
+```
+This would result in different behavior because it would cause the promise to be rejected with a new promise object, rather than the original exception.
+
+DONE.

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit.apply(this, arguments);
+```
+This would result in different behavior because `this.emit` with `apply` will call the `emit` function with the `this` context of `Dirty` and pass on the arguments object as the only argument, whereas `this.emit` without `apply` will call the `emit` function with the `this` context of `Dirty` and pass on the individual arguments as separate parameters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit.call(this, 'error', new Error('Corrupted row at the end of the db: ' + buffer));
+```
+This would result in different behavior because `this.emit.call` will call the `emit` function with the `this` context of `Dirty`, and pass on 'error' and a new `Error` object as separate parameters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit.bind(this, 'error', new Error('Cor

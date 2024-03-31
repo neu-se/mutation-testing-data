@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op]()
+```
+This would result in different behavior because it would call the `op` method on the `descriptor` object without passing any arguments, which could produce a different result if the method has side effects or relies on the values of any global variables.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op](args)
+```
+This would result in different behavior because it would pass the `args` array as an argument to the `op` method, which could affect the result of the method if it relies on the values of the arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].bind(descriptor)()
+```
+This would result in different behavior because it would bind the `op` method to the `descriptor` object and then call it without passing any arguments, which could affect the result of the method if it relies on the values of `this` or the arguments passed to it.
+
+DONE.

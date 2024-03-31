@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emitError
+```
+This would result in different behavior because `emitError` is not a function in the `Dirty` class, so it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error(key))
+```
+This would result in different behavior because it would emit an error event with a different message: "Could not load corrupted row: {{key}}".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('load', this._data.get(key))
+```
+This would result in different behavior because it would emit a "load" event with a different value for the "key" parameter.
+
+DONE.

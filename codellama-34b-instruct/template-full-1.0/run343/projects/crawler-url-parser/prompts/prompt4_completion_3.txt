@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!currentUrlStr || !_has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the `!` operator negates the condition, so the function would return null if `currentUrlStr` is truthy or if there are no illegal characters in `currentUrlStr`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr.length && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the `length` property returns the length of the string, so the condition would be truthy if `currentUrlStr` is not empty and there are illegal characters in `currentUrlStr`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr.replace(/[a-zA-Z]+/g, '') && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the `replace()` method with the global flag (`g`) would remove all

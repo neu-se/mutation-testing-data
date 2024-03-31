@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!!timezones[name]
+```
+This would result in different behavior because `!timezones[name]` checks whether a timezone with the given name exists in the `timezones` object, while `!!timezones[name]` checks whether the timezone with the given name exists and is not falsy (e.g. `null`, `false`, etc.). Therefore, `!!timezones[name]` would evaluate to `true` even if the timezone exists but has a falsy value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+timezones[name] === true
+```
+This would result in different behavior because `timezones[name] === true` checks whether the timezone with the given name exists and has a value of `true`, while `!timezones[name]` checks whether the timezone with the given name exists and is not falsy. Therefore, `timezones[name] === true` would evaluate to `false` if the timezone exists but has a value other than `true`.

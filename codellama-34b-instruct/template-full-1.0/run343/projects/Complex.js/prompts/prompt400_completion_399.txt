@@ -1,0 +1,30 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'acosh': function() {
+
+      // acosh(c) = log(c + sqrt(c^2 - 1))
+
+      var res = this['acos']();
+
+      var tmp = res['re'];
+      res['re'] = -res['im'];
+      res['im'] = tmp;
+
+      return res;
+    },
+```
+This would result in different behavior because the `acos` method was called on the complex number `c`, which would produce a different result than the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'acosh': function() {
+
+      // acosh(c) = log(c + sqrt(c^2 - 1))
+
+      var res = this['acos']();
+
+      if (res['im'] <= 0) {
+        var tmp = res['re'];
+        res['re'] = -res['im'];
+        res['im'] = tmp;
+      }

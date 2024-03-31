@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).fail()
+```
+This would result in different behavior because `Q(object).fail()` is a rejected promise, while `Q(object)["finally"]` is a resolved promise with the value `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function(v) { return v; })
+```
+This would result in different behavior because `Q(object).then(function(v) { return v; })` is a resolved promise with the same value as `Q(object)`, while `Q(object)["finally"]` is a resolved promise with the value `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function(v) { throw new Error("Buggy code"); })
+```
+This would result in different behavior because `Q(object).then(function(v) { throw new Error("Buggy code"); })` is a rejected promise with the error message "Bug

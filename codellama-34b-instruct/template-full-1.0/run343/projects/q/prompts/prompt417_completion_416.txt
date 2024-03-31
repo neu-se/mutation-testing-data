@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.inspect.then(identity)
+```
+This would result in different behavior because `identity` is a function that returns its first argument, whereas `object.inspect` is a function that returns a value that is not a promise. As a result, the `then` method would not be called with the `identity` function as an argument, and the code would behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object.inspect.then(function() { return this.value; })
+```
+This would result in different behavior because `this.value` would be a different value than the one returned by `object.inspect`. The `then` method would be called with the `function() { return this.value; }` function as an argument, which would return a different value than the one returned by `object.inspect`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.inspect.then(function(value) { return value != null ? value : undefined;

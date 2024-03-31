@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0
+```
+This would result in different behavior because the original code fragment checks if there are any in-flight writes, while this new fragment checks if there are more than 0 in-flight writes. If there are 0 in-flight writes, the original code would emit the 'drain' event, while the new fragment would not emit the event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites === 0
+```
+This would result in different behavior because the original code fragment checks if there are any in-flight writes, while this new fragment checks if there are exactly 0 in-flight writes. If there are any in-flight writes, the original code would not emit the 'drain' event, while the new fragment would emit the event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites >= 0
+```
+This would result in different

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.all
+```
+This would result in different behavior because `Q.all` returns a promise that resolves when all of the promises in the array argument have resolved, whereas `Q.defer` returns a new, unresolved promise. In the context of the `put` method, using `Q.all` instead of `Q.defer` would cause the `ends.resolve` method to be called immediately with an array of promises, rather than with a new promise that resolves to the array. This would cause the `put` method to resolve its promise more quickly, which could have unintended consequences if the code that consumes the queue is not expecting it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject
+```
+This would result in different behavior because `Q.reject` returns a promise that is rejected with the given reason, whereas `Q.defer` returns a new, unresolved promise. In the context of the `put` method, using `Q.reject` instead of `Q

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiouy]y$|quy$/i, function(w) { return w.substr(0, w.length - 3) + 'ies' })
+```
+This would result in different behavior because it would cause the rule to match words that end in "y" but not "quy", and would cause the replacement to remove the last three characters of the word instead of the last two.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiouy]y$/i, function(w) { return w.substr(0, w.length - 2) + 'ies' })
+```
+This would result in different behavior because it would cause the rule to match words that end in "y" but not "quy", and would cause the replacement to remove the last two characters of the word instead of the last one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/quy$/i, function(

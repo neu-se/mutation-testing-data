@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.next().retain
+```
+This would result in different behavior because `iter.next()` returns the next operation in the iterator, and `.retain` would return the length of the retained text in the operation, rather than the operation itself. This would cause the `diffResult.forEach()` loop to iterate over the lengths of the retained text rather than the operations in the delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.next().delete
+```
+This would result in different behavior because `iter.next()` returns the next operation in the iterator, and `.delete` would return the length of the deleted text in the operation, rather than the operation itself. This would cause the `diffResult.forEach()` loop to iterate over the lengths of the deleted text rather than the operations in the delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.next().attributes
+```
+This would result in different behavior because `iter.next()` returns the next operation in the iterator, and `.attributes` would

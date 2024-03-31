@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).reverse().map(part => part.split('').reverse().join(''))
+```
+This would result in different behavior because it would reverse the characters within each part of the path, potentially causing the matcher to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).filter(part => part === ':id')
+```
+This would result in different behavior because it would only include parts of the path that match the string ':id', potentially reducing the number of matches.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).reverse().map(part => part.split('-').reverse().join(''))
+```
+This would result in different behavior because it would reverse the parts of the path, and then split each part on the '-' character and reverse the resulting array, potentially causing the matcher to fail.
+
+DONE.

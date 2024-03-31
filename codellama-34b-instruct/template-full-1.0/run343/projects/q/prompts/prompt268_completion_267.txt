@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error('<error message>')
+```
+This would result in different behavior because `reject` is a function that is called with a reason, while `throw new Error` statement throws an error synchronously, which would cause the promise to be rejected with an error instead of a reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolve(reason)
+```
+This would result in different behavior because `resolve` is a function that is called with a value, while `reject` is called with a reason. Calling `resolve` with a reason would cause the promise to be resolved with the reason, which would be unexpected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reject(new Error(reason))
+```
+This would result in different behavior because `reject` is called with a new error object that has the reason as its message, which would cause the promise to be rejected with a different error object than the original error object.
+
+DONE.

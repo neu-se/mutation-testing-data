@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is a primitive value, and `typeof null === "object"` would return `false`, which means the `then` method would not be called, and the rejection would not be handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{"value": reason}
+```
+This would result in different behavior because `reason` is an object, and `typeof { "value":reason }.value === "object"` would return `true`, which means the `then` method would not be called, and the rejection would not be handled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reason.detail
+```
+This would result in different behavior because `reason.detail` is undefined, and `typeof reason.detail === "undefined"` would return `true`, which means the `then` method would not be called, and the rejection would not be handled.
+
+DONE.

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject({
+    index: index,
+    value: progress
+});
+```
+This would result in different behavior because the `onProgress` function will no longer notify the deferred with the progress value on each update.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject("" + err);
+```
+This would result in different behavior because the rejection message would change to the stringified error object, rather than the original error message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve({
+    index: index,
+    value: progress
+});
+```
+This would result in different behavior because the `onProgress` function would now resolve the deferred with the progress value on each update, rather than only rejecting it if all promises have been rejected.
+
+DONE.

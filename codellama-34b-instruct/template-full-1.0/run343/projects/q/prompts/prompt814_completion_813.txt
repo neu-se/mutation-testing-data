@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.call
+```
+This would result in different behavior because `fcall` is a method of the `Q` object, while `call` is a method of the `Function` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function() {
+    return callback();
+}
+```
+This would result in different behavior because `fcall` is a method that takes the context object as an argument, while the replacement code does not have the context object as an argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var args = Array.prototype.slice.call(arguments);
+args.unshift(null);
+callback.apply(null, arguments);
+```
+This would result in different behavior because `fcall` is a method that takes the context object as an argument, while the replacement code does not have the context object as an argument.
+
+DONE.

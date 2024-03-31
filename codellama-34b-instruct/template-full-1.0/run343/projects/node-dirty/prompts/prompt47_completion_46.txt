@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `update` method would not invoke the callback function `cb` even if the key exists in the database, as `null` is not a function and cannot be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because `update` method would not update the value stored at key in the database, as `{}` is an empty object and has no properties, and therefore cannot be used to update a value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => {}
+```
+This would result in different behavior because `update` method would not invoke the callback function `cb` even if the key exists in the database, as `() => {}` is a function with no statements and therefore cannot update the value at the key.
+
+DONE.

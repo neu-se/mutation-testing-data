@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.slice(0, -1)
+```
+This would result in different behavior because `spec.slice(0, -1)` would return a string that is one character shorter than `spec`, which could cause the regular expression to not match the full path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/([a-zA-Z0-9_/:~.])/g, '')
+```
+This would result in different behavior because `spec.replace(/([a-zA-Z0-9_/:~.])/g, '')` would remove all instances of the characters in the regular expression from `spec`, which could cause the regular expression to not match the full path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(-1)[0]
+```
+This would result in different behavior because `spec.split('/').slice(-1)[0]` would return the last segment of the path, which could cause the regular expression to not match the
