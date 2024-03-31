@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).catch
+```
+This would result in different behavior because `Q(answerPs[i]).catch()` would catch any rejection in the promise and would not proceed with the next iteration of the loop, while the original code would continue with the next iteration.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function() {...}).catch(function() {...})
+```
+This would result in different behavior because the inner function would be executed synchronously and would fail the test if it throws an error, while the original code executes the function asynchronously and would not fail the test if it throws an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function() {...}.bind(undefined, answerPs[i]))
+```
+This would result in different behavior because the function would be bound to the global object, which is not the same as `this` in the original

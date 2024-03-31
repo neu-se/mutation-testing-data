@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+name, args.slice(1)
+```
+This would result in different behavior because slicing the `args` array would result in a new array, causing the `name` parameter to be `undefined` which would throw an error when passed to `Q(object)` as it is not a valid argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+args, name
+```
+This would result in different behavior because passing `name` as the first argument to `Q(object)` would result in a type error as `Q` expects the first argument to be a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+name, args.concat([name])
+```
+This would result in different behavior because concatenating `name` to the end of the `args` array would result in a new array that is one element longer than the original `args` array.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!spec.match(/[^/]:|:\/|:$/)
+```
+This would result in different behavior because the `!` operator is a logical NOT, which would invert the result of the `match()` method, causing the regex to match even if it shouldn't.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) === null
+```
+This would result in different behavior because the `===` operator is a strict equality check, which would return `null` if the regex does not match, rather than returning a truthy value indicating a match.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) !== null
+```
+This would result in different behavior because the `!==` operator is a strict non-identity check, which would return a truthy value indicating a match if the regex does not match, rather than returning `null`.
+
+DONE.

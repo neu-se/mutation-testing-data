@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var p = promise; !!p; p = p.source;
+```
+This would result in different behavior because the extra semicolon after `!!p` would cause a SyntaxError, causing the code to fail to run.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var p = promise; !p.source; p = p;
+```
+This would result in different behavior because the `!p.source` would evaluate to `true` if `p.source` is falsy (e.g., if it is `undefined` or `null`), causing the `p = p` assignment to not happen.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var p = promise; p = p.source; !p;
+```
+This would result in different behavior because the `!p` would evaluate to `true` if `p` is falsy (e.g., if it is `undefined` or `null`), causing the `var p = promise` declaration to not

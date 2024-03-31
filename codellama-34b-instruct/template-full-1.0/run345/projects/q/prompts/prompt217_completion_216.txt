@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function () {
+    if (typeof console !== "undefined" &&
+        typeof console.warn === "function") {
+        console.warn(name + " is deprecated, use " + alternative +
+                     " instead.", new Error("").stack.split("\n")[1]);
+    }
+    return callback.apply(callback, arguments);
+}
+```
+This would result in different behavior because it would only display the first line of the error stack trace, rather than the entire stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function () {
+    if (typeof console !== "undefined" &&
+        typeof console.warn === "function") {
+        console.warn(name + " is deprecated, use " + alternative +
+                     " instead.", new Error("").stack.replace(/^.*\n/, ""));
+    }
+    return callback.apply(callback, arguments);
+}
+```
+This would result in different behavior because it would display the entire error stack trace, but only after the first line

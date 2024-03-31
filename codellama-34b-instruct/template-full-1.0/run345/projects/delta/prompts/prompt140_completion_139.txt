@@ -1,0 +1,10 @@
+  * The bugs in this code are related to edge cases in the implementation of the diff algorithm.
+* One edge case is when a retain op is followed by an insert op, and the cursor is at the end of the insert op. In this case, the correct behavior is to leave the cursor at the end of the insert op, but the current implementation leaves the cursor at the beginning of the next op.
+* Another edge case is when a retain op is followed by a delete op, and the cursor is at the beginning of the delete op. In this case, the correct behavior is to leave the cursor at the beginning of the next op, but the current implementation leaves the cursor at the end of the previous op.
+* To fix these bugs, you can replace the code fragments that handle these edge cases with correct implementations. For example, you can change the code that handles the cursor at the end of an insert op to the following:
+```
+cursor = this.changePosition(cursor, 1, true)
+```
+This would move the cursor to the beginning of the next op, which is the correct behavior.
+Option 1: The PLACEHOLDER can be replaced with:
+```

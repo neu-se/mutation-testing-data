@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.doesNotMatch
+```
+This would result in different behavior because the `doesNotMatch` method checks if a rule does not match a given path and context, whereas the original `matches` method checks if a rule matches a given path and context. If a rule was added to the policy with the intention of matching a certain path and context, but the `doesNotMatch` method was used instead, then the policy would incorrectly allow any action on the path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!rule.matches
+```
+This would result in different behavior because the `!` operator negates the result of the `matches` method, so if the result of the `matches` method is `true`, then `!rule.matches` would result in `false`, and vice versa. If a rule was added to the policy with the intention of allowing a certain action on a path, but the `!` operator was used instead, then the policy would incorrectly deny the action.
+
+Option 3: The PLACEHOLDER can

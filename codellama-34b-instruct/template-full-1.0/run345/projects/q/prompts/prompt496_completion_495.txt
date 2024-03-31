@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is not a rejected promise, so the `untrackRejection` function would not be called, and the `unhandledRejections` array would not be updated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+1
+```
+This would result in different behavior because `1` is not a rejected promise, so the `untrackRejection` function would not be called, and the `unhandledRejections` array would not be updated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.reject(reason)
+```
+This would result in different behavior because `Promise.reject(reason)` creates a new rejected promise with the same reason as the original promise, so the `untrackRejection` function would be called, but the `unhandledRejections` array would still be updated with the original promise, not the new one.
+
+DONE.

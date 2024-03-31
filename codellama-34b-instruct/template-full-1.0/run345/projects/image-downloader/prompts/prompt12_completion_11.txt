@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest)
+```
+This would result in different behavior because `path.dirname()` returns the directory name of the provided file path, while `path.basename()` returns the file name. Using `path.dirname()` would result in the `dest` directory being set to the directory of the file being downloaded, rather than the file name itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.resolve(options.dest, '..')
+```
+This would result in different behavior because `path.resolve()` returns the absolute path of the provided file path, while `path.dirname()` returns the directory name. Using `path.resolve()` would result in the `dest` directory being set to the parent directory of the file being downloaded, rather than the directory of the file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.basename(path.dirname(options.dest))
+```
+This would result in different behavior because `path.basename()` returns the file name

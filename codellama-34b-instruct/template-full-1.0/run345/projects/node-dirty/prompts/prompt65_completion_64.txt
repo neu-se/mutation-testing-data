@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.end()
+```
+This would result in different behavior because `end()` will cause the write stream to stop receiving new data, whereas `destroy()` will reset the stream and cause it to error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.write("error", () => this._writeStream.destroy())
+```
+This would result in different behavior because `write()` will cause the write stream to write the string "error" to the file, whereas `destroy()` will reset the stream and cause it to error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.on("finish", () => this._writeStream.destroy())
+```
+This would result in different behavior because `on("finish")` will cause the write stream to emit a "finish" event when it is finished writing, and `destroy()` will reset the stream and cause it to error.
+
+DONE.

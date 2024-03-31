@@ -1,0 +1,18 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+promises[index]
+```
+This would result in different behavior because it would refer to the original array of promises instead of the array of promises returned by `array_map()`, which are the promises that are being resolved. This could cause the `allResolved()` function to return a promise that resolves before all of the original promises have settled, which would be incorrect.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises[i]
+```
+This would result in different behavior because it would refer to the `promises` array in the closure scope of the `array_reduce()` function, which could cause unexpected behavior if `promises` is modified by the `onFulfilled()` or `onRejected()` callbacks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Array.prototype.slice.call(promises)
+```
+This would result in different behavior because it would create a shallow copy of the `promises` array, which could cause unexpected behavior if the `prom

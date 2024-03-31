@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+currentUrlStr && _has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because it checks the base URL for illegal characters instead of the current URL, which could allow for more false positives.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_has_illegal_chars(currentUrlStr) || _has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because it checks both the current and base URLs for illegal characters, which could increase the likelihood of missing some issues.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!_has_illegal_chars(currentUrlStr) || _has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because it checks that the current URL does not have any illegal characters, which could cause false negatives if the base URL is also invalid.
+
+DONE.

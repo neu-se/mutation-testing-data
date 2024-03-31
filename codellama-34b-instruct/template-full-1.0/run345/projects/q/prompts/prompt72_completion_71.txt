@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+  process.nextTick(flush);
+};
+```
+This would result in different behavior because `process.nextTick()` is synchronous, whereas `setTimeout()` is asynchronous.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+  setTimeout(flush, 1000);
+};
+```
+This would result in different behavior because `setTimeout()` schedules the `flush` function to be executed 1 second after it is called, whereas `process.nextTick()` executes the function immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+  requestPortTick();
+};
+```
+This would result in different behavior because `requestPortTick()` uses a message channel to execute the `flush` function, whereas `setTimeout()` simply schedules it to be executed at a later time.
+
+DONE.

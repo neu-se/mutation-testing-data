@@ -1,0 +1,17 @@
+  Option 1:
+```
+otherIter.peekType()
+```
+This would result in different behavior because it would always return `null`, as the `peekType` method is not defined in the `OpIterator` class. This would cause the logic for handling `delete` elements to be skipped, potentially resulting in incorrect behavior when composing the two `Delta` objects.
+
+Option 2:
+```
+otherIter.next().type
+```
+This would result in different behavior because it would always return the next `Op`'s type, rather than the current one. This would potentially cause the logic for handling `retain` elements to be misinterpreted, resulting in incorrect behavior when composing the two `Delta` objects.
+
+Option 3:
+```
+otherIter.next().peek().type
+```
+This would result in different behavior because it would always return the next `Op`'s `peek` property, which is not defined for most value types and would return a TypeError when trying to be accessed. This would potentially cause the logic for handling `reserve` elements to be misinterpreted, resulting in incorrect behavior when composing the

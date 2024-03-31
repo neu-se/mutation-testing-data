@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer.call
+```
+This would result in different behavior because `continuer.call` would force the `continuer` function to use its `this` object as the value of `this` within the function, whereas `continuer.bind` would create a new function with the `this` object bound to the first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolved(continuer)
+```
+This would result in different behavior because `Q.resolved()` would resolve the `continuer` function as a promise, whereas `continuer.bind` would return the `continuer` function itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` would cause `continuer` to be null, which would then be passed as the first argument to `makeGenerator.apply()`, which would likely result in an error.
+
+DONE.

@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops[delta.ops.length - 2], newOp
+```
+This would result in different behavior because it would include the previous op in the composition instead of the last op.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.ops[0], newOp
+```
+This would result in different behavior because it would include the first op in the composition instead of the last op.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const otherOp = (delta.ops.length > 1) ? delta.ops[delta.ops.length - 2] : null;
+if (otherOp !== null) {
+    newOp = otherOp;
+}
+```
+This would result in different behavior because it would only use the previous op in the composition if it exists, instead of always using the last op.
+
+DONE.

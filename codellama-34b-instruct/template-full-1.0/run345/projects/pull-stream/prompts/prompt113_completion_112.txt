@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (err) return cb(err)
+```
+This would result in different behavior because the original code fragment checks if the `err` argument is truthy before calling the callback with an error, while this new code fragment only checks if `err` is defined before calling the callback with an error. If `err` is a falsey value such as `null` or `false`, the original code fragment would call the callback with an error, while this new code fragment would not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (err) return cb(null, err)
+```
+This would result in different behavior because the original code fragment calls the callback with just an error argument if the `err` argument is truthy, while this new code fragment calls the callback with `null` as the first argument regardless of whether `err` is truthy or falsey.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (err) return cb(acc, err)
+```
+This would result in different

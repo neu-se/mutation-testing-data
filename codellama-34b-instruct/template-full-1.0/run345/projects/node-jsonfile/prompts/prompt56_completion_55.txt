@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+str.replace(/^\uFEFF/, '').replace(EOL, EOL)
+```
+This would result in different behavior because it would replace the BOM character with a newline character, which is different from the original behavior where it was replaced with an empty string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+str.replace(/^\u000D?\u000A|\u000D[^\u000A]|\u000A[^\u000D]/g, EOL)
+```
+This would result in different behavior because it would replace all CRLF and LFCR combinations with the given EOL character, which is different from the original behavior where it only replaced the first occurrence.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+str.replace(/^\uFEFF/, '').replace(/\n/g, EOL)
+```
+This would result in different behavior because it would first remove the BOM character and

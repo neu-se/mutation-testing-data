@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op.retain ? op.attributes : null
+```
+This would result in different behavior because if `op.retain` is truthy, the original code would return `op.attributes`, but the new code would return `null`, which would change the behavior of the `AttributeMap.invert` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.attributes == null ? op.retain : op.attributes
+```
+This would result in different behavior because if `op.attributes` is null, the original code would return `op.retain`, but the new code would return `op.attributes`, which would change the behavior of the `AttributeMap.invert` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op.retain ? [] : op.attributes
+```
+This would result in different behavior because if `op.retain` is truthy, the original code would return `op.attributes`, but the new code would return an empty array, which would change

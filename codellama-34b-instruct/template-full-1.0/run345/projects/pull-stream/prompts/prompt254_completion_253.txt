@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null, data);
+```
+This would result in different behavior because it would cause the stream to emit data without checking for errors, which could lead to data loss or unexpected behavior in the code that consumes the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(new Error('failed to read data'), null);
+```
+This would result in different behavior because it would cause the stream to emit an error without checking for errors, which could lead to the code that consumes the stream to crash or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, cb);
+```
+This would result in different behavior because it would cause the stream to return data before it is ready, which could lead to data loss or unexpected behavior in the code that consumes the stream.
+
+DONE.

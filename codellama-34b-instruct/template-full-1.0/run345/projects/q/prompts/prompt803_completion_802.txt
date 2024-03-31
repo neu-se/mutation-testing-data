@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+progressed + 1
+```
+This would result in different behavior because the `progressed` function would no longer be called with the correct arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+progressed("", undefined)
+```
+This would result in different behavior because the `progressed` function would be called with invalid arguments, potentially causing an error or unintended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() {
+    return progressed.apply(null, arguments);
+}
+```
+This would result in different behavior because the `progressed` function would be called in a different context, potentially causing issues if the function relies on the `this` value or lexical scope.
+
+**Bonus**: If we wanted to make a more intentional change to the code, we could replace the PLACEHOLDER with a stub function that always returns a specific value, for example:
+```
+function() {
+    return "stub value";
+}

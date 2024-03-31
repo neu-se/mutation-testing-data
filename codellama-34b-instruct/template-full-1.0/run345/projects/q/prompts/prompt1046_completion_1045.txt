@@ -1,0 +1,19 @@
+  
+Option 1: The PLACEHOLDER can be replaced with:
+```
+closed.reject
+```
+This would result in different behavior because `resolve` and `reject` are opposing methods in the Q library. When the `closed` promise is resolved, it will move on to the next step in the callback chain, but when it is rejected, it will skip to the next step in the callback chain associated with the error. Using `closed.reject` could cause unintended behavior in the `close` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve
+```
+This would result in different behavior because it would cause the `ends` promise to be resolved twice, which could lead to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var err = new Error("Can't get value from closed queue");
+closed.resolve(err);
+```
+This would result in different behavior because it would throw the error in the `.fail` method of the `ends` promise, which would be uncaught. Therefore, it could cause the

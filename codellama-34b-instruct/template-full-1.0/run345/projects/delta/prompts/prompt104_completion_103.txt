@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(op, i) => predicate(this.ops[i], op)
+```
+This would result in different behavior because the `predicate` function is called with the op from the current Delta instance, rather than from the `other` Delta instance.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(op, i) => predicate(op, this.ops[i])
+```
+This would result in different behavior because the `predicate` function is called with the op from the `other` Delta instance, rather than from the current Delta instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(op, i) => predicate(this.ops[i], other.ops[i])
+```
+This would result in different behavior because the `predicate` function is called with the op from both the current Delta instance and the `other` Delta instance.
+
+DONE.

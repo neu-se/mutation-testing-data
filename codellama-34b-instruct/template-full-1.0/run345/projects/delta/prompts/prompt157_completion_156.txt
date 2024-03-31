@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'delete'
+```
+This would result in different behavior because the `delete` operation would be applied even if the other delta has an `insert` operation at the same position.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain'
+```
+This would result in different behavior because the `retain` operation would be applied even if the other delta has an `insert` operation at the same position.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength() > 0
+```
+This would result in different behavior because the `delete` operation would be applied even if the other delta has an `insert` operation with a length greater than 0.
+
+DONE.

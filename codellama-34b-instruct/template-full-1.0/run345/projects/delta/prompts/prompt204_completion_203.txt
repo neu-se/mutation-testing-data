@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+concat(other.ops.slice(1))
+```
+This would result in different behavior because it would concatenate the first element of the `other` delta's operations array with the `this` delta's operations array, instead of concatenating the entire `other` delta's operations array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+concat(other.slice(1))
+```
+This would result in different behavior because it would concatenate the `other` delta's operations array starting from the second operation, instead of concatenating the entire `other` delta's operations array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+concat(other.ops.filter((op) => op !== other.ops[0]))
+```
+This would result in different behavior because it would concatenate the `other` delta's operations array after removing the first operation, instead of concatenating the entire `other` delta's operations array.
+
+DONE.

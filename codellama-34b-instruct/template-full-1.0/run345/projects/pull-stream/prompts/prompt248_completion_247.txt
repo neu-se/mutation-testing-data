@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, cb)
+```
+This would result in different behavior because it would call the `cb` function with a null value, whereas the original code would call it with the abort error or data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(err, function(abortErr) {
+    // TODO: what do we do with the abortErr?
+    cb(err)
+})
+```
+This would result in different behavior because it would call the `cb` function with the abort error, whereas the original code would only call it with the original error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function(data) {
+    cb(null, data)
+})
+```
+This would result in different behavior because it would call the `cb` function with the data, whereas the original code would call it with the abort error or data.
+
+DONE.

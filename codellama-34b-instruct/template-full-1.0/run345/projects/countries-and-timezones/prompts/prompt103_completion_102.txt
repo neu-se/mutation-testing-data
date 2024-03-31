@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{ [key]: { ...tzs[key] } }
+```
+This would result in different behavior because it would return a new object with the same properties as the previous object, rather than the previous object itself. This could cause issues if the caller of the function is relying on the object's identity to be the same.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{ [key]: tzs[key].timezones }
+```
+This would result in different behavior because it would return the `timezones` property of the `tzs[key]` object, rather than the `tzs[key]` object itself. This could cause issues if the caller of the function is expecting the function to return a object with a specific set of properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{ [key]: { ...tzs[key], timezones: tzs[key].timezones } }
+```
+This would result in different behavior because it would return a new object with

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort(err)
+```
+This would result in different behavior because `abort` is a function that aborts the current stream, whereas `nextStream` is a function that is called when the stream is not ended. If `abort` is called instead of `nextStream`, it will abort the current stream and the stream of streams, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(data) {
+  cb(null, data)
+})
+```
+This would result in different behavior because it would call `read` with a null value for the first argument, which is not the same as calling it with the `abort` error that was passed to the function. Additionally, it would call `cb` with the `data` argument, which may not be the same as calling it with the `err` argument that was passed to the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read(null, function(err

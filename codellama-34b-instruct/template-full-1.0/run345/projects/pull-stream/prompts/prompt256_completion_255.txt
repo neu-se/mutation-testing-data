@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read = read(null, function (end, stream) {
+  if(end)
+    return cb(end)
+  if(stream && 'object' === typeof stream)
+    stream = values(stream)
+  else if ('function' !== typeof stream)
+    stream = once(stream)
+  _read = stream
+  nextChunk()
+})
+```
+This would result in different behavior because it changes the order of operations in the `nextChunk()` function. The original code checks for the `end` of the stream before calling `nextChunk()`, while the mutated code calls `nextChunk()` before checking for the `end` of the stream. This could result in a different behavior if the stream is not in the expected state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read = read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {

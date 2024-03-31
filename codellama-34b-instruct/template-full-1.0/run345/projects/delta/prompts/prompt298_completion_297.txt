@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!predicate
+```
+This would result in different behavior because the `!` operator inverts the value of the `predicate` function, causing the `eachLine` method to skip rows if the `predicate` function returns a truthy value, and to perform the desired action (collect lines into a Delta object) when the predicate returns falsey value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (predicate(line, iter.next().attributes, i))
+```
+This would result in different behavior because the `if` statement is checking for a truthy value, so the method will only collect lines when the `predicate` function returns a truthy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+switch (predicate(line, iter.next().attributes, i))
+```
+This would result in different behavior because the `switch` statement checks the return value of the `predicate` function against a set of constant values, and only collects lines when the return

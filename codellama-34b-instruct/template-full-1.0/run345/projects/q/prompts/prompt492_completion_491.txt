@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(reason)
+```
+This would result in different behavior because it would resolve the promise with the reason instead of rejecting it, which would cause the `untrackRejection` method to be called instead of the `trackRejection` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.reject(reason)
+```
+This would result in different behavior because it would reject the promise with the reason instead of resolving it, which would cause the `trackRejection` method to be called instead of the `untrackRejection` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.reject()
+```
+This would result in different behavior because it would reject the promise with no reason, which would cause the `trackRejection` method to be called with no reason, which would cause an error because the method expects a reason.
+
+DONE.

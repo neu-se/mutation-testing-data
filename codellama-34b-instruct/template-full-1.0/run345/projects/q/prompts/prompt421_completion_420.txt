@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!Q.nearer(value)
+```
+This would result in different behavior because `Q.nearer()` checks if the value is a promise or not, while `isPromise()` checks if it's a promise that hasn't been resolved yet.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!Q.isPromiseAlike(value)
+```
+This would result in different behavior because `Q.isPromiseAlike()` checks if the value is a promise or a promise-like object, while `isPromise()` only checks if it's a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value !== Q.nearer(value)
+```
+This would result in different behavior because `Q.nearer()` returns the most resolved form of the object, meaning if it's a fulfilled promise, it returns the fulfillment value, otherwise it returns the promise. In contrast, `isPromise()` only checks if it's a promise, not if

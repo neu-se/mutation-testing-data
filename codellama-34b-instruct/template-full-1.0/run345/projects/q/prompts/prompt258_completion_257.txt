@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+1 + value
+```
+This would result in different behavior because the original code fragment `Q(value)` returns a promise that resolves to `value`, while the replacement code fragment `1 + value` returns a promise that resolves to `1 + value`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+value + 1
+```
+This would result in different behavior because the original code fragment `Q(value)` returns a promise that resolves to `value`, while the replacement code fragment `value + 1` returns a promise that resolves to `value + 1`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(value)
+```
+This would result in different behavior because the original code fragment `Q(value)` returns a promise that resolves to `value`, while the replacement code fragment `Promise.resolve(value)` returns a promise that resolves to `value`, but the latter would also not trigger any progress events if `value` is a promise object.
+

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.nsend(1, 2, 3);
+```
+This would result in different behavior because `Q.nsend` expects a function as the first argument, but an integer `1` is provided instead, which would cause an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.ninvoke(Q.nsend, 1, 2, 3);
+```
+This would result in different behavior because `Q.nsend` is called as a method of a function `Q.nsend`, but it is not defined as a method on that function. This would cause an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q.npost(Q.nsend, 1, 2, 3);
+```
+This would result in different behavior because `Q.npost` expects a function as the first argument, but a string `"Q.nsend"` is provided instead, which would cause an error.
+
+DONE.

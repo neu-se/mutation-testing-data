@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.indexOf(promise)
+```
+This would result in different behavior because `reportedUnhandledRejections` is an array, and `indexOf` will return the index of the first occurrence of `promise` in the array, or -1 if it is not present. This can cause the `trackRejection` function to behave differently, potentially causing unhandled rejections to be tracked incorrectly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Array.prototype.slice.call(reportedUnhandledRejections).indexOf(promise)
+```
+This would result in different behavior because it uses the `slice` method to convert `reportedUnhandledRejections` to an array, and then uses `indexOf` to find the index of the first occurrence of `promise` in the array. This can cause the `trackRejection` function to behave differently, potentially causing unhandled rejections to be tracked incorrectly.
+
+Option 3: The PLACEHOLDER can be replaced

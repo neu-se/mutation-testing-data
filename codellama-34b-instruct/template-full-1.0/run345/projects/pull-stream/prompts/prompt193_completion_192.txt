@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This would result in different behavior because the original code fragment checks if `aborted` is truthy, while the new code fragment checks if `aborted` is falsy. If `aborted` is falsy, the new code fragment would return `cb(aborted)` which is not what the original code intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && aborted
+```
+This would result in different behavior because the original code fragment checks if `aborted` is true, while the new code fragment checks if both `abort` and `aborted` are true. If `abort` is true and `aborted` is false, the new code fragment would return `cb(aborted)` which is not what the original code intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || !aborted
+```
+This would result in different behavior because the original code fragment checks if `aborted` is true, while the new code

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return;
+```
+This would result in different behavior because it would cause the `invert` method to return `undefined` instead of a delta object, which would likely cause an error or unexpected behavior when the method is used.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Invalid inverted delta");
+```
+This would result in different behavior because it would cause the `invert` method to throw an error when it is called, which could make it more difficult to diagnose and debug issues with the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new Delta([{ retain: 1 }]);
+```
+This would result in different behavior because it would cause the `invert` method to return a delta object with a single op that retains 1 character, rather than the original delta object that it was called on. This could potentially be a useful change if the intention is to create a new delta object that represents the inverse of the original delta object, but it should be carefully

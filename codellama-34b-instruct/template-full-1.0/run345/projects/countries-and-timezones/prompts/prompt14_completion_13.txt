@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result, { [country]: { current: tz.current, all: tz.all } }
+```
+This would result in different behavior because it would cause the `current` and `all` properties of the country object to point to the same array as the `tz` object, rather than creating separate arrays for each property. This would cause the `tzMap` object to be overwritten with the same data on every iteration of the `reduce` function, resulting in a loss of information.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result, { [country]: { current: tz.current.concat(), all: tz.all.concat() } }
+```
+This would result in different behavior because it would cause the `current` and `all` properties of the country object to point to a new array that is a concatenation of the `tz.current` and `tz.all` arrays, rather than creating separate arrays for each property. This would cause the `tzMap` object to be overwritten with a shallow copy of

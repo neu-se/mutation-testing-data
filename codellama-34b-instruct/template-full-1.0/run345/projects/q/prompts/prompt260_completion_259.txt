@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+value
+```
+This would result in different behavior because the `nearer` function returns a promise that is already fulfilled, which means that the `deferred.reject()` call will never be reached.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value)
+```
+This would result in different behavior because `Q(value)` is a call to the `Promise` constructor and will return a resolved promise. The `deferred.reject()` call will never be reached.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+throw new Error()
+```
+This would result in different behavior because the promise is rejected with an error, which means that the `deferred.resolve()` call will never be reached.
+
+DONE.

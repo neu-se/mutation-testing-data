@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+( null, _value, ( _value = null ) )
+```
+
+This would result in different behavior because the original code fragment does not have a comma operator, but this new code fragment has a comma operator that evaluates `_value = null` and then discards it. This means that the original code fragment always calls `cb` with `_value` as the second argument, while this modified code fragment calls `cb` with `null` as the second argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+( null, _value | 0 )
+```
+
+This would result in different behavior because the bitwise OR operator `|` has a higher precedence than the `===` operator in JavaScript, so `_value == === null` would be evaluated first. If `_value` is not equal to `null`, then the resulting value of the expression would be different from the original code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+( null, _value | ( _value = null ) )

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+arguments, 3
+```
+This would result in different behavior because `Q.nmcall` would wrongly pass three arguments to `this.dispatch("post", [name, nodeArgs])`, instead of the expected two, causing an error in the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+name, args
+```
+This would result in different behavior because `Q.nmcall` would wrongly pass two arguments (`name` and `args`) to `Q(object).dispatch("post", [name, nodeArgs])`, instead of the expected variadic arguments, causing an error in the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs, null, false
+```
+This would result in different behavior because `Q.nmcall` would wrongly pass three arguments to `nodeArgs.push(deferred.makeNodeResolver())`, instead of the expected two, causing an error in the function.
+
+DONE.

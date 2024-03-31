@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+  domain.exit();
+}
+throw e;
+```
+This would result in different behavior because the exception will be thrown after the domain exit, which will potentially affect the behavior of the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+  domain.exit();
+}
+setTimeout(function() { throw e; }, 0);
+```
+This would result in different behavior because the exception will be thrown after a timeout, which will potentially affect the behavior of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (domain) {
+  domain.exit();
+}
+setImmediate(function() { throw e; });
+```
+This would result in different behavior because the exception will be thrown after a setImmediate, which will potentially affect the behavior of the code.
+
+DONE.

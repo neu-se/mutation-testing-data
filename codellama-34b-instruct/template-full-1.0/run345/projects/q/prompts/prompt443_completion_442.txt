@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Unhandled rejection");
+```
+This would result in different behavior because the original code fragment does not throw an error, but the replaced code fragment does. The error will be caught and reported by the `process.emit("unhandledRejection", <PLACEHOLDER>, promise);` line.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolve(reason);
+```
+This would result in different behavior because the original code fragment rejects the promise, but the replaced code fragment resolves the promise with the reason. This could cause different behavior in the promise chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+executor(reason);
+```
+This would result in different behavior because the original code fragment does not call the `executor` function, but the replaced code fragment does. The `executor` function will be called with the `reason`, which could cause different behavior in the promise chain.
+
+DONE.

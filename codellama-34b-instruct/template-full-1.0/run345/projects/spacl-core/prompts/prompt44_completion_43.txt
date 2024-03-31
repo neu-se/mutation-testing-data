@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (var.match(version === '1' || version === '1.0'
+  ? /[*+][^/]|[^/][*+]/
+  : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null) {
+  throw new Error('Path contains malformed wildcards')
+}
+```
+This would result in different behavior because the regex check for malformed wildcards is incorrect and would allow for matches on strings that should not be matched.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (var.match(version === '1' || version === '1.0'
+  ? /[*+][^/]|[^/][*+]/
+  : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null) {
+  throw new Error('Path contains malformed wildcards')

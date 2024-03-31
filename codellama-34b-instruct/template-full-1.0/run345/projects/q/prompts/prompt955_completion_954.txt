@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(bound).nfapply
+```
+This would result in different behavior because the `nfapply` method is not defined in the `Q` object, and would cause a `TypeError` to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply(Q)
+```
+This would result in different behavior because the `fapply` method expects an array of arguments to apply to the function, but passing `Q` as the argument would result in an attempt to call the `bound` function with the `Q` object as its context, which may not be intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(bound).fapply([])
+```
+This would result in different behavior because the `fapply` method expects an array of arguments to apply to the function, but passing an empty array would result in an attempt to call the `bound` function with no arguments, which may not be intended.
+
+DONE.

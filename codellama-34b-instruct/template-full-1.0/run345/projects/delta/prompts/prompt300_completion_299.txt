@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.next(2).attributes || {}
+```
+This would result in different behavior because it returns the attributes of the next op, rather than the current op.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peekLength()
+```
+This would result in different behavior because it returns the length of the next op, rather than the current op.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() === 'insert' ? iter.next(1).attributes : {}
+```
+This would result in different behavior because it only returns the attributes of the next op if it is an insert operation, rather than returning the attributes of the current op regardless of its type.
+
+DONE.

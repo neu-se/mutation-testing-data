@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol && parsedUrl.protocol != 'http' && parsedUrl.protocol != 'https'
+```
+This would result in different behavior because the `!=` operator is not the same as the `!==` operator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host && parsedUrl.host != parsedUrl.protocol && parsedUrl.host != 'http' && parsedUrl.host != 'https'
+```
+This would result in different behavior because we are checking the `host` property instead of the `protocol` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.path && parsedUrl.path.includes('http') && parsedUrl.path.includes('https')
+```
+This would result in different behavior because we are checking if the `path` property contains the substring `http` or `https`, which may not be the same as checking the `protocol` property.
+
+DONE.

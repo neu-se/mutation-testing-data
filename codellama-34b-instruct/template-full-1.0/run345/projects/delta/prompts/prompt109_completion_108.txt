@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reversePredicate = (op, index) => !predicate(op, index)
+```
+This would result in different behavior because the new predicate will return the opposite value of the original predicate for the same inputs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+alternativePredicate = (op, index) => predicate(op, index) && op.retain
+```
+This would result in different behavior because the new predicate will only return true if the original predicate is also true and the `retain` property of the op is not `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+peekPredicate = (op, index) => predicate(op, index) && this.peekType() === 'insert'
+```
+This would result in different behavior because the new predicate will only return true if the original predicate is also true and the `peekType()` method of the delta returns the string 'insert'.
+
+DONE.

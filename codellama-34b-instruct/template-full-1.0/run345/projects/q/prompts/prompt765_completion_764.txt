@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(noop())
+```
+This would result in different behavior because `promise.then(noop())` would return a new promise that has already been resolved with the result of the `noop()` function, which is undefined. In contrast, the original code `promise` would return a new promise that is pending the resolution of the original promise, which is not desirable in this case.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(reject(new Error('Failed')))
+```
+This would result in different behavior because `promise.then(reject(new Error('Failed')))` would return a new promise that is immediately rejected with the error message 'Failed', whereas the original code `promise` would return a new promise that is pending the resolution of the original promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(notification => when(notification, noop()))
+```
+This would result in different behavior because `prom

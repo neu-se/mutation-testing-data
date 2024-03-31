@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is a function that returns a resolver, but `null` is not a function and would not resolve the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is a function that returns a resolver, but `undefined` is not a function and would not resolve the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { return deferred.makeNodeResolver().resolve(); }
+```
+This would result in different behavior because the original code fragment returns a function that returns the resolver, but the new code fragment returns a function that returns a resolved promise.
+
+DONE.

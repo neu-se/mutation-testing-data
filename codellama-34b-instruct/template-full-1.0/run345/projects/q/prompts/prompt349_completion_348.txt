@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is a falsy value, whereas `exception` is a truthy value. If the `inspect` function returns `{state: "rejected"}`, the `promise.exception` property will be set to `null` instead of the expected exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.exception = reject(new Error("Promise does not support operation: " + op));
+```
+This would result in different behavior because the `reject` function is not called with the expected `op` argument. Instead, it will be called with the `op` argument as the error message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.exception = new Error("Promise does not support operation: " + op);
+```
+This would result in different behavior because the `exception` property will be set to a new error object instead of the expected rejection error.
+
+DONE.

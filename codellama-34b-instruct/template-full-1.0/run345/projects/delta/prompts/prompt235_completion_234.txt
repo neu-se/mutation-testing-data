@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.next())
+```
+This would result in different behavior because `otherIter.next()` will return the next operation object in the iterator, whereas `otherIter.next(opLength)` will return the next `opLength` operations objects in the iterator. This could potentially cause the code to behave differently, especially if the `opLength` is greater than 1.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.peek())
+```
+This would result in different behavior because `otherIter.peek()` will return the next operation object in the iterator, but it will not advance the iterator. This could potentially cause the code to behave differently, especially if the `opLength` is greater than 1.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.slice(0, opLength))
+```
+This would result in different behavior because `otherIter.slice(0, opLength)` will return an iterator that iter

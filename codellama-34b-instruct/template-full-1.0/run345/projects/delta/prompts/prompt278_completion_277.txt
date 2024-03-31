@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const start = Op.length(thisOp) - iter.peekLength();
+```
+This would result in different behavior because `Op.length(thisOp)` would always be zero, since `thisOp` is an insert operation with no text, and `iter.peekLength()` would be the length of the next operation in the delta, which could be a retain or delete operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const start = iter.peekLength() - Op.length(thisOp);
+```
+This would result in different behavior because `iter.peekLength()` would always be the length of the next operation in the delta, and `Op.length(thisOp)` would be the length of the current operation, which is always zero for an insert operation with no text.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const start = 0;
+```
+This would result in different behavior because `start` would always be zero, which would cause the `if` statement

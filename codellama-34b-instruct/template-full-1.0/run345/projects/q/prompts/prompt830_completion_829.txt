@@ -1,0 +1,22 @@
+  
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(
+     void 0, deferred.reject
+);
+```
+
+This would result in different behavior because the original code: `this.then(function(value){})` chained the callback function to the promise and would call it when the promise was fulfilled, while the new code would call the `deferred.reject` function immediately upon rejecting the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(promise);
+```
+This would result in different behavior because the original code: `this.then(function(value){})` chained the callback function to the promise and would call it when the promise was fulfilled, while the new code would reject the promise immediately, so the callback function would not be executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(function() { deferred.reject(promise) }, 0);
+```
+This would result in different behavior because the original code

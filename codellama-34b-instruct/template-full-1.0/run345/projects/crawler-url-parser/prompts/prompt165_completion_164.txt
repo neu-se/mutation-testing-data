@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.slice(0, linkurl_path.lastIndexOf("/"))
+```
+This would result in different behavior because the `lastIndexOf` method returns the last occurrence of the specified value ("/") in the string, and the `slice` method extracts the substring up to but not including that index. In the original code, the `includes` method checks if the `pageurl_path` is included in the `linkurl_path`, but with the new code, it checks if the `linkurl_path` up to the last "/" is included in the `pageurl_path`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_path.replace(/\/[^\/]+$/, "")
+```
+This would result in different behavior because the `replace` method removes the last part of the string that starts with a "/" and ends with a non-"/" character. In the original code, the `includes` method checks if the `pageurl_path` is included in the `linkurl_

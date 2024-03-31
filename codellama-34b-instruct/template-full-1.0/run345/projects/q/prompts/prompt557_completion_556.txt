@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Something went wrong");
+```
+This would result in different behavior because it would cause an error to be thrown, even if the generator is not done iterating, and would therefore always cause the promise returned by `Q.async` to be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return undefined;
+```
+This would result in different behavior because it would cause the generator to yield `undefined` instead of a promise, which would change the behavior of `all` and `spread`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return null;
+```
+This would result in different behavior because it would cause the generator to yield `null` instead of a promise, which would change the behavior of `all` and `spread`.
+
+DONE.

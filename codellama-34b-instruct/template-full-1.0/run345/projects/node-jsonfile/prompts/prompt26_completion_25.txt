@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+options.replacer
+```
+This would result in different behavior because `options.replacer` is a different function than `options.reviver`, which is used to transform the object into a string. Using `options.replacer` would cause the code to write a different object to the file.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+options.reviver()
+```
+This would result in different behavior because `options.reviver` is a function that is executed on the object before it is written to the file. Using `options.reviver()` would cause the code to execute the function on the object before it is written to the file, which could result in different behavior depending on the implementation of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(JSON.stringify(obj), options.reviver)
+```
+This would result in different behavior because `JSON.parse(JSON.stringify(obj))` is a different way of converting the

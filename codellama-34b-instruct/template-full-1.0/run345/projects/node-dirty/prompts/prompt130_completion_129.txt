@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const [value, cbs] = this._queue.shift();
+```
+This would result in different behavior because the original code was using the `Pop()` method to remove the first element from the queue, but this would remove the last element instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const [key, cbs] = ["fake_key", []];
+```
+This would result in different behavior because the original code was using the `key` and `value` from the queue element, but this would always use the same `fake_key` value and an empty array for `cbs`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const [key, cbs] = ["key", ["fake_cb"]];
+```
+This would result in different behavior because the original code was using the `key` and `value` from the queue element, but this would always use the same `key` value and an array with a single `fake_cb` function for `

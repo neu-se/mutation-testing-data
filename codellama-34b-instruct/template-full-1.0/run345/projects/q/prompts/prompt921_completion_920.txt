@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fin(deferred.resolve).fail
+```
+This would result in different behavior because `fin` is not the same function as `fail`,
+so the returned promise would not handle rejections in the same way.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.resolve).fail
+```
+This would result in different behavior because `fail` would be called twice,
+with the same nodeback, which would not have the desired effect.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail("Error").fail
+```
+This would result in different behavior because `fail` would be called with "Error"
+as an argument, which would not have the desired effect.
+
+DONE.

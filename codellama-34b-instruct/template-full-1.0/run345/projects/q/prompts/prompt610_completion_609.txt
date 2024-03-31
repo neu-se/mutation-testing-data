@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch().promiseDispatch
+```
+This would result in different behavior because it would add an extra `promiseDispatch` method call to the object's dispatch method. In the original code, the `promiseDispatch` method is called on the `deferred.promise` object, which is created from the `Q(object).dispatch(...)` line. By adding it here, we are essentially calling `promiseDispatch` twice, which could cause errors or unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch().then
+```
+This would result in different behavior because it would replace the `promiseDispatch` method call with a `then` method call. The `then` method is used to add a callback function to the end of a promise's chain of callbacks, whereas the `promiseDispatch` method is used to immediately dispatch a message to a value in a future turn. Using `then` instead would change the timing of the message dispatch.
+
+Option 3: The PLACEH

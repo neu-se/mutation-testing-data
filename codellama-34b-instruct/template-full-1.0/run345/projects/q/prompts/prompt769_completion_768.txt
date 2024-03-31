@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = Promise.prototype.allSettled;
+```
+This would result in different behavior because it would return a promise for an array of promises instead of a promise for an array of promises that are all fulfilled or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = function () {
+    return this.then(function() {
+        return promises;
+    });
+};
+```
+This would result in different behavior because it would return a promise for an array of promises that are all fulfilled or rejected instead of a promise for an array of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.prototype.allResolved = function () {
+    return this.all().then(function() {
+        return promises;
+    });
+};
+```
+This would result in different behavior because it would return a promise for an array of promises that are all fulfilled or rejected instead of a promise for an

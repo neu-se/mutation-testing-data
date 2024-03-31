@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.get(key) || []
+```
+This would result in different behavior because the `||` operator would evaluate to `[]` if `this._queue.get(key)` is falsy, which could happen if `this._queue.get(key)` returns an empty array or `null`. In the original code, `this._queue.get(key)` is only evaluated once, so if it returns an empty array, the code would continue to use the `cbs` variable as an empty array, which could lead to bugs if the code relies on the `cbs` array being non-empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.get(key) || this._data.get(key)
+```
+This would result in different behavior because the `||` operator would evaluate to `this._data.get(key)` if `this._queue.get(key)` is falsy, which could happen if `this._queue.get(key)` returns an empty array or `

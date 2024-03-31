@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).fail(callback.fcall()).then(function () {
+    return value;
+});
+```
+This would result in different behavior because the `.fail()` method is not defined on the `Q` object, and it would cause an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(function () {
+    return value;
+}, callback.fcall());
+```
+This would result in different behavior because the `.then()` method does not have a callback function that can be used to recover from the failure, and it would not forward the resolution of the promise when the callback is done.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).finally(callback.fcall()).then(function () {
+    return value;
+});
+```
+This would result in different behavior because the `.finally()` method does not have a callback function that can be used to recover from the failure, and it would not forward the resolution of the

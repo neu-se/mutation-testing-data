@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path || verb == ctx
+```
+This would result in different behavior because the `||` operator has lower precedence than the `==` operator, so the expression would be evaluated as `(path || verb) == ctx`, which would always return `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+verb == ctx && path
+```
+This would result in different behavior because the `&&` operator has higher precedence than the `==` operator, so the expression would be evaluated as `verb == (ctx && path)`, which would return `true` only if both `verb` and `path` are truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ ctx ? path != verb : path
+```
+This would result in different behavior because the ternary operator `?:` has higher precedence than the equality operators `==` and `!=`, so the expression would be evaluated as `ctx ? (path != verb) : path`, which would return the result of the comparison between `path` and `

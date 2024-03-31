@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Loop = true
+```
+This would result in different behavior because `Loop = true` would cause the loop to run indefinitely, resulting in an infinite loop, while the original code `next` would call the next iteration of the loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Read(end,function(end,data){
+if(!end && !test(data))
+return sync ? loop = true : next(end,cb)
+})
+```
+This would result in different behavior because the function passed to `read` would be called with `end` and `data` arguments, and the function body would check if `end` is truthy or if `test(data)` is truthy, and if so, it would set `loop` to true and return `next(end,cb)`. The original code would call `next(end,cb)` without checking the value of `end` or `test(data)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Loop = false

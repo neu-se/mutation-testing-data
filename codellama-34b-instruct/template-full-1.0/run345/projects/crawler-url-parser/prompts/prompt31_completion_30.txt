@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!/#.*$/
+```
+This would result in different behavior because it would negate the test for the end of the string, allowing the regex to match patterns that are not at the end of the string, such as `http://example.com/path#fragment`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(?![a-z0-9]*)/
+```
+This would result in different behavior because it would create a negative lookahead assertion that would prevent matching URLs that start with a character that is not a letter or digit. This would allow URLs that start with other characters, such as `//example.com`, to be matched.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\(^.+\)/
+```
+This would result in different behavior because it would create a capture group that matches any character one or more times. This would allow URLs that have multiple characters at the start of the string, such as `http:`, to be matched.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfaply(args)
+```
+This would result in different behavior because the `nfapply` method is not defined on the `Promise` prototype, so it would result in a `TypeError`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nfcall(callback, args)
+```
+This would result in different behavior because `Q.nfcall` returns a promise for the resolution of the given promise after milliseconds time has elapsed since the resolution of the given promise, while `Q(callback).nfapply` returns a promise for the invocation of the given function with the given arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).then(args)
+```
+This would result in different behavior because `Q(callback).then` returns a promise for the invocation of the given function with the given arguments, while `Q.nfapply` returns a promise for the resolution of the given promise after milliseconds time has

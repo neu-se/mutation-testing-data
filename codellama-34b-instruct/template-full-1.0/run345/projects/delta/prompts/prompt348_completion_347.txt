@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const getEmbedTypeAndData_buggy = (opRetain, opInsert) => {
+  // This line of code checks whether opRetain is an object, but it checks
+  // if opInsert is an object instead. This would cause incorrect behavior if
+  // opRetain is an object, but opInsert is not.
+  if (typeof opInsert === 'object' && opInsert !== null) {
+    const embedType = Object.keys(opRetain)[0];
+    const opData = opInsert[embedType];
+    return [embedType, opData];
+  }
+  const embedType = Object.keys(opRetain)[0];
+  const opData = opRetain[embedType];
+  return [embedType, opData];
+}
+```
+This would result in different behavior because the substitute code would check the wrong data structure for an object, causing it to skip over the necessary functionality.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const getEmbedTypeAnd

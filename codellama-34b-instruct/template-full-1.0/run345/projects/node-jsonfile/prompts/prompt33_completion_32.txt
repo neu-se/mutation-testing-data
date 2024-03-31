@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+await universalify.fromPromise(fs.readFile)(file, str, options)
+```
+This would result in different behavior because the original code uses `universalify.fromCallback(fs.writeFile)` which takes a callback function to handle the write operation, but this replacement uses `universalify.fromPromise(fs.readFile)` which returns a promise that can be awaited. This means that the write operation will be handled asynchronously, which may cause differences in behavior if the code relies on the ordering of read and write operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+await universalify.fromNodeCallback(fs.writeFile)(file, str, options)
+```
+This would result in different behavior because the original code uses `universalify.fromCallback(fs.writeFile)` which takes a callback function to handle the write operation, but this replacement uses `universalify.fromNodeCallback(fs.writeFile)` which takes a node-style callback function to handle the write operation. This means that the

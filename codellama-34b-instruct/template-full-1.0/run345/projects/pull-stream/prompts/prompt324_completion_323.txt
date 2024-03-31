@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort === false ? null : abort
+```
+This would result in different behavior because it would cause the `once` function to always return `null` when `a` is `true`, regardless of the value of `onEnd`. In the original code, `onEnd` is only called when `a` is `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort === true && onEnd !== null ? null : abort
+```
+This would result in different behavior because it would add an additional check for `onEnd` being non-null before returning `null`. In the original code, there is no check for `onEnd` being non-null before returning `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort === true && onEnd.length === 0 ? null : abort
+```
+This would result in different behavior because it would check the length of `onEnd` before returning `null`. In the original code, there is no check for the length of `on

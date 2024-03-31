@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with `stream !== 'object'`.
+
+This would result in different behavior because `stream !== 'object'` would always return `false` for arrays and streams, whereas `'function' !== typeof stream` would return `true` for arrays and streams that have not been converted to objects.
+
+Option 2: The PLACEHOLDER can be replaced with `stream.constructor === Array`.
+
+This would result in different behavior because `stream.constructor === Array` would only return `true` for arrays, whereas `'function' !== typeof stream` would return `true` for arrays and other objects.
+
+Option 3: The PLACEHOLDER can be replaced with `stream.hasOwnProperty('length')`.
+
+This would result in different behavior because `stream.hasOwnProperty('length')` would only return `true` for arrays and other objects that have a `length` property, whereas `'function' !== typeof stream` would return `true` for arrays and other objects regardless of whether they have a `length` property.
+
+DONE.

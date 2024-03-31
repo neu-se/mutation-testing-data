@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setImmediate(() => { if (cb) cb(); this.emit('drain'); });
+```
+This would result in different behavior because the `cb` function would be called twice, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setImmediate(() => { if (cb) cb(this._data.get(key)); this.emit('drain'); });
+```
+This would result in different behavior because the `cb` function would be called with the wrong argument, `this._data.get(key)`, which is not the value that was set using the `set` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(() => { if (cb) cb(this._data.get(key)); this.emit('drain'); this._data.delete(key); });
+```
+This would result in different behavior because the `cb` function would be called with the same argument as in option 2, but also the data would

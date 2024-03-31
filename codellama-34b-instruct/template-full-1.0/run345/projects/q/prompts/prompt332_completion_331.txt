@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(result);
+```
+This would result in different behavior because if any of the methods in the descriptor (`then`, `resolve`, `reject`, etc.) throw an exception, the promise returned by `Q.makePromise` would be rejected with that exception, rather than fulfilling with the return value of the method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(new Error("Promise rejected"));
+```
+This would result in different behavior because if any of the methods in the descriptor (`then`, `resolve`, `reject`, etc.) throw an exception, the promise returned by `Q.makePromise` would notify with the exception, rather than rejecting with the exception.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolve(result).then(function (newValue) {
+    deferred.notify(newValue);
+});
+```
+This would result in different behavior because if any of the methods in the descriptor (`then

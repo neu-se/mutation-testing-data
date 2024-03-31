@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'load', this._data.length
+```
+This would result in different behavior because `this._data.length` returns the number of elements in the dataset, while `this._data.size` returns the number of bytes used to store the dataset. This would cause the Dirty DB to emit a different number of 'load' events for clients to receive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`load`, 0
+```
+This would result in different behavior because it would always emit a 'load' event with a size of 0, indicating that the database is empty, even if it is not. This could cause clients to erroneously assume that the database is empty, when in fact it is not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`'load', 'fail'`
+```
+This would result in different behavior because it would always emit a 'load' event with a size of 'fail', which would cause an error in clients that are expecting a size of 0 or greater.

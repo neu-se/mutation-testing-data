@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('end', () => {
+  if (buffer.length) {
+    this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
+  }
+  this.emit('load', this._data.size);
+})
+```
+This would result in different behavior because the load event would be emitted with the wrong number of rows in the database, which could cause the application to behave unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('error', () => {
+  this.emit('error', new Error('Error writing to the database'));
+})
+```
+This would result in different behavior because the error event would not be emitted, which could cause the application to behave unexpectedly if there is an error writing to the database.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.on('finish', () => {
+  this.emit('d

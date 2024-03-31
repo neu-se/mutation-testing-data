@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(null);
+```
+This would result in different behavior because the original code passed the `deferred.reject` function as a parameter to the `fail` method, which would be called if the promise was rejected. In this modified version, `null` is passed as the first parameter to the `fail` method, which would cause any rejection to be ignored.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).finalize(deferred.reject)
+```
+This would result in different behavior because the original code called the `fail` method on the promise returned by `fapply`, which would cause any rejection to be handled by the `deferred.reject` function. In this modified version, the `finalize` method is called on the same promise, which would cause any rejection to be handled by the `deferred.finalized` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.

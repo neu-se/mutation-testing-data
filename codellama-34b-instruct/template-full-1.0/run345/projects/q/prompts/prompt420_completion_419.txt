@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.when(!value).then(...)
+```
+This would result in different behavior because in the original code `value` is resolved and passed as the fulfillment value to the `then` method, whereas in the modified code `!value` is resolved and passed as the fulfillment value, which could result in a different behavior if `value` is a promise that resolves to a falsy value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(value, Q.UNFULFILLED).then(...)
+```
+This would result in different behavior because in the original code `value` is resolved and passed as the fulfillment value to the `then` method, whereas in the modified code `value` is resolved and passed as the rejection reason to the `then` method, which could result in a different behavior if `value` is a promise that resolves to a falsy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.when(value,

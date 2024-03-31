@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^[a-zA-Z0-9_/:~.$+*?-]*$/
+```
+This would result in different behavior because the `?` character matches zero or one of the preceding character, which would allow for unexpected characters in the path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^[a-zA-Z0-9_/:~.#$+*-]*$/
+```
+This would result in different behavior because the `#` character is not matched by the original regular expression, and would therefore be allowed in the path, potentially resulting in incorrect matches.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^[a-zA-Z0-9_/:~.#$+*-]*[a-zA-Z0-9]$/
+```
+This would result in different behavior because the additional `[a-zA-Z0-9]$` at the end of the regular expression would require the path to end with a letter or number,

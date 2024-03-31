@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._data.set
+```
+This would result in different behavior because it sets the value without any de-duplication check.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, undefined)
+```
+This would result in different behavior because it always sets the value to `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, JSON.parse(JSON.stringify(row.val)))
+```
+This would result in different behavior because it sets the value as a clone of the original value.
+
+DONE.

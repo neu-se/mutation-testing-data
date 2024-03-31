@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.push(baseOp.insert);
+```
+This would result in different behavior because `inverted.push(baseOp.insert)` is not the correct implementation of the `invert` method. The correct implementation should only push operations that are not redundant, i.e., `retain` or `delete` operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(baseOp));
+```
+This would result in different behavior because `inverted.retain(Op.length(baseOp))` would result in the `inverted` delta having a retain operation with the same length as the `baseOp` operation, which is not necessarily the correct length for the inverted operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.push(baseOp.insert !== null ? new Op('delete', baseOp.insert.length) : baseOp);
+```
+This would result in different behavior because `in

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+head.task = null;
+```
+This would result in different behavior because it would change the value of `head.task` to `null`, which is not a function and would cause an error when `runSingle` tries to call it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+head.task = function() {};
+```
+This would result in different behavior because it would change the value of `head.task` to a new function that does nothing, which would cause the queue to be empty and `flush` to return immediately without executing any tasks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+head.task = laterQueue.shift();
+```
+This would result in different behavior because it would change the value of `head.task` to the first task in the `laterQueue`, which would cause `flush` to execute that task immediately instead of the one that was originally queued.
+
+DONE.

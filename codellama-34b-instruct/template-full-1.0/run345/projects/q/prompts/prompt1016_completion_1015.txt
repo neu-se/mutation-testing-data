@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function(error) {
+    Q.nextTick(function() {
+        nodeback(error.message);
+    });
+}
+```
+This would result in different behavior because instead of calling the `nodeback` function with the `error` object as an argument, it would call it with the error message. This would cause the promise to be rejected with the error message, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function(error) {
+    Q.nextTick(function() {
+        nodeback(error);
+    });
+}
+```
+This would result in different behavior because it would call the `nodeback` function with the `error` object as an argument, but it would do so asynchronously using `Q.nextTick`, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function(error) {
+    nodeback(error);
+}
+```
+This would result in different behavior

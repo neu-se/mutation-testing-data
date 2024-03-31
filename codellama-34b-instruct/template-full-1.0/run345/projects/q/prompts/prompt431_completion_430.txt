@@ -1,0 +1,17 @@
+  Option 1: The `Promise.isRejected()` can be replaced with:
+```
+this.isPending()
+```
+This would result in different behavior because `isPending` would return `true` for a resolved promise, whereas `isRejected` should only return `true` for a rejected promise.
+
+Option 2: The `Promise.isRejected()` can be replaced with:
+```
+this.inspect === "rejected"
+```
+This would result in different behavior because `inspect` is a method that returns an object with information about the promise, and the `state` property of that object would contain the string "rejected" for a rejected promise.
+
+Option 3: The `Promise.isRejected()` can be replaced with:
+```
+this.then(function (value) { return false; }).catch(function (reason) { return true; })
+```
+This would result in different behavior because `then` and `catch` are methods that handle the resolution or rejection of a promise, and in this case, we are returning `false` if the promise is resolved

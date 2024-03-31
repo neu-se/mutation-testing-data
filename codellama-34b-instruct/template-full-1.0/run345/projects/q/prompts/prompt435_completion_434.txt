@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+true || typeof process === "object" && typeof process.emit === "function"
+```
+This would result in different behavior because the `||` operator guarantees that the right-hand side of the expression will be evaluated, even if the left-hand side is truthy. In this case, the right-hand side is `typeof process === "object" && typeof process.emit === "function"`, which will always be true if `process` is an object with an `emit` method, regardless of the value of `process.emit`. Therefore, the `trackRejection` function will always be called, regardless of whether `process` is defined or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"test" + typeof process === "object" && typeof process.emit === "function"
+```
+This would result in different behavior because the `+` operator concatenates strings, so the expression will always evaluate to a string, regardless of the value of `process.emit`. Therefore, the `trackRejection` function will always be called,

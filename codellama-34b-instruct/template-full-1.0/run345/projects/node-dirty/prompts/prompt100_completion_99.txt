@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Could not load corrupted row: ${rowStr}`)
+```
+This would result in different behavior because it replaces the `row` variable with `rowStr`, which is a string representation of an object rather than an object itself. This change would cause different errors to be thrown when an invalid row is encountered, and would potentially prevent the `Dirty` constructor from emitting errors correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Could not parse row: ${row}`)
+```
+This would result in different behavior because it replaces the `rowStr` variable with `row`, which is an object rather than a string. This change would cause the `JSON.parse` method to throw an error when an invalid row is encountered, and would potentially prevent the `Dirty` constructor from emitting errors correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', new Error('Could not parse row')
+```
+This would result in different

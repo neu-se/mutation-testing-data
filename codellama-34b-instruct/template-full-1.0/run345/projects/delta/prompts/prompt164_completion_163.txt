@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof thisIter.peek() === 'delete'
+```
+This would result in different behavior because the `peek()` method returns an `Op` object, which will have a `delete` property if it is a deletion operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength() === 0
+```
+This would result in different behavior because the `peekLength()` method returns the length of the current iteration, which would be 0 for a deletion operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.hasNext() && thisIter.next() === 'delete'
+```
+This would result in different behavior because the `hasNext()` method checks if there is a next iteration, and the `next()` method returns the next `Op` object, which will be a deletion operation if it exists.
+
+DONE.

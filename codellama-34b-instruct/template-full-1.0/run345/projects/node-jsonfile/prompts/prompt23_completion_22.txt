@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+stripBom(await fs.readFile(file, options))
+```
+This would result in different behavior because `stripBom` is called on the result of `fs.readFile`, which is a promise, while in the original code it is called on the `data` variable which is the result of `fs.readFile` after it has been resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stripBom(fs.readFileSync(file, options))
+```
+This would result in different behavior because `stripBom` is called on the result of `fs.readFileSync`, which is the raw file content, while in the original code it is called on the `data` variable which is the parsed JSON.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+JSON.parse(stripBom(await fs.readFile(file, options)))
+```
+This would result in different behavior because `JSON.parse` is called on the result of `stripBom`, which

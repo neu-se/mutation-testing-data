@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (err, value) {
+    if (err) {
+        deferred.reject(err);
+    } else {
+        deferred.resolve(value);
+    }
+}
+```
+This would result in different behavior because the original code fragment uses `deferred.makeNodeResolver` which is a different function that returns a different resolver.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because the original code fragment uses `deferred.resolve` instead of `deferred.reject`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(deferred)
+```
+This would result in different behavior because the original code fragment does not use `.bind`.
+
+DONE.

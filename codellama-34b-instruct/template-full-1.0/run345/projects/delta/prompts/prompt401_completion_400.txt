@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (thisData && otherData) {
+  return { [embedType]: handler.transform(thisData[embedType], otherData[embedType], priority) };
+} else {
+  return thisData;
+}
+```
+This would result in different behavior because it would only transform the `embedType` property if both `thisData` and `otherData` are truthy, whereas the original code would transform it regardless of the truthiness of `otherData`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (thisData || otherData) {
+  return { [embedType]: handler.transform(thisData ? thisData[embedType] : null, otherData ? otherData[embedType] : null, priority) };
+} else {
+  return thisData;
+}
+```
+This would result in different behavior because it would only transform the `embedType` property if either `thisData` or `otherData` is truthy, whereas the original code would transform it regardless of the truthiness of `otherData

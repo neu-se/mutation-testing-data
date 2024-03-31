@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+urlMap = undefined;
+```
+This would result in different behavior because setting urlMap to undefined would cause the `typeof urlMap.set` check in the extract function to fail, resulting in an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delete urlMap.set;
+```
+This would result in different behavior because deletion of the set method from the urlMap object would cause the `typeof urlMap.set` check in the extract function to fail, resulting in an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+urlMap = {
+	set: function() {
+		throw new Error('Invalid set method called');
+	}
+};
+```
+This would result in different behavior because adding a custom set method to the urlMap object would cause the `typeof urlMap.set` check in the extract function to fail, resulting in an error.
+
+DONE.

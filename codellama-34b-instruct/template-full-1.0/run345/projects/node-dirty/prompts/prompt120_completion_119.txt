@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites >= 1
+```
+This would result in different behavior because the original code checks if there are no inflight writes left, which means the drain event will be emitted when there are no more writes in the queue. However, with the replacement code, the drain event will be emitted when there is at least one write in the queue, which is the opposite of the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites === 0
+```
+This would result in different behavior because the original code checks if there are no inflight writes left, which means the drain event will be emitted when there are no more writes in the queue. However, with the replacement code, the drain event will be emitted even if there are writes in the queue, which is the opposite of the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.size <= 0
+```
+This would result in

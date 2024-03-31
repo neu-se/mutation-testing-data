@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || i >= array.length
+```
+This would result in different behavior because the `||` operator has higher precedence than the `==` operator, so the expression inside the `if` statement would be evaluated as `abort || (i >= array.length)`, which would always be true if `abort` is truthy, regardless of the value of `i`. This would cause the `cb` function to be called with a truthy value, which would result in an error if the `cb` function is not designed to handle such a value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!abort && i >= array.length
+```
+This would result in different behavior because the `!` operator has higher precedence than the `&&` operator, so the expression inside the `if` statement would be evaluated as `!(abort && i >= array.length)`, which would always be false if `abort` is truthy and `i` is less than the length of the array, regardless of other conditions. This would cause

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deliverTimezones.bind(null, { deprecated: true });
+```
+This would result in different behavior because the `.bind()` method creates a new function that, when called, has its `this` keyword set to the first argument (in this case, `null`) and has its first argument set to `{ deprecated: true }`. This means that the original `deliverTimezones` function will be called with `this` set to `null` and the `deprecated` option set to `true`, which may result in different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.assign(getTimezones, { deprecated: true });
+```
+This would result in different behavior because `Object.assign()` modifies the object that is passed as its first argument, in this case, `getTimezones`. The object that is passed as the second argument is used to extend the first argument, so in this case, the `getTimezones` object will be modified to have a `deprecated` property set to

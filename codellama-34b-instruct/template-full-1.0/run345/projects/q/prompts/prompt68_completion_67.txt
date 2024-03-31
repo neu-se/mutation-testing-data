@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+0
+```
+This would result in different behavior because `process.nextTick` would be called with `flush` as the first argument, which would cause `flush` to be called immediately, rather than being queued up to be called later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"undefined"
+```
+This would result in different behavior because `process.nextTick` would be called with `flush` as the first argument, which would cause `flush` to be called with the string "undefined" as its first argument, rather than the actual `undefined` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `process.nextTick` would be called with `flush` as the first argument, which would cause `flush` to be called with `null` as its first argument, rather than the actual `undefined` value.
+
+DONE.

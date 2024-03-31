@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function (error) { deferred.reject(error) }
+```
+This would result in different behavior because it would reject the promise with a different message than deferred.makeNodeResolver().
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (error, result) { deferred.resolve(error || result) }
+```
+This would result in different behavior because it would resolve the promise with either the error or result from the callback, rather than just calling deferred.makeNodeResolver.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function (error, result) { deferred.reject(error ? error : result) }
+```
+This would result in different behavior because it would reject the promise with either the error or result from the callback, rather than just calling deferred.makeNodeResolver.
+
+DONE.

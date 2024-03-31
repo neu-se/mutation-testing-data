@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.splice(reportedUnhandledRejections.indexOf(promise), 1);
+```
+This would result in different behavior because it would remove the promise from the `reportedUnhandledRejections` array regardless of whether it is found in the `unhandledRejections` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.splice(unhandledRejections.indexOf(promise), 1);
+```
+This would result in different behavior because it would remove the promise from the `reportedUnhandledRejections` array only if it is found in the `unhandledRejections` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.splice(unhandledReasons.indexOf(reason), 1);
+```
+This would result in different behavior because it would remove the promise from the `reportedUnhandledRejections` array if

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (row.val === undefined) {
+  delete this._data[row.key]; // delete operator instead of .delete method
+} else {
+  this._data[row.key] = row.val; // object property assignment instead of .set method
+}
+```
+This would result in different behavior because the `delete` operator does not remove the property from the object's prototype, whereas the `.delete` method does. The `delete` operator also returns a boolean indicating whether the deletion was successful, whereas the `.delete` method returns the deleted value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (row.val === undefined) {
+  this._data.prop(row.key); // property access syntax instead of .get method
+} else {
+  this._data[row.key] = row.val; // object property assignment instead of .set method
+}
+```
+This would result in different behavior because the property access syntax `.prop` does not invoke the property's getter or setter,

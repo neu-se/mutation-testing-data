@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.statusCode !== 300
+```
+This would result in different behavior because the new code would not trigger the `reject` function on status codes between 201 and 299, which may be legitimate status codes but were not accounted for in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.statusCode === 300
+```
+This would result in different behavior because the new code would trigger the `reject` function on status code 300, even though this status code is typically used for redirection and may not indicate an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.statusCode >= 500 && res.statusCode < 600
+```
+This would result in different behavior because the new code would trigger the `reject` function on status codes between 500 and 599, which are typically used for server errors.
+
+DONE.

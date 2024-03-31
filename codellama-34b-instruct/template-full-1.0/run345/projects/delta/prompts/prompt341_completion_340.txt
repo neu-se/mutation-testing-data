@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new OpIterator(slice.ops).peek()
+```
+This would result in different behavior because `peek()` returns the next op without consuming it, whereas `next()` consumes and returns the next op.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new OpIterator(slice.ops)[Symbol.iterator]()
+```
+This would result in different behavior because `Symbol.iterator` returns an iterator object, whereas `peek()` and `next()` return op objects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new OpIterator(slice.ops).ops
+```
+This would result in different behavior because `ops` is a reference to the entire list of ops in the iterator, whereas `peek()` and `next()` return individual ops.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+c == 'i' || c == 'I'
+```
+This would result in different behavior because the comparison uses type-coercion, so if `c` is not a string, the expression would evaluate to `NaN`, which is not equivalent to the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+c === 'i' || c === 'I' || c === '+' || c === '-'
+```
+This would result in different behavior because the same type-coercion issue as above, but also including additional operators.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+c === 'i' || c === 'I' || c === 0
+```
+This would result in different behavior because the addition of `0` to the comparison, which would make the expression always evaluate to `NaN` if `c` is not a string.
+
+DONE.

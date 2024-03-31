@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(object).dispatch
+```
+This would result in different behavior because it would create a new resolved promise with the value of `object`, whereas the original code `Q(object).dispatch` simply returns the result of `Q(object)` and then calls the `dispatch` method on it. This could change the behavior of the code if `Q` is not simply a wrapper for `Promise`, but has other side effects or different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(async () => object).dispatch
+```
+This would result in different behavior because it would create an async function that returns `object`, whereas the original code `Q(object).dispatch` simply returns the result of `Q(object)` and then calls the `dispatch` method on it. This could change the behavior of the code if `Q` is not simply a wrapper for `Promise`, but has other side effects or different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(async object => object

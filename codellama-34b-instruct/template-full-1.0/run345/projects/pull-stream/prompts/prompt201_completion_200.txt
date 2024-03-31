@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null)
+```
+This would result in different behavior because the original code checks the value of `aborted`, but this replacement code unconditionally calls `cb(null)` regardless of the value of `aborted`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb(aborted)
+```
+This would result in different behavior because the original code calls `cb(aborted)` only if `aborted` is truthy, but this replacement code unconditionally calls `abortCb(aborted)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(abort)
+```
+This would result in different behavior because the original code calls `cb(null)` if `aborted` is falsy, but this replacement code calls `cb(abort)` regardless of the value of `aborted`.
+
+DONE.

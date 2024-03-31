@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise ? Promise.resolve(value) : Promise.reject(value);
+```
+This would result in different behavior because in the original code, the deferred promise is fulfilled or rejected based on the presence or absence of `resolvedPromise`, respectively. However, in this modified code, the deferred promise is always fulfilled, regardless of whether `resolvedPromise` is present or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!resolvedPromise && Promise.throw(value);
+```
+This would result in different behavior because in the original code, the deferred promise is rejected with the reason `value` if `!resolvedPromise` is true. However, in this modified code, the deferred promise is rejected with the reason `value` only if `resolvedPromise` is false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise = Promise.resolve(value);
+```
+This would result in different behavior because in the

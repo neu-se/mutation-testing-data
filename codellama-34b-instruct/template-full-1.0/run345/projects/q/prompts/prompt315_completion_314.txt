@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+0
+```
+This would result in different behavior because when `fallback` is `void 0`, the `Promise` constructor would return a rejected promise with a `TypeError` indicating that `fallback` must be a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!!fallback
+```
+This would result in different behavior because when `fallback` is a function, `!!fallback` would evaluate to `true`, and the `Promise` constructor would proceed as normal. However, when `fallback` is not a function, `!!fallback` would evaluate to `false`, and the `Promise` constructor would throw a `TypeError` indicating that `fallback` must be a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fallback || void 0
+```
+This would result in different behavior because when `fallback` is `void 0`, the `Promise` constructor would return a resolved promise with a value of `undefined`.
+
+D

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches(path, ctx) || !(verb in this.verbs)
+```
+This would result in different behavior because it would negate the `matches` method result and check if the verb is not in the `verbs` object, effectively reversing the logic and allowing any non-governed actions on paths that are governed by the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!this.verbs[verb]
+```
+This would result in different behavior because it would check if the `verbs` object has no mapping for the given verb, effectively allowing any action on paths that are governed by the rule, regardless of the verb.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.verbs[verb] === false
+```
+This would result in different behavior because it would check if the `verbs` object has a mapping for the given verb and if it's equal to false, effectively allowing any action on paths that are governed by the rule

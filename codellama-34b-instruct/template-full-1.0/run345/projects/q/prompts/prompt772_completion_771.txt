@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return promises.allSettled(promises);
+```
+This would result in different behavior because the original code fragment was:
+```
+return Q(promises).allSettled(<PLACEHOLDER>);
+```
+The `allSettled` method is only available on instances of Q, and the `<PLACEHOLDER>` was meant to be a placeholder for the `promises` variable. Replacing it with `promises.allSettled(promises)` would create a recursive call to the `allSettled` method, causing a "maximum call stack size exceeded" error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return promises.allResolved(promises);
+```
+This would result in different behavior because the original code fragment was:
+```
+return Q(promises).allResolved(<PLACEHOLDER>);
+```
+The `allResolved` method is only available on instances of Q, and the `<PLACEHOLDER>` was

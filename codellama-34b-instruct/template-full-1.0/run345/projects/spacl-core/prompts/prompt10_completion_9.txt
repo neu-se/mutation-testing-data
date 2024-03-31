@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(version === '1' || version === '1.0'
+      ? /[*+][^/]|[^/][*+]/
+      : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null
+```
+This would result in different behavior because it would fail to match the URL path if it contains any of the wildcard characters `*` or `+` at the end of the path, even if it is a valid URL. The original code fragment allows for these characters to be present at the end of the path, as long as they are not immediately preceded by a `/`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[*+][^/]|[^/][*+]/) !== null
+```
+This would result in different behavior because it would only check for the presence of `*` or `+` characters in the URL path, and not check for their position or presence in specific

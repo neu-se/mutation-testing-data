@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.apply(promise)
+```
+This would result in different behavior because `apply` always calls the callback with `promise` as the first argument, whereas `fcall` only calls the callback with `promise` as the first argument if the callback is a method of `promise`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.call(promise)
+```
+This would result in different behavior because `call` always calls the callback with `promise` as the first argument, whereas `fcall` only calls the callback with `promise` as the first argument if the callback is a method of `promise`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.when(callback.fcall(promise), function () {
+    throw new Error("Q can't apply callback");
+})
+```
+This would result in different behavior because it always throws an error if `callback.fcall(promise)` resolves with a value, whereas the original code

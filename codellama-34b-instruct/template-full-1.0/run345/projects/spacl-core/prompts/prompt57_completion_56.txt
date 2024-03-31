@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/(\\.|$)/g
+```
+This would result in different behavior because the `.` character in the original fragment matches anything except for a newline, whereas the `\.` in the replacement fragment matches only a literal period. This would cause the regular expression to match occurrences of `.` in the input string that the original fragment would not have matched.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/([^$])/g
+```
+This would result in different behavior because the `[^$]` character class in the replacement fragment matches any character except for the end of the string, whereas the `\.$` in the original fragment matches only a literal period followed by the end of the string. This would cause the regular expression to match occurrences of a period not followed by the end of the string, which the original fragment would not have matched.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/([$])/g
+```
+This would result in different behavior because the `[$]` character class in the replacement fragment matches any

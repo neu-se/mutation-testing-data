@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+compile.replace(/\W/g, '\\$&')
+```
+This would result in different behavior because it would escape all non-word characters in the path specification, including forward slashes, which would cause the matcher to match paths that were not intended to be matched.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+compile.replace(/:(\w+)/g, '($1)')
+```
+This would result in different behavior because it would replace all named captures with numbered captures, which would cause the order of the captures to be different.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+compile.replace(/[\/()]/g, '')
+```
+This would result in different behavior because it would remove all forward slashes and parentheses, which would cause the matcher to match paths that were not intended to be matched.
+
+DONE.

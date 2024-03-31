@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch("when", [])
+```
+This would result in different behavior because the `promiseDispatch` method will be called with the arguments `"when"` and an empty array, which will cause the `when` method to be applied to `resolvedPromise`, which may have unintended consequences.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.reject(new Error())
+```
+This would result in different behavior because the `reject` method will be called with an `Error` object, which will cause the promise to be rejected with that error, whereas the original code fragment would have resolved the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.notify(function () {})
+```
+This would result in different behavior because the `notify` method will be called with a no-op function as the progress listener, which will cause the promise to be notified but not resolved or rejected.
+
+DONE.

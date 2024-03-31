@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return this.promiseDispatch(deferred.resolve, op, args);
+```
+This would result in different behavior because it would call `promiseDispatch` directly on `deferred`, which would not be correct as it should be called on the promise returned by `Q(object)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return this.promiseDispatch(deferred.reject, op, args);
+```
+This would result in different behavior because it would call `promiseDispatch` with the `reject` method of `deferred`, which would cause the promise to be rejected instead of resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return this.promiseDispatch(deferred.progress, op, args);
+```
+This would result in different behavior because it would call `promiseDispatch` with the `progress` method of `deferred`, which would update the progress of the promise instead of resolving or rejecting it.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.resolve, deferred.reject));
+```
+This would result in different behavior because deferred.makeNodeResolver() takes two parameters, but three arguments are being passed, which would result in an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.unshift(deferred.makeNodeResolver());
+```
+This would result in different behavior because the order of arguments is reversed, which would cause the callback to be passed the wrong arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(deferred.reject, deferred.resolve));
+```
+This would result in different behavior because deferred.reject and deferred.resolve are being passed in the wrong order, which would cause the callback to be called with the wrong arguments.
+
+DONE.

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isBoolean
+```
+This would result in different behavior because `isBoolean` is a different function from `isObject`. While `isObject` checks if a value is an object, `isBoolean` checks if a value is a boolean. If the value passed to `fromGeoJSON` is not an object, `isObject` will return `false`, but `isBoolean` will return `true` if the value is a boolean, and `false` otherwise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty('type')
+```
+This would result in different behavior because `hasOwnProperty` checks if the property is defined on the object itself, not on any of its prototypes. If the `type` property is not defined on the `point` object, `hasOwnProperty` will return `false`, but `point.type` will return `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof point.type !== 'string'

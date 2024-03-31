@@ -1,0 +1,27 @@
+  
+Option 1:
+```
+while (thisIter.hasNext(<test>)) {
+  const thisOp = thisIter.next();
+  const otherOp = otherIter.next();
+  if (otherOp.retain) {
+    const length = Math.min(thisOp.retain, otherOp.retain);
+    const newOp = { retain: length };
+    delta.push(newOp);
+    otherOp.retain -= length;
+    thisOp.retain -= length;
+    if (otherOp.retain <= 0) {
+      otherIter.back();
+    }
+  }
+}
+```
+This would result in different behavior because the `test` parameter in `hasNext` is not defined, and thus the loop would run forever.
+
+Option 2:
+```
+while (thisIter.hasNext(<thisOp.insert>)) {
+  const length = Math.min(thisOp.retain, otherOp.retain);
+  const newOp = { retain: length };
+  delta.push(newOp);
+  otherOp.retain

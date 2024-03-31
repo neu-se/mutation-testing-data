@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort, null || function () {}
+```
+This would result in different behavior because it would replace the existing `cb` function with `null` when the `cb` function is not already null. This would cause the `abort` function to not be executed, which could result in unexpected behavior in the `drain` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort, undefined || function () {}
+```
+This would result in different behavior because it would replace the existing `cb` function with `undefined` when the `cb` function is not already undefined. This would cause the `abort` function to not be executed, which could result in unexpected behavior in the `drain` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort, function () {} || function () {}
+```
+This would result in different behavior because it would replace the existing `cb` function with a new function that does nothing. This would cause the `abort` function to not be executed,

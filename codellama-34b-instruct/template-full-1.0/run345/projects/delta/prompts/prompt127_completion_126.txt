@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.next().map(op => ({ ...op, insert: null }))
+```
+This would result in different behavior because `iter.next()` returns an iterator over the ops, but the `map` function would modify the `insert` property of each op to be `null`, which would break the next loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.next().reduce((acc, op) => acc + op.length, 0)
+```
+This would result in different behavior because `reduce` returns a single value, which would break the loop.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.next().filter(op => op.insert != null)
+```
+This would result in different behavior because `filter` returns a new iterator over the ops that pass the filter, which would break the loop.
+
+DONE.

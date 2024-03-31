@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+console.log(data)
+```
+This would result in different behavior because it would cause the data to be logged to the console, while the original code fragment simply called the callback function with the data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, null)
+```
+This would result in different behavior because it would cause the callback function to be called with a different set of arguments (null, null) than the original code fragment (data).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+drain(function (data) {
+    if (!test(data)) {
+        cb(null, data);
+    }
+}, function (err) {
+    cb(err, null);
+});
+```
+This would result in different behavior because it would cause the callback function to be called with a different set of arguments (null, data) than the original code fragment (data) in the case where the test function returns false.
+
+DONE.

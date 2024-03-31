@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^(javascript|mailto:|ftp:)/ig.test.bind
+```
+This would result in different behavior because `.bind` returns a bound function, which always returns true when called, regardless of the input. Therefore, it would always return true for the example URLs provided, even if they do not start with "javascript", "mailto", or "ftp".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^(javascript|mailto:|ftp:)/g.test.bind
+```
+This would result in different behavior because the `g` flag is removed, causing the regular expression to only match the pattern at the beginning of the string. Therefore, it would fail to match the example URLs provided, which do not start with "javascript", "mailto", or "ftp".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var test = /^(javascript|mailto:|ftp:)/g.test; var bind = test.bind(test);
+```
+This would result in different behavior

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/^Wo?Man$/i
+```
+This would result in different behavior because the `?` operator makes the `o` optional, so it would match "woman" and "woMan", which would otherwise not be matched by the original regex.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/^Wo(?:Man|Woman)$/i
+```
+This would result in different behavior because the `?` operator makes the entire group optional, so it would match "woman" and "woMan", but also "wo", which would not be matched by the original regex.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/^(?:Wo|Man)$/i
+```
+This would result in different behavior because the `?` operator makes the entire group optional, so it would match "woman" and "woMan", but also "wo", "man", and "woMan" (which would not be matched by the original regex).
+
+DONE.

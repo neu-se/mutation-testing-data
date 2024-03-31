@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+timezone === undefined
+```
+This would result in different behavior because `timezone` may be undefined, but the `!` operator would still return `true` if it's not null or undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!timezone && timezone.name !== 'UTC'
+```
+This would result in different behavior because the `&&` operator has higher precedence than the `!` operator, so the `timezone.name` would be evaluated before the `!`. If `timezone` is not null, it will always return `false` if `timezone.name` is not 'UTC'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!!timezone && timezone.name !== 'UTC'
+```
+This would result in different behavior because the `!!` operator converts the value to a boolean and then not's it, so it will always return `true` if `timezone` is not null. If `timezone` is null, it will always

@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    setTimeout(flush, 0);
+    requestPortTick();
+};
+```
+This would result in different behavior because it would cause the `requestTick` function to execute twice. Once with `setTimeout(flush, 0)` and second time with `requestPortTick()`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    if (typeof process !== 'undefined') {
+        process.once('async', flush);
+    }
+};
+```
+This would result in different behavior because it would only invoke `flush` function asynchronously but not immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () {
+    setTimeout(flush, 1);
+};
+```
+This would result in different behavior because  it would invoke `flush` function with a delay of 1 millisecond, instead of immediately.
+
+DONE.

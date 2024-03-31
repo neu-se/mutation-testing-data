@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => null
+```
+This would result in different behavior because it would cause the map function to return `null` for each `rule`, rather than a clone of the `rule`, which would cause the `clone` function to return a `Policy` with a `null` `rules` property, which would cause the `query` function to throw an error when attempting to iterate over the `null` rules.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.copy()
+```
+This would result in different behavior because it would cause the map function to return a copy of each `rule`, rather than a clone of the `rule`, which would cause the `clone` function to return a `Policy` with a `rules` property that is a shallow copy of the original `rules` property, rather than a deep copy, which could cause issues if the `rules` property is mutated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule.clone(

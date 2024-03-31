@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Corrupted row at the start of the db: ${buffer}`)
+```
+This would result in different behavior because the error message would be different, indicating a corrupted row at the start of the db instead of the end.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new SyntaxError(`Corrupted row at line ${buffer.length}: ${buffer}`)
+```
+This would result in different behavior because a SyntaxError would be thrown with a more specific error message indicating the exact line number where the corruption occurred.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error('Unexpected end of file')
+```
+This would result in different behavior because a more generic error message would be shown, indicating an unexpected end of file instead of a specific corrupted row.
+
+DONE.

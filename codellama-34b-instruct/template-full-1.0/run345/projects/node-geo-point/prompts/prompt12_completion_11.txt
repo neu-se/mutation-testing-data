@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+! point.type || point.type === 'Point'
+```
+This would result in different behavior because it would allow the `fromGeoJSON` function to be called with any object that has a `type` property, regardless of its value. The original code fragment required that the `type` property must have the exact value `'Point'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.type === 'Point' || point.type === 'Point'
+```
+This would result in different behavior because it would allow the `fromGeoJSON` function to be called with any object that has a `type` property, regardless of its value. The original code fragment required that the `type` property must have the exact value `'Point'`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+! point.type && point.coordinates.length === 2
+```
+This would result in different behavior because it would allow the `fromGeoJSON` function to be called with any object that has a

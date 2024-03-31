@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+latitude < -90 || latitude > 180
+```
+This would result in different behavior because the latitude is being compared to the wrong range of values. The latitude range is -90 to 90, but the buggy code fragment compares it to -90 to 180, which would cause the constructor to throw an error for valid latitudes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+longitude < -90 || longitude > 180
+```
+This would result in different behavior because the longitude is being compared to the wrong range of values. The longitude range is -180 to 180, but the buggy code fragment compares it to -90 to 180, which would cause the constructor to throw an error for valid longitudes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const badLatitude = true;
+if ( badLatitude ) { throw new RangeError('bad latitude value'); }
+```
+This

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because it would negate the `isGlob` variable, causing the code to enter the `else` block when the `src` is a glob, and the `if` block when it is not. This would likely cause unexpected behavior in the `zip` and `tar` methods, as they would be called with incorrect arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split('.').length == 1
+```
+This would result in different behavior because it would check if the `src` string contains only one dot, which is not the same as checking if it is a glob pattern. This would cause the code to enter the `if` block when it should enter the `else` block, or vice versa.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.existsSync(src)
+```
+This would result in different behavior because it would check if the `src` file exists, which is not the same as checking

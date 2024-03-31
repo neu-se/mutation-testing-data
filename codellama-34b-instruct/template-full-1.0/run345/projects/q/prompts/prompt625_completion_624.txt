@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `Q.set` method expects a promise or immediate reference for the object as its first argument. Passing `false` will result in an error when trying to access the `promiseDispatch` method, which is called in the next tick.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(function () {})
+```
+This would result in different behavior because `Q()` expects a function as an argument, and returns a promise of the result of calling that function. Passing a function that returns `undefined` (like the empty function passed to `Q()` here) will result in a promise that is never resolved or rejected, which could cause the `dispatch` method to hang indefinitely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.delay(object, 0)
+```
+This would result in different behavior because `Q.delay()` returns a promise that is resolved with the given value (in this case, `object`) after a

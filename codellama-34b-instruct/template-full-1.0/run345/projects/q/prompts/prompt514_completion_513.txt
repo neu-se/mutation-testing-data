@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Deferred()
+```
+This would result in different behavior because it would create a new Deferred object, whereas the original code fragment uses the existing Deferred object created by the generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(deferred)
+```
+This would result in different behavior because it would wrap the Deferred object in a promise, whereas the original code fragment uses the Deferred object directly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(function (deferred) {
+    return deferred.promise;
+})(deferred)
+```
+This would result in different behavior because it would create a new promise that resolves to the same value as the Deferred object, whereas the original code fragment uses the Deferred object directly.
+
+DONE.

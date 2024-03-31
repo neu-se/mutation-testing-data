@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error('Something is wrong')
+```
+This would result in different behavior because it would emit a new error with a generic message, which would not be captured by the existing error handling logic.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', err, 0
+```
+This would result in different behavior because it would emit an error with the same message as the original error, but with a falsy value for the third argument, which would cause the `emit` function to return a falsy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', err, 1
+```
+This would result in different behavior because it would emit an error with the same message as the original error, but with a truthy value for the third argument, which would cause the `emit` function to return a truthy value.
+
+DONE.

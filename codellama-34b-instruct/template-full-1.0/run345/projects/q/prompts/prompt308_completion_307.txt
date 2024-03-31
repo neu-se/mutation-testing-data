@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+function(resolver, rejecter) {}
+```
+This would result in different behavior because it would create a new function expression that takes two arguments, which is not what the original code fragment does.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q([this, that]).spread(function (x, y) {
+    if (x === y) {
+        // TODO: "===" should be Object.is or equiv
+        return x;
+    } else {
+        throw new Error("Q can't join: not the same: " + x + " " + y);
+    }
+})
+```
+This would result in different behavior because it would create a new promise that resolves to an array of `this` and `that`, which is not what the original code fragment does.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(x).join(y)
+```
+This would result in different behavior because it would create a new promise that resolves to `

@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error();
+```
+This would result in different behavior because it would throw an error, causing the promise to be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (value instanceof Promise) {
+  return value.then(<original implementation>);
+} else {
+  return <original implementation>(value);
+}
+```
+This would result in different behavior because it would check if the value is a promise and if so, return the result of the promise instead of the original implementation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<original implementation>().then(function(value) {
+  if (value instanceof Promise) {
+    return value.then(<original implementation>);
+  } else {
+    return <original implementation>(value);
+  }
+});
+```
+This would result in different behavior because it would apply the original implementation to the result of the promise instead of the promise itself.
+
+DONE.

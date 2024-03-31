@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+src, fs.constants.W_OK
+```
+This would result in different behavior because `fs.constants.W_OK` checks if the file is writable, while `fs.constants.R_OK` checks if the file is readable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.constants.R_OK, src
+```
+This would result in different behavior because the order of the arguments in the `access()` method is important. `fs.constants.R_OK` should be the first argument, as it sets the access mode to read-only.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+, true
+```
+This would result in different behavior because it would check for read access to the file path, but it would also return `true` if the file does not exist.
+
+DONE.

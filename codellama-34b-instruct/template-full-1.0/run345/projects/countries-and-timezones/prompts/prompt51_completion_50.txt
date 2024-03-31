@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (totalTimezones !== memoizedTimezones) (data.timezones).forEach(getTimezone);
+```
+This would result in different behavior because `Object.keys(data.timezones).forEach(getTimezone);` is not the same as `(data.timezones).forEach(getTimezone);`. The first line uses `Object.keys()` to get an array of the own enumerable property names of `data.timezones`, while the second line uses `data.timezones.forEach()` to iterate over the properties of the `data.timezones` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (totalTimezones !== memoizedTimezones) getTimezone(data.timezones[0]);
+```
+This would result in different behavior because `getTimezone(data.timezones[0]);` is not the same as `(data.timezones).forEach(getTimezone);`. The first line calls `getTimezone()` on the

@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (promise && promise._state) {
+    promise._state = 'rejected';
+}
+```
+This would result in different behavior because it would force the promise to be in the rejected state, regardless of whether it was resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return promise && promise.then(undefined, noop);
+```
+This would result in different behavior because it would return a new promise that is resolved with the value of the `noop` function, which is always `undefined`, regardless of the original promise's resolution.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+try {
+    return promise && promise.then(undefined, noop);
+} catch (e) {
+    return Q.reject(e);
+}
+```
+This would result in different behavior because it would return a new promise that is resolved with the value of the `noop` function, but if the `promise` is rejected, it would catch the re

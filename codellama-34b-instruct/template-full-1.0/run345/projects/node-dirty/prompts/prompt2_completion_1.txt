@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+`this._data = null;`
+This would result in different behavior because the constructor would be assigning `null` to `this._data` instead of creating a new `Map` object, which would cause the `set` method to fail when trying to set a key-value pair.
+
+Option 2: The PLACEHOLDER can be replaced with:
+`this._data = new WeakMap();`
+This would result in different behavior because a `WeakMap` is a type of `Map` object that uses weak references to keys, which means that they can be garbage collected if they are no longer referenced. This could cause the `set` method to fail if it is trying to set a key-value pair that is not referenced.
+
+Option 3: The PLACEHOLDER can be replaced with:
+`this._data = new Map(null);`
+This would result in different behavior because `Map(null)` creates a new map with no entries, which means that the `set` method would always fail if it is trying to set a key-value pair.
+
+DONE

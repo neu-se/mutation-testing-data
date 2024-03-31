@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+plural.bind(null)
+```
+This would result in different behavior because `plural.bind(null)` creates a new function with the `plural` function as its target, but with the `this` value set to `null`. This means that the `plural` function will not be able to access the `rules` array, which is defined in the scope of the `plural` function, and the resulting function will not be able to correctly determine the plural form of the input word.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+plural.bind({rules: rules})
+```
+This would result in different behavior because `plural.bind({rules: rules})` creates a new function with the `plural` function as its target, but with the `this` value set to an object that contains the `rules` array. This means that the resulting function will be able to access the `rules` array when determining the plural form of the input word.
+
+Option 3: The PLACEHOLDER

@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+
+```
+op.delete !== true
+```
+
+This would result in different behavior because the original line `op.delete || typeof op.retain` is testing whether `op.delete` is a non-`null` value _or_ whether the value of `op.retain` is a number, while replacing it with `op.delete !== true` only tests whether `op.delete` is strictly equal to `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+
+```
+op.delete || (<PLACEHOLDER>)
+```
+
+This would result in different behavior because the original line `op.delete || typeof op.retain` is only testing `op.delete` for non-`null` values, while replacing it with `(<PLACEHOLDER>)` allows for the possibility of `op.delete` having a different type of value that could affect the behavior of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+
+```
+(op.delete + op.ret

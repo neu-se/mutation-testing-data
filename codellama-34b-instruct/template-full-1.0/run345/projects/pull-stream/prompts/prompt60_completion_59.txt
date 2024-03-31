@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+  if(typeof err === 'function')
+      cb = err
+  abort = err
+  if(read) return read(abort, cb)
+}
+```
+This would result in different behavior because it changes the condition in which the abort function is called. In the original code, the abort function is only called if `err` is a function and `cb` is not a function. In the mutated code, the abort function is called regardless of the types of `err` and `cb`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink.abort = function (err, cb) {
+  if(typeof err === 'function')
+      cb = err
+  abort = err
+  if(read) return read(abort, cb)
+}
+```
+This would result in different behavior because it changes the assignment of the `cb` variable. In the original code, `cb` is assigned the value of `err` if `err`

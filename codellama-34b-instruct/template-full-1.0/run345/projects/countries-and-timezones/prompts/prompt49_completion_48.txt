@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (totalTimezones !== memoizedTimezones) for (let key in data.timezones) getTimezone(key);
+```
+This would result in different behavior because the `Object.keys(data.timezones).forEach` loop would be executed only once, whereas the `for (let key in data.timezones)` loop would be executed every time `getAllTimezones()` is called. This could lead to unexpected behavior in the application, particularly if the `getTimezone()` function has side effects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (totalTimezones !== memoizedTimezones) getTimezone(Object.keys(data.timezones)[0]);
+```
+This would result in different behavior because the `Object.keys(data.timezones).forEach` loop would be executed only once, whereas the `getTimezone(Object.keys(data.timezones)[0])` function would be executed every time `getAllTimezones()` is called

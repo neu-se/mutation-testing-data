@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    read(true, cb(err))
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code would call the `cb` function with the `err` argument if the `_read` function returned an error, while this modified code would call the `cb` function with the `err` argument if the `_read` function returned any value other than `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    read(err, cb)
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code would call the `cb` function with the `err` argument if the `_read` function returned an error, while this modified code would call the `cb` function with the `err` argument if the `_read` function returned

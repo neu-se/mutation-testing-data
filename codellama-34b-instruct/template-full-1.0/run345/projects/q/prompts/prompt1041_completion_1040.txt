@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve = next.resolve;
+```
+This would result in different behavior because `next.resolve` is not defined in the original code, and it is not clear what the intention of the author was when they wrote this line.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer = Q.filter(function(v) { return v; });
+```
+This would result in different behavior because `Q.filter` is a higher-order function that applies the provided function to each element in the queue, and `Q.defer` is not a higher-order function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+closed.promise = Q.reject(new Error("Queue is closed"));
+```
+This would result in different behavior because `Q.reject` is a higher-order function that returns a rejected promise with the provided error, and `closed.promise` is a property that is only set to `Q.reject` if the queue is closed.

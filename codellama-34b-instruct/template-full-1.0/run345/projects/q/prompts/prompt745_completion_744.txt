@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve()
+```
+This would result in different behavior because `deferred.resolve()` would immediately fulfill the promise, whereas `onRejected` would only be called if the promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject()
+```
+This would result in different behavior because `deferred.reject()` would immediately reject the promise, whereas `onRejected` would only be called if the promise is rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+when(promise, function() { deferred.resolve() }, function() { deferred.reject() })
+```
+This would result in different behavior because it would create a new promise and attach `deferred.resolve()` and `deferred.reject()` as its success and failure handlers. This would result in different behavior because it would introduce an additional layer of nesting and complexity.
+
+DONE.

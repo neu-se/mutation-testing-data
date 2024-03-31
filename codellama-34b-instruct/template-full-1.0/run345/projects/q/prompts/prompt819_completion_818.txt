@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `progress` is a callback function that is expected to be called with a progress update, but replacing it with `null` would cause the progress update to be ignored.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => {}
+```
+This would result in different behavior because `progress` is a callback function that is expected to be called with a progress update, but replacing it with an empty arrow function would cause the progress update to be ignored.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(update) => { throw update; }
+```
+This would result in different behavior because `progress` is a callback function that is expected to be called with a progress update, but replacing it with a function that throws an error when called with a progress update would cause the promise to be rejected with the progress update as the reason.
+
+DONE.

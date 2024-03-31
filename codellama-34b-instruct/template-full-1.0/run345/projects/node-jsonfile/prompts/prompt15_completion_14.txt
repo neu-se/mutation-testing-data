@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise(fs.readFile)
+```
+This would result in different behavior because `universalify.fromCallback` expects a function that takes a callback as its last argument, but `fs.readFile` does not accept a callback and instead returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(async () => fs.readFile(file, options))
+```
+This would result in different behavior because `universalify.fromCallback` expects a function that returns a promise, but the function passed to it returns a Node.js-style callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(() => new Promise((resolve, reject) => {
+  fs.readFile(file, options).then(resolve, reject);
+}))
+```
+This would result in different behavior because the function passed to `universalify.fromCallback` has a different signature than the original.
+
+DONE

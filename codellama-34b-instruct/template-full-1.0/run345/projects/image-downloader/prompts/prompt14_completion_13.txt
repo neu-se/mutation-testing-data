@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+decodeURI(pathname)
+```
+This would result in different behavior because `decodeURI` will decode a URI, but it will not decode the path separators, whereas `decodeURIComponent` will decode the path separators, which is more likely to be the desired behavior in this scenario.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+encodeURI(basename)
+```
+This would result in different behavior because `encodeURI` will encode a URI, but it will not encode the path separators, whereas `decodeURIComponent` will decode the path separators, which is more likely to be the desired behavior in this scenario.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.basename(path.dirname(pathname))
+```
+This would result in different behavior because `path.dirname(pathname)` will return the directory name of the file, whereas `path.basename(pathname)` will return the file name, which is more likely to be the desired behavior in this scenario.

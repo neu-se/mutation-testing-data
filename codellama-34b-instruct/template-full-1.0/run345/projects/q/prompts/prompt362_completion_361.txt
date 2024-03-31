@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_rejected(value)
+```
+This would result in different behavior because the `_rejected` function is called with the fulfilled value, whereas the original code calls the `_fulfilled` function with the fulfilled value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_progressed(value)
+```
+This would result in different behavior because the `_progressed` function is called with the fulfilled value, whereas the original code calls the `_fulfilled` function with the fulfilled value. Additionally, the `_progressed` function may return a rejected promise, which would cause the promise returned by `then` to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_fulfilled(reject(value))
+```
+This would result in different behavior because the `_fulfilled` function is called with a rejected promise, whereas the original code calls the `_fulfilled` function with the fulfilled value.
+
+DONE.
