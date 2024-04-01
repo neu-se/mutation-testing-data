@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Q can't apply finally callback");
+```
+This would result in different behavior because the original code fragment only throws an error if the `callback` argument is not a function, but this modified code fragment throws an error regardless of the type of the `callback` argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(void 0, void 0, progressed);
+```
+This would result in different behavior because the original code fragment uses `Q.fcall()` to create a new promise that is resolved with the return value of the `progressed` function, but this modified code fragment uses `Q.then()` to create a new promise that is resolved with the return value of the `progressed` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(function (value) {
+    return value;
+}, function (reason) {
+    throw reason;
+});
+```
+This would result in different behavior because

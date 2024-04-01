@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer(null)
+```
+This would result in different behavior because `Q.defer(null)` creates a new deferred object with a null value, whereas `Q.defer()` creates a new deferred object with an undefined value. This could potentially cause issues in the `put` method, where the `ends.resolve` function is called with a null value instead of an undefined value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer(1)
+```
+This would result in different behavior because `Q.defer(1)` creates a new deferred object with the value 1, whereas `Q.defer()` creates a new deferred object with an undefined value. This could potentially cause issues in the `put` method, where the `ends.resolve` function is called with the value 1 instead of an undefined value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer(Q.reject())
+```
+This would result in

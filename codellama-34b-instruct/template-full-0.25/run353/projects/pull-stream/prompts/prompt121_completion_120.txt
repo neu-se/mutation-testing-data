@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink(null, function (err, data) {
+  if (err) return cb(err);
+  acc = reducer(acc, data);
+});
+```
+This would result in different behavior because it would call the `sink` function with a different callback function, which would cause the `reducer` function to be called with a different `acc` value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink(null, function (err, data) {
+  if (err) return cb(err);
+  acc = reducer(acc, data);
+  cb(null, acc);
+});
+```
+This would result in different behavior because it would call the `cb` function with a different value for the `acc` parameter, which would cause the `reducer` function to be called with a different `acc` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+sink(null, function (err, data) {
+  if (err

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    throw reason;
+});
+```
+This would result in different behavior because the original code fragment would not throw an error if the callback returned a promise that was rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    return Q.reject(reason);
+});
+```
+This would result in different behavior because the original code fragment would not return a rejected promise if the callback returned a promise that was rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return callback.fcall().then(function () {
+    return Q.reject(new Error(reason));
+});
+```
+This would result in different behavior because the original code fragment would not return a rejected promise with a new error object if the callback returned a promise that was rejected.
+
+DONE.

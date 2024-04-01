@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+prop === undefined || match[index + 1] !== prop
+```
+This would result in different behavior because the `!==` operator checks for strict inequality, which means that `match[index + 1]` must be of a different type than `prop` for the condition to be true. In the original code, the `!=` operator is used, which checks for loose inequality and allows for type coercion.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prop === undefined || match[index + 1] !== prop.toString()
+```
+This would result in different behavior because the `toString()` method is called on `prop`, which converts it to a string. This means that the condition will only be true if `match[index + 1]` is not equal to the string representation of `prop`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prop === undefined || match[index + 1] !== prop.valueOf()
+```
+This would result in different behavior because the `valueOf()`

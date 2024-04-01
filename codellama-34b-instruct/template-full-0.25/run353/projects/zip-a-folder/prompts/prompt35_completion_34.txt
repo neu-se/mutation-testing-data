@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', reject);
+```
+This would result in different behavior because the `on('error', reject)` event listener would be added to the `output` stream instead of the `zipArchive` stream, which could cause the `reject` function to be called when an error occurs on the `output` stream, even if the `zipArchive` stream is still processing the archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', () => reject());
+```
+This would result in different behavior because the `on('error', () => reject())` event listener would be added to the `output` stream instead of the `zipArchive` stream, which could cause the `reject` function to be called when an error occurs on the `output` stream, even if the `zipArchive` stream is still processing the archive. Additionally, the `reject` function would be called with no arguments, which could cause the promise to be rejected with

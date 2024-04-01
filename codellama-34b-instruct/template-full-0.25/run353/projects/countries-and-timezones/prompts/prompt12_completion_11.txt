@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: [], all: [] };
+```
+This would result in different behavior because it would always reset the `current` and `all` arrays for the given `country`, even if they were already populated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: result[country].current.slice(), all: result[country].all.slice() };
+```
+This would result in different behavior because it would create a shallow copy of the `current` and `all` arrays for the given `country`, rather than a deep copy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: result[country].current.concat([]), all: result[country].all.concat([]) };
+```
+This would result in different behavior because it would create a new array by concatenating the `current` and `all` arrays for the given `country`, rather than modifying the existing arrays in place.
+
+D

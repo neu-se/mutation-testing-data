@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because it would cause the `dispatch` method to be called on the `Promise.prototype` object, which is not a valid method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because it would cause the `dispatch` method to be called on the `Promise.prototype` object, which is not a valid method, and it would resolve the promise instead of rejecting it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(function() {});
+```
+This would result in different behavior because it would cause the `dispatch` method to be called on the `Promise.prototype` object, which is not a valid method, and it would fail the promise with an

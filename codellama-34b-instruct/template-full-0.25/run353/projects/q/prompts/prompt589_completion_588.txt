@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).dispatch("next")
+```
+This would result in different behavior because `Q.async` returns a function that takes no arguments, while `dispatch` takes a string and an array of arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { return Q(makeGenerator); })
+```
+This would result in different behavior because `Q.async` returns a function that takes no arguments, while `then` takes a function that returns a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { return Q(makeGenerator).dispatch("next"); })
+```
+This would result in different behavior because `Q.async` returns a function that takes no arguments, while `then` takes a function that returns a promise, and `dispatch` takes a string and an array of arguments.
+
+DONE.

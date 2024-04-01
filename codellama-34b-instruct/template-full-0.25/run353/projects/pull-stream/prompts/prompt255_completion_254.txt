@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` is a function call, whereas `nextStream` is a reference to the function itself. In the original code, `nextStream` is called later in the code, but with this change, it would be called immediately, which could cause the code to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because it changes the arguments passed to `nextStream`. In the original code, `nextStream` is called with no arguments, but with this change, it is called with `null` and a function that takes `err` and `data`

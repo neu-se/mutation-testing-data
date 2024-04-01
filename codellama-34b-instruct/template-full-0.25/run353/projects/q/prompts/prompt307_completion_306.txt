@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(resolve, reject);
+```
+This would result in different behavior because the `then` method is not being called with the correct arguments. The `resolve` and `reject` functions are not defined in the context of the `race` function, and therefore the promise would not be resolved or rejected as expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function(value) {
+    resolve(value);
+}, function(reason) {
+    reject(reason);
+});
+```
+This would result in different behavior because the `then` method is not being called with the correct arguments. The `resolve` and `reject` functions are not defined in the context of the `race` function, and therefore the promise would not be resolved or rejected as expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(function(value) {
+    return value;

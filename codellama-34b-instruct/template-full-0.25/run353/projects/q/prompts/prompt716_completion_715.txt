@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this)
+```
+This would result in different behavior because `bind` creates a new function with the `this` context bound to the first argument, which in this case is `this`. This means that the `dispatch` method will be called on a different object than the one it was originally called on, which could cause unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.apply(this, arguments)
+```
+This would result in different behavior because `apply` calls the `dispatch` method on the `this` object with the `arguments` object as the first argument, which is an array-like object containing the arguments passed to the function. This means that the `dispatch` method will be called with a different set of arguments than it was originally called with, which could cause unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.call(this, arguments)
+```
+This would result in different behavior because `call` calls the

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites);
+```
+This would result in different behavior because the original code emits the `'drain'` event only when `this._inFlightWrites` is less than or equal to 0, while the new code always emits the event regardless of the value of `this._inFlightWrites`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._queue.size);
+```
+This would result in different behavior because the original code emits the `'drain'` event only when `this._queue.size` is 0, while the new code always emits the event regardless of the size of `this._queue`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._data.size);
+```
+This would result in different behavior because the original code emits the `'drain'` event only when `this._data.size`

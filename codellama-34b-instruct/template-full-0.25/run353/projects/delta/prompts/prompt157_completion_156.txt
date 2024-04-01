@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'delete'
+```
+This would result in different behavior because the `peekType()` method returns the type of the next operation in the iterator, and in this case, it would return `'delete'` instead of `'insert'`. This would cause the `compose()` method to behave differently when the next operation in the `other` iterator is a delete operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'retain'
+```
+This would result in different behavior because the `peekType()` method returns the type of the next operation in the iterator, and in this case, it would return `'retain'` instead of `'insert'`. This would cause the `compose()` method to behave differently when the next operation in the `other` iterator is a retain operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert' && otherIter.peekLength() > 0
+```

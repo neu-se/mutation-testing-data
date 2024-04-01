@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result.value, callback, errback
+```
+This would result in different behavior because the `value` property is not defined on the `result` object, which would cause a `ReferenceError` to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result, callback, errback.bind(null, result)
+```
+This would result in different behavior because the `errback` function would be called with the `result` object as its `this` value, which would cause the `errback` function to be called with a different context than expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result, callback, errback.bind(null, result.value)
+```
+This would result in different behavior because the `errback` function would be called with the `result.value` object as its `this` value, which would cause the `errback` function to be called with a different context than expected.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch.call(resolvedPromise, args);
+```
+This would result in different behavior because `call` will ignore the `this` context of the function, whereas `apply` will use the `this` context of the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch.bind(resolvedPromise, args)();
+```
+This would result in different behavior because `bind` will create a new function with the `this` context of `resolvedPromise` and the arguments `args`, whereas `apply` will call the function with the `this` context of `resolvedPromise` and the arguments `args`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch.apply(resolvedPromise, args.slice(1));
+```
+This would result in different behavior because `apply` will call the function with the `this` context of `resolvedPromise
