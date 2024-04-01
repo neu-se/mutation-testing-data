@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty.call(object, 'latitude')
+```
+This would result in different behavior because `hasOwnProperty` is a method of `Object.prototype`, and using `call` or `apply` to call it on a different object would return `false` if the property is not found on that object, even if it is found on the prototype chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(object, 'latitude')
+```
+This would result in different behavior because it would always return `false`, since `Object.prototype` does not have a `latitude` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty('latitude')
+```
+This would result in different behavior because it would always return `true`, since `hasOwnProperty` is a method of `Object.prototype` and always returns `true` when called with a string argument.
+
+DONE

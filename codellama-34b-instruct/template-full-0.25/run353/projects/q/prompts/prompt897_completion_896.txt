@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Failed to makeNodeResolver"));
+```
+This would result in different behavior because the original code fragment calls `deferred.makeNodeResolver()` to create a new node resolver, while this replacement code fragment calls `deferred.reject()` to reject the promise with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(deferred.makeNodeResolver());
+```
+This would result in different behavior because the original code fragment calls `deferred.makeNodeResolver()` to create a new node resolver, while this replacement code fragment calls `deferred.resolve()` to resolve the promise with the node resolver.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(deferred.makeNodeResolver());
+```
+This would result in different behavior because the original code fragment calls `deferred.makeNodeResolver()` to create a new node resolver, while this replacement code fragment calls `deferred.notify()` to notify the promise

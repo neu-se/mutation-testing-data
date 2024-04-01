@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise
+```
+This would result in different behavior because it would create a new deferred object and return its promise, rather than returning the promise of the original deferred object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.defer(); })
+```
+This would result in different behavior because it would create a new deferred object and return its promise, rather than returning the promise of the original deferred object. Additionally, it would create a new promise chain, which could cause issues if the original code relied on the specific behavior of the promise chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.reject(); })
+```
+This would result in different behavior because it would create a new deferred object and return its promise, rather than returning the promise of the original deferred object. Additionally, it would reject the promise, which could

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).apply(this, arguments)
+```
+This would result in different behavior because `apply` would change the context of the function call, potentially causing errors if the function relies on the context being the same as the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).bind(this)()
+```
+This would result in different behavior because `bind` would create a new function with the context bound to `this`, potentially causing errors if the function relies on the context being the same as the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).call(this, arguments)
+```
+This would result in different behavior because `call` would change the context of the function call, potentially causing errors if the function relies on the context being the same as the original code.
+
+DONE.

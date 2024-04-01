@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(undefined);
+```
+This would result in different behavior because `undefined` is not a promise, and it would cause the `dispatch` method to return a promise that is already resolved, which would not allow the function to be called in a future turn.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(Q.reject(new Error("Invalid argument")));
+```
+This would result in different behavior because it would cause the `dispatch` method to return a promise that is already rejected, which would not allow the function to be called in a future turn.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(Q.async(function () {
+    throw new Error("Invalid argument");
+}));
+```
+This would result in different behavior because it would cause the `dispatch` method to return a promise that is already resolved with a function that throws an error, which would not allow the function to be called in a future turn.
+
+DONE

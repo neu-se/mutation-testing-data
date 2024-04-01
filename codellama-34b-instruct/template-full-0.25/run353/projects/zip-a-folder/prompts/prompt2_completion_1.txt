@@ -1,0 +1,30 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        gzip: false,
+    },
+});
+```
+This would result in different behavior because the `gzip` option is set to `false`, which would result in the archive not being compressed, even if the `compression` level is set to a non-zero value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        gzip: true,
+        gzipOptions: {
+            level: COMPRESSION_LEVEL.uncompressed,
+        },
+    },
+});
+```
+This would result in different behavior because the `gzip` option is set to `true`,

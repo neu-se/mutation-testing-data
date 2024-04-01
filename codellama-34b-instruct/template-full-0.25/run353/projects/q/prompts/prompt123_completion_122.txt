@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+for (var key in object) {
+    if (object_hasOwnProperty(object, key)) {
+        keys.push(key);
+    }
+}
+```
+This would result in different behavior because it would iterate over all properties of the object, not just the own properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+for (var key in object) {
+    if (object_hasOwnProperty(object, key) && typeof object[key] === "function") {
+        keys.push(key);
+    }
+}
+```
+This would result in different behavior because it would only push keys that refer to functions, not all own properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+for (var key in object) {
+    if (object_hasOwnProperty(object, key) && key.indexOf("_") === 0) {
+        keys.push(key);
+    }
+}
+```
+This would result in different

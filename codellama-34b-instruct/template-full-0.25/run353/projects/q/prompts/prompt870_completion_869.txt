@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function () {
+    throw new Error("Something went wrong");
+});
+```
+This would result in different behavior because it would cause the promise to be rejected with an error, even if the original code fragment resolved successfully.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function () {
+    return Q.reject("Something went wrong");
+});
+```
+This would result in different behavior because it would cause the promise to be rejected with a specific error message, even if the original code fragment resolved successfully.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function () {
+    return Q.resolve("Something went wrong");
+});
+```
+This would result in different behavior because it would cause the promise to be resolved with a specific value, even if the original code fragment rejected with an error.
+
+DONE.

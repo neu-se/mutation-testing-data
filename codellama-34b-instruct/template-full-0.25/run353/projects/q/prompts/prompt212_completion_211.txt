@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+value.constructor === Promise
+```
+This would result in different behavior because `instanceof` checks the entire prototype chain, while `constructor` only checks the immediate constructor. This could cause the code to misbehave if a custom `Promise` implementation is used that does not inherit directly from the built-in `Promise` constructor.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(value) === '[object Promise]'
+```
+This would result in different behavior because `Object.prototype.toString` returns a string representation of the object, which can be used to check the type of the object. However, this approach is not recommended because it is not as reliable as using `instanceof` or `constructor`, and it can be affected by the presence of custom `toString` methods.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value.then !== undefined
+```
+This would result in different behavior because `then` is a property of a `Promise` object that

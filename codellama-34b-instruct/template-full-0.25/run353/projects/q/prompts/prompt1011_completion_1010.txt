@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null, deferred.makeNodeResolver())
+```
+This would result in different behavior because the `defer` function is called with a `null` argument, which would cause it to return a promise that is already resolved, rather than a promise that is pending. This would cause the `nodeArgs.push(deferred.makeNodeResolver())` line to be executed immediately, rather than being delayed until the promise is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(deferred.makeNodeResolver())
+```
+This would result in different behavior because the `defer` function is called with a function argument, which would cause it to return a promise that is pending until the function is called. This would cause the `nodeArgs.push(deferred.makeNodeResolver())` line to be executed only when the promise is resolved, rather than immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(deferred.makeNodeResolver(), null)
+```
+This

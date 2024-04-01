@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return reason; });
+```
+This would result in different behavior because it would create a new promise that resolves to `reason`, rather than the original promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return reason; }, function() { return reason; });
+```
+This would result in different behavior because it would create a new promise that resolves to `reason` if the original promise is fulfilled, and rejects with `reason` if the original promise is rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return reason; }, function() { return reason; }).catch(function() { return reason; });
+```
+This would result in different behavior because it would create a new promise that resolves to `reason` if the original promise is fulfilled, rejects with `reason` if the original promise is rejected, and catches any errors that may occur during the resolution or rejection

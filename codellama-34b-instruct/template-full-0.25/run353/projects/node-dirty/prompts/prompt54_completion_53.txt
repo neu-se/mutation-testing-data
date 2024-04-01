@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain');
+```
+This would result in different behavior because the `emit` method is called immediately, rather than being called after the `drain` event is emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('drain'));
+```
+This would result in different behavior because an error event is emitted with the message "drain", rather than the `drain` event being emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._data.size);
+```
+This would result in different behavior because the `drain` event is emitted with the number of items in the `_data` map, rather than being emitted without any arguments.
+
+DONE.

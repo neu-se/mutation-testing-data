@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/:.*/
+```
+This would result in different behavior because the `.*` matches any number of characters, including none, whereas the original `.+` matches at least one character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/:.+?/
+```
+This would result in different behavior because the `.+?` matches one or more characters, but makes the match non-greedy, so it will stop at the first match, whereas the original `.+` matches one or more characters and is greedy, so it will match as many characters as possible.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/:.{1,}/
+```
+This would result in different behavior because the `.{1,}` matches one or more characters, but makes the match possessive, so it will not backtrack and try alternative matches, whereas the original `.+` matches one or more characters and is not possessive, so it will backtrack and try alternative matches.
+
+DONE.

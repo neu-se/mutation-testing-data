@@ -1,0 +1,35 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+{
+  return {
+    [embedType]: handler.transform(
+      thisData[embedType],
+      otherData[embedType],
+      !priority,
+    ),
+  };
+}
+```
+This would result in different behavior because the `priority` parameter is negated, which would cause the transformation to be performed in the opposite order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{
+  return {
+    [embedType]: handler.transform(
+      otherData[embedType],
+      thisData[embedType],
+      priority,
+    ),
+  };
+}
+```
+This would result in different behavior because the `thisData` and `otherData` parameters are swapped, which would cause the transformation to be performed with the arguments in the opposite order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{
+  return {
+    [embedType]: handler.transform(
+      thisData[embedType],
+      otherData[embed

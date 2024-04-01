@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('error'); }
+```
+This would result in different behavior because the `emit` method is called with the `'error'` event instead of the `'drain'` event, which would cause the `Dirty` instance to emit an error event instead of a drain event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this._queue.clear(); }
+```
+This would result in different behavior because the `_queue` property is cleared instead of being emptied, which would cause the `Dirty` instance to forget all the pending writes instead of just emptying the queue.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this._data.clear(); }
+```
+This would result in different behavior because the `_data` property is cleared instead of being emptied, which would cause the `Dirty` instance to forget all the stored data instead of just empty

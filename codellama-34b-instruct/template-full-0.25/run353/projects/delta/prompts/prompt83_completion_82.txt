@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes !== lastOp.attributes
+```
+This would result in different behavior because `isEqual` checks for deep equality, while `!==` checks for reference inequality. If the attributes objects are different objects, even if they have the same contents, the `isEqual` check would pass, while the `!==` check would fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes == lastOp.attributes
+```
+This would result in different behavior because `isEqual` checks for deep equality, while `==` checks for reference equality. If the attributes objects are the same object, the `isEqual` check would pass, while the `==` check would also pass.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes.length !== lastOp.attributes.length
+```
+This would result in different behavior because `isEqual` checks for deep equality, while `length` checks for the length of the attributes object. If the attributes objects have different lengths,

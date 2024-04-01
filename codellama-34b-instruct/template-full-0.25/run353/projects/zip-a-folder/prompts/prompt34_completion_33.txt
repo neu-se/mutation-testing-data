@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'end', resolve
+```
+This would result in different behavior because the `end` event is emitted when the archive stream has been finalized and there are no more data to be written, whereas the `error` event is emitted when there is an error in the archive stream. By replacing `error` with `end`, the promise would resolve even if there is an error in the archive stream, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'finish', reject
+```
+This would result in different behavior because the `finish` event is emitted when the archive stream has been finalized and there are no more data to be written, whereas the `error` event is emitted when there is an error in the archive stream. By replacing `error` with `finish`, the promise would reject even if there is no error in the archive stream, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'close', resolve
+```
+This

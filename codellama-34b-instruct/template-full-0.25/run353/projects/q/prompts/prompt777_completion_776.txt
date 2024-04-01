@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.inspect.rejected
+```
+This would result in different behavior because `promise.inspect` returns an object with properties `state`, `value`, and `reason`, but `promise.inspect.rejected` would return `undefined`, which would cause the `allSettled` method to return a promise that is never resolved or rejected, leading to a deadlock.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.inspect.value
+```
+This would result in different behavior because `promise.inspect.value` would return the value of the promise, which could be different from the value of the promise returned by `allSettled`. For example, if the promise returned by `allSettled` is rejected, `promise.inspect.value` would return `undefined`, while `promise.inspect.rejected` would return the rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.
