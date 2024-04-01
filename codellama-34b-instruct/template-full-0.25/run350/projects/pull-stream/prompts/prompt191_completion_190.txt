@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!prop
+```
+This would result in different behavior because the `!` operator negates the value of `prop`, which is a function that returns a property of an object. In the original code, `prop` is called with the `map` function as an argument, which means that `prop` is a function that takes another function as an argument. By negating `prop`, we are essentially negating the result of calling `map` with `read` as an argument, which could potentially cause the `map` function to return a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prop.bind(null)
+```
+This would result in different behavior because `prop.bind(null)` creates a new function that is bound to the `null` context, which means that the `this` keyword inside the `prop` function will refer to the global object (or `undefined` in strict mode). In the original code, `prop` is called with the `map` function as an argument, which means that `this` inside `prop`

@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer.prototype.promiseDispatch = function (resolve, op, operands) {
+    var args = array_slice(arguments);
+    if (messages) {
+        messages.push(args);
+        if (op === "when" && operands[1]) { // progress operand
+            progressListeners.push(operands[1]);
+        }
+    } else {
+        Q.nextTick(function () {
+            resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+        });
+    }
+};
+```
+This would result in different behavior because it would cause the `promiseDispatch` method to be called on the `defer.prototype` object, which is not the same as the `promise` object that is created in the `defer` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer.prototype.promiseDispatch = function (resolve, op, operands) {
+    var args = array_slice(arguments);

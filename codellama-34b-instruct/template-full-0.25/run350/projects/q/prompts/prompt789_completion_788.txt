@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(null, null, progressed)
+```
+This would result in different behavior because it would cause the progressed callback to be called for both fulfilled and rejected promises, whereas the original code only called it for fulfilled promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(null, null, function() {})
+```
+This would result in different behavior because it would cause the progressed callback to be called for both fulfilled and rejected promises, whereas the original code only called it for fulfilled promises. Additionally, the new callback would do nothing, whereas the original callback would call the `progressed` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.then(null, null, function(value) { return value; })
+```
+This would result in different behavior because it would cause the progressed callback to be called for both fulfilled and rejected promises, whereas the original code only called it for fulfilled promises. Additionally, the new callback would return the value

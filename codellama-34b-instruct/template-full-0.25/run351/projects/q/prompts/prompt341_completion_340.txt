@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null, value)
+```
+This would result in different behavior because `defer` expects a function as its first argument, but `null` is being passed instead. This would cause an error to be thrown, which would result in the promise being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(function() { return value; }, null)
+```
+This would result in different behavior because the function passed to `defer` would return `value`, which is not the same as the original code fragment where `value` is passed directly to `defer`. This would cause the promise to resolve with the return value of the function, which is not the same as the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(function() { throw value; }, null)
+```
+This would result in different behavior because the function passed to `defer` would throw an error with the value of `value`, which is not the same as the original code fragment where `

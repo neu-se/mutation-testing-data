@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promise).then
+```
+This would result in different behavior because `then` is a method that returns a promise, whereas `tap` is a method that returns the original promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promise).then(function() { return promise; })
+```
+This would result in different behavior because `then` is a method that returns a promise, whereas `tap` is a method that returns the original promise. Additionally, the function passed to `then` will be called with the resolved value of the promise, whereas `tap` does not modify the resolved value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(promise).then(function() { return Q.reject(promise); })
+```
+This would result in different behavior because `then` is a method that returns a promise, whereas `tap` is a method that returns the original promise. Additionally, the function passed to `then` will be called with the

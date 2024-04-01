@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && !this.verbs[verb]
+```
+This would result in different behavior because the `!` operator would invert the result of the `this.verbs[verb]` expression, causing the `query` method to return `true` even if the verb is not allowed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && this.verbs[verb] === true
+```
+This would result in different behavior because the `===` operator would check for strict equality between the result of the `this.verbs[verb]` expression and the boolean value `true`, causing the `query` method to return `true` only if the verb is explicitly allowed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && this.verbs[verb] !== false
+```
+This would result in different behavior because the `!==` operator would check for strict inequality between the result of the `this

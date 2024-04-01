@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort === true ? null : abort
+```
+This would result in different behavior because the original code fragment `abort` is a boolean value, while the replacement code fragment `abort === true ? null : abort` is a ternary expression that evaluates to `null` if `abort` is `true`, and `abort` otherwise. This change would cause the `onAbort` callback to be called with a different argument, which could potentially cause the test to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the original code fragment `abort` is a boolean value, while the replacement code fragment `!abort` is the logical negation of `abort`, which is also a boolean value. This change would cause the `onAbort` callback to be called with a different argument, which could potentially cause the test to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort + 1
+```

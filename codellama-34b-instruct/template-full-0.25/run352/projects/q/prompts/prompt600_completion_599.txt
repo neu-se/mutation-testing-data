@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+op, args.slice(1)
+```
+This would result in different behavior because `args.slice(1)` would return a new array containing all elements of `args` except the first one, whereas `args` would return the original array. This could cause the `promiseDispatch` method to receive a different set of arguments and potentially produce a different result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op, args.concat([1])
+```
+This would result in different behavior because `args.concat([1])` would return a new array containing all elements of `args` followed by the value `1`, whereas `args` would return the original array. This could cause the `promiseDispatch` method to receive a different set of arguments and potentially produce a different result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op, args.map(function(x) { return x + 1; })
+```
+This would result in different behavior because `args.map(function(x

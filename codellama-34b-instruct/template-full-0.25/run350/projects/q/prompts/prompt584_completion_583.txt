@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value);
+```
+This would result in different behavior because the `result.value` property is not defined, and the `Q` function would return a rejected promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value).then(function (value) {
+    return value;
+});
+```
+This would result in different behavior because the `Q` function would return a promise that is resolved with the value of `result.value`, but the `then` method would return a new promise that is resolved with the return value of the callback function, which is `value`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value).then(function (value) {
+    return value + 1;
+});
+```
+This would result in different behavior because the `Q` function would return a promise that is resolved with the value of `result.value`, but the `then` method would return a new promise that is resolved with the

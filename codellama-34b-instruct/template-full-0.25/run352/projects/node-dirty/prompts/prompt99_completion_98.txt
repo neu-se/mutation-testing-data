@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`)
+```
+This would result in different behavior because the error message would be different.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'E_CORRUPTED_ROW' })
+```
+This would result in different behavior because the error object would have a different `code` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'E_CORRUPTED_ROW', row: rowStr })
+```
+This would result in different behavior because the error object would have a different `row` property.
+
+DONE.

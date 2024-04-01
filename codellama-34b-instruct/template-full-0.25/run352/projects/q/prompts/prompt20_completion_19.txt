@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextTick = function (task) {
+    setTimeout(task, 0);
+};
+```
+This would result in different behavior because `setTimeout` is not a microtask, it's a macrotask, which means that it will be executed after all the other macrotasks in the queue, while `nextTick` is a microtask, which means that it will be executed as soon as possible, before any other macrotask.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextTick = function (task) {
+    task();
+};
+```
+This would result in different behavior because `task` would be executed synchronously, which means that it would block the event loop and prevent other tasks from being executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextTick = function (task) {
+    Promise.resolve().then(task);
+};
+```
+This would result in different behavior because `Promise.resolve().then(task)` is a

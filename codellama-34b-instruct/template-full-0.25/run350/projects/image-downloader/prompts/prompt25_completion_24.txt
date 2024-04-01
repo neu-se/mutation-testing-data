@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+__filename
+```
+This would result in different behavior because `__filename` is the path to the current file, while `__dirname` is the path to the current directory. Using `__filename` instead of `__dirname` would result in a different path being resolved, which could potentially cause the code to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest)
+```
+This would result in different behavior because `path.dirname()` returns the directory name of the path passed to it, while `__dirname` returns the path to the current directory. Using `path.dirname()` instead of `__dirname` would result in a different path being resolved, which could potentially cause the code to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.join(options.dest, '..')
+```
+This would result in different behavior because `path.join()` returns the path to the parent directory of the path passed to it, while `__dirname` returns the path to the current directory.

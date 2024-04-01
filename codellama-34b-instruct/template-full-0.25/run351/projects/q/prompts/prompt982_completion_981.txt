@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(null));
+```
+This would result in different behavior because the original code fragment passed a function as an argument to `makeNodeResolver`, but this replacement code fragment passes `null` instead, which would cause the `makeNodeResolver` function to throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(function() {}));
+```
+This would result in different behavior because the original code fragment passed a function as an argument to `makeNodeResolver`, but this replacement code fragment passes an empty function instead, which would cause the `makeNodeResolver` function to return a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(function(err) { throw err; }));
+```
+This would result in different behavior because the original code fragment passed a function as an argument to `makeNodeResolver`, but this replacement code fragment passes a

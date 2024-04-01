@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)
+```
+This would result in different behavior because the `typeof href == "undefined"` check is removed, which would allow links with a length of less than 3 characters to be included in the `urlMap`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)
+```
+This would result in different behavior because the `href.length < 3` check is removed, which would allow links with a length of less than 3 characters to be included in the `urlMap`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof href == "undefined" || /^(javascript|mailto:|ftp:)/ig.test(href)
+```
+This would result in different behavior because the `href.length < 3` check is removed,

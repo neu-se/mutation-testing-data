@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This would result in different behavior because `err && abort` is a logical AND operation, which means that if `err` is truthy, the expression will evaluate to `abort`, and if `err` is falsy, the expression will evaluate to `cb`. In contrast, the original code fragment `err || abort, cb` is a logical OR operation, which means that if `err` is truthy, the expression will evaluate to `err`, and if `err` is falsy, the expression will evaluate to `abort`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err ? abort : cb
+```
+This would result in different behavior because `err ? abort : cb` is a ternary operator that evaluates to `abort` if `err` is truthy, and `cb` if `err` is falsy. In contrast, the original code fragment `err || abort, cb` is a logical OR operation that evaluates to `err` if `err` is truth

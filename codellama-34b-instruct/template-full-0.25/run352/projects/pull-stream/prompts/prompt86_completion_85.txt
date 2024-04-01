@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort, cb || function () {}
+```
+This would result in different behavior because the `||` operator has a lower precedence than the `,` operator, so the expression would be evaluated as `(abort, cb) || function () {}`, which would always return a function. In the original code, the `||` operator has a higher precedence than the `,` operator, so the expression would be evaluated as `abort || (cb || function () {})`, which would return `abort` if it is truthy, or `cb` if it is truthy, or a function if neither is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && cb || function () {}
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the expression would be evaluated as `abort && (cb || function () {})`, which would return `cb` if it is truthy, or a function if `abort` is falsy

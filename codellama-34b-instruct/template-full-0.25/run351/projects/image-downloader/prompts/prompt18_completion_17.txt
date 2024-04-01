@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+options.dest, basename
+```
+This would result in different behavior because it would use the unencoded basename instead of the decoded basename, which could cause issues if the filename contains special characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest), decodedBasename
+```
+This would result in different behavior because it would use the directory name instead of the full path, which could cause issues if the destination directory is not the current working directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.join(path.dirname(options.dest), decodedBasename)
+```
+This would result in different behavior because it would use the directory name instead of the full path, and it would use the decoded basename instead of the unencoded basename.
+
+DONE.

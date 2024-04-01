@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function () { throw new Error("Test error"); });
+```
+This would result in different behavior because it adds a `then` method to the promise returned by `Q.async(makeGenerator)`, which would cause the error to be thrown when the promise is resolved, rather than when it is created.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().catch(function () { throw new Error("Test error"); });
+```
+This would result in different behavior because it adds a `catch` method to the promise returned by `Q.async(makeGenerator)`, which would cause the error to be thrown when the promise is rejected, rather than when it is created.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function () { return Q.reject("Test error"); });
+```
+This would result in different behavior because it adds a `then` method to the promise returned by `Q

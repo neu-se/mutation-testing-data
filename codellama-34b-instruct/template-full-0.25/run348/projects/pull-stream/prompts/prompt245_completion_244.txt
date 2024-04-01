@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort
+```
+This would result in different behavior because `err && abort` is a logical AND operation, while `err || abort` is a logical OR operation. If `err` is truthy, `err && abort` will evaluate to `abort`, while `err || abort` will evaluate to `err`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!err || abort
+```
+This would result in different behavior because `!err || abort` is a logical OR operation with a negated condition, while `err || abort` is a logical OR operation with a positive condition. If `err` is falsy, `!err || abort` will evaluate to `abort`, while `err || abort` will evaluate to `err`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null
+```
+This would result in different behavior because `err ? abort : null` is a ternary operation that returns `abort` if `err` is truthy,

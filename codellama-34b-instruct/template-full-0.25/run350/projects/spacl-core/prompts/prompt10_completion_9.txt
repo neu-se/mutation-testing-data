@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(version === '1' || version === '1.0'
+      ? /[*+][^/]|[^/][*+]/
+      : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) === null
+```
+This would result in different behavior because the `!== null` check would be replaced with a `=== null` check, which would cause the code to behave differently for inputs that match the regex.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(version === '1' || version === '1.0'
+      ? /[*+][^/]|[^/][*+]/
+      : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null
+```
+This would result in different behavior because the `!== null` check would be replaced with a `!== null

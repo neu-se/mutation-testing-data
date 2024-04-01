@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject, deferred.resolve, deferred.notify
+```
+This would result in different behavior because the order of the arguments has been changed, which could cause issues if the functions are not called in the correct order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve, deferred.reject, deferred.notify.bind(deferred)
+```
+This would result in different behavior because the `bind` method is being used to ensure that the `this` context is correct when the `notify` function is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve, deferred.reject, deferred.notify.call(deferred)
+```
+This would result in different behavior because the `call` method is being used to set the `this` context to `deferred` when the `notify` function is called.
+
+DONE.

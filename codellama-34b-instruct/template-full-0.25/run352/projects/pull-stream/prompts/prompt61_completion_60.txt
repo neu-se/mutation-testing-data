@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because the `done` callback is not being passed to the `read` function, which could cause the stream to not be properly drained.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, function () {})
+```
+This would result in different behavior because the `done` callback is being replaced with a new function that does not have the same behavior as the original `done` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, null)
+```
+This would result in different behavior because the `done` callback is being replaced with `null`, which could cause the stream to not be properly drained.
+
+DONE.

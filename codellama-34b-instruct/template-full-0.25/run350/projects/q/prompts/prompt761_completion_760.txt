@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.slice(0, promises.length - 1)
+```
+This would result in different behavior because the slice method would return a new array with all but the last element of the original array, which would cause the `allResolved` function to return a promise that is not fulfilled with the original array of promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises.concat([Q.reject()])
+```
+This would result in different behavior because the concat method would return a new array with the original array of promises followed by a rejected promise, which would cause the `allResolved` function to return a promise that is rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.map(function (promise) { return Q.reject(promise); })
+```
+This would result in different behavior because the map method would return a new array with each element of the original array transformed into a rejected promise, which would cause the `allResolved` function

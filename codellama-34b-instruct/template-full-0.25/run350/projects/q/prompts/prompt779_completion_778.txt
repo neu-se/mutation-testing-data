@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, onRejected)
+```
+This would result in different behavior because it would cause the promise to be rejected with the error message "Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message, which is different from the original behavior where the promise is rejected with the original error message.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, null)
+```
+This would result in different behavior because it would cause the promise to be fulfilled with the value of the first resolved promise, which is different from the original behavior where the promise is rejected with the error message "Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(onFulfilled, onRejected)
+```
+This would result in different

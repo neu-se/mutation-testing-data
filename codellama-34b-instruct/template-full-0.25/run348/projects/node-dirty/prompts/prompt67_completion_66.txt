@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy(true));
+```
+This would result in different behavior because the `destroy` method is called with a truthy argument, which would cause the stream to be destroyed immediately, rather than waiting for the `'end'` event to be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy(false));
+```
+This would result in different behavior because the `destroy` method is called with a falsy argument, which would cause the stream to be destroyed immediately, rather than waiting for the `'end'` event to be emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy());
+```
+This would result in different behavior because the `destroy` method is called without any arguments, which would cause the stream to be destroyed immediately, rather than waiting for the `'end'` event to be emitted.
+

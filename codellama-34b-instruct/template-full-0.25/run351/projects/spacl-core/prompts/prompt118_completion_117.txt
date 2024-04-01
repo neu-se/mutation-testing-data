@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches
+```
+This would result in different behavior because the `!` operator would negate the result of the `matches` method, causing the `query` method to return `true` for paths that are not governed by the rule, and `false` for paths that are governed by the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.verbs.hasOwnProperty(verb)
+```
+This would result in different behavior because the `hasOwnProperty` method checks if the `verbs` object has the specified property, regardless of its value. This would cause the `query` method to return `true` for paths that are governed by the rule, but have a verb that is not explicitly allowed or denied, and `false` for paths that are not governed by the rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.regex.test(path)
+```
+This would result in different behavior because the `test` method checks if the

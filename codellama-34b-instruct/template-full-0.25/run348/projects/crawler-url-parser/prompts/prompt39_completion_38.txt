@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' && parsedUrl.protocol != 'ftp:'
+```
+This would result in different behavior because the additional condition `&& parsedUrl.protocol != 'ftp:'` would cause the function to return `null` if the protocol is `ftp:`, even if the other conditions are met.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' && parsedUrl.host != 'localhost'
+```
+This would result in different behavior because the additional condition `&& parsedUrl.host != 'localhost'` would cause the function to return `null` if the host is `localhost`, even if the other conditions are met.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' && parsedUrl.pathname.starts

@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` would be called twice in a row, which would cause the stream to be read twice, potentially leading to unexpected results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `read` function would be called with a different set of arguments, potentially leading to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function

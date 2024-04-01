@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because `res.pipe()` returns a stream, but `createWriteStream()` returns a writable stream. Using `res.pipe()` would not create a file at the specified destination.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(fs.createWriteStream(dest))
+```
+This would result in different behavior because `fs.createWriteStream()` is a different function than `createWriteStream()`. Using `fs.createWriteStream()` would create a file at the specified destination, but the file would be empty because `res.pipe()` does not write any data to the stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: true })
+```
+This would result in different behavior because `createWriteStream()` takes an options object as its second argument, and the `end` option determines whether the stream should be closed after all data has

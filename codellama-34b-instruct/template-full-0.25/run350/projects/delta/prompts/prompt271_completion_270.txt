@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext() && iter.peekType() !== 'insert'
+```
+This would result in different behavior because the additional condition `iter.peekType() !== 'insert'` would cause the loop to terminate early if the next operation is an insertion, even if there are still operations left in the iterator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext() || iter.peekType() === 'insert'
+```
+This would result in different behavior because the additional condition `iter.peekType() === 'insert'` would cause the loop to continue even if there are no more operations left in the iterator, as long as the next operation is an insertion.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.hasNext() && iter.peekType() === 'insert'
+```
+This would result in different behavior because the additional condition `iter.peekType() === 'insert'` would cause the loop to terminate early if the next operation is not an insert

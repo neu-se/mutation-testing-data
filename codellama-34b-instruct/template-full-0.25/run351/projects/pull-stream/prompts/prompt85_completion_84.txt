@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb && function () {}
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the `function () {}` would be evaluated first and then the result would be `&&` with `cb`. This would cause the `sink.abort` function to always return `undefined` instead of a function, which could lead to unexpected behavior in the code that uses the `drain` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb ? function () {} : null
+```
+This would result in different behavior because the `?` operator has a higher precedence than the `||` operator, so the `function () {}` would be evaluated first and then the result would be `?` with `cb`. This would cause the `sink.abort` function to always return `null` instead of a function, which could lead to unexpected behavior in the code that uses the `drain` function.
+
+Option 3: The PLACEHOLDER can be replaced

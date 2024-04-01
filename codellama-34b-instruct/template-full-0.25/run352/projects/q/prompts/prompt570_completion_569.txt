@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result.value, callback, errback
+```
+This would result in different behavior because `result.value` is not a promise, so it would not be handled by the `when` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result, callback, errback.bind(null, result)
+```
+This would result in different behavior because `errback` would be called with `result` as its first argument, which would change the behavior of the `errback` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result, callback.bind(null, result), errback
+```
+This would result in different behavior because `callback` would be called with `result` as its first argument, which would change the behavior of the `callback` function.
+
+DONE.

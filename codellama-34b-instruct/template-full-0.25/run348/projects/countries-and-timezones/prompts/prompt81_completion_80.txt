@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+values.filter(c => c.timezones.length > 0).map(c => getCountry(c.id, options))
+```
+This would result in different behavior because it filters out countries with no timezones before mapping them to their corresponding country objects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+values.map(c => getCountry(c.id, options)).filter(c => c.timezones.length > 0)
+```
+This would result in different behavior because it maps all countries to their corresponding country objects before filtering out countries with no timezones.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+values.map(c => getCountry(c.id, options)).filter(c => c.timezones.length > 0).map(c => c.id)
+```
+This would result in different behavior because it maps all countries to their corresponding country objects, filters out countries with no timezones, and then maps the remaining countries to

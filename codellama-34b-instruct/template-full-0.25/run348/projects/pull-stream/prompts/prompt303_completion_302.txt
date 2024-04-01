@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!ended
+```
+This would result in different behavior because the `!` operator negates the value of `ended`, which means that the `read` function would be called with `end` set to `true` even if the stream has not ended yet.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended && !end
+```
+This would result in different behavior because the `&&` operator checks if both `ended` and `!end` are truthy, which means that the `read` function would be called with `end` set to `true` only if the stream has ended and `end` is not set to `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended || !end
+```
+This would result in different behavior because the `||` operator checks if either `ended` or `!end` is truthy, which means that the `read` function would be called with `end` set to `true` if the stream has ended or if `end` is not

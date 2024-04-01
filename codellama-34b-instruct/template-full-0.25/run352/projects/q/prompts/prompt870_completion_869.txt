@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method would be called on the promise returned by `nfapply`, which would cause the promise to be rejected even if the original function call was successful.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `then` method would be called on the promise returned by `nfapply`, which would cause the promise to be resolved or rejected based on the result of the original function call, rather than always rejecting the promise as in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(deferred.resolve, deferred.reject).fail(deferred.reject);
+```
+This would result in different behavior because the `then

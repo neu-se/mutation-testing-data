@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not defined on the `this` object, which is a `Promise` instance. The `fail` method is only defined on the `Q` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fapply` method is not defined on the `Q` object. The `fapply` method is only defined on the `Promise` prototype.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the `dispatch` method is not defined on the `this` object, which is a `Promise` instance. The `dispatch` method is only defined on the `Q`

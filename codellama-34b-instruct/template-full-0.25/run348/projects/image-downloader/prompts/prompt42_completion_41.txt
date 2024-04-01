@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error('Request timed out.')
+```
+This would result in different behavior because the `TimeoutError` constructor is not being called, and the error message is different.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error('Request timed out.', { code: 'ETIMEDOUT' })
+```
+This would result in different behavior because the error message is different, and the `code` property is not being set to `'ETIMEDOUT'`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error('Request timed out.', { code: 'ETIMEDOUT', timeout: 1000 })
+```
+This would result in different behavior because the `timeout` property is not being set to `1000`.
+
+DONE.

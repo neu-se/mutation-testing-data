@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+become(reject(reason));
+```
+This would result in different behavior because `become` is a function that takes a promise as an argument, and `reject` is a function that returns a promise that is rejected with the given reason. In the original code, `become` is called with the result of `reject(reason)`, which is a rejected promise. In this modified code, `become` is called with a function that returns a rejected promise, which is not the same as calling `become` with a rejected promise directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+become(Q.reject(reason));
+```
+This would result in different behavior because `Q.reject` is a function that returns a promise that is rejected with the given reason, whereas `reject` is a function that returns a promise that is resolved with the given reason. In the original code, `become` is called with the result of `reject(reason)`, which is a rejected promise. In this modified code, `

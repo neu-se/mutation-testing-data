@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', reject);
+```
+This would result in different behavior because it would cause the `reject` function to be called if there is an error while piping the archive to the output stream, which would cause the promise to be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('finish', resolve);
+```
+This would result in different behavior because it would cause the `resolve` function to be called when the archive is finished piping to the output stream, which would cause the promise to be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('end', resolve);
+```
+This would result in different behavior because it would cause the `resolve` function to be called when the archive is finished piping to the output stream, which would cause the promise to be resolved.
+
+DONE.

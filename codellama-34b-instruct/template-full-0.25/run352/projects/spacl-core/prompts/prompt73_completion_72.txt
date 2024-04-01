@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.clone()
+```
+This would result in different behavior because the `clone()` method is not called in the original code, which means that the `ctx` object is not being cloned, and any changes made to the `ctx` object in the `rule.query()` method would affect the original `ctx` object, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.clone(true)
+```
+This would result in different behavior because the `clone(true)` method is not called in the original code, which means that the `ctx` object is not being cloned with a deep copy, and any changes made to the `ctx` object in the `rule.query()` method would affect the original `ctx` object, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, verb, ctx.clone(false)
+```
+This would result in different behavior because the `clone(false

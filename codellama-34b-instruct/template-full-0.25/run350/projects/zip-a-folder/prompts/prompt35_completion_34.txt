@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', reject);
+```
+This would result in different behavior because the `on('error', reject)` event listener would be added to the `output` stream instead of the `zipArchive` stream, which could cause the error to be handled differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', () => reject(new Error('Archive error')));
+```
+This would result in different behavior because the `on('error', () => reject(new Error('Archive error')))` event listener would be added to the `output` stream instead of the `zipArchive` stream, which could cause the error to be handled differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.pipe(output).on('error', (err) => reject(err));
+```
+This would result in different behavior because the `on('error', (err) => reject(err))` event

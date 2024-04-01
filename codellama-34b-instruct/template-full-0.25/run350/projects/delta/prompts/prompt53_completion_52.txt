@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+handler === undefined
+```
+This would result in different behavior because `handler` is an object, and `handler === undefined` will always be false, even if `handler` is an empty object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+handler.length === 0
+```
+This would result in different behavior because `handler` is an object, and `handler.length` will always be undefined, even if `handler` is an empty object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(handler).length === 0
+```
+This would result in different behavior because `Object.keys(handler)` will return an array of the object's own enumerable property names, and `Object.keys(handler).length` will return the number of properties in the object. If the object is empty, `Object.keys(handler).length` will be 0.
+
+DONE.

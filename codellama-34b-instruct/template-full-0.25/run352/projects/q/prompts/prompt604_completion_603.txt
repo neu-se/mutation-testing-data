@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("test error"));
+```
+This would result in different behavior because the original code fragment resolves the promise with the result of `object.promiseDispatch(deferred.resolve, op, args)`, while this replacement code fragment rejects the promise with a new error object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(null);
+```
+This would result in different behavior because the original code fragment resolves the promise with the result of `object.promiseDispatch(deferred.resolve, op, args)`, while this replacement code fragment resolves the promise with `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(op);
+```
+This would result in different behavior because the original code fragment resolves the promise with the result of `object.promiseDispatch(deferred.resolve, op, args)`, while this replacement code fragment resolves the promise with the `op` argument.
+
+DONE.

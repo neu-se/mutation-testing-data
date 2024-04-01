@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function() { throw new Error("This is a bug"); });
+```
+This would result in different behavior because the original code would return a promise that is fulfilled with the return value of the generator function, while this modified code would return a promise that is rejected with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function() { return "This is a bug"; });
+```
+This would result in different behavior because the original code would return a promise that is fulfilled with the return value of the generator function, while this modified code would return a promise that is fulfilled with the string "This is a bug".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(function() { return Q.reject("This is a bug"); });
+```
+This would result in different behavior because the original code would return a promise that is fulfilled with the return value of

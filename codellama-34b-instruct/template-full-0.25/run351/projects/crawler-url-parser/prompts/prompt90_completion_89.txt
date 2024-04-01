@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href) || href.includes("http://")
+```
+This would result in different behavior because the additional condition `href.includes("http://")` would cause the code to treat URLs with the "http://" protocol as invalid, even if they are otherwise valid.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href) || href.includes("https://")
+```
+This would result in different behavior because the additional condition `href.includes("https://")` would cause the code to treat URLs with the "https://" protocol as invalid, even if they are otherwise valid.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `pipe` method is not being used correctly. The `pipe` method should be used to pipe the response stream to the file stream, but in this case, it is being used to pipe the response stream to the `createWriteStream` function, which is not a valid operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `pipe` method is being used to pipe the response stream to the file stream, but the `createWriteStream` function is not being used correctly. The `createWriteStream` function should be used to create a new file stream, but in this case, it is being used as a function that takes a file path as an argument.
+
+Option 

@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return done(end);
+  }
+  if (op && false === op(data)) {
+    return read(abort || true, done || function () {});
+  }
+  next();
+})
+```
+This would result in different behavior because the original code fragment only calls `next()` if `op` is not defined or if `op(data)` returns `false`. However, this modified code fragment calls `next()` regardless of the value of `op` or `op(data)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return done(end);
+  }
+  if (op && false === op(data)) {
+    return read(abort || true, done || function () {});
+  }
+  next();
+})
+```
+This would result in different behavior because the original code fragment only calls `next

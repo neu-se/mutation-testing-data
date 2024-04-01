@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.close()
+```
+This would result in different behavior because the `close` method would be called twice, once for each event emitted by the `writeStream`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', () => this.close()
+```
+This would result in different behavior because the `close` method would be called when an error occurs, rather than when the `writeStream` is drained.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'finish', () => this.close()
+```
+This would result in different behavior because the `close` method would be called when the `writeStream` is finished writing, rather than when it is drained.
+
+DONE.

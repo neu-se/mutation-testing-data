@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+policies.forEach((policy) => [policy.name, policy])
+```
+This would result in different behavior because `forEach` does not return a new array, unlike `map`, which means that the `super` call in the constructor would not receive the expected array of policies.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+policies.filter((policy) => policy.name === 'policy')
+```
+This would result in different behavior because `filter` returns a new array containing only the policies that match the filter condition, whereas `map` returns a new array containing all the policies.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+policies.reduce((acc, policy) => acc.set(policy.name, policy), new Map())
+```
+This would result in different behavior because `reduce` returns a new object containing the accumulated values, whereas `map` returns a new array containing the mapped values.
+
+DONE.

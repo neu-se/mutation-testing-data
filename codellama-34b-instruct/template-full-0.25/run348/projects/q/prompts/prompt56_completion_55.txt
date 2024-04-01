@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.nextTick.bind(null, flush);
+```
+This would result in different behavior because `process.nextTick.bind(null, flush)` is a bound function that will always call `flush` with `null` as the `this` value, regardless of the context in which it is called. In contrast, `process.nextTick` is a function that will call its first argument with the `this` value of the `process` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick.call(null, flush);
+```
+This would result in different behavior because `process.nextTick.call(null, flush)` is a function call that will call `flush` with `null` as the `this` value, regardless of the context in which it is called. In contrast, `process.nextTick` is a function that will call its first argument with the `this` value of the `process` object.
+
+Option 3: The PLACEHOLDER can be

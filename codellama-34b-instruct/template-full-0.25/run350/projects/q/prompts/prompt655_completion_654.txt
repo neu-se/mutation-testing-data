@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `dispatch` method would be called on `null` instead of the `object` promise, which would likely result in a `TypeError` being thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the `dispatch` method would be called on `undefined` instead of the `object` promise, which would likely result in a `TypeError` being thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function () { return object; })
+```
+This would result in different behavior because the `then` method would be called on the `object` promise, which would return a new promise that resolves to the value of `object`. This would cause the `dispatch` method to be called on the resolved value of `object` instead of the original promise, which could potentially result in different behavior.
+
+DONE.

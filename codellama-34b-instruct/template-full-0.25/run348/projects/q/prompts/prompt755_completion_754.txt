@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = allResolved;
+```
+This would result in different behavior because `allResolved` is a function that returns a promise, while `deprecate` is a function that logs a deprecation warning.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function () { return Q.reject(new Error("allResolved is deprecated")); };
+```
+This would result in different behavior because the new function would always reject the promise, while the original function would resolve it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function () { return Q.resolve([]); };
+```
+This would result in different behavior because the new function would always resolve the promise with an empty array, while the original function would resolve it with an array of promises.
+
+DONE.

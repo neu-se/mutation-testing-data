@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob
+```
+This would result in different behavior because the `!` operator negates the result of the `isGlob` function, causing the `zipArchive.glob()` method to be called even if the `src` parameter is not a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isGlob.bind(null)
+```
+This would result in different behavior because the `bind()` method creates a new function that, when called, has its `this` keyword set to the first argument passed to `bind()`. In this case, the `this` keyword would be set to `null`, which would cause the `isGlob` function to be called with the global object as its `this` value, rather than the `src` parameter.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isGlob.call(null, src)
+```
+This would result in different behavior because the `call()` method calls a function with a specified `this` value and arguments.

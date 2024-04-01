@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promises.slice(1)
+```
+This would result in different behavior because it would return an array of promises without the first element, which could cause the `all` method to return a promise that is not fulfilled with the expected value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promises.concat([Q.reject()])
+```
+This would result in different behavior because it would add a rejected promise to the end of the array of promises, which could cause the `all` method to return a rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.filter(function(promise) { return promise.inspect().state === "rejected"; })
+```
+This would result in different behavior because it would return an array of only the rejected promises, which could cause the `all` method to return a promise that is not fulfilled with the expected value.
+
+DONE.

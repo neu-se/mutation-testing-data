@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new RegExp('\\b(?:' + tools.concat(clothes, games, illnesses, misc).join('|') + ')s\\b', 'i'), function(w) { return w.substr(0, w.length - 1) }
+```
+This would result in different behavior because the `substr` method is called on the word, which would remove the last character, resulting in a different plural form.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new RegExp('\\b(?:' + tools.concat(clothes, games, illnesses, misc).join('|') + ')s\\b', 'i'), function(w) { return w.replace(/s$/, '') }
+```
+This would result in different behavior because the `replace` method is called on the word, which would remove the last character if it is an 's', resulting in a different plural form.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

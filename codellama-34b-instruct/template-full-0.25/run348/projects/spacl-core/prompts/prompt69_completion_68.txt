@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx)
+```
+This would result in different behavior because the `query` method is not being called on the `rule` object, which is a required step to check if the action is allowed on the path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb)
+```
+This would result in different behavior because the `ctx` parameter is missing, which is required to resolve context-dependent paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx.clone())
+```
+This would result in different behavior because the `ctx` parameter is being cloned, which could affect the outcome of the `query` method.
+
+DONE.

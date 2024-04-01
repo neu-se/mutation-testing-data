@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb && function () {}
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the `function () {}` would be evaluated first and then the result would be passed to the `cb` function. In the original code, the `cb` function is only called if `cb` is truthy, but in this modified code, it would be called regardless of the value of `cb`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb || function () { throw new Error('error') }
+```
+This would result in different behavior because the `throw` statement would be executed if `cb` is falsy, which would cause the function to throw an error and exit immediately. In the original code, the `cb` function is only called if `cb` is truthy, but in this modified code, it would be called regardless of the value of `cb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb || function ()

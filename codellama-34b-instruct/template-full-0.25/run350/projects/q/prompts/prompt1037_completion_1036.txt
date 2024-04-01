@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve = next.reject;
+```
+This would result in different behavior because `next.reject` is a function that rejects the promise with the given error, whereas `next.resolve` is a function that resolves the promise with the given value. Using `next.reject` instead of `next.resolve` would cause the `put` method to reject the promise instead of resolving it, which could lead to unexpected behavior in the code that uses the `Queue` class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve = function () {
+    return next.promise;
+};
+```
+This would result in different behavior because the `ends.resolve` function is now returning a promise instead of a value. This could cause the `put` method to return a promise that resolves to a different value than the original code, which could lead to unexpected behavior in the code that uses the `Queue` class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends

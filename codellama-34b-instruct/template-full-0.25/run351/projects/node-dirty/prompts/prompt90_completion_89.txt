@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('Empty lines never appear in a healthy database'));
+```
+This would result in different behavior because the original code fragment emits an error only if the row is empty, while the new code fragment emits an error for any row.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('Corrupted row at the end of the db: ' + buffer));
+```
+This would result in different behavior because the original code fragment emits an error only if the row is corrupted, while the new code fragment emits an error for any row at the end of the database.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('Could not load corrupted row: ' + rowStr));
+```
+This would result in different behavior because the original code fragment emits an error only if the row is corrupted, while the new code fragment emits an error for any row that cannot be loaded.
+

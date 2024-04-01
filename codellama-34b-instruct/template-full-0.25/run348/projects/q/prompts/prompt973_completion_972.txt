@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.nbind(FS.readFile, __filename)("utf-8")
+```
+This would result in different behavior because `Q.nbind` is a function that wraps a NodeJS continuation-passing function and returns an equivalent version that returns a promise, but it is not the same as `Q.nfbind` which is a function that wraps a NodeJS continuation-passing function and returns an equivalent version that returns a promise, but it also binds the function to a specific context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nfcall(FS.readFile, __filename)("utf-8")
+```
+This would result in different behavior because `Q.nfcall` is a function that passes a continuation to a Node function, which is called with the given arguments provided individually, and returns a promise, but it is not the same as `Q.nfapply` which is a function that passes a continuation to a Node function, which is called with the given arguments provided

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+archiverOptions || { gzip: true }
+```
+This would result in different behavior because it would enable gzip compression even if the `archiverOptions` object is undefined or null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+archiverOptions && { gzip: true }
+```
+This would result in different behavior because it would enable gzip compression only if the `archiverOptions` object is defined and not null.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{ gzip: archiverOptions?.gzip }
+```
+This would result in different behavior because it would enable gzip compression only if the `gzip` property of the `archiverOptions` object is truthy.
+
+DONE.

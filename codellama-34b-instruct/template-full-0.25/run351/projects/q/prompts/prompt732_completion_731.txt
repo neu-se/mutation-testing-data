@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pendingCount < 0
+```
+This would result in different behavior because the `pendingCount` variable is only ever incremented, never decremented, so it will never be less than 0. This would cause the `deferred.resolve(promises)` line to never be executed, even if all of the promises have been resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pendingCount === promises.length
+```
+This would result in different behavior because the `pendingCount` variable is only ever incremented, never decremented, so it will never be equal to the length of the `promises` array. This would cause the `deferred.resolve(promises)` line to never be executed, even if all of the promises have been resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promises.length === 0
+```
+This would result in different behavior because the `promises` array is only ever appended to, never modified, so it will never

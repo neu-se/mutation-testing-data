@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(continuer.bind, "throw");
+```
+This would result in different behavior because the inner `bind` would return a new function that is bound to the `continuer` function, rather than the `continuer` function itself. This would cause the `errback` function to be called with the wrong context, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(null, "throw");
+```
+This would result in different behavior because the `bind` method would return a new function that is bound to the `continuer` function, but with a `null` context. This would cause the `errback` function to be called with the wrong context, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(function () {}, "throw");
+```
+This would result in different behavior because the `bind` method would return a new function that is bound to an anonymous

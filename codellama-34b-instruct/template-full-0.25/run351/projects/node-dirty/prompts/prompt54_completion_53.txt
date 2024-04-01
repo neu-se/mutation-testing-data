@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain');
+```
+This would result in different behavior because the `emit` method is called immediately, without waiting for the write stream to drain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._data.size);
+```
+This would result in different behavior because the `emit` method is called with a different argument, which could cause the `close` method to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._data.size - 1);
+```
+This would result in different behavior because the `emit` method is called with a different argument, which could cause the `close` method to behave differently.
+
+DONE.

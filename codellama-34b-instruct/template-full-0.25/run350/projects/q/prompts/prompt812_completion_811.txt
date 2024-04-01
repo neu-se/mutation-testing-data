@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    throw reason;
+})
+```
+This would result in different behavior because the original code fragment would throw the reason immediately, while this new code fragment would throw the reason after the callback is done.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return reason;
+})
+```
+This would result in different behavior because the original code fragment would throw the reason immediately, while this new code fragment would return the reason after the callback is done.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return reason;
+}).catch(function () {
+    throw reason;
+})
+```
+This would result in different behavior because the original code fragment would throw the reason immediately, while this new code fragment would return the reason after the callback is done and then throw the reason again.
+
+DONE.

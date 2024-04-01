@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, null)
+```
+This would result in different behavior because the `null` value for `ctx` would cause the `matches` method to return `false` for any rule that has a non-empty `ctx` property, even if the rule's `path` property matches the input `path`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx.clone())
+```
+This would result in different behavior because the `clone()` method would create a new `QueryContext` object, which would cause the `matches` method to return `false` for any rule that has a different `ctx` property, even if the rule's `path` property matches the input `path`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx.reverse())
+```
+This would result in different behavior because the `reverse()` method would return a new `QueryContext` object with the `path` and `verb` properties reversed

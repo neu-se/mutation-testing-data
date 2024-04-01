@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(null)
+```
+This would result in different behavior because `bind` returns a new function that, when called, has its `this` set to the first argument passed to `bind`, and its arguments set to the remaining arguments passed to `bind`. In this case, `this` would be set to `null`, and the function would be called with no arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.call(null)
+```
+This would result in different behavior because `call` sets the `this` value of the function to the first argument passed to `call`, and then calls the function with the remaining arguments passed to `call`. In this case, `this` would be set to `null`, and the function would be called with no arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.apply(null)
+```
+This would result in different behavior because `apply` sets the

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    throw reason;
+})
+```
+This would result in different behavior because the original code fragment would throw the reason as an error, while the new code fragment would throw it as a rejection.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return Q.reject(reason);
+})
+```
+This would result in different behavior because the original code fragment would throw the reason as an error, while the new code fragment would return a rejected promise with the reason as the rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return Q.resolve(reason);
+})
+```
+This would result in different behavior because the original code fragment would throw the reason as an error, while the new code fragment would return a resolved promise with the reason as the resolution value.
+
+DONE.

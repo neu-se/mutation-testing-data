@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick()
+```
+This would result in different behavior because `requestTick` is a function that schedules the `flush` function to be called on the next tick of the event loop, but `requestTick()` would call the `requestTick` function immediately, which could cause the `flush` function to be called out of order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, 1000)
+```
+This would result in different behavior because `setTimeout` would schedule the `flush` function to be called after a delay of 1000 milliseconds, which could cause the `flush` function to be called after the `requestTick` function has been called, causing the `flush` function to be called out of order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(flush)
+```
+This would result in different behavior because `setImmediate` would schedule the `flush` function to be called on the next

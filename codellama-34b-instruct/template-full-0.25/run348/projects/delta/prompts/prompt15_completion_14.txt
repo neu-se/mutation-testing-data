@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+a == null
+```
+This would result in different behavior because `a == null` checks if `a` is null or undefined, while `typeof a !== 'object'` only checks if `a` is not an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a !== Object(a)
+```
+This would result in different behavior because `Object(a)` converts `a` to an object, and then checks if it is not equal to `a`. This would catch cases where `a` is not an object, but also cases where `a` is an object that is not equal to itself, such as `NaN`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!a || typeof a !== 'object'
+```
+This would result in different behavior because it checks if `a` is falsy or not an object, which is a more comprehensive check than just checking if `a` is not an object.
+
+DONE.

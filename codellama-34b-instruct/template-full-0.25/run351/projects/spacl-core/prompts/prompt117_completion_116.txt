@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) || verb in this.verbs
+```
+This would result in different behavior because the `||` operator will always evaluate to `true` if the first operand is `true`, even if the second operand is `false`. This means that if `this.matches(path, ctx)` returns `true`, the `query` method will always return `true`, regardless of whether the verb is allowed or denied.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && !(verb in this.verbs)
+```
+This would result in different behavior because the `!` operator will always evaluate to `true` if the operand is `false`, and `false` if the operand is `true`. This means that if `verb` is not in `this.verbs`, the `query` method will always return `false`, regardless of whether `this.matches(path, ctx)` returns `true` or `false`.
+
+Option 3: The PLACEH

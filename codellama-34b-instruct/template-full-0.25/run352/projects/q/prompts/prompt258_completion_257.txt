@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { throw new Error("Buggy code"); });
+```
+This would result in different behavior because it would throw an error, causing the promise to reject, while the original code would resolve the promise with the value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return undefined; });
+```
+This would result in different behavior because it would resolve the promise with `undefined`, while the original code would resolve the promise with the value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return Q.reject("Buggy code"); });
+```
+This would result in different behavior because it would reject the promise with the string "Buggy code", while the original code would resolve the promise with the value.
+
+DONE.

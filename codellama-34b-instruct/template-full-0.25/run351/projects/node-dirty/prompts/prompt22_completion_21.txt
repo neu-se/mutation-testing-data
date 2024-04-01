@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setTimeout(() => { if (cb) cb(); this.emit('drain'); }, 0);
+```
+This would result in different behavior because `setTimeout` is used instead of `setImmediate`, which means that the callback will be executed after a delay of at least 0 milliseconds, whereas `setImmediate` would execute the callback immediately after the current execution context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(() => { if (cb) cb(); this.emit('drain'); });
+```
+This would result in different behavior because `process.nextTick` is used instead of `setImmediate`, which means that the callback will be executed in the next tick of the event loop, whereas `setImmediate` would execute the callback immediately after the current execution context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (cb) cb(); this.emit('drain');
+```
+This would result in different behavior because the callback is executed immediately

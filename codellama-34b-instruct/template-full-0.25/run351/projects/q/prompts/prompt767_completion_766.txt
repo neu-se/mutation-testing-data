@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message);
+```
+This would result in different behavior because the original code fragment was `noop`, which means it does nothing and does not throw any errors. However, the new code fragment throws an error with a message that includes the last error message, which could cause the test suite to fail if it is not expecting this error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(rejection);
+```
+This would result in different behavior because the original code fragment was `noop`, which means it does nothing and does not reject the promise. However, the new code fragment rejects the promise with the rejection error, which could cause the test suite to fail if it is not expecting this rejection.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify({ index: index, value: progress });
+```
+This would result

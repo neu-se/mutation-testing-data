@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolver.bind(null)
+```
+This would result in different behavior because `bind` returns a new function with a bound `this` value, which would cause the `resolver` function to be called with the wrong context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolver.apply(null)
+```
+This would result in different behavior because `apply` calls the `resolver` function with the `this` value set to `null`, which would cause the function to throw an error if it relies on the `this` value being a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolver.call(null)
+```
+This would result in different behavior because `call` calls the `resolver` function with the `this` value set to `null`, which would cause the function to throw an error if it relies on the `this` value being a promise.
+
+DONE.

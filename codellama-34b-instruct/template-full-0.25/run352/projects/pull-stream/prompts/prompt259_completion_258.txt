@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream` is a function that returns a stream, but `nextStream()` would call the function and return the result of the function, which is not a stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(true, function(abortErr) {
+  // TODO: what do we do with the abortErr?
+  cb(err)
+})
+```
+This would result in different behavior because it would call the `read` function with the `abortErr` argument, which is not the same as the `err` argument that is passed to the `nextChunk` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+   

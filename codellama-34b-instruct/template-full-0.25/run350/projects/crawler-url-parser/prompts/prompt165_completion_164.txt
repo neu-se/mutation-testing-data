@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "")
+```
+This would result in different behavior because it would remove the last path component from the page URL, which could cause the `gettype` function to return a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "").replace(/\/default\.[a-z]+$/, "")
+```
+This would result in different behavior because it would remove the last path component from the page URL and also remove any "default" file extension, which could cause the `gettype` function to return a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "").replace(/\/default\.[a-z]+$/, "").replace(/\/index\.[a-z]+$/, "")

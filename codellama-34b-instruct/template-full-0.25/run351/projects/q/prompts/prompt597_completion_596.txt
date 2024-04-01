@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch.bind(object)
+```
+This would result in different behavior because `bind` creates a new function with the `this` value bound to `object`, which would cause the `dispatch` method to be called on the wrong object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch.call(null, object)
+```
+This would result in different behavior because `call` sets the `this` value to `null` instead of `object`, which would cause the `dispatch` method to be called on the wrong object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch.apply(object, [])
+```
+This would result in different behavior because `apply` sets the `this` value to `object` and passes an empty array as the arguments, which would cause the `dispatch` method to be called with the wrong arguments.
+
+DONE.

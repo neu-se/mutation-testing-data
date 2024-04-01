@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(null));
+```
+This would result in different behavior because `deferred.makeNodeResolver(null)` would create a new node resolver with a null value, which would cause the promise to be rejected with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(undefined));
+```
+This would result in different behavior because `deferred.makeNodeResolver(undefined)` would create a new node resolver with an undefined value, which would cause the promise to be resolved with an undefined value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.push(deferred.makeNodeResolver(deferred.promise));
+```
+This would result in different behavior because `deferred.makeNodeResolver(deferred.promise)` would create a new node resolver with the promise as the value, which would cause the promise to be resolved with the promise as the value.
+
+D

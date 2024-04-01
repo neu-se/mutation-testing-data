@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because `res.pipe` would pipe the response data directly to the `createWriteStream` without any error handling, which could lead to uncaught errors and unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: false })
+```
+This would result in different behavior because the `end` option is set to `false`, which means that the `createWriteStream` will not be closed automatically when the response ends, which could lead to unclosed file descriptors and potential memory leaks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest), { end: true })
+```
+This would result in different behavior because the `end` option is set to `true`, which means that the `createWriteStream` will be closed automatically when the response ends, which could lead to unexpected behavior if the response data is not fully

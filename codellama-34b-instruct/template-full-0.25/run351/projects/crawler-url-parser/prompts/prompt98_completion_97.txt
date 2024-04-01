@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+urlMap.has(currentUrl.url) && urlMap.get(currentUrl.url).text.includes(text)
+```
+This would result in different behavior because the `&&` operator would cause the second condition to only be evaluated if the first condition is true, which would prevent the `text` variable from being included in the `tmpUrl.text` string if the `urlMap` does not contain the `currentUrl.url`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+urlMap.has(currentUrl.url) || urlMap.get(currentUrl.url).text.includes(text)
+```
+This would result in different behavior because the `||` operator would cause the second condition to only be evaluated if the first condition is false, which would prevent the `text` variable from being included in the `tmpUrl.text` string if the `urlMap` contains the `currentUrl.url`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!urlMap.has

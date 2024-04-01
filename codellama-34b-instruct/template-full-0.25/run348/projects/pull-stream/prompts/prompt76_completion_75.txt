@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || false, done || function () {}
+```
+This would result in different behavior because the `abort` variable is now always `false`, which means that the `read` function will never be called with an `abort` argument of `true`, even if the `abort` variable is set to `true` later in the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || true, done || function () {}
+```
+This would result in different behavior because the `done` variable is now always `true`, which means that the `read` function will never be called with a `done` callback that is not a function, even if the `done` variable is set to a non-function value later in the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || true, done || function (err) { console.log(err) }
+```
+This would result in different behavior because the `done` callback is now a function that logs its argument

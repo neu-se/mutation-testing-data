@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.reject);
+```
+This would result in different behavior because the `makeNodeResolver` function is called with an additional argument, which would cause the `deferred.reject` function to be called immediately, rather than when the promise is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(null);
+```
+This would result in different behavior because the `makeNodeResolver` function is called with a `null` argument, which would cause the `deferred.reject` function to be called with a `null` error, rather than with the actual error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(function() {});
+```
+This would result in different behavior because the `makeNodeResolver` function is called with a function that does not have the same behavior as the `deferred.reject` function, which would cause the promise to be resolved with a different value than expected

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { code: 'E_CORRUPTED_ROW' })
+```
+This would result in different behavior because the original code fragment only creates an error with a message, while this new code fragment creates an error with a message and a code. The code is a custom property that can be used to identify the type of error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { rowStr })
+```
+This would result in different behavior because the original code fragment only creates an error with a message, while this new code fragment creates an error with a message and a rowStr property. The rowStr property is a custom property that can be used to store the corrupted row string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error(`Could not load corrupted row: ${rowStr}`, { rowStr, code: 'E_CORRUP

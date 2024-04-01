@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, cb)
+```
+This would result in different behavior because it would always call the `cb` function with the `true` value as the first argument, regardless of whether the `err` variable is `null` or not. This would cause the `flatten` function to always return a stream of `true` values, rather than the expected stream of values from the input stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, cb)
+```
+This would result in different behavior because it would always call the `cb` function with the `null` value as the first argument, regardless of whether the `err` variable is `null` or not. This would cause the `flatten` function to always return a stream of `null` values, rather than the expected stream of values from the input stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(err, cb)
+```
+This would result in different behavior because it would always call the `cb` function

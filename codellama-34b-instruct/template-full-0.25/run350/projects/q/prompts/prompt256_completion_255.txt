@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!resolvedPromise
+```
+This would result in different behavior because the `!` operator would invert the boolean value of `resolvedPromise`, causing the `if` statement to always evaluate to `true` and the `become` function to be called even if the promise has already been resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise === true
+```
+This would result in different behavior because the `===` operator checks for strict equality, and `resolvedPromise` is a promise object that will never be strictly equal to `true`. The `if` statement would always evaluate to `false`, and the `become` function would never be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.isFulfilled()
+```
+This would result in different behavior because the `isFulfilled()` method checks if the promise has been resolved or rejected, and the `if` statement would evaluate to `true` if the promise has been resolved

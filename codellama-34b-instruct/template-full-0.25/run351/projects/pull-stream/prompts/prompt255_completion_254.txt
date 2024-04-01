@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because the original code fragment was not calling the `nextStream` function, but instead was referring to it. By adding the parentheses, we are actually calling the function, which could potentially cause the code to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment was not passing any arguments to the `nextStream` function, but this code fragment is passing `null` as the first argument and a function as the second argument. This could potentially cause the `nextStream` function to behave differently.
+
+Option 3: The PLACEHOLDER

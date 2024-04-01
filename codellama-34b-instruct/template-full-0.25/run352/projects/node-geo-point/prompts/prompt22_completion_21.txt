@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty.call(object, 'latitude')
+```
+This would result in different behavior because `hasOwnProperty` is a method of `Object.prototype`, and using `call` or `apply` to invoke it would change the value of `this` inside the method, potentially causing it to return a different result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty.bind(object, 'latitude')
+```
+This would result in different behavior because `bind` creates a new function that, when called, will call the original function with a specific `this` value and arguments. In this case, the new function would always call `hasOwnProperty` with `object` as `this` and `'latitude'` as the first argument, regardless of how it is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty.apply(object, ['latitude'])
+```
+This would result in different behavior because

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', reject
+```
+This would result in different behavior because the `error` event is emitted when there is an error during the compression process, whereas the `close` event is emitted when the compression is complete. By replacing `close` with `error`, the promise will be rejected if there is an error during the compression process, which is different from the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'finish', resolve
+```
+This would result in different behavior because the `finish` event is emitted when the compression is complete, whereas the `close` event is emitted when the compression is complete and the output stream is closed. By replacing `close` with `finish`, the promise will be resolved when the compression is complete, but the output stream may not be closed, which is different from the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'end', resolve
+```
+This would result in different behavior because the `end` event is emitted when

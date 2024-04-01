@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => null;
+```
+This would result in different behavior because `Delta.getHandler` is a function that returns a handler for a given embed type, but by replacing it with a function that returns `null`, the `transform` method would not be able to find a handler for the embed type, leading to different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => () => null;
+```
+This would result in different behavior because `Delta.getHandler` is a function that returns a handler for a given embed type, but by replacing it with a function that returns a function that returns `null`, the `transform` method would not be able to find a handler for the embed type, leading to different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => { throw new Error('Handler not found'); };
+```
+This would result in different behavior because `Delta.getHandler` is a function that returns a

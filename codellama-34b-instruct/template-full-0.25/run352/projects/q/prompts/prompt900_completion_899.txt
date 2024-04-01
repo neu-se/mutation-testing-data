@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(null)
+```
+This would result in different behavior because the `bind` method returns a new function that, when called, has its `this` set to the first argument passed to `bind`, regardless of the calling context. In this case, the `this` value of the function returned by `bind` would be `null`, which is not a valid value for the `this` argument of `makeNodeResolver`. This would cause an error to be thrown when the function is called, which would result in the promise being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.call(null)
+```
+This would result in different behavior because the `call` method calls a function with a specified `this` value and arguments provided individually. In this case, the `this` value of the function returned by `call` would be `null`, which is not a valid value for the `this` argument of `makeNodeResolver`. This would cause an error to be thrown when the function

@@ -1,0 +1,32 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        gzip: true,
+        gzipOptions: {
+            level: o.compression,
+        },
+    },
+});
+```
+This would result in different behavior because the `gzip` option is set to `true`, which would compress the archive using the gzip algorithm, whereas the original code fragment did not specify any compression algorithm.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({
+    src,
+    targetFilePath: tarFilePath,
+    format: 'tar',
+    zipAFolderOptions,
+    archiverOptions: {
+        zlib: {
+            level: o.compression,
+        },
+    },
+});
+```
+This would result in different behavior because the `zlib` option is set to an object with a `

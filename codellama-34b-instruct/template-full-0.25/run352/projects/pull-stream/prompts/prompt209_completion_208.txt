@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This would result in different behavior because the `!` operator negates the value of `aborted`, so the code would execute the `cb(aborted)` line even if `aborted` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+aborted && err
+```
+This would result in different behavior because the `&&` operator short-circuits if the first operand is false, so the code would execute the `cb(aborted)` line only if `aborted` is true and `err` is not null.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err || aborted
+```
+This would result in different behavior because the `||` operator short-circuits if the first operand is true, so the code would execute the `cb(aborted)` line only if `err` is null or `aborted` is true.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_writeFileSync
+```
+This would result in different behavior because `_writeFileSync` is a synchronous version of `_writeFile`, which means it would not return a promise and would not be compatible with the `universalify.fromPromise` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_writeFile.bind(null, file, obj, options)
+```
+This would result in different behavior because `bind` creates a new function that is bound to a specific context and arguments, which means that the `this` value inside the function would be `null` and the arguments would be fixed to `file`, `obj`, and `options`. This would cause the function to behave differently than the original `_writeFile` function, which takes a variable number of arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_writeFile.bind(null, file, obj, options).bind(null, file, obj, options)
+```
+This would result in different behavior because it would create

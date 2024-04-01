@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+onUnhandledError.bind(null)
+```
+This would result in different behavior because `bind` returns a new function with a bound context, which would cause the error to be thrown in the global scope rather than the `process.domain` context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onUnhandledError.bind(process.domain)
+```
+This would result in different behavior because `bind` returns a new function with a bound context, which would cause the error to be thrown in the `process.domain` context rather than the global scope.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onUnhandledError.bind(process.domain, error)
+```
+This would result in different behavior because `bind` returns a new function with a bound context and arguments, which would cause the error to be thrown in the `process.domain` context with the `error` object as an argument, rather than the global scope with no arguments.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(tzs).reduce((prev, key) => {
+  if (!tzs[key].deprecated) prev[key] = tzs[key];
+  return prev;
+}, {});
+```
+This would result in different behavior because the original code uses `Object.assign` to merge the objects, while this code uses `Object.keys` to iterate over the keys of the object and then assigns the values to a new object. This would result in a different output if the input object has any non-enumerable properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.values(tzs).reduce((prev, value) => {
+  if (!value.deprecated) prev.push(value);
+  return prev;
+}, []);
+```
+This would result in different behavior because the original code uses `Object.assign` to merge the objects, while this code uses `Object.values` to get an array of the values of the object and then reduces it to a new array.

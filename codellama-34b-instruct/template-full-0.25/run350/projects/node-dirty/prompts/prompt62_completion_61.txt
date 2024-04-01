@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._readStream.destroy(new Error('Test error'));
+```
+This would result in different behavior because it would simulate an error occurring while reading from the file stream, which would cause the `error` event to be emitted instead of the `end` event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end(() => this._writeStream.destroy());
+```
+This would result in different behavior because it would simulate the write stream being closed before all data has been written, which would cause the `drain` event to be emitted instead of the `end` event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, () => {
+  if (--this._inFlightWrites <= 0) this.emit('drain');
+});
+```
+This would result in different behavior because it would simulate the write stream being closed before all data has been written, which would cause the `drain` event to

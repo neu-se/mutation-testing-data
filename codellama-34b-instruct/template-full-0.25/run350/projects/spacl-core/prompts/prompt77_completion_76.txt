@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.rules.slice()
+```
+This would result in different behavior because `slice()` returns a shallow copy of the array, whereas `this.rules` returns the original array. This could cause the `matches` method to behave differently if the `rules` array is modified during execution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.rules.filter(rule => rule.matches(path, ctx))
+```
+This would result in different behavior because `filter()` returns a new array containing only the elements that match the provided predicate, whereas `this.rules` returns the original array. This could cause the `matches` method to behave differently if the `rules` array is modified during execution.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.rules.find(rule => rule.matches(path, ctx))
+```
+This would result in different behavior because `find()` returns the first element that matches the provided predicate, whereas `this.rules` returns the original array. This could cause the

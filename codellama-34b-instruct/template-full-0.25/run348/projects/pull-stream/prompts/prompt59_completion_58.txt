@@ -1,0 +1,12 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator negates the value of `abort`, which means that the `if` statement would always evaluate to `true` if `abort` is `true`, and `false` if `abort` is `false`. This would cause the `sink.abort()` function to be called immediately, regardless of whether the `read` function has been called or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && false
+```
+This would result in different behavior because the `&&` operator evaluates to `false` if either of its operands is `false`, and `true` otherwise. In this case, if `abort` is `true`, the `if` statement would evaluate to `false`, and the `sink.abort()` function would not be called. If `abort` is `false`, the `if` statement would evaluate to `true`, and the `sink.abort()` function would be called.
+

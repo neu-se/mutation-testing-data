@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites < 0 && !this._waitForDrain
+```
+This would result in different behavior because the original code fragment checks if `this._inFlightWrites` is less than or equal to 0, while this new code fragment only checks if it is less than 0. This means that if `this._inFlightWrites` is equal to 0, the new code fragment will not trigger the `drain` event, while the original code fragment would have triggered it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites <= 0 || !this._waitForDrain
+```
+This would result in different behavior because the original code fragment checks if `this._inFlightWrites` is less than or equal to 0 and `this._waitForDrain` is false, while this new code fragment only checks if `this._inFlightWrites` is less than or equal to 0 or `this._waitForD

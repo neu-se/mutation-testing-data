@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+embedType === Object.keys(otherData)[1]
+```
+This would result in different behavior because the index of the embed type in the `otherData` object is now 1 instead of 0, which would cause the `handler.transform` method to be called with different arguments and potentially return a different result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+embedType === Object.keys(otherData)[0] && otherData[embedType] !== null
+```
+This would result in different behavior because the check for `null` would cause the `handler.transform` method to be called only if the `otherData` object has a non-null value for the embed type, which could result in different behavior if the `handler.transform` method has different behavior for null and non-null values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+embedType === Object.keys(otherData)[0] && otherData[embedType] !== undefined
+```
+This would result in different behavior because

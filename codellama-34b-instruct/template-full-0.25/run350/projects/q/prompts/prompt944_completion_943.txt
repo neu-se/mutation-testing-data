@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(deferred.reject);
+```
+This would result in different behavior because the original code fragment only rejects the promise if the callback throws an error, but this new code fragment would always reject the promise with the value of `deferred.reject`, which is a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(deferred.reject);
+```
+This would result in different behavior because the original code fragment only resolves the promise if the callback does not throw an error, but this new code fragment would always resolve the promise with the value of `deferred.reject`, which is a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.reject);
+```
+This would result in different behavior because the original code fragment creates a new node resolver function and passes it to the callback, but this new code fragment would pass the value of `deferred.reject` to the callback instead

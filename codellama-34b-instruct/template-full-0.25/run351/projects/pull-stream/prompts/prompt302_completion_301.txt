@@ -1,0 +1,31 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (err, data) {
+  if(ended = ended || end) {
+    //last ? terminate(cb) :
+    cb(ended)
+  }
+  else if(!test(data)) {
+    ended = true
+    last ? cb(null, data) : terminate(cb)
+  }
+  else
+    cb(null, data)
+})
+```
+This would result in different behavior because the `read` function is now being called with `null` as the first argument, which is not the same as the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(function (err, data) {
+  if(ended = ended || end) {
+    //last ? terminate(cb) :
+    cb(ended)
+  }
+  else if(!test(data)) {
+    ended = true
+    last ? cb(null, data) : terminate(cb)
+  }
+  else
+    cb(null, data)
+})

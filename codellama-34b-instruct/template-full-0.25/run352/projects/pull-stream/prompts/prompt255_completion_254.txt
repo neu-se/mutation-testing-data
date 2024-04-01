@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because the original code fragment was a reference to the `nextStream` function, while the new code fragment is a call to the `nextStream` function. This would cause the function to be executed immediately, rather than being passed as a callback to the `read` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment was a reference to the `nextStream` function, while the new code fragment is a call to the `nextStream` function with two arguments: `null` and an anonymous function. This would cause the function to be executed immediately,

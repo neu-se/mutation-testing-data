@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+```
+This would result in different behavior because the `next.promise` property would be resolved with the `value` argument, instead of the `next` promise. This would cause the `get` method to return a resolved promise with the `value` argument, instead of a pending promise that resolves with the `value` argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: Q.reject(new Error("Can't get value from closed queue"))
+});
+```
+This would result in different behavior because the `Q.reject` method would be called with a new error object, instead of the `error` argument. This would cause the `get` method to return a rejected promise with the new error object, instead of a pending promise that resolves with the `value` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error('Could not load database')
+```
+This would result in different behavior because the original code emits a `'load'` event with a value of 0, indicating that the database was loaded successfully. However, the replaced code would emit an `'error'` event with a message indicating that the database could not be loaded, which would cause the test suite to fail if it is not expecting this behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'load', 1
+```
+This would result in different behavior because the original code emits a `'load'` event with a value of 0, indicating that the database was loaded successfully. However, the replaced code would emit a `'load'` event with a value of 1, indicating that the database was not loaded successfully, which would cause the test suite to fail if it is not expecting this behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'load', -1
+```
+This would result in different behavior because the original code emits a

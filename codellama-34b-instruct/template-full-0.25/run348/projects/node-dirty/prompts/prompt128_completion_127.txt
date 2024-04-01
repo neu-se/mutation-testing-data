@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.uncork();
+```
+This would result in different behavior because `uncork` is a method that unblocks the stream, allowing data to flow through it, while `cork` is a method that blocks the stream, preventing data from flowing through it. In the original code, the stream is corked to prevent data from being written to the file until all the data is ready to be written. If we replace `cork` with `uncork`, the data will start being written to the file immediately, which could result in incomplete or corrupted data being written.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```

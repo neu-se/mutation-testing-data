@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `pipe` method is not being used correctly. The `pipe` method should be used to pipe the response data to the write stream, but in this case, it is being used to pipe the write stream to the response data. This would cause the write stream to receive the response data as input, rather than the other way around, which would result in unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({ filename: dest }));
+```
+This would result in different behavior because the `pipe` method is being used to pipe the response data to the write stream, but the `on` method is being used to listen for the `error` event on the write stream, rather than the response data. This would cause the `error` event to be em

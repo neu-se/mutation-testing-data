@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].call(promise, args)
+```
+This would result in different behavior because `call` would bind the `this` context to `promise`, whereas `apply` would bind it to the global object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].bind(promise)(args)
+```
+This would result in different behavior because `bind` would create a new function with the `this` context bound to `promise`, whereas `apply` would not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op].apply(promise, [args])
+```
+This would result in different behavior because `apply` would pass the `args` array as a list of arguments to the function, whereas `call` would pass it as a single argument.
+
+DONE.

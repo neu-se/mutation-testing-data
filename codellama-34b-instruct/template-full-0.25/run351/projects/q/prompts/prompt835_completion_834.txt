@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+process.domain.bind(onUnhandledError)
+```
+This would result in different behavior because `process.domain.bind(onUnhandledError)` is a function call that returns a new function, whereas `typeof process === "object" && process && process.domain` is a boolean expression that evaluates to `true` or `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.domain.unbind(onUnhandledError)
+```
+This would result in different behavior because `process.domain.unbind(onUnhandledError)` is a function call that removes the `onUnhandledError` function from the `process.domain` event emitter, whereas `typeof process === "object" && process && process.domain` is a boolean expression that evaluates to `true` or `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.domain.addEventListener("error", onUnhandledError)
+```
+This would result in different behavior

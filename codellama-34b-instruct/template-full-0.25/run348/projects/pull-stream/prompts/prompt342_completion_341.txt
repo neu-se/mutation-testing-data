@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator negates the value of `abort`, so if `abort` is `true`, `!abort` would be `false`, and the `onAbort` callback would not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || onAbort
+```
+This would result in different behavior because the `||` operator is a logical OR, so if `abort` is `true`, the expression `abort || onAbort` would evaluate to `true`, and the `onAbort` callback would not be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort && onAbort
+```
+This would result in different behavior because the `&&` operator is a logical AND, so if `abort` is `true`, the expression `abort && onAbort` would evaluate to `onAbort`, and the `onAbort` callback would be called with

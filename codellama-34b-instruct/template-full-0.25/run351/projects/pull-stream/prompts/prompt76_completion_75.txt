@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || false, done || function () {}
+```
+This would result in different behavior because the `abort` variable is now always `false`, which would cause the `read` function to be called with `false` as the first argument, rather than `true` or `abort` as in the original code. This could potentially cause the `read` function to behave differently, depending on its implementation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || true, done || function () {}
+```
+This would result in different behavior because the `done` variable is now always `true`, which would cause the `read` function to be called with `true` as the second argument, rather than `done` or `function () {}` as in the original code. This could potentially cause the `read` function to behave differently, depending on its implementation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || true, done || function () { throw new Error('done is not a function

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && !this.verbs[verb]
+```
+This would result in different behavior because the `!` operator is added before `this.verbs[verb]`, which would cause the `query` method to return `true` if the action is explicitly denied, rather than `false` if the action is explicitly allowed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && this.verbs[verb] === false
+```
+This would result in different behavior because the `===` operator is added to check if the value of `this.verbs[verb]` is `false`, rather than checking if the property exists.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && this.verbs[verb] !== true
+```
+This would result in different behavior because the `!==` operator is added to check if the value of `this.verbs[verb]` is not `true

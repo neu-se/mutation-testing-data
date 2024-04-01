@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'close', resolve
+```
+This would result in different behavior because the event `'close'` is emitted when the output stream is closed, while the event `'error'` is emitted when there is an error in the stream. By replacing `'error'` with `'close'`, the promise would resolve even if there is an error in the stream, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', resolve
+```
+This would result in different behavior because the promise would resolve even if there is an error in the stream, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'end', reject
+```
+This would result in different behavior because the event `'end'` is emitted when the output stream is closed, while the event `'error'` is emitted when there is an error in the stream. By replacing `'error'` with `'end'`, the promise would reject even if there is no error in the stream, which could lead to unexpected behavior.

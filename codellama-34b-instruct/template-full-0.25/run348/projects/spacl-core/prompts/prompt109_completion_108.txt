@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path, ctx.parent
+```
+This would result in different behavior because `ctx.parent` is a different object than `ctx`, and the `matches` method of the `Policy` class may return a different result when called with a different context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path, ctx.parent.path
+```
+This would result in different behavior because `ctx.parent.path` is a different string than `path`, and the `matches` method of the `Policy` class may return a different result when called with a different path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, ctx.parent.query(path, verb, ctx)
+```
+This would result in different behavior because `ctx.parent.query(path, verb, ctx)` is a different result than `policy.query(path, verb, ctx)`, and the `matches` method of the `Policy` class may return a different result when called with a different query result.
+
+DONE.

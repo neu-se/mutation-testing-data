@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `!` operator negates the `end` variable, so the resulting value would be `true` if `end` is `false`, and `false` if `end` is `true`. This would cause the `mapper` function to be called with a non-null value even when the `read` function has returned an end-of-stream signal, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && data
+```
+This would result in different behavior because the `&&` operator only evaluates the second operand if the first operand is truthy. If `end` is `true`, the `data` variable would not be evaluated, and the resulting value would be `null`. This could cause the `mapper` function to be called with a `null` value, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end || data
+```
+This would

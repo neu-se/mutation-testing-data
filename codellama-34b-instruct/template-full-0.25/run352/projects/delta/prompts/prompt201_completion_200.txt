@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.concat(rest).chop()
+```
+This would result in different behavior because the original code fragment calls the `chop` method on the result of `concat`, which is a `Delta` object, while this code fragment calls the `chop` method on the `rest` parameter, which is an `OpIterator` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.concat(rest).slice(0)
+```
+This would result in different behavior because the original code fragment calls the `chop` method on the result of `concat`, which is a `Delta` object, while this code fragment calls the `slice` method on the `rest` parameter, which is an `OpIterator` object, and passes `0` as the first argument, which would return the first element of the `rest` parameter.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.concat(rest).slice(1)
+```
+This would result in different behavior because the original code fragment

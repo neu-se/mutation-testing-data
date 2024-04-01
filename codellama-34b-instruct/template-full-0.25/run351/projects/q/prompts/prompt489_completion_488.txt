@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resetUnhandledRejections(0);
+```
+This would result in different behavior because the `resetUnhandledRejections` function would be called with a value of 0, which would cause the `unhandledRejections` array to be reset to an empty array, even if there were unhandled rejections present. This would result in the `unhandledRejections` array being empty, even if there were unhandled rejections present, which could cause the `process.emit("unhandledRejection", reason, promise)` line to not be executed, even if there were unhandled rejections present.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resetUnhandledRejections(1);
+```
+This would result in different behavior because the `resetUnhandledRejections` function would be called with a value of 1, which would cause the `unhandledRejections` array to be reset to an array with a single element, even if there were no unhandled rejections present. This would result in

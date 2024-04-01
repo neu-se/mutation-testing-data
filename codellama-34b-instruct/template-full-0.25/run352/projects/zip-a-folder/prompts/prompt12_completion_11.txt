@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK | fs.constants.W_OK);
+```
+This would result in different behavior because the `fs.constants.R_OK | fs.constants.W_OK` bitmask includes both read and write permissions, whereas the original code only included read permission. This could cause the code to fail if the file is not writable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.constants.R_OK & fs.constants.W_OK);
+```
+This would result in different behavior because the `fs.constants.R_OK & fs.constants.W_OK` bitmask includes only read and write permissions, whereas the original code included all permissions. This could cause the code to succeed even if the file is not writable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.promises.access(src, fs.

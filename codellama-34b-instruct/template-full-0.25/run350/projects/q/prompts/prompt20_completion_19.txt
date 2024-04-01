@@ -1,0 +1,33 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextTick = function (task) {
+    tail = tail.next = {
+        task: task,
+        domain: isNodeJS && process.domain,
+        next: null
+    };
+
+    if (!flushing) {
+        flushing = true;
+        requestTick();
+    }
+};
+```
+This would result in different behavior because the `requestTick` function is not defined, so the `nextTick` function would not be able to schedule the task for execution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextTick = function (task) {
+    tail = tail.next = {
+        task: task,
+        domain: isNodeJS && process.domain,
+        next: null
+    };
+
+    if (!flushing) {
+        flushing = true;
+        setTimeout(flush, 0);
+    }
+};
+```
+This would result in different behavior because the `setTimeout` function is used to schedule the task for execution, which

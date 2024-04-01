@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}./`
+```
+This would result in different behavior because it would add an extra slash at the end of the path, which would cause the matcher to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}.+/`
+```
+This would result in different behavior because it would allow any character (including slashes) after the path, which would cause the matcher to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}.+?/`
+```
+This would result in different behavior because it would allow any character (including slashes) after the path, but it would do so in a non-greedy way, which would cause the matcher to fail.
+
+DONE.

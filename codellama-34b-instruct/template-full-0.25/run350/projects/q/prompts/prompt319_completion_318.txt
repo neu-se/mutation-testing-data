@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () {}
+```
+This would result in different behavior because it would change the descriptor object's property to a new function that does nothing, which would likely cause the promise to resolve with an unexpected value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = null
+```
+This would result in different behavior because it would change the descriptor object's property to null, which would likely cause the promise to reject with a TypeError.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op] = function () { throw new Error() }
+```
+This would result in different behavior because it would change the descriptor object's property to a new function that throws an error, which would likely cause the promise to reject with the error.
+
+DONE.

@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `err` parameter is not being checked for `null` or `undefined` values, which could cause the `nextStream()` function to be called with an invalid argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```

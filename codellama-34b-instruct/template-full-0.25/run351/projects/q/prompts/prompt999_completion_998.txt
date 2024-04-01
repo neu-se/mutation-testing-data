@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not being called on the correct object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is being called with the wrong argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).fail(function() {});
+```
+This would result in different behavior because the `fail` method is being called with a different function.
+
+DONE.

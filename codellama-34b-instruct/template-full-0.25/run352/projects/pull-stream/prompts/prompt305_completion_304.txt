@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ended && cb
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `=` operator, so the expression would be evaluated as `(ended && cb) = ended`, which would always be truthy and therefore never terminate the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended || cb
+```
+This would result in different behavior because the `||` operator has a lower precedence than the `=` operator, so the expression would be evaluated as `ended = (ended || cb)`, which would always be truthy and therefore never terminate the stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended ? cb : null
+```
+This would result in different behavior because the ternary operator has a higher precedence than the `=` operator, so the expression would be evaluated as `ended = (ended ? cb : null)`, which would always be truthy and therefore never terminate the stream.
+
+DONE.

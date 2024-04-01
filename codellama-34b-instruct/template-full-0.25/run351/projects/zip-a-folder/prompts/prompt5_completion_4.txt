@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream || targetFilePath
+```
+This would result in different behavior because the `||` operator has a lower precedence than the `&&` operator, so the expression would be evaluated as `(zipAFolderOptions?.customWriteStream || targetFilePath) && targetFilePath`, which would always be truthy if `targetFilePath` is defined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream && !targetFilePath
+```
+This would result in different behavior because the `!` operator has a higher precedence than the `&&` operator, so the expression would be evaluated as `zipAFolderOptions?.customWriteStream && (!targetFilePath)`, which would always be falsy if `targetFilePath` is defined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream ?? targetFilePath
+```
+This would result in different behavior because the `??` operator has a higher precedence than

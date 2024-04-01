@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+psl.parse(ret.host, true)
+```
+This would result in different behavior because the `true` argument would cause the `parse` method to return the parsed hostname as an object, rather than a string. This would cause the `ret.domain` and `ret.subdomain` properties to be set to `undefined`, which would cause the `gettype` function to return "internal" for all links, even if they are external.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+psl.parse(ret.host, false)
+```
+This would result in different behavior because the `false` argument would cause the `parse` method to return the parsed hostname as a string, rather than an object. This would cause the `ret.domain` and `ret.subdomain` properties to be set to the correct values, which would cause the `gettype` function to return the correct type for all links.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+psl.parse

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.close()
+```
+This would result in different behavior because the `close` method is not called when the `drain` event is emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.emit('drain')
+```
+This would result in different behavior because the `drain` event is not emitted when the `close` method is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'close', () => this.emit('drain')
+```
+This would result in different behavior because the `drain` event is not emitted when the `close` event is emitted.
+
+DONE.

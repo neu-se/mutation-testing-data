@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.nbind.apply(void 0, args);
+```
+This would result in different behavior because it would call `Q.nbind` with the arguments `args` instead of `nodeArgs`, which would cause the function to return a promise that resolves to the result of `Q.nbind` instead of the result of the method call.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.nbind.apply(void 0, args).fail(deferred.reject);
+```
+This would result in different behavior because it would call `Q.nbind` with the arguments `args` instead of `nodeArgs`, which would cause the function to return a promise that resolves to the result of `Q.nbind` instead of the result of the method call. Additionally, it would call `deferred.reject` if the promise returned by `Q.nbind` is rejected, which would cause the function to return a rejected promise instead of the result of the method call.
+
+Option 3:

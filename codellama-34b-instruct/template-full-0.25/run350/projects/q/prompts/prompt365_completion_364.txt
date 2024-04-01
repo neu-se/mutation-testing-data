@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!done
+```
+This would result in different behavior because the `!` operator negates the boolean value of `done`, so the `rejected` callback would be called even if the promise was fulfilled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+done && false
+```
+This would result in different behavior because the `&&` operator short-circuits the evaluation of the expression if the first operand is falsy, so the `rejected` callback would never be called even if the promise was rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+done || true
+```
+This would result in different behavior because the `||` operator short-circuits the evaluation of the expression if the first operand is truthy, so the `rejected` callback would be called even if the promise was fulfilled.
+
+DONE.

@@ -1,0 +1,27 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    return done(null);
+  } else {
+    return done(end);
+  }
+});
+```
+This would result in different behavior because the original code fragment checks for the presence of the `done` callback before calling it, while this new code fragment always calls the `done` callback with `null` as the first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    return done(end);
+  } else {
+    return done(null);
+  }
+});
+```
+This would result in different behavior because the original code fragment checks for the presence of the `done` callback before calling it, while this new code fragment always calls the `done` callback with `end` as the first argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function

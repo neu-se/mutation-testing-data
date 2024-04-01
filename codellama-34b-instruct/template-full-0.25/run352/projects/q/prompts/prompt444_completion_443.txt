@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { throw new Error("intentional error"); });
+```
+This would result in different behavior because it would cause the promise to be rejected with an error, which would trigger the `untrackRejection` function and remove the promise from the `unhandledRejections` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.reject("intentional rejection"); });
+```
+This would result in different behavior because it would cause the promise to be rejected with a string, which would trigger the `untrackRejection` function and remove the promise from the `unhandledRejections` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.fulfill("intentional fulfillment"); });
+```
+This would result in different behavior because it would cause the promise to be fulfilled with a string, which would trigger the `untrackRejection` function and remove the

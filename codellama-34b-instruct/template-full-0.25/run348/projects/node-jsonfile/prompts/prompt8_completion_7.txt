@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+data = data.replace(/^\ufeff/, '')
+```
+This would result in different behavior because it would remove the UTF-8 BOM (Byte Order Mark) from the beginning of the data, which is not what the original code fragment does. The original code fragment uses the `stripBom` function to remove the BOM, which is a more robust way of doing it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+data = data.replace(/^(\ufeff)?/, '')
+```
+This would result in different behavior because it would remove the UTF-8 BOM (Byte Order Mark) from the beginning of the data, but it would also remove any other characters that match the regular expression `/^(\ufeff)?/`, which is not what the original code fragment does.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data = data.replace(/^(\ufeff)?/g, '')
+```
+This would result in different behavior because it would remove the UTF-8 BOM (Byte

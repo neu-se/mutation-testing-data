@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream()` would be called immediately, instead of being called conditionally based on the value of `_read`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextChunk()
+```
+This would result in different behavior because `nextChunk()` would be called immediately, instead of being called conditionally based on the value of `_read`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function(end, stream) {
+  if(end)
+    return cb(end)
+  if(stream && 'object' === typeof stream)
+    stream = values(stream)
+  else if ('function' !== typeof stream)
+    stream = once(stream)
+  _read = stream
+  nextChunk()
+})
+```
+This would result in different behavior because the `nextStream()` function would be called with a different callback function, which would cause the `nextChunk()` function to be called

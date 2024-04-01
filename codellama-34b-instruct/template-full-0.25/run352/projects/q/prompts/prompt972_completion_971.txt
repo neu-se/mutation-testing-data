@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+name, args.slice(1)
+```
+This would result in different behavior because it would pass a slice of the `args` array starting from the second element, instead of passing the `args` array as is.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+name, args.concat(deferred.makeNodeResolver())
+```
+This would result in different behavior because it would concatenate the `args` array with a new element, the result of `deferred.makeNodeResolver()`, instead of passing the `args` array as is.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+name, [args, deferred.makeNodeResolver()]
+```
+This would result in different behavior because it would pass an array containing the `args` array and the result of `deferred.makeNodeResolver()`, instead of passing the `args` array as is.
+
+DONE.

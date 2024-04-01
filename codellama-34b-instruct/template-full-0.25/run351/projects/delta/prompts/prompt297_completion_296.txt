@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+predicate(line, {}, i) === false
+```
+This would result in different behavior because the `predicate` function would be called with an empty attributes object, which may cause it to behave differently than when called with the original attributes object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+predicate(line, iter.next(2).attributes || {}, i) === false
+```
+This would result in different behavior because the `predicate` function would be called with an attributes object that is two characters ahead of the original attributes object, which may cause it to behave differently than when called with the original attributes object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+predicate(line, iter.next(1).attributes || {}, i - 1) === false
+```
+This would result in different behavior because the `predicate` function would be called with an attributes object that is one character ahead of the original attributes object, and with an index that is one less than the original index, which may cause it

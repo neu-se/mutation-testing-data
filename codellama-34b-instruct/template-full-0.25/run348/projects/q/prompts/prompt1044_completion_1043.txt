@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("tail")
+```
+This would result in different behavior because the `get` method is called with a different argument, which would cause the `put` method to resolve with a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("head").fail(function (error) {
+    closed.resolve(error);
+    throw error;
+})
+```
+This would result in different behavior because the `fail` method is called with a different argument, which would cause the `get` method to resolve with a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.promise.get("tail").fail(function (error) {
+    closed.resolve(error);
+    throw error;
+})
+```
+This would result in different behavior because the `get` method is called with a different argument, which would cause the `put` method to resolve with a different value.
+
+DONE.

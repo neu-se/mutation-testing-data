@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.all(array).then(function (array) {
+    return fulfilled.apply(void 0, array);
+}, rejected);
+```
+This would result in different behavior because it would return a promise for the return value of the generator or the first rejected promise among those yielded, whereas the original code would return a promise for the return value of the generator or the first rejected promise among those yielded, but would also propagate any errors that occur during the execution of the generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q.all(array).then(function (array) {
+    return fulfilled.apply(void 0, array);
+}, rejected).catch(function (error) {
+    return rejected(error);
+});
+```
+This would result in different behavior because it would catch any errors that occur during the execution of the generator and return a rejected promise with the error, whereas the original code would propagate any errors that occur during the execution of the generator.
+
+Option 3: The PL

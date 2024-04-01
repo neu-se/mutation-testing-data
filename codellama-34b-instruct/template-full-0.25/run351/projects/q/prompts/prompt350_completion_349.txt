@@ -1,0 +1,34 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+self.promiseDispatch(function (value) {
+    if (done) {
+        return;
+    }
+    done = true;
+
+    deferred.resolve(_fulfilled(value));
+});
+```
+This would result in different behavior because the `promiseDispatch` method is not defined on the `self` object, so it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+self.promiseDispatch(function (value) {
+    if (done) {
+        return;
+    }
+    done = true;
+
+    deferred.resolve(_fulfilled(value));
+}, "when", [function (exception) {
+    if (done) {
+        return;
+    }
+    done = true;
+
+    deferred.resolve(_rejected(exception));
+}]);
+```
+This would result in different behavior because the `promiseDispatch` method is not defined on the `self` object, so it would throw an error.
+
+Option 3

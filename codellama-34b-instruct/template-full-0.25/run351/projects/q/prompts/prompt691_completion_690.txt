@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"apply", [this, array_slice(arguments)]
+```
+This would result in different behavior because `this` would refer to the global object instead of the `Promise` object, which could cause the `dispatch` method to be called on the wrong object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"apply", [void 0, array_slice(arguments, 1)]
+```
+This would result in different behavior because it would omit the first argument to the `apply` method, which could cause the `dispatch` method to be called with the wrong arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"apply", [void 0, array_slice(arguments, 2)]
+```
+This would result in different behavior because it would omit the first two arguments to the `apply` method, which could cause the `dispatch` method to be called with the wrong arguments.
+
+DONE.

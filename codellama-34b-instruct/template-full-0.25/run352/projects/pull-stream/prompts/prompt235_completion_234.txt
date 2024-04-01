@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+loop = true
+```
+This would result in different behavior because the `loop` variable is set to `true` unconditionally, whereas in the original code it is only set to `true` if the `test` function returns `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(end, data)
+```
+This would result in different behavior because the `cb` function is called with the `end` and `data` arguments, whereas in the original code it is only called with the `end` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(end, function (end, data) {
+  if (!end && !test(data)) {
+    return sync ? loop = true : next(end, cb)
+  }
+  cb(end, data)
+})
+```
+This would result in different behavior because the `read` function is called with a different callback function that has a different behavior than the original callback function.
+
+DONE.

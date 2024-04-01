@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort, cb || function () {})
+```
+This would result in different behavior because the original code fragment `read` is not called with the `abort` and `cb` arguments, while the replaced code fragment does call `read` with those arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, cb || function () {})
+```
+This would result in different behavior because the original code fragment `read` is not called with the `abort` and `cb` arguments, while the replaced code fragment does call `read` with those arguments. Additionally, the `abort` argument is not passed to `read` if it is not truthy, while the replaced code fragment always passes `abort` to `read`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, cb || function () {})
+```
+This would result in different behavior because the original code fragment `read` is not called with the `abort` and

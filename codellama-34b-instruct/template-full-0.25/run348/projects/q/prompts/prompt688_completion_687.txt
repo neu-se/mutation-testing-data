@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this)
+```
+This would result in different behavior because `bind` creates a new function with the `this` context bound to the first argument, which in this case is `this`. This means that the new function will always be called with `this` set to the `Promise.prototype` object, regardless of how it is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.call(null)
+```
+This would result in different behavior because `call` sets the `this` context of the function to `null`. This means that the function will be called with `this` set to `null`, regardless of how it is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.apply(undefined)
+```
+This would result in different behavior because `apply` sets the `this` context of the function to `undefined`. This means that the function will be called with `this` set to `undefined`, regardless of how it is

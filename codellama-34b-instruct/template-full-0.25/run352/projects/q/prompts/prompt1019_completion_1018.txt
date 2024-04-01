@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this)
+```
+This would result in different behavior because `bind` creates a new function with the `this` context bound to the first argument, which in this case is `this`. This means that the `dispatch` method will always be called on the current object, even if the promise is resolved with a different object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.apply(this, arguments)
+```
+This would result in different behavior because `apply` calls the `dispatch` method with the current object as the `this` context and the `arguments` object as the arguments. This means that the `dispatch` method will always be called with the current object as the `this` context and the `arguments` object as the arguments, even if the promise is resolved with a different object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.call(this, arguments)
+```
+This would result in different behavior because `call` calls the `

@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error, "__minimumStackCounter__", {value: p.stackCounter + 1, configurable: true}
+```
+This would result in different behavior because the stack counter would be incremented by 1, which would cause the error stack trace to be concatenated with the stack trace of `promise` even if the `error` object already has a `__minimumStackCounter__` property with a value greater than or equal to `p.stackCounter`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+error, "__minimumStackCounter__", {value: p.stackCounter - 1, configurable: true}
+```
+This would result in different behavior because the stack counter would be decremented by 1, which would cause the error stack trace to be concatenated with the stack trace of `promise` even if the `error` object already has a `__minimumStackCounter__` property with a value less than or equal to `p.stackCounter`.
+
+Option 3: The PLACEHOLDER

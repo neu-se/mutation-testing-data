@@ -1,0 +1,29 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    return promise.inspect();
+}, function (reason) {
+    throw reason;
+});
+```
+This would result in different behavior because it would cause the promise to be rejected with the reason from the original promise, rather than the resolved value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    return promise.inspect();
+}, function (reason) {
+    return reason;
+});
+```
+This would result in different behavior because it would cause the promise to be resolved with the reason from the original promise, rather than being rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function (value) {
+    return promise.inspect();
+}, function (reason) {
+    return promise.inspect();
+});
+```
+This would result in different behavior because it would cause the promise to be resolved with the result of `promise.inspect()`,

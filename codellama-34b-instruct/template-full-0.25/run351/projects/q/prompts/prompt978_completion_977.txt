@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(object).npost(name, args).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not called on the `deferred` object, which means that the promise will not be rejected if the `npost` method fails.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).npost(name, args).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `then` method is called on the `deferred` object, which means that the promise will be resolved or rejected based on the result of the `npost` method, rather than being rejected if the `npost` method fails.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).npost(name, args).catch(deferred.reject);
+```
+This would result in different behavior because the `catch` method is called on the `deferred

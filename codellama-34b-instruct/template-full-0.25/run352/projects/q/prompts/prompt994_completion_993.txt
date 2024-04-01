@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.ninvoke(object, name, args).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not called on the `deferred` object, which would cause the promise to never be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.ninvoke(object, name, args).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `then` method is not called on the `deferred` object, which would cause the promise to never be resolved or rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.ninvoke(object, name, args).then(deferred.resolve).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not called on the `deferred` object, which would cause the promise to never be rejected.
+
+DONE.

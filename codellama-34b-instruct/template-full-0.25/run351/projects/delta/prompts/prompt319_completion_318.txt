@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.delete
+```
+This would result in different behavior because `delete` is a method that deletes the specified number of characters from the `inverted` delta, whereas `retain` is a method that retains the specified number of characters from the `inverted` delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(length, {})
+```
+This would result in different behavior because it would retain the specified number of characters from the `inverted` delta, but with an empty attributes object, which would not have the same effect as the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(length, { [embedType]: handler.invert(opData, baseOpData) })
+```
+This would result in different behavior because it would retain the specified number of characters from the `inverted` delta, but with an attributes object that is the result of inverting the attributes of the

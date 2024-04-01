@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.pop
+```
+This would result in different behavior because `pop` removes the last element of an array, whereas `push` adds a new element to the end of an array. In this case, `pop` would remove the `promise` from `reportedUnhandledRejections`, which would cause the `process.emit("rejectionHandled", unhandledReasons[at], promise)` event to not be emitted, leading to different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.shift
+```
+This would result in different behavior because `shift` removes the first element of an array, whereas `push` adds a new element to the end of an array. In this case, `shift` would remove the `promise` from `reportedUnhandledRejections`, which would cause the `process.emit("rejectionHandled", unhandledReasons[at], promise)` event to not be emitted, leading to different behavior.

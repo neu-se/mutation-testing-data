@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return value;
+}).then(function () {
+    return value;
+});
+```
+This would result in different behavior because the additional `then` method call would cause the promise to resolve with the value returned by the second function, which is also `value`. This would result in the promise being fulfilled with `value` twice, which is different from the original behavior where the promise was fulfilled with `value` only once.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {
+    return value;
+}).catch(function () {
+    throw new Error("Error");
+});
+```
+This would result in different behavior because the additional `catch` method call would cause the promise to be rejected with an error if the promise returned by `callback.fcall()` is rejected. This would result in the promise being rejected with an error, which is different from the original behavior where the promise was fulfilled with `value` if the promise returned by `callback

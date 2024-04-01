@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+throw new Error("Test error");
+```
+This would result in different behavior because the original code fragment `flush` would not throw an error, but the new code fragment would throw an error unconditionally.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (Math.random() < 0.5) {
+  throw new Error("Test error");
+} else {
+  flush();
+}
+```
+This would result in different behavior because the original code fragment `flush` would always be called, but the new code fragment would only call `flush` with a 50% probability.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (typeof process !== "undefined" && process.env.NODE_ENV === "production") {
+  throw new Error("Test error");
+} else {
+  flush();
+}
+```
+This would result in different behavior because the original code fragment `flush` would always be called, but the new code fragment would only call `flush` if

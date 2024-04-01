@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+predicate.call(this, op, index)
+```
+This would result in different behavior because it would call the `predicate` function with the `this` context set to the current `Delta` object, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+predicate(op, index)
+```
+This would result in different behavior because it would call the `predicate` function with the `this` context set to the global object, which may not be the desired behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+predicate.apply(this, [op, index])
+```
+This would result in different behavior because it would call the `predicate` function with the `this` context set to the current `Delta` object, and pass the `op` and `index` arguments as an array, which may not be the desired behavior.
+
+DONE.

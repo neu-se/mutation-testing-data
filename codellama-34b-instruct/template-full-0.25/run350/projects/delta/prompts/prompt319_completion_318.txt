@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.delete
+```
+This would result in different behavior because `inverted.delete` would delete the entire delta, whereas `inverted.retain` would retain only the specified attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(op), {})
+```
+This would result in different behavior because `inverted.retain(Op.length(op), {})` would retain the entire delta with no attributes, whereas `inverted.retain` with the original attributes would retain the attributes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(op), { [embedType]: handler.invert(opData, baseOpData) })
+```
+This would result in different behavior because `inverted.retain(Op.length(op), { [embedType]: handler.invert(opData, baseOpData) })` would retain the entire

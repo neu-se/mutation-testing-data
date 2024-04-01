@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain'); }
+```
+This would result in different behavior because the `cb` function is not being called, which could cause the test to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('error'); }
+```
+This would result in different behavior because the `error` event is being emitted instead of the `drain` event, which could cause the test to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain', 'foo'); }
+```
+This would result in different behavior because the `drain` event is being emitted with an additional argument, which could cause the test to fail.
+
+DONE.

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && this._inFlightWrites > 0
+```
+This would result in different behavior because the `&&` operator has higher precedence than the `||` operator, so the expression would be evaluated as `this._queue.size && (this._inFlightWrites > 0)` instead of `(this._queue.size || this._inFlightWrites > 0)`. This could cause the `_flush` method to be called more frequently than intended, leading to potential bugs or performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size || this._inFlightWrites < 0
+```
+This would result in different behavior because the `||` operator has higher precedence than the `>` operator, so the expression would be evaluated as `(this._queue.size || this._inFlightWrites) < 0` instead of `this._queue.size || (this._inFlightWrites < 0)`. This could cause the `_

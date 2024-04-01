@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { throw new Error("unhandled rejection"); })
+```
+This would result in different behavior because it would cause the promise to be rejected with a new error, which would be handled by the `untrackRejection` function and would result in the `unhandledRejections` array being updated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.reject(reason); })
+```
+This would result in different behavior because it would cause the promise to be rejected with the same reason as before, but it would be handled by the `reject` function, which would update the `unhandledReasons` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function() { return Q.reject(new Error("unhandled rejection")); })
+```
+This would result in different behavior because it would cause the promise to be rejected with a new error, which would be handled by

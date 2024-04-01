@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+flush()
+```
+This would result in different behavior because it would call the `flush` function immediately, rather than passing it as a callback to `process.nextTick`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+flush.bind(null)
+```
+This would result in different behavior because it would bind the `flush` function to the `null` context, rather than passing it as a callback to `process.nextTick`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { flush(); }
+```
+This would result in different behavior because it would create a new function that calls `flush`, rather than passing the `flush` function as a callback to `process.nextTick`.
+
+DONE.

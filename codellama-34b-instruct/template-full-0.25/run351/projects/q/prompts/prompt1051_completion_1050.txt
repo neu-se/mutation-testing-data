@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end.tail = end.tail.get("tail");
+```
+This would result in different behavior because it would cause the `get` method to return a promise that resolves to the tail of the queue, rather than the head.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end.tail = end.tail.get("head");
+```
+This would result in different behavior because it would cause the `get` method to return a promise that resolves to the head of the queue, rather than the tail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end.tail = Q.reject(new Error("Can't get value from closed queue"));
+```
+This would result in different behavior because it would cause the `get` method to return a rejected promise with the specified error message, rather than a resolved promise with the value of the queue.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Q can't wrap an undefined function"));
+```
+This would result in different behavior because the original code fragment would not throw an error if the `callback` argument is undefined, but this modified code fragment would throw an error in that case.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(callback);
+```
+This would result in different behavior because the original code fragment would call the `callback` function with the given `args` and return a promise that resolves with the return value of the `callback` function, but this modified code fragment would resolve the promise with the `callback` function itself, without calling it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Q can't wrap a function that takes no arguments"));
+```
+This would result in different behavior because the original code fragment would wrap the `callback` function with a function that takes an array of arguments, but this modified code fragment would reject

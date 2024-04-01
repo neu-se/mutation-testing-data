@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(continuer, "throw")
+```
+This would result in different behavior because it would cause the `errback` function to be called with the `continuer` function as its `this` context, rather than the `generator` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+continuer.bind(generator, "throw")
+```
+This would result in different behavior because it would cause the `errback` function to be called with the `generator` function as its `this` context, rather than the `continuer` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+errback.bind(continuer, "throw")
+```
+This would result in different behavior because it would cause the `errback` function to be called with the `continuer` function as its `this` context, rather than the `generator` function.
+
+DONE.

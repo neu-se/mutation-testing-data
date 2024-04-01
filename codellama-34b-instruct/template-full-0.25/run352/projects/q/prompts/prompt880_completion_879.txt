@@ -1,0 +1,14 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(deferred)
+```
+This would result in different behavior because `bind` creates a new function that, when called, has its `this` set to the first argument passed to `bind`, which in this case is `deferred`. This means that the `makeNodeResolver` method will always be called with `deferred` as its `this` context, even if the function it returns is called with a different context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.call(deferred)
+```
+This would result in different behavior because `call` immediately calls the `makeNodeResolver` method with `deferred` as its `this` context, rather than returning a new function that can be called later. This means that the `makeNodeResolver` method will always be called with `deferred` as its `this` context, regardless of how the function it returns is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

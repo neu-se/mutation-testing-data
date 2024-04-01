@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.slice(0, -1)}`)
+```
+This would result in different behavior because the original code fragment includes the entire buffer, while this new code fragment only includes the buffer up to the second-to-last character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.toUpperCase()}`)
+```
+This would result in different behavior because the original code fragment includes the buffer as-is, while this new code fragment includes the buffer in all uppercase letters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', new Error(`Corrupted row at the end of the db: ${buffer.replace('foo', 'bar')}`)
+```
+This would result in different behavior because the original code fragment includes the buffer as-is, while this new code fragment includes the buffer with all occurrences of "foo" replaced with

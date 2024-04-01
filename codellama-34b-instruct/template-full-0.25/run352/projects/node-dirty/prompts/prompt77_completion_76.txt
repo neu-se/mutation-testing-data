@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'load', 1
+```
+This would result in different behavior because the `load` event would be emitted with a value of `1`, which would indicate that the database is not empty, even if it actually is. This could cause the application to behave incorrectly if it relies on the `load` event to determine whether the database is empty or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'load', -1
+```
+This would result in different behavior because the `load` event would be emitted with a value of `-1`, which would indicate that the database is empty, even if it actually is not. This could cause the application to behave incorrectly if it relies on the `load` event to determine whether the database is empty or not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'load', this._data.size
+```
+This would result in different behavior because the `load` event would be emitted with a value that is not `0`, even if the database is

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer(null)
+```
+This would result in different behavior because the `defer` function expects a function as its argument, but `null` is not a function. This would cause the `defer` function to throw an error, which would result in the promise being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer(function() {})
+```
+This would result in different behavior because the `defer` function expects a function as its argument, but the function passed to it does not have any side effects. This would cause the `defer` function to return a promise that is immediately resolved with the value `undefined`, which would result in the `then` method being called with `undefined` as its argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer(function() { throw new Error("Test error") })
+```
+This would result in different behavior because the `defer` function expects a function as its argument, but the function passed to it throws an error

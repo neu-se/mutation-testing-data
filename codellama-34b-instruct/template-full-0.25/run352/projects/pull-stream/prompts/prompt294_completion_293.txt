@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(err || true)
+```
+This would result in different behavior because the `last` variable is now being checked before the `cb` function is called, which could cause the `terminate` function to be called unnecessarily.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+last ? cb(err || true) : terminate(cb)
+```
+This would result in different behavior because the `last` variable is now being checked after the `cb` function is called, which could cause the `terminate` function to be called unnecessarily.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+last ? cb(err || true) : cb(err || true)
+```
+This would result in different behavior because the `last` variable is now being checked twice, which could cause the `cb` function to be called twice unnecessarily.
+
+DONE.

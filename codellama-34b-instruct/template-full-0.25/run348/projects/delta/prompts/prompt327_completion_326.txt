@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(Op.length(baseOp));
+```
+This would result in different behavior because it would delete the entire baseOp, rather than just the newline character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(baseOp), { 'delete': true });
+```
+This would result in different behavior because it would retain the entire baseOp, but with the 'delete' attribute set to true, which would cause it to be deleted in the inverted Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(baseOp), { 'delete': false });
+```
+This would result in different behavior because it would retain the entire baseOp, but with the 'delete' attribute set to false, which would cause it to be retained in the inverted Delta.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.push(null);
+```
+This would result in different behavior because it would add a null operation to the delta, which would cause the `concat` method to throw an error when trying to concatenate the null operation with the other operations in the delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.next());
+```
+This would result in different behavior because it would add the next operation from the other delta to the current delta, which would cause the `concat` method to concatenate the two deltas in a different way than the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(new Delta(otherIter.next()));
+```
+This would result in different behavior because it would create a new delta from the next operation from the other delta and add it to the current delta, which would cause the `concat` method to concatenate the two deltas in a different way than the original code.
+
+DONE.

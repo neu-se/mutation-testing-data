@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: [], all: [] };
+```
+This would result in different behavior because it would reset the `result` object for each country, instead of updating it with the new timezone information.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: result[country].current.concat(id), all: result[country].all.concat(id) };
+```
+This would result in different behavior because it would update the `result` object with the new timezone information, but it would do so in a way that would cause the `current` and `all` arrays to be concatenated with the `id` value, instead of just adding the `id` value to the arrays.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: result[country].current.filter((tz) => tz !== id), all: result[country].all.filter((tz) => tz !== id) };
+```
+This

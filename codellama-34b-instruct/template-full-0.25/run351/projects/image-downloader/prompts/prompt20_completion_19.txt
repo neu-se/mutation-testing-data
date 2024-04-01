@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+path.isRelative
+```
+This would result in different behavior because `path.isRelative` checks if the path is relative, whereas `path.isAbsolute` checks if the path is absolute. If the path is relative, the code would not reject the promise, even though it should.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.isAbsolute(options.dest)
+```
+This would result in different behavior because `path.isAbsolute` expects a string as its argument, whereas `options.dest` is an object. If the object is not a string, the code would throw an error, even though it should not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.isAbsolute(options.url)
+```
+This would result in different behavior because `path.isAbsolute` checks if the path is absolute, whereas `options.url` is a URL. If the URL is not absolute, the code would not reject the promise, even though it should.

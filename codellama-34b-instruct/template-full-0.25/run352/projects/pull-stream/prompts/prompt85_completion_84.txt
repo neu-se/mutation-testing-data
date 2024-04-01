@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb && function () {}
+```
+This would result in different behavior because the `&&` operator has a higher precedence than the `||` operator, so the `function () {}` would be evaluated first and then the result would be `&&` with `cb`. This would cause the `sink.abort` function to always return `undefined` instead of the expected `cb` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb || function () { throw new Error('abort') }
+```
+This would result in different behavior because the `||` operator would evaluate to `function () { throw new Error('abort') }` if `cb` is falsy, which would cause the `sink.abort` function to throw an error instead of returning `cb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb || function () { return null }
+```
+This would result in different behavior because the `||` operator would evaluate to `function () { return null }` if

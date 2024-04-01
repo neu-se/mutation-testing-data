@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'delete' &&
+        (priority || otherIter.peekType() !== 'delete')
+```
+This would result in different behavior because the original code fragment checks if the next operation in `thisIter` is an insertion, while the modified code fragment checks if it is a deletion. This change would cause the `transform` method to behave differently when the next operation in `thisIter` is a deletion.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'retain' &&
+        (priority || otherIter.peekType() !== 'retain')
+```
+This would result in different behavior because the original code fragment checks if the next operation in `thisIter` is an insertion or a deletion, while the modified code fragment checks if it is a retain. This change would cause the `transform` method to behave differently when the next operation in `thisIter` is a retain.
+
+Option 3: The PLACEHOLDER can

@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(array).all();
+```
+This would result in different behavior because `Q(array).all()` returns a promise that resolves to an array of promises, whereas `array.map(Q)` returns an array of values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(array).then(function(values) {
+    return values.map(Q);
+});
+```
+This would result in different behavior because `Q(array).then()` returns a promise that resolves to an array of values, whereas `array.map(Q)` returns an array of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(array).then(function(values) {
+    return values.map(function(value) {
+        return Q(value);
+    });
+});
+```
+This would result in different behavior because `Q(array).then()` returns a promise that resolves to an array of values, whereas `array.map(function(value)
