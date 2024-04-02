@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This would result in different behavior because it would cause the `set` method to always write to the database, even if the value being set is the same as the existing value. This could cause unnecessary writes and slow down the system.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.get(key).push(cbs);
+```
+This would result in different behavior because it would cause the `set` method to always append the callbacks to the existing list of callbacks for the given key, rather than replacing the list. This could cause the callbacks to be executed out of order, which could cause unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.slice());
+```
+This would result in different behavior because it would cause the `set` method to always create a new copy of the list of callbacks, rather than using the existing list. This could cause unnecessary memory

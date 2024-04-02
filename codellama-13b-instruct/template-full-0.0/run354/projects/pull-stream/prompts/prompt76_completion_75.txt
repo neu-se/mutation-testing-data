@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || false, done || function () {}
+```
+This would result in different behavior because the `abort || false` expression would always evaluate to `false`, causing the `sink.abort()` function to always return `false` regardless of the value of `abort`. This would cause the `read()` function to always be called with `false` as the first argument, which would cause the stream to continue reading data even if the `abort` flag is set to `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort || true, done || function () {}
+```
+This would result in different behavior because the `abort || true` expression would always evaluate to `true`, causing the `sink.abort()` function to always return `true` regardless of the value of `abort`. This would cause the `read()` function to always be called with `true` as the first argument, which would cause the stream to stop reading data even if the `abort` flag is set to `false`.
+
+Option

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+const cb of cbs.slice()
+```
+This would result in different behavior because the `slice()` method creates a shallow copy of the array, which would prevent the `cb` function from being called multiple times if the `cbs` array contains duplicate elements.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const cb of cbs.filter(cb => cb != null)
+```
+This would result in different behavior because the `filter()` method creates a new array containing only the elements that pass the test implemented by the provided function. In this case, the function checks if the `cb` function is not null, and only includes it in the new array if it is not null. This would prevent the `cb` function from being called if it is null, which could cause the program to crash or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const cb of cbs.map(cb => cb.bind(this))
+```
+This would result in different behavior because the `map

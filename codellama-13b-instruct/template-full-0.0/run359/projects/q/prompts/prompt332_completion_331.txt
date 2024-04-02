@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolve(result);
+```
+This would result in different behavior because the original code fragment resolves the promise with the result of the `descriptor[op].apply(promise, args)` call, while the new code fragment resolves the promise with the result of the `resolve(result)` call. This could potentially cause the promise to be resolved with a different value than the original code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reject(result);
+```
+This would result in different behavior because the original code fragment resolves the promise with the result of the `descriptor[op].apply(promise, args)` call, while the new code fragment rejects the promise with the result of the `reject(result)` call. This could potentially cause the promise to be rejected with a different reason than the original code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(result).then(resolve, reject);
+```
+This would result in different behavior because the original code fragment resol

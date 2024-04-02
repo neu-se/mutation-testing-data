@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver()
+```
+This would result in different behavior because the parentheses at the end of the function call would cause the function to be invoked immediately, rather than being passed as a reference to the `setTimeout` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver
+```
+This would result in different behavior because the reference to the `makeNodeResolver` function would be passed to `setTimeout`, rather than the function itself. This would cause the `setTimeout` function to be invoked immediately, rather than being scheduled to run later.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(deferred)
+```
+This would result in different behavior because the `bind` method would bind the `makeNodeResolver` function to the `deferred` object, creating a new function that would be passed to `setTimeout`. This would cause the `setTimeout` function to be invoked with a different context, which could potentially cause different

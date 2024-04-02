@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.when(value, fulfilled, rejected, progressed)
+```
+This would result in different behavior because the `Q.when` function is called with the `value` argument, which is not a promise, but a promise-like object. This would cause the `Q.when` function to return a promise that is resolved with the `value` argument, rather than the original promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(value, fulfilled, rejected, progressed).then(function (value) {
+    return value;
+})
+```
+This would result in different behavior because the `Q.when` function is called with the `value` argument, which is not a promise, but a promise-like object. This would cause the `Q.when` function to return a promise that is resolved with the `value` argument, rather than the original promise. Additionally, the `then` method is called on the returned promise, which would cause the promise to be resolved with the `value` argument, rather than

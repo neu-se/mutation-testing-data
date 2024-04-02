@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!otherIter.hasNext() &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because the `isEqual` function is called with the last element of `delta.ops` and `newOp`, which may not be the same as the last element of `other.ops`. This could cause the `compose` method to return a delta that is not the composition of the two deltas.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert' &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because the `isEqual` function is called with the last element of `delta.ops` and `newOp`, which may not be the same as the last element of `other.ops`. This could cause the `compose` method to return a delta that is not the composition of the two deltas.
+
+Option

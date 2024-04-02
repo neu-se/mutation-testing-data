@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolve(result)
+```
+This would result in different behavior because the `resolve` function is called with the result of the `descriptor[op].apply(promise, args)` expression, which could be a promise or a value. In the original code, the `resolve` function is only called if the `descriptor[op]` expression is truthy, which means that if `descriptor[op]` is a promise, it will be resolved with the value of the promise, rather than the promise itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+resolve(Q(result))
+```
+This would result in different behavior because the `resolve` function is called with the result of the `Q(result)` expression, which is a promise that resolves to the value of the `result` expression. In the original code, the `resolve` function is only called if the `descriptor[op]` expression is truthy, which means that if `descriptor[op]` is a promise, it will be resolved with the value of the promise, rather

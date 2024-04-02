@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+defer
+```
+This would result in different behavior because the `defer` keyword is used to defer the execution of a function until the current call stack is cleared. In the original code, the `defer` keyword is used to defer the execution of the `promiseDispatch` function until the current call stack is cleared, which is necessary to ensure that the `promiseDispatch` function is called after the current call stack is cleared. However, in the buggy code fragment, the `defer` keyword is not used, which means that the `promiseDispatch` function will be called immediately, which can cause the `promiseDispatch` function to be called before the current call stack is cleared, which can result in different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    self.promiseDispatch(function (value) {
+        if (done) {
+            return;
+        }
+        done = true;
+
+        deferred.resolve(_fulfilled(value));

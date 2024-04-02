@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.push(baseOp);
+```
+This would result in different behavior because the original code fragment pushes the `baseOp` onto the `inverted` delta, while the buggy code fragment pushes the `baseOp` onto the `inverted` delta twice. This would cause the `inverted` delta to contain duplicate operations, which could lead to unexpected behavior when the `inverted` delta is used.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(Op.length(baseOp));
+```
+This would result in different behavior because the original code fragment deletes the `baseOp` from the `inverted` delta, while the buggy code fragment deletes the `baseOp` from the `inverted` delta and then pushes it onto the `inverted` delta. This would cause the `inverted` delta to contain the `baseOp` twice, which could lead to unexpected behavior when the `inverted` delta is used.
+
+Option

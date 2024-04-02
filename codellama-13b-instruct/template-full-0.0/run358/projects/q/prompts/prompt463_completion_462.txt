@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections
+```
+This would result in different behavior because the `unhandledRejections` array would be used instead of the `reportedUnhandledRejections` array, which would cause the `process.emit("unhandledRejection", reason, promise);` line to be executed for every promise that is rejected, even if the reason has already been handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would be used instead of the `unhandledRejections` array, which would cause the `process.emit("unhandledRejection", reason, promise);` line to be executed only for promises that have not been handled, which would be a more accurate representation of the number of unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons
+```
+This would result in different behavior because the `unhand

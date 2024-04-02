@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections, promise
+```
+This would result in different behavior because the original code fragment is checking if the `promise` is in the `unhandledRejections` array, while the buggy code fragment is checking if the `promise` is in the `unhandledRejections` array and the `promise` is not in the `reportedUnhandledRejections` array. This would cause the buggy code fragment to report unhandled rejections that have already been reported, which could lead to false positives in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections, reportedUnhandledRejections, promise
+```
+This would result in different behavior because the original code fragment is checking if the `promise` is in the `unhandledRejections` array, while the buggy code fragment is checking if the `promise` is in both the `unhandledRejections` and `reportedUnhandledRejections` arrays. This would cause the buggy

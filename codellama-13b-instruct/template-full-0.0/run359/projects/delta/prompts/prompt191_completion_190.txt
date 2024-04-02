@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.retain = thisOp.retain;
+```
+This would result in different behavior because it would cause the `compose` method to always retain the entire length of the `thisOp`, regardless of whether the `otherOp` is a retain or a delete. This could cause the `compose` method to produce incorrect results in certain cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+newOp.retain = otherOp.retain;
+```
+This would result in different behavior because it would cause the `compose` method to always retain the entire length of the `otherOp`, regardless of whether the `thisOp` is a retain or a delete. This could cause the `compose` method to produce incorrect results in certain cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.retain = Math.min(thisOp.retain, otherOp.retain);
+```
+This would result in different behavior because it would cause the `compose` method to retain the minimum of

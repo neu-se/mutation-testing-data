@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+untrackRejection
+```
+This would result in different behavior because the `untrackRejection` function is called instead of `trackRejection`, which would cause the promise to be removed from the `unhandledRejections` array and the `unhandledReasons` array, and the `rejectionHandled` event to be emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+trackRejection(promise, reason)
+```
+This would result in different behavior because the `trackRejection` function is called with the `promise` and `reason` arguments, which would cause the promise to be added to the `unhandledRejections` array and the `unhandledReasons` array, and the `unhandledRejection` event to be emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+resetUnhandledRejections()
+```
+This would result in different behavior because the `resetUnhandledRejections` function is called, which would cause

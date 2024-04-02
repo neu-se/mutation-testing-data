@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!Number.isFinite(a['r']) || Number.isFinite(a['phi'])
+```
+This would result in different behavior because the `||` operator has a higher precedence than the `&&` operator, so the expression would be evaluated as `(!Number.isFinite(a['r']) || Number.isFinite(a['phi'])) && Number.isFinite(a['phi'])`, which would always be true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Number.isFinite(a['r']) && !Number.isFinite(a['phi'])
+```
+This would result in different behavior because the expression would be evaluated as `Number.isFinite(a['r']) && (!Number.isFinite(a['phi']) && Number.isFinite(a['phi']))`, which would always be false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Number.isFinite(a['r']) && Number.isFin

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx)
+```
+This would result in different behavior because the `matches` method is called on the `rule` object, whereas the original code fragment only references the `matches` property of the `rule` object. This could potentially cause the test to fail if the `matches` method is not properly implemented.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx) && rule.query(path, verb, ctx)
+```
+This would result in different behavior because the `matches` method is called on the `rule` object, and the `query` method is called on the `rule` object. This could potentially cause the test to fail if the `matches` method is not properly implemented, or if the `query` method is not properly implemented.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx)
+```
+This would result in different behavior because the `query` method is called on the `rule`

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_writeFile(file, obj, options)
+```
+This would result in different behavior because the original code fragment is a function call, while the buggy code fragment is a function definition. This would cause the code to fail at runtime with a "not a function" error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.writeFile(file, str, options)
+```
+This would result in different behavior because the original code fragment uses the `universalify` module to wrap the `fs.writeFile` function in a promise, while the buggy code fragment does not. This would cause the code to fail at runtime with a "promise not defined" error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.writeFileSync(file, str, options)
+```
+This would result in different behavior because the original code fragment uses the `universalify` module to wrap the `fs.writeFile` function in a promise, while the buggy code fragment uses the synchronous

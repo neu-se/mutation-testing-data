@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (abort) {
+  loop = false;
+  if (done) done(abort);
+  else if (abort && doneLackingErr) {
+    console.warn(doneLackingErr);
+    throw abort;
+  }
+}
+```
+This would result in different behavior because it would cause the loop to exit immediately if `abort` is truthy, regardless of whether `done` is defined or not. This could potentially cause the stream to be drained prematurely, which could have unintended consequences.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (abort) {
+  loop = false;
+  if (done) done(abort);
+  else if (abort && doneLackingErr) {
+    console.warn(doneLackingErr);
+    throw abort;
+  }
+} else if (op && false === op(data)) {
+  loop = false;
+  read(abort || true, done || function ()

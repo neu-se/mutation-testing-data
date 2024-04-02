@@ -1,0 +1,13 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!busy
+```
+This would result in different behavior because the `!` operator negates the value of `busy`, causing the `if` statement to always evaluate to `true`. This would cause the `read` function to be called even if the `abort` argument is `true`, which would result in the `abortCb` function being called with the `abort` argument, even if the `aborted` variable is `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+busy == false
+```
+This would result in different behavior because the `==` operator compares the value of `busy` to `false`, causing the `if` statement to only evaluate to `true` if `busy` is `false`. This would cause the `read` function to be called only if `busy` is `false`, which would result in the `abortCb` function being called only if `aborted` is `true` and `busy` is `false`.
+
+Option 3:

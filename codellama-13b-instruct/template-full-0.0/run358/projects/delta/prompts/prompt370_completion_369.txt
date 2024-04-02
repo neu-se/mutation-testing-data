@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.retain(1)
+```
+This would result in different behavior because the `retain` method is called with a constant value of `1`, which would cause the `transform` method to retain the first character of the delta, regardless of the input delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(thisOp))
+```
+This would result in different behavior because the `retain` method is called with the length of the current operation, which would cause the `transform` method to retain the entire operation, regardless of the input delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(thisOp), AttributeMap.transform(thisOp.attributes, otherOp.attributes, priority))
+```
+This would result in different behavior because the `retain` method is called with the length of the current operation and the transformed attributes, which would cause the `transform` method to retain the entire operation and apply the transformed attributes

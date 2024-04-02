@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb()
+```
+This would result in different behavior because the callback function `cb` would be called immediately, rather than being added to the queue. This could cause issues if the callback function relies on the data being persisted to disk.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb.call(this)
+```
+This would result in different behavior because the callback function `cb` would be called with the context of the `Dirty` class, rather than being called with the context of the caller. This could cause issues if the callback function relies on the context being correct.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb.bind(this)()
+```
+This would result in different behavior because the callback function `cb` would be bound to the context of the `Dirty` class, and then called immediately. This could cause issues if the callback function relies on the context being correct.
+
+DONE.

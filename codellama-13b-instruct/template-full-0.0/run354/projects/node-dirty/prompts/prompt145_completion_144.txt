@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain')
+```
+This would result in different behavior because the `drain` event would be emitted immediately after the `cork()` method is called, rather than waiting for the `drain` event to be emitted by the write stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('drain'))
+```
+This would result in different behavior because an error would be emitted immediately after the `cork()` method is called, rather than waiting for the `drain` event to be emitted by the write stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('close')
+```
+This would result in different behavior because the `close` event would be emitted immediately after the `cork()` method is called, rather than waiting for the `drain` event to be emitted by the write stream.
+
+DONE.

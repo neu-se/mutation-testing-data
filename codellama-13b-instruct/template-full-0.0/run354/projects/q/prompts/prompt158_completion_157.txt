@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error.stack
+```
+This would result in different behavior because the `makeStackTraceLong` function would not be called, and the stack trace of the `error` object would not be modified.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+error.stack + "\n" + STACK_JUMP_SEPARATOR + "\n" + promise.stack
+```
+This would result in different behavior because the stack trace of the `error` object would be concatenated with the stack trace of the `promise` object, and the `STACK_JUMP_SEPARATOR` string would be inserted between them.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+error.stack.split("\n")[0]
+```
+This would result in different behavior because only the first line of the stack trace of the `error` object would be used, and the rest of the stack trace would be discarded.
+
+DONE.

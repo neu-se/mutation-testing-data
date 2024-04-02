@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attributes).filter(key => attributes[key] != null)
+```
+This would result in different behavior because it would filter out any keys in the `attributes` object that have a value of `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attributes).map(key => attributes[key])
+```
+This would result in different behavior because it would return an array of all the values in the `attributes` object, rather than an object with the keys and values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attributes).reduce((copy, key) => {
+  if (attributes[key] != null) {
+    copy[key] = attributes[key];
+  }
+  return copy;
+}, {});
+```
+This would result in different behavior because it would create a new object with the same keys as the `attributes` object, but with only the non-null values.
+
+DONE.

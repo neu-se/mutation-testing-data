@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.push(op)
+```
+This would result in different behavior because it would push the entire op object to the inverted delta, rather than just the op.insert property. This could cause issues if the op object contains other properties that are not intended to be pushed to the inverted delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(op.insert)
+```
+This would result in different behavior because it would retain the op.insert property of the op object, rather than the entire op object. This could cause issues if the op object contains other properties that are not intended to be retained.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(op.insert)
+```
+This would result in different behavior because it would delete the op.insert property of the op object, rather than the entire op object. This could cause issues if the op object contains other properties that are not intended to be deleted.
+
+DONE.

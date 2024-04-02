@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.set(key, undefined, cb);
+```
+This would result in different behavior because it would remove the key from the database, rather than setting its value to undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, undefined);
+```
+This would result in different behavior because it would set the value of the key to undefined, rather than removing it from the database.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, () => {});
+```
+This would result in different behavior because it would set the value of the key to undefined, and then immediately call the callback function, rather than waiting for the data to be persisted to disk.
+
+DONE.

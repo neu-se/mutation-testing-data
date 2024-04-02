@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl.host != pageurl.host
+```
+This would result in different behavior because the condition would be inverted, and the function would return "external" for links that are actually internal.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl.host == pageurl.host && linkurl.subdomain != pageurl.subdomain
+```
+This would result in different behavior because the function would return "subdomain" for links that are actually on the same subdomain, but with a different subdomain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl.host == pageurl.host && linkurl.subdomain == pageurl.subdomain && linkurl.path != pageurl.path
+```
+This would result in different behavior because the function would return "samelevel" for links that are actually on the same level, but with a different path.
+
+DONE.

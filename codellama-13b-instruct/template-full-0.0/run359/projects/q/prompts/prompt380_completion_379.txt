@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.when(promise, function (value) {
+    return value;
+});
+```
+This would result in different behavior because it would cause the promise to be resolved with its original value, rather than the value returned by the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(promise, function (value) {
+    return Q.resolve(value);
+});
+```
+This would result in different behavior because it would cause the promise to be resolved with a new promise that is resolved with the original value, rather than the original value itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.when(promise, function (value) {
+    return Q.reject(value);
+});
+```
+This would result in different behavior because it would cause the promise to be rejected with the original value, rather than being resolved with the value returned by the callback.
+
+DONE.

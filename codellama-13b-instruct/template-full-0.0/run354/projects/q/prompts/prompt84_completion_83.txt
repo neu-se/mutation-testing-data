@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick()
+```
+This would result in different behavior because the `requestTick` function is called immediately, rather than being passed as a callback to `setTimeout`. This would cause the `flush` function to be called immediately, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setTimeout(requestTick, 0)
+```
+This would result in different behavior because the `requestTick` function is passed as a callback to `setTimeout`, which would cause it to be called asynchronously after a delay of 0 milliseconds. This would allow the `flush` function to be called at a later time, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setTimeout(function () { requestTick(); }, 0)
+```
+This would result in different behavior because the `requestTick` function is passed as a callback to `setTimeout`, which would cause it to be called asynchronously after a delay of

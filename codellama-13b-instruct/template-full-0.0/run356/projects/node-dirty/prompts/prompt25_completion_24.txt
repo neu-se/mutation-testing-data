@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb()
+```
+This would result in different behavior because the callback function `cb` would be called immediately, rather than being passed as an argument to the `setImmediate` function. This could cause the callback function to be executed before the `setImmediate` function is called, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+setImmediate(cb)
+```
+This would result in different behavior because the `setImmediate` function would be called with the callback function `cb` as an argument, rather than being called with no arguments. This could cause the callback function to be executed later than expected, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(() => { if (cb) cb(); this.emit('drain'); })
+```
+This would result in different behavior because the `setImmediate` function would be called with a function that includes a call to the callback function `cb`, rather than being called with no

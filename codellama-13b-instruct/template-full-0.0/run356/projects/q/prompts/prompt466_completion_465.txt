@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport === -1
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would not be updated, and the `process.emit("rejectionHandled", unhandledReasons[at], promise);` line would not be executed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+atReport !== -1 && atReport !== 0
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would be updated, and the `process.emit("rejectionHandled", unhandledReasons[at], promise);` line would be executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+atReport !== -1 && atReport !== 0 && atReport !== 1
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would be updated, and the `process.emit("rejectionHandled", unhandledReasons[at], promise);` line would be executed.

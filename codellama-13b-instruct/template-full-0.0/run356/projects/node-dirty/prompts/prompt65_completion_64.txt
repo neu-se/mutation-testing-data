@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.destroy()
+```
+This would result in different behavior because the `destroy()` method is called on the write stream, which would cause the stream to be closed and any pending writes to be discarded. This could result in data loss if the data is not yet persisted to disk.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.end()
+```
+This would result in different behavior because the `end()` method is called on the write stream, which would cause the stream to be closed and any pending writes to be flushed to disk. This could result in data loss if the data is not yet persisted to disk.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => this._writeStream.close()
+```
+This would result in different behavior because the `close()` method is called on the write stream, which would cause the stream to be closed and any pending writes to be flushed to disk. This could result in data loss if the data

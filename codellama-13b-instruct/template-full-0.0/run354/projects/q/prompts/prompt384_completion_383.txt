@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).thenResolve
+```
+This would result in different behavior because the `callback.fcall(value)` expression would be evaluated before the `thenResolve` method is called, which would cause the callback to be called with the original value instead of the resolved value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).thenResolve(value)
+```
+This would result in different behavior because the `thenResolve` method would be called with the original value instead of the resolved value, which would cause the callback to be called with the original value instead of the resolved value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).thenResolve(value).then(function (value) { return value; })
+```
+This would result in different behavior because the `thenResolve` method would be called with the original value instead of the resolved value, which would cause the callback to be called with the original value instead of

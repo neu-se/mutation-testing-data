@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  cbed = true
+  if(end = end || abort) {
+    loop = false
+    if(done) done(end === true ? null : end)
+    else if(end && end !== true) {
+      console.warn(doneLackingErr)
+      throw end
+    }
+  }
+  else if(op && false === op(data) || abort) {
+    loop = false
+    read(abort || true, done || function () {})
+  }
+  else if(!loop){
+    next()
+  }
+})
+```
+This would result in different behavior because the `read` function is called with a `null` argument, which would cause the `read` function to return `null` instead of calling the callback function. This would cause the `sink` function to return `null` instead of calling the `done` callback function, which would cause the `drain` function to return `null` instead of calling the `done` callback function.

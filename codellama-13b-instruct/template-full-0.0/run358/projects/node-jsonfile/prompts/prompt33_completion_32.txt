@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because the `writeFileSync` method is synchronous, while the original code uses the `writeFile` method which is asynchronous. This could cause issues if the code relies on the asynchronous behavior of `writeFile`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile, { encoding: 'utf8' })
+```
+This would result in different behavior because the `writeFile` method takes an `encoding` option, which is not present in the original code. This could cause issues if the code relies on the `encoding` option being present.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile, { mode: 0o666 })
+```
+This would result in different behavior because the `writeFile` method takes a `mode` option, which is not present in the original code.

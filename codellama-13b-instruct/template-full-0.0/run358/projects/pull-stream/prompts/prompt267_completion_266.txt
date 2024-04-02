@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end || true
+```
+This would result in different behavior because the `||` operator will return the first truthy value, which in this case is `true`, causing the `if` statement to always evaluate to `true`. This would cause the `nextStream()` function to be called, which would result in the stream being flattened, even if the current stream is not empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && true
+```
+This would result in different behavior because the `&&` operator will return the first falsy value, which in this case is `false`, causing the `if` statement to always evaluate to `false`. This would cause the `nextChunk()` function to be called, which would result in the current chunk being read, even if the current stream is empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end == true
+```
+This would result in different behavior because the `==` operator will perform a type-safe comparison, which in this case would

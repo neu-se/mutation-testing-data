@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read(abort, function(err) {
+  cb(err || abort)
+})
+```
+This would result in different behavior because the original code fragment `cb(err || abort)` would only call the callback function with an error if `err` is truthy, but the new code fragment `cb(err || abort)` would call the callback function with an error if `abort` is truthy as well. This could potentially cause the test suite to fail, as the test may be expecting the callback function to be called with an error if `err` is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(abort, function(err) {
+  cb(err)
+})
+```
+This would result in different behavior because the original code fragment `cb(err || abort)` would call the callback function with an error if `err` is truthy or `abort` is truthy, but the new code fragment `cb(err)` would only call the callback function with an error if `err` is

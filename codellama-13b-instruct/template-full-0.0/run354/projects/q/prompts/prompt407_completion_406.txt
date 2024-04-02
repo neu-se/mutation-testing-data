@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) || isPromiseAlike(value)
+```
+This would result in different behavior because it would allow the `nearer` function to return a promise-like object that is not a promise, which could cause issues in the rest of the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) && value.inspect().state === "fulfilled"
+```
+This would result in different behavior because it would only allow the `nearer` function to return a promise that is fulfilled, which could cause issues in the rest of the code if the promise is not fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise(value) && value.inspect().state !== "rejected"
+```
+This would result in different behavior because it would only allow the `nearer` function to return a promise that is not rejected, which could cause issues in the rest of the code if the promise is rejected.
+
+DONE

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+result[country]
+```
+This would result in different behavior because the `!` operator is removed, which would cause the `Object.assign` method to be called even if the `result[country]` object already exists. This could lead to unexpected behavior if the `Object.assign` method is not idempotent.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!result[country] && Object.assign(result, { [country]: { current: [], all: [] } })
+```
+This would result in different behavior because the `&&` operator is added, which would cause the `Object.assign` method to be called only if the `result[country]` object does not already exist. This could lead to unexpected behavior if the `Object.assign` method is not idempotent.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result[country] || Object.assign(result, { [country]: { current: [], all: [] } })
+```
+This would result in different

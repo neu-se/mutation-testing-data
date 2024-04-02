@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+onEnd = null
+```
+This would result in different behavior because the `onEnd` function would be set to `null`, which would cause the stream to not call the `onEnd` function when the stream ends.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onEnd = function () {}
+```
+This would result in different behavior because the `onEnd` function would be set to an empty function, which would cause the stream to not call the `onEnd` function when the stream ends.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onEnd = function (abort) {
+  if (abort) {
+    console.log("Aborting stream");
+  }
+}
+```
+This would result in different behavior because the `onEnd` function would be set to a function that logs a message to the console when the stream is aborted.
+
+DONE.

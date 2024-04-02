@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)()
+```
+This would result in different behavior because the original code fragment returns a promise that resolves to the return value of the generator function, while the buggy code fragment returns a promise that resolves to the return value of the `Q.async` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)
+```
+This would result in different behavior because the original code fragment calls the `Q.async` function and immediately invokes the returned function, while the buggy code fragment returns a reference to the `Q.async` function without calling it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).apply(this, arguments)
+```
+This would result in different behavior because the original code fragment calls the `Q.async` function with the `this` context and the `arguments` object, while the buggy code fragment calls the `Q.async` function with the `this` context and the `

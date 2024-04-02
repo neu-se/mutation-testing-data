@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+file, str, options, null
+```
+This would result in different behavior because the additional `null` argument would cause the `fs.writeFile` function to throw an error, which would be caught by the `universalify.fromCallback` function and returned as a rejected promise. This would cause the `writeFile` function to return a rejected promise, which would be caught by the `writeFileSync` function and returned as `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+file, str, options, undefined
+```
+This would result in different behavior because the additional `undefined` argument would cause the `fs.writeFile` function to throw an error, which would be caught by the `universalify.fromCallback` function and returned as a rejected promise. This would cause the `writeFile` function to return a rejected promise, which would be caught by the `writeFileSync` function and returned as `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+file, str, options

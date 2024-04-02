@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+"(module.js:1234567890)"
+```
+This would result in different behavior because the buggy code fragment would cause the `isNodeFrame` function to return `true` for any stack trace line that contains the string "module.js", regardless of the actual line number. This could cause the `isInternalFrame` function to return `true` for stack trace lines that are not actually internal to the Q library, leading to incorrect filtering of stack traces.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"(module.js:1234567890:1234567890)"
+```
+This would result in different behavior because the buggy code fragment would cause the `isNodeFrame` function to return `true` for any stack trace line that contains the string "module.js" and a line number, regardless of the actual line number. This could cause the `isInternalFrame` function to return `true` for stack trace lines that are not actually internal

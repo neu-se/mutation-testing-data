@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes
+```
+This would result in different behavior because the `lastOp.attributes` check is now included, which would cause the `retain` operation to be treated as a `delete` operation if the attributes are present.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes
+```
+This would result in different behavior because the `!lastOp.attributes` check is now included, which would cause the `retain` operation to be treated as a `delete` operation if the attributes are not present.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+lastOp && typeof lastOp.retain === 'number' && lastOp.attributes.length === 0
+```
+This would result in different behavior because the `lastOp.attributes.length === 0` check is now included, which would cause the `retain` operation to

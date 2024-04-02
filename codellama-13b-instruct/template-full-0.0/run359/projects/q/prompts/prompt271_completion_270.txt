@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+resolvedPromise.promiseDispatch
+```
+This would result in different behavior because the `resolvedPromise` object would be passed to the `promiseDispatch` method instead of the `resolvedPromise` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+})
+```
+This would result in different behavior because the `promiseDispatch` method would be called asynchronously using `Q.nextTick`, which would cause the `promiseDispatch` method to be called after the `valueOf` method has returned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.nextTick(function () {
+    resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+})
+```
+This would result in different behavior because the `promiseDispatch` method would be called asynchronously using `Q.nextTick

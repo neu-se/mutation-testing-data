@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain')
+```
+This would result in different behavior because the `drain` event would be emitted immediately after the `cork()` method is called, rather than waiting for the write stream to drain. This could cause the `drain` event to be emitted multiple times, which could lead to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('error', new Error('Write stream closed unexpectedly'))
+```
+This would result in different behavior because an error would be emitted if the write stream is closed unexpectedly, rather than waiting for the write stream to drain. This could cause the `drain` event to be emitted multiple times, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites)
+```
+This would result in different behavior because the `drain` event would be emitted with the number of in-flight writes

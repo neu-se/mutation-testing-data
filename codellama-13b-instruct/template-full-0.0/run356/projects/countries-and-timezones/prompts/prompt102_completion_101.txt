@@ -1,0 +1,16 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(tzs).reduce((prev, key) => {
+  if (!tzs[key].deprecated) prev[key] = tzs[key];
+  return prev;
+}, {});
+```
+This would result in different behavior because the original code fragment uses `Object.assign` to merge the `prev` object with the `tzs[key]` object, while this code fragment uses the `reduce` method to create a new object with the same keys as the `tzs` object, but with the values replaced by the `tzs[key]` object if the `deprecated` property is false. This would result in a different output if the `deprecated` property is true for any of the timezones in the `tzs` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.values(tzs).reduce((prev, tz) => {
+  if (!tz.deprecated) prev.push(tz);
+  return prev;
+}, []);
+```

@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.when(object, op, args)
+```
+This would result in different behavior because the `Q.when` function is used to wait for a promise to be fulfilled before invoking the `dispatch` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.when(object, op, args).then(function(result) {
+    return result;
+})
+```
+This would result in different behavior because the `then` method is used to chain a new promise that resolves with the result of the `dispatch` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.when(object, op, args).then(function(result) {
+    return Q.when(result);
+})
+```
+This would result in different behavior because the `then` method is used to chain a new promise that resolves with the result of the `dispatch` method, which is then wrapped in another promise using the `Q.when` function.
+
+DONE.

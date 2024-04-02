@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && !this._waitForDrain
+```
+This would result in different behavior because the `||` operator is replaced with `&&`, which would cause the `flush()` method to only be called when the queue is not empty and the write stream is not waiting for drain. This would result in the `flush()` method being called more frequently, which could potentially cause performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size || this._waitForDrain
+```
+This would result in different behavior because the `||` operator is replaced with `&&`, which would cause the `flush()` method to only be called when the queue is empty or the write stream is waiting for drain. This would result in the `flush()` method being called less frequently, which could potentially cause performance issues.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0 && !this._waitForDrain
+```
+This would result in different behavior because

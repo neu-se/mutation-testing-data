@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object_create(null)
+```
+This would result in different behavior because `object_create(null)` creates a new object with no prototype, whereas `object_create(defer.prototype)` creates a new object with the prototype of the `defer` function. This could potentially cause issues if the `defer` function is not intended to be used as a prototype.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object_create(defer.prototype, {
+    promise: {
+        value: promise,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    }
+})
+```
+This would result in different behavior because it creates a new object with the prototype of the `defer` function and sets the `promise` property to the `promise` object. This could potentially cause issues if the `defer` function is not intended to be used as a prototype.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.create

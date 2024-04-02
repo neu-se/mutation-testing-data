@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.end()
+```
+This would result in different behavior because the `end()` method is called on the write stream, which would cause the stream to be closed and any pending writes to be flushed. This could potentially cause the `drain` event to be emitted earlier than expected, which could affect the behavior of the program.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.destroy()
+```
+This would result in different behavior because the `destroy()` method is called on the write stream, which would cause the stream to be destroyed and any pending writes to be lost. This could potentially cause the program to crash or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork()
+```
+This would result in different behavior because the `cork()` method is called on the write stream, which would cause any pending writes to be buffered and not flushed to the underlying file system. This could potentially cause the program to run out

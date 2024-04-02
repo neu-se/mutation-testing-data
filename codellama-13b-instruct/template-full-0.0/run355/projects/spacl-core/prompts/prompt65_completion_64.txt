@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+...rules.slice()
+```
+This would result in different behavior because the `slice()` method creates a shallow copy of the array, whereas the original code fragment creates a deep copy. This could cause issues if the `rules` array contains objects that are mutated by the `push()` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+...rules.map((rule) => rule.clone())
+```
+This would result in different behavior because the `map()` method creates a new array with the results of calling the `clone()` method on each element in the original array. This could cause issues if the `rules` array contains objects that are mutated by the `clone()` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+...rules.filter((rule) => rule.matches(path, ctx))
+```
+This would result in different behavior because the `filter()` method creates a new array with only the elements that pass the test implemented by the `matches()` method. This could cause issues if the

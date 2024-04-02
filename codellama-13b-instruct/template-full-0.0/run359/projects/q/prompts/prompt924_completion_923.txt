@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.slice(1)
+```
+This would result in different behavior because it would remove the first element of the `nodeArgs` array, which is the `deferred.makeNodeResolver()` function. This would cause the `Q.nfbind` function to return a promise that resolves to the result of the `callback` function, rather than a promise that resolves to the result of the `callback` function and the `deferred.makeNodeResolver()` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.concat(deferred.makeNodeResolver())
+```
+This would result in different behavior because it would add the `deferred.makeNodeResolver()` function to the end of the `nodeArgs` array, rather than replacing the `nodeArgs` array with the `deferred.makeNodeResolver()` function. This would cause the `Q.nfbind` function to return a promise that resolves to the result of the `callback` function and the `deferred.makeNodeResolver()` function, rather than a

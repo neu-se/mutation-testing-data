@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(op));
+```
+This would result in different behavior because it would retain the entire length of the op, rather than just the retain attribute.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(op.retain);
+```
+This would result in different behavior because it would retain the retain attribute of the op, rather than just the length of the op.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(op.retain, AttributeMap.invert(op.attributes, baseOp.attributes));
+```
+This would result in different behavior because it would retain the retain attribute of the op, as well as the inverted attributes of the op and the base op.
+
+DONE.

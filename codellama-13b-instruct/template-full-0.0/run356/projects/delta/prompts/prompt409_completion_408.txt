@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.retain(Op.length(thisIter.next()));
+```
+This would result in different behavior because it retains the length of the next operation in the iterator, rather than the operation itself. This could cause issues if the operation is a delete, as it would retain the length of the deleted text rather than the retained text.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherIter.next());
+```
+This would result in different behavior because it pushes the next operation in the other iterator onto the delta, rather than retaining it. This could cause issues if the operation is a delete, as it would push the deleted text onto the delta rather than retaining it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.retain(
+  transformedData,
+  AttributeMap.transform(
+    thisOp.attributes,
+    otherOp.attributes,
+    priority,
+  ),
+);
+```
+This would result in different behavior because it retains the transformed

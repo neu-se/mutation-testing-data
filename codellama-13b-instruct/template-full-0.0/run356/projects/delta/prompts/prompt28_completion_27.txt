@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base).filter(key => base[key] !== attr[key])
+```
+This would result in different behavior because it would only return the keys that have a different value in the `base` and `attr` objects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base).map(key => base[key])
+```
+This would result in different behavior because it would return an array of values from the `base` object, rather than an object with the same keys and values as the `base` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base).reduce((memo, key) => {
+  if (base[key] !== attr[key]) {
+    memo[key] = base[key];
+  }
+  return memo;
+}, {})
+```
+This would result in different behavior because it would only return the keys and values from the `base` object that have a different value in the

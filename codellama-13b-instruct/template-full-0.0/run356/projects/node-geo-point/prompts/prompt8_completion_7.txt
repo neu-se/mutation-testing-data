@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty('type')
+```
+This would result in different behavior because the `hasOwnProperty` method is called with a string argument, which would cause the method to return `false` even if the `type` property exists on the `point` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty.call(point, 'type')
+```
+This would result in different behavior because the `hasOwnProperty` method is called with the `call` method, which would cause the method to be called with the `point` object as the `this` value, and the `type` property as the first argument. This would cause the method to return `true` if the `type` property exists on the `point` object, even if it is inherited from a prototype.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.hasOwnProperty.call(point, 'type')
+```
+This would result in different behavior because

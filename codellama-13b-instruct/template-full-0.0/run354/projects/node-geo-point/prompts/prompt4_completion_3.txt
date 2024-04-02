@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!isObject(point) || point.type !== 'Point'
+```
+This would result in different behavior because it would check if the `point` argument is an object and if its `type` property is equal to `'Point'`, which is not the case in the original code. This would cause the `fromGeoJSON` method to throw a `TypeError` if the `point` argument is not an object or if its `type` property is not equal to `'Point'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isObject(point) || !point.hasOwnProperty('type') || !point.hasOwnProperty('coordinates')
+```
+This would result in different behavior because it would check if the `point` argument is an object and if it has the `type` and `coordinates` properties, which is not the case in the original code. This would cause the `fromGeoJSON` method to throw a `TypeError` if the `point` argument is not an object or if it does

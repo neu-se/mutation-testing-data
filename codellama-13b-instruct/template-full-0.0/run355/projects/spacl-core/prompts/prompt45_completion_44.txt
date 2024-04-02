@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+part.match(/:.+/) === null
+```
+This would result in different behavior because the `match` method would return `null` if the string does not contain any colon-prefixed segments, whereas the original code fragment would return `true` in that case. This could potentially cause the `Matcher` class to produce incorrect results if the path specification contains no colon-prefixed segments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+part.match(/:.+/) !== undefined
+```
+This would result in different behavior because the `match` method would return `undefined` if the string does not contain any colon-prefixed segments, whereas the original code fragment would return `true` in that case. This could potentially cause the `Matcher` class to produce incorrect results if the path specification contains no colon-prefixed segments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+part.match(/:.+/) !== null && part.match(/:.+/)[0] === part

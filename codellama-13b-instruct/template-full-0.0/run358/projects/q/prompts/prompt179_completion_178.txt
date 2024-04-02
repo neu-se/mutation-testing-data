@@ -1,0 +1,12 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+stackLine.indexOf("(node.js:") !== -1;
+```
+This would result in different behavior because it would cause the `isNodeFrame` function to always return `true`, regardless of whether the stack line contains the string "(node.js:". This could cause the `isInternalFrame` function to return `true` for stack lines that are not actually internal frames, which could lead to incorrect behavior in the `makeStackTraceLong` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stackLine.indexOf("(node.js:") !== -1 || stackLine.indexOf("(module.js:") !== -1;
+```
+This would result in different behavior because it would cause the `isNodeFrame` function to return `true` for stack lines that contain either "(node.js:" or "(module.js:". This could cause the `isInternalFrame` function to return `true` for stack lines that are not actually internal frames, which could lead to incorrect behavior in the `makeStackTraceLong` function.
+

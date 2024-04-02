@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream(<PLACEHOLDER>)
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `if` statement would be executed differently. In the original code, the `if` statement would only be executed if `err` is truthy. In the modified code, the `if` statement would be executed if `err` is truthy or if `err` is equal to `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream(<PLACEHOLDER>)
+    else read(true, function(abortErr)

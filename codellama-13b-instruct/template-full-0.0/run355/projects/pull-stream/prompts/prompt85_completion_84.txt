@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb || function () { throw new Error('Test error') }
+```
+This would result in different behavior because the `throw` statement would cause the `sink` function to throw an error, which would be caught by the `try` block in the `drain` function. This would cause the `drain` function to return an error, which would be passed to the `done` callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb || function () { return 'Test error' }
+```
+This would result in different behavior because the `return` statement would cause the `sink` function to return a string, which would be passed to the `done` callback. This would cause the `drain` function to return a string, which would be passed to the `done` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb || function () { console.log('Test error') }
+```
+This would result in different behavior because the `console.log` statement would cause
