@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+inverted.push(new Op('retain', { length: op.retain }))
+```
+This would result in different behavior because it pushes a new `Op` object with `'retain'` type and `{ length: op.retain }` attributes, instead of just retaining the length.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+inverted.retain(op.retain)
+```
+This would result in different behavior because it directly passes `op.retain` to the `retain` method, which might not be the expected behavior if `op.retain` is a number.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+inverted.retain(op.retain, op.attributes)
+```
+This would result in different behavior because it passes `op.attributes` to the `retain` method, which might not be the intended behavior if `op.attributes` should be transformed or inverted

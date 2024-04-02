@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.regex.test(path) && verb in this.verbs
+```
+This would result in different behavior because `this.regex.test(path)` checks if the regex has a match in the path as a string, while `this.matches(path, ctx)` checks if the regex matches the path string and if the context properties match the captured groups.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.verbs.hasOwnProperty(verb)
+```
+This would result in different behavior because `verb in this.verbs` checks if the verb is a key in the verbs object, while `this.verbs.hasOwnProperty(verb)` checks if the verb is an own property of the verbs object, excluding inherited properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.regex.source === path && verb in this.verbs
+```
+This would result in different behavior because `this.regex.source === path` checks if

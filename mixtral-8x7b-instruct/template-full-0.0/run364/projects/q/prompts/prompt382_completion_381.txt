@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return callback.fcall(value); }
+```
+This would result in different behavior because the original code includes `.thenResolve(value)` after the callback, ensuring that the original value is passed through even if the callback throws an exception. The proposed change would not include this behavior, potentially changing the resolved value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return callback.fcall(); }
+```
+This would result in different behavior because the original code passes the value to the callback, while the proposed change does not pass any arguments to the callback. This would likely cause the callback to throw an error, changing the behavior of the `tap` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return value; }
+```
+This would result in different behavior because the original code includes the callback's return value in the promise chain, allowing the callback to modify the resolved value. The proposed change would ignore the callback'

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+allResolved, "allResolved", "all"
+```
+This would result in different behavior because the `allSettled` function would be using the `all` function instead of its own implementation, which could lead to incorrect results when handling an array of promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+allResolved, "allResolved", function() { return Promise.resolve(); }
+```
+This would result in different behavior because the `allSettled` function would be using a function that always returns a resolved promise, instead of using the original `allResolved` function. This would cause the `allSettled` function to always resolve immediately, even if the input promises are still pending.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+allResolved, "allResolved", Q.reject("Placeholder error")
+```
+This would result in different behavior because the `allSettled` function would be using a rejected promise

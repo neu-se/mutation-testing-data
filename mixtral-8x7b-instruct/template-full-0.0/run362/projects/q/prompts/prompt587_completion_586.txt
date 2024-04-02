@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).then(null, Q.reject)
+```
+This would result in different behavior because the error handling would change. In the original code, if an error occurs within the generator function, it would propagate until caught or escape the function, resulting in a rejection for the returned promise. However, in this modified code, any error would be immediately rejected, potentially masking issues within the generator function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(() => makeGenerator())
+```
+This would result in different behavior because the context of the generator function would change. In the original code, the generator function is called with the original context (`this` value). In this modified code, the generator function is called within an arrow function, changing the context to the global object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).spread(fulfilled, rejected)
+```
+This would result in different behavior

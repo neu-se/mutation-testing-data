@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+global.process.emit
+```
+This would result in different behavior because it emits the 'drain' event at the global process level instead of the current instance of Dirty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('invalid_event')
+```
+This would result in different behavior because it emits an 'invalid\_event' that is not handled by the Dirty class, and therefore, would not trigger any expected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.emit
+```
+This would result in different behavior because it emits the 'drain' event on the `_writeStream` object instead of triggering the 'drain' event handler function in the Dirty class.
+
+DONE.

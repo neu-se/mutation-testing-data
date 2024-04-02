@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because the `array_indexOf` method would not find the `promise` in the empty array, and therefore not remove it from the `reportedUnhandledRejections` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections
+```
+This would result in different behavior because `unhandledRejections` is the array that stores the promises with unhandled rejections, not the array that stores the promises with unhandled rejections that have been reported.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+reportedUnhandledRejections.slice()
+```
+This would result in different behavior because `slice()` creates a shallow copy of the array, so changes to the original `reportedUnhandledRejections` array would not be reflected in the copy. This means that the `process.emit("rejectionHandled")` method would not be called for the promises with handled

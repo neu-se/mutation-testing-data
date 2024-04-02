@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+inverted.retain = undefined;
+```
+This would result in different behavior because it would reassign the `retain` method of the `inverted` Delta object to `undefined`, causing errors when the `retain` method is called later in the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+inverted['noRetain'] = inverted.retain;
+inverted.retain = () => {};
+```
+This would result in different behavior because it would create a new property `noRetain` that references the original `retain` method, and then replace the `retain` method with an empty function, causing the `retain` method to have no effect when called later in the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+const originalRetain = inverted.retain;
+inverted.retain = (length: number, attributes?: AttributeMap) => {
+  originalRetain(length *

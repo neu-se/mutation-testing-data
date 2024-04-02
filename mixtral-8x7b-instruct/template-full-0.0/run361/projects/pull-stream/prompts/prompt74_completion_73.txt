@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read ? read(abort, cb || function () {}) : true
+```
+This would result in different behavior because if `read` is falsy, it will always return `true` instead of invoking the callback `cb` with an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && true
+```
+This would result in different behavior because it will only return `true` when `abort` is truthy, whereas the original expression always returns `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+global.abort || true
+```
+This would result in different behavior because it checks for the global variable `abort` instead of the local variable, and will always return `true` if `global.abort` is not defined.
+
+DONE.

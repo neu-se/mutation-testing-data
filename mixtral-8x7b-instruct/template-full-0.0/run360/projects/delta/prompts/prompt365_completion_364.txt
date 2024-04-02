@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peek().type !== 'insert')
+```
+This would result in different behavior because it checks the type of the next operation in `otherIter` instead of checking if `otherIter` has a next operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peekLength() > 0)
+```
+This would result in different behavior because it checks if there is any operation in `otherIter` instead of checking the type of the next operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' && (priority || otherIter.peekLength() > 0 && otherIter.peek().type === 'insert')

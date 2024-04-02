@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'mice'
+```
+This would result in different behavior because the original code adds a rule for the word "mouse", but this change directly adds the exception for "mouse" as a string, bypassing the rule-adding function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function addRule(match, result) {
+  rules.push([match, result])
+  return plural;
+}
+```
+This would result in different behavior because the original code uses `unshift` to add rules to the beginning of the `rules` array, but this change uses `push` to add rules to the end of the array, potentially affecting the order in which rules are applied.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function addRule(match, result) {
+  rules.unshift([match, result])
+  return function(w) { return w + 'es' };
+}

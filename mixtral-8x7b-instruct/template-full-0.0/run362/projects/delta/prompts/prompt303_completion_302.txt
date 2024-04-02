@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+iter.next().attributes || {}
+```
+This would result in different behavior because the `attributes` property is being accessed directly from the result of `iter.next()`, which might not have an `attributes` property, and if it doesn't, it will return `undefined`. The original code uses a default value of `{}` in case `attributes` is not present.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+iter.next().insert || ' '
+```
+This would result in different behavior because the `insert` property is being accessed directly from the result of `iter.next()`, which might not have an `insert` property, and if it doesn't, it will return `undefined`. The original code uses a default value of `NULL_CHARACTER` in case `insert` is not present.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+iter.next().retain || 0
+```
+This would result in different behavior because the

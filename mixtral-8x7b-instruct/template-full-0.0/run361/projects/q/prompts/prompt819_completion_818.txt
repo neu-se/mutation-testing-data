@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because the `progress` callback is not being passed to the promise, and an empty function is called instead. This would prevent any progress notifications from being handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because `null` is being passed as the third argument to the promise's `then` method, instead of the `progress` callback. This would cause the progress notifications to be ignored.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.progress
+```
+This would result in different behavior because it would create an infinite recursion, causing a stack overflow. The `Q.progress` function calls `Q(object).then(void 0, void 0, progressed)`, which would call `Q.progress` again, and so on.
+
+DONE.

@@ -1,0 +1,22 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+a
+```
+This would result in different behavior because it compares the keys of object 'a' instead of 'b' in the `diff` function, potentially missing mismatched values between the two objects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(a).concat(Object.keys(c))
+```
+This would result in different behavior because it introduces a new variable 'c' that is not defined or passed as an argument in the `diff` function, causing an error or unintended results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attributes).reduce<AttributeMap>((attrs, key) => {
+  if (!isEqual(a[key], b[key])) {
+    attrs[key] = b[key] || null;
+  }
+  return attrs;
+}, {})
+```
+This would result in different behavior because it uses the '||' operator instead of the conditional operator '? :

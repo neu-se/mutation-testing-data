@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.apply(Q, [object]).timeout
+```
+This would result in different behavior because `Q.when` is used instead of `Q(object)`. `Q.when` is used to wrap an immediate value into a promise, but it has slightly different behavior when dealing with null or undefined values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).delay(ms)
+```
+This would result in different behavior because `Q(object).delay(ms)` is used instead of `Q(object).timeout(ms, error)`. The `delay` method delays the resolution of a promise, while the `timeout` method rejects the promise if it is not resolved within a specified time.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).thenResolve().timeout
+```
+This would result in different behavior because `Q(object).thenResolve()` is used instead of `Q(object)`. The `

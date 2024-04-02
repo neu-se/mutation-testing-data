@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return callback; }
+```
+This would result in different behavior because the returned promise from `finally` would always resolve to a function that returns the original callback, rather than the actual resolved/rejected value of the original promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+callback.bind(this)
+```
+This would result in different behavior because if the callback function uses `this` within its implementation, the value of `this` would now be bound to the global object (or `undefined` in strict mode) instead of the promise instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+callback()
+```
+This would result in different behavior because the callback function would be invoked immediately, rather than being passed as a function reference to be called when the promise is settled.
+
+DONE.

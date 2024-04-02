@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read.bind(this)
+```
+This would result in different behavior because it changes the value of `this` within the `read` function, potentially causing issues if the `read` function relies on the value of `this`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort, cb || function () {})
+```
+This would result in different behavior because it passes `abort` as the first argument to `read`, whereas the original code only passes `abort` if it is truthy. This could cause issues if `read` behaves differently depending on the value of its first argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+global.read(abort, cb || function () {})
+```
+This would result in different behavior because it references the `read` global variable, rather than the `read` variable declared within the `drain` function. This could cause issues if a global `read` variable exists and behaves differently than the local `read` variable.

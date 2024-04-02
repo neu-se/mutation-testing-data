@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve.apply(deferred, [null].concat(nodeArgs))
+```
+This would result in different behavior because the NodeJS continuation passing function would receive a resolved promise instead of a Node-style callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(new Error("Manual rejection"))
+```
+This would result in different behavior because the promise would be rejected immediately, regardless of the NodeJS function's outcome.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+nodeArgs.push(function () { throw new Error("Manual rejection") })
+```
+This would result in different behavior because the NodeJS function would receive a manual rejection instead of a Node-style callback.
+
+DONE.

@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.makeNodeResolver().call(null)
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is not being passed as a callback to `this.dispatch("post", [name, nodeArgs])`. Instead, it is being invoked immediately, which can cause unexpected behavior or errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.makeNodeResolver().apply(null)

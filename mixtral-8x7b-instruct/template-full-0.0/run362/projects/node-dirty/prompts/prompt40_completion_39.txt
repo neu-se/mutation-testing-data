@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fn(key, this._data) === false
+```
+This would result in different behavior because the `forEach` method would now receive the entire `_data` object as the second argument instead of just the current value. This change would cause the loop to break prematurely if the `match` function returns `false` for any key-value pair in the object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fn.call(null, key, val) === false
+```
+This would result in different behavior because the `match` function would be called with `null` as its `this` context. This change could cause issues if the `match` function relies on the `this` context being set to the `Dirty` instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+fn.apply(this, [key, val]) === false

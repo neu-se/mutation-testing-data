@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null.dispatch
+```
+This would result in different behavior because it would throw an error "Cannot read property 'dispatch' of null" instead of correctly calling the `dispatch` method on the promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.promiseDispatch
+```
+This would result in different behavior because it directly calls the `promiseDispatch` method instead of using the `dispatch` method which wraps the call in a future turn using `nextTick`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.dispatch.call(Q)
+```
+This would result in different behavior because it changes the context of the `dispatch` method to the `Q` object instead of using the current context of the promise object.
+
+DONE.

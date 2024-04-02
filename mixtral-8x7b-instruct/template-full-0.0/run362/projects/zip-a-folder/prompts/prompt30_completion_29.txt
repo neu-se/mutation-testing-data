@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'end', resolve
+```
+This would result in different behavior because the `end` event is emitted when the entire stream has finished, while `close` is emitted when the underlying file descriptor has been closed. This could cause the function to resolve prematurely, before the output stream has finished writing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+'finish', resolve
+```
+This would result in different behavior because the `finish` event is emitted when the underlying file descriptor has been closed and all data has been flushed, making it a more reliable indicator that the output stream has finished writing. However, this event is not part of the Stream interface, but rather a specific event of the Archiver class. This could cause the function to resolve too late, after the output stream has already finished writing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+'drain', resolve
+```
+This would result in different behavior because the `drain` event is

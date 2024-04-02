@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"(node:".indexOf(stackLine)
+```
+This would result in different behavior because it checks if the stack line contains the string "(node:" instead of checking if it contains "(module.js:". This might cause the `isNodeFrame` function to incorrectly identify a stack line as a Node frame or miss a Node frame, affecting the filtering of stack traces.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+stackLine.includes("(node.")
+```
+This would result in different behavior because it checks if the stack line includes the string "(node." instead of checking if it contains "(module.js:". This might cause the `isNodeFrame` function to incorrectly identify a stack line as a Node frame or miss a Node frame, affecting the filtering of stack traces.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+1 in stackLine
+```
+This would result in different behavior because it checks if the property "1" exists in the stack line

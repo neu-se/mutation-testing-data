@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+thisIter.peek()
+```
+This would result in different behavior because `peek()` only returns the next operation without advancing the iterator, causing an infinite loop when trying to consume the same operation in the following iterations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+thisIter.next(0)
+```
+This would result in different behavior because passing 0 as the argument to `next()` will always return the first operation in the iterator, ignoring the length specified in the `while` loop condition, causing unexpected behavior in the resulting delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+thisIter.next(-1)
+```
+This would result in different behavior because passing -1 as the argument to `next()` will throw an error, as it is an invalid argument for the function. This would cause the `compose` method to fail, and the error would propagate up the call stack.
+
+DONE.

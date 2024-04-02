@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, false, true
+```
+This would result in different behavior because the `parse()` function's third argument is `parseQueryString`, which is set to `true` in the original code. Changing it to `false` would result in query strings not being parsed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, true, false
+```
+This would result in different behavior because the `parse()` function's third argument is `slashesDenoteHost`, which is set to `true` in the original code. Changing it to `false` would result in treating a '/' in the second position of a string as a delimiter, even when it should be treated as part of the authority component.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, 'something_else', true

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+(policy) => policy.name
+```
+This would result in different behavior because the original code returns an array containing the policy name and the policy object, while this change only returns the policy name. This could cause issues if the rest of the codebase expects an array with two elements.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+(policy) => ({ name: policy.name, policy: policy })
+```
+This would result in different behavior because the original code returns an array, while this change returns an object with two properties. This could cause issues if the rest of the codebase expects an array and doesn't handle objects correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+(policy) => [policy.name, policy, policy.name]
+```
+This would result in different behavior because the original code returns an array containing the policy name and the policy object, while this change returns an array containing the policy name, the policy object, and the

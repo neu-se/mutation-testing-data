@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This would result in different behavior because the `nextChunk()` function would only be called when there is an error and the `abort` condition is true. In contrast, the original code calls `nextChunk()` when there is no error or the `abort` condition is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(err || abort)
+```
+This would result in different behavior because the `cb` function would be called with the first truthy value between `err` and `abort`. In contrast, the original code calls `cb` with the `err` value if it exists, or calls `nextStream()` if the `abort` condition is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(err, abort)

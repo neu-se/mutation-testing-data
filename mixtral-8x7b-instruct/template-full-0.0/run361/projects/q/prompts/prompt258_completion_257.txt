@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Q(value)
+```
+This would result in different behavior because `new Q(value)` creates a new promise instance, while `Q(value)` returns a resolved promise. This change may cause issues if other parts of the codebase rely on the specific behavior of `Q(value)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(value)
+```
+This would result in different behavior because it uses the native `Promise.resolve` instead of the project's custom `Q` function. This change may cause issues if the custom `Q` function has different behavior or capabilities than the native `Promise.resolve`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(value).then(function(result) { return result * 2; })
+```
+This would result in different behavior because it not only resolves the promise but also multiplies the resolved value by 2. This change may cause issues if other parts of

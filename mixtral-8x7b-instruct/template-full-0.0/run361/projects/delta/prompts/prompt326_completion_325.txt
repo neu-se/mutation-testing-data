@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+false
+```
+This would result in different behavior because the `inverted.push(baseOp);` line would not be executed when `op.delete` is replaced with `false`, and the corresponding operation from the base Delta would not be added to the inverted Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+0
+```
+This would result in different behavior because the `inverted.retain(Op.length(baseOp), AttributeMap.invert(op.attributes, baseOp.attributes));` line would be executed instead of `inverted.push(baseOp);`, and a retain operation with a length of `Op.length(baseOp)` would be added to the inverted Delta instead of the corresponding operation from the base Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+null
+```
+This would result in different behavior because the `inverted.push(baseOp);` line would not be executed when `op

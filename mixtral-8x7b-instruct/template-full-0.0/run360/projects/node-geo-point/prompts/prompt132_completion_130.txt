@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[this, zoom]
+```
+This would result in different behavior because instead of passing two arguments to the `toTile` function, it would pass an array containing the `GeoPoint` instance and the `zoom` value, which is not the expected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.zoom
+```
+This would result in different behavior because the `GeoPoint` class does not have a `zoom` property, and trying to access it would result in `undefined`. The original `toTile` function expects the `zoom` as a separate argument, not a property of the `GeoPoint` instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.pow(2, Math.random() * 10)
+```
+This would result in different behavior because it generates a random number between 2 and 1023 (inclusive) instead of using the provided `zoom` value. This change would lead to unexpected tile coordinates,

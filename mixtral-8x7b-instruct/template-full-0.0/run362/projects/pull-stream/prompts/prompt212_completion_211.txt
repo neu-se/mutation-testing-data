@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+abortCb = null
+```
+This would result in different behavior because it would prevent the `abortCb` function from being called if the async operation is aborted after the `map` function has started processing the data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb(aborted)
+```
+This would result in different behavior because it would immediately invoke the `abortCb` function with the `aborted` value, instead of waiting for the `map` function to complete. This could potentially cause issues if the `abortCb` function expects to be called with a different argument or if it needs to perform some cleanup before returning.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb = function() {}
+```
+This would result in different behavior because it would override the `abortCb` function with an empty function, which would prevent it from performing any necessary cleanup or error handling when the async operation is aborted.
+
+DONE.

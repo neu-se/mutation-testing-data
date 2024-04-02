@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+point['type'] !== 'Point'
+```
+This would result in different behavior because it accesses the `type` property as a string key instead of using the dot notation, which might behave differently if the `Point` object has an overridden `toString` method or if the property is accessed through an inherited prototype.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.prototype.hasOwnProperty.call(point, 'type') && point['type'] !== 'Point'
+```
+This would result in different behavior because it explicitly checks for the `type` property in the object itself, avoiding issues with properties in the prototype chain. However, it uses the string key access, which might still behave differently due to the reasons mentioned in Option 1.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+point.constructor.name !== 'Point'
+```
+This would result in different behavior because it checks if the constructor's name is `Point` instead of

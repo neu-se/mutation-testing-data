@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+this.ops[this.index - 1]
+```
+This would result in different behavior because it would access the previous Op in the ops array instead of the current one, potentially causing an out-of-bounds error or incorrect behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Math.max(0, nextOp.length - offset)
+```
+This would result in different behavior because it would limit the length to the remaining length of the current Op, potentially causing the Iterator to skip over some Op's or return incorrect Op's.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+nextOp.retain || Infinity
+```
+This would result in different behavior because it would always return an Op with a retain property, even if the original Op had a delete property, potentially causing the Iterator to return incorrect Op's.
+
+DONE.

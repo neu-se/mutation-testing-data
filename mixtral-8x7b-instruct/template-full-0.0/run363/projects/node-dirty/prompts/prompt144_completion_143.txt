@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites < 0 || this._waitForDrain
+```
+This would result in different behavior because it changes the condition to check if there are more flights than in-progress writes or if `this._waitForDrain` is true, which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!this._inFlightWrites || this._waitForDrain
+```
+This would result in different behavior because it checks if there are no in-flight writes or if `this._waitForDrain` is true, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0 && !this._waitForDrain
+```
+This would result in different behavior because it checks if there are more than 0 in-flight writes and if `this._waitForDrain` is false, which is the opposite of the intended behavior.
+
+D

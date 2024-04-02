@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `untrackRejection` function checks if the rejected reason is null or undefined and removes it from the unhandled rejections array. Replacing it with null would prevent it from being removed, causing the tracked rejection count to be inaccurate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because the `untrackRejection` function expects the rejected reason to be an object with a `state` property set to "rejected". Replacing it with a boolean value would cause the `untrackRejection` function to not remove the rejection from the unhandled rejections array, causing the tracked rejection count to be inaccurate.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{state: "fulfilled"}

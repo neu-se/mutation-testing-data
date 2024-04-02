@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+inspected.state !== "fulfilled"
+```
+This would result in different behavior because the comparison is now checking for the opposite of "fulfilled" state instead of "rejected". This means that the `_rejected` handler will be called even when the promise is resolved successfully.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+inspected.reason
+```
+This would result in different behavior because the `inspected.reason` property is only defined when the promise is rejected. Using this as the condition will always evaluate to `true` when the promise is resolved, causing the `_rejected` handler to be called instead of the `_fulfilled` handler.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+inspected.state === "pending"
+```
+This would result in different behavior because the comparison is now checking for the "pending" state instead of "rejected". This means that the `_rejected` handler will not be called when the promise is

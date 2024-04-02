@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+rules.push([/[aeiouy]o$/i, function(w) { return w + 's' }])
+```
+This would result in different behavior because it uses `push` instead of `unshift`, adding the rule to the end of the `rules` array instead of the beginning.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+rules.unshift({match: /[aeiouy]o$/i, result: function(w) { return w + 's' }})
+```
+This would result in different behavior because it uses an object instead of an array to define the rule, which would not match the expected format of the `rules` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+rules.unshift([/[aeiouy]o$/i, "s"])
+```
+This would result in different behavior because it sets the `result` of the rule to the string "s"

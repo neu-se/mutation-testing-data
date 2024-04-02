@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.unshift
+```
+This would result in different behavior because `unshift` is not a method that exists on a writable stream, and attempting to call it would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.uncork(); this._queue.clear();
+```
+This would result in different behavior because it would clear the `_queue` after uncorking the stream, which would cause any pending writes to be discarded.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.uncork(); this._inFlightWrites = 0;
+```
+This would result in different behavior because it would reset the `_inFlightWrites` counter after uncorking the stream, which would cause the `drain` event to be emitted prematurely.
+
+DONE.

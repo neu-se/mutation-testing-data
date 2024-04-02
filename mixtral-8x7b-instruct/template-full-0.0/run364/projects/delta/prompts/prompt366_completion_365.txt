@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'insert' && otherIter.peekType() !== 'insert' ? thisIter.next() : undefined
+```
+This would result in different behavior because it would unconditionally call `thisIter.next()` when the current operation type is 'insert' and `otherIter` has a pending operation, potentially skipping some operations in `thisIter`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+'insert' && otherIter.peekType() !== 'insert' ? 'delete' : thisIter.peekType()

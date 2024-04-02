@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function() { return { resolve: function() {} }; }
+```
+This would result in different behavior because the `put` method would no longer be able to replace the `ends.resolve` function, and thus would not be able to properly resolve the promise returned by the `get` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject
+```
+This would result in different behavior because the `put` method would always reject the promise instead of resolving it, causing the `get` method to immediately throw an error instead of returning a value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().resolve("some value")
+```
+This would result in different behavior because the `closed` variable would be immediately set to a resolved promise, instead of being a promise that gets resolved when the queue is closed. This would cause the `closed` method to always return a resolved promise, even if the queue is closed with an error.
+
+DONE.

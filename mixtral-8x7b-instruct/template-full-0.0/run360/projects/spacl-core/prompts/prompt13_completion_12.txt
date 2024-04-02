@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/][:]|:\/|:$/
+```
+This would result in different behavior because it checks for a character other than '/' followed by a colon (`[^/]:`), instead of just a colon (`:`) after a slash (`/`).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/]:|:[/]|:$/
+```
+This would result in different behavior because it checks for a colon (`:`) followed by a slash (`/`) or end-of-string (`$`), instead of just a colon (`:`) after a slash (`/`).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/]:|:\//g
+```
+This would result in different behavior because it uses the global flag (`g`), which would change the behavior of the regular expression to find all occurrences instead of

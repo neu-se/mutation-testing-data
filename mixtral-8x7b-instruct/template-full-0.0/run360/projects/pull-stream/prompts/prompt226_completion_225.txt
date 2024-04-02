@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+data => !data`test(data)`
+```
+This would result in different behavior because it would attempt to evaluate `test` as a property of the `data` object, rather than calling it as a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function (data) { return data !== test }
+```
+This would result in different behavior because it would always return true if the `data` is not identical to the `test` function, rather than checking if the `test` function returns false for the `data`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data => test.call(data)
+```
+This would result in different behavior because it would call the `test` function with `data` as the `this` context, rather than passing `data` as an argument to the `test` function.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+baseArgs.slice
+```
+This would result in different behavior because `slice` returns a new array, while `concat` returns a new array containing the joined arrays. In this case, it would cause `nodeArgs` to have a different value than the original implementation, potentially causing issues downstream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+baseArgs.push
+```
+This would result in different behavior because `push` modifies the original array instead of creating a new one. This could lead to unexpected behavior in the `nodeArgs` array, potentially causing issues when passed to `Q(callback).fapply(nodeArgs)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+baseArgs.unshift
+```
+This would result in different behavior because `unshift` adds elements to the beginning of the array instead of concatenating arrays at the end. This would cause the order of arguments passed to `Q(callback).fapply(nodeArgs)` to be

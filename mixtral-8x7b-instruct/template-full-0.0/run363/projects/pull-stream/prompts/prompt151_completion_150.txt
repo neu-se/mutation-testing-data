@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => cb(null, value)
+```
+This would result in different behavior because the original code stores the value in a temporary variable `_value` before passing it to the callback, while the mutated code directly passes the current value, which might change in the meantime.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+abortCb(cb, abort, onAbort)
+```
+This would result in different behavior because the original code checks if `abort` is truthy and returns early if it is, while the mutated code always calls `abortCb` regardless of the value of `abort`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+abortCb(cb, abort, value)

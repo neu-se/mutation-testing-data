@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because the `process.emit("rejectionHandled")` function would be called unconditionally, even if the rejection was not actually handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+atReport === unhandledRejections.length
+```
+This would result in different behavior because the `process.emit("rejectionHandled")` function would only be called if the rejection was the last one in the `unhandledRejections` array, rather than if it was simply present in the array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+atReport > -1
+```
+This would result in different behavior because the `process.emit("rejectionHandled")` function would be called even if the rejection was not present in the `reportedUnhandledRejections` array, which could lead to incorrect reporting of handled rejections.
+
+DONE.

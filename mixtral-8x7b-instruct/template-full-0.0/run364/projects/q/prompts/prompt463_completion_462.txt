@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because it would always compare the third argument of `process.emit("rejectionHandled", ...)` with an empty array, instead of the `reportedUnhandledRejections` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections
+```
+This would result in different behavior because it would compare the third argument of `process.emit("rejectionHandled", ...)` with the `unhandledRejections` array, which contains promises, instead of the `reportedUnhandledRejections` array, which contains promises that have been reported as unhandled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.slice()
+```
+This would result in different behavior because it would create a shallow copy of the `unhandledRejections` array, but it would not update the `reportedUnhandledRejections` array. Therefore, the `

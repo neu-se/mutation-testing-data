@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw rejected; }
+```
+This would result in different behavior because the rejected reason would be thrown as an exception instead of being passed to the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject(rejected); }
+```
+This would result in different behavior because it would always create a new rejected promise, even if the original promise was fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return rejected; }
+```
+This would result in different behavior because it would treat the rejected reason as a fulfillment value, which could cause unexpected behavior in the rest of the promise chain.
+
+DONE.

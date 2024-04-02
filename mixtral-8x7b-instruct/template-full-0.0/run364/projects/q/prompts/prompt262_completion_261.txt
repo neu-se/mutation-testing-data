@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(fulfill(value));
+```
+This would result in different behavior because the `defer.fulfill` method would wrap the resolved value in an additional promise, which is not the case in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(fulfill(value));
+```
+This would result in different behavior because it would call the `defer.resolve` method instead of the `become` function, potentially causing issues if the `defer` object has already been resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(value);
+```
+This would result in different behavior because it would use the `Promise.resolve` method from the global scope instead of the local `Q.resolve` method, potentially causing issues if the behavior of the global `Promise.resolve` is different from the local `Q.resolve`.
+
+DONE.

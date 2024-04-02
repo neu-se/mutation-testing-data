@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'type' in point && 'coordinates' in point
+```
+This would result in different behavior because it checks for the presence of properties using the `in` operator instead of the `hasOwnProperty` method, which also checks for inherited properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+point.type !== undefined && point.coordinates !== undefined
+```
+This would result in different behavior because it checks for the existence of properties using the `undefined` value, which would also consider properties with a value of `undefined` as valid.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(point).length === 2 && point.type && point.coordinates

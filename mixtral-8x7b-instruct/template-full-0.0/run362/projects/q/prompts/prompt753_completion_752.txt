@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return []; }
+```
+This would result in different behavior because the `any` method would always return an empty array, instead of resolving to the value of the first fulfilled promise or rejecting if all promises are rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject('Error'); }
+```
+This would result in different behavior because the `any` method would always reject with the string 'Error', instead of resolving to the value of the first fulfilled promise or rejecting if all promises are rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.defer().promise; }

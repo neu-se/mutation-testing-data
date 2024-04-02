@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return {}; }
+```
+This would result in different behavior because the returned promise would always fulfill with an empty object instead of the original object passed to `Q.master()`. This change could cause issues if the returned promise's state or the original object's properties are relied upon later in the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject(new Error('Master object replacement error')); }
+```
+This would result in different behavior because the returned promise would always reject with an error. This change could cause issues if the returned promise's state or the original object's properties are relied upon later in the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (op, args) { return Q.reject(new Error('Master object method error')); }
+```
+This would result in different behavior because the fallback function would always reject with an error. This change could cause issues if any of the

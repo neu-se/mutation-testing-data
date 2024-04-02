@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Math.log(Math.tan((this.latitude * Math.PI / 180) + 1 / Math.cos((this.latitude * Math.PI / 180)))) / Math.PI
+```
+This would result in different behavior because it directly uses `this.latitude` instead of `coordinate.latitude`, causing the `toTile` method to depend on the instance's state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+1 / (2 * Math.pow(2, zoom))
+```
+This would result in different behavior because it uses a constant value instead of calculating the `y` coordinate, causing incorrect tile coordinates to be generated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.pow(2, zoom)
+```
+This would result in different behavior because it raises 2 to the power of `zoom` instead of using it as the base for exponentiation, causing incorrect tile coordinates to be generated.

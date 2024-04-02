@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(_rejected(exception));
+```
+This would result in different behavior because the `deferred.reject` method is called instead of resolving the deferred object, causing the returned promise to be rejected immediately with the given exception, instead of waiting for the original promise to be settled and then rejecting with the same exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+throw _rejected(exception);
+```
+This would result in different behavior because a synchronous `throw` statement is used instead of calling the `deferred.reject` method, causing the current execution context to be immediately terminated and the exception to be propagated up the call stack.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(_rejected(exception));
+```
+This would result in different behavior because the `deferred.resolve` method is called with the rejected value instead of the fulfilled value, causing the returned promise to be resolved with the rejected value

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { throw new Error('Aborting read stream'); }
+```
+This would result in different behavior because the new function throws an error, while the original code fragment silently aborts the read stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb && cb()
+```
+This would result in different behavior because the new fragment only calls `cb` if it is truthy, while the original code fragment calls a no-op function if `cb` is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb || (() => process.exit(1))()
+```
+This would result in different behavior because the new fragment calls `process.exit(1)` if `cb` is falsy, while the original code fragment calls a no-op function. This would cause the process to exit with a non-zero exit code, indicating an error.
+
+DONE.

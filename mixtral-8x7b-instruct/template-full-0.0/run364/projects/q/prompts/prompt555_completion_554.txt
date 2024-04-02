@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () {}
+```
+This would result in different behavior because the original errback function is not being called, and an empty function does not handle rejections either. This could cause uncaught rejections in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+5
+```
+This would result in different behavior because 5 is a number, not a function, and cannot be used as a continuation. This would cause a TypeError in the test suite.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because it would resolve the promise instead of handling rejections. This could cause tests to pass even when there are errors, providing a false sense of security in the test suite.
+
+DONE.

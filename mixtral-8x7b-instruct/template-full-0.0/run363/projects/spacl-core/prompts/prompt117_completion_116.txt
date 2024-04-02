@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.regex.test(path) && verb in this.verbs
+```
+This would result in different behavior because `this.regex.test(path)` checks if the regex has a match in the string, but does not store the matched data. This could lead to unexpected behavior when using `this.regex.props` in the `matches` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.verbs.hasOwnProperty(verb)
+```
+This would result in different behavior because `this.verbs.hasOwnProperty(verb)` only checks if the `verb` property exists in the `verbs` object, but does not return the value of the property. This would cause the `query` method to always return `true` or `false` instead of `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.regex.exec(path) && verb in this.verbs
+```
+This would result in different behavior because `this.

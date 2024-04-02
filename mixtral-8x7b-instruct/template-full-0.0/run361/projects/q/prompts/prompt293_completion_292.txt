@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[deferred.resolve, deferred.reject, deferred.notify][Math.floor(Math.random() * 3)]
+```
+This would result in different behavior because instead of calling `deferred.resolve`, `deferred.reject`, or `deferred.notify` directly, we are now choosing one of them randomly, which may not be the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(function () { var r = deferred.resolve; deferred.resolve = deferred.reject; deferred.reject = r; return r; }())
+```
+This would result in different behavior because we are swapping the `deferred.resolve` and `deferred.reject` functions, causing the promise to be rejected instead of resolved with the given value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve.bind(deferred)()
+```
+This would result in different behavior because we are calling `deferred.resolve

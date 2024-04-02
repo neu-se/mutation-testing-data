@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the continuation function `continuer` would throw a `TypeError` when trying to call `generator[verb](null)` in the SpiderMonkey generator case.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+undefined
+```
+This would result in different behavior because the continuation function `continuer` would throw a `TypeError` when trying to call `generator[verb](undefined)` in the SpiderMonkey generator case.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+123
+```
+This would result in different behavior because the continuation function `continuer` would treat the number `123` as a resolved promise in the SpiderMonkey generator case, and then try to call `generator[verb](123)`, which would likely cause unexpected behavior or errors depending on the generator implementation.
+
+DONE.

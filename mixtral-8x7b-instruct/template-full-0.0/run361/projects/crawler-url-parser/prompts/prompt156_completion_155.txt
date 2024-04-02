@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/[^\/]*$/, ""
+```
+This would result in different behavior because it removes everything after the last slash, including any query parameters, instead of only removing the last path segment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/(\/[^\/]+)\/?$/, ""
+```
+This would result in different behavior because it requires at least one character after the last slash, which could cause it to fail if the path ends with a slash followed by a query parameter.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/(\/[^\/]*)?$/, ""
+```
+This would result in different behavior because it makes the last path segment optional, which could cause it to remove too much of the path if there are multiple slashes at the end.
+
+DONE.

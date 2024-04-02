@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || false, done || function () {})
+```
+This would result in different behavior because the `read` function would be called with `false` as the first argument instead of `true` or the `abort` value. This could cause the `read` function to behave differently, especially if it checks the value of the first argument to determine whether to end the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op && true === op(data) || abort
+```
+This would result in different behavior because the `op` function would always return `true`, causing the loop to terminate immediately. This could cause the function to stop reading data from the stream prematurely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op && op(data) !== false || abort
+```
+This would result in different behavior because the `op` function would have to return a truthy value other than `false` for the loop to continue. This could cause the function to stop reading

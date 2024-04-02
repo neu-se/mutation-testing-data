@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Buggy node resolver'); }
+```
+This would result in different behavior because a thrown error in the resolver function would cause the returned promise to be rejected immediately, rather than waiting for the timeout specified in the `setTimeout` call.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because directly calling `deferred.resolve` would immediately resolve the promise, rather than waiting for the timeout specified in the `setTimeout` call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because directly calling `deferred.reject` would immediately reject the promise, rather than waiting for the timeout specified in the `setTimeout` call.
+
+DONE.

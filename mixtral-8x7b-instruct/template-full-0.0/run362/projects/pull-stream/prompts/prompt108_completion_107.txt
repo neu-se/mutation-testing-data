@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+cb === undefined
+```
+This would result in different behavior because it checks for strict equality with `undefined`, which could cause issues if the `cb` variable was defined as `null` or any other falsy value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof cb === 'undefined'
+```
+This would result in different behavior because it checks the type of `cb` using the `typeof` operator, which would not catch cases where `cb` is defined but is not a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb && cb instanceof Function
+```
+This would result in different behavior because it checks if `cb` is a function using the `instanceof` operator, which would not catch cases where `cb` is a function but is not an instance of the Function constructor (e.g. if it was defined using the `new Function` syntax).
+
+DONE.

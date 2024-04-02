@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Promise.resolve(); }
+```
+This would result in different behavior because the `catch` block would not receive the original rejection reason, but instead a resolved promise, which would cause the `then` to immediately fulfill, and the `rejection` object would not be created.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('New error'); }
+```
+This would result in different behavior because the `catch` block would receive a new error object instead of the original rejection reason, which would cause the `rejection` object to have a different `message` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject(new Error('New error')); }
+```
+This would result in different behavior because the `catch` block would receive a rejected promise with a new error object instead of the original rejection reason, which would cause the `rejection` object to have a different `message

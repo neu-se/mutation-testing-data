@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'tar', archiverOptions: zipAFolderOptions}
+```
+This would result in different behavior because the `zipAFolderOptions` is directly passed to `archiverOptions` instead of having the `compression` property extracted. This change would cause the `zip` method to behave like the `tar` method, ignoring the `compression` level set in `zipAFolderOptions`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'zip', zipAFolderOptions}
+```
+This would result in different behavior because the `format` is changed to 'zip' while keeping the same `zipAFolderOptions`. This change would cause the `tar` method to create a zip file instead of a tar file, which is not expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'tar',

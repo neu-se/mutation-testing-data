@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would cause the `get` method to return `undefined` instead of rejecting the promise with an error when there's no more value to get from the queue.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.promise
+```
+This would result in different behavior because it would cause an infinite loop when there's no more value to get from the queue. The `get` method would keep calling itself recursively, causing a stack overflow.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve()
+```
+This would result in different behavior because it would cause the `get` method to immediately resolve the promise with `undefined` instead of rejecting it with an error when there's no more value to get from the queue.
+
+DONE.

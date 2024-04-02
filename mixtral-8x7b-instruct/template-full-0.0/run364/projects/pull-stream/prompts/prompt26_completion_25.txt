@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].concat.bind(null, read, ref[0], ref[1], ref[2])
+```
+This would result in different behavior because it uses [].concat instead of the spread operator, which may result in different behavior when dealing with arrays or objects with custom `.concat()` methods.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Function.prototype.apply.bind(pull, null, ref)
+```
+This would result in different behavior because it uses `Function.prototype.apply` instead of `pull.apply`, which may cause issues if `pull` has a custom `apply` method or if the `this` context is important.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(...ref.slice(0, 3)).reduce(pull, read)
+```
+This would result in different behavior because it uses `Array.prototype.reduce` instead of the switch statement, which may lead to different performance characteristics or issues when dealing with

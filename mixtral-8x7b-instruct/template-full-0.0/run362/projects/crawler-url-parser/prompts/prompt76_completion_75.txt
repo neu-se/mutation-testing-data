@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(embedBaseUrlStr || currentUrl)
+```
+This would result in different behavior because it uses `URL.parse` on `embedBaseUrlStr` if it is not null/undefined, otherwise it uses `URL.parse` on `currentUrl`. This is different from the original code, which always uses `URL.parse` on `embedBaseUrlStr`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(embedBaseUrlStr, true, false)
+```
+This would result in different behavior because it sets the third argument of `URL.parse` to `false`, which means that the parsed URL will not be normalized. This is different from the original code, which sets the third argument to `true`, which means that the parsed URL will be normalized.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse('http://' + embedBaseUrlStr)

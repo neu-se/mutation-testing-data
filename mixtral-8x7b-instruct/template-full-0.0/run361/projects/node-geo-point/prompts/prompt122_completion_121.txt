@@ -1,0 +1,11 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+0
+```
+This would result in different behavior because the `calculateBearing` method would always return 0, regardless of the input points. This is because the `Math.atan2` function would not receive the `sinθ * sinδ * cosφ1` and `cosδ - sinφ1 * sinφ2` values as operands, and instead would receive 0 and `cosδ - sinφ1 * sinφ2`, resulting in a different value for the bearing calculation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+new GeoPoint(0, 0)
+```
+This would result in different behavior because the `calculateBearing` method would always return the bearing between the current `GeoPoint` instance and a new `GeoPoint` with latitude and longitude equal to 0. This is because the `calculateBearing` method expects a `GeoPoint` instance as its argument, and replacing the PLACEHOLDER with a new `GeoPoint` instance would

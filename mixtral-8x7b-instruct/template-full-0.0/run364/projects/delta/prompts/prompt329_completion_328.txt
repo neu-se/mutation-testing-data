@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+op.retain && op.attributes || {}
+```
+This would result in different behavior because if `op.retain` is falsy but `op.attributes` is truthy, the original code would return `undefined` for the second argument of `inverted.retain()`, while this change would return an empty object `{}`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+op.retain !== undefined && op.attributes
+```
+This would result in different behavior because if `op.retain` is `0` or `null`, the original code would still include `op.attributes` as the second argument of `inverted.retain()`, while this change would not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+op.attributes || op.retain
+```
+This would result in different behavior because if `op.attributes` is falsy but `op.retain` is truthy, the original code would not include `op

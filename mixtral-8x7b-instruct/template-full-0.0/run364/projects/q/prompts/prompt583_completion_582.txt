@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(callback)
+```
+This would result in different behavior because the callback is now wrapped in a resolved promise, so it won't be invoked immediately. Instead, it will be invoked in the next tick, which might cause tests that expect the immediate invocation of the callback to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(callback)
+```
+This would result in different behavior because the callback is now wrapped in a Q-specific resolved promise, which might have different behavior than the original resolved promise. This could cause tests that expect specific behavior from the original resolved promise to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(callback)
+```
+This would result in different behavior because the callback is now scheduled to be invoked in the next iteration of the event loop, instead of immediately. This could cause tests that expect the immediate invocation of the callback to fail.
+
+DONE.

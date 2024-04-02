@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+row['key'], row['val']
+```
+This would result in different behavior because it accesses the properties using bracket notation instead of dot notation, which can lead to issues if the property names contain special characters or reserved words.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._data.get(row.key), updater(this.get(key))
+```
+This would result in different behavior because it uses the `get` method to retrieve the value from the `_data` object, and also calls the `updater` function with the value from the current `key` instead of the one from the `row` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+row.key, undefined
+```
+This would result in different behavior because it sets the value to `undefined` instead of the result of the `updater` function, which can lead to data loss or inconsistencies.
+
+DONE.

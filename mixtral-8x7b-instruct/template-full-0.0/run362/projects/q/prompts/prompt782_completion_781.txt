@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null, null
+```
+This would result in different behavior because the `all` function would receive `null` instead of a function for the `onFulfilled` property of the promise's handlers, causing it to throw an error and not correctly process the promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { return value; }, function (reason) { throw reason; }
+```
+This would result in different behavior because the `rejected` handler would immediately throw the error instead of waiting for all promises to settle, causing the `allSettled` promise to reject prematurely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { return Q.resolve(value); }, function (reason) { return Q.reject(reason); }
+```
+This would result in different behavior because it would wrap the resolved value or reason in a new promise, which could cause issues if the downstream code expects the original value or

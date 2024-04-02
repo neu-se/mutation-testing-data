@@ -1,0 +1,11 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0 || this._inFlightWrites > 0
+```
+This would result in different behavior because the original condition checks if `this._queue.size` is greater than 0 or `this._inFlightWrites` is greater than 0, while the modified condition checks if `this._queue.size` is strictly greater than 0 and `this._inFlightWrites` is strictly greater than 0. This means that if either `this._queue.size` or `this._inFlightWrites` is 0, the condition will fail in the modified version, while it would pass in the original version.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(this._queue).length > 0 || this._inFlightWrites > 0
+```
+This would result in different behavior because the original condition uses the `size` property of the `Map` object `this._queue`, while the modified condition uses the `Object.keys()` method

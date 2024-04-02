@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject(exception)
+```
+This would result in different behavior because instead of resolving the deferred promise with the rejected exception, it would create a new rejected promise, breaking the expected error propagation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fallback.call(promise, op, args)
+```
+This would result in different behavior because it would call the fallback function with the operation and arguments, which is supposed to be called only when there's no descriptor for the given operation. This could lead to unexpected behavior or errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(exception)

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because the `drain` function would be called unconditionally, even if the `done` callback has already been called. The original code fragment, `null`, does not affect the execution of `drain(null, done)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+1
+```
+This would result in different behavior because `drain` would receive a number instead of `null`. This could cause `drain` to behave differently, depending on its implementation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+done
+```
+This would result in different behavior because `drain` would receive the `done` callback as its first argument instead of `null`. This could cause `drain` to behave differently, depending on its implementation, and might also cause issues if `drain` calls the `done` callback more than once.
+
+DONE.

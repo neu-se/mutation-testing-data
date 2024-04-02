@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+-point1.longitude + point2.longitude
+```
+This would result in different behavior because it changes the order of subtraction, effectively swapping the longitude values of point1 and point2.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Math.abs(point2.longitude - point1.longitude)
+```
+This would result in different behavior because it always returns a positive value, removing the ability to detect whether point2 is to the west of point1.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+point2['longitude'] - point1['longitude']
+```
+This would result in different behavior because it uses array-like access to object properties, which may not be properly tested in the existing test suite.
+
+DONE.

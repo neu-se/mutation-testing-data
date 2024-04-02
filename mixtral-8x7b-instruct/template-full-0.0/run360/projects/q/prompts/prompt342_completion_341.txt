@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(fulfilled(value));
+```
+This would result in different behavior because the `then` method would call the `resolve` function with the result of invoking the `fulfilled` callback instead of passing the value or exception directly. This could cause issues if the `fulfilled` callback has side effects or returns a promise that needs to be resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(value).then(fulfilled);

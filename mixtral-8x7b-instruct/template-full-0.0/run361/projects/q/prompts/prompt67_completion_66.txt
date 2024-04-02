@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+channel.port1.onmessage = function () {};
+```
+This would result in different behavior because the `flush` function will not be called when the message is received in `channel.port1`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+flush();
+```
+This would result in different behavior because `flush` is called immediately, rather than being called as a callback when the message is received in `channel.port1`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+requestTick();
+```
+This would result in different behavior because `requestTick` is called immediately, rather than being called as a callback when the message is received in `channel.port1`. It would also cause an infinite loop as `requestTick` calls `flush` which then calls `requestTick` again.
+
+DONE.

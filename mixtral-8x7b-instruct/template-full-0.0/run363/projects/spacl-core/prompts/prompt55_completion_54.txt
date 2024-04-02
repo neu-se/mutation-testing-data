@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+`/[${part}]/`
+```
+This would result in different behavior because it matches a single character present in the `part` variable instead of replacing special characters with their escaped version.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+`/${part.split('').join('\\.')}/`
+```
+This would result in different behavior because it escapes every character in the `part` variable, including non-special ones, which can cause unexpected matches.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+`/${part.replace(/[^\w]/g, '\\$1')}/`
+```
+This would result in different behavior because it only escapes characters that are not word characters (letters, digits, and underscores), which can cause issues with special characters like `.` and `$`.
+
+DONE.

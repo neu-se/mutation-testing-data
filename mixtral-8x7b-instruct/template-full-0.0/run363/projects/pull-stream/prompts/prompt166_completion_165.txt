@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { cb(true) }
+```
+This would result in different behavior because the original code calls `cb` directly, while the mutated code wraps `cb` in an anonymous function. This could affect the behavior of the `abortCb` function if it relies on the calling context of the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb.apply(null, [true])
+```
+This would result in different behavior because the original code calls `cb` with a single argument, while the mutated code uses the `apply` method to call `cb` with the same argument but in a different context. This could affect the behavior of the `abortCb` function if it relies on the calling context of the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(null, true)
+```
+This would result in different behavior because the original code calls `cb` with a single argument (`true`), while the mutated code

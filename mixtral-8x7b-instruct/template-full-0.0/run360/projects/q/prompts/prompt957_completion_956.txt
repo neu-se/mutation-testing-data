@@ -1,0 +1,23 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () {
+    return callback.call(thisp);
+}
+```
+This would result in different behavior because the `apply` method is replaced with `call`, causing the arguments passed to the `bound` function to be handled as separate arguments instead of an array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () {
+    return callback.apply(thisp, arguments);
+}
+```
+This would result in different behavior because the `nodeArgs` array is replaced with the `arguments` object, causing the `nodeArgs.push(deferred.makeNodeResolver())` line to add the resolver to the `arguments` object instead of the array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () {
+    return callback.apply(thisp, [].slice.call(arguments));
+}
+```
+This would result in different behavior because the `nodeArgs` array is replaced with a new array created from the `arguments`

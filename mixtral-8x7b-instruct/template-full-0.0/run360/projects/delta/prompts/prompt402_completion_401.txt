@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+embedType === Object.keys(thisData)[0]
+```
+This would result in different behavior because it compares the embedType with the first key of the `thisData` object instead of the `otherData` object. This change would cause the transformation to behave differently when both `thisData` and `otherData` are objects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+embedType === 'embedType'
+```
+This would result in different behavior because it compares the embedType with a string 'embedType' instead of comparing it with the keys of the `otherData` object. This change would cause the transformation to always return false when checking for the embedType, resulting in different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+embedType in otherData
+```
+This would result in different behavior because it checks if the embedType is an enumerable property of the `otherData` object instead of comparing it with the keys of the `otherData` object.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'http://' + parsedBaseUrl.host + parsedUrl.path
+```
+This would result in different behavior because it constructs the URL by concatenating the protocol, base URL's host, and the current URL's path, instead of using the `URL.resolve()` method which takes care of resolving relative URLs correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+parsedBaseUrl.protocol + '://' + parsedBaseUrl.host + parsedUrl.path
+```
+This would result in different behavior because it explicitly adds the protocol and '://' to the base URL before concatenating the path, which might not result in the correct URL if the base URL doesn't have a protocol or has a different protocol than the current URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+parsedBaseUrl + parsedUrl.path
+```
+This would result in different behavior because it simply concatenates the base URL and the current URL's

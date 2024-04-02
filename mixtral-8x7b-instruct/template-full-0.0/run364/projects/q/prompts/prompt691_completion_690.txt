@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"spy", [void 0, array_slice(arguments)]
+```
+This would result in different behavior because `dispatch` method would look for a `spy` method in the object instead of `apply`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+["apply", array_slice(arguments)]
+```
+This would result in different behavior because the first argument of `dispatch` method should be an array, but here it is a plain string `"apply"`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"apply", [this, arguments]

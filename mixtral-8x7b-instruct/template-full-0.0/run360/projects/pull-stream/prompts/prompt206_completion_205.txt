@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+data
+```
+This would result in different behavior because it would always trigger the `cb(aborted)` case, even when there is no error, and the data should be passed to the callback instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would pass `null` instead of `aborted` in case of an aborted state, which could cause issues if the callback is expecting an error object or a specific value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would pass `true` instead of `aborted`, which could cause issues if the callback is expecting an error object or a specific value. Additionally, it would change the type of the value passed to the callback, which could cause unexpected behavior in the callback implementation.
+
+DONE.

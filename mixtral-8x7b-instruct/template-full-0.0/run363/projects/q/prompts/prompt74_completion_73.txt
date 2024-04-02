@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(flush, 1)
+```
+This would result in different behavior because the `flush` function would be called with a delay of 1ms instead of being called synchronously. This could cause tests to pass that assume the `flush` function is called immediately.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(flush)
+```
+This would result in different behavior because the `setImmediate` function is not equivalent to `setTimeout(fn, 0)`. `setImmediate` schedules a function to be run in the next iteration of the event loop, while `setTimeout` schedules a function to be run after a minimum delay of 0ms. This could cause tests to pass that assume the `flush` function is called immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+flush.bind(null)()

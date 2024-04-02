@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject;
+```
+This would result in different behavior because the `deferred.reject` function would be called immediately, instead of being passed as a callback to the `dispatch` method. This would cause the promise to always be rejected, even if the `dispatch` method eventually resolves.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve;
+```
+This would result in different behavior because the `deferred.resolve` function would be called immediately, instead of being passed as a callback to the `dispatch` method. This would cause the promise to always be resolved, even if the `dispatch` method eventually rejects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { deferred.reject(); }
+```
+This would result in different behavior because a new function would be created and passed as a callback to the `dispatch` method, instead of passing the `deferred.reject` function directly. This could potentially cause issues if the new function is

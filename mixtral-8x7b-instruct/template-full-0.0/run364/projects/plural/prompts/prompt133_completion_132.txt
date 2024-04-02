@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+rule[1]
+```
+This would result in different behavior because the test for a regular expression match is replaced with a test for a string equality, which would always fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule[0].toString()
+```
+This would result in different behavior because the test for a regular expression match is replaced with a test for string equality of the regular expression's string representation, which would always be false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule[0].exec(word)
+```
+This would result in different behavior because the test for a regular expression match is replaced with a test for the result of the exec method, which would return an array if there is a match, or null if there is no match.
+
+DONE.

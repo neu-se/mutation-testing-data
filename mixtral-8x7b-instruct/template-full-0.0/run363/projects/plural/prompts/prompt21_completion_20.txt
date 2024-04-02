@@ -1,0 +1,22 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+rules.push([match, result])
+```
+This would result in different behavior because the order of rules will be reversed, potentially changing the output of the `plural` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+var rules = []
+```
+This would result in different behavior because the `rules` array is re-initialized, discarding any previously added rules.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function addRule(match, result) {
+  rules = rules.concat([[match, result]])
+  return plural
+}
+```
+This would result in different behavior because the `rules` array is concatenated instead of unshifted, changing the order of rules and potentially affecting the output of the `plural` function.
+
+DONE.

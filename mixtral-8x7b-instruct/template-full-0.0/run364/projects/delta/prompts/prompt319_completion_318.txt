@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+inverted.retain = undefined;
+```
+This would result in different behavior because it would reassign the `retain` method of the `inverted` Delta object to `undefined`, causing errors when the `retain` method is called later in the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+inverted['retain'] = null;
+```
+This would result in different behavior because it would set the `retain` property of the `inverted` Delta object to `null`, causing the `retain` method to no longer be callable, resulting in errors later in the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+inverted.push = inverted.retain;
+```
+This would result in different behavior because it would override the `push` method of the `inverted` Delta object with the `retain` method, causing any calls to `inverted.push()` to behave like `inverted

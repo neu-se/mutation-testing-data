@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver()
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is called immediately and its result is pushed into `nodeArgs`, rather than being used as a callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is pushed into `nodeArgs` instead of a function, causing the `dispatch` method to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () {}
+```
+This would result in different behavior because an empty function is pushed into `nodeArgs` instead of a function that resolves or rejects the deferred promise.
+
+DONE.

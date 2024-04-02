@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+done(true)
+```
+This would result in different behavior because the `drain` function would always pass `true` as the first argument to the callback supplied by the user, even when the stream has ended with an error. The original code only passes an argument when the stream ends without an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+done(null, true)
+```
+This would result in different behavior because the `drain` function would always pass `true` as the second argument to the callback supplied by the user, even when the stream has ended without emitting any data. The original code only passes an argument when the stream ends without emitting any data if the `op` function returns `false` for the data emitted before the end event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+done(end)
+```
+This would result in different behavior because the `drain` function would pass the `end` argument from the `read` callback to the

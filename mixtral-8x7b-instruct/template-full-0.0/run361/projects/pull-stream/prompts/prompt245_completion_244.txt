@@ -1,0 +1,16 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+abort || err
+```
+This would result in different behavior because the order of checking the conditions has been reversed. In the original code, if `abort` is truthy, it would immediately abort the current stream and the stream of streams. However, with this change, if `err` is truthy (meaning there was an error in the current chunk), it would still attempt to process the current chunk before aborting, which might not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && err
+```
+This would result in different behavior because the conditions are now combined with the `&&` operator. In the original code, either `abort` or `err` would cause the function to abort the current stream and the stream of streams. With this change, both `abort` and `err` need to be truthy for the function to abort, which is not equivalent to the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort + err
+```

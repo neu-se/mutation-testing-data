@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because the callback function would always execute with a false error value, regardless of the input `err`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, abort)
+```
+This would result in different behavior because the callback function would always execute with a null error value and a truthy value for the second argument, instead of just executing with the input `err`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(err || true)
+```
+This would result in different behavior because the callback function would execute with the input `err` if it is truthy, and with the value `true` otherwise. This changes the behavior of the function when `err` is falsy (e.g. `0`, an empty string, or `false`).
+
+DONE.

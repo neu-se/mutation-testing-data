@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because the rejection behavior of the promise would be changed to resolution, potentially causing tests to pass even when they should have caught an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Intentional error') }
+```
+This would result in different behavior because it introduces a new error that wasn't present in the original code, potentially causing tests to fail and alerting developers to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.notify
+```
+This would result in different behavior because it changes the rejection to a progress notification, which might not be handled correctly by the test suite, potentially causing tests to pass or fail depending on how the test suite is implemented.
+
+DONE.

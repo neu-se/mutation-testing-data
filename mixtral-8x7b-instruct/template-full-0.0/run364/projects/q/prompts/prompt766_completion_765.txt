@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `all` function would resolve immediately, even if the input promises are rejected. The original code fragment, `noop`, is a function that does nothing and returns undefined, which allows the `all` function to wait for all input promises to settle before resolving.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Buggy error'); }
+```
+This would result in different behavior because it introduces an error in the `all` function, causing it to reject immediately when called. The original code fragment, `noop`, does not affect the behavior of the `all` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { deferred.resolve(value + 1); }
+```
+This would result in different behavior because it modifies the resolved value of the promise, causing the `all` function to resolve with a different value than the

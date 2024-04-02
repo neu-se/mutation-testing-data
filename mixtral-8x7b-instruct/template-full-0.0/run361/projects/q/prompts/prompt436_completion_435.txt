@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.includes(promise)
+```
+This would result in different behavior because `Array.prototype.includes()` is not supported in older browsers, and it might not work as expected if the polyfill is not provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.some(p => p === promise)
+```
+This would result in different behavior because `Array.prototype.some()` is not supported in older browsers, and it might not work as expected if the polyfill is not provided. Additionally, it introduces a new variable `p` which could lead to confusion.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.filter(p => p === promise).length > 0

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, false, true
+```
+This would result in different behavior because the `parse()` function's third argument, `parseQueryString`, is set to `false`. This means that the query string in the URL will not be parsed into an object, potentially causing differences in behavior if the code further down the line expects a parsed query string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, true, false
+```
+This would result in different behavior because the `parse()` function's second argument, `slashesDenoteHost`, is set to `false`. This means that any occurrence of a '/' in the host portion of the URL will be treated as a path separator, potentially causing differences in behavior if the code further down the line expects a correctly formatted host.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr, URL.parseOptions({ slashesDenoteHost: true, parseQueryString: true })

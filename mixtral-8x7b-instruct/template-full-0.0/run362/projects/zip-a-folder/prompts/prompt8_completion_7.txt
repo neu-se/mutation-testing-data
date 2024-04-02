@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+targetBasePath.toString() === src
+```
+This would result in different behavior because it compares the directories as strings, which may not give the expected result when the directory paths are absolute or relative.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.resolve(targetBasePath) === path.resolve(src)
+```
+This would result in different behavior because it resolves the directories to their absolute paths before comparison, which may not give the expected result if the source and target directories are on different drives or partitions.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+targetBasePath.includes(src)
+```
+This would result in different behavior because it checks if the source directory is a subdirectory of the target directory, which is not the same as checking if they are the same directory.
+
+DONE.

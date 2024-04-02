@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'nonexistentType'
+```
+This would result in different behavior because it would always use the 'nonexistentType' handler, which would cause a runtime error since it's not a valid embed type.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+'object' as const
+```
+This would result in different behavior because it would force the type to be 'object', which would prevent the type checker from inferring the correct embed type based on the input. This could lead to incorrect behavior in the `transform` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+'string' as const
+```
+This would result in different behavior because it would force the type to be 'string', which would cause the `handler.transform` method to always use the 'string' handler. This could lead to incorrect behavior if the input types are not 'string'.
+
+DONE.

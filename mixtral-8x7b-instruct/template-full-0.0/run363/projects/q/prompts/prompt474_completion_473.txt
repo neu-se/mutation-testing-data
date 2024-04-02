@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+reportedUnhandledRejections = [];
+```
+This would result in different behavior because the `reportedUnhandledRejections` array would be reset every time `untrackRejection` is called, causing some unhandled rejections to be lost and not reported.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+process.emit("rejectionHandled", unhandledReasons[at], promise, unhandledReasons[at]);
+```
+This would result in different behavior because an extra argument `unhandledReasons[at]` is passed to the `process.emit` function, which might cause the event handler to behave unexpectedly or throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.splice(at, 2);
+```
+This would result in different behavior because two elements are removed from the `unhandledReasons` array instead of one, causing the wrong reason to be associated

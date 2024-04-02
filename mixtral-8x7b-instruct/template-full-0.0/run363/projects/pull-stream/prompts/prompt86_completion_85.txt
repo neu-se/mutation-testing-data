@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false, cb || function () {}
+```
+This would result in different behavior because the `read` function would always be called with `false` as the first argument, even if `abort` is not set, which could cause unintended behavior in the `read` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort, function () {}
+```
+This would result in different behavior because the callback function passed to `read` would always be an empty function, regardless of the value of `cb`, which could cause unintended behavior if the original callback function was supposed to do something.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort, cb && cb()
+```
+This would result in different behavior because the callback function passed to `read` would only be called if `cb` is truthy, which could cause unintended behavior if the original callback function was supposed to be called regardless of the value of `cb`.
+
+DONE.

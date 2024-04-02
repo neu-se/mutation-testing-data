@@ -1,0 +1,13 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl.host === linkurl.host
+```
+This would result in different behavior because a strict equality check (`===`) is used instead of the loose equality check (`==`). If the `host` properties are of the same type, the behavior would remain the same. However, if the types are different (e.g., one is a string and the other is a number), the strict equality check would fail, while the loose equality check might still succeed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl.hostname == linkurl.host
+```
+This would result in different behavior because the `host` property of the `pageurl` is being compared with the `hostname` property of the `linkurl`. The `host` property includes the port number if it is present, while the `hostname` property does not. This could lead to false positives or false negatives in the comparison, depending on whether the port numbers are the same or different.
+
+Option 3: The PLACEHOLDER can

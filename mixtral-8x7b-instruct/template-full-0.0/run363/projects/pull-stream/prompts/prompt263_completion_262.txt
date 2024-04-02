@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { cb() }
+```
+This would result in different behavior because the callback would be called immediately, without waiting for data from the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(cb)
+```
+This would result in different behavior because the callback would be called in the next iteration of the event loop, instead of being called synchronously.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(cb)
+```
+This would result in different behavior because the callback would be called in the next iteration of the event loop, but the exact timing would depend on the current state of the Node.js event loop.
+
+DONE.

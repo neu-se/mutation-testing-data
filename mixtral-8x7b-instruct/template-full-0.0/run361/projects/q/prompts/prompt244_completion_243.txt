@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+resolvedPromise.inspect()
+```
+This would result in different behavior because `inspect` is called without passing any arguments, which would cause the returned object to have an empty `state` property instead of the expected string value of "pending" or "fulfilled".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+resolvedPromise.inspect.call(null)
+```
+This would result in different behavior because `call` is used to change the context of the `inspect` method, which would cause it to lose its reference to the `resolvedPromise` object. This would result in the returned object having an undefined `state` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+resolvedPromise.inspect.bind(resolvedPromise)()
+```
+This would result in different behavior because `bind` is used to create a new function with a pre-set `this` value, but the resulting function is immediately invoked without any arguments. This would cause the returned object

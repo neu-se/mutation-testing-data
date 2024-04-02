@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` always returns a resolved promise, while `when` defers execution until the input promise is resolved or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.constructor
+```
+This would result in different behavior because `this.constructor` may not always refer to the `Q` object, especially if the code is used in a different context or with a different implementation of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (promise, onFulfilled, onRejected, onProgress) {
+  promise.then(onFulfilled, onRejected).then(null, deferred.reject);
+}
+```
+This would result in different behavior because it doesn't handle progress notifications, which are passed to the `onProgress` callback in the original code. Ignoring progress notifications could lead to unexpected behavior or incomplete results in certain

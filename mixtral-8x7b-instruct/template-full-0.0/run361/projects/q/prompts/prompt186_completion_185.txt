@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/at ([^ ]+):(\d+)$/.exec
+```
+This would result in different behavior because the negated character class `[^ ]` matches any character except a space, but the original fragment matches any character including a space. This change may cause the regular expression to fail to match some stack lines.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/at (.+):(\d+):(\d+)$/.exec
+```
+This would result in different behavior because the `.+` matches one or more of any character, whereas the original fragment matches one or more non-space characters. This change may cause the regular expression to match more stack lines than intended, including those with spaces in the function name.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/at ([^)]+):(\d+):(\d+)$/.exec
+```
+This would result in different behavior because the character class `[^)]` matches any character except

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(value).thenResolve
+```
+This would result in different behavior because `thenResolve` is not a function in the Q library, and this would cause a test failure if the test suite checks for the correct resolution value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` would be called immediately, instead of being passed as a callback to the `resolver` function. This could cause the promise to be resolved with an incorrect value or at an incorrect time.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because `deferred.reject` would be called immediately, instead of being passed as a callback to the `resolver` function. This could cause the promise to be rejected with an incorrect reason or at an incorrect time.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+data
+```
+This would result in different behavior because it would pass the data to the callback instead of the `aborted` value, which could cause the downstream code to continue processing the data instead of handling the aborted state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would pass a `null` value to the callback instead of the `aborted` value, which could cause the downstream code to continue processing the data instead of handling the aborted state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Error('Forced error')
+```
+This would result in different behavior because it would force an error to be passed to the callback instead of the `aborted` value, which could cause the downstream code to handle the error instead of the aborted state.
+
+DONE.

@@ -1,0 +1,25 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+    return {};
+}
+```
+This would result in different behavior because the `inspect` method would be called on an empty object instead of the promise's state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+    return Q.resolve();
+}
+```
+This would result in different behavior because `Q.resolve` returns a promise that is immediately fulfilled, so the `inspect` method would be called on a fulfilled promise instead of the promise's state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+    return Q.reject();
+}
+```
+This would result in different behavior because `Q.reject` returns a promise that is immediately rejected, so the `inspect` method would not be called at all.
+
+DONE.

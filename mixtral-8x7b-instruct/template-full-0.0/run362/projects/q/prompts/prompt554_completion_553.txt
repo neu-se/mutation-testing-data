@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function() {}
+```
+This would result in different behavior because the `when` function is not being called, and instead an empty function is being returned. The `when` function is used to handle both fulfilled and rejected promises, so not calling it may lead to unexpected results or errors not being properly handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+callback.bind(this)
+```
+This would result in different behavior because `bind` creates a new function with its `this` value set to the provided value. If the value of `this` is important in the context of the `when` function, not passing it along could cause issues. Additionally, `bind` also creates a new function that cannot be further bound, which could have unintended consequences.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+callback.call(this)
+```
+This would result in different behavior because `call` invokes the `callback` function immediately with the provided `this`

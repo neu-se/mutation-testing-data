@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+"call", [name, nodeArgs]
+```
+This would result in different behavior because the `dispatch` method would call the function directly instead of posting a message to it. This could cause issues if the function being called has side effects or relies on the `this` keyword.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"post", nodeArgs
+```
+This would result in different behavior because the `name` of the method being called would not be passed as an argument to the `dispatch` method. This would cause an error if the function being called relies on the `name` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"post", [name, []]
+```
+This would result in different behavior because the `nodeArgs` array would be replaced with an empty array. This would cause the function being called to not receive the correct arguments, which could cause it to behave unexpectedly or throw an error.
+
+DONE.

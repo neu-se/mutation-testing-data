@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+op.length - offset
+```
+This would result in different behavior because the `substr` method would receive the full length of the `insert` property instead of the remaining length after the offset.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+1
+```
+This would result in different behavior because the `substr` method would always return the first character of the `insert` property, regardless of the `length` parameter.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+nextOp.length
+```
+This would result in different behavior because the `substr` method would receive the full length of the `insert` property, which might be longer than the desired substring.
+
+By introducing these changes, we aim to expose potential weaknesses in the test suite, as the mutated code may not be covered by existing tests or may produce incorrect results, leading to new test cases and ultimately a more robust and reliable codebase.
+
+DONE.

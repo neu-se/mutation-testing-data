@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.splice(at, 0);
+```
+This would result in different behavior because the rejected promise will not be removed from the `unhandledRejections` array, causing it to grow without bound. Additionally, the corresponding unhandled rejection event will not be emitted, which could lead to unexpected behavior in the application.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.splice(at, <PLACEHOLDER>);
+```
+This would result in different behavior because the corresponding unhandled rejection event will not be emitted with the correct error message. This could make it difficult to debug and understand why the promise was rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.splice(at, 1, "Replacement error message");
+```
+This would result in different behavior because the error message associated with the unhandled rejection event will be replaced

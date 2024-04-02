@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Rejected explicitly'))
+```
+This would result in different behavior because the new error object is created instead of using the original `rejected` argument. This change will make the test suite fail if it does not handle the new error object correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because `null` is passed instead of a function. This change will make the test suite fail if it does not handle the absence of a `rejected` function correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Rejected explicitly') }
+```
+This would result in different behavior because a function that throws an error is passed instead of a function that simply returns the `rejected` argument. This change will make the test suite fail if it does not handle the thrown error correctly.
+
+DONE.

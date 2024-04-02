@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because a new empty object is created instead of inheriting from `defer.prototype`. This could cause methods like `defer.resolve`, `defer.fulfill`, `defer.reject`, and `defer.notify` to not be defined on the `deferred` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because `null` is assigned to `deferred.prototype` instead of an object. This would cause the `deferred` object not to inherit any methods or properties from `defer.prototype`, resulting in undefined methods when trying to use them.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Object.create(Array.prototype)
+```
+This would result in different behavior because a new object is created with `Array.prototype` as its prototype, instead of `defer.prototype`. This would cause the `deferred` object to inherit methods and properties from `Array

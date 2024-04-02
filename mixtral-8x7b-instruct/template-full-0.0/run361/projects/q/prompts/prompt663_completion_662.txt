@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"POST", [name, array_slice(arguments, 1)]
+```
+This would result in different behavior because the string is now capitalized, which could cause issues if the `dispatch` method is case-sensitive when checking for method names.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"post", [name, 123]
+```
+This would result in different behavior because the second argument to the `dispatch` method is now an array with a single integer, instead of an array of arguments sliced from the `arguments` object. This would cause the method being dispatched to receive incorrect arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"post", [null, array_slice(arguments, 1)]
+```
+This would result in different behavior because the first argument to the `dispatch` method is now `null` instead of the object on which the method is being called. This would cause the method being dispatched to be

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve
+```
+This would result in different behavior because the `thenReject` method would return a promise that is always resolved, instead of being rejected with the given reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject(reason); }
+```
+This would result in different behavior because it would create a new rejected promise instead of just rejecting the original promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw reason; }
+```
+This would result in different behavior because it would throw the reason instead of returning a rejected promise. This could cause the calling code to behave differently, especially if it is not expecting an exception to be thrown.
+
+DONE.

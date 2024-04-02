@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `isInternalFrame` function would start returning `true` for all stack lines, causing the `filterStackString` function to only keep the last stack line, which might not provide enough information to locate the source of the error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because the `getFileNameAndLineNumber` function would return `[undefined, NaN]`, causing the `isInternalFrame` function to always return `false`, which would result in no filtering of the stack trace, including Node and Q cruft.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => {}
+```
+This would result in different behavior because the `getFileNameAndLineNumber` function would return `[undefined, NaN]`, causing the `isInternalFrame` function to always return `false`, which would result in no filtering of the stack trace, including Node and

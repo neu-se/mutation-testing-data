@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+data || {}
+```
+This would result in different behavior because if `data` is falsy, it would return an empty object instead of continuing to read from the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+data + ''
+```
+This would result in different behavior because it would convert `data` to a string before passing it to the test function. This could cause issues if the test function is expecting a non-string type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+test.fn(data)
+```
+This would result in different behavior because it would call the function stored in the `fn` property of the `test` object, rather than the `test` function itself. This could cause issues if the `fn` property is not a function or if it has different behavior than the `test` function.
+
+DONE.

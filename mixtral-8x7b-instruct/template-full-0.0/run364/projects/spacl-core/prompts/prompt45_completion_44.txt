@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+part.search(/:.+/) > -1
+```
+This would result in different behavior because `search` returns the index of the match, not the match itself, and it can't distinguish between a successful match and no match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+/:.+/.test(part)
+```
+This would result in different behavior because `test` checks if the regex matches the string and returns a boolean, but it doesn't extract the matched group.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+part.includes(':')
+```
+This would result in different behavior because `includes` checks if the string contains the specified substring, but it doesn't ensure that the colon is the first character in the group.
+
+DONE.

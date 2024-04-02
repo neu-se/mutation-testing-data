@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'/', ctx
+```
+This would result in different behavior because it replaces the `path` parameter with a constant string, causing the `matches` method to always return `policy.matches('/')` instead of checking the provided path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+path, undefined
+```
+This would result in different behavior because it replaces the `ctx` parameter with `undefined`, causing the `matches` method to behave differently when a context is required but not provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+this.get('another_policy').matches(path)
+```
+This would result in different behavior because it checks if the `path` matches another policy ('another_policy') instead of the intended one (`name`). This could lead to unexpected results when querying policies.
+
+DONE.

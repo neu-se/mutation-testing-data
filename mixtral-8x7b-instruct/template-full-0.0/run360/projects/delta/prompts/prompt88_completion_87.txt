@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+newOp.insert !== undefined && lastOp.insert !== undefined
+```
+This would result in different behavior because it would allow any value in `insert` property, not just strings.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+typeof newOp.insert === 'object' && typeof lastOp.insert === 'object'
+```
+This would result in different behavior because it would require both `insert` properties to be objects, instead of strings.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+newOp.hasOwnProperty('insert') && lastOp.hasOwnProperty('insert')

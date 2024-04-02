@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `when` function would not wait for the `null` value to be resolved or rejected, and would immediately proceed to the `onFulfilled` or `onRejected` handlers with `null` as the argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `when` function would immediately resolve the `Promise.resolve()` value, and would not wait for the original promise to be resolved or rejected. This could lead to unexpected behavior in the `onFulfilled` or `onRejected` handlers.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this
+```
+This would result in different behavior because the `when` function would treat the `this` value as a promise, and would attempt to resolve or reject it. This could lead to unexpected behavior in the `onFulfilled` or `onRe

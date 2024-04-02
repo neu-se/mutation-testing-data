@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+allow = res
+```
+This would result in different behavior because it always assigns the result of the rule query to `allow`, even if `res` is false. This could lead to allowing actions that should be denied.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+allow = true || res
+```
+This would result in different behavior because it sets `allow` to true if either the current rule allows the action or if any previous rule allowed the action. This could lead to allowing actions that should be denied.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+allow = this.rules.some(rule => rule.query(path, verb, ctx) === true)
+```
+This would result in different behavior because it checks if any rule allows the action, rather than checking each rule in sequence. This could lead to skipping rules that should be applied.
+
+DONE.

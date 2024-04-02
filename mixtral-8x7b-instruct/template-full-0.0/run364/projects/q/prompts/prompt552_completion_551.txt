@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(result.value)
+```
+This would result in different behavior because it immediately resolves the promise with the value, instead of waiting for the next `yield` statement in the generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(result.value)
+```
+This would result in different behavior because it uses the `Q` constructor instead of the `when` function, which could lead to different error handling or behavior depending on the implementation of the `Q` constructor.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Promise(function (resolve) { resolve(result.value) })
+```
+This would result in different behavior because it creates a new promise using the ES6 `Promise` constructor, which again could lead to different error handling or behavior depending on the implementation of the `Promise` constructor.
+
+DONE.

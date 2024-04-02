@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `push` method of the `delta` object would receive a `null` value instead of an operation from the `other` Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+otherIter.peek()
+```
+This would result in different behavior because it would push the same operation multiple times if there are consecutive identical operations in the `other` Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{ type: 'insert', insert: 'placeholder' }
+```
+This would result in different behavior because it would push a new operation with a fixed string 'placeholder' instead of the actual operation from the `other` Delta.
+
+DONE.

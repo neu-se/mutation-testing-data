@@ -1,0 +1,23 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a).reduce<AttributeMap>((attrs, key) => {
+  if (a[key] !== b[key]) {
+    attrs[key] = b[key] === undefined ? null : b[key];
+  }
+  return attrs;
+}, {});
+```
+This would result in different behavior because it only considers keys from the first map (`a`) when checking for differences, while the original code considers keys from both maps.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(b).reduce<AttributeMap>((attrs, key) => {
+  if (a[key] === undefined) {
+    attrs[key] = b[key];
+  }
+  return attrs;
+}, {});
+```
+This would result in different behavior because it only considers keys from the second map (`b`) when transforming attributes, while the original code considers keys from both maps with a priority for the second map.
+
+Option 3:

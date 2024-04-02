@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+callback.apply
+```
+This would result in different behavior because it directly calls the `callback` function using `apply` instead of using the `nfapply` method from the `Q` library. This change would bypass any behavior specific to the `nfapply` method, such as error handling or promise resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.apply
+```
+This would result in different behavior because it uses the `when` method from the `Q` library to wrap the `callback` function, but applies it to the arguments using `apply`. This could cause issues if the `callback` function does not behave as expected when wrapped in a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(callback).nfapply
+```
+This would result in different behavior because it creates a new promise using `Q.resolve` that resolves to the `callback` function, and then calls `nfapply` on that promise. This

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Math.tan(coordinate.longitude * Math.PI / 180) + 1 / Math.cos(coordinate.longitude * Math.PI / 180)
+```
+This would result in different behavior because the calculation now depends on the longitude instead of the latitude, which can produce incorrect results for the tile calculation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Math.tan(coordinate.latitude) + 1 / Math.cos(coordinate.latitude)
+```
+This would result in different behavior because the conversion from degrees to radians is removed, causing incorrect results for the tile calculation due to the use of larger input values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Math.tan(coordinate.latitude * Math.E / 180) + 1 / Math.cos(coordinate.latitude * Math.E / 180)
+```
+This would

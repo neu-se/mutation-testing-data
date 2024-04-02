@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/.test
+```
+This would result in different behavior because the negated character class is now unescaped, changing the meaning of the regular expression. It would match any string containing a character not in the set `a-z`, `0-9`, `:`, `/`, `?`, `#`, `[`, `]`, `@`, `!`, `$`, `&`, `'`, `(`, `)`, `*`, `+`, `,`, `;`, `=`, `.`, `-`, `_`, `~`, or `%`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+new RegExp('[^a-z0-9\\:\\/\\?\\#\\[\\]\\@\\!\\$\\&\\'\\(\\)\\*\\+\\,\\;\\

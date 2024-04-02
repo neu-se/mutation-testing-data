@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Math.atan(coordinate.latitude) / (180 / Math.PI)
+```
+This would result in different behavior because the `atan` function returns the angle in radians between the positive x-axis of a plane and the point given by the coordinates (y, x). This would result in incorrect calculations for the tile coordinates.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+coordinate.longitude * Math.PI / 180
+```
+This would result in different behavior because the longitude value is being used instead of the latitude value. This would result in incorrect tile coordinates being generated, as the latitude value is crucial for determining the y-coordinate of the tile.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+coordinate.latitude * Math.E / 180
+```
+This would result in different behavior because the constant `Math.E` is being used instead of `Math.PI`. This would result

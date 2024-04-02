@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `postMessage` method would not be called, and no message would be sent through the channel.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+channel.port1.postMessage
+```
+This would result in different behavior because messages would be sent to the wrong port (port1 instead of port2), potentially causing unexpected behavior in the application.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() { channel.port2.postMessage('mutated') }
+```
+This would result in different behavior because the function would wrap the `postMessage` call, causing a synchronous function call instead of an asynchronous message post. This could cause issues if the application relies on the asynchronous nature of the message passing.
+
+DONE.

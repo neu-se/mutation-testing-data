@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+op.attributes || {}
+```
+This would result in different behavior because it uses a default value of an empty object for `op.attributes` instead of using `baseOp.attributes`. This could cause issues if the `invert` method relies on the presence of specific properties in `baseOp.attributes` that are not present in `op.attributes`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseOp.attributes || {}
+```
+This would result in different behavior because it uses a default value of an empty object for `baseOp.attributes` instead of using `op.attributes`. This could cause issues if the `invert` method relies on the presence of specific properties in `op.attributes` that are not present in `baseOp.attributes`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because it completely ignores the original `op.attributes` and `baseOp.attributes` and replaces them with an

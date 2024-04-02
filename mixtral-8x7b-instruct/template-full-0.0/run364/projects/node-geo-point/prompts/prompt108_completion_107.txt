@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+<Math.pow(2, zoom) - 1>
+```
+This would result in different behavior because it would cause an off-by-one error in the tile X and Y calculations, resulting in an incorrect tile being returned for a given coordinate and zoom level.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<Math.pow(2, zoom + 1)>
+```
+This would result in different behavior because it would double the intended tile size, causing the calculated tile coordinates to be halved and therefore incorrect.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<Math.log2(Math.tan(coordinate.latitude * Math.PI / 180) + 1 / Math.cos(coordinate.latitude * Math.PI / 180)) / Math.PI>
+```
+This would result in different behavior because it would directly use the latitude in the calculation instead of first converting it to radians, causing incorrect tile coordinates

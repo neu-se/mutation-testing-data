@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, "*", ctx)
+```
+This would result in different behavior because `matches` method is checking if the rule matches the path, while `query` method checks if the rule allows or denies the action for the path. By changing the method to `query`, the function will always check for the existence of any action (\*), which is not the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because the `matches` method would always return true, regardless of the rule matching the path. This would mean that every path matches the policy, which is not the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.name === path
+```
+This would result in different behavior because the `matches` method would only return true if the rule's name matches the path, instead of checking if the rule matches the path. This is not the intended behavior, as it relies on the rule name instead

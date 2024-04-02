@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read.bind(this)
+```
+This would result in different behavior because it changes the value of `this` within the `read` function, potentially causing issues if the `read` function relies on the value of `this`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read || function(){}
+```
+This would result in different behavior because it changes the behavior when `read` is falsy, potentially causing the function to continue executing when it should have stopped.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, done || function () {})
+```
+This would result in different behavior because it calls the `read` function immediately, rather than waiting for the `next` function to call it. This could cause issues if the `read` function is not designed to be called immediately.
+
+DONE.

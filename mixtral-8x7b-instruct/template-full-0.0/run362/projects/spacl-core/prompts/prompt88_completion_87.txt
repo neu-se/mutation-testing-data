@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy, policy.name]
+```
+This would result in different behavior because it would add an extra value (the policy object itself) to the Map, causing issues when querying for policies by name.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name.toUpperCase(), policy]
+```
+This would result in different behavior because it would change the policy name to uppercase, causing issues when querying for policies by name, as the query would be case-sensitive.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, () => policy]
+```
+This would result in different behavior because it would add a function that returns the policy instead of the policy itself, causing issues when querying for policies by name, as the returned function would not have the `query` and `matches` methods.
+
+DONE.

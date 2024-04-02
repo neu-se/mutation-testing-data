@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+for (const key in a) {
+```
+This would result in different behavior because it uses `const` instead of `<PLACEHOLDER>` which uses `in` without declaring the iteration variable. This change would cause the compiler to throw an error, but if it didn't, it would result in `key` always being set to the last key of `a`, instead of iterating over all keys.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+for (let key of Object.keys(a)) {
+```
+This would result in different behavior because it uses `let` and `of` instead of `in`. This change would cause the code to iterate over the keys as an array, which would result in different behavior when the key doesn't exist in `b`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+for (const key in Object.keys(a)) {
+```
+This would result in different behavior

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+typeof baseUrlStr !== 'undefined' && _has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because it introduces a strict equality check for `baseUrlStr`, which would change the evaluation of the condition when `baseUrlStr` is `null` or an empty string.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+baseUrlStr && _has_illegal_chars(baseUrlStr.toString())
+```
+This would result in different behavior because it converts `baseUrlStr` to a string before checking for illegal characters, which would cause the condition to evaluate to `true` even if `baseUrlStr` is an object with an empty string as its only property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+_has_illegal_chars(baseUrlStr || '')
+```
+This would result in different behavior because it checks for illegal characters in `baseUrlStr` regardless of its truthiness, and

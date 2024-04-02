@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr.startsWith('http')
+```
+This would result in different behavior because it only checks if the URL starts with 'http' and ignores other possible protocols like 'https'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/^[a-z0-9]+:/.test(currentUrlStr)
+```
+This would result in different behavior because it only checks if the URL starts with an alphanumeric character followed by a colon, which would match 'ftp:' or 'mailto:' schemes, but not relative URLs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+!currentUrlStr.startsWith('//')
+```
+This would result in different behavior because it only checks if the URL does not start with '//', which would allow relative URLs to pass the check even if they contain illegal characters.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.reject(exception)
+```
+This would result in different behavior because the returned promise will always be rejected with the `exception` object, even if the `rejected` callback is provided. The original code fragment allows the `rejected` callback to handle the exception and determine the rejection reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_rejected.call(null, exception)
+```
+This would result in different behavior because the `this` context of the `_rejected` function is changed to `null`. If there are any context-dependent operations inside the `_rejected` function, the behavior would differ from the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve().then(function () { throw exception; })
+```
+This would result in different behavior because the rejection is delayed and wrapped in a new promise. The original code fragment immediately rejects the promise with the `exception` object, while this change would create a new

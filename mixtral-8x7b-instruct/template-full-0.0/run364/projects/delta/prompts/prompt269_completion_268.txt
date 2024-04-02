@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+[]
+```
+This would result in different behavior because it returns an empty Delta instead of the original `retDelta.chop()` which returns a new Delta instance with the last operation removed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+retDelta.slice()
+```
+This would result in different behavior because it returns a new Delta instance with the same operations as `retDelta` instead of the original `retDelta.chop()` which removes the last operation from the Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+retDelta.concat([])
+```
+This would result in different behavior because it returns a new Delta instance with the same operations as `retDelta` concatenated with an empty Delta instead of the original `retDelta.chop()` which removes the last operation from the Delta.
+
+DONE.

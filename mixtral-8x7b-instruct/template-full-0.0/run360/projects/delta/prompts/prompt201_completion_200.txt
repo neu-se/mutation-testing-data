@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Delta(delta.ops.slice()).concat(rest).chop()
+```
+This would result in different behavior because it creates a new Delta object with the same ops instead of referencing the existing one, which may cause issues if the original object is modified later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+delta.concat(delta.ops.slice().reverse()).chop()
+```
+This would result in different behavior because it concatenates the rest of the operations in reverse order, which may cause unexpected results in the resulting Delta object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+delta.concat(rest).slice()
+```
+This would result in different behavior because it returns a new array of operations instead of a Delta object, which may not have the same methods or behavior as a Delta object.
+
+DONE.

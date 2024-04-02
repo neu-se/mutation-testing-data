@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(null)
+```
+This would result in different behavior because the original code fragment resolves the promise with the value passed to the `resolve` method, while this modification resolves it with `null`. This could cause issues if the consuming code expects a specific value other than `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because instead of resolving the promise, it would reject it. This could cause tests to fail if they expect the promise to be resolved with a specific value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.fulfill
+```
+This would result in different behavior because the `fulfill` method is not part of the Q promise API. The correct method to resolve a promise is `resolve`. This would cause a `TypeError` if the `become` function is called with the result of `deferred.fulfill`.
+
+DONE.

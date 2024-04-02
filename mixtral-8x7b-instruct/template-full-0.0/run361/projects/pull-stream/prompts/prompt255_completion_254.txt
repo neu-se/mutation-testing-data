@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { return; }
+```
+This would result in different behavior because the `nextStream` function would not be called, and the function would return immediately, potentially causing the stream to stop processing unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because `nextStream` would be called immediately, instead of only being called when there is no more data to read from the current stream. This could cause the function to move on to the next stream prematurely, potentially causing the stream to process data in the wrong order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+once(nextStream)
+```
+This would result in different behavior because `once` would ensure that `nextStream` is only called once, even if it is called multiple times. This could cause the function to get stuck on the current stream, potentially causing the stream to stop processing data.
+
+DONE.

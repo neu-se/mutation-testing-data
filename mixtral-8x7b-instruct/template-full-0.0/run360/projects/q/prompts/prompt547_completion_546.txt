@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject
+```
+This would result in different behavior because `Promise.reject` creates a new rejected promise, while `reject` is a reference to the `Q.reject` function. This change would cause the code to always create a new rejected promise instead of using the one provided by the `Q` library.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because `deferred.reject` is called with the exception directly, while the original code wraps the exception in a promise using `Q.reject(exception)`. This change would cause the error to be propagated synchronously instead of being wrapped in a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw exception; }
+```
+This would result in different behavior because instead of rejecting the promise with the exception, it throws the exception directly. This change would cause the error to be propagated synchronously and potentially crash the application

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { cb(true) }
+```
+This would result in different behavior because the original code fragment simply invokes `cb(true)`, while the modified fragment wraps it in an anonymous function. This could affect the behavior of the `abortCb` function, depending on how it is implemented.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the original code fragment passes the `cb` function as the first argument to `abortCb`, while the modified fragment passes `null` instead. This could cause `abortCb` to behave differently, depending on how it is implemented.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb.bind(this)
+```
+This would result in different behavior because the original code fragment passes the `cb` function as is, while the modified fragment passes a new function that is the result of invoking `cb.bind(this)`. This could affect the value of `this` inside

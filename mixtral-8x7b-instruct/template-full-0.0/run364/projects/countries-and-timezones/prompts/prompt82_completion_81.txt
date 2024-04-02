@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => getCountry('wrongId', options)
+```
+This would result in different behavior because it always passes a wrong static ID to the `getCountry` function, which might return unexpected results or throw an error if there is no country with the given 'wrongId'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+() => getTimezone(null)
+```
+This would result in different behavior because it always passes a null value to the `getTimezone` function, which might return unexpected results or throw an error if the input is not a string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => Math.random() > 0.5 ? getCountry(id, options) : null
+```
+This would result in different behavior because it randomly decides whether to return a country or null. This can cause unpredictable results and test failures, especially if the test suite assumes that `getCountriesForTimezone` will always return an array of countries

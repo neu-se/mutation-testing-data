@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/[^\/]*$/, ""
+```
+This would result in different behavior because it removes everything after the last slash, including any query parameters, instead of only removing the last path part.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/(\/[^\/]*)?$/, ""
+```
+This would result in different behavior because it makes the last path part optional, allowing it to match URLs with or without a trailing slash.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/(\/[^\/]*)\/*$/, ""

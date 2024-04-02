@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because `trackUnhandledRejection` is set to `false`, disabling unhandled rejection tracking. The `Q.stopUnhandledRejectionTracking()` function would have no effect if it only sets `trackUnhandledRejections` to `false`, since it is already set to `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+trackUnhandledRejections = "something else";
+```
+This would result in different behavior because `trackUnhandledRejections` is expected to be a boolean value, but is now set to a string. This would likely cause an error in the `trackRejection` and `untrackRejection` functions, which check the value of `trackUnhandledRejections` before performing their respective actions.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+resetUnhandledRejections;
+```
+This would result in different behavior because the `

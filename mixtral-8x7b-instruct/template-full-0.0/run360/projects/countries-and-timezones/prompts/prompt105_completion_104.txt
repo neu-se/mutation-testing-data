@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: { ...tzs[key] } }
+```
+This would result in different behavior because it creates a shallow copy of the timezone object instead of directly assigning the value from the `tzs` object. This might cause issues if the original code relies on mutating the timezone object in the `prev` state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: tzs[key].name }
+```
+This would result in different behavior because it only assigns the `name` property of the timezone object instead of the entire object. This would cause issues if the original code relies on having the entire timezone object in the `prev` state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: getTimezone(tzs[key].name) }
+```
+This would result in different behavior because it calls the `getTimezone` function with the `name` property of the

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject
+```
+This would result in different behavior because `Promise.reject` creates a new rejected promise, while `reject` is a reference to the `Q.reject` function. This change would cause the code to always create a new rejected promise instead of using the one provided by the `Q` library.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because `deferred.reject` is the correct way to reject the deferred object in the Q library, while `reject` is a reference to the `Q.reject` function. This change would cause the code to reject the deferred object instead of creating a new rejected promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+throw new Error('Rejection')
+```
+This would result in different behavior because instead of rejecting the promise with a reason, it throws an error. This would cause the code to behave differently because the error would not be

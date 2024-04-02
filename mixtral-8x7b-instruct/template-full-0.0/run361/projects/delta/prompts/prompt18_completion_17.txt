@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a)
+```
+This would result in different behavior because it compares the keys of `a` and `b` instead of just using the keys of `b`. This could cause some differences in the resulting attribute map when there are overlapping keys with different values in `a` and `b`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(<any>{})
+```
+This would result in different behavior because it uses an empty object as the source of keys, which would result in an empty attributes object. This would cause the `diff` function to always return `undefined`, even when there are differences between `a` and `b`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a).concat(Object.keys(b)).filter(key => key !== 'key')
+```
+This would result in different behavior because it filters out the key 'key' from the list of keys used to build

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+stream !== null
+```
+This would result in different behavior because it no longer checks if `stream` is an object. It only checks if `stream` is not null, which would cause the `once` function to always be used, even if `stream` is an object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stream && typeof stream === 'object'
+```
+This would result in different behavior because the order of the conditions is reversed. This would cause the `once` function to be used if `stream` is truthy and an object, instead of using the `values` function if `stream` is an object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would always evaluate to true, causing the `values` function to always be used, regardless of the value of `stream`.
+
+DONE.

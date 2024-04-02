@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+/^[a-zA-Z0-9_/:~.$+*-]*/.test(spec)
+```
+This would result in different behavior because it only checks if the `spec` starts with a valid character, but not if it contains invalid characters in other positions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+!!spec.match(/^\//)
+```
+This would result in different behavior because it only checks if the `spec` starts with a slash, but doesn't throw an error if it doesn't.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+spec.match(/[^/]:|:\/|:$/) || spec.match(/\/$/)
+```
+This would result in different behavior because it checks if the `spec` ends with a slash or contains malformed captures, but doesn't throw an error in either case.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"<@"
+```
+This would result in different behavior because the `indexOf` method would return -1, causing the `isNodeFrame` function to return false, and the `filterStackString` function to potentially filter out more stack lines than it should.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"@module.js"
+```
+This would result in different behavior because the `indexOf` method would return 0, causing the `isNodeFrame` function to return true, and the `filterStackString` function to potentially include Node.js frames in the filtered stack trace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"@ line 1"
+```
+This would result in different behavior because the `indexOf` method would return 0, causing the `getFileNameAndLineNumber` function to return a wrong file name and line number, and the `isInternalFrame` function to potentially include internal frames in the filtered stack trace.
+
+DONE

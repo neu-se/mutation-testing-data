@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(callback)
+```
+This would result in different behavior because the callback is now wrapped in a resolved promise, so it won't be invoked immediately. Instead, it will be invoked in the next tick, which might cause tests that expect immediate execution to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(callback)
+```
+This would result in different behavior because the callback is now wrapped in a Q-specific resolved promise, which might have different behavior than the original callback. This could cause tests that are tightly coupled to the Q implementation to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+callback().then(identity)
+```
+This would result in different behavior because the callback is now immediately invoked and then passed through a `then` call with the `identity` function. This could cause tests that expect a certain order of execution to fail, as well as tests that expect the callback to be a function and not a promise.
+
+D

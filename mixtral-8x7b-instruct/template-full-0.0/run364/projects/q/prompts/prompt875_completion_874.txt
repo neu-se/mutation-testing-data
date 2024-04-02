@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+defer(null)
+```
+This would result in different behavior because the `nfapply` method would return a promise that is already resolved with a `null` value instead of waiting for the node function to execute and passing its result to the next promise in the chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+defer({then: function() { throw new Error('Invalid promise');}})
+```
+This would result in different behavior because the `nfapply` method would return a promise that is rejected with an error message instead of waiting for the node function to execute and passing its result to the next promise in the chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+defer(Promise.resolve())

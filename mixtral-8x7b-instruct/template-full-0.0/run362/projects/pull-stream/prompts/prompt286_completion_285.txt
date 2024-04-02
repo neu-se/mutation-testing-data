@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `data` would not be set to `null` when an error occurs in the `mapper` function, and it would be passed to the `cb` function along with the error as the second argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because the `data` would not be set to `null` when an error occurs in the `mapper` function, and it would be passed to the `cb` function along with the error as the second argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data
+```
+This would result in different behavior because the `data` would be passed to the `cb` function regardless of whether an error occurred in the `mapper` function or not. This is different from the original behavior where `data` is only passed to the `cb` function when there is no error and the `end` is truthy.
+

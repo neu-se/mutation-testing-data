@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Function.prototype.bind.call(deferred.resolve, deferred)
+```
+This would result in different behavior because it would immediately call `deferred.resolve` with the `nodeArgs` array as an argument, instead of waiting for the Node.js-style callback to be called and passing its result to `deferred.resolve`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.promise
+```
+This would result in different behavior because it would always resolve the promise with the value `deferred.promise`, instead of passing the result of the Node.js-style callback to `deferred.resolve`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because it would always reject the promise with no reason, instead of passing the result of the Node.js-style callback to `deferred.resolve` or `deferred.reject` depending on the success or failure of the as

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { return; }
+```
+This would result in different behavior because the `abortCb` function is not called when the `abort` signal is received, and the callback is immediately returned without any error or value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb
+```
+This would result in different behavior because the `cb` function is called directly, instead of passing it as an argument to `abortCb`. This would bypass any error handling or logging that might be implemented in `abortCb`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb(null, abort, onAbort)
+```
+This would result in different behavior because the first argument of `abortCb` is set to `null`, instead of `cb`. This would prevent any error or value from being passed to the callback function, and might cause unexpected behavior in the calling code.
+
+DONE.

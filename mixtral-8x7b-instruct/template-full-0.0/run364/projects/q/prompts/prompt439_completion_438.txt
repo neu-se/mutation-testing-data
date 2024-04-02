@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `instanceof` check in `isPromise` function would return `false` for `null` values, causing the function to return `value` instead of resolving the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `inspect` method in the `reject` function would return a different object with a `state` property of `"fulfilled"` instead of `"rejected"`, causing the rejected promise to be resolved instead of rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{then: function() {}}
+```
+This would result in different behavior because the `isPromiseAlike` function would return `true` for this object, causing the `nearer` function to return the object instead of resolving the promise. This would bypass the intended behavior of resolving the promise to its fulfillment value.

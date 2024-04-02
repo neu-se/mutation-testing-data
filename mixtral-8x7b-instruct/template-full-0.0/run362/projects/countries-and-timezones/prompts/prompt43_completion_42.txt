@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+prev, { [id]: { ...buildCountry(data, id) } }
+```
+This would result in different behavior because it creates a shallow copy of the `buildCountry` result instead of directly assigning the `getCountry` result. This might cause issues if the original code relies on modifying the returned object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+prev, { [id]: getCountry('wrongId', options) }
+```
+This would result in different behavior because it calls `getCountry` with a wrong id, which might return a different country object or even an error, depending on the actual implementation of `getCountry`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+prev, { [id]: { ...getCountry(id, options), timezones: [] } }
+```
+This would result in different behavior because it creates a shallow copy of the `getCountry` result and overrides its `timezones` property with an

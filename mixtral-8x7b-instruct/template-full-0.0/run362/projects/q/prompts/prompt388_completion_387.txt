@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.apply(Q, [value].concat(fulfilled, rejected, progressed))
+```
+This would result in different behavior because it changes the way `when` function is called, using `Function.prototype.apply` and passing `value`, `fulfilled`, `rejected`, and `progressed` as separate arguments instead of passing them as an array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(value, fulfilled, rejected, progressed) && []
+```
+This would result in different behavior because it adds a boolean AND operation with an empty array, which would always evaluate to the empty array, potentially changing the return value of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(value, rejected, fulfilled, progressed)
+```
+This would result in different behavior because it swaps the order of `fulfilled` and `rejected` arguments, which would cause the function to behave incorrect

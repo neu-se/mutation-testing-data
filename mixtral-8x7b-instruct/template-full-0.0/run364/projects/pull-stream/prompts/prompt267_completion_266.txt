@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `nextStream` function would continue executing even when the `read` function returns an 'end' signal, potentially causing the function to read past the end of the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stream
+```
+This would result in different behavior because it would cause the `nextStream` function to immediately call `nextChunk` with the current `stream` value, instead of waiting for the `read` function to return it. This could cause the function to skip the first chunk of data in the stream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+values(stream) || true
+```
+This would result in different behavior because it would cause the `nextStream` function to always return `true` as the 'end' signal, even if the `values` function returns an error. This could cause the function to continue reading from the stream even when it has reached the end, potentially causing it to enter an

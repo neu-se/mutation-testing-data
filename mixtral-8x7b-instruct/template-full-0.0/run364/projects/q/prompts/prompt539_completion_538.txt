@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve([])
+```
+This would result in different behavior because it always resolves to an empty array, while the original code resolves to an array of the input values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.all(value)
+```
+This would result in different behavior because it treats the input value as an iterable and resolves to an array of resolved values, while the original code resolves to the input value itself if it's not a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(value, function(v) { return [v]; })
+```
+This would result in different behavior because it always wraps the input value in an array, while the original code behaves differently depending on whether the input value is a promise or not.
+
+DONE.

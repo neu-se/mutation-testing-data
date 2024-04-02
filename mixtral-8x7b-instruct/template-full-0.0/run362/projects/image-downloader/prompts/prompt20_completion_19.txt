@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+path.basename
+```
+This would result in different behavior because `path.basename` returns the last portion of a path, while `path.isAbsolute` checks if a path is absolute. This change would cause the function to incorrectly treat the `options.dest` as absolute if it contains any path separators, even if it's not an absolute path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Boolean(options.dest)
+```
+This would result in different behavior because `Boolean(options.dest)` checks if `options.dest` is truthy, while `path.isAbsolute` checks if a path is absolute. This change would cause the function to incorrectly treat empty strings or falsy values as valid destinations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.abs(options.dest)

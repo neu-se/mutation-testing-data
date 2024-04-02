@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(this.verbs).reduce((obj, key) => {
+  obj[key] = this.verbs[key];
+  return obj;
+}, {})
+```
+This would result in different behavior because it creates a new object with the same keys and values, but it's a shallow copy. If the `verbs` object has nested objects or arrays, the original and the new object would not be equivalent.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+JSON.parse(JSON.stringify(this.verbs))
+```
+This would result in different behavior because it creates a deep copy of the `verbs` object using JSON serialization and deserialization. However, this method has limitations, such as not being able to serialize functions, undefined values, or circular references.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+this.verbs.bind(this)
+```
+This would result in different behavior because

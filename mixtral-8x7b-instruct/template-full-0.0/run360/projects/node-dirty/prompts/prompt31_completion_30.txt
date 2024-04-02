@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.delete
+```
+This would result in different behavior because it removes the key-value pair from the in-memory cache, but does not add the key-value pair to the write queue for persisting on disk.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._queue.set
+```
+This would result in different behavior because it adds the key-value pair to the write queue for persisting on disk, but does not update the in-memory cache.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.get
+```
+This would result in different behavior because it retrieves the value associated with the key from the in-memory cache, but does not remove the key-value pair from the cache or add it to the write queue for persisting on disk.
+
+DONE.

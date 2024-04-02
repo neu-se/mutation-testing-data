@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a)
+```
+This would result in different behavior because it would include keys from the first map (a) in the resulting map, even if they don't exist in the second map (b). The original code only includes keys from the second map (b) if they don't exist in the first map (a).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.assign({}, b)
+```
+This would result in different behavior because it would not perform a deep clone of the second map (b), and would instead create a shallow copy. This means that nested objects or arrays would not be copied correctly, and changes to them in the resulting map would affect the original map (b).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(b).reduce<AttributeMap>((attrs, key) => {
+  if (a[key] === undefined) {
+    attrs[key] = b[key];

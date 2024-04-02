@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'cellos'
+```
+This would result in different behavior because it directly adds the rule instead of using the `addRule` function. This could cause issues if the `addRule` function has side effects or if it's used for validation elsewhere in the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function addRule(match, result) { rules.push([match, result]) }
+```
+This would result in different behavior because it uses the `push` method instead of `unshift`. This would change the order in which the rules are applied, potentially causing incorrect pluralization for some words.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function addRule(match, result) { rules = rules.concat([[match, result]]) }
+```
+This would result in different behavior because it uses `concat` instead of `unshift`. This would also change the order in which the rules are applied, potentially causing incorrect pluralization for some words.

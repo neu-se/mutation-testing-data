@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => read
+```
+This would result in different behavior because it changes the `read` variable to a function that returns `read`, instead of just passing `read` as a callback. This could cause issues if the returned function is not treated as a callback, but instead called directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read || function(){}
+```
+This would result in different behavior because it changes the behavior when `abort` is true. Instead of calling `read` with the `abort` argument, it would call the empty function if `read` is falsy. This could cause issues if the test suite does not account for this alternative behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, cb, 42)
+```
+This would result in different behavior because it changes the number of arguments passed to `read`. If the `read` function is not designed to handle this extra argument, it could cause unexpected behavior. This would help to identify tests

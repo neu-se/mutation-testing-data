@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.next(1)
+```
+This would result in different behavior because it always takes the next 1-length operation from `thisIter`, instead of using the length provided by the `end` variable. This could lead to skipping or including extra operations in the resulting `Delta`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.next(<number>firstOther.retain)
+```
+This would result in different behavior because it uses the `retain` value of the first operation in `otherIter` instead of the `length` of the next operation in `thisIter`. This could lead to skipping or including extra operations in the resulting `Delta`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.next(Math.min(thisIter.peekLength(), firstOther.retain))
+```
+This would result in different behavior because it uses the `retain` value of the first operation in `other

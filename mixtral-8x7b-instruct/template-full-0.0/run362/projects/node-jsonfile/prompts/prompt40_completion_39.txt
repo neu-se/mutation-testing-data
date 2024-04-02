@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` always returns a resolved promise, while `universalify.fromPromise` returns a promise that may be rejected. This change would cause the `writeFile` function to not reject promises when an error occurs during the write operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(_writeFile) => {}
+```
+This would result in different behavior because it completely removes the functionality of the `writeFile` function. This change would cause the `jsonfile` module to not have a `writeFile` function, which could lead to unexpected behavior when trying to write JSON files.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(_writeFile) => universalify.fromPromise(_writeFile)
+```
+This would result in different behavior because it applies `universalify.fromPromise` to the `_writeFile` function twice. This change would cause the `writeFile` function to return a promise that

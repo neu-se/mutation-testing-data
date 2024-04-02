@@ -1,0 +1,25 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"allSettled"
+```
+This would result in different behavior because the function name is changed, and the original `allResolved` function will not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function allResolved(promises) {
+    return Q(promises).all();
+}
+```
+This would result in different behavior because the `allResolved` function now uses the `all` method instead of the original implementation, which waits for all promises to be settled, not just fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function allResolved(promises) {
+    return Q(promises).all().then(function(results) {
+        return Q.resolve(results.map(function(result) {
+            return { state: result.state, value: result.value };
+        }));
+    });
+}
+```
+This would result in different behavior because the `allResolved

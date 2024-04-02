@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cos(point1Rad) * sin(point2Rad) * acos(1)
+```
+This would result in different behavior because it replaces the `<PLACEHOLDER>` with a constant value, which would not consider the actual longitude difference between the two points. This change would cause the distance calculation to be inaccurate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+cos(point1Rad) * sin(point2Rad) * atan2(point1.longitude, point2.longitude)
+```
+This would result in different behavior because it uses the `atan2` function with the longitude values instead of the actual longitude difference. This change would cause the distance calculation to be inaccurate and potentially result in unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+cos(point1Rad) * sin(point2Rad) * Math.atan(point1.longitude / point2.longitude)

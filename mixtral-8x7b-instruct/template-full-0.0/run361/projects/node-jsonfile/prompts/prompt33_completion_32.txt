@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fs.writeFileSync
+```
+This would result in different behavior because the `writeFile` function is now synchronous, which can cause issues in an asynchronous context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `universalify.fromCallback` expects a function with a node-style callback, but `fs.writeFileSync` does not provide a callback. This can cause the function to hang or throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(file, str, options) => fs.writeFile(str, file, options)
+```
+This would result in different behavior because the order of the `file` and `str` arguments is reversed, causing the function to write the contents of the `options` object to the file instead of the JSON string.
+
+DONE.

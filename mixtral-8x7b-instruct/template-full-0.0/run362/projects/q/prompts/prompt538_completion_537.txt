@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.all()
+```
+This would result in different behavior because `this.all()` would be called immediately, instead of using the promised array as an argument to `all` when the promise is fulfilled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.all.apply(this, [<PLACEHOLDER>])
+```
+This would result in different behavior because `apply` would change the context of `all` to be `this`, and pass the array as an argument, but the array would be the global object, not the resolved array from the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.all.call(this, <PLACEHOLDER>)

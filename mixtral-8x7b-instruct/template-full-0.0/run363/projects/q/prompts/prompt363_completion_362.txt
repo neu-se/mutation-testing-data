@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+_rejected
+```
+This would result in different behavior because the resolved value would be treated as a rejection, changing the behavior of the promise chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Replacement error'); }
+```
+This would result in different behavior because an error would be thrown instead of resolving the promise with a value, potentially causing the test suite to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject('Replacement rejection')
+```
+This would result in different behavior because the promise would be rejected with a specific reason, which might not be expected by the test suite and could cause a test failure.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+(coordinate.longitude + 180) / 180 * Math.pow(2, zoom)
+```
+This would result in different behavior because the longitude value is scaled incorrectly, which can cause issues in determining the correct tile for a given coordinate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+(coordinate.latitude + 180) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because the latitude value is used instead of the longitude value, causing incorrect tile calculations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(coordinate.longitude + 180) * Math.pow(2, zoom - 1)
+```
+This would result in different behavior because the formula uses a different base for the exponent, which can lead to incorrect tile calculations.
+
+DONE.

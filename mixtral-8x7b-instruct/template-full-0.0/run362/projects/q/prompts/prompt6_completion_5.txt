@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because the CommonJS module exports would always be assigned the Q API, regardless of the actual existence of the `exports` and `module` objects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the Q API would not be assigned as a module export, and the Q global would not be created when the script is executed in a CommonJS, NodeJS, or RequireJS environment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"undefined" === typeof exports
+```
+This would result in different behavior because the Q API would not be assigned as a module export if the `exports` variable is defined, even if it is not an object. This could potentially cause issues in environments that use non-standard approaches to define module exports.
+
+DONE.

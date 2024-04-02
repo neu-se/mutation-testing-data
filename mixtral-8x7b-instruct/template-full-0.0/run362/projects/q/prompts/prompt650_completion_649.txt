@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.dispatch
+```
+This would result in different behavior because `this` inside the `fcall` and `fbind` methods now refers to the object that the method is called on, rather than the Q promise object. This could cause issues if the object being dispatched to doesn't have the same `dispatch` method as the Q promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Math.random().dispatch
+```
+This would result in different behavior because `Math.random()` returns a random number, not a Q promise object. The `dispatch` method can only be called on a Q promise object, so this would result in a TypeError.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.all.dispatch

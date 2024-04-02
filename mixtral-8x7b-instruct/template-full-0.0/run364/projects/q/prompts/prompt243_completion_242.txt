@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.inspect() === undefined
+```
+This would result in different behavior because it checks if the `inspect()` method returns `undefined`, instead of checking if `resolvedPromise` is not defined. This might always evaluate to `true`, causing the promise to always be resolved, even if it shouldn't be.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport && hasStacks
+```
+This would result in different behavior because it checks if `Q.longStackSupport` and `hasStacks` are both true, instead of checking if `resolvedPromise` is not defined. This might cause the promise to behave differently depending on the global state of `Q.longStackSupport` and `hasStacks`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof resolvedPromise === 'undefined'
+```
+This would result in different behavior because it checks the type of `resolvedPromise`, instead of checking if it is not defined. This might cause the promise to

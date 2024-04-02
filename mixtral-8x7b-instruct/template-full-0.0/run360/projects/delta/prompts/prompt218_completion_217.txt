@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+other.ops.length - 1
+```
+This would result in different behavior because it would incorrectly use the second-to-last operation in the `other` Delta instead of the last operation when concatenating Deltas.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+other.ops.slice(0)
+```
+This would result in different behavior because it would create a copy of the entire `other.ops` array instead of just slicing it, which could lead to performance issues in larger Deltas.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+other.ops.filter((op) => op !== null)

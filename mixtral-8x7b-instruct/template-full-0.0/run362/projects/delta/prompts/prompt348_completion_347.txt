@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+null
+```
+This would result in different behavior because the `invert` method would return an incomplete `Delta` object, as the `handler.invert` function would not receive the required arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+[opData, baseOpData]
+```
+This would result in different behavior because the `invert` method would return a `Delta` object with an incorrectly inverted operation. Instead of inverting the attributes, it would push a new array containing both `opData` and `baseOpData` into the `Delta` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+opData + baseOpData

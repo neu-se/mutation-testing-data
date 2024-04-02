@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'bacteria', 'bacterium'
+```
+This would result in different behavior because it swaps the original match and result, causing incorrect plurals for 'bacteria' and 'bacterium'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+'bacterium', function(w) { return w + 'a' }
+```
+This would result in different behavior because it always appends an 'a' instead of correctly handling the plural form of 'bacterium'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]m$/i, function(w) { return w.substr(0, w.length - 1) + 'a' }

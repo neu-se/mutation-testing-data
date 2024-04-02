@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+output.destroy
+```
+This would result in different behavior because the 'error' event listener would not be set up, and any errors that occur during the archiving process would not be handled. Instead, the output stream would be destroyed, which might cause the process to terminate unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+output.on('data', reject)
+```
+This would result in different behavior because the 'data' event would trigger the reject function, causing the promise to be rejected even if there are no errors during the archiving process. This is not the intended behavior, as the 'error' event should be used to handle errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+output.on('finish', reject)
+```
+This would result in different behavior because the 'finish' event indicates that the output stream has finished writing data, not that an error has occurred. In this case, the reject function would be called even if the

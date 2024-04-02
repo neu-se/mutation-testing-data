@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekType() === 'insert' && (priority || otherIter.peek() !== null)
+```
+This would result in different behavior because it checks if `otherIter` has any remaining operations instead of checking the type of the next operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekType() === 'insert' && (priority || otherIter.peek().type !== 'insert')
+```
+This would result in different behavior because it checks the type of the next operation in `otherIter` explicitly, instead of relying on the `peekType()` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekType() === 'insert' && (priority || otherIter.peek().type !== undefined)

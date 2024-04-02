@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+buildCountry(data, id)
+```
+This would result in different behavior because it directly calls `buildCountry` instead of memoizing the country, which could lead to duplicate computations and potential inconsistencies in the `countries` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+memoizeCountry(buildCountry(data, 'wrongId'))
+```
+This would result in different behavior because it passes a hardcoded 'wrongId' to the `buildCountry` function, which would store the built country under a different id than expected, causing incorrect values to be returned when requesting countries by id.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+memoizeCountry(null)
+```
+This would result in different behavior because it always stores `null` as a country, which would cause issues when requesting countries by id, as the returned country object would be incorrect and incomplete.
+
+DONE.

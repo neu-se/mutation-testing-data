@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+generator.constructor.name === "GeneratorFunction"
+```
+This would result in different behavior because it checks if the generator is an instance of the built-in `GeneratorFunction` constructor, which is not the case for SpiderMonkey's Python-style generators.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+generator.constructor.prototype.constructor.name === "GeneratorFunction"
+```
+This would result in different behavior because it checks if the prototype of the generator's constructor is an instance of the built-in `GeneratorFunction` constructor, which is not the case for SpiderMonkey's Python-style generators.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+generator.constructor.toString().indexOf("GeneratorFunction") > -1
+```
+This would result in different behavior because it checks if the string representation of the generator's constructor contains the string "GeneratorFunction", which is not the case for SpiderMonkey's Python-style generators.

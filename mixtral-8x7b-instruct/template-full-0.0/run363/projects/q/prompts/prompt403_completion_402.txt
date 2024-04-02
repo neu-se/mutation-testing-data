@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject
+```
+This would result in different behavior because `Promise.reject` creates a new rejected promise, while the original code throws an error which can be caught and handled by a subsequent promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.bind(null, promise).thenReject
+```
+This would result in different behavior because `Q.when` wraps the `promise` in a Q-style promise, and `bind` creates a new function with `promise` already set as the first argument. This new function is then used to call `thenReject`, which is different from the original code where `thenReject` is called directly on the `promise`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(promise).thenReject
+```
+This would result in different behavior because `Q.resolve` creates a new promise that is resolved with the `promise` as its value, and then

@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.hasNext() &&
+  isEqual(delta.ops[delta.ops.length - 2], newOp)
+```
+This would result in different behavior because it checks the previous operation in the current delta instead of the last operation in the other delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+otherIter.peekType() === 'insert' &&
+  isEqual(delta.ops[delta.ops.length - 1], newOp)
+```
+This would result in different behavior because it only considers the case when the next operation in the other delta is an insert.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+otherIter.peekType() !== 'delete' &&
+  isEqual(delta.ops[delta.ops.length - 1], newOp)

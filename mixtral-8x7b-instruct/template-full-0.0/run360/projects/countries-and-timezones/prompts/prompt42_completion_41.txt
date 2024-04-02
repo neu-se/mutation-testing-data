@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{ [id]: buildCountry(data, id) }
+```
+This would result in different behavior because it directly returns the built country object without memoization. This means that if the same country is requested multiple times, it will not be taken from the cache, leading to unnecessary computation and potentially different results if the `buildCountry` function has side effects.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+{ [id]: {} }
+```
+This would result in different behavior because it always returns an empty object for each country, regardless of the actual country data. This would cause issues in any code that relies on the returned country objects having the correct properties and values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{ [id]: getCountry(id + 1, options) }
+```
+This would result in different behavior because it requests the country with an incremented ID instead of the correct one. This would cause issues in any code that relies on the correct country being

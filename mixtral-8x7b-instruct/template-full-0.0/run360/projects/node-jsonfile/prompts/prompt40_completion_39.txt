@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` always returns a resolved promise, while `universalify.fromPromise` returns a promise that may be rejected if the input function throws an error. This change would cause the `writeFile` function to not reject promises when the input function throws an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(_writeFile) => {}
+```
+This would result in different behavior because the arrow function with an empty block does not have the same behavior as `universalify.fromPromise(_writeFile)`. The former does not return a promise, while the latter returns a promise that wraps the result of invoking `_writeFile` with the appropriate context and arguments. This change would cause the `writeFile` constant to not return a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(_writeFile) => _writeFile
+```
+This would result in different behavior because the arrow function with an implicit

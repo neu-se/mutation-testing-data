@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+global.process.emit
+```
+This would result in different behavior because it emits the event at the global process level instead of the current instance of Dirty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', null)
+```
+This would result in different behavior because it always passes `null` as the first argument to the 'drain' event listener, even if an error occurred.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit.apply(global.process, ['drain'])

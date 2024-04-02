@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+generator.verb
+```
+This would result in different behavior because it would attempt to access the `verb` property of the generator object instead of calling the method with the given verb argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+generator['next']
+```
+This would result in different behavior because it would only call the `next` method, regardless of the verb argument provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+generator[verb](arg || {})
+```
+This would result in different behavior because it would pass an empty object as the second argument when the verb is 'next', which might cause unexpected results in the generator function.
+
+DONE.

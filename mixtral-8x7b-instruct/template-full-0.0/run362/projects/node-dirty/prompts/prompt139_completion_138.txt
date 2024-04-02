@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+cbs.length > 0 || err === null
+```
+This would result in different behavior because it reverses the condition, making the error event only be emitted when there are callbacks and the error is not null, instead of when there are no callbacks or the error is not null.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!cbs.length && err === undefined
+```
+This would result in different behavior because it checks for undefined instead of null, meaning that an error event would not be emitted if err is null, but would be emitted if err is undefined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cbs.length > 0 && err !== null

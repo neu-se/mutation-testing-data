@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because it would always execute the `cb(abort)` inside the `else` block, even if the `map` function is still busy processing data. In the original code, if `busy` is true, it waits for the `mapper` to complete before executing the callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+map
+```
+This would result in different behavior because it would pass the `map` function as the second argument to the `abortCb` function, instead of passing the processed data. This change would cause the `abortCb` function to behave differently, possibly causing unexpected results downstream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prop(map)

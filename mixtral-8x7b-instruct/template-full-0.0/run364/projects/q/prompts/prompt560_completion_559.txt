@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because in the SpiderMonkey generator case, it would always consider the exception as an instance of `StopIteration`, even if it's not, and resolve the promise with the exception value instead of rejecting it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new StopIteration()
+```
+This would result in different behavior because it creates a new `StopIteration` object, which might not have the same properties as the original exception object, and could cause the continuation to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because it would always treat the exception as not an instance of `StopIteration`, and reject the promise with the exception instead of resolving it with the exception value.
+
+DONE.

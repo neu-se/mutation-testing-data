@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/][:]|:\/|:$/
+```
+This would result in different behavior because it checks for a character other than '/' followed by a colon (`[^/]:`), instead of just checking for a colon preceded by any character (`[^/]:`). This change would cause the regex to fail to match certain valid paths, such as `:foo`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/]:|:\/*|:$/
+```
+This would result in different behavior because it allows a '*' character after the colon in the second alternative (`:\/*`), which would make the regex match paths that it shouldn't, such as `:*/foo`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+/[^/]:|:\/|:[a-zA-Z]/
+```
+This would result in different behavior because it only allows alph

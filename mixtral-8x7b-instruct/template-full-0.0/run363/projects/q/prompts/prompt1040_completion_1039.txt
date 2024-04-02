@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return { resolve: function() {} }; }
+```
+This would result in different behavior because the `next.resolve` inside the `put` function would not have the same effect as before, as it now resolves an empty object instead of a promise. This could cause issues downstream when trying to resolve or reject the `ends` promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject
+```
+This would result in different behavior because instead of resolving the `ends` promise with a value and the tail of the queue, it would reject the promise. This would cause issues in the rest of the code, as it expects a resolved promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return { promise: null }; }
+```
+This would result in different behavior because the `ends.promise` would be set to `null` instead of a promise object. This would cause issues in the `get` and `close`

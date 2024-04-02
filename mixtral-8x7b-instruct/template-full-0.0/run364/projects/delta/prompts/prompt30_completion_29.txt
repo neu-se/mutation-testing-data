@@ -1,0 +1,13 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+base[key] !== attr[key] && base[key] !== undefined
+```
+This would result in different behavior because it checks for the non-equality of `base[key]` and `attr[key]`, and also checks if `base[key]` is not `undefined`. This change would cause the function to behave differently when `attr[key]` is `undefined` but `base[key]` is not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+base[key] !== attr[key] || attr[key] !== undefined
+```
+This would result in different behavior because it checks for the non-equality of `base[key]` and `attr[key]`, or if `attr[key]` is not `undefined`. This change would cause the function to behave differently when `attr[key]` is not `undefined`, regardless of the value of `base[key]`.
+
+Option 3: The PLACEHOLDER can be replaced with:

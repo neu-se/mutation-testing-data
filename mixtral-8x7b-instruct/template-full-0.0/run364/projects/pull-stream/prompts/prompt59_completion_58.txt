@@ -1,0 +1,23 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return sink.abort()
+  }
+})
+```
+This would result in different behavior because the `cbed` variable is always set to true, causing the `while` loop to continue even when the stream has ended. This could lead to the `done` callback being called multiple times or not at all.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return sink.abort(true)
+  }
+})
+```
+This would result in different behavior because the `abort` function is called with an argument of `true`, even if the `end` variable is `false`. This could cause the `done` callback to be called with an error, even if the stream has not actually failed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {

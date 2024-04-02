@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function makeStackTraceLong() {}
+```
+This would result in different behavior because it defines a function that does nothing, instead of forwarding the error to a future turn and throwing it as an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+throw new Error("Timed out after " + ms + " ms");
+```
+This would result in different behavior because it throws the error immediately, instead of scheduling it to be thrown in a future turn.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.onerror(error);
+```
+This would result in different behavior because it calls the global `Q.onerror` function, if it exists, instead of throwing the error as an exception or forwarding it to a future turn.
+
+DONE.

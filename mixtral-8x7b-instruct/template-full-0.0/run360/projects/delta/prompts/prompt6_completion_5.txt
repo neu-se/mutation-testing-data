@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Object.getOwnPropertyNames
+```
+This would result in different behavior because `Object.getOwnPropertyNames` returns only the own enumerable and non-enumerable properties of an object, while `Object.keys` returns only the own enumerable properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+['constructor', ...Object.keys(attributes)];
+```
+This would result in different behavior because it adds the `constructor` property to the resulting array, which can cause unexpected behavior when iterating over the keys or when filtering null values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Object.keys(attributes).filter(key => attributes[key] !== null);
+```
+This would result in different behavior because it filters out keys with null values, which can cause some attributes to be omitted from the resulting object.
+
+DONE.

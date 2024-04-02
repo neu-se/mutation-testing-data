@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+{ ...result, [country]: { current: [], all: [] } }
+```
+This would result in different behavior because it creates a new object instead of modifying the existing one, which may cause unexpected issues if other parts of the code rely on mutating the original object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result[country] = { current: [], all: [] };
+```
+This would result in different behavior because it directly assigns a new object to the `result[country]` property, bypassing any custom logic that might be implemented in the `Object.assign` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, result, { [country]: { current: [], all: [] } });
+```
+This would result in different behavior because it creates a shallow copy of the `result` object and then assigns a new object to the `country` property, which may cause unexpected issues if other parts of the code rely on mut

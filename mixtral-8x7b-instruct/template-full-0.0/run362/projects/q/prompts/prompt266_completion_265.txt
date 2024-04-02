@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because the `defer.reject` function would always return early, and the `resolvedPromise` would never be updated, even if a reason is provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `defer.reject` function would always return early, and the `resolvedPromise` would be set to `null` instead of a rejected promise, which could cause issues in the rest of the code that expects a promise object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new Promise(function() {})
+```
+This would result in different behavior because the `defer.reject` function would always return early, and the `resolvedPromise` would be set to a new (unrelated) promise object instead of a rejected promise, which could cause issues in the rest of the code that expects a rejected promise.
+
+DONE.

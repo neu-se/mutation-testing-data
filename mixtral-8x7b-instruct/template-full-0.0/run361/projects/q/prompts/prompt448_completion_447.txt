@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because instead of tracking the rejection in the correct `unhandledRejections` array, it would always push an empty array, which would not accurately represent the unhandled rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.length = unhandledRejections.length + 1;
+```
+This would result in different behavior because it increments the length of the `unhandledRejections` array instead of pushing the promise to the array, which would lead to incorrect tracking of unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.push(null);
+```
+This would result in different behavior because it pushes `null` to the `unhandledRejections` array instead of the actual promise, which would lead to incorrect tracking of unhandled rejections and make it difficult to identify the actual unhandled rejections.

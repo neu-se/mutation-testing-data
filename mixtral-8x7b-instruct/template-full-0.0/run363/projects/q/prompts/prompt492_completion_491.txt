@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `untrackRejection` function checks if the promise passed to it is the same as the one in the `unhandledRejections` array. By replacing `this` with `null`, the comparison will always be false, and the rejection will not be untracked.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because `{}` is a new object, and the `untrackRejection` function checks if the promise passed to it is the same as the one in the `unhandledRejections` array. By replacing `this` with a new object, the comparison will always be false, and the rejection will not be untracked.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q
+```
+This would result in different behavior because `Q` is a constructor function, and the `untrackRejection` function checks if the promise passed

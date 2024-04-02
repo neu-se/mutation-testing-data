@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because the `read` function is now called with `abort || true` as the first argument instead of just `abort`. This change could cause the `read` function to behave differently, especially if it checks the truthiness of the first argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, done)
+```
+This would result in different behavior because the second argument passed to `read` is now `done` instead of the error or data received from the stream. This change could cause the `read` function to behave differently, especially if it expects the error or data in the second argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op(data)
+```
+This would result in different behavior because the `op` function is now called with `data` as the argument instead of being passed to the comparison with `false`. This change could cause the `op` function to

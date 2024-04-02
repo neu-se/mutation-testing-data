@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { deferred.resolve(); }
+```
+This would result in different behavior because the `nodeArgs.push(deferred.makeNodeResolver());` line would not have any effect, and the promise would always be resolved immediately, regardless of the Node.js function's result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { deferred.reject(new Error('Always rejected')); }

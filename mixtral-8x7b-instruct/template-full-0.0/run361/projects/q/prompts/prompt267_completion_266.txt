@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(reject(reason));
+```
+This would result in different behavior because it immediately wraps the rejected promise in a resolved promise, preventing the rejection from being handled properly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(reason);
+```
+This would result in different behavior because it calls the `reject` method on the `deferred` object directly, instead of through the `become` function, potentially bypassing important logic.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject(reason);
+```
+This would result in different behavior because it creates a new rejected promise using the `Promise` constructor, instead of using the `deferred` object's `reject` method, potentially bypassing important logic.
+
+DONE.

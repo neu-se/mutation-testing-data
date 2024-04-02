@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].concat.apply([], this.ops.reduce)
+```
+This would result in different behavior because it applies `reduce` to each element of `this.ops` array instead of the array itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.ops.filter(op => op).reduce
+```
+This would result in different behavior because it filters out `falsy` values from `this.ops` array before applying `reduce`, which could lead to different accumulated values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.ops.reduce.bind(this)
+```
+This would result in different behavior because it binds `this` to the `reduce` function, but does not actually invoke it. This would cause the `reduce` function to not execute and return its result.
+
+DONE.

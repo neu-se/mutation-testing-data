@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `requestTick` would be set to `setImmediate` unconditionally, even in non-supporting environments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+1 > 0
+```
+This would result in different behavior because the `requestTick` would be set to `setImmediate` unconditionally, due to the always-truthy comparison.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof window !== "undefined" || true
+```
+This would result in different behavior because the additional `|| true` part would always evaluate to `true`, causing the `requestTick` to be set to `setImmediate` unconditionally.
+
+DONE.

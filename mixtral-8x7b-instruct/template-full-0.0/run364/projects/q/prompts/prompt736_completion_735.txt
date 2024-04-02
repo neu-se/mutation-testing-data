@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `all` function expects an array of promises, and `null` is not a promise. This would cause the `when` function to throw an error, which is different from the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `all` function expects an array of promises, and `Promise.resolve()` is a promise that is immediately resolved. This would cause the `all` function to resolve the array with an extra resolved promise, which is different from the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return "I am a buggy function"; }
+```
+This would result in different behavior because the `all` function expects an array of promises, and a function that returns a string is not a promise. This would cause the `when` function to throw an error, which is different from the original

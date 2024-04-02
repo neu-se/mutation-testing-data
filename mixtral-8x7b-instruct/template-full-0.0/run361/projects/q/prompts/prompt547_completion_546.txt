@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function (exception) { throw exception; }
+```
+This would result in different behavior because the original `reject` function is used to create a rejected promise, while this replacement throws an exception directly, which might not be properly handled in some cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject
+```
+This would result in different behavior because `Promise.reject` creates a rejected promise with the given argument, while the original `reject` function is used to create a rejected promise with the `exception` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (exception) { return Q.reject(exception); }
+```
+This would result in different behavior because the original `reject` function is part of the `Q` library, while this replacement uses the `Q.reject` method to create a rejected promise, which might have different behavior in some cases.
+
+DONE.

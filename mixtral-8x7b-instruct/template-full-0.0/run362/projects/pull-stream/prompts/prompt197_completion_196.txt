@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `if(busy)` check would be skipped, causing the `abortCb` callback to be called immediately even if the mapper is still processing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+busy === true
+```
+This would result in different behavior because the `if(busy === true)` check would only be true if `busy` is explicitly set to `true`, and not if it's any other truthy value. This could cause the `abortCb` callback to be called at the wrong time.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof busy === 'undefined'
+```
+This would result in different behavior because the `if(typeof busy === 'undefined')` check would only be true if `busy` has not been defined yet, which would cause the `abortCb` callback to be called immediately even if the mapper is not processing.
+
+D

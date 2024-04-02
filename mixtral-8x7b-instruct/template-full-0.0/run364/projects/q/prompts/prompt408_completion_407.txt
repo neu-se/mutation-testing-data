@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+value && value.then
+```
+This would result in different behavior because it would consider an object with a `then` property, even if it's `null` or `undefined`, as a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+typeof value === 'object' && value.then && value.then.constructor === Function
+```
+This would result in different behavior because it would only consider an object with a `then` method that is a function as a promise, but it would not consider promise-like objects created by other means.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Object.prototype.toString.call(value) === '[object Promise]'
+```
+This would result in different behavior because it would use the internal `[[PromiseState]]` and `[[PromiseResult]]` properties of the promise to determine its state, which may not be consistent with the actual behavior of the promise.
+
+DONE.

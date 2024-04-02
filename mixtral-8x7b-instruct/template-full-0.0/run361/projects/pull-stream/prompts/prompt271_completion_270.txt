@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[1,2,3]
+```
+This would result in different behavior because the replacement is a constant array, while the original `values` is a function that returns an array of arguments. This change would cause the function to always treat the next stream as the end of the stream, even if it has more data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Math.random
+```
+This would result in different behavior because the replacement is a function that returns a random number, while the original `values` is a function that returns an array of arguments. This change would cause the function to treat the next stream as the end of the stream with a probability of 0.5, regardless of whether it has more data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return [].slice.call(arguments) }
+```
+This would result in different behavior because the replacement is a function that returns a shallow copy of the arguments array, while the original `values` is a

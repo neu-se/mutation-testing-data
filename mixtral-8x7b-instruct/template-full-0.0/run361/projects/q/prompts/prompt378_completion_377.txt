@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(promise).tap
+```
+This would result in different behavior because it wraps the `promise` in a new resolved promise before calling `tap`, which is not the behavior of the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(promise).thenResolve().tap
+```
+This would result in different behavior because it forces the `promise` to be resolved before calling `tap`, which is not the behavior of the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(null).tap
+```
+This would result in different behavior because it calls `tap` on a new promise that is resolved with `null`, instead of calling `tap` on the original `promise`.
+
+DONE.

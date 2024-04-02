@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+map || {}
+```
+This would result in different behavior because if `map` is falsy, it will default to an empty object instead of the `id` function. This could cause issues if the consumer of the `asyncMap` function expects the `map` function to be called even when it is `null` or `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+map || function (data) { return data; }
+```
+This would result in different behavior because if `map` is falsy, it will default to an identity function instead of the `id` function. This could cause issues if the consumer of the `asyncMap` function expects the `id` function to be called when `map` is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+map || function (data) { throw new Error('Map function is required'); }
+```
+This would result in different behavior because if `map` is falsy, it will throw an error instead

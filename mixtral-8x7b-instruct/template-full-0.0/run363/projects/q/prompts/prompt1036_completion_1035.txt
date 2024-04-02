@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function() { return {resolve: function() {}, promise: Q.defer()}; }
+```
+This would result in different behavior because it always returns a new object with a resolved promise, instead of resolving the same promise object. This could cause issues in the `put`, `get`, and `close` methods that expect to resolve or get the same promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject
+```
+This would result in different behavior because it always creates a rejected promise, causing the `put` method to fail and the queue to be closed immediately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return {resolve: function(value) { throw new Error("Invalid operation"); }, promise: Q.defer()}; }
+```
+This would result in different behavior because it throws an error when resolving the promise, causing the `put` method to fail and the queue to be closed immediately.
+
+DONE.

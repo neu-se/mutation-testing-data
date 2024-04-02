@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the original `all` function resolves the returned promise when all input promises are resolved, while `Promise.resolve()` resolves the returned promise immediately, regardless of the input promises' statuses.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Rejected'))
+```
+This would result in different behavior because the original `all` function resolves the returned promise when all input promises are resolved, while `Q.reject(new Error('Rejected'))` immediately rejects the returned promise, without considering the input promises' statuses.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return 42; }
+```
+This would result in different behavior because the original `all` function expects a promise or an array of promises as input, while `function() { return 42; }` is a regular function that returns an immediate value, causing

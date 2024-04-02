@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.indexOf
+```
+This would result in different behavior because it uses the `indexOf` method of the `unhandledRejections` array instead of the `array_indexOf` utility function. This could lead to issues if the `unhandledRejections` array contains non-integer keys or has a custom `indexOf` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+[].indexOf.bind(unhandledRejections)
+```
+This would result in different behavior because it uses the `bind` method to create a new function with `this` set to the `unhandledRejections` array. This could lead to issues if the `unhandledRejections` array is later modified, as the bound function will still reference the original array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(i => unhandledRejections.indexOf(i))
+```
+This would result in different behavior because it creates a lambda function that

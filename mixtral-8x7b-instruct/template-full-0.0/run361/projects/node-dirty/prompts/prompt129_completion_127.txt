@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+0
+```
+This would result in different behavior because it would prevent corking the write stream, causing potential data loss if the buffer is not empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._queue.size
+```
+This would result in different behavior because it would prevent flushing the queue if there are items in the queue but `_waitForDrain` is true, causing potential data loss.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._writeStream.write(data, () => {
+  if (!cbs.length) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because it would not wait for the 'drain' event before emitting 'drain', potentially causing

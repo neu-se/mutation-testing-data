@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because it would always call `nextStream()` instead of calling `nextChunk()` when there's no abort condition and `_read` is defined. This change would cause the function to not propagate errors correctly from the current stream to the caller.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read
+```
+This would result in different behavior because it would cause an infinite recursion when calling `nextChunk()`, since it would keep calling the same function without ever reaching the base case. This change would cause the function to crash with a stack overflow error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would cause the function to always call `nextStream()` instead of calling `nextChunk()` when there's no abort condition and `_read` is defined. This change would cause the function to not propagate errors correctly from the current stream to the caller and might

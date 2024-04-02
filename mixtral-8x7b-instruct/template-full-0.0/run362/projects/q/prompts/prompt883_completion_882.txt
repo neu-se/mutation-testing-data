@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => deferred.reject()
+```
+This would result in different behavior because it wraps the `deferred.reject()` call in an arrow function, potentially changing the context in which it is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` is a function reference, and not calling the function. This would cause the promise to always resolve, rather than rejecting as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(null)
+```
+This would result in different behavior because it passes `null` as an argument to the `deferred.reject` method. This could potentially cause any error handling code that expects an error object to fail.
+
+DONE.

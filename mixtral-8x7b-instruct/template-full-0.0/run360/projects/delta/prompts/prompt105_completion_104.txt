@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Array.prototype.forEach.call(this.ops, predicate);
+```
+This would result in different behavior because it uses `Array.prototype.forEach` instead of the `forEach` method of the `ops` array, potentially causing issues with context and losing the reference to the current `Delta` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.ops.filter(predicate).forEach((op, index) => { ... });
+```
+This would result in different behavior because it first filters the `ops` array based on the predicate and then applies the `forEach` method, which is not equivalent to the original behavior of simply iterating over all elements in the `ops` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.ops.forEach((op, index) => predicate(index, op));
+```
+This would result in different behavior because it swaps the order of the `predicate` arguments, passing the index as

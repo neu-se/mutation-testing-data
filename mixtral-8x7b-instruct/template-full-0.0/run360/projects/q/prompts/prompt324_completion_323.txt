@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fallback.apply
+```
+This would result in different behavior because `apply` is used to invoke a function with a given `this` value and arguments provided as an array (or an array-like object). Using `apply` instead of `call` may cause issues if the `fallback` function expects a specific `this` context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fallback.bind(null)
+```
+This would result in different behavior because `bind` creates a new function with the `this` value set to the provided value (in this case, `null`) and partially applied arguments. This would prevent the `fallback` function from accessing the correct `this` context, causing unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { fallback(); }
+```
+This would result in different behavior because wrapping the `fallback` function in an anonymous function would change the behavior of the `op` and `args

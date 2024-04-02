@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+callback(value)
+```
+This would result in different behavior because the `thenResolve` method is removed, and the callback is directly called with the `value`. This could cause issues if the `callback` is asynchronous and expects a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(callback(value))
+```
+This would result in different behavior because a new promise is created, resolving the callback's result, instead of directly passing the `value` to the `thenResolve` method. This could cause issues if the `callback` returns a promise that needs to be awaited.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+callback.fcall(Promise.resolve(value))
+```
+This would result in different behavior because the `fcall` method is used instead of directly calling the `callback`, and the `value` is resolved before being passed to the `fcall` method. This could cause issues if the `callback`

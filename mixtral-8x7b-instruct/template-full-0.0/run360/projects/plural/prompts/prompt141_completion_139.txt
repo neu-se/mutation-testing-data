@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'word, rule[1]'
+```
+This would result in different behavior because it passes the second element of the rule array (the result function or string) instead of the first element (the matching pattern). This change would cause the function to either apply the wrong transformation or no transformation at all, depending on the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+word, word.match(rule[0])
+```
+This would result in different behavior because it uses the `match` method instead of the `test` method. This change would cause the function to return `null` for rules with no match, instead of continuing to the next rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+word, word.replace(rule[0], rule[1])
+```
+This would result in different behavior because it uses the `replace` method instead of checking if the pattern matches with `test`. This change would cause the function to apply the second element of the rule

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+defer(undefined);
+```
+This would result in different behavior because `defer(<PLACEHOLDER>)` is used to create a new deferred object with a resolver function, while `defer(undefined)` would create a deferred object with `undefined` as the resolver function, which could cause issues in the rest of the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+defer({then: function() {}});
+```
+This would result in different behavior because `defer(<PLACEHOLDER>)` is used to create a new deferred object with a resolver function, while `defer({then: function() {}})` would create a deferred object with an empty `then` method, which could cause issues in the rest of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+defer(function() { throw new Error("Bug!"); });
+```
+This would result in different behavior because `defer(<PL

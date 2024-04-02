@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb => cb && cb()
+```
+This would result in different behavior because if `cb` is falsy, it will not be invoked, and the `emit('drain')` will not be called either.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+() => { this.emit('drain'); if (cb) cb(); }

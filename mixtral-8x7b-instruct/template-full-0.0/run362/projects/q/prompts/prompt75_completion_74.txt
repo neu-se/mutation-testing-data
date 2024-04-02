@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(flush, 1);
+```
+This would result in different behavior because the `flush` function would be called with a delay of 1ms instead of being called asynchronously using `MessageChannel`. This could cause tests to fail if they rely on the `flush` function being called synchronously.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+requestAnimationFrame(flush);
+```
+This would result in different behavior because the `flush` function would be called using `requestAnimationFrame` instead of `setTimeout` or `MessageChannel`. This could cause tests to fail if they rely on the `flush` function being called at a specific time or with a specific delay.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+queueMicrotask(flush);
+```
+This would result in different behavior because the `flush` function would be called using `queueMicrotask` instead of `setTimeout` or `MessageChannel`. This could cause tests to fail if

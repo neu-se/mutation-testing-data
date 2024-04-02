@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+snapshot.state === "pending"
+```
+This would result in different behavior because the code would now check if the promise is in the "pending" state instead of the "fulfilled" state. The test suite should include a test case that checks if the `all` function correctly handles fulfilled promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+isPromise(promise) && (snapshot = promise).state === "fulfilled"
+```
+This would result in different behavior because the code now directly assigns `promise` to `snapshot` instead of calling the `inspect` method. The test suite should include a test case that checks if the `all` function correctly handles promises with properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+isPromise(promise) && snapshot.state === "completed"
+```
+This would result in different behavior because the code now checks if the promise is in the "completed" state instead of the "fulfilled

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout.bind(window, flush)
+```
+This would result in different behavior because it explicitly sets the `window` as the context for `setTimeout` which may not be the same as the original context in certain environments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+flush();
+```
+This would result in different behavior because it invokes `flush` immediately instead of scheduling it to be executed asynchronously.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => flush();

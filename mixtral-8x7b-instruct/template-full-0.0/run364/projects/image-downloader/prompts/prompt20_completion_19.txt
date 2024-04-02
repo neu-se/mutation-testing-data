@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+path.basename
+```
+This would result in different behavior because `path.basename` returns the last portion of a path, while `path.isAbsolute` checks if a path is absolute. This change could cause issues if the `options.dest` is an absolute path, as it would be treated as a filename instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Boolean(options.dest)
+```
+This would result in different behavior because `Boolean(options.dest)` checks if `options.dest` is truthy, while `path.isAbsolute` checks if a path is absolute. This change could cause issues if `options.dest` is an object or an empty string, as it would be considered truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.random() > 0.5

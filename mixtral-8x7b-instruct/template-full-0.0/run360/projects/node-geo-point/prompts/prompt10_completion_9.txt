@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'coordinates' in point
+```
+This would result in different behavior because it checks if the 'coordinates' property exists in the point object using the 'in' operator, which also returns true for inherited properties. The original 'hasOwnProperty' method checks if the property is directly present in the object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Object.prototype.hasOwnProperty.call(point, 'coordinates')
+```
+This would result in different behavior because it uses the 'call' method to explicitly invoke the 'hasOwnProperty' method from the object's prototype, which may not have the same behavior as using the method directly on the object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Reflect.has(point, 'coordinates')
+```
+This would result in different behavior because it uses the Reflect API's 'has' method, which might have different behavior or implementation than the original 'hasOwnProperty' method.
+
+DONE.

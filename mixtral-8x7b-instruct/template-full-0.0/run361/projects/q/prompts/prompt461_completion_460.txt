@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the code block inside `untrackRejection` would not run, and the unhandled rejection would not be removed from the tracking arrays.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+'process' in window
+```
+This would result in different behavior because it checks for the existence of `process` in the global `window` object, which is not equivalent to checking if `process` is an object with a `emit` function. This change would cause the unhandled rejection tracking to not work in a Node.js environment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof global.process === "object" && typeof global.process.emit === "function"
+```
+This would result in different behavior because it checks for the existence of `process` in the `global` object instead of directly. This change would cause the unhandled rejection tracking to not work in a Node.js environment when

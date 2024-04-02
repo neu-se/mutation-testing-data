@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(promises).all
+```
+This would result in different behavior because `all` resolves immediately when all promises are fulfilled, but it doesn't wait for rejected promises to settle. This means that if any promise in the input array is rejected, the resulting promise will be rejected as well, whereas `allSettled` waits for all promises to settle before resolving with an array of their states.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q([])
+```
+This would result in different behavior because it always returns an immediately resolved promise with an empty array, regardless of the state of the input promises. This is different from `allSettled`, which waits for all input promises to settle before resolving with an array of their states.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(promises).map(Q.when)
+```
+This would result in different behavior because it creates a new promise for each input promise, even if

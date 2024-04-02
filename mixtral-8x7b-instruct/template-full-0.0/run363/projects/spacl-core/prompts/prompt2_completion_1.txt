@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+new RegExp(spec).exec(spec)
+```
+This would result in different behavior because `exec` returns the first match of the regex in the input string, while `match` returns all matches. In this case, if the `spec` contains a regex with a global flag, `match` will return all matches, but `exec` will only return the first match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^[a-zA-Z0-9_/:~.$+*-]*$/)
+```
+This would result in different behavior because the original code uses `spec.match` with a regex pattern as an argument, while this option uses the regex pattern as a string. This would cause the code to always return `null` because the regex pattern is not being compiled to a regex object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(spec)
+```
+This would result in different behavior because the argument passed to `

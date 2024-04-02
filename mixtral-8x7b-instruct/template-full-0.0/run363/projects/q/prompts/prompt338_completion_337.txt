@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `inspect` function is not called, and the promise's `inspected` property will be set to `null`. This could lead to unexpected behavior when checking the promise's state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return "inspected"; }
+```
+This would result in different behavior because the `inspect` function is replaced with a function that always returns the string "inspected". This would cause the promise's `inspected` property to always have the value "inspected", which could lead to unexpected behavior when checking the promise's state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() { throw new Error("inspect error"); }
+```
+This would result in different behavior because the `inspect` function is replaced with a function that throws an error. This would cause the promise to be rejected with an error message, instead of being resolved with the

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `embedBaseUrl` will not be assigned if `baseUrlStr` is not provided, and the code will continue to use the global `baseUrl` variable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(baseUrlStr, true)
+```
+This would result in different behavior because the `search` property of the `parsedUrl` object will not be an empty object, but rather an object with properties corresponding to the query parameters in `baseUrlStr`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(baseUrlStr, true, false)
+```
+This would result in different behavior because the `parsedUrl` object will not include the query string, as the third argument to `URL.parse` is set to `false`.
+
+DONE.

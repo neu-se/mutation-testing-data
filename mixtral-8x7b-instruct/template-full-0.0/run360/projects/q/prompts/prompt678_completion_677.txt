@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Object.prototype.dispatch
+```
+This would result in different behavior because it introduces the possibility of invoking an unintended method from any object's prototype chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).unknownMethod
+```
+This would result in different behavior because it attempts to call a non-existent method on the Q promise object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(null).dispatch
+```
+This would result in different behavior because it passes `null` as the `object` argument, which might not be handled correctly in the `Q.fcall` and `Q.fbind` methods.
+
+DONE.

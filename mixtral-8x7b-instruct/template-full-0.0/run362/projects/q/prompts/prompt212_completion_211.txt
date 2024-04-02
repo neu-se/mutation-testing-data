@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+value.constructor === Promise
+```
+This would result in different behavior because it checks if the constructor of `value` is `Promise`, which may not be accurate for all cases, especially if the `Promise` constructor has been replaced or shadowed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(value) === '[object Promise]'
+```
+This would result in different behavior because it uses the `toString` method to check the type of `value`, which may not be reliable due to potential custom `toString` implementations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value && typeof value.then === 'function'
+```
+This would result in different behavior because it checks if `value` exists and has a `then` method, which is a more permissive check than the original code. This would consider any object with a `then` method as a promise, even if it doesn't behave like a promise.
+
+DONE.

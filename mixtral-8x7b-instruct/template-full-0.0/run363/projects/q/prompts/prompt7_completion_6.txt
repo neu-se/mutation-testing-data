@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return {}; }
+```
+This would result in different behavior because the Q object would be replaced with an empty object, changing the entire library's behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Mutation testing error'); }
+```
+This would result in different behavior because the Q object would throw an error upon initialization, revealing potential issues with error handling in the test suite.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { noop.apply(this, arguments); }
+```
+This would result in different behavior because the Q object would not have any methods or properties, as `noop` is an empty function. This would expose any tests that rely on the existence of specific methods or properties in the Q object.
+
+DONE.

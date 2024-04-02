@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise
+```
+This would result in different behavior because it uses the constructor form of the Promise instead of the Q library, potentially causing issues with the rest of the code that relies on Q's specific methods and behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because it returns an empty array instead of a promise, causing issues with any code that expects a promise and calls methods like `.then()` or `.nodeify()` on the result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Buggy behavior'); }
+```
+This would result in different behavior because it replaces the original code with a function that throws an error, causing any code that calls `nodeify()` to fail and potentially not handle errors correctly. This can help reveal weaknesses in the test suite by checking if error handling is properly tested.
+
+DONE.

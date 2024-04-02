@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => cb
+```
+This would result in different behavior because it creates a new function with no arguments, causing `cb` to always be `undefined` inside the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, acc)
+```
+This would result in different behavior because it immediately calls the callback with the accumulator value, instead of waiting for the error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb.bind(null, err, acc)
+```
+This would result in different behavior because it sets the `this` context of the callback to `null` and passes `err` and `acc` as arguments, which might cause issues if the callback expects a different context or arguments.
+
+DONE.

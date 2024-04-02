@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `allSettled` function would immediately resolve with an empty array instead of waiting for all input promises to settle.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Buggy error'))
+```
+This would result in different behavior because the `allSettled` function would immediately reject with the error object instead of waiting for all input promises to settle.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer().promise
+```
+This would result in different behavior because the `allSettled` function would create a new deferred object and not wait for the input promises to settle. Instead, it would return an immediately resolved promise with an empty array.
+
+DONE.

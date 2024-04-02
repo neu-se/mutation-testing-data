@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because the `onUnhandledError` function would be overwritten and not call the original error handling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.nextTick.bind(Q)
+```
+This would result in different behavior because `onUnhandledError` would use a bound version of `nextTick` instead of the original function, potentially causing issues with the execution order of the callbacks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (error) { throw error; }

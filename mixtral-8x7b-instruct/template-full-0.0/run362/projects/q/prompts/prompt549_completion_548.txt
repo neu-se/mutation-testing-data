@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(result.value) === "[object Promise]"
+```
+This would result in different behavior because it checks if `result.value` is a promise using `Object.prototype.toString` instead of the original `instanceof` check. This might not produce the same result as the original code, especially when used in different iframes or when the `Promise` constructor is replaced.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result.value && (result.value.constructor.name === "Promise")
+```
+This would result in different behavior because it checks if `result.value` is an instance of a `Promise` by comparing the `constructor.name` instead of using the `instanceof` operator. This could lead to different results when the `Promise` constructor is replaced or when used in different iframes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof result.value.then === "function"
+```
+This would result

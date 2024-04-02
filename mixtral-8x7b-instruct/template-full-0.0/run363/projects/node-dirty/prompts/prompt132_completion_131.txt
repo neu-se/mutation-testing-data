@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.entries(this._queue)[0]
+```
+This would result in different behavior because it gets the first entry of the `this._queue` object, but not necessarily in the order of insertion.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Array.from(this._queue.entries())[0]
+```
+This would result in different behavior because it converts the `this._queue` map to an array of key-value pairs, but not necessarily in the order of insertion.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const keys = Array.from(this._queue.keys());
+const key = keys[0];
+const cbs = this._queue.get(key);
+```
+This would result in different behavior because it first retrieves the keys from the `this._queue` map, then gets the first key and its corresponding value, but not necessarily in the order of insertion.
+
+DONE.

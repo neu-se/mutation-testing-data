@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because the `archiverOptions` object would always be overwritten with an empty object, even if it was provided in the function arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+archiverOptions && { zlib: { level: o.compression } }
+```
+This would result in different behavior because the `archiverOptions` object would only include the `zlib` property when `archiverOptions` is not `null` or `undefined`, instead of including all properties of `archiverOptions`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+archiverOptions || { gzip: { level: o.compression } }
+```
+This would result in different behavior because the `archiverOptions` object would default to an object with the `gzip` property when `archiverOptions` is `null` or `undefined`, instead of an empty object.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/z/, 'ez'
+```
+This would result in different behavior because the rule for adding "es" to words ending in "s", "x", or "z" would incorrectly change words like "quiz" to "quizez" instead of "quizzes".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/a/, function(w) { return w + 'x' }
+```
+This would result in different behavior because the rule for replacing the last character of a word with "x" would be applied to words containing the letter "a", even if they don't match the intended pattern for words ending in "a".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/a/, function(w) { return w.slice(0, -1) }
+```
+This would result in different behavior because the rule for replacing the last character of a word with "e" would instead remove the last character of any word containing the letter "

@@ -1,0 +1,22 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.assign({}, b)
+```
+This would result in different behavior because it creates a new object with the properties of `b`, instead of using the `attributes` variable that contains the merged properties of `a` and `b`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+{}
+```
+This would result in different behavior because it always returns an empty object, regardless of the input. The original implementation returns `undefined` if there are no attributes left after the transformation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(b).reduce((attrs, key) => {
+  if (a[key] === undefined) {
+    attrs[key] = b[key] || null;
+  }
+  return attrs;
+}, {} as AttributeMap)
+```
+This would result in different behavior because it sets the value to `null` if `b[key]` is falsy, whereas the original implementation keeps the

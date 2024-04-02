@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because an empty array is truthy, so the `Q.done()` call would execute immediately without waiting for the generator to produce a value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve()
+```
+This would result in different behavior because `Q.resolve()` returns a promise that is immediately resolved with a value of `undefined`. This would cause the `Q.done()` call to execute immediately, potentially before the generator has produced a value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject('Error')
+```
+This would result in different behavior because `Q.reject('Error')` returns a promise that is immediately rejected with an error. This would cause the `Q.done()` call to reject the promise returned by `Q.spawn()`, rather than waiting for the generator to produce a value.
+
+DONE.

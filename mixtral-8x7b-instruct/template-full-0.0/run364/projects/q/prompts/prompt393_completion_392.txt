@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(value)
+```
+This would result in different behavior because the `when` function would always return a resolved promise, even if `value` is a rejected promise or a non-promise object with a `then` method. The original code checks if the value is a rejected promise and propagates the rejection, while the mutated code would treat it as a fulfilled promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(value)
+```
+This would result in different behavior because the `when` function would always use the `Q.resolve` method to wrap the value, even if it is a promise or a non-promise object with a `then` method. The original code checks if the value is a promise and uses its `then` method, while the mutated code would always use `Q.resolve`, which might have different behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+value.then.apply(value,

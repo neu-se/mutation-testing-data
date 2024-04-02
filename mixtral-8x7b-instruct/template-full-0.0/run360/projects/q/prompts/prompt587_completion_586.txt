@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).then(null, Q.reject)
+```
+This would result in different behavior because the error handling would change. Instead of propagating any errors to the promise returned by the decorated generator, Q.reject would be called immediately with the error, which might bypass some error handling code in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).spread(fulfilled, rejected)
+```
+This would result in different behavior because the spread method is not called on the result of Q.async. This would cause the function to behave differently when passed multiple arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).done()
+```
+This would result in different behavior because the promise returned by Q.async would not be returned by the spawn function. This would cause the promise chain to end prematurely and any unhandled errors would not be thrown.
+
+DONE

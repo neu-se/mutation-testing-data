@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"<@"
+```
+This would result in different behavior because the `indexOf` method would return -1, causing the `isNodeFrame` function to return false for any stack line containing "@".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"@module.js"
+```
+This would result in different behavior because the `indexOf` method would return 0, causing the `isNodeFrame` function to return true for any stack line starting with "@module.js".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"@" + (new Date()).getTime()
+```
+This would result in different behavior because the `indexOf` method would return -1, causing the `isNodeFrame` function to return false for any stack line containing the current timestamp instead of "@".
+
+DONE.

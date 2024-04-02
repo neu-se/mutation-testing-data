@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this._flush = () => {};
+```
+This would result in different behavior because the `_flush` method is assigned an empty function, which means that the data in the queue will not be written to the disk when the `_flush` method is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._flush = this.set;
+```
+This would result in different behavior because the `_flush` method is assigned the `set` method, which means that the data in the queue will be written to the disk using the `set` method, which may not be the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._flush = (key, val, cb) => {
+  this._data.set(key, val);
+  if (cb) cb();
+};

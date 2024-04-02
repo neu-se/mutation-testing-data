@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { return pull.apply }
+```
+This would result in different behavior because the returned function would not actually call `pull.apply`, but instead return a reference to the `apply` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+pull.bind
+```
+This would result in different behavior because `bind` creates a new function with the `this` value set to a provided value, and optionally pre-sets some arguments. It does not actually call the function with the provided arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+pull.call
+```
+This would result in different behavior because `call` calls a function with a given `this` value and arguments provided individually. It would immediately execute the `pull` function, rather than returning a function that can be executed later.
+
+DONE.

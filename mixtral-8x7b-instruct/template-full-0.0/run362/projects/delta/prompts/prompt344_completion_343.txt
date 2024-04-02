@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'none'
+```
+This would result in different behavior because it would always use the 'none' embed type, which might not be compatible with the actual embed type in the `other` Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+'unknown' as const
+```
+This would result in different behavior because it would always use the 'unknown' embed type, which might not be compatible with the actual embed type in the `other` Delta. Additionally, using `as const` would make it a read-only tuple, which could cause issues if the handler expects a mutable object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+(Math.random() < 0.5 ? 'type1' : 'type2') as const
+```
+This would result in different behavior because it would randomly choose between 'type1' and 'type2' embed types, which might not be compatible with the actual embed type in the `other` Delta. Additionally

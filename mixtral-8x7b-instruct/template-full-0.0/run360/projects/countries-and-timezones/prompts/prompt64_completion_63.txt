@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+countries[id]
+```
+This would result in different behavior because it directly returns the country object instead of using the `deliverCountry` function, which filters out deprecated timezones.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+{ ...countries[id], timezones: Object.values(timezones) }
+```
+This would result in different behavior because it returns all timezones instead of filtering out deprecated ones, and it also flattens the timezones object into an array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{ ...countries[id], timezones: Object.keys(timezones).map(key => timezones[key]) }
+```
+This would result in different behavior because it returns all timezones as an array of objects instead of filtering out deprecated ones, and it also converts the timezones object keys into an array.
+
+By replacing the `del

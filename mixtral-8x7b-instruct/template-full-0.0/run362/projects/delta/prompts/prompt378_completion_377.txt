@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'delete'
+```
+This would result in different behavior because it would always compare the 'delete' type instead of using the 'peekType()' method of the 'otherIter' object. This change would cause the function to behave differently when processing operations in the 'other' delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+otherIter.peek().type
+```
+This would result in different behavior because it would access the 'type' property directly, bypassing the 'peekType()' method. This change could cause issues if the 'peek()' method returns a value that doesn't have a 'type' property, leading to unexpected behavior or errors.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+otherIter.peek().delete || otherIter.peek().retain
+```
+This would result in different behavior because it would always compare the 'delete' or 'retain' properties of the current operation in the 'otherIter'

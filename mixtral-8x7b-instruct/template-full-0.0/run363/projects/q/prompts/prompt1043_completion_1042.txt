@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would cause the 'get' method to immediately return null instead of waiting for a value to be put into the queue.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.promise
+```
+This would result in different behavior because it would cause the 'get' method to return the entire promise object instead of just the head value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.promise.then(function(val) { return val.head; })
+```
+This would result in different behavior because it would add an extra layer of promise chaining, causing the 'get' method to return a promise that resolves to the head value instead of the head value itself.
+
+DONE.

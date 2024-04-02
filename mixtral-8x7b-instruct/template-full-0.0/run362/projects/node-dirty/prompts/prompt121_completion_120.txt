@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('drain', this._inFlightWrites)
+```
+This would result in different behavior because the original code emits a 'drain' event with no arguments, while this modification would emit the event with the number of in-flight writes as an argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('drained')
+```
+This would result in different behavior because the original code emits a 'drain' event, while this modification would emit a 'drained' event instead.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+global.emit('drain')
+```
+This would result in different behavior because the original code emits the 'drain' event on the current instance of the object, while this modification would emit the event on the global object, which may not be handled correctly by the rest of the code.
+
+DONE.

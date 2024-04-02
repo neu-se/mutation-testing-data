@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` always returns a resolved promise, while `when` waits for the promise to settle. In this case, `onRejected` and `onProgress` would never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this
+```
+This would result in different behavior because `this` would refer to the context of the `fbound` function, not the `when` function. This could lead to unexpected behavior or errors, as the `when` function's context and its methods (`onFulfilled`, `onRejected`, and `onProgress`) may not be available or may not work as expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when
+```
+This would result in different behavior because `Q.when` has additional functionality compared to the original `when` function. `Q.when` can coerce immediate values into promises

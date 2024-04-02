@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'0'
+```
+This would result in different behavior because the `_queue` map would always store an array with a single callback, even if multiple callbacks are passed to the `set` method for the same key. This is because the `cbs.push(cb)` line would not be executed due to the falsy value of `'0'`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.path
+```
+This would result in different behavior because the `_queue` map would store an array with a single callback for every key, even if multiple callbacks are passed to the `set` method for the same key. This is because the `cbs.push(cb)` line would always be executed, appending the current path to the `cbs` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.get(key)
+```
+This would result in different behavior because the `_queue` map would

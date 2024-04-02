@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject
+```
+This would result in different behavior because the resolved promise would be rejected instead, causing the chained `.then()` to not receive the expected value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.promise.resolve
+```
+This would result in different behavior because it tries to access the `resolve` method on the promise object itself, which is not guaranteed to exist.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve
+```
+This would result in different behavior because it would attempt to resolve a new promise instead of resolving the existing deferred promise, causing the chained `.then()` to not receive the expected value.
+
+DONE.

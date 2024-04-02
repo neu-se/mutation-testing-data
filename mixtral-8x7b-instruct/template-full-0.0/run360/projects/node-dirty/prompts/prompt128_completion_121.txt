@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.unshift
+```
+This would result in different behavior because `unshift` is not a method that exists on a writable stream, and would throw an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write('some random data')
+```
+This would result in different behavior because it would write 'some random data' to the stream, instead of corking it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork = false
+```
+This would result in different behavior because it would set the cork property to false, instead of calling the cork method.
+
+DONE.

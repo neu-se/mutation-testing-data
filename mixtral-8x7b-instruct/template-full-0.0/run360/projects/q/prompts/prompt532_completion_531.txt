@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].concat.bind(null, value).spread
+```
+This would result in different behavior because it uses the `concat` method of the Array prototype with a null `this` value and the `value` as the first argument, followed by the `spread` method. This changes the context and could lead to different behavior in certain cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(value).all.spread
+```
+This would result in different behavior because it uses the `all` method instead of `spread`. The `all` method is used to create a promise that is fulfilled when all of the given promises are fulfilled, or rejects with the reason of the first promise to reject. Using this in place of `spread` would result in different behavior as it would not properly unwrap the array of values from the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(value).spread

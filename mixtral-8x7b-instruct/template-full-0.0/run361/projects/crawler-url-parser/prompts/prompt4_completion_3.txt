@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr !== null && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it changes the loose equality `typeof` check to a strict `!==` check, which may cause the function to return `null` for valid input.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+_has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it removes the `currentUrlStr &&` part, causing the function to throw an error if `currentUrlStr` is falsy (e.g., `''`, `0`, `null`, `undefined`).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr && _has_illegal_chars(currentUrlStr.toString())

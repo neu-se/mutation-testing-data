@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+'http' === url.substring(0, 4)
+```
+This would result in different behavior because it checks if the URL starts with 'http' instead of using the `startsWith` method and `trimLeft` to remove leading whitespaces. This could cause issues when the URL actually starts with 'https' but the comparison returns false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+url.indexOf('https') === 0
+```
+This would result in different behavior because it checks if 'https' is at the beginning of the URL string using the `indexOf` method instead of using the `startsWith` method. This could cause issues when the URL starts with 'https' but the comparison returns -1 (not found).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!url.includes(' ') && url.startsWith('https')

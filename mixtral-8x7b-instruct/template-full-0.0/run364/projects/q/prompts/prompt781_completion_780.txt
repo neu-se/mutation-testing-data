@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function (err) { deferred.reject(err); }
+```
+This would result in different behavior because the error is directly passed to the `deferred.reject` method, bypassing the creation of a new error object with a custom message.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function (err) { deferred.reject(new Error("Promise rejected: " + err)); }

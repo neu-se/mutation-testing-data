@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+src === ''
+```
+This would result in different behavior because it checks if the source is an empty string instead of checking if it's a glob pattern.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof src !== 'string'
+```
+This would result in different behavior because it checks if the source is not a string, rather than checking if it's a glob pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!Array.isArray(src)
+```
+This would result in different behavior because it checks if the source is not an array, rather than checking if it's a glob pattern. This might be problematic if the `compress` function is not updated to handle arrays of file paths or globs.
+
+DONE.

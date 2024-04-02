@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+console.error('Buggy code: Mutation testing example');
+```
+This would result in different behavior because it logs an error message instead of forwarding the error to a future turn and throwing it as an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.nextTick(function () { throw error; });
+```
+This would result in different behavior because it throws the error immediately instead of forwarding it to a future turn.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(error.message);
+```
+This would result in different behavior because it only passes the error message instead of the entire Error object, which could lead to loss of information about the error's stack trace and other properties.
+
+DONE.

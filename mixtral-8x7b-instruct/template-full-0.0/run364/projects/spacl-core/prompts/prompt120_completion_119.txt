@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would always return false when `ctx` is not provided, even if the path matches the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<any random object>
+```
+This would result in different behavior because it would throw a TypeError when `ctx` is not provided, as the `in` operator would be checking the presence of properties in an object that is not an actual query context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because it would return false when `ctx` is not provided, as the `in` operator would check for properties in an empty object, which would never match the properties from the regex.
+
+By introducing these changes, the mutation testing aims to reveal potential weaknesses in the test suite, encouraging developers to improve their tests and ensure better code coverage.
+
+DONE.

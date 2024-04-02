@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:'
+```
+This would result in different behavior because it uses the `!==` operator instead of `!=`. The `!==` operator checks for strict equality, while `!=` checks for loose equality. In this case, it might cause some test cases to fail if the code relies on the loose equality behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.protocol && parsedUrl.protocol != 'http' && parsedUrl.protocol != 'https'
+```
+This would result in different behavior because it checks for the string 'http' instead of 'http:'. This change might cause test cases to fail if the code expects the protocol to include the colon.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'http:' !== parsedUrl.protocol && 'https:' !== parsedUrl.protocol
+```
+This would result in different behavior because it swaps the order of the operands. This

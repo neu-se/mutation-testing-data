@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+prev || {}
+```
+This would result in different behavior because if `prev` is falsy, it will return an empty object instead of the original behavior of skipping that key-value pair in the resulting object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+prev
+```
+This would result in different behavior because if `prev` is falsy, it will omit that key-value pair in the resulting object, whereas the original code would still include it with a value of `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+prev ? { ...prev, [id]: getCountry(id, options) } : { [id]: getCountry(id, options) }
+```
+This would result in different behavior because if `prev` is truthy, it will create a new object with the spread operator, whereas the original code would use `Object.assign()` to copy the properties from `prev` to the new object.
+
+DONE.

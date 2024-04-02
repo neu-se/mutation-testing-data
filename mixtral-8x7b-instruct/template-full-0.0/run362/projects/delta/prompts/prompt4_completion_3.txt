@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+a
+```
+This would result in different behavior because the `compose` function would now use the `a` object as the base object for merging attributes, instead of the `b` object. This could lead to unexpected behavior when merging attribute maps.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+{}
+```
+This would result in different behavior because the `compose` function would always start with an empty object as the base for merging attributes, regardless of the input `a` and `b` objects. This could lead to loss of attributes from the `a` object if the `b` object does not have the same attributes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.assign({}, a, b)
+```
+This would result in different behavior because the `compose` function would use `Object.assign` to merge the `a` and `b` objects, instead of creating a deep clone of the `b`

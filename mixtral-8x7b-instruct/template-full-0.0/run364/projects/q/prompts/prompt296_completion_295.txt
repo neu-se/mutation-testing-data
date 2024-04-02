@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(x).then(function() { return y; })
+```
+This would result in different behavior because the `join` method expects `y` to be passed directly as an argument, but this change wraps `y` in a new promise, which may not be equivalent to the original value of `y` if the promise is resolved asynchronously or with a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(x).spread(function() { return y; })
+```
+This would result in different behavior because `spread` is used to unwrap arrays of promises, not single promises. This would cause a `TypeError` to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(x).all([y])
+```
+This would result in different behavior because `all` is used to wait for an array of promises to be resolved, but in this case there is only one promise being passed. This would cause the

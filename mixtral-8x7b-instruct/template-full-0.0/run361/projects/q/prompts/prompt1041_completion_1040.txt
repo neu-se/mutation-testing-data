@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `next.resolve` function would be set to `null`, making it impossible to resolve the `next` deferred object. This could cause the queue to stop functioning correctly, as items may not be added properly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve.bind(ends)
+```
+This would result in different behavior because it would set the `put` method to always use the same `resolve` function, regardless of the value being added to the queue. This could cause issues if the `ends` deferred object is resolved multiple times, as it would only trigger the corresponding `then` handlers once.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { next.resolve(); }
+```
+This would result in different behavior because it would immediately resolve the `next` deferred object, without waiting for the value to be added to the queue. This could cause the queue to become corrupted, as

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'insert'.includes(iter.peek().type)
+```
+This would result in different behavior because it checks if the type property of the current operation is a string containing the substring "insert", instead of checking if the type property exists and is equal to "insert".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peek().type === Object.keys(Op.prototype)[0]
+```
+This would result in different behavior because it checks if the type property of the current operation is equal to the first key of the Op prototype, instead of checking if the type property exists and is equal to "insert".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peek().type === 'insert' || iter.peek().type === 'Insert'

@@ -1,0 +1,13 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `all` function would resolve immediately, even if the input promises are rejected. The original code fragment, `noop`, is a function that does nothing and is used to ensure that the promise is rejected if the input promise is rejected. By replacing it with `Promise.resolve()`, the `all` function will resolve even if there are rejected promises, which is different from the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Buggy!') }
+```
+This would result in different behavior because the `all` function would always reject with an error, even if all the input promises are fulfilled. The original code fragment, `noop`, is a function that does nothing and is used to ensure that the promise is rejected if the input promise is rejected. By replacing it with a function that throws an error, the `all` function will always reject, which is different from the original behavior.
+
+Option 3:

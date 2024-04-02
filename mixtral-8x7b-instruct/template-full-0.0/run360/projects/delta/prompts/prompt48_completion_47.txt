@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+embedType !== Object.keys(b)[0]
+```
+This would result in different behavior because it no longer checks if `embedType` is falsy, allowing operations with different embed types to be considered equal.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+embedType && embedType !== Object.keys(b)[0]
+```
+This would result in different behavior because it now requires `embedType` to be truthy, which could lead to unexpected behavior when comparing operations with falsy embed types.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+embedType !== 'some-arbitrary-string'
+```
+This would result in different behavior because it now checks against a fixed string instead of the embed type of the second object, which would cause mismatched embed types to be considered equal.
+
+DONE.

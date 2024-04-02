@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because the `next` function is replaced with a direct call to `read`, which may cause the function to terminate prematurely and not process all data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op && op(data) || read(abort || true, done || function () {})
+```
+This would result in different behavior because it changes the order of operations, potentially causing the `read` function to be called before the `op` function, which could lead to data being processed out of order or skipped entirely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort = true
+```
+This would result in different behavior because it sets the `abort` variable to `true` unconditionally, causing the function to terminate immediately and potentially skipping processing of remaining data.
+
+DONE.

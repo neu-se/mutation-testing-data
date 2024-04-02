@@ -1,0 +1,13 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+const key = this._queue.keys().next().value; cbs = this._queue.values();
+```
+This would result in different behavior because instead of destructuring an array containing the first key-value pair from the `this._queue` Map, it now retrieves the first key and iterates over the values of the Map separately. This could cause issues if the order of keys and values is important or if there are multiple entries with the same key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const [key, ...cbs] = this._queue;
+```
+This would result in different behavior because instead of destructuring the first key-value pair from the `this._queue` Map, it now destructures the entire Map into an array, with the first element being the key-value pair and the rest being the remaining entries in the Map. This could cause issues if the order of keys and values is important or if there are multiple entries with the same key.
+
+Option 3: The PLACEHOLDER can be

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return callback }
+```
+This would result in different behavior because it changes the behavior of `nfcall` to always return a function instead of directly invoking the callback and returning a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+callback.bind(null)
+```
+This would result in different behavior because it changes the context (`this`) of the callback, which could affect how the callback behaves if it relies on accessing properties of the object it was originally bound to.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+callback || function() {}
+```
+This would result in different behavior because it introduces a fallback function that does nothing, effectively suppressing errors that would have been passed through the promise chain. This could lead to silent failures and make it harder to detect and handle errors correctly.
+
+DONE.

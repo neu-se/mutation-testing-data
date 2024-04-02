@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return continuer; }
+```
+This would result in different behavior because the `errback` variable would not be a function reference but a function that returns the `continuer` function. The `Q.async` function expects `errback` to be a function reference that can be called with "throw" as the first argument and an exception as the second argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+continuer.bind(null, "throw")
+```
+This would result in different behavior because the `this` value of the `continuer` function would be set to `null` instead of the `continuer` function itself. This could lead to unexpected behavior when the `continuer` function tries to access its own properties or methods.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return continuer("throw", new Error("Buggy error")); }

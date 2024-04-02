@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'.'
+```
+This would result in different behavior because it always sets the filename as '.', instead of using the URL's pathname. This would cause all files to be saved with the same name, overwriting each other.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+options.url.pathname.split('/').pop()
+```
+This would result in different behavior because it uses the last segment of the URL's pathname instead of the entire pathname. This could lead to incorrect filenames if the URL contains additional segments after the filename.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+path.parse(options.url).base

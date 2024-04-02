@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `isPending` function would always return false, regardless of the input's promise status.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `isPending` function would throw a TypeError when called with `null` as the input, as it checks if the input is an instance of Promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new Proxy({}, {})
+```
+This would result in different behavior because the `isPending` function would return `false` when called with a Proxy object, even if it's a pending promise. The Proxy object intercepts the default behavior of the original object, so the `instanceof Promise` check would fail.
+
+DONE.

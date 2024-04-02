@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `continuer` function expects a value or a promise, and null is neither. This would cause the `when` function to throw an error, which would then be caught and turned into a rejection for the promise returned by the decorated generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+42
+```
+This would result in different behavior because the `continuer` function expects a value or a promise, and 42 is a number. This would not cause an error, but it would also not allow the generator to continue executing until the promise is fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(function() { arg }, 0)
+```
+This would result in different behavior because it wraps the `arg` in a `setTimeout` function with a delay of 0 milliseconds. This would cause the `continuer` function to receive a function instead of a value or

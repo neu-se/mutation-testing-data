@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.search(/[^a-zA-Z0-9_/:~.$+*-]/) !== -1
+```
+This would result in different behavior because it uses `search` instead of `match`, and checks for the presence of invalid characters instead of the absence.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[^a-zA-Z0-9_/:~.$+*-]/.test(spec)
+```
+This would result in different behavior because it uses the `test` method of a regular expression instead of `match` or `search`, which returns a boolean indicating the presence of invalid characters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!spec.match(/^[a-zA-Z0-9_/:~.$+*-]*$/)
+```
+This would result in different behavior because it negates the result of the `match` method, effectively checking for the presence of invalid characters instead of the absence.
+

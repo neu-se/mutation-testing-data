@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+new RegExp(spec).exec(spec)
+```
+This would result in different behavior because `exec` returns the first match of the regular expression in the input string, while `match` returns all matches. In this case, if the `spec` contains a regex pattern, the behavior would differ.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.search(spec)
+```
+This would result in different behavior because `search` returns the index of the first match of the regular expression in the input string, while `match` returns the matches. In this case, if the `spec` contains a regex pattern, the behavior would differ.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').join('\\/')
+```
+This would result in different behavior because it escapes the forward slashes in the `spec`, changing the regular expression. This would cause the regex validation to fail, and the constructor would throw an error even if the input string is valid.

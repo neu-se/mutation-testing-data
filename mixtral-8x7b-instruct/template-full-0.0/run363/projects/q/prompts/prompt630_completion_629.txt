@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).promiseDispatch
+```
+This would result in different behavior because `promiseDispatch` is a protected method that should not be called directly. The `dispatch` method is used to ensure that the method is called in the next tick.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).thenDispatch
+```
+This would result in different behavior because `thenDispatch` is not a method of the Q promise object. Using `thenDispatch` instead of `dispatch` would bypass the logic to ensure the method is called in the next tick and could potentially lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).reject
+```
+This would result in different behavior because `reject` is a method that creates a rejected promise. By replacing the PLACEHOLDER with `Q(object).reject`, you would be creating a rejected promise instead of dispatching the "delete" message to the object. This could lead to unexpected

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => buildCountry(data, id)
+```
+This would result in different behavior because it creates a new function each time, which may not take advantage of memoization.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+memoizeCountry(buildCountry(data, 'wrongId'))
+```
+This would result in different behavior because it passes a hardcoded 'wrongId' instead of the actual 'id', potentially causing incorrect country initialization.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+memoizeCountry(null)
+```
+This would result in different behavior because it always passes null to memoizeCountry, which might cause issues if the memoizeCountry function relies on its argument.
+
+DONE.

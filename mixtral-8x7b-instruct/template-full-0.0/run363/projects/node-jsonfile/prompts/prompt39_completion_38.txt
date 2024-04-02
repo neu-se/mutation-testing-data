@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+_fs.writeFile
+```
+This would result in different behavior because it uses the locally scoped `_fs` variable instead of the `fs` module passed in through the `options` object. This could cause issues if the behavior of `graceful-fs` and `fs` differ.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.writeFileSync
+```
+This would result in different behavior because `fs.writeFileSync` is a synchronous version of the function, while the original code uses the asynchronous `fs.writeFile`. This could cause issues with the flow of the program, potentially causing it to hang or time out.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_fs.writeFileSync
+```
+This would result in different behavior because it uses the synchronous `_fs.writeFileSync` instead of the asynchronous `universalify.fromCallback(fs.writeFile)`. This could cause issues with the flow of

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Buggy!') }
+```
+This would result in different behavior because a new error is always thrown, even when there is no uncaught exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { delete global.Q }
+```
+This would result in different behavior because it deletes the Q global, potentially breaking other parts of the code that rely on it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { nextTick.laterQueue.push(noop) }
+```
+This would result in different behavior because it adds a no-operation task to the laterQueue, which could cause the task to be executed at a different time or not at all.
+
+DONE.

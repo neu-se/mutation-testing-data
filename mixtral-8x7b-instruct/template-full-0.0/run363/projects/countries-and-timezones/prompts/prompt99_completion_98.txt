@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+for (const key in tzs) {
+  if (tzs.hasOwnProperty(key) && !tzs[key].deprecated) {
+    prev[key] = tzs[key];
+  }
+}
+```
+This would result in different behavior because it uses a `for...in` loop instead of `Object.keys` with `reduce`. This might not preserve the original order of keys, which could cause issues if the order is important.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.values(tzs).filter(tz => !tz.deprecated)
+```
+This would result in different behavior because it returns an array of timezone values instead of an object. This could cause issues if the calling code expects an object with specific keys.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(tzs).filter(key => !tzs[key].deprecated).reduce((prev, key) => {
+  prev[key] = t

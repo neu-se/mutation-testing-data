@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+zipAFolderOptions?.customWriteStream
+```
+This would result in different behavior because the optional chaining operator (`?.`) would return `undefined` if `zipAFolderOptions` is `null` or `undefined`, instead of throwing an error. This change would not check if `zipAFolderOptions` is truthy before trying to access its `customWriteStream` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+zipAFolderOptions && zipAFolderOptions.customWriteStream || fs.createWriteStream('default.zip')
+```
+This would result in different behavior because if `zipAFolderOptions` is falsy, it would create a new `WriteStream` with the file name 'default.zip' instead of throwing an error. This change would introduce a default write stream when `zipAFolderOptions` is not provided or is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+(zipAFolderOptions as any).custom

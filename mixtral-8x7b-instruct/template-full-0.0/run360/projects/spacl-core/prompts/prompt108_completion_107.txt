@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `matches` method would return `false` even if the policy exists but has a different context, whereas the original code would return the result of the `matches` method in the `Policy` class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because the `matches` method would always return `true` if the policy exists, even if the path doesn't match, whereas the original code would return the result of the `matches` method in the `Policy` class.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(<any>ctx).someRandomProperty
+```
+This would result in different behavior because the `matches` method would return `true` or `false` based on the existence of `someRandomProperty` in the `ctx` object, rather than the actual path matching, whereas the original code would return the result of the `matches` method in the `Policy`

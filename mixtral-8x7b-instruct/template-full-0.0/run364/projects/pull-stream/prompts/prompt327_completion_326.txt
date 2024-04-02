@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because the `once` function would always be called with `true` as the `abort` argument, even when the stream is ending due to an error. The original code only calls `once` with `true` when the stream is explicitly aborted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `once` function would always be called with `null` as the `abort` argument, even when the stream is ending due to an error. The original code only calls `once` with `null` when the stream ends gracefully.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data
+```
+This would result in different behavior because the `once` function would be called with the `data` argument, which is not what the `abort` parameter is intended for. The original code calls `once` with the `end` argument, which indicates whether the stream has ended.
+

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { nodeback && nodeback(null, value) }
+```
+This would result in different behavior because the `Q.nextTick` is removed, and the callback will be executed synchronously if provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+nodeback || (value => Q.nextTick(() => nodeback(null, value)))
+```
+This would result in different behavior because it inverts the condition, and if no `nodeback` is provided, it wraps the value in a `Q.nextTick` callback, which would delay the resolution of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+nodeback && nodeback(value)

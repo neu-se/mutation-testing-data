@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function* () {}
+```
+This would result in different behavior because it creates an empty generator function, instead of using the provided `makeGenerator` function. This would cause the `spawn` function to always return an immediately resolved promise, without executing the intended generator function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+42
+```
+This would result in different behavior because it replaces the `makeGenerator` parameter with an integer value. This would cause a syntax error in the `async` function, as it expects a function as its argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+makeGenerator.apply(null, []);
+```
+This would result in different behavior because it invokes the `makeGenerator` function immediately with no arguments, rather than wrapping it in a function and deferring its execution. This would cause the `spawn` function to always return a promise that is immediately resolved with the result of invoking `makeGenerator`, instead of

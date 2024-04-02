@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `nfcall` function would no longer wait for the callback to be called. Instead, it would immediately return a resolved promise, causing the function to not work as intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject("Error")
+```
+This would result in different behavior because the `nfcall` function would immediately reject the promise with an error message, instead of waiting for the callback to be called. This would cause any `then` methods chained after the `nfcall` to not be executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(() => Q.resolve(), ms)
+```
+This would result in different behavior because the `nfcall` function would wait for the specified number of milliseconds before resolving the promise, instead of waiting for the callback to be called. This would cause a delay in the execution of the function, which could lead to unexpected behavior.

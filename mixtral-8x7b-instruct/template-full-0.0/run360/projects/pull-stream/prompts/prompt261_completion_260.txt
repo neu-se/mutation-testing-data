@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { cb(err) }
+```
+This would result in different behavior because the error would always be passed to the callback, even if it's not an actual error (e.g., when the `end` event is emitted).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.exit(1)
+```
+This would result in different behavior because the process would be terminated immediately upon receiving an error, rather than allowing the error to be handled by the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+console.error(err)
+```
+This would result in different behavior because the error would be logged to the console, but the callback would not be invoked, leaving the application in an inconsistent state.
+
+DONE.

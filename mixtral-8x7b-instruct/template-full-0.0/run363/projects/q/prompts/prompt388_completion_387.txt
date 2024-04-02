@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.apply(Q, [value].concat(fulfilled, rejected, progressed))
+```
+This would result in different behavior because it changes the way `when` function is called, using `Function.prototype.apply` and passing `Q` as the context, which may not have the desired effect.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(value).then(fulfilled, rejected)
+```
+This would result in different behavior because it directly passes `fulfilled` and `rejected` functions to `Q(value).then`, bypassing the `when` function and changing the behavior of progressed function handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when.call(Q, value, fulfilled, rejected, progressed)
+```
+This would result in different behavior because it changes the way `when` function is called, using `Function.prototype.call` and explicitly setting the context to `Q`,

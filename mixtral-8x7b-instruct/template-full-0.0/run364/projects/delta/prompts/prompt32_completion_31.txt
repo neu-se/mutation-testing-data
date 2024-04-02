@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a)
+```
+This would result in different behavior because it would compare keys from `a` instead of `attr`, potentially missing some differences or incorrectly marking some keys as different.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(<any>attr)
+```
+This would result in different behavior because it would treat `attr` as `any`, potentially allowing invalid keys and causing runtime errors or unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(attr).filter(key => key !== 'base')
+```
+This would result in different behavior because it would exclude the `base` key from the comparison, potentially missing some differences or incorrectly marking some keys as unchanged.
+
+DONE.

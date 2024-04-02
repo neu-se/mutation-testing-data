@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { setTimeout(flush, 0); }
+```
+This would result in different behavior because the `setImmediate` function is not used, and instead, `setTimeout` is used, which may have a different delay in execution depending on the environment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `requestTick` function would not be assigned any value, causing an error when `requestTick` is called in the `nextTick` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { console.log('tick'); }

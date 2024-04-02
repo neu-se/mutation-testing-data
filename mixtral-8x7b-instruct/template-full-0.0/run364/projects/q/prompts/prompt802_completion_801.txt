@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `progress` method expects the third argument to be a function, and `null` is not a function. This would likely cause an exception to be thrown.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because the `progress` method expects the third argument to be a function that will be called with progress notifications, but an empty function will not have the desired effect of passing progress notifications to the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` is a function that resolves the deferred object, but the `progress` method expects the third argument to be a function that will be called with progress notifications. This would likely cause the deferred object to be resolved prematurely and unexpectedly.
+
+DONE.

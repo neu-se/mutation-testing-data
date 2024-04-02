@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+defer(null);
+```
+This would result in different behavior because the `defer` function is called without passing the `Q` object as the first argument, which is required to create a new deferred object. This would cause the `deferred.promise` to be undefined, leading to unexpected behavior in the `Q.nbind` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+defer(true);
+```
+This would result in different behavior because the `defer` function is called with `true` as the first argument, instead of a `Q` object. This would cause the `deferred.promise` to be undefined, leading to unexpected behavior in the `Q.nbind` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+defer(function() {});
+```
+This would result in different behavior because the `defer` function is called with an empty function as the first argument, instead of a `Q` object. This would cause

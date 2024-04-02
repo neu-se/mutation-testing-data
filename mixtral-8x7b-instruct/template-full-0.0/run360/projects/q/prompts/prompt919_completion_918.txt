@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return {}; }
+```
+This would result in different behavior because the `nodeArgs.push` call would add an empty object instead of a node resolver function, causing the callback to never be called and the promise to never resolve or reject.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because the `nodeArgs.push` call would add a `resolve` function instead of a node resolver function, causing the promise to immediately resolve with `undefined` instead of waiting for the Node.js callback to be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject

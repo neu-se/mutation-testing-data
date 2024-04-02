@@ -1,0 +1,13 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+linkurl_path.startsWith(pageurl_path)
+```
+This would result in different behavior because it checks if the `linkurl_path` starts with `pageurl_path`, instead of checking if `pageurl_path` includes `linkurl_path`. This change would cause the function to consider a link as "uplevel" only if its path is a prefix of the base URL's path, instead of being a subpath at any position.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl_path.indexOf(linkurl_path) > -1
+```
+This would result in different behavior because it uses the `indexOf` method to check if `pageurl_path` contains `linkurl_path`. However, this method is case-sensitive, unlike the original `includes` method. This change would cause the function to fail to recognize some links as "sublevel" or "uplevel" if their paths have different casing compared to the base URL's path.
+
+Option 

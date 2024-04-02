@@ -1,0 +1,11 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+version === '1' || version === '1.1' ? /[*+][^/]|[^/][*+]/ : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/
+```
+This would result in different behavior because the regex pattern for version 1.1 is changed to match version 1, which may not catch the same edge cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+spec.match(version === '1' ? /[*+][^/]|[^/][*+]/ : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null
+```
+This would result in different behavior because the spec string is not compared against the regex pattern for version 1.0 or version 1.1, which may not catch the

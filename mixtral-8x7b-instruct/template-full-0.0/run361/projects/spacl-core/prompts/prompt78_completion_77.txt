@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+let rule: Rule
+for (rule of this.rules) {
+```
+This would result in different behavior because it introduces a variable declaration, potentially shadowing an existing variable with the same name in the outer scope. This could lead to unexpected behavior if the outer scope variable is inadvertently modified instead of the intended `rule` variable within the loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const [rule] = this.rules
+```
+This would result in different behavior because it uses destructuring assignment to extract the first rule from the `rules` array, instead of iterating over the entire array. This would cause the `matches` method to only check the first rule in the `rules` array, ignoring the rest.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.rules.find(rule => rule.matches(path, ctx))
+```
+This would result in different behavior because it uses the `Array.prototype.find` method to search for the first

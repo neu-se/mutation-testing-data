@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `Q.longStackSupport` check is bypassed, and the `hasStacks` variable is not evaluated, so long stack traces will not be enabled even if `Q_DEBUG` is set.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport || hasStacks
+```
+This would result in different behavior because the `hasStacks` variable is evaluated even if `Q.longStackSupport` is true, which may cause long stack traces to be enabled unnecessarily.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport && (hasStacks || true)
+```
+This would result in different behavior because the `hasStacks` variable is always treated as true, which may cause long stack traces to be enabled even if `Q_DEBUG` is not set.
+
+DONE.

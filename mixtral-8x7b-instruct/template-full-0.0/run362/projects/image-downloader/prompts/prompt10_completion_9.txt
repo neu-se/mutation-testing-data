@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+'./' + options.dest
+```
+This would result in different behavior because it prepends './' to the dest path, which might not be the intended behavior. It could lead to issues if the dest path is intended to be an absolute path or a path relative to a different directory.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.cwd() + path.sep + options.dest
+```
+This would result in different behavior because it prepends the current working directory to the dest path, which might not be the intended behavior. It could lead to issues if the dest path is intended to be an absolute path or a path relative to a different directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+options.dest.toUpperCase()

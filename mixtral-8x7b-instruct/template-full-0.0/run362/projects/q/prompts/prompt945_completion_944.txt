@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve.apply(deferred, [deferred.makeNodeResolver()].concat(nodeArgs));
+```
+This would result in different behavior because it immediately resolves the promise with the node resolver function and the arguments, instead of waiting for the specified timeout.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(nodeArgs.pop());
+```
+This would result in different behavior because it resolves the promise with the last argument passed, instead of the node resolver function, which is used to handle the Node.js-style callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject();
+```
+This would result in different behavior because it immediately rejects the promise, regardless of the Node.js-style callback or the arguments provided.
+
+DONE.

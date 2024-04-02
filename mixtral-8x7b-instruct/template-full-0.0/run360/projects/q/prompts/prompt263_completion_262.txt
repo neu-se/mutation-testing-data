@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Promise(resolve => resolve(value))
+```
+This would result in different behavior because a new promise is created instead of resolving the existing deferred promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fulfill(new Value(value))
+```
+This would result in different behavior because a new `Value` object is created and resolved, instead of resolving the existing deferred promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve = function () {}
+deferred.reject = function (reason) { deferred.promise.reject(reason) }
+deferred.fulfill = function (value) { deferred.promise.reject('Fulfillment is not supported') }
+deferred.notify = function (progress) { deferred.promise.notify(progress) }
+```
+This would result in different behavior because the `resolve`, `reject`, and `fulfill` methods are overridden, preventing

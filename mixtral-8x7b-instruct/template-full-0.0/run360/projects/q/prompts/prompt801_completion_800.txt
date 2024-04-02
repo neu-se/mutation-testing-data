@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `then` method treats `null` and `undefined` differently. In the original code, passing `undefined` as an argument to `then` would ignore the onFulfilled/onRejected/onProgress callbacks, while passing `null` would throw a TypeError.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+0
+```
+This would result in different behavior because the `then` method treats `0` and `undefined` differently. In the original code, passing `undefined` as an argument to `then` would ignore the onFulfilled/onRejected/onProgress callbacks, while passing `0` would treat it as an onFulfilled callback and immediately resolve the returned promise with the value `0`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() {}
+```
+This would result in different behavior because an empty function would be passed as the progressed argument.

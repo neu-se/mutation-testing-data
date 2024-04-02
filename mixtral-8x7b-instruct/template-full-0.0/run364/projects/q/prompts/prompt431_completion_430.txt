@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{}().state
+```
+This would result in different behavior because it would always return `"rejected"`, since it's calling the `state` property on an empty object, which is always truthy and will not trigger the rejection branch in the ternary operator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.inspect.state
+```
+This would result in different behavior because it would always reference the `state` property of the `inspect` function object itself, rather than calling the `inspect` method on the current promise instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(function(){}).state
+```
+This would result in different behavior because it would reference the `state` property of an empty function expression, which does not exist, and would throw a `TypeError` at runtime.
+
+DONE.

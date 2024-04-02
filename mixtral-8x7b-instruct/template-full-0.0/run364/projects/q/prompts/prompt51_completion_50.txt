@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(flush, 1);
+```
+This would result in different behavior because the `flush` function would be called asynchronously after a 1ms delay, instead of being called synchronously using `process.nextTick` in Node.js environments or using the fastest available means in other environments. This could lead to race conditions or unexpected execution order of tasks.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+head = head.next = { task: task, domain: isNodeJS && process.domain, next: head };
+```
+This would result in different behavior because the new task would be added to the head of the linked list instead of the tail, causing the tasks to be executed in reverse order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+flushing = requestTick();
+```
+This would result in different behavior because `flushing` would be assigned the return value of `requestTick()` instead of being set to `true`. This could lead

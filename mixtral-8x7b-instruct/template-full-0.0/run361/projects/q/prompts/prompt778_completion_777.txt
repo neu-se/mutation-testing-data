@@ -1,0 +1,23 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+  return promise;
+}
+```
+This would result in different behavior because the `inspect` method is not called, and the promise object will be returned instead. This could cause issues if the consumer of the `allSettled` method expects an object with `state`, `value`, and `reason` properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+  return {};
+}
+```
+This would result in different behavior because an empty object will be returned instead of the promise's inspection object. This could cause confusion and errors if the consumer of the `allSettled` method relies on the inspection object to determine the state and value/reason of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function regardless() {
+  return Q.resolve();
+}
+```
+This would result in different behavior because a resolved promise will be returned instead of the promise's inspection object. This could

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject()
+```
+This would result in different behavior because the `closed` deferred would be immediately rejected, causing the `Queue` to be non-functional. The original code initializes `closed` with a resolved deferred, allowing the queue to operate normally until `close` is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer(null)
+```
+This would result in different behavior because the `closed` deferred would be initialized with a null resolver, which could lead to unexpected behavior or errors when attempting to resolve or reject the deferred. The original code initializes `closed` with a deferred created using `Q.defer()`, ensuring a proper resolver is in place.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer(function () { throw new Error('Buggy resolver') })
+```
+This would result in different behavior because the `closed` deferred would be initialized with a resolver

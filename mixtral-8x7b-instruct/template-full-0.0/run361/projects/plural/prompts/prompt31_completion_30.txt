@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function(w) { return w.slice(0, -2) + 'es' }
+```
+This would result in different behavior because `slice` and `substr` have slightly different behaviors when handling negative indexes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function(w) { return w.substr(0, w.length - 1) + 'es' }
+```
+This would result in different behavior because the length of the resulting string is incorrect, as it should be `w.length - 2` instead of `w.length - 1`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function(w) { return w.toUpperCase().substr(0, w.length - 2) + 'ES' }
+```
+This would result in different behavior because the resulting string is in uppercase, and the original code preserves the case of the input string.
+
+DONE.

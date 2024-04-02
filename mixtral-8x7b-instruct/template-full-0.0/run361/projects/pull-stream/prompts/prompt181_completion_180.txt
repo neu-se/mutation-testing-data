@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => {}
+```
+This would result in different behavior because the `onAbort` function passed in as an argument is not being called, which is different from the original behavior of invoking `onAbort` when the `abort` flag is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `abort` callback will receive `null` instead of the `onAbort` function, which might cause unexpected behavior in the calling code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { throw new Error('onAbort called') }
+```
+This would result in different behavior because the `onAbort` function is replaced with a function that throws an error, causing the entire application to crash when the `abort` flag is true. This is different from the original behavior of gracefully handling the abort scenario.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because an empty array is truthy, so the generator would be invoked immediately instead of waiting for a value to replace the placeholder.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve()
+```
+This would result in different behavior because `Q.resolve()` returns a promise that is immediately resolved with a value of `undefined`. The generator would be invoked immediately, but it would receive `undefined` as the first argument instead of the promise returned by `Q.async(makeGenerator)`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.denodeify(function() {})
+```
+This would result in different behavior because `Q.denodeify` creates a new function that accepts a Node.js-style callback and returns a promise. The generator would be invoked immediately with a function that returns a promise, rather than a promise returned by `Q.async(makeGenerator)`.
+
+DONE.

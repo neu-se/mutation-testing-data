@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+'s'
+```
+This would result in different behavior because it would always use the `https` module instead of checking if the URL starts with 'https'. This could lead to issues when downloading files from HTTP URLs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+request = url.trimLeft().startsWith('https') ? https : http;
+```
+This would result in different behavior because it would not check if the URL is starting with 'https' after calling `trimLeft()`. This could lead to issues when downloading files from HTTPS URLs that have leading whitespace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const request = (url.trimLeft().startsWith('https') ? https : http).bind(null, url);
+```
+This would result in different behavior because it would bind the `url` to the `request` function, making it unchangeable. This could lead to issues when trying to download files from different URLs.
+

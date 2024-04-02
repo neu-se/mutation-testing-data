@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(callback)
+```
+This would result in different behavior because `Q.when` wraps its argument in a promise if it is not already a promise, which could cause the `finally` callback to be called at an inappropriate time.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(callback)
+```
+This would result in different behavior because `Q.resolve` immediately resolves the returned promise with the `callback` function, which could cause the `finally` callback to be called immediately rather than waiting for the original promise to settle.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(callback).then(function() {})
+```
+This would result in different behavior because it wraps the `callback` function in a promise and immediately resolves it, which could cause the `finally` callback to be called immediately rather than waiting for the original promise to settle. Additionally, the added `then` call with an empty function

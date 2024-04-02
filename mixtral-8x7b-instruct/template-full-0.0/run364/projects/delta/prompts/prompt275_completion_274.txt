@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'insert'.includes(iter.peekType())
+```
+This would result in different behavior because it checks if the string 'insert' contains the value of `iter.peekType()`, instead of comparing it directly. This would cause the code to always return true if `iter.peekType()` is not null or undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peekType === 'insert'
+```
+This would result in different behavior because it compares the function `iter.peekType` to the string 'insert', instead of calling the function and comparing its return value. This would cause the code to always return false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peekType.call(iter) === 'insert'
+```
+This would result in different behavior because it calls the `peekType` function with the `iter` context, instead of just calling it directly. This could potentially cause unexpected behavior if

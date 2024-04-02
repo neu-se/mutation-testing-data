@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because the `array_indexOf` method would not be able to find the `promise` in the empty array, and the unhandled rejection would not be reported.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+{push: function() {}}
+```
+This would result in different behavior because the `unhandledRejections` array would not grow when tracking rejections, and the `array_indexOf` method would always return -1, preventing the unhandled rejection from being reported.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+global.unhandledRejections
+```
+This would result in different behavior because it would use a global variable instead of the local one, and the `array_indexOf` method would always return -1, preventing the unhandled rejection from being reported.
+
+DONE.

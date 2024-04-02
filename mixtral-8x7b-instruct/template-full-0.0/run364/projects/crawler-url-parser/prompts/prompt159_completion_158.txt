@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl_path
+```
+This would result in different behavior because the comparison of `linkurl_without_last_part` and `pageurl_without_last_part` would always be true if `pageurl_path` does not end with a slash, causing some internal links to be incorrectly classified as "samelevel".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl_path + "/"
+```
+This would result in different behavior because the comparison of `linkurl_without_last_part` and `pageurl_without_last_part` would always be false if `pageurl_path` ends with a slash, causing some internal links to be incorrectly classified as not "samelevel".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pageurl_path.slice(0, -1)
+```
+This would result in different behavior because the comparison of `linkurl_without_last_part` and `pageurl

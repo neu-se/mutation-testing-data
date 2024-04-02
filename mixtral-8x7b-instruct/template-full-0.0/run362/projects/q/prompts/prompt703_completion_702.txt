@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because the `fbound` function would no longer receive any arguments, causing it to always pass an empty array as the second argument to `promise.dispatch("apply", ...)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `fbound` function would receive `null` as the second argument instead of an array of arguments, causing `promise.dispatch("apply", ...)` to throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{ length: 1, 0: 42 }
+```
+This would result in different behavior because the `fbound` function would receive an object with a `length` property and a single array-like element instead of a true array, potentially causing `promise.dispatch("apply", ...)` to behave unexpectedly.
+
+DONE.

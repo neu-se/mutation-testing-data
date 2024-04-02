@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+laterQueue = laterQueue.concat(array_slice(arguments))
+```
+This would result in different behavior because it modifies the global `laterQueue` variable, changing the behavior of the `nextTick` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+laterQueue.unshift(task)
+```
+This would result in different behavior because it adds the task to the beginning of the `laterQueue` array instead of the end, causing tasks to be executed in a different order.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(task, 0)
+```
+This would result in different behavior because it uses `setTimeout` instead of adding the task to the `laterQueue` array, bypassing the scheduled execution of tasks and causing them to be executed immediately.
+
+DONE.

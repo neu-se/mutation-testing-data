@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function() { return {resolve: function() {}, promise: Q.defer()}; }
+```
+This would result in different behavior because it creates a new object with a `resolve` function and a new promise each time `put` is called, instead of reusing the same `ends` object. This could cause issues with synchronization and potential data loss.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{resolve: function() {}, promise: Q.defer().promise}
+```
+This would result in different behavior because it uses an already resolved promise, which breaks the queue functionality. When trying to put a new value in the queue, it would immediately resolve the promise, causing issues with the order of elements in the queue.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{resolve: function(value) { throw new Error("Can't add value to full queue"); }, promise: Q.defer().promise}

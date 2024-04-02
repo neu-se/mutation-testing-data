@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would always set `aborted` to true, causing the function to immediately call the callback with an error, even if the `read` operation has not been aborted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would always set `aborted` to null, which would not trigger the error case in the callback. This could cause the function to continue executing and possibly produce incorrect results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb && abortCb(abort)
+```
+This would result in different behavior because it would call the `abortCb` function immediately, even if the `read` operation has not been aborted. This could cause the function to execute the callback prematurely and produce incorrect results.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `transformPosition` method would always prioritize the original delta's operations over the other delta's operations, regardless of the `priority` argument's value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert'
+```
+This would result in different behavior because the `transformPosition` method would only consider the current operation when updating the `index` variable, potentially skipping over multiple insert operations in a row.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!priority
+```
+This would result in different behavior because the `transformPosition` method would always prioritize the other delta's operations over the original delta's operations, regardless of the `priority` argument's value.
+
+DONE.

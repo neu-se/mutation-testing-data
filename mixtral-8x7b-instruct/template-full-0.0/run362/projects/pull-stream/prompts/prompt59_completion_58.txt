@@ -1,0 +1,24 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    return sink.abort()
+  }
+})
+```
+This would result in different behavior because the original code checks if `end` is truthy, but this code checks if `end` is strictly equal to `true`. This means that if `end` is any other truthy value, the function will continue executing instead of aborting.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    throw new Error('Stream ended')
+  }
+})
+```
+This would result in different behavior because the original code calls `sink.abort()` when the stream ends, but this code throws an error instead. This could cause the program to crash or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (data)

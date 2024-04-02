@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+field(data.toUpperCase())
+```
+This would result in different behavior because the original code filters items based on their `field` value, while this modification filters items based on their `field` value converted to uppercase. This change may cause some items to be incorrectly filtered or pass through, depending on the case of their `field` values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prop('nonexistentProperty')(data)
+```
+This would result in different behavior because the original code uses the `field` variable, which is a function derived from the `prop` utility or the `id` function. This modification attempts to access a nonexistent property of the input data, which would always return `undefined`. This change would cause all items to pass through the filter, regardless of the `invert` flag.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+field(Math.floor(Math.random() * 10)) % 2 === 0 ?

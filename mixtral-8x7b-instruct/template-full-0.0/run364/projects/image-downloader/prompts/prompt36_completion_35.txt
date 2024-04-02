@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(__dirname + '/' + dest)
+```
+This would result in different behavior because it would write the stream to a different directory (the current directory instead of the one specified in the `dest` variable), potentially causing the output file to be saved in an unexpected location.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).destroy()
+```
+This would result in different behavior because it would immediately destroy the writable stream, preventing any data from being written to the file. This could cause the function to reject the promise instead of resolving it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(process.stdout)
+```
+This would result in different behavior because it would pipe the response data to the standard output stream (the console) instead of writing it to a file. This could cause the data to be displayed in the console instead of being saved to a file.
+
+DONE.

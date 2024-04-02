@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+latitude instanceof Number || longitude instanceof Number
+```
+This would result in different behavior because it checks for the `Number` object instead of the `number` type.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+typeof latitude !== 'number' || latitude.toString() === '[object Number]' || typeof longitude !== 'number' || longitude.toString() === '[object Number]'
+```
+This would result in different behavior because it checks for the `Number` object and the `number` type, which would pass the check even if the variables contain other objects that have a `toString` method that returns '[object Number]'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof latitude !== 'number' || isNaN(latitude) || typeof longitude !== 'number' || isNaN(longitude)

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new URL(currentUrlStr, true, true)
+```
+This would result in different behavior because `new URL` creates a `URL` object, while the original code uses the `URL.parse` method to parse the URL. This could lead to differences in how the URL is parsed and represented.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr.split('?')[0]
+```
+This would result in different behavior because the code is removing the query string from the URL by using the `parsedUrl.search` property, which is a string containing the query string. By replacing it with `currentUrlStr.split('?')[0]`, the query string will be removed, but the behavior will be different because the `parsedUrl` object will not be created, and its properties will not be available.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr.match(/^https?:\/\//) ? currentUrlStr : 'http

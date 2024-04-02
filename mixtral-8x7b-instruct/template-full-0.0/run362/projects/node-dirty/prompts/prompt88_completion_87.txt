@@ -1,0 +1,22 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+arr.push(buffer);
+```
+This would result in different behavior because the `buffer` is not cleared after processing each chunk, causing potential data duplication and corruption in the next iteration.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.set(row.key, row.val || '');
+```
+This would result in different behavior because it sets the value to an empty string if `row.val` is falsy, potentially overwriting existing values unintentionally.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._writeStream.write(data, (err) => {
+  if (err) throw err;
+  for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because it throws an error instead of passing it to the callback functions, potentially causing the application to crash instead of handling the error gracefully.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+exception.message === "Generator completed"
+```
+This would result in different behavior because it checks if the exception's message is "Generator completed" instead of checking if the exception is an instance of StopIteration. This change may cause the function to behave unexpectedly when other exceptions are thrown within the generator.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it always evaluates to true, causing the function to return a rejected promise with the exception instead of wrapping the exception value in a promise. This change would cause a different error handling experience for the users of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+exception instanceof Error
+```
+This would result in different behavior because it checks if the exception is an instance of the Error constructor, which is a more general check than checking for StopIteration. This change would cause the function to treat all exceptions as stopping iterations, which might not be the desired behavior.
+
+DONE

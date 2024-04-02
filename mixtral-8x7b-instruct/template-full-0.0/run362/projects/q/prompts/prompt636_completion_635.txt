@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolveThrown
+```
+This would result in different behavior because `deferred.resolveThrown` would cause the promise to be rejected instead of resolved, which is different from the original behavior of just calling `deferred.resolve`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.promise
+```
+This would result in different behavior because `deferred.promise` is the promise object itself, and calling `dispatch` on it would not have the desired effect of forwarding the message to the original object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(null)
+```
+This would result in different behavior because it would always resolve the promise with a value of `null`, regardless of the arguments passed to `dispatch`. This is different from the original behavior, which forwards the message to the original object and resolves the promise with the result of the operation.
+
+DONE.

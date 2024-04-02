@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `embedBaseUrl` would not be overridden by `baseUrl` when it is defined, leading to potential misinterpretation of relative URLs in certain cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(embedBaseUrlStr, <PLACEHOLDER>, true)
+```
+This would result in different behavior because the third argument, `parseQueryString`, would be set to `false` for the `embedBaseUrl` parsing, potentially causing issues with query parameter handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(embedBaseUrlStr, { parseQueryString: <PLACEHOLDER> }, true)

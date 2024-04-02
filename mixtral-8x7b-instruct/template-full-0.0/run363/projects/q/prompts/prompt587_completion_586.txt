@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).then(null, Q.reject)
+```
+This would result in different behavior because the error handling would change. Instead of propagating any errors to the promise returned by the decorated generator, Q.reject would be called immediately with the error, which might bypass some error handling code in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).spread(null, function() {})
+```
+This would result in different behavior because the second argument to spread is a no-op function, which would prevent the rejected callback from being called. This could cause tests to pass even if the code is not handling rejections correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.async(makeGenerator).spread(function() {}, null)
+```
+This would result in different behavior because the order of the fulfilled and rejected callbacks has been reversed. This could cause tests to pass even if the

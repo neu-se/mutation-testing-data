@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+a[key] !== b[key]
+```
+This would result in different behavior because it checks for strict inequality instead of using the `isEqual` function, which checks for deep equality including nested objects and arrays.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+typeof a[key] !== 'undefined' && a[key] !== b[key]
+```
+This would result in different behavior because it adds an extra check for `undefined`, which is not present in the original code. This might cause some cases to pass through when they shouldn't, especially when the `keepNull` flag is used.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+a[key] !== null && a[key] !== b[key]
+```
+This would result in different behavior because it checks for inequality with `null` explicitly, while the original code uses `isEqual` which handles `null` comparisons correctly. This might cause some cases to fail when they

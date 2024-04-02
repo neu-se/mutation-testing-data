@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this._queue.delete(key)
+```
+This would result in different behavior because it removes the key-callback mapping from the queue instead of adding the callback to the list of callbacks associated with the key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._queue['set'](key, cbs)
+```
+This would result in different behavior because it tries to call the 'set' method on the queue map, which is not a function, instead of using the `set` method of the Map object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.set(key, cbs)
+```
+This would result in different behavior because it stores the callbacks in the data map instead of the queue map, which could lead to unexpected behavior when flushing the data to disk.
+
+DONE.

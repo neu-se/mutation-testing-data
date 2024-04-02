@@ -1,0 +1,27 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    Q.nextTick(function () {
+        nodeback(value);
+    });
+}, function (error) {
+    Q.nextTick(function () {
+        nodeback(null, error); // change to this
+    });
+});
+```
+This would result in different behavior because the null value is being passed as the first argument in case of an error, which is not the standard Node.js-style callback behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    Q.nextTick(function () {
+        nodeback(value, value); // change to this
+    });
+}, function (error) {
+    Q.nextTick(function () {
+        nodeback(error);
+    });
+});
+```
+This would result in different behavior because the same value is being passed as both the first and second argument in case of a successful resolution, which is not the standard Node.js-style callback

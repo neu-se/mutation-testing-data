@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i, function(w) { return w + 's' }
+```
+This would result in different behavior because the rule for words ending in 'y' or 'quy' would add an 's' instead of changing 'y' to 'ies' and appending to the word.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i, function(w) { return w.slice(0, -1) + 'ies' }
+```
+This would result in different behavior because the rule for words ending in 'y' or 'quy' would use 'slice' instead of 'substr' or 'substring' to remove the last character and append 'ies', which may not work correctly for all edge cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(fulfill(value));
+```
+This would result in different behavior because the `Q.resolve` function creates a new promise that wraps the given value, even if the value is already a promise. By calling `Q.resolve` on the result of `fulfill(value)`, we are creating an extra layer of wrapping that wasn't present in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(value);
+```
+This would result in different behavior because `deferred.resolve` will resolve the promise with the given value immediately, even if the value is a promise that has not yet settled. In the original code, `become(fulfill(value))` ensures that the promise is not resolved until the `fulfill` function has completed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new Promise(function (resolve, reject) { resolve(value); });
+```
+This would result in

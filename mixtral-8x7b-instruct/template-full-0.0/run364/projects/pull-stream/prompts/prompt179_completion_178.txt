@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the function would always return `false` instead of the value from the `cb` function, which could be any value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null)
+```
+This would result in different behavior because the first argument to `cb` is now always `null`, whereas before it could be any value. This could mask errors in the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(i)
+```
+This would result in different behavior because the value passed to `cb` is now the current index `i`, rather than the current value in the array. This could cause issues if the code downstream relies on the value being the actual value in the array.
+
+DONE.

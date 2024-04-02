@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+(op: any, index: number) => predicate(index, op)
+```
+This would result in different behavior because the arguments of the predicate function are swapped, which could lead to incorrect filtering or mapping results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+(op: Op, index: unknown) => predicate(op, index)
+```
+This would result in different behavior because the type of the `index` argument is changed from `number` to `unknown`. This could lead to unexpected behavior if the predicate function relies on the `index` being a number.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+(op: Op, index: number) => predicate(op)

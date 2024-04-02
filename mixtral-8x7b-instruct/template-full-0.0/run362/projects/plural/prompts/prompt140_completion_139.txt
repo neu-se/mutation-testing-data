@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the test `rule[0].test(word)` would be skipped, and the rule would not be applied even if the word matches the regular expression.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the test `rule[0].test(word)` would throw a `TypeError: Cannot read property 'test' of null`, and the rule would not be applied even if the word matches the regular expression.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+rule[1]
+```
+This would result in different behavior because the test `type(rule[1]) === 'Function'` would always return `true`, and the rule would be applied even if it is not a function. This could lead to unexpected results or errors if the rule is not a function and does not have the expected properties or methods.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+mapper || function(){}
+```
+This would result in different behavior because if `mapper` is falsy, it would return an empty function instead of the `id` function. This could cause issues if the consumer of the `map` function expects the returned function to at least return the input for some cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+mapper === null ? function(){} : mapper
+```
+This would result in different behavior because if `mapper` is explicitly set to `null`, it would return an empty function instead of the `id` function. This could cause issues if the consumer of the `map` function expects the returned function to at least return the input for some cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+mapper || id
+```
+This would result in different behavior because if `mapper` is falsy, it would return the `id` function instead of itself. This could cause issues if the consumer of the `map

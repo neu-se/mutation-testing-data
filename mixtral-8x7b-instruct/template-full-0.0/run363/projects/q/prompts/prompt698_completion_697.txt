@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+args.length > 0 ? args : [null];
+```
+This would result in different behavior because the original code passes an empty array if `args` is not provided, while this change passes `[null]` when `args` is not provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.reject.apply(this, arguments);
+```
+This would result in different behavior because the original code resolves the promise with the result of `apply`, while this change rejects the promise with the arguments passed to `fbind`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(promises.slice());
+```
+This would result in different behavior because the original code resolves the promise with the original `promises` array, while this change resolves the promise with a copy of the `promises` array. This could lead to different behavior if the original array is modified after the `all` function is called.
+
+DONE

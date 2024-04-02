@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"GET"
+```
+This would result in different behavior because the string comparison in the `dispatch` method would fail, causing the promise to always reject instead of correctly handling the "get" operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+symbol("get")
+```
+This would result in different behavior because `symbol("get")` creates a new symbol, which is different from the string `"get"`. The `dispatch` method expects a string, so it would not be able to handle the symbol correctly, causing the promise to always reject.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => this.promiseDispatch(deferred.resolve, "get", [key])

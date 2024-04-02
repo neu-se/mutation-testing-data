@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'error'.code = 'EPIPE';
+output.emit('error', new Error('Broken pipe'));
+```
+This would result in different behavior because it sets a custom error code and changes the error message, which might not be caught by the tests.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+reject('Unexpected error');
+```
+This would result in different behavior because it changes the error message, which might not be caught by the tests.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+output.destroy();
+reject(new Error('Stream destroyed'));
+```
+This would result in different behavior because it destroys the write stream and throws a new error, which might not be caught by the tests.
+
+DONE.

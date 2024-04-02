@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+ended = 1
+```
+This would result in different behavior because it always sets `ended` to a truthy value, even if `end` is a falsy value. The original code fragment `ended = end` assigns the value of `end` to `ended`, whereas this mutation always assigns a truthy value, potentially causing the function to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+global.ended = end
+```
+This would result in different behavior because it uses the `global` object to set the value of `ended`, potentially affecting other parts of the codebase. The original code fragment `ended = end` assigns the value of `end` to a local variable `ended`, whereas this mutation uses the `global` object, potentially causing unintended side effects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ended += end
+```
+This would result in different behavior because it adds the value of `end` to `ended` instead

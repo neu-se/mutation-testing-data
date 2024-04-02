@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+< 0
+```
+This would result in different behavior because it would always return false, causing the `eachLine` function to skip iterating over the lines.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peekLength() + 1
+```
+This would result in different behavior because it would cause the `eachLine` function to skip iterating over the last line if its length is not a multiple of the newline character length.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+iter.peekType() !== 'insert' && iter.peekLength() > 0
+```
+This would result in different behavior because it would skip iterating over lines if the current operation is not an insert and the peeked length is greater than zero, which might not be the desired behavior in some cases.
+
+DONE.

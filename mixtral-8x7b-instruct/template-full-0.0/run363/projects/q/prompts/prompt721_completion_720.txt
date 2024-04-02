@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `defer` function would receive `null` as an argument instead of a deferred object, causing the `all` function to throw an exception when trying to access the `defer.promise` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return {}; }
+```
+This would result in different behavior because `defer.resolve` would receive an empty object instead of an array, causing the `all` function to reject the returned promise with an error indicating that the resolved value is not an array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { deferred.resolve(value * 2); }
+```
+This would result in different behavior because the resolved value of the promise would be multiplied by 2, which could cause unexpected results in the code that uses the `all` function.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'error', new Error('Corrupted row at the end of the db')
+```
+This would result in different behavior because it removes the interpolated `buffer` variable, which may hide the fact that the row is corrupted or make it harder to debug.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+'warning', new Error(`Corrupted row at the end of the db: ${buffer}`)
+```
+This would result in different behavior because it changes the event type from 'error' to 'warning', which might not be handled correctly by the application, and the error message still contains the `buffer` variable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+'error', new Error(`Unexpected end of file: ${buffer}`)
+```
+This would result in different behavior because it changes the error message, which might not be expected by the application, and includes the `buffer` variable. This could make it harder to identify the actual issue if the application is

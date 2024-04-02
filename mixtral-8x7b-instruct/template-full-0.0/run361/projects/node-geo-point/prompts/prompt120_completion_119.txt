@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+[this, 0, 0]
+```
+This would result in different behavior because the `calculateDestination` method in the prototype is being called with a hardcoded array instead of the correct `distance` and `bearing` values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+[null as any, distance, bearing]
+```
+This would result in different behavior because the first argument, which should be the `coordinate` object, is replaced with `null`. This will cause issues in the method as it relies on the properties of the `coordinate` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+[this, 'wrongDistance', 'wrongBearing']
+```
+This would result in different behavior because the `distance` and `bearing` values are replaced with strings. The method expects numbers as arguments, and this change would cause unexpected results or errors.
+
+DONE.

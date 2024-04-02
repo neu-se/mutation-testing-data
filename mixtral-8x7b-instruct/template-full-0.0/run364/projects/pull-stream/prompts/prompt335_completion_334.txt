@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `cb` function would receive `null` as the data argument, instead of the original data value. This could cause issues if the code downstream is not expecting `null` and throws an error when it encounters it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op && op(data) || data
+```
+This would result in different behavior because if `op` is falsy, the original data value would be returned instead of being passed through the `op` function. This could cause issues if the `op` function is expected to always be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data.toString()
+```
+This would result in different behavior because the data value would be converted to a string before being passed to the `cb` function. This could cause issues if the downstream code is expecting a different data type and throws an error when it encounters a string.
+
+DONE.

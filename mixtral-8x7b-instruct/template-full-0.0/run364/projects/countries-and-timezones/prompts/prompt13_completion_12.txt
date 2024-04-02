@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+{ [country]: { current: [id], all: [id] } }
+```
+This would result in different behavior because it initializes the `current` and `all` arrays with the current timezone id, instead of being empty arrays. This change would cause the `buildCountry` function to return timezones with only the current timezone id instead of an empty array when `tz.r` is undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{ [country]: { current: result.all, all: result.all } }
+```
+This would result in different behavior because it sets both `current` and `all` arrays to the `result.all` array, instead of having separate arrays. This change would cause the `buildCountry` function to always return the same timezones for both `timezones` and `allTimezones` properties when `tz.r` is undefined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{ [country

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `defer` function is intended to create a new deferred object, while `Promise.resolve()` immediately creates a resolved promise. This change would cause the `allResolved` function to always return a resolved promise, even if some input promises are still pending or rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer()
+```
+This would result in different behavior because the `Q.defer()` function is called outside the `allResolved` function, and it is used to create a deferred object that is returned by the function. By moving it inside the function, the returned deferred object would be recreated every time `allResolved` is called, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Buggy code'))
+```
+This would result in different behavior because the `Q.reject` function

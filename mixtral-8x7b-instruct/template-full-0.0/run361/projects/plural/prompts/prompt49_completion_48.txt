@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+rules.push([/[^aeiouy]o$/i, function(w) { return w + 'es' }]);
+```
+This would result in different behavior because it uses `push` instead of `unshift`, adding the rule to the end of the `rules` array instead of the beginning.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+rules.unshift(["[^aeiouy]o$/i", function(w) { return w + 'es' }]);
+```
+This would result in different behavior because it wraps the regular expression in quotes, changing it from a regular expression object to a string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+rules.unshift([/[^aeiouy]o$/i, "w + 'es'"]);
+```
+This would result in different behavior because it uses a string instead of a function for the second element of the array, causing the

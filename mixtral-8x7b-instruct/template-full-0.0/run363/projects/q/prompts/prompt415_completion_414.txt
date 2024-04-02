@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof value === 'object' && value !== null && typeof value.then === 'function'
+```
+This would result in different behavior because it checks if `value` is an object and not null, instead of just checking if it is an instance of Promise. This could lead to treating non-promise objects with a `then` method as promises, which may not behave as expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+value instanceof Promise || value.constructor.name === 'Promise'
+```
+This would result in different behavior because it checks if `value` is an instance of Promise or if its constructor's name is 'Promise'. This could lead to treating objects created with different Promise implementations as not promises, even if they have the same behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+value && typeof value.then === 'function'

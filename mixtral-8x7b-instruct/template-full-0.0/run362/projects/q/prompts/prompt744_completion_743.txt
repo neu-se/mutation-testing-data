@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+onRejected
+```
+This would result in different behavior because the `onRejected` function would be called instead of `onFulfilled` when the promise is resolved, causing the `pendingCount` to decrease and potentially leading to incorrect handling of resolved promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because an empty function would be called instead of `onFulfilled`, causing the `deferred.resolve(result)` line to never be executed, and the returned promise would never be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this
+```
+This would result in different behavior because `this` would be passed as the argument to the `when` function, which expects a function as its first argument. This would cause an error and break the execution flow.
+
+DONE.

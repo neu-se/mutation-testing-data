@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+null
+```
+This would result in different behavior because the `handler.transform` method would not be called when the `thisData` and `otherData` objects have the same key, which is the `embedType`. The `handler.transform` method is responsible for transforming the embedded type, and skipping it would lead to different behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+otherData[embedType]
+```
+This would result in different behavior because it would directly use the `otherData`'s embedded type instead of the transformed data returned by the `handler.transform` method. This could lead to incorrect transformations when the `thisData` and `otherData` objects have the same key (`embedType`).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+{}
+```
+This would result in different behavior because it would always create a new object with an empty key-value pair, even when the `embedType` exists in

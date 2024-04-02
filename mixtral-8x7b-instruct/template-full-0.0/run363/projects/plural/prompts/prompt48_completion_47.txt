@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+/[aeiouy]o$/, 'x'
+```
+This would result in different behavior because it always appends 'x' instead of using a function to determine the plural form.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[aeiouy]o$/, function(w) { return w + 'es' }
+```
+This would result in different behavior because it always appends 'es' instead of checking if the last character before 'o' is a vowel.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]o$/i, function(w) { return w }
+```
+This would result in different behavior because it doesn't modify the input string at all, instead of appending 'es' to the end of the string.
+
+DONE.

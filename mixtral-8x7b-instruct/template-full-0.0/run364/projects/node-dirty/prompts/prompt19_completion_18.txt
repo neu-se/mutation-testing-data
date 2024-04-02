@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because it always sets an empty array as the value for the `key` in the `_queue` map, instead of using the existing value or initializing it to an empty array if it doesn't exist. This could cause issues if there are multiple callbacks for the same key, as they would be overwritten and not executed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._queue
+```
+This would result in different behavior because it sets the entire `_queue` map as the value for the `key` instead of just the value associated with the `key`. This could cause unintended side effects and issues in the rest of the code that relies on the structure of the `_queue` map.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{key, cbs} = this._queue;
+```
+This would result in different behavior because it destructures the `_queue` map into separate variables

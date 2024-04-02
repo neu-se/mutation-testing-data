@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Math.atan(Δλ / Math.tan(φ2))
+```
+This would result in different behavior because it uses the tangent addition formula instead of atan2, which can lead to incorrect results when Δλ is negative and φ2 is close to ±π/2.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Math.asin(Math.sin(φ1) * Math.cos(δ) + Math.cos(φ1) * Math.sin(δ) * Math.cos(θ))
+```
+This would result in different behavior because it directly calculates φ2 using the haversine formula, but it does not account for the case where the result is outside the range of -π/2 and π/2, leading to incorrect results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Math.acos(Math.sin(φ1) * Math.sin(φ2) + Math.cos

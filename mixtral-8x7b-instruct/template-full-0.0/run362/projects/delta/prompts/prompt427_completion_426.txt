@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+op.retain === undefined
+```
+This would result in different behavior because it checks for the exact value `undefined` instead of the type `'number'`. This would make the function return `undefined` when the `retain` property is not present, instead of checking for the type.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+typeof op.retain === 'undefined'
+```
+This would result in different behavior because it checks for the type `'undefined'` instead of the type `'number'`. This would make the function return `true` when the `retain` property is not present or has a different type, instead of checking for the type `'number'`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+op.hasOwnProperty('retain') && typeof op.retain === 'number'
+```
+This would result in different behavior because it checks if the `retain` property exists and has the type `'number

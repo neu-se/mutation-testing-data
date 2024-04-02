@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+mapper || function() {}
+```
+This would result in different behavior because if `mapper` is falsy, it would return an empty function instead of the `id` function. This could cause issues if the consumer of the `map` function expects the returned function to at least return the input for falsy `mapper` values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(mapper + '')
+```
+This would result in different behavior because it would convert `mapper` to a string, which would break the code if `mapper` is a function. This could expose a weakness in the test suite if it doesn't account for incorrect `mapper` types.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+mapper ? mapper : id
+```
+This would result in different behavior because it would use the `id` function as a fallback only if `mapper` is explicitly set to `false` or `null`. If `mapper` is

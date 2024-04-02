@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.constructor.prototype.dispatch.call(this, "post", [name, nodeArgs])
+```
+This would result in different behavior because it explicitly calls the `dispatch` method on the prototype of the constructor of the current object, which may not be the intended behavior if the object's constructor has been overridden.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.dispatch("post", function() { [name, nodeArgs] })

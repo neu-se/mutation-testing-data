@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/^(javascript|mailto|ftp):/i.test
+```
+This would result in different behavior because it changes the regular expression delimiter from `/` to `|`, which may cause unexpected issues if the input string contains the `|` character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/^(javascript|mailto:|ftp):/g.test
+```
+This would result in different behavior because it adds the global flag `g`, which changes the behavior of the regular expression to match all occurrences instead of stopping after the first match.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/^(javascript|mailto:|ftp)/i.test
+```
+This would result in different behavior because it removes the trailing `/g` flag, which changes the behavior of the regular expression to match only the first occurrence instead of all occurrences.
+
+DONE.

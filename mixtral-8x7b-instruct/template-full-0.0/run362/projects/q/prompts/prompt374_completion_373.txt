@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Error()
+```
+This would result in different behavior because it creates a new error object, while the original code fragment uses the exception passed to the `_rejected` function. This change would affect any error handling in the `rejected` callback, as it would not receive the original exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"An error occurred"
+```
+This would result in different behavior because it replaces the exception with a string. This change would affect any error handling in the `rejected` callback, as it would not receive the original exception and would not be able to access its properties or stack trace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error())
+```
+This would result in different behavior because it creates a new rejected promise instead of throwing an exception. This change would affect the flow of the application, as the rejected promise would be handled asynchronously instead of propagating synchronously.
+
+DONE.

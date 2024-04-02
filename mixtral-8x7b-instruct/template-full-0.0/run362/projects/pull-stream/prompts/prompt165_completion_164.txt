@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => cb(true)
+```
+This would result in different behavior because it uses an arrow function with an implicit return, which may behave differently in certain contexts compared to the original `abortCb` call.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abortCb(null, abort, onAbort)
+```
+This would result in different behavior because it passes `null` as the first argument to `abortCb`, which may cause unexpected behavior if `abortCb` checks for non-null values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abortCb(cb, abort)
+```
+This would result in different behavior because it does not pass the `onAbort` callback to `abortCb`, which may cause issues if `abortCb` relies on that callback to handle abort events.
+
+DONE.

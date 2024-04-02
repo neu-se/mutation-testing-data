@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+done && function () {}
+```
+This would result in different behavior because the buggy fragment only calls the callback if `done` is truthy, whereas the original fragment always calls the callback (either `done` or an empty function).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function () { throw new Error('Bang!') }
+```
+This would result in different behavior because the buggy fragment throws an error, whereas the original fragment calls the callback without throwing an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the buggy fragment passes `null` as an argument to `read`, whereas the original fragment passes either `done` or an empty function.
+
+DONE.

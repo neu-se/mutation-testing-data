@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+1 + flush
+```
+This would result in different behavior because it would add 1 to the return value of the `flush` function, which could cause the test to pass even if `flush` has a different behavior than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+flush || 'default'
+```
+This would result in different behavior because it would return the string 'default' if `flush` is falsy, which could cause the test to pass even if `flush` is not called or returns an incorrect value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(flush, 1000)
+```
+This would result in different behavior because it would wrap the call to `flush` in a `setTimeout` function with a delay of 1000 milliseconds, which could cause the test to pass even if `flush` is supposed to be called synchronously.
+
+DONE.

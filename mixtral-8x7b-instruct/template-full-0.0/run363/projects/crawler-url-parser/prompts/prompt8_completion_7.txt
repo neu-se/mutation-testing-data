@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrl && _has_illegal_chars(currentUrl)
+```
+This would result in different behavior because it checks if `currentUrl` is truthy and then checks if it's illegal, instead of checking if the `currentUrlStr` has illegal characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!!("currentUrlStr" && _has_illegal_chars(currentUrlStr))
+```
+This would result in different behavior because it converts the string to a boolean before checking if it has illegal characters, which would always return true if the string is not empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof _has_illegal_chars === "function" && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it checks if `_has_illegal_chars` is a function before calling it, which would not catch cases where `_has_illegal_chars`

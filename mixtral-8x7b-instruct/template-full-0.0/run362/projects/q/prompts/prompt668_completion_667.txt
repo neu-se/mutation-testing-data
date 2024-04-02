@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Object.call(Q, "apply", [void 0, args])
+```
+This would result in different behavior because it explicitly calls the `Object` constructor with the `apply` method, instead of using `Q(object).dispatch`. This change would bypass any custom behavior or inheritance chain established in the `Q` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.prototype.dispatch
+```
+This would result in different behavior because it attempts to access the `dispatch` method from the `Q` prototype, rather than calling it on the `Q(object)` instance. This change would likely cause an error, as `dispatch` is not directly available on the prototype.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.dispatch
+```
+This would result in different behavior because it tries to access the `dispatch` method directly from the `Q` object, instead of calling it on the `Q(object)` instance. This change would

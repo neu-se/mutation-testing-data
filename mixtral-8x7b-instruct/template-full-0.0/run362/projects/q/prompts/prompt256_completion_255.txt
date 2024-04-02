@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because the `deferred.resolve` function would immediately return instead of resolving the promise with the given value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `Q(value)` call inside the `become` function would treat the `null` value as a rejection reason, causing the promise to be rejected instead of being resolved with the given value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new Promise(function (resolve) { resolve(value); })
+```
+This would result in different behavior because it creates a new promise instead of resolving the existing one, potentially causing unexpected behavior in the calling code.
+
+DONE.

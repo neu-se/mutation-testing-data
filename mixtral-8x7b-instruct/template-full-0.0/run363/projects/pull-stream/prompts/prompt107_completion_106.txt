@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false, done
+```
+This would result in different behavior because the `drain` function would not receive the `done` callback as its second argument, and might not behave as expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null, () => done()
+```
+This would result in different behavior because the `drain` function would receive an anonymous function as its second argument, which would immediately call `done()` when executed, rather than waiting for the `drain` function to call it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+undefined, done
+```
+This would result in different behavior because the `drain` function would receive `undefined` as its second argument, which might not behave as expected.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `done` method expects a promise as an argument, and null is not a promise. This would cause the `then` method chained after `Q(<PLACEHOLDER>)` to throw an exception.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `done` method expects the promise to be the same as the one being handled. By replacing it with a resolved promise, the `done` method would not have any effect on the original promise's rejections or fulfillments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return "I'm not a promise"; }
+```
+This would result in different behavior because the `done` method expects a promise as an argument, and a function that returns a string is not a promise. This would cause the `then` method chained after `Q(<PLACE

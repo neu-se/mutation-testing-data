@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+value.then
+```
+This would result in different behavior because it directly calls the `then` method on the `value` object, bypassing the `Q` constructor. This could cause issues if the `value` is not a promise or if it's a promise from a different library.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(value).done
+```
+This would result in different behavior because `done` is not a method on the promise returned by `Q(value).then`. This would cause a `TypeError` when trying to call `done`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(value).then
+```
+This would result in different behavior because it uses the `Q.resolve` method to ensure that `value` is a promise before calling `then`. This could cause issues if the `Q.resolve` method has different behavior from the `Q` constructor.
+
+DONE.

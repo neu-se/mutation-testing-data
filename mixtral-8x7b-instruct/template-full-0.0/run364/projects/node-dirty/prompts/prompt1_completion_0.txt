@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.load()
+```
+This would result in different behavior because `this.load()` would throw a `TypeError` since the `load` method is not defined as a method on the `Dirty` class. The original `this._load` is a reference to a private method that is defined later in the class.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._load = this._load.bind(this);
+```
+This would result in different behavior because it would change the meaning of `this` inside the `_load` method. The original code does not use `bind` because the value of `this` inside `_load` is already correctly set due to the way the method is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const that = this;
+this._load = function() {
+  // ...
+  that.emit('load', 0);
+}
+```
+This would result in different behavior because it would change the

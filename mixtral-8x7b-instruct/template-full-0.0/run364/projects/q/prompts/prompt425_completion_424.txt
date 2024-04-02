@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.inspect().state === "fulfilled" ? "rejected" : "fulfilled";
+```
+This would result in different behavior because the `isFulfilled` function would incorrectly report rejected promises as fulfilled, and vice versa.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.inspect().then(function(state) { return state === "fulfilled"; }).value;
+```
+This would result in different behavior because the `isFulfilled` function would introduce an unnecessary Promise, making it less efficient and potentially causing issues with synchronous values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.inspect().state === "pending";
+```
+This would result in different behavior because the `isFulfilled` function would incorrectly report all promises, whether fulfilled or not, as pending.
+
+DONE.

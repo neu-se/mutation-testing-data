@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Array.isArray
+```
+This would result in different behavior because it checks if the input is an array instead of an object, potentially causing incorrect behavior in the `fromGeoJSON` and `fromLatLngArray` methods.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Object.prototype.toString.call(input) === '[object Object]'
+```
+This would result in different behavior because it checks if the input is an object using the `Object.prototype.toString` method, which might not behave the same way as the original `isObject` function, potentially causing issues in the `fromGeoJSON` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+input => typeof input === 'object'
+```
+This would result in different behavior because it does not check if the input is not null, which could cause issues in the `fromGeoJSON` method if a null value is passed.
+
+DONE.

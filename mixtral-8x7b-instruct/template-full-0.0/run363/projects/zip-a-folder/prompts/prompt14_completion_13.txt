@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.constants.W_OK | fs.constants.R_OK
+```
+This would result in different behavior because the `access` call would now check if the source directory has both write and read permissions, instead of just read permissions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.constants.X_OK
+```
+This would result in different behavior because the `access` call would now check if the source directory has execute permissions, instead of read permissions.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.constants.S_IRUSR
+```
+This would result in different behavior because the `access` call would now check for the owner's read permission on the source directory, using the symbolic constant `S_IRUSR`, instead of checking for read permission using the `R_OK` constant.
+
+DONE.

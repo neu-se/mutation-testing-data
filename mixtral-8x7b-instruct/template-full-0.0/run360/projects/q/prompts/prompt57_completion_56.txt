@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(flush, 100);
+```
+This would result in different behavior because the `flush` function would be called with a delay of 100ms instead of being called asynchronously in the next event loop iteration. This could cause tests that rely on the immediate execution of the `flush` function to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+noop;
+```
+This would result in different behavior because the `requestTick` function would be replaced with a no-op function, effectively disabling the asynchronous execution of tasks. This could cause tests that rely on the asynchronous behavior of the `nextTick` function to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('BANG!'); }
+```
+This would result in different behavior because an error would be thrown every time the `requestTick` function is called. This could cause tests that rely on the error-free execution of

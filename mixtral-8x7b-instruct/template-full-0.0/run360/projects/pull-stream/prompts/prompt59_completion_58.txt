@@ -1,0 +1,23 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    loop = false
+    if (done) done(end)
+    else console.warn(doneLackingErr)
+  }
+})
+```
+This would result in different behavior because the original code checks if `end` is truthy, while the modified code checks if `end` is exactly `true`. This change may cause the function to behave differently if `end` is a non-empty string or a non-zero number.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end === true) {
+    loop = false
+    if (done) done()
+    else console.warn(doneLackingErr)
+  }
+})
+```
+This would result in different behavior because the original code checks if `end` is truthy, while the modified code checks if `end` is exactly equal to `true`. This change may cause the function to stop

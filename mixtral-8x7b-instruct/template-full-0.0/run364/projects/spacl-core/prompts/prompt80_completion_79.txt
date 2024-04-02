@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+rule['matches']
+```
+This would result in different behavior because it accesses the `matches` method as a property, which would not cause an error but would have different behavior in certain edge cases (e.g. if `rule` has a `matches` property that is not a function).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.query
+```
+This would result in different behavior because it calls the `query` method instead of the `matches` method. This would cause the function to return a different value, as the `query` method returns a boolean or null, while the `matches` method only returns a boolean.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule['query'].bind(rule)
+```
+This would result in different behavior because it creates a bound version of the `query` method, which would cause the method to always use the `rule` as its `this` context. This could cause issues if the `matches` method relies on

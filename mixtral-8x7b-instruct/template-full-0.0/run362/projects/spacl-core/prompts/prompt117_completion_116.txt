@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+this.regex.test(path) && verb in this.verbs
+```
+This would result in different behavior because it directly uses the regex test method instead of the matches method, which checks for context-dependent paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.verbs.hasOwnProperty(verb)
+```
+This would result in different behavior because it checks if the verb property exists in the verbs object, instead of checking if the verb is a truthy value in the verbs object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx) && Object.keys(this.verbs).includes(verb)
+```
+This would result in different behavior because it uses the Array.prototype.includes method instead of the 'in' operator to check if the verb exists in the verbs object.
+
+DONE.

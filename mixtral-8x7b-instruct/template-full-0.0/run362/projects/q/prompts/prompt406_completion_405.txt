@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(promise)
+```
+This would result in different behavior because it unconditionally wraps the input promise with `Q.when()`, which may cause unexpected behavior if the input is not a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(promise)
+```
+This would result in different behavior because it always returns a new promise that is resolved to the input promise, which may cause unexpected behavior if the input is already a resolved promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+promise || Q.when(null)
+```
+This would result in different behavior because it returns a wrapped promise with `Q.when()` when the input is falsy, which may cause unexpected behavior if the input is intentionally falsy.
+
+DONE.

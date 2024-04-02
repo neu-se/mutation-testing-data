@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because an empty array is returned instead of a promise, which would not allow the `allSettled` function to process the input promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+promises || []
+```
+This would result in different behavior because if `promises` is falsy (e.g., `null`, `undefined`), it would return an empty array instead of a rejected promise, which would not allow the `allSettled` function to handle the case where no promises are provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q([])
+```
+This would result in different behavior because it would always return a promise that resolves to an empty array, even if the `promises` variable contains real promises. This would not allow the `allSettled` function to process the input promises.
+
+DONE.

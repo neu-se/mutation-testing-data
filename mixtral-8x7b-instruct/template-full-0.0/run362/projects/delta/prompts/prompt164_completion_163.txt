@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekType() === 'insert'
+```
+This would result in different behavior because it would prioritize insert operations from the other Delta instead of delete operations, which could lead to incorrect composition results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekType() === 'retain'
+```
+This would result in different behavior because it would prioritize retain operations from the current Delta instead of delete operations from the other Delta, which could lead to incorrect composition results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.peekLength() === 0
+```
+This would result in different behavior because it checks the length of the next operation instead of its type, which would lead to incorrect composition results. The original code fragment checks if the next operation is a delete operation, while this change would check if the length of the next operation is zero, which is not equivalent.
+
+DONE.

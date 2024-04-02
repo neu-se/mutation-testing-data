@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `zipArchive.glob()` method would be called unconditionally, even when `src` is not a glob pattern. This could cause unexpected behavior or errors if `src` is a regular file path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+src.match(/\*/)
+```
+This would result in different behavior because it checks if the `src` string contains an asterisk character (`*`), which is commonly used in glob patterns. However, this is not a reliable way to determine if `src` is a glob pattern, as it may contain an asterisk for other reasons.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof src === 'string' && src.includes('*')
+```
+This would result in different behavior because it checks if `src` is a string and contains the asterisk character (`*`). This is a more reliable way to determine if `src

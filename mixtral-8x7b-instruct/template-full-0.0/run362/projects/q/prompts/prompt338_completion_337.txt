@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `inspect` function is not called, and the promise's `inspected` property will be set to `null`. This could lead to unexpected behavior when checking the promise's state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function() { return 42; }
+```
+This would result in different behavior because the `inspect` function is replaced with a function that always returns `42`. This would cause the promise's `inspected` property to be set to `42`, which is not an object with a `state` property. This could lead to unexpected behavior when checking the promise's state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+{ state: 'fulfilled', value: 42 }
+```
+This would result in different behavior because the `inspect` function is replaced with an object that has a `state` property set to `'fulfilled'

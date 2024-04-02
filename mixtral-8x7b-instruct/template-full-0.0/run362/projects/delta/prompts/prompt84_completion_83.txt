@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+nextOp.insert && lastOp.insert
+```
+This would result in different behavior because it checks if both `newOp.insert` and `lastOp.insert` are truthy, instead of comparing them with `===`. This could lead to unexpected behavior when dealing with falsy values like `0` or `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+lastOp.hasOwnProperty('insert') && newOp.hasOwnProperty('insert')
+```
+This would result in different behavior because it checks if both `newOp` and `lastOp` have an `insert` property, instead of checking if their `insert` properties are equal. This could lead to incorrect merging of operations when the `insert` properties have different values but are still truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.is(newOp.insert, lastOp.insert)
+```
+This would result in different behavior because it uses the `Object

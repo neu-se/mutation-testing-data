@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync
+```
+This would result in different behavior because `readFile` becomes a synchronous operation, which can cause issues in an asynchronous context. The original code uses `universalify.fromPromise` to ensure the function works both in a callback-based and promise-based environment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readdir)
+```
+This would result in different behavior because the function now uses the `fs.readdir` method instead of `fs.readFile`. This change would cause the function to return a list of files in a directory instead of reading the contents of a specific file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise(fs.readFile).bind(fs)
+```
+This would result in different behavior because the `bind` method changes the value of `this` within the `readFile` function to be the `fs` object. This

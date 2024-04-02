@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(a)
+```
+This would result in different behavior because it compares the keys of both objects `a` and `b` instead of only the keys of `b`. This might cause some attributes from `a` to be incorrectly included in the result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(Object.assign({}, a, b))
+```
+This would result in different behavior because it merges the objects `a` and `b` before comparing their keys. This might cause some attributes from `a` to be incorrectly included in the result or overwrite attributes from `b`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(JSON.parse(JSON.stringify({ ...a, ...b })))
+```
+This would result in different behavior because it stringifies and then parses the objects `a` and `b` before comparing their keys. This might cause issues with keys that

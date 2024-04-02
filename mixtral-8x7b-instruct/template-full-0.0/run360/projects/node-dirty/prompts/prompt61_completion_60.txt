@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fs.unlinkSync(this.path);
+```
+This would result in different behavior because it deletes the file instead of closing the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._readStream.pause();
+```
+This would result in different behavior because it stops the read stream from emitting data, instead of closing it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._readStream = null;
+this._writeStream.destroy();
+```
+This would result in different behavior because it destroys the write stream without closing the read stream.
+
+DONE.

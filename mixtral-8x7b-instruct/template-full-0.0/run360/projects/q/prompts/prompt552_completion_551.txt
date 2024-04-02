@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(result.value)
+```
+This would result in different behavior because the original `when` function is used to handle both ES6 and SpiderMonkey generators, while `Promise.resolve` only handles ES6 generators. If the code is run in a SpiderMonkey environment, the behavior would differ from the original implementation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(result.value)
+```
+This would result in different behavior because the `Q` constructor is used to create a new promise, but the original `when` function is used to handle both ES6 and SpiderMonkey generators. If the code is run in a SpiderMonkey environment, the behavior would differ from the original implementation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new Q(result.value)
+```
+This would result in different behavior because the `new` keyword is used to create a new instance of the `Q` constructor,

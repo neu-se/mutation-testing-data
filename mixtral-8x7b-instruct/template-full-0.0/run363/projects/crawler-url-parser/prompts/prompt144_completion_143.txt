@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'/index\\.[a-z]+$'
+```
+This would result in different behavior because the backslash before the dot is escaped, making it a literal dot instead of a regex wildcard.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/\/index\.\w+$/
+```
+This would result in different behavior because `\w` matches any word character (equivalent to `[a-zA-Z0-9_]`), instead of just lowercase letters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/\/index\.[a-z]+\/*$/
+```
+This would result in different behavior because the trailing slash is optional, allowing for matches like "/index.html/" and "/index.html".
+
+DONE.

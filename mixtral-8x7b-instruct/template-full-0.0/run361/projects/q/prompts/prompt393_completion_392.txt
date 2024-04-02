@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(value)
+```
+This would result in different behavior because the `when` function would always return a resolved promise, even if `value` is a rejected promise or a non-promise object with a `then` method. The original code checks if the value is a rejected promise and calls the `rejected` callback if it is.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(value)
+```
+This would result in different behavior because if the `Q` object doesn't have a `resolve` method, it would throw a `TypeError`. The original code doesn't check if `Q.resolve` exists, so it assumes that it does.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+value.then(fulfilled, rejected, progressed).catch(function (reason) {
+  unhandledReasons.push(reason);
+  throw reason;
+})
+```
+This would result in different behavior

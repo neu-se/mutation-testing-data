@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `Delta` object's `push` method would not handle `null` values in the same way as an `Op` object, causing unexpected behavior in the `compose` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because the `Delta` object's `push` method expects an `Op` object, and an empty object `{}` does not have the necessary properties, causing unexpected behavior in the `compose` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+iter.next()
+```
+This would result in different behavior because it would consume an additional operation from the `thisIter`, which could lead to incorrect composition of operations in the `compose` method.
+
+DONE.

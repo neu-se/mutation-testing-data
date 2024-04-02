@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+data['timezonesMap']
+```
+This would result in different behavior because it directly accesses a property from the data object, bypassing the getTimezonesMap function. This could lead to unintended consequences if the data object doesn't have the 'timezonesMap' property or if the property has a different value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+getTimezonesMap(data).current
+```
+This would result in different behavior because it always returns the 'current' property from the timezonesMap, even if the 'allTimezones' property is requested. This change would cause the allTimezones property to be ignored, which might not be the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+buildTimezonesMap(data)[id] || {}
+```
+This would result in different behavior because it bypasses the caching mechanism provided by the getTimezonesMap function. This could lead to performance

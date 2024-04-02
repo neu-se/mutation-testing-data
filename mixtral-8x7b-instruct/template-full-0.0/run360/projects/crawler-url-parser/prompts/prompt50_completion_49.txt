@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'http://' + parsedBaseUrl.host + parsedUrl.path
+```
+This would result in different behavior because it constructs the absolute URL by concatenating the base URL's host with the parsed URL's path, instead of using the `URL.resolve` method which takes care of resolving the relative URL against the base URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.format({ ...parsedBaseUrl, pathname: parsedUrl.path })
+```
+This would result in different behavior because it creates a new URL object by spreading the `parsedBaseUrl` object and replacing its `pathname` property with the `parsedUrl.path`, instead of using the `URL.resolve` method which handles relative URL resolution more accurately.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+parsedBaseUrl.protocol + '//' + parsedBaseUrl.host + parsedUrl.path

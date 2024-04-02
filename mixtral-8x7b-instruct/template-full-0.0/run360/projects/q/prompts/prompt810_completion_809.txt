@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise
+```
+This would result in different behavior because it changes the constructor used for the `fcall()` method in the `finally` method implementation. This could cause issues if the `Promise` constructor behaves differently than the `Q` constructor.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because it would cause the `fcall()` method in the `finally` method implementation to throw a `TypeError` when trying to call the `fcall()` method on a `null` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because it would cause the `fcall()` method in the `finally` method implementation to return a promise that is always resolved with `undefined`, instead of forwarding the resolution of the original promise. This could cause issues if the returned promise is expected to have the same resolution as the original promise.
+

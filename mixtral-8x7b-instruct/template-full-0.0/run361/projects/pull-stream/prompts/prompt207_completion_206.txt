@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null)
+```
+This would result in different behavior because it would force the callback to always return null as the error, even if an error occurred during the map function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.exit(1)
+```
+This would result in different behavior because it would terminate the entire process, rather than just calling the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+map(data, function (err, data) { busy = false; cb(err, data); })
+```
+This would result in different behavior because it would set `busy` to false before calling the callback, which could cause issues if the `map` function is asynchronous and takes some time to complete.
+
+DONE.

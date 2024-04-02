@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:'
+```
+This would result in different behavior because it uses the `!==` operator instead of `!=`. The `!==` operator checks for strict equality, while `!=` checks for loose equality. In this case, it might cause some test cases to pass that shouldn't, especially when dealing with typed values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+parsedUrl.hasOwnProperty('protocol') && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:'

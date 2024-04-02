@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(<unknown as {}>)
+```
+This would result in different behavior because it would force TypeScript to widen the `undefined` type to `unknown`, causing a type error when trying to call `Object.keys()` on an `unknown` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.values(attributes)
+```
+This would result in different behavior because it returns the values of the object keys instead of the keys themselves, which would break any code that expects an object with keys.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(attributes).filter(key => key.length > 0)

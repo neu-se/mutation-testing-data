@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fulfilled.call
+```
+This would result in different behavior because `call` uses the provided `this` value and arguments provided individually, while `apply` uses the provided `this` value and an array of arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fulfilled.bind(null)
+```
+This would result in different behavior because `bind` creates a new function that, when called, has its `this` value set to the provided value and pre-filled arguments, if any. In this case, using `bind` without any arguments would cause the `this` value to be set to `null` within the `fulfilled` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(function() { fulfilled; })()
+```
+This would result in different behavior because the code above would immediately invoke an anonymous function that returns the `fulfilled` function, but does not actually call it. This would effectively remove the `spread` method'

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return []; }
+```
+This would result in different behavior because the `any` method would always return an empty array instead of a promise, and the `any` method on the Promise prototype would return a promise that resolves to an empty array immediately, regardless of the input promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.reject('Error'); }
+```
+This would result in different behavior because the `any` method would always reject the returned promise with the error message 'Error', and the `any` method on the Promise prototype would return a promise that is immediately rejected with the error message 'Error', regardless of the input promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return Q.resolve(null); }
+```
+This would result in different behavior because the `any` method would always return a promise that resolves to null, regardless of the input promises. This could cause issues if the code that uses

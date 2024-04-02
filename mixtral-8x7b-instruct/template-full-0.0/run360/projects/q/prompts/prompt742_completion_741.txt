@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve
+```
+This would result in different behavior because `Promise.resolve` always returns a resolved promise, while `when` waits for the promise to settle. In this case, `onRejected` and `onProgress` would never be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this
+```
+This would result in different behavior because `this` inside the `onFulfilled`, `onRejected`, and `onProgress` functions would now refer to the current promise instead of the individual promises in the `promises` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve
+```
+This would result in different behavior because `Q.resolve` always returns a resolved promise, while `when` waits for the promise to settle. In this case, `onRejected` and `onProgress` would never be called. However, this change would also require changing the `when` function calls to use `

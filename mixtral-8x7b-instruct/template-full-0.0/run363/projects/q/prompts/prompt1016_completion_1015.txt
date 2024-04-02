@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.makeNodeResolver(true)
+```
+This would result in different behavior because the `makeNodeResolver` method would receive an argument, which it doesn't in the original code. This could potentially cause issues if the method's implementation is not designed to handle unexpected arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.makeChild()
+```
+This would result in different behavior because `makeChild` is not a method of the `deferred` object, and would cause an error. This highlights the importance of checking for the correct method before calling it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject('Unexpected error')
+```
+This would result in different behavior because the `reject` method would be called immediately, instead of waiting for the Node-style callback to be called. This could cause issues if the rest of the code expects the promise to be rejected at a later time.
+
+DONE.

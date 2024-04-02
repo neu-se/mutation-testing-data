@@ -1,0 +1,14 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.writeFile
+```
+This would result in different behavior because it directly uses the `fs.writeFile` function instead of wrapping it with `universalify.fromCallback`. This change would cause the `writeFile` and `writeFileSync` functions to fail if they are called in a non-Node.js environment, as `fs.writeFile` is not available in those environments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify(fs.writeFile)
+```
+This would result in different behavior because it applies the `universalify` function to `fs.writeFile` instead of `fs.writeFile.fromCallback`. This change would cause the `writeFile` and `writeFileSync` functions to fail if they are called in a non-Node.js environment, as `universalify` would not be able to handle the synchronous version of the `fs.writeFile` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```

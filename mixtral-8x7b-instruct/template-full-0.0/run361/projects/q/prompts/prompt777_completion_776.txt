@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function(){return 42;}
+```
+This would result in different behavior because the returned promise would always resolve to the value 42, instead of resolving to an object with the 'state' property as in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+promise.then(null, null)
+```
+This would result in different behavior because it would swallow any rejections and always resolve the promise, instead of propagating the rejection as in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+promise.always
+```
+This would result in different behavior because `promise.always` is not a valid method, whereas `promise.inspect` is a valid method that returns the state of the promise. This would cause a `TypeError` to be thrown.
+
+DONE.

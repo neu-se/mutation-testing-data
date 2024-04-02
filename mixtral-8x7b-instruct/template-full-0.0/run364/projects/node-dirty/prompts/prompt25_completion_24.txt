@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => cb()
+```
+This would result in different behavior because the callback is immediately invoked without any delay, whereas the original code fragment would wait for the next tick of the event loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+setImmediate(cb)
+```
+This would result in different behavior because the callback is scheduled to run in the next iteration of the event loop, whereas the original code fragment would run the callback synchronously.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+process.nextTick(() => { throw new Error('Boom!') })
+```
+This would result in different behavior because an error is thrown instead of executing the callback, which would cause the program to crash.
+
+DONE.

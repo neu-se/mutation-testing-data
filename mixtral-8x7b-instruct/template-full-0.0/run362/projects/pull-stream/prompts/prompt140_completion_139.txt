@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => cb
+```
+This would result in different behavior because it creates a new function that always calls the `cb` function, even if `end` is truthy. The original code only calls `cb` when `end` is falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb || function(){}
+```
+This would result in different behavior because it ensures that `cb` is always called, even if it is falsy. The original code only calls `cb` if `end` is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+generate(null, cb)
+```
+This would result in different behavior because it calls `cb` with `generate` as the first argument, instead of passing it directly. The original code calls `cb` with only one argument, the result of `generate()`.
+
+DONE.

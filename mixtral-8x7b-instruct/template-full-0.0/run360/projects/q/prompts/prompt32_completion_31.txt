@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+global.setImmediate(function () { flush(); });
+```
+This would result in different behavior because it uses the `setImmediate` function instead of the `setTimeout` function, which may have different performance characteristics or behavior depending on the environment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+runSingle.call(null, task, domain);
+```
+This would result in different behavior because it uses the `call` method to explicitly set the `this` value for the `runSingle` function, which may not be necessary and could potentially cause issues if the `runSingle` function relies on the correct `this` value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(function () { flush(); }, 100);
+```
+This would result in different behavior because it uses a `setTimeout` with a delay of 100 milliseconds, which is different from the original `setTimeout(flush, 0)`, and

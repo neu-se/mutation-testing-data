@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.reject(reason)
+```
+This would result in different behavior because `Promise.reject` creates a new rejected promise, instead of rejecting the current deferred.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(reason)
+```
+This would result in different behavior because `deferred.reject` would directly reject the current deferred, bypassing the resolver function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+throw reason
+```
+This would result in different behavior because it raises an uncaught exception, which would terminate the entire application, instead of just rejecting the current promise.
+
+DONE.

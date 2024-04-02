@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].concat.bind(null, read, ref[0], ref[1], ref[2])
+```
+This would result in different behavior because it uses [].concat instead of the spread operator, which may result in different behavior when dealing with arrays or objects with custom `.length` properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Function.prototype.apply.bind(pull, null, ref)
+```
+This would result in different behavior because it uses `Function.prototype.apply` instead of `Function.prototype.call`, which may result in different behavior when handling context (`this`).
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(...args) => pull.apply(null, [...ref, ...args])
+```
+This would result in different behavior because it uses a rest parameter and spread operator, which may result in different behavior when handling arrays or objects with custom `.length` properties.
+
+These changes introduce different behaviors that may

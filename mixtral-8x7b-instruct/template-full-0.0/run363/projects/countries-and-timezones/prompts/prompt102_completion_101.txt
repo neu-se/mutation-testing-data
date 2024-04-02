@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Object.create
+```
+This would result in different behavior because `Object.create` creates a new object with the specified prototype object and properties, while `Object.assign` copies the values of all enumerable own properties from one or more source objects to a target object. In this case, the result of `deliverTimezones` would be different as `Object.create` does not modify the original object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+(prev, { [key]: tzs[key] }) => prev
+```
+This would result in different behavior because the arrow function returns the `prev` object without adding the timezone object with the specified key. The `deliverTimezones` function would filter out all non-deprecated timezones, which is different from the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(prev, key) => prev
+```
+This would result in different behavior because the arrow function ignores the time

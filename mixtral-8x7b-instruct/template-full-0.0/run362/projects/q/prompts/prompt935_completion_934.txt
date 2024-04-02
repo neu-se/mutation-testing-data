@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].slice
+```
+This would result in different behavior because `[].slice` is the native Array.prototype.slice method, while `array_slice` is an undefined variable or function. This change would cause a ReferenceError, breaking the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Function.prototype.apply.call(Array.prototype.slice, arguments, [1])
+```
+This would result in different behavior because it uses Function.prototype.apply to call Array.prototype.slice with the correct context (arguments object) and the correct starting index (1). This change would alter the behavior of the `Q.nbind` function, potentially causing unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+[].splice.call(arguments, 0, arguments.length - 1)
+```
+This would result in different behavior because it uses `[].splice.call` to create a shallow copy of the arguments list, excl

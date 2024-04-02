@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { read(abort, cb) }
+```
+This would result in different behavior because the `abort` argument passed to the inner `read` function would always be `true`, even when it's called during normal operation (not in the `abort` branch).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read
+```
+This would result in different behavior because it would cause the current stream to be aborted instead of continuing to read from it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb
+```
+This would result in different behavior because it would call the callback directly, instead of passing the `abort` argument to the `read` function.
+
+DONE.

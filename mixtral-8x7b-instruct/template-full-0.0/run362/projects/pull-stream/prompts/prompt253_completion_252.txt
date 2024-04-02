@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+nextChunk()
+```
+This would result in different behavior because it immediately invokes `nextChunk` function instead of waiting for the `_read` function to complete, which could cause the stream to behave unexpectedly or even crash if `_read` is not yet initialized.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream
+```
+This would result in different behavior because it assigns the `nextStream` function to `_read` instead of invoking it, causing the stream to skip the current chunk and move on to the next stream without processing the current one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { nextChunk() }

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `fin` method expects a callback function, and `null` is not a function. This would cause a `TypeError` to be thrown when calling `Q(<PLACEHOLDER>)["finally"](callback)`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+[]
+```
+This would result in different behavior because `Q(<PLACEHOLDER>)["finally"](callback)` expects a promise as the first argument. An empty array is not a promise, so this would cause a `TypeError` to be thrown.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because `Q(<PLACEHOLDER>)["finally"](callback)` expects a promise that resolves to an object with a `finally` method. `Promise.resolve()` resolves to a promise that resolves to

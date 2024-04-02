@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+'di', 'dice'
+```
+This would result in different behavior because the original rule added 'die' as a string, but this change adds 'di' as a string, which would match different words and potentially cause incorrect pluralization.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/^di$/i, function(w) { return w + 'ces' }
+```
+This would result in different behavior because the original rule added 'die' as a string, but this change adds a regular expression that matches the string 'di', and the function returns the input string with 'ces' appended, which would cause incorrect pluralization for words like 'die'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+'die', function(w) { return w + 'ces' }
+```
+This would result in different behavior because the original rule added 'dice' as the second argument, but this change adds a function that appends 'ces' to the

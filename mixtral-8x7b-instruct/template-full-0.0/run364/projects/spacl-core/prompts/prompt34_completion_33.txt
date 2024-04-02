@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+['/', ...spec.split('/').slice(1)].reverse()
+```
+This would result in different behavior because it prepends a slash to the resulting array, which can change the behavior of the code that uses this fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('').filter(x => x === '/').map(x => spec.slice(spec.indexOf(x) + 1)).reverse()
+```
+This would result in different behavior because it splits the string by characters instead of by slashes, and then filters for slashes, slices the string starting from the index of the slash, and finally reverses the resulting array. This would result in a different behavior compared to the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).filter(x => x).reverse()
+```
+This would result in different behavior because it filters out empty strings, which can occur if there

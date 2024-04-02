@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null, data)
+```
+This would result in different behavior because even if the data is being aborted, it would still return the data, instead of the abort error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.exit(1)
+```
+This would result in different behavior because it would terminate the entire process instead of just calling the callback with an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+map(data, cb)
+```
+This would result in different behavior because it would bypass the error handling and the map function, and directly call the callback with the data, even if there was an error.
+
+DONE.

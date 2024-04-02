@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+defer(null)
+```
+This would result in different behavior because the `defer` function call with a null argument creates a deferred object with a resolved promise, whereas the original code creates a deferred object with a reject function as a placeholder for the node resolver. This change would cause the `npost` and `ninvoke` methods to immediately resolve instead of waiting for the Node-style callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+defer({ then: function() {} })
+```
+This would result in different behavior because passing an empty object with a `then` method to the `defer` function creates a deferred object with a resolved promise, but without a proper reject function. This change would cause the `npost` and `ninvoke` methods to immediately resolve and not call the Node-style callback even if it is provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+defer(function() {})
+```
+This would result in different behavior because passing

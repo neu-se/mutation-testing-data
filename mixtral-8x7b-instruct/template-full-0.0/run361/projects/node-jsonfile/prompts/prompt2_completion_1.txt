@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync
+```
+This would result in different behavior because `readFile` becomes a synchronous operation, which can cause issues in an asynchronous context. The original `universalify.fromCallback(fs.readFile)` allows for both synchronous and asynchronous operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise(fs.writeFile)
+```
+This would result in different behavior because `readFile` would now use the `writeFile` function, which is used for writing files, not reading them. This would cause the function to fail or behave unexpectedly when used for reading files.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.readdir
+```
+This would result in different behavior because `readFile` now uses the `readdir` function, which is used for reading directories, not file contents. This would cause the function to fail or behave unexpectedly when used for reading file contents.
+

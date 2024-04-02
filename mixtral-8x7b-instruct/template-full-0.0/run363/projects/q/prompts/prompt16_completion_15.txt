@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the condition will always be falsy, and the code block below it will not execute in any environment, including browsers where `window` is defined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'undefined' === typeof window
+```
+This would result in different behavior because the condition will always be falsy, as the `typeof` operator returns a string. The code block below it will not execute in any environment, including browsers where `window` is defined.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(window) === '[object global]'
+```
+This would result in different behavior because the condition checks for the `window` object being an instance of the `global` object, which is not the case in most environments. The code block below it will not execute, and the Q global will not be initialized as expected.
+
+DONE.

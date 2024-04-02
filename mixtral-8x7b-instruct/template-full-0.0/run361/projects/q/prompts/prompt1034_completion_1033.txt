@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+qEndingLine = 42;
+```
+This would result in different behavior because the variable `qEndingLine` is being reassigned to a number instead of capturing the line number. This change will prevent proper stack traces if any errors occur in the Q library.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+var qEndingLine = 'captureLine';
+```
+This would result in different behavior because the variable `qEndingLine` is being reassigned to a string instead of capturing the line number. This change will prevent proper stack traces if any errors occur in the Q library.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function captureLine() { return 42; }
+qEndingLine = captureLine();
+```
+This would result in different behavior because `qEndingLine` is being assigned the result of calling the `captureLine` function, which always returns `42`. This change will prevent proper stack traces if any

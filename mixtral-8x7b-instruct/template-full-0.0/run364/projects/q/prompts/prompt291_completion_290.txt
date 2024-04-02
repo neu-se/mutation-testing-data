@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because the `deferred.reject` function is intended to be used to reject the promise, while `deferred.resolve` would resolve it, causing a different outcome than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.notify
+```
+This would result in different behavior because `deferred.notify` is used to signal progress on a promise, while `deferred.reject` is used to reject the promise with a reason. Using `deferred.notify` instead would not reject the promise and could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { throw new Error('Rejecting the promise'); }
+```
+This would result in different behavior because instead of rejecting the promise with the original reason, it would reject the promise with a new error message. This could lead to unexpected behavior and make it harder to debug the issue.
+
+DONE.

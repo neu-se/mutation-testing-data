@@ -1,0 +1,14 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `isRejected` function would always return false, regardless of the input. This is because the short-circuit OR operator (`||`) would always return the second operand (`false`) when the first operand (the result of `typeof object === "object" && object.inspect && object.inspect().state === "rejected"`) is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `isRejected` function would throw a `TypeError` when called with `null` or `undefined` as the argument. This is because the `inspect` property would be `undefined` and the `&&` operator would return `undefined` when evaluating `object.inspect()`. The `state` property would then be accessed on `undefined`, causing the `TypeError`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript

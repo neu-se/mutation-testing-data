@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(end, data)
+```
+This would result in different behavior because the arguments `end` and `data` are passed to the callback `cb` immediately, instead of waiting for the inner `read` function to call it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb.apply(null, [end, data])
+```
+This would result in different behavior because `Function.prototype.apply` is used to call the callback `cb`, potentially changing the value of `this` inside the callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prop(cb)(end, data)
+```
+This would result in different behavior because `prop(cb)` is called with `end` and `data` as arguments, instead of calling `cb` directly. This assumes that `prop` is a function that returns a new function with the same behavior as the original function.
+
+DONE.

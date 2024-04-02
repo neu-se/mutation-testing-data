@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `nfcall` function would no longer wait for the callback to be called. Instead, it would immediately return a resolved promise, causing the continuation to be called prematurely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject("Error message")
+```
+This would result in different behavior because the `nfcall` function would immediately reject the promise with an error message, bypassing the callback function altogether.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(function () {
+  Q.resolve();
+}, 0);
+```
+This would result in different behavior because the `nfcall` function would schedule the resolution of the promise using `setTimeout`, causing the continuation to be called asynchronously even if the callback is called synchronously. This could lead to unexpected behavior in the continuation.
+
+DONE.

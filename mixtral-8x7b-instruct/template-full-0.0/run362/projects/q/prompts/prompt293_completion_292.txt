@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[deferred.resolve, deferred.reject, deferred.notify][Math.floor(Math.random() * 3)]
+```
+This would result in different behavior because instead of calling `deferred.resolve`, `deferred.reject`, or `deferred.notify` based on the order they are defined, it now chooses one at random. This could cause issues if the order of these calls matters in the rest of the codebase.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve.bind(null, 'hacked value')
+```
+This would result in different behavior because instead of passing the resolved value to the `deferred.resolve` function, it now passes a hardcoded string 'hacked value'. This could cause issues if the rest of the codebase relies on the resolved value being of a certain type or having certain properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { deferred.resolve; deferred.reject

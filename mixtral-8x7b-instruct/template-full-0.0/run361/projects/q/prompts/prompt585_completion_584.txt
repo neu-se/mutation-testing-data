@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+throw new Error('Buggy code');
+```
+This would result in different behavior because an unhandled error is thrown instead of executing the original `Q.done`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+return Q.resolve(null);
+```
+This would result in different behavior because it immediately resolves the promise with a null value, instead of executing the original `Q.done`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.delay(1000).then(function() { Q.done(); });
+```
+This would result in different behavior because it adds a 1-second delay before attempting to execute `Q.done`, which might not be defined or available in the current scope.
+
+DONE.

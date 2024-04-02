@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+'verb' in rule.verbs
+```
+This would result in different behavior because it checks if the string 'verb' exists as a property in the `verbs` object instead of checking if the `verb` variable exists as a property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+this.verbs.hasOwnProperty(verb)
+```
+This would result in different behavior because it checks if the `verbs` object has the `verb` property directly, but it won't check the prototype chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(this.verbs).includes(verb)

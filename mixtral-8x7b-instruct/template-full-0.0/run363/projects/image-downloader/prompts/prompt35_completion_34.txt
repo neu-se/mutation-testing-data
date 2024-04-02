@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+res.destroy;
+```
+This would result in different behavior because `res.destroy` is a function to destroy the incoming message. It immediately releases the resources associated with the message. Unlike `res.pipe`, it doesn't pipe the data to the destination stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fs.createWriteStream;
+```
+This would result in different behavior because `fs.createWriteStream` is a function to create a writable stream. It doesn't start piping the data from the response to the destination.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+res.pipe(fs.createWriteStream(dest, { flags: 'a' }));
+```
+This would result in different behavior because the `flags: 'a'` option will open the file in append mode, which means the data will be added to the end of the file, instead of overwriting the file.
+
+DONE.

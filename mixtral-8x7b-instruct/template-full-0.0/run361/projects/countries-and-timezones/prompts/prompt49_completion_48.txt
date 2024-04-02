@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+for (const name in data.timezones) {
+  if (data.timezones.hasOwnProperty(name)) {
+    timezones[name] = buildTimezone(data, name);
+  }
+}
+```
+This would result in different behavior because it directly assigns the result of `buildTimezone` to `timezones` instead of using the `memoizeTimezone` function. This could lead to duplicate entries in the `timezones` object if the same name appears multiple times in `data.timezones`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+data.timezones.filter(tz => tz).forEach(name => timezones[name] = buildTimezone(data, name));
+```
+This would result in different behavior because it uses the `filter` method to filter out falsy values before iterating over the array, which could lead to missing timezones if the `name` property of a timezone is falsy.
+
+Option 

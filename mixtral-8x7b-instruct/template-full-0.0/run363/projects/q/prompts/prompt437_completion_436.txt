@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.length
+```
+This would result in different behavior because it always checks the length of the array instead of checking if the promise exists in the array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(unhandledRejections).length
+```
+This would result in different behavior because it wraps the array in a promise, which would always evaluate to true since a promise is an object and not falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Array.isArray(unhandledRejections) && unhandledRejections.indexOf(promise) !== -1
+```
+This would result in different behavior because it checks if unhandledRejections is an array and then checks if the promise exists in the array. However, it uses the indexOf method instead of the array\_indexOf method, which may not exist in all environments.
+
+DONE.

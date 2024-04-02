@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(null)
+```
+This would result in different behavior because the `Q.thenResolve` function would receive `Promise.resolve(null)` instead of `promise`. This might not cause any test failures directly, but it could expose issues with how the code handles resolved promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Artificial error'))
+```
+This would result in different behavior because `Q.thenReject` would receive `Q.reject(new Error('Artificial error'))` instead of `promise`. This would immediately reject the promise, which might expose issues with how the code handles rejected promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(42)
+```
+This would result in different behavior because `Q.thenResolve` would receive `Q.resolve(42)` instead of `promise`. This would fulfill the promise with the value `42`, which

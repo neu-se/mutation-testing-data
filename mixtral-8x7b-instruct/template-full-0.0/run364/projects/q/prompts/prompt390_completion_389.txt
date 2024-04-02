@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return rejected.apply(this, arguments); }
+```
+This would result in different behavior because it changes the context of the `rejected` function to `this`, which may not be the desired behavior in all cases.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+reject
+```
+This would result in different behavior because it directly calls the `reject` function instead of checking if `rejected` is a function first. This could cause issues if `rejected` is not a function, but an object or another data type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return rejected(exception, self); }
+```
+This would result in different behavior because it changes the number of arguments passed to the `rejected` function. This could cause issues if `rejected` expects only one argument and the second argument (`self`) is not what it expects.
+
+DONE.

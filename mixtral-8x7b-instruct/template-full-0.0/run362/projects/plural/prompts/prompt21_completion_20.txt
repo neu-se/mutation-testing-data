@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+rules.push([match, result])
+```
+This would result in different behavior because the order of rules will be reversed, potentially causing incorrect pluralization.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+rules = rules.concat([match, result])
+```
+This would result in different behavior because the new rule will be appended at the end of the rules array instead of being inserted at the beginning, potentially causing incorrect pluralization.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+const newRules = [match, result];
+rules = newRules.concat(rules);
+```
+This would result in different behavior because the new rule will be appended at the beginning of a new rules array, which is then concatenated with the original rules array. This could cause incorrect pluralization due to the new rule being prioritized over the original rules.
+
+DONE.

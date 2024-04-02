@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.reject(new Error("Initial rejection"))
+```
+This would result in different behavior because the queue would be rejected immediately upon creation, making it unusable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve()
+```
+This would result in different behavior because the `put` method would not be able to add any values to the queue, as the `ends` promise would be immediately resolved with an empty object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise
+```
+This would result in different behavior because the `put` method would not be able to add any values to the queue, as the `ends` promise would be immediately resolved with an empty object.
+
+DONE.

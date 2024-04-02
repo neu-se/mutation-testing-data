@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions: o}
+```
+This would result in different behavior because it uses the local variable `o` instead of directly using `{compression: COMPRESSION_LEVEL.high}`. This change may cause issues if other parts of the codebase rely on the `zipAFolderOptions` object being mutated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'gz', zipAFolderOptions}
+```
+This would result in different behavior because it changes the format to 'gz' instead of 'tar'. This change will cause the code to compress the input using gzip instead of creating a tar archive.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+{src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions: {compression: 10}}
+```
+This would result in different

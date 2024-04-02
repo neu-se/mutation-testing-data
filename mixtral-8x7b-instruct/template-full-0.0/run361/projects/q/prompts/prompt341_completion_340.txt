@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because an empty object is used instead of a deferred object, and the `deferred.resolve()` method would not be available.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function(){return {resolve:function(){}, reject:function(){}, notify:function(){}};}
+```
+This would result in different behavior because a mock deferred object is used, but the `resolve`, `reject`, and `notify` methods do not have any effect.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function(){return {resolve:function(value){value}, reject:function(exception){exception}, notify:function(value){value}};}
+```
+This would result in different behavior because a mock deferred object is used, and the `resolve`, `reject`, and `notify` methods return their input arguments instead of actually resolving or rejecting the promise.
+
+DONE.

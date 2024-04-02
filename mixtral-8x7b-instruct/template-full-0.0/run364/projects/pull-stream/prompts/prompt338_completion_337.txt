@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+field.call(null)
+```
+This would result in different behavior because it changes the `this` context of the `field` function to the global object, which might not have the expected behavior if `field` relies on the `this` value to refer to the current data item.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+field + ''
+```
+This would result in different behavior because it converts the result of `field` to a string, which might not be the expected type if the `seen` object or the `filter` function expects a different type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(field || id)(data)
+```
+This would result in different behavior because it introduces a potential short-circuit evaluation that might bypass the `field` function and always use the `id` function instead, which could lead to incorrect results if `field` has side effects or returns a different value than `id`.
+
+DONE.

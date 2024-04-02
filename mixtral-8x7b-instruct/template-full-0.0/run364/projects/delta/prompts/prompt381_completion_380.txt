@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+otherIter.next().insert
+```
+This would result in different behavior because it accesses the `insert` property of the result of `otherIter.next()`, which might not have an `insert` property if the next operation is a delete or retain operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+otherIter.skip(1)
+```
+This would result in different behavior because it skips the next operation in the `otherIter`, instead of returning it. This could lead to mismatched operations between the two deltas being compared.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+otherIter.peek()

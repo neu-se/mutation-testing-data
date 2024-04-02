@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { throw new Error('Something went wrong') }
+```
+This would result in different behavior because it throws an error instead of doing nothing or executing a given callback without arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb && cb()
+```
+This would result in different behavior because it only executes the callback if it is truthy, instead of always executing it or doing nothing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(cb)
+```
+This would result in different behavior because it pushes the callback to the next tick of the event loop, which might cause issues if the order of execution is important.
+
+DONE.

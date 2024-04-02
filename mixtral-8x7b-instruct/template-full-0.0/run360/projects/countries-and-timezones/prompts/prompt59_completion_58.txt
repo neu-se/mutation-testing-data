@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{ id: 'fake-country' }
+```
+This would result in different behavior because it returns a static object with a hardcoded `id` instead of building a country object using the `buildCountry` function. This change would cause issues if the test suite expects the returned country object to have specific properties or methods.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+data.countries[id] || {}
+```
+This would result in different behavior because it returns an empty object if the `id` is not found in the `data.countries` object. The original code would return `undefined` in this case, which might cause different behavior in tests that expect `undefined` or handle the case where the country is not found.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+buildCountry(data, 'fake-country')
+```
+This would result in different behavior because it always tries to build a country with the `id` set to `'fake-country

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.length = unhandledReasons.length - 1;
+```
+This would result in different behavior because the `unhandledReasons` array's length is being decremented instead of removing the element at the same index as the unhandled promise, causing potential data inconsistency and incorrect unhandled rejection handling.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.splice(at, 0);
+```
+This would result in different behavior because the `unhandledReasons` array's element is not being removed, causing potential data inconsistency and incorrect unhandled rejection handling. Instead of removing the element at the same index as the unhandled promise, it is inserting nothing at that index, causing the data to shift.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.splice(at, <PLACEHOLDER>, reason);

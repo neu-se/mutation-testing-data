@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+at > -1
+```
+This would result in different behavior because it would check for the index being greater than -1 instead of equal to -1, causing the unhandled rejection to never be untracked even when it is handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.indexOf(promise) !== -1
+```
+This would result in different behavior because it directly accesses the `unhandledRejections` array instead of using the `at` variable, potentially causing unexpected behavior if the array has been modified since the index was stored in `at`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof at !== "number"
+```
+This would result in different behavior because it checks the type of `at` instead of its value, causing the unhandled rejection to never be untracked even when it is handled.
+
+DONE.

@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+parsedBaseUrl.toString()
+```
+This would result in different behavior because `toString()` might return a different string representation of the object than the default one, potentially causing a mismatch in the resolved URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Object.assign({}, parsedBaseUrl)
+```
+This would result in different behavior because `Object.assign({}, parsedBaseUrl)` creates a shallow copy of the `parsedBaseUrl` object, which might not have the same object reference as the original `parsedBaseUrl` object, causing a mismatch in the resolved URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+JSON.parse(JSON.stringify(parsedBaseUrl))

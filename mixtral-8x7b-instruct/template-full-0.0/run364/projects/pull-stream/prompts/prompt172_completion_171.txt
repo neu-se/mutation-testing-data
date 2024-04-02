@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+array instanceof Array === false
+```
+This would result in different behavior because it uses the `instanceof` operator instead of the `Array.isArray()` method, which may not behave the same in certain edge cases (e.g., when using iframes or non-standard implementations).
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Array.prototype.isPrototypeOf(array) === false
+```
+This would result in different behavior because it checks if `array` is not an instance of the `Array` prototype, which may not behave the same as `Array.isArray()` in certain edge cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.prototype.toString.call(array) !== '[object Array]'
+```
+This would result in different behavior because it uses the `toString` method to check the type of `array`, which may not be as reliable as `Array.isArray()` in certain situations (e.g., when dealing with host objects).

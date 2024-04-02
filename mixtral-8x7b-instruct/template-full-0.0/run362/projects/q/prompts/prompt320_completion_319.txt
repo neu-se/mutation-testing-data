@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+descriptor[op].call
+```
+This would result in different behavior because it changes the way the `op` method is called on the `descriptor` object. The `apply` method allows passing an array of arguments, while the `call` method requires individual arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+descriptor[op].bind(null, op)
+```
+This would result in different behavior because it changes the way the `op` method is called on the `descriptor` object by using `bind`. This creates a new function with the `op` property pre-set as the first argument, which might not be the desired behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+descriptor.op()

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+function () { read(abort, cb) }
+```
+This would result in different behavior because the `abort` argument passed to the inner `read` function would always be `true`, even when it's called during normal operation (not in the `abort` branch). This could cause the inner `read` function to behave differently than intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read.bind(null, abort, cb)
+```
+This would result in different behavior because it would set the `this` value of the `read` function to `null`, which could cause issues if `read` relies on the `this` value being set to a specific object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+once(read)(abort, cb)
+```
+This would result in different behavior because it would wrap the `read` function with the `once` function, which ensures that the `read` function can only be called once. This could cause issues if the

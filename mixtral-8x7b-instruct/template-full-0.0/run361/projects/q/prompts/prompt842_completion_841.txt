@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(object, ms, error)
+```
+This would result in different behavior because `Q.when` does not have a `timeout` method, and it would raise a `TypeError` when called with three arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(object).timeout(ms, error)
+```
+This would result in different behavior because `Q.resolve(object)` creates a new promise that is immediately resolved with the value of `object`, and then the `timeout` method is called on that new promise. This would cause the original promise to be "detached" from the timeout mechanism, and the timeout behavior might not work as expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.denodeify(setTimeout)(ms, Q.resolve(object), error)
+```
+This would result in different behavior because `Q.denodeify` converts a Node.js-style callback-based function

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+{}
+```
+This would result in different behavior because a new empty object is created instead of inheriting from `defer.prototype`. This could cause methods like `defer.resolve`, `defer.fulfill`, `defer.reject`, and `defer.notify` to not be available on the `deferred` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because `null` is assigned to `deferred`, which is not an object and does not have any properties or methods. This would cause errors when trying to access methods like `defer.resolve`, `defer.fulfill`, `defer.reject`, and `defer.notify`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Object.create(Promise.prototype)
+```
+This would result in different behavior because the `deferred` object would inherit from `Promise.prototype` instead of `defer.prototype`. This could cause issues if `defer.prototype` contains

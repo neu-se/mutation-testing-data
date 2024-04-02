@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.catch
+```
+This would result in different behavior because the `catch` method is used to handle rejections, not the `then` method. This change would cause the `finally` method to always return a resolved promise, even if there is an error in the `callback`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.then(undefined, rejected)
+```
+This would result in different behavior because the second argument of the `then` method is used to specify a rejection handler, but `undefined` is passed instead of a function. This would cause the `finally` method to always return a rejected promise if there is an error in the `callback`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.then(function() { return rejected; }, rejected)
+```
+This would result in different behavior because the same `rejected` function is used as both the fulfillment and rejection handler. This would cause the `finally` method

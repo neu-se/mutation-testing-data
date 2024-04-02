@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+1 * field
+```
+This would result in different behavior because it multiplies the field by 1, which doesn't change its value but introduces an unnecessary operation. This could potentially cause the test to fail if the test checks for the exact value of the `field` variable.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+field || 'default'
+```
+This would result in different behavior because it returns a default value if `field` is falsy. This could cause the test to fail if the test assumes that `field` is always a truthy value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+global.field
+```
+This would result in different behavior because it accesses the `field` variable from the global scope, which could potentially have a different value than the `field` variable defined in the local scope. This could cause the test to fail if the test assumes that `field` is always the same value as the local variable.
+
+DONE.

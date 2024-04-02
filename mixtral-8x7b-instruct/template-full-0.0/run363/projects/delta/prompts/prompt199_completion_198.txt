@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.ops.slice(thisIter.index + 1)
+```
+This would result in different behavior because it returns a new array of the remaining operations starting from the next index, instead of the rest property which returns an iterator. This change would cause issues if the code relies on the iterator behavior, such as having a different reference or not updating the iterator index.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.ops.filter((op, idx) => idx > thisIter.index)
+```
+This would result in different behavior because it returns a new array containing only the operations with an index greater than the current iterator index, filtered using the array's filter method. This change would cause issues if the code relies on the iterator behavior, such as having a different reference or not updating the iterator index.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+thisIter.ops.slice(thisIter.index).filter(op => op)

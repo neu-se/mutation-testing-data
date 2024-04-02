@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return continuer }
+```
+This would result in different behavior because the `bind` method is used to create a new function with a pre-defined `this` value and partially applied arguments. By replacing it with a function that simply returns `continuer`, the new function will not have the desired behavior when called with `"next"` or `"throw"` arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function (verb) { return continuer }
+```
+This would result in different behavior because the function created by `bind` expects two arguments (`verb` and `arg`), but the replacement function only accepts one argument (`verb`). This will cause an error when the function is called with two arguments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (verb, arg) { return continuer() }
+```
+This would result in different behavior because the function created by `bind` calls `continuer` with the provided `verb

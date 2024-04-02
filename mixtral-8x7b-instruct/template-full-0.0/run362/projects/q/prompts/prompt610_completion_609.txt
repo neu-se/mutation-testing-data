@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).bind
+```
+This would result in different behavior because `bind` returns a function, not a promise. The original code expects a promise, so the test suite should fail when it receives a function instead.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(null)
+```
+This would result in different behavior because it always creates a new promise that is immediately resolved with a value of `null`. The original code expects a promise that is resolved with the `object` passed to it, so the test suite should fail when it receives a promise resolved with `null` instead.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when
+```
+This would result in different behavior because `when` is used to handle both promises and immediate values. By replacing the original code with `when`, the test suite should fail when it receives a promise resolved with the `object` passed to it, because `when` would immediately resolve the promise instead of waiting for the next

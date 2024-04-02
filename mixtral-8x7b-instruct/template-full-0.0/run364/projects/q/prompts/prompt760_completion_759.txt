@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+[].map.bind(promises)
+```
+This would result in different behavior because it uses the native `Array.prototype.map` instead of the `Q.array_map` function, which may not handle promises correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.all(promises.map(function(promise) { return Q(promise); }))
+```
+This would result in different behavior because it wraps every promise in the array with a new promise created by the `Q` constructor, which may change the settling behavior of the original promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+promises.slice(0).map(function(promise) { return Q(promise); })
+```
+This would result in different behavior because it creates a shallow copy of the `promises` array and wraps every promise in the copy with a new promise created by the `Q` constructor, which may change the sett

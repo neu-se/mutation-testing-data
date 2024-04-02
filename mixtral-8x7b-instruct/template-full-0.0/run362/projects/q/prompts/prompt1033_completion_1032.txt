@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Error("Hand-crafted error")
+```
+This would result in different behavior because it creates a new error object with a specific message, instead of just passing the string "error". This could cause issues if the error handling code expects a specific error object type or properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because it passes `null` instead of an error object. This could cause issues if the error handling code expects an error object and tries to access its properties.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(null, function() { throw new Error("Error in nodeback"); })
+```
+This would result in different behavior because it wraps the `null` value in a promise and adds a rejection handler that throws an error. This could cause issues if the error handling code expects a synchronous error to be thrown.
+
+DONE.

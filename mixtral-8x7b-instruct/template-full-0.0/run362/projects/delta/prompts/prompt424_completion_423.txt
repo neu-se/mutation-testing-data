@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+nextType === 'insert' && (offset <= index || !priority)
+```
+This would result in different behavior because it allows the offset to match the index when priority is true, which could cause an infinite loop or incorrect index manipulation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextType === 'insert' && (offset + 1 < index || !priority)
+```
+This would result in different behavior because it increases the offset comparison by 1, which could cause the loop to skip an 'insert' operation or result in incorrect index manipulation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextType === 'insert' && (offset > index && !priority)

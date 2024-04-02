@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).catch(() => {})
+```
+This would result in different behavior because the `catch` method would swallow any rejections, preventing them from being propagated or handled by the calling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(null)
+```
+This would result in different behavior because it would replace the input promise with a new promise that is immediately resolved with a value of `null`. This could lead to unexpected behavior in the calling code, especially if it relies on the original promise's value or rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(object).spread(() => {})
+```
+This would result in different behavior because the `spread` method expects an array or a promise for an array as its argument, and it tries to unwrap the array elements into separate arguments for the fulfillment handler. Since the handler function in this case does not accept any arguments, the call to `spread` would result

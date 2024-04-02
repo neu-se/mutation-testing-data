@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+op.delete !== undefined || typeof op.retain === 'number'
+```
+This would result in different behavior because it now checks if `op.delete` is not undefined instead of checking if it exists. This change would cause the code to behave differently when `op.delete` is explicitly set to `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+op.hasOwnProperty('delete') || typeof op.retain === 'number'
+```
+This would result in different behavior because it now checks if the `delete` property exists in the `op` object instead of checking if it is truthy. This change would cause the code to behave differently when other properties with the name "delete" are present in the `op` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+'delete' in op || typeof op.retain === 'number'
+```
+This would result in different behavior because it now checks if the `delete` property is

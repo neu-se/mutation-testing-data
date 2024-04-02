@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because the `progressed` function is replaced with an empty function, which would not execute the provided `progressed` function when a progress notification is emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+42
+```
+This would result in different behavior because the integer `42` is not a function, so it would throw a `TypeError` when the `then` method tries to call it as a callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve
+```
+This would result in different behavior because `deferred.resolve` is a function that resolves the deferred, which is not the same as notifying progress. This would cause the promise to be immediately fulfilled instead of emitting a progress notification.
+
+DONE.

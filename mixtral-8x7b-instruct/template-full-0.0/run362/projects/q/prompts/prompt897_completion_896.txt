@@ -1,0 +1,18 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+defer(null);
+```
+This would result in different behavior because the `defer` function expects a resolver object to be passed as the first argument, and not `null`. This would cause the returned promise to never resolve or reject.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+defer({ resolve: function() {}, reject: function() {} });
+```
+This would result in different behavior because the resolver object passed to `defer` is not created using the `defer` function itself. This would cause the returned promise to never resolve or reject, as the `resolve` and `reject` functions do not have the expected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+defer(true);
+```
+This would result in different behavior because the `defer` function expects a resolver object to be passed as the first argument, and not a boolean value. This would cause the returned promise to never resolve or reject, as the resolver object is not created correctly.
+

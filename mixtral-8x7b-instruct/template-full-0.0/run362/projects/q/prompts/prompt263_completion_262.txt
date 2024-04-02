@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new Promise(resolve => resolve(value))
+```
+This would result in different behavior because a new promise is created instead of resolving the existing deferred promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(value)
+```
+This would result in different behavior because `deferred.resolve` is called directly, bypassing the `become` function which updates the `resolvedPromise`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(value)

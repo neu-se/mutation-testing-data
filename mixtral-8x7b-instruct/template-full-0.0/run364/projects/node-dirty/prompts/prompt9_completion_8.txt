@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+val, key
+```
+This would result in different behavior because the key and value would be swapped when setting the value in the internal `_data` map.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.set(key, 'buggy_value')
+```
+This would result in different behavior because it sets a static string 'buggy\_value' instead of the provided `val` variable, causing data inconsistency.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this._data.delete(key)
+```
+This would result in different behavior because it would always delete the key-value pair instead of updating the value when `val` is defined.
+
+DONE.

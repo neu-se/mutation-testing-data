@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(promise).tap
+```
+This would result in different behavior because it always wraps the promise in a resolved promise before applying the `tap` method, which might not be the intended behavior in the original code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.denodeify(promise).tap
+```
+This would result in different behavior because it converts the promise to a node-style callback, which might not be the intended behavior in the original code and could lead to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+promise.constructor.prototype.tap
+```
+This would result in different behavior because it uses the constructor's prototype to access the `tap` method, which might not be the same as the `tap` method defined in the `Q` library, leading to unexpected behavior or even errors.
+
+DONE.

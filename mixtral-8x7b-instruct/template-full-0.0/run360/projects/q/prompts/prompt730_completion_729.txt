@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.notify(null)
+```
+This would result in different behavior because `notify` expects an object with `index` and `value` properties, and passing `null` would not provide the necessary information for progress updates.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.notify({index: -1})
+```
+This would result in different behavior because the `index` property is expected to be a non-negative integer, representing the index of the promise in the input array. Passing `-1` would cause incorrect progress updates.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.notify({value: {}});
+```
+This would result in different behavior because the `value` property should contain the progress update, which is expected to be a primitive value or a plain object. Passing an empty object would not provide the necessary information for progress updates.
+
+DONE.

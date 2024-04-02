@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+'http'
+```
+This would result in different behavior because the code would always use the 'http' module instead of checking the URL scheme, which could lead to using an unsecured connection for HTTPS URLs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+request = url.trimLeft().startsWith('https') ? https : http;
+```
+This would result in different behavior because the order of the condition has been changed, and it would cause the code to use 'http' instead of 'https' if the URL starts with 'https', as `startsWith` is case-sensitive.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+request = Math.random() > 0.5 ? https : http;
+```
+This would result in different behavior because the decision to use 'http' or 'https' is now random, which could lead to using an unsecured connection for some requests even if the URL starts with 'https'.
+
+DONE.

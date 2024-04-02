@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr !== null && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it changes the loose equality `==` to strict equality `===`, which may cause the condition to fail if `currentUrlStr` is an object that is truthy but not strictly equal to `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+currentUrlStr && _has_illegal_chars(currentUrlStr.toString())
+```
+This would result in different behavior because it calls `toString()` on `currentUrlStr` before passing it to `_has_illegal_chars()`. This may cause the condition to pass even if `currentUrlStr` contains illegal characters, but they are not visible until it is converted to a string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+_has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it removes the `current

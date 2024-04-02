@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the `currentUrl` object will not be created when `parsedUrl.host` is null, and the code inside the conditional block will not execute, potentially causing unexpected behavior in the `extract` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(currentUrlStr, <PLACEHOLDER>, false)
+```
+This would result in different behavior because the `parse` function's third argument, which specifies whether to include query parameters in the returned object, is set to `false`. This means that the `parsedUrl` object will not contain any query parameters, potentially causing unexpected behavior in the `extract` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse('https://' + currentUrlStr, <PLACEHOLDER>, true)
+```
+This would result in different behavior because the `currentUrlStr` is prepended with 'https://',

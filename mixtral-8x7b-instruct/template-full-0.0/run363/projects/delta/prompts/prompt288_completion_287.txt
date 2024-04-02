@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+line.push('')
+```
+This would result in different behavior because it pushes an empty string to the `line` Delta instead of calling the `iter.next()` method. This change would cause the line-by-line iteration to skip the current operation and might lead to incorrect processing of the input Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+line.push(null)
+```
+This would result in different behavior because it pushes `null` to the `line` Delta instead of calling the `iter.next()` method. This change would cause the line-by-line iteration to skip the current operation and might lead to incorrect processing of the input Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+line.push(thisIter.next())
+```
+This would result in different behavior because it pushes the next operation from the `thisIter` instead of the `otherIter`. This change would cause the line-by-

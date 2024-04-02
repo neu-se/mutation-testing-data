@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because the `once` function would no longer call the `onEnd` callback when the `end` event is received, and the `cb` function would be called with `end` set to `true` and `data` set to `false`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+data
+```
+This would result in different behavior because the `once` function would call the `onEnd` callback with the `data` value received in the current chunk, rather than passing `null` or an `end` event as the argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op(data)
+```
+This would result in different behavior because the `op` function would be called with the `data` value received in the current chunk, rather than passing `end` set to `true` or `false` to the `onEnd` callback.
+
+DONE.

@@ -1,0 +1,16 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i, function(w) { return w + 's' }
+```
+This would result in different behavior because the function now appends an 's' instead of correctly forming the plural for words ending in 'y' or 'quy'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i, function(w) { return w.slice(0, -1) + 'ies' }
+```
+This would result in different behavior because the function uses `slice` instead of `substr`, which may result in incorrect pluralization for words ending in 'y' or 'quy'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+/[^aeiou]y$|quy$/i, function(w) { return w.substr(0, w.length - 2) + 'ies' }
+```

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => cb(null, value)
+```
+This would result in different behavior because it doesn't save and set `value` to `null` after using it, potentially causing the same `value` to be returned in subsequent calls.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+abortCb(cb, abort, onAbort)
+```
+This would result in different behavior because it directly calls `abortCb` with `cb`, `abort`, and `onAbort` as arguments, instead of returning it as a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+abortCb(value, abort, onAbort)
+```
+This would result in different behavior because it passes `value` as the first argument to `abortCb`, instead of `cb`.
+
+DONE.

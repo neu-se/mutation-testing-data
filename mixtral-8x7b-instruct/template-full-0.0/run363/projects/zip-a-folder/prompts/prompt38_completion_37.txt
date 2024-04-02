@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+glob.hasMagic(src)
+```
+This would result in different behavior because it checks if the `src` string has any glob syntax, instead of checking if `src` is a glob string itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+path.isAbsolute(src)
+```
+This would result in different behavior because it checks if the `src` string is an absolute path, instead of checking if `src` is a glob string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+Array.isArray(src)
+```
+This would result in different behavior because it checks if `src` is an array, instead of checking if `src` is a glob string. This change would cause the `zipArchive.directory` or `zipArchive.glob` method to be called with an incorrect argument when `src` is a string.
+
+DONE.

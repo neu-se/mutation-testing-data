@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+callback.apply
+```
+This would result in different behavior because it directly calls the `callback` function using `apply` instead of using the `nfapply` method from the `Q` library. This change would bypass any behavior specific to the `nfapply` method, such as error handling or promise resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q(callback).nfapply(null)
+```
+This would result in different behavior because it passes `null` as the `args` argument to the `nfapply` method. This change would cause the `nfapply` method to ignore any arguments provided to the `Q.nfcall` method and instead use `null` as the arguments array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q(callback).nfapply([])
+```
+This would result in different behavior because it passes an empty array `[]` as the `args` argument to the `nfapply` method. This change would cause the

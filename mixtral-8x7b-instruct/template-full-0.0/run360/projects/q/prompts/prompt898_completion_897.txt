@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve.apply(deferred, [null].concat(nodeArgs))
+```
+This would result in different behavior because the Node.js callback would be called synchronously with a null value instead of being called asynchronously with the result or error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.reject(new Error('Artificial error'))
+```
+This would result in different behavior because the Node.js callback would always be rejected with an artificial error, regardless of the actual result or error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(nodeArgs)
+```
+This would result in different behavior because the Node.js callback would be called with the `nodeArgs` array as the result instead of the actual result or error.
+
+DONE.

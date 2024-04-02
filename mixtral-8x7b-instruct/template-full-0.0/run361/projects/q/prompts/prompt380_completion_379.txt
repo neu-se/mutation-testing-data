@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(null)
+```
+This would result in different behavior because the `tap` method would return a promise that is always resolved with a value of `null`, instead of returning the original promise unchanged.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.reject(new Error('Artificial error'))
+```
+This would result in different behavior because the `tap` method would return a rejected promise with an artificial error, instead of returning the original promise unchanged.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.resolve(1).then(function(value) { return Q.resolve(value + 1); })
+```
+This would result in different behavior because the `tap` method would return a promise that is always resolved with a value that is one greater than the original promise's resolution value, instead of returning the original promise unchanged.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+() => {}
+```
+This would result in different behavior because the `onAbort` function passed in as an argument is not being used, and an empty function is returned instead. This could cause issues if the `onAbort` function was expected to handle aborting the operation or performing some other cleanup task.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `null` is being returned instead of the `onAbort` function. This could cause issues if the `onAbort` function was expected to handle aborting the operation or performing some other cleanup task.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { throw new Error('Abort!') }
+```
+This would result in different behavior because an error is being thrown instead of returning the `onAbort` function. This could cause issues if the `onAbort` function was expected to handle aborting the operation gracefully.
+
+DONE.

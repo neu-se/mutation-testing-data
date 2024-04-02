@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+['', ctx]
+```
+This would result in different behavior because it always checks the policy against an empty path, ignoring the provided `path` argument.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+path.toUpperCase(), ctx
+```
+This would result in different behavior because it converts the `path` argument to uppercase before checking the policy, which may cause mismatches with the original path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+this.get('another_policy').matches

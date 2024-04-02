@@ -1,0 +1,21 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve(value, true);
+```
+This would result in different behavior because `deferred.resolve` now has an extra argument, which is not part of the original function signature. This could cause issues if the continuation passed to `fapply` is expecting a certain number of arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(function () {
+  deferred.resolve(value);
+}, timeout - 10);
+```
+This would result in different behavior because the timeout is now 10ms shorter than the original, which could cause the promise to resolve earlier than expected. This might not be caught by tests that don't account for the difference in timing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+setTimeout(function () {
+  deferred.reject('Artificially injected error');
+}, timeout);
+```
+This would result in different behavior because the promise is now always rejected with an error message,

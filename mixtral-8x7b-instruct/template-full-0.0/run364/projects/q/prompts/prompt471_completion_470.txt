@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+"rejectionHandled", "some random string", promise
+```
+This would result in different behavior because it replaces the unhandled reason with a static string, which would cause the process to emit an incorrect error message.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"rejectionHandled", unhandledReasons[Math.floor(Math.random() * unhandledReasons.length)], promise
+```
+This would result in different behavior because it selects a random unhandled reason instead of using the correct one, which would cause the process to emit an incorrect error message.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+"rejectionHandled", unhandledReasons[at], Q.reject("some random reason")
+```
+This would result in different behavior because it changes the promise that is passed to the process.emit function, which would cause the process to emit an incorrect error message.
+
+DONE.

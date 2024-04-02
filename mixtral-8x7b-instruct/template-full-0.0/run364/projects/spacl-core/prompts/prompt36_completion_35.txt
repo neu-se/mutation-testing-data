@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+'/'.concat(spec.split('').slice(1).reverse().join(''))
+```
+This would result in different behavior because it reverses each character instead of the path segments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).reverse().join('/')
+```
+This would result in different behavior because it reverses the order of the path segments instead of the segment list itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'/'.concat(spec.split('/').slice(1).map(x => x.split('').reverse().join('')))
+```
+This would result in different behavior because it reverses each character within each path segment, instead of reversing the order of the path segments.
+
+DONE.

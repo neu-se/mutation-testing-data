@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+output.destroy
+```
+This would result in different behavior because the 'error' event listener would not be set up, and any errors that occur during the archiving process would not be handled. The `destroy` method would terminate the write stream and archiver without proper error handling.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+output.on('foobar', reject)
+```
+This would result in different behavior because the 'error' event would not be properly handled. Instead, the 'foobar' event is being listened to, which would not be triggered in normal circumstances. This could lead to unhandled errors and unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+global.process.emit('error', reject)
+```
+This would result in different behavior because the error would not be associated with the specific write stream or archiver. Instead, it would be emitted as a global process error, which could potentially terminate the entire

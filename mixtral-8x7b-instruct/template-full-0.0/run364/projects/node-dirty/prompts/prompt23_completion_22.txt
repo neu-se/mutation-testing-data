@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb => cb && cb()
+```
+This would result in different behavior because the `cb` might not be called if it's falsy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+cb => setTimeout(cb, 0)
+```
+This would result in different behavior because the callback would be executed asynchronously, which might not be expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => this.emit('drain')
+```
+This would result in different behavior because the `cb` would not be called, which might cause issues if the callback is expected to do something.
+
+DONE.

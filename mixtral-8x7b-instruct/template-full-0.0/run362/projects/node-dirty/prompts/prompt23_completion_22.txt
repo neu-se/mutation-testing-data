@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb => cb && cb()
+```
+This would result in different behavior because if `cb` is falsy, it will not be invoked, and the `emit('drain')` will not be called either.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+() => { this.emit('drain'); if (cb) setTimeout(cb, 0); }
+```
+This would result in different behavior because the `cb` will be executed asynchronously, which might not be the expected behavior in the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => { if (cb) { try { cb(); } catch (e) { /* swallow the error */ } } this.emit('drain'); }
+```
+This would result in different behavior because any errors thrown in the `cb` will be swallowed, which might lead to silent failures and make it difficult to debug issues.
+
+DONE.

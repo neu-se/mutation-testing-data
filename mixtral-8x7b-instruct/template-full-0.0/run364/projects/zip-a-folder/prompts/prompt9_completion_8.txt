@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+src === ''
+```
+This would result in different behavior because it checks if the source is an empty string instead of checking if it's a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+typeof src !== 'string'
+```
+This would result in different behavior because it checks if the source is not a string, instead of checking if it's a glob.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+!Array.isArray(src)
+```
+This would result in different behavior because it checks if the source is not an array, instead of checking if it's a glob. This is less likely to occur in a real-world scenario, as `src` is expected to be a string, but it's still a valid mutation that could potentially expose weaknesses in the test suite.
+
+DONE.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+100
+```
+This would result in different behavior because it would force the `diff` function to always remove a fixed number of characters (100) from the current position in the first delta, regardless of the actual length of the operation in the second delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+thisIter.peek().length
+```
+This would result in different behavior because it would use the length of the current operation being pointed to by the iterator, instead of the length of the next operation in the delta. This could lead to incorrect removal of characters if the current and next operations have different lengths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+otherIter.peekLength()
+```
+This would result in different behavior because it would use the length of the next operation in the second delta, instead of the first delta. This could lead to incorrect removal of characters if the lengths of the corresponding operations in the two deltas are different.
+
+D

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null;
+```
+This would result in different behavior because the `defer` function would receive `null` as an argument instead of a resolver function. The resolver function is necessary for properly resolving or rejecting the deferred promise, so using `null` would cause the deferred promise to remain in a pending state indefinitely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return true; };
+```
+This would result in different behavior because the returned function would always return `true` instead of a resolver function. This would cause the deferred promise to be immediately resolved with the value `true`, regardless of the result of the `Q(callback).fapply(nodeArgs)` call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+deferred.resolve;
+```
+This would result in different behavior because the `makeNodeResolver` method returns an object with `resolve` and `reject` properties, which are functions. By directly using

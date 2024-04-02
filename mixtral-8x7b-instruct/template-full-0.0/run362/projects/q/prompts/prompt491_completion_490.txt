@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+() => {}
+```
+This would result in different behavior because the `untrackRejection` function is not called, and the rejection will not be removed from the unhandled rejections list.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+untrackRejection.bind(null, rejection)
+```
+This would result in different behavior because the `untrackRejection` function will be called without the `reason` argument, and the rejection will not be removed from the unhandled rejections list.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => untrackRejection(rejection, 'fakeReason')
+```
+This would result in different behavior because the `untrackRejection` function is called with a fake reason, and the actual reason for the rejection will be lost.
+
+DONE.

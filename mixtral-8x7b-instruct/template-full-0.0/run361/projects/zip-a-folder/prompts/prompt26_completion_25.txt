@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+format, {}
+```
+This would result in different behavior because the `archiverOptions` object will always be an empty object, discarding the provided compression level.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+'tar', archiverOptions
+```
+This would result in different behavior because the `format` will always be 'tar', and the `archiverOptions` will be passed directly, which may cause unexpected behavior in the `zip` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+format, archiverOptions || {zlib: {level: 1}}
+```
+This would result in different behavior because even if `archiverOptions` is not provided, a default `zlib.level` of 1 will be used, which is lower than the default `COMPRESSION_LEVEL.high` (9). This change may lead to different compression levels in the generated archives.
+
+DONE.

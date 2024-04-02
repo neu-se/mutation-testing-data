@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+new URL('http://' + pageurl.host + pageurl.path)
+```
+This would result in different behavior because it creates a new URL object using the `URL` constructor, which may not behave exactly the same way as the `parse` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse('http://' + pageurl.host + pageurl.path, true, true)
+```
+This would result in different behavior because it uses the `URL.parse` method with the `slashesDenoteHost` and `parseQueryString` options set to `true`, which may parse the URL differently than the original code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+new URL('http://' + pageurl.host + pageurl.path).parse()

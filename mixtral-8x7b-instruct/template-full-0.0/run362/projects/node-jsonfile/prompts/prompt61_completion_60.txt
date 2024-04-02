@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof content === 'string'
+```
+This would result in different behavior because it checks the type of `content` instead of checking if `content` is a Buffer. This would cause the `toString('utf8')` method to not be called when `content` is a Buffer, leading to potential issues with encoding.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+content instanceof ArrayBuffer
+```
+This would result in different behavior because it checks if `content` is an ArrayBuffer, which is not the same as checking if it is a Buffer. This would cause the `toString('utf8')` method to not be called when `content` is a Buffer, leading to potential issues with encoding.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+content.constructor.name === 'Buffer'
+```
+This would result in different behavior because it checks the constructor name of `content` instead of checking if `content` is a Buffer. This would cause the `toString('utf8')` method

@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+{key, val: this._data.get(key) || 'default_value'}
+```
+This would result in different behavior because if the key is not present in the `_data` object, it will return 'default\_value' instead of undefined, which might cause issues downstream if the consumers of this object are not prepared to handle such a value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{key, val: this._data.set(key, this._data.get(key))}

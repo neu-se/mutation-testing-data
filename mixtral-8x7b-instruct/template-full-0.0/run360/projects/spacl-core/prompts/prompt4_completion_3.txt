@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+spec.startsWith('/') === false
+```
+This would result in different behavior because it uses the `startsWith` method instead of the `match` method with a regular expression. This change would cause the error to be thrown when the spec does not start with a slash but has a valid character immediately after, whereas the original code fragment only checks for a slash.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+!spec.match(/^\//)
+```
+This would result in different behavior because it negates the result of the `match` method, causing the error to be thrown when the spec does start with a slash. This is the opposite behavior of the original code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+/^\//.test(spec) === false
+```
+This would result in different behavior because it uses the `test` method of a regular expression instead of the `match` method on the spec string. This change would

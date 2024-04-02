@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+buildCountry(data, id).id
+```
+This would result in different behavior because it always returns the country's ID instead of the actual country object. This change would bypass the memoization logic and always create a new country object, even if it already exists in the `countries` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+data.countries[id]
+```
+This would result in different behavior because it directly accesses the `data` object, bypassing the `memoizeCountry` function. This change would not update the `countries` object when a new country is fetched, causing inconsistencies between the `data` object and the `countries` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+getCountry(id).id
+```
+This would result in different behavior because it returns the country's ID instead of the actual country object. This change would cause issues when the consuming code expects a country object

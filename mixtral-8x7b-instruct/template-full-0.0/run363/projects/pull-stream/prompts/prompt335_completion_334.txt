@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `cb` function would receive `null` as the second argument instead of the data read from the stream. This could cause issues if the code downstream expects a non-null value and throws an error or behaves unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+data.toString()
+```
+This would result in different behavior because the data would be converted to a string. If the downstream code expects a specific data type (e.g., a number or a buffer), it would not receive the expected data type and might fail or behave unexpectedly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+data + 1

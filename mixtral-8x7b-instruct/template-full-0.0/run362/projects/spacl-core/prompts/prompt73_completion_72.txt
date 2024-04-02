@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[path, 'dummyVerb', ctx]
+```
+This would result in different behavior because the `verb` argument passed to the `rule.query` method is hardcoded to 'dummyVerb', which is not the same as the original `verb` argument. This change would cause the `query` method to not function as intended when checking for specific verbs on paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path, verb, Object.assign({}, ctx)
+```
+This would result in different behavior because the `ctx` argument passed to the `rule.query` method is shallow-copied using `Object.assign`, which might not behave the same way as the original `ctx` argument in certain situations. This change could cause issues if the original `ctx` object contains properties that are references to other objects, as modifying those objects through the copied `ctx` would not affect the original `ctx`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, verb

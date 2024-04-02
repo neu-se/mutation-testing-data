@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+"Post"
+```
+This would result in different behavior because the string comparison in `this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);` would fail, causing the promise to never reject even if the `dispatch` method fails.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch.bind(this, "post")
+```
+This would result in different behavior because the `bind` method returns a new function that, when called, will have its `this` keyword set to the provided value and its arguments pre-filled. This means that the `dispatch` method would be called immediately, instead of being called with the `[name, nodeArgs]` arguments when the promise is run.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function () { return this.dispatch("post"); }
+```
+This would result in different behavior because a new function is being returned, which when called will always call `dispatch` with the string `"

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `Promise.prototype.del` method expects a key as an argument, and null would not be a valid property key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+'use strict'
+```
+This would result in different behavior because the `'use strict'` directive would cause an error in the line `Promise.prototype.del = // XXX legacy Promise.prototype["delete"] =` since you cannot assign a property to a `null` value in strict mode.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => {}
+```
+This would result in different behavior because it would change the meaning of the statement by introducing an arrow function expression that does not return a function reference. The `Promise.prototype.del` method expects a function reference, and the arrow function would not provide that.
+
+DONE.

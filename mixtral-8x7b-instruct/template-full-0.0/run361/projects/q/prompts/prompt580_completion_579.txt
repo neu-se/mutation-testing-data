@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () {}
+```
+This would result in different behavior because the `errback` function is redefined, causing the `continuer` function to always call the `callback` instead of handling exceptions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+continuer.bind(this, "next")
+```
+This would result in different behavior because the `errback` function will not be defined, and any errors thrown in the generator will not be caught and handled properly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+continuer.bind(window, "throw")

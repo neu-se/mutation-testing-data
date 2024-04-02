@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.push(reason.stack)
+```
+This would result in different behavior because it only pushes the stack property of the reason object, discarding the "(no stack) " string and the reason value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.unshift("(no stack) " + reason)
+```
+This would result in different behavior because it inserts the reason value with the "(no stack) " prefix at the beginning of the unhandledReasons array instead of appending it to the end.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledReasons.push(null)
+```
+This would result in different behavior because it always pushes null to the unhandledReasons array, regardless of the reason value, which could lead to incorrect tracking of unhandled rejections.
+
+DONE.

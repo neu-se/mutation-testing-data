@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { value.spread(fulfilled, rejected); }
+```
+This would result in different behavior because the `Q(value)` is not necessary, and directly calling `spread` method of `value` would cause issues if `value` is not a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { Q.spread.call(Q, value, fulfilled, rejected); }
+```
+This would result in different behavior because using `Q.spread` instead of `value.spread` would cause issues if `value` is not a promise, and `call` method is used to explicitly set the context to `Q`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (value) { Q.spread.apply(Q, [value, fulfilled, rejected]); }
+```
+This would result in different behavior because using `Q.spread` instead of `value.spread

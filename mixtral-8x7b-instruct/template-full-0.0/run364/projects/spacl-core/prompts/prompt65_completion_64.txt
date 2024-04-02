@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+[]
+```
+This would result in different behavior because it always appends an empty array to the rules array, instead of the provided rules. This could lead to unexpected results when querying the policy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.rules.concat([])
+```
+This would result in different behavior because it always concatenates an empty array to the rules array, instead of the provided rules. This could lead to unexpected results when querying the policy, especially if the rules array contains unique objects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.rules.filter(() => true)
+```
+This would result in different behavior because it creates a new array with all elements from the rules array, instead of just appending the provided rules. This could lead to unexpected results when querying the policy, especially if the rules array contains unique objects or if the order of rules matters.
+
+DONE.

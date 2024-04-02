@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+false
+```
+This would result in different behavior because the second parsing of the `currentUrl` would not happen if the protocol is not `http:` or `https:`, potentially causing incorrect parsing of some URLs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(currentUrlStr, result_normalize_options, true)
+```
+This would result in different behavior because the `result_normalize_options` would be used for parsing the `currentUrlStr`, potentially changing the parsed result and causing some tests to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse('about:blank', <PLACEHOLDER>, true)
+```
+This would result in different behavior because an error would be thrown when trying to parse the `about:blank` URL, causing some tests to fail.
+
+DONE.

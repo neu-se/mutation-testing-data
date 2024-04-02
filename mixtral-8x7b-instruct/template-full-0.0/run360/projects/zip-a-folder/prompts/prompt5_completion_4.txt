@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+Object.keys(zipAFolderOptions || {}).length === 0 && targetFilePath
+```
+This would result in different behavior because it checks if `zipAFolderOptions` is an empty object instead of checking if it has a customWriteStream property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+!zipAFolderOptions?.customWriteStream && zipAFolderOptions?.targetFilePath
+```
+This would result in different behavior because it checks for a non-existent property `targetFilePath` instead of `targetFilePath` existing and not being equal to the `src` property.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+!zipAFolderOptions?.customWriteStream && !zipAFolderOptions?.targetFilePath
+```
+This would result in different behavior because it checks for the non-existence of both `customWriteStream` and `targetFilePath` properties, instead of checking for the non-equality of `src` and `targetBasePath`.

@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.emit('drain', 'incorrect argument')
+```
+This would result in different behavior because the `drain` event handler would receive an unexpected argument, possibly causing it to fail or behave unexpectedly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+this.emit('notdrain')
+```
+This would result in different behavior because an invalid event would be emitted, which would not be handled by any listener, and could cause unexpected behavior or errors in the application.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+global.drain = () => {}; this.emit(drain)
+```
+This would result in different behavior because it would override the global `drain` function and emit an event with the name of the overridden function, which would not be handled by any listener, and could cause unexpected behavior or errors in the application.
+
+DONE.

@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is expected to be a function, and replacing it with `null` would cause an error when called in `this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{}
+```
+This would result in different behavior because `deferred.makeNodeResolver()` is expected to be a function, and replacing it with an empty object would cause an error when called in `this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because `deferred.makeNodeResolver()` returns a function that is used to resolve the deferred object with a Node.js-style callback. Replacing it with `deferred.resolve` would cause the promise to be resolved

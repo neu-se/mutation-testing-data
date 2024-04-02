@@ -1,0 +1,27 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function allResolvedBad() {
+    return Q.resolve([]);
+}
+```
+This would result in different behavior because it always resolves to an empty array, ignoring the input promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function allResolvedBad(promises) {
+    return Q.all(promises);
+}
+```
+This would result in different behavior because it uses the `Q.all` function instead of the correct `all` function, potentially causing incorrect handling of rejected promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function allResolvedBad(promises) {
+    return Q.all(promises).then(function(results) {
+        return array_map(results, function(promise) {
+            return Q.reject(promise);
+        });
+    });
+}
+```
+This would result in different behavior because it rejects all resolved promises, which is the opposite of the intended

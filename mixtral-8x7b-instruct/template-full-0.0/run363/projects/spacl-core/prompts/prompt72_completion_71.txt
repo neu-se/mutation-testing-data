@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because the `query` method would no longer pass the `ctx` variable to the `rule.query` method, potentially causing issues if the rules rely on context for their evaluation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<any>
+```
+This would result in different behavior because TypeScript's type system would no longer enforce the correct type for the `ctx` variable, potentially causing runtime errors if the rules expect a specific type for the context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{} as QueryContext
+```
+This would result in different behavior because it would always pass an empty object as the context, potentially causing issues if the rules expect specific properties or methods to be present in the context object.
+
+By introducing these changes, the mutation testing process highlights potential weaknesses in the test suite, as the tests should ideally fail due to the altered behavior. This provides a starting point for improving the test suite by adding or

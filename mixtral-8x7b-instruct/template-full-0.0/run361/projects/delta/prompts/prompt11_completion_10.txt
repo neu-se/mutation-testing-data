@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+key of a
+```
+This would result in different behavior because it checks if `key` is a property key of the `a` object, rather than checking if `key` is an enumerable property of the `a` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+Object.prototype.hasOwnProperty.call(a, key)
+```
+This would result in different behavior because it checks if `key` is an own property of the `a` object, rather than checking if `key` is an enumerable property of the `a` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+key in Object.prototype.toString.call(a).slice(8, -1)
+```
+This would result in different behavior because it checks if `key` is a property of the string representation of the `a` object, rather than checking if `key` is an enumerable property of the `a` object.
+
+These changes

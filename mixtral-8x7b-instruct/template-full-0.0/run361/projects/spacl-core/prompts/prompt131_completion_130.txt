@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+prop == null
+```
+This would result in different behavior because it checks for both `null` and `undefined`, while the original code only checks for `undefined`. This could cause false negatives in the `matches` method if a property exists but has a value of `null`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+match[index + 1] !== undefined && match[index + 1] !== prop
+```
+This would result in different behavior because it checks if `match[index + 1]` is not equal to `undefined` before comparing it to `prop`. This could cause false negatives in the `matches` method if `match[index + 1]` is `null` or any other value that is not `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+match[index + 1] !== this.regex.props[index]
+```
+This would result in different behavior because it compares `match[index + 1]

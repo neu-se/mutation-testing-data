@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return {}; }
+```
+This would result in different behavior because the module exports an empty object instead of the Q API.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+"use strict"; undefined;
+```
+This would result in different behavior because the strict mode is applied, and an undefined variable is declared, causing a ReferenceError in strict mode.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { definition.apply(this, arguments); }
+```
+This would result in different behavior because it calls the `definition` function with the `apply` method, changing the context (`this`) to the global object, which might cause unexpected issues if the function relies on the correct context.
+
+DONE.

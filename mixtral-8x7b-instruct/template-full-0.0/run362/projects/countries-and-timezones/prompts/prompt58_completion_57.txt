@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+buildCountry(data, id)
+```
+This would result in different behavior because it directly calls `buildCountry` instead of memoizing the country object. This could lead to unnecessary recalculations and potential inconsistencies in the returned data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+countries['id'] = buildCountry(data, id);
+```
+This would result in different behavior because it uses a hardcoded string 'id' as the key for the `countries` object, instead of using the actual `id` value. This would cause all countries to be stored under the same key, leading to incorrect data and unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+countries[id] = {};
+```
+This would result in different behavior because it initializes the country object with an empty object instead of calling `buildCountry(data, id)`. This would lead to missing country properties and incorrect data, causing tests to fail or produce unexpected

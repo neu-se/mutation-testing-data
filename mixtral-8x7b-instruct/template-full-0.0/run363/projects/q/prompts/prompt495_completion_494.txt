@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+trackRejection(null, reason);
+```
+This would result in different behavior because it would force `unhandledReasons` to always have a string with the value of `"(no stack) null"` as its last element, even if a reason with a stack trace is provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unhandledRejections.push(reason);
+```
+This would result in different behavior because it would add the reason to the `unhandledRejections` array instead of the `promise`. This could cause issues when trying to remove the rejection from the array with `untrackRejection()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+trackRejection(promise, null);
+```
+This would result in different behavior because it would force `unhandledReasons` to always have a string with the value of `"(no stack) null"` as its last element, even if a reason with a stack

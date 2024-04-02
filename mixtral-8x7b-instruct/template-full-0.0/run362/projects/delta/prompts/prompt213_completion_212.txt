@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+delta.ops = delta.ops.concat(other.ops.slice(1));
+```
+This would result in different behavior because it directly modifies the `delta.ops` array, bypassing the `Delta` constructor. The original code creates a new `Delta` object with the modified `ops` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+delta.ops.push(...other.ops.slice(1));
+```
+This would result in different behavior because it uses the spread operator to push the remaining elements of `other.ops` into `delta.ops`, instead of creating a new array with `concat`. This may modify the original `delta.ops` array, depending on how the `Delta` class is implemented.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+delta.ops = delta.ops.concat(other.ops);
+```
+This would result in different behavior because it concatenates the entire `other.

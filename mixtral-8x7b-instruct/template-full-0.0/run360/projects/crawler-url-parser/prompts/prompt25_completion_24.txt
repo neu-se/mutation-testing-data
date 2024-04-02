@@ -1,0 +1,15 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+baseUrlStr.slice(0, -1)
+```
+This would result in different behavior because it removes the last character from the base URL string instead of the entire fragment part (including the '#' character). This might lead to incorrect parsing of URLs if the fragment part is important for determining the base URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+'#foo'
+```
+This would result in different behavior because it sets a static value for the fragment part, which might not match the original fragment part in the base URL. This could lead to incorrect parsing of URLs if the actual fragment part is important for determining the base URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+URL.parse(baseUrlStr, true, false).hash

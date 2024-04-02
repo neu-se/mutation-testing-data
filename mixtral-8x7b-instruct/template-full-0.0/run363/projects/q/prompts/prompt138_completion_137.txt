@@ -1,0 +1,9 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.stack && typeof error === "object" && error !== null && error.stack && hasStacks
+```
+This would result in different behavior because the condition now checks for `promise.stack` before checking if `hasStacks` is true. In the original code, `hasStacks` is checked first, which could potentially prevent a null reference error if `promise` does not have a `stack` property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+hasStacks && promise.hasOwnProperty('stack') && typeof error === "object" && error !== null && error.stack

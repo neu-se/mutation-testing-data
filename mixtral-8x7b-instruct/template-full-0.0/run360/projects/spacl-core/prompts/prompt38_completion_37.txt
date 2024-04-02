@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+''.concat(spec,'/').slice
+```
+This would result in different behavior because it adds an extra slash at the beginning of the regex, causing it to fail to match paths that don't start with a slash.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('').slice
+```
+This would result in different behavior because it splits the spec string into individual characters instead of path segments, causing it to fail to match any path correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').sort.slice
+```
+This would result in different behavior because it sorts the path segments before slicing, causing it to fail to match paths with a specific order of segments.
+
+DONE.

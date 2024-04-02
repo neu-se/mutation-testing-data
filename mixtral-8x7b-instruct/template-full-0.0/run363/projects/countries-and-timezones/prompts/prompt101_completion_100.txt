@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+key in tzs
+```
+This would result in different behavior because it checks if the key exists in the object, rather than checking if the value at that key is not deprecated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+tzs[key].hasOwnProperty('deprecated')
+```
+This would result in different behavior because it checks if the 'deprecated' property exists in the value at that key, rather than checking if the value of 'deprecated' is true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!Object.prototype.hasOwnProperty.call(tzs[key], 'deprecated')
+```
+This would result in different behavior because it checks if the 'deprecated' property does not exist in the value at that key, rather than checking if the value of 'deprecated' is true.
+
+DONE.

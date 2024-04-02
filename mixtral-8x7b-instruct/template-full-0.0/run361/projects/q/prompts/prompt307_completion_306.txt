@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve(answerPs[i]).then
+```
+This would result in different behavior because `Promise.resolve()` creates a new promise that is resolved with the given value, whereas `Q(answerPs[i])` directly creates a promise from the `answerPs[i]` value. If `answerPs[i]` is not a promise, the behavior would differ.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.when(answerPs[i]).then
+```
+This would result in different behavior because `Q.when()` accepts an immediate value or a thenable and returns a promise, while `Q(answerPs[i])` directly creates a promise from the `answerPs[i]` value. If `answerPs[i]` is not a promise, the behavior would differ.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer().resolve(answerPs[i]).promise.then
+```
+This would

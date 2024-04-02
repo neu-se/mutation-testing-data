@@ -1,0 +1,19 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `allResolved` function would immediately resolve the returned promise with an empty array, instead of waiting for all input promises to settle.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return null; }
+```
+This would result in different behavior because the `allResolved` function would always return a promise that resolves to an array with `null` values, instead of the actual resolved values of the input promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function (promises) { return promises.slice(); }
+```
+This would result in different behavior because the `allResolved` function would create a copy of the input array, but not wait for all input promises to settle. The returned promise would resolve with an array of the same length as the input array, but containing promises instead of their settled values.
+
+DONE.

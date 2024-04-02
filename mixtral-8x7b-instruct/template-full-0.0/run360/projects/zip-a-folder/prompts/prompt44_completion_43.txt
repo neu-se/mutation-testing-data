@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```typescript
+zipArchive['directory']
+```
+This would result in different behavior because it accesses the `directory` method using bracket notation instead of dot notation, which can lead to issues if the `directory` property is not defined in the `zipArchive` object or if it is defined as a getter.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```typescript
+zipArchive.bulk([{src, dest: ''}])
+```
+This would result in different behavior because it calls the `bulk()` method with an array containing a single object that has the `src` property set to the original `src` value and an empty `dest` property. This effectively adds the `src` directory to the archive without any compression, which is different from the original `directory()` method behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```typescript
+zipArchive.glob(src, {cwd: '/'})
+```
+This would result in different

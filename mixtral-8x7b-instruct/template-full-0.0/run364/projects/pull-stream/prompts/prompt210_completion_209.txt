@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+null
+```
+This would result in different behavior because the `abortCb` function would not be called, even if the iteration is aborted. Originally, the `abortCb` function is called with the `aborted` value, which allows any further processing of the aborted data to happen.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+data
+```
+This would result in different behavior because the `aborted` value would not be passed to the `abortCb` function, but instead, the `data` would be passed. This change would cause any further processing of the aborted data to be performed with the actual data, instead of acknowledging the abortion.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { cb(null, data) }
+```
+This would result in different behavior because instead of directly calling the `cb` function, a new function would be created and assigned to `abortCb`. This change would cause the `abort

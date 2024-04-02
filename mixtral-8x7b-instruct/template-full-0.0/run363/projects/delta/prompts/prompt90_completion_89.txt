@@ -1,0 +1,20 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof newOp.retain === 'string' &&
+          typeof lastOp.retain === 'number'
+```
+This would result in different behavior because it checks if `newOp.retain` is a string, instead of a number, while keeping the check for `lastOp.retain` as a number. This change would cause the following condition to behave differently, potentially leading to unexpected results or test failures.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+typeof newOp.retain === 'number' &&
+          typeof lastOp.retain === 'boolean'
+```
+This would result in different behavior because it checks if `lastOp.retain` is a boolean, instead of a number. This change would cause the following condition to behave differently, potentially leading to unexpected results or test failures.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof newOp.retain === 'number' &&
+          'retain' in lastOp
+```
+This would result

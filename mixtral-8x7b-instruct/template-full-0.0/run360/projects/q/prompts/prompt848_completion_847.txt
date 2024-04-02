@@ -1,0 +1,17 @@
+ Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+Promise.resolve()
+```
+This would result in different behavior because the `defer()` function is used to create a new deferred object, while `Promise.resolve()` creates a resolved promise. This change would cause the returned promise to always be resolved immediately, regardless of the state of the input promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+Q.defer()
+```
+This would result in different behavior because `Q.defer()` returns a deferred object, but it is not the same as the `defer()` function used in the original code. This change would cause the returned promise to be associated with a different deferred object, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function () { return { promise: null, resolve: function () {}, reject: function () {}, notify: function () {} }; }
+```
+This would result in different behavior because it creates a new object with the same structure as a deferred object
