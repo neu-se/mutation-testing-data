@@ -1,0 +1,14 @@
+  The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment checks for the `err` parameter to be `true` before calling `nextStream()`, but the new code fragment checks for `err` to be any truthy value, which could include other values that are not intended to be treated as errors.

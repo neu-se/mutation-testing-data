@@ -1,0 +1,177 @@
+Your task is to apply mutation testing to the following code:
+```
+		delete parsedUrl.hash;
+		ret.baseurl = URL.format(parsedBaseUrl);
+
+		let absoluteUrl = URL.parse(URL.resolve(parsedBaseUrl, parsedUrl));
+		currentUrlStr = URL.format(absoluteUrl);
+	}
+
+	parsedUrl = URL.parse(currentUrlStr, true, true);
+	delete parsedUrl.hash;
+
+	ret.url = URL.format(parsedUrl);
+	ret.protocol = parsedUrl.protocol;
+	ret.host = parsedUrl.host;
+	ret.path = parsedUrl.pathname;
+
+	if (ret.host) {
+		let parsedHost = psl.parse(ret.host);
+		ret.domain = parsedHost.domain;
+		ret.subdomain = parsedHost.subdomain;
+	}
+
+	ret.search = parsedUrl.search;
+	ret.querycount = parsedUrl.search ? parsedUrl.search.split("=").length - 1 : 0;
+
+	return ret;
+}
+
+function extract(data, sourceUrl) {
+	let urlMap = new Map();
+	var baseUrl = parse(sourceUrl);
+
+	let $ = typeof data === "string" ? cheerio.load(data) : data;
+	let embedBaseUrlStr = $('base').attr('href');
+	let embedBaseUrl = parse(embedBaseUrlStr);
+	baseUrl = embedBaseUrl ? embedBaseUrl : baseUrl;
+	let baseUrlStr = baseUrl ? baseUrl.url : null;
+
+	$('a').each(function (i, el) {
+		let href = $(this).attr('href');
+		let text = $(this).text().trim();
+		//href = href.replace(/;.*$/g,"");
+		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+		let currentUrl = parse(href, baseUrlStr);
+
+		if (currentUrl && currentUrl.url) {
+			if (urlMap.has(currentUrl.url)) {
+				let tmpUrl = urlMap.get(currentUrl.url);
+				if (!tmpUrl.text.includes(text)) {
+					tmpUrl.text = `${tmpUrl.text} ${text}`;
+				}
+			} else {
+				currentUrl.text = text == null ? "" : text;
+				currentUrl.baseurl = baseUrlStr;
+				urlMap.set(currentUrl.url, currentUrl);
+			}
+		}
+	});
+
+	//remove base url
+	urlMap.delete(baseUrlStr);
+
+	for (let currentUrl of urlMap.values()) {
+		currentUrl.type = gettype(currentUrl, baseUrl);
+	}
+
+	let retArr = Array.from(urlMap.values());
+
+	retArr = retArr.map(function (el) {
+		return {
+			url: el.url,
+			text: el.text,
+			type: el.type
+		}
+	});
+
+	return retArr;
+}
+
+
+function gettype(linkurl, pageurl) {
+
+	if (typeof linkurl == "string") linkurl = parse(linkurl);
+	if (typeof pageurl == "string") pageurl = parse(pageurl);
+
+	let linkurl_subdomain_len = linkurl.subdomain ? linkurl.subdomain.length : 0;
+	let pageurl_subdomain_len = pageurl.subdomain ? pageurl.subdomain.length : 0;
+
+	let linkurl_path = linkurl.path ? linkurl.path : "";
+	let pageurl_path = pageurl.path ? pageurl.path : "";
+	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
+	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
+
+	let linkurl_parts = linkurl_path.split("/").filter(function (elem, index, array) {
+		return elem.length > 0
+	});
+	let pageurl_parts = pageurl_path.split("/").filter(function (elem, index, array) {
+		return elem.length > 0
+	});
+
+	if (<PLACEHOLDER>) {
+
+		let part_count_diff = linkurl_parts.length - pageurl_parts.length;
+
+		if (part_count_diff == 0) {
+			let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+			let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+			if (linkurl_without_last_part == pageurl_without_last_part) return "samelevel"
+		} else if (part_count_diff == 1) {
+			if (linkurl_path.includes(pageurl_path)) return "sublevel";
+		} else if (part_count_diff == -1) {
+			if (pageurl_path.includes(linkurl_path)) return "uplevel";
+		}
+
+		return "internal";
+	} else if (linkurl.domain == pageurl.domain) {
+		if (linkurl_subdomain_len < pageurl_subdomain_len) return "updomain";
+		return "subdomain";
+	}
+
+	return "external";
+}
+
+module.exports.parse = parse;
+module.exports.extract = extract;
+module.exports.gettype = gettype;
+
+
+//for testing purpose
+if (!module.parent) {
+	console.log("for testing purpose");
+	//getlevel("www.domain.com/aaa/bbb/","www.domain.com/aaa/bbb/ccc");
+	//let res1 = getlevel("sub.domain.com/aaa/bbb/","sub.domain.com/aaa/bbb/ccc");
+	//let res2 = getlevel("sub.domain.com/aaa/bbb/ccc/ddd","sub.domain.com/aaa/bbb/ccc");
+	//let res3 = getlevel("sub.domain.com/aaa/bbb/eee","sub.domain.com/aaa/bbb/ccc");
+	//debugger;
+
+	//let res = parse("ddd","http://www.stackoverflow.com/aaa/bbb/ccc/");
+
+	//let page = 'http://journals.tubitak.gov.tr/';
+	//let link = 'http://journals.tubitak.gov.tr/genel/telifhakki.pdf';
+	//let res = gettype(link, page);
+	//debugger
+	//res = gettype(page, link);
+	//debugger
+	//process.exit();
+
+
+	let url = "https ://www.npmjs.com/package/electron-window-manager";
+	let res = parse(url);
+	debugger;
+
+
+}
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+pageurl.host == linkurl.host
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

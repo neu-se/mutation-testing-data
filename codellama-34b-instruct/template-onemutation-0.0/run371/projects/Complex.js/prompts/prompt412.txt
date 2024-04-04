@@ -1,0 +1,222 @@
+Your task is to apply mutation testing to the following code:
+```
+
+      res['re'] = -res['im'];
+      res['im'] = tmp;
+      return res;
+    },
+
+    /**
+     * Calculate the complex acosh
+     *
+     * @returns {Complex}
+     */
+    'acosh': function() {
+
+      // acosh(c) = log(c + sqrt(c^2 - 1))
+
+      var res = this['acos']();
+      if (res['im'] <= 0) {
+        var tmp = res['re'];
+        res['re'] = -res['im'];
+        res['im'] = tmp;
+      } else {
+        var tmp = res['im'];
+        res['im'] = -res['re'];
+        res['re'] = tmp;
+      }
+      return res;
+    },
+
+    /**
+     * Calculate the complex atanh
+     *
+     * @returns {Complex}
+     */
+    'atanh': function() {
+
+      // atanh(c) = log((1+c) / (1-c)) / 2
+
+      var a = this['re'];
+      var b = this['im'];
+
+      var noIM = a > 1 && b === 0;
+      var oneMinus = 1 - a;
+      var onePlus = 1 + a;
+      var d = oneMinus * oneMinus + b * b;
+
+      var x = (d !== 0)
+        ? new Complex(
+          (onePlus * oneMinus - b * b) / d,
+          (b * oneMinus + onePlus * b) / d)
+        : new Complex(
+          (a !== -1) ? (a / 0) : 0,
+          (b !== 0) ? (b / 0) : 0);
+
+      var temp = x['re'];
+      x['re'] = logHypot(x['re'], x['im']) / 2;
+      x['im'] = Math.atan2(x['im'], temp) / 2;
+      if (noIM) {
+        x['im'] = -x['im'];
+      }
+      return x;
+    },
+
+    /**
+     * Calculate the complex acoth
+     *
+     * @returns {Complex}
+     */
+    'acoth': function() {
+
+      // acoth(c) = log((c+1) / (c-1)) / 2
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (a === 0 && b === 0) {
+        return new Complex(0, Math.PI / 2);
+      }
+
+      var d = a * a + b * b;
+      return (d !== 0)
+        ? new Complex(
+          a / d,
+          -b / d).atanh()
+        : new Complex(
+          (a !== 0) ? a / 0 : 0,
+          (b !== 0) ? -b / 0 : 0).atanh();
+    },
+
+    /**
+     * Calculate the complex acsch
+     *
+     * @returns {Complex}
+     */
+    'acsch': function() {
+
+      // acsch(c) = log((1+sqrt(1+c^2))/c)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (<PLACEHOLDER>) {
+
+        return new Complex(
+          (a !== 0)
+            ? Math.log(a + Math.sqrt(a * a + 1))
+            : Infinity, 0);
+      }
+
+      var d = a * a + b * b;
+      return (d !== 0)
+        ? new Complex(
+          a / d,
+          -b / d).asinh()
+        : new Complex(
+          (a !== 0) ? a / 0 : 0,
+          (b !== 0) ? -b / 0 : 0).asinh();
+    },
+
+    /**
+     * Calculate the complex asech
+     *
+     * @returns {Complex}
+     */
+    'asech': function() {
+
+      // asech(c) = log((1+sqrt(1-c^2))/c)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (this['isZero']()) {
+        return Complex['INFINITY'];
+      }
+
+      var d = a * a + b * b;
+      return (d !== 0)
+        ? new Complex(
+          a / d,
+          -b / d).acosh()
+        : new Complex(
+          (a !== 0) ? a / 0 : 0,
+          (b !== 0) ? -b / 0 : 0).acosh();
+    },
+
+    /**
+     * Calculate the complex inverse 1/z
+     *
+     * @returns {Complex}
+     */
+    'inverse': function() {
+
+      // 1 / 0 = Infinity and 1 / Infinity = 0
+      if (this['isZero']()) {
+        return Complex['INFINITY'];
+      }
+
+      if (this['isInfinite']()) {
+        return Complex['ZERO'];
+      }
+
+      var a = this['re'];
+      var b = this['im'];
+
+      var d = a * a + b * b;
+
+      return new Complex(a / d, -b / d);
+    },
+
+    /**
+     * Returns the complex conjugate
+     *
+     * @returns {Complex}
+     */
+    'conjugate': function() {
+
+      return new Complex(this['re'], -this['im']);
+    },
+
+    /**
+     * Gets the negated complex number
+     *
+     * @returns {Complex}
+     */
+    'neg': function() {
+
+      return new Complex(-this['re'], -this['im']);
+    },
+
+    /**
+     * Ceils the actual complex number
+     *
+     * @returns {Complex}
+     */
+    'ceil': function(places) {
+
+      places = Math.pow(10, places || 0);
+
+      return new Complex(
+        Math.ceil(this['re'] * places) / places,
+        Math.ceil(this['im'] * places) / places);
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+b === 0
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

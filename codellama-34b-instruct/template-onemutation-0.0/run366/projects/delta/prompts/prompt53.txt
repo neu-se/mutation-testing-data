@@ -1,0 +1,172 @@
+Your task is to apply mutation testing to the following code:
+```
+import * as diff from 'fast-diff';
+import cloneDeep = require('lodash.clonedeep');
+import isEqual = require('lodash.isequal');
+import AttributeMap from './AttributeMap';
+import Op from './Op';
+import OpIterator from './OpIterator';
+
+const NULL_CHARACTER = String.fromCharCode(0); // Placeholder char for embed in diff()
+
+interface EmbedHandler<T> {
+  compose(a: T, b: T, keepNull: boolean): T;
+  invert(a: T, b: T): T;
+  transform(a: T, b: T, priority: boolean): T;
+}
+
+const getEmbedTypeAndData = (
+  a: Op['insert'] | Op['retain'],
+  b: Op['insert'],
+): [string, unknown, unknown] => {
+  if (typeof a !== 'object' || a === null) {
+    throw new Error(`cannot retain a ${typeof a}`);
+  }
+  if (typeof b !== 'object' || b === null) {
+    throw new Error(`cannot retain a ${typeof b}`);
+  }
+  const embedType = Object.keys(a)[0];
+  if (!embedType || embedType !== Object.keys(b)[0]) {
+    throw new Error(
+      `embed types not matched: ${embedType} != ${Object.keys(b)[0]}`,
+    );
+  }
+  return [embedType, a[embedType], b[embedType]];
+};
+
+class Delta {
+  static Op = Op;
+  static OpIterator = OpIterator;
+  static AttributeMap = AttributeMap;
+  private static handlers: { [embedType: string]: EmbedHandler<unknown> } = {};
+
+  static registerEmbed<T>(embedType: string, handler: EmbedHandler<T>): void {
+    this.handlers[embedType] = handler;
+  }
+
+  static unregisterEmbed(embedType: string): void {
+    delete this.handlers[embedType];
+  }
+
+  private static getHandler(embedType: string): EmbedHandler<unknown> {
+    const handler = this.handlers[embedType];
+    if (<PLACEHOLDER>) {
+      throw new Error(`no handlers for embed type "${embedType}"`);
+    }
+    return handler;
+  }
+
+  ops: Op[];
+  constructor(ops?: Op[] | { ops: Op[] }) {
+    // Assume we are given a well formed ops
+    if (Array.isArray(ops)) {
+      this.ops = ops;
+    } else if (ops != null && Array.isArray(ops.ops)) {
+      this.ops = ops.ops;
+    } else {
+      this.ops = [];
+    }
+  }
+
+  insert(
+    arg: string | Record<string, unknown>,
+    attributes?: AttributeMap | null,
+  ): this {
+    const newOp: Op = {};
+    if (typeof arg === 'string' && arg.length === 0) {
+      return this;
+    }
+    newOp.insert = arg;
+    if (
+      attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 0
+    ) {
+      newOp.attributes = attributes;
+    }
+    return this.push(newOp);
+  }
+
+  delete(length: number): this {
+    if (length <= 0) {
+      return this;
+    }
+    return this.push({ delete: length });
+  }
+
+  retain(
+    length: number | Record<string, unknown>,
+    attributes?: AttributeMap | null,
+  ): this {
+    if (typeof length === 'number' && length <= 0) {
+      return this;
+    }
+    const newOp: Op = { retain: length };
+    if (
+      attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 0
+    ) {
+      newOp.attributes = attributes;
+    }
+    return this.push(newOp);
+  }
+
+  push(newOp: Op): this {
+    let index = this.ops.length;
+    let lastOp = this.ops[index - 1];
+    newOp = cloneDeep(newOp);
+    if (typeof lastOp === 'object') {
+      if (
+        typeof newOp.delete === 'number' &&
+        typeof lastOp.delete === 'number'
+      ) {
+        this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };
+        return this;
+      }
+      // Since it does not matter if we insert before or after deleting at the same index,
+      // always prefer to insert first
+      if (typeof lastOp.delete === 'number' && newOp.insert != null) {
+        index -= 1;
+        lastOp = this.ops[index - 1];
+        if (typeof lastOp !== 'object') {
+          this.ops.unshift(newOp);
+          return this;
+        }
+      }
+      if (isEqual(newOp.attributes, lastOp.attributes)) {
+        if (
+          typeof newOp.insert === 'string' &&
+          typeof lastOp.insert === 'string'
+        ) {
+          this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };
+          if (typeof newOp.attributes === 'object') {
+            this.ops[index - 1].attributes = newOp.attributes;
+          }
+          return this;
+        } else if (
+          typeof newOp.retain === 'number' &&
+          typeof lastOp.retain === 'number'
+        ) {
+          this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };
+          if (typeof newOp.attributes === 'object') {
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+!handler
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

@@ -1,0 +1,58 @@
+Your task is to apply mutation testing to the following code:
+```
+
+var Q = require("./q");
+
+module.exports = Queue;
+function Queue() {
+    var ends = Q.defer();
+    var closed = <PLACEHOLDER>();
+    return {
+        put: function (value) {
+            var next = Q.defer();
+            ends.resolve({
+                head: value,
+                tail: next.promise
+            });
+            ends.resolve = next.resolve;
+        },
+        get: function () {
+            var result = ends.promise.get("head");
+            ends.promise = ends.promise.get("tail");
+            return result.fail(function (error) {
+                closed.resolve(error);
+                throw error;
+            });
+        },
+        closed: closed.promise,
+        close: function (error) {
+            error = error || new Error("Can't get value from closed queue");
+            var end = {head: Q.reject(error)};
+            end.tail = end;
+            ends.resolve(end);
+            return closed.promise;
+        }
+    };
+}
+
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+Q.defer
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

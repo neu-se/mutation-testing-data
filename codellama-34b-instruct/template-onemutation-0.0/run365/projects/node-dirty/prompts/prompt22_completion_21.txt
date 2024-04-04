@@ -1,0 +1,5 @@
+  The PLACEHOLDER can be replaced with:
+```
+setTimeout(() => { if (cb) cb(); this.emit('drain'); }, 0);
+```
+This would result in different behavior because `setTimeout` with a delay of 0 is not the same as `setImmediate`, which is a special function that queues the callback to be executed as soon as possible, but before the next event loop iteration. In this case, using `setTimeout` with a delay of 0 would cause the callback to be executed after the next event loop iteration, which could lead to unexpected behavior in the application.

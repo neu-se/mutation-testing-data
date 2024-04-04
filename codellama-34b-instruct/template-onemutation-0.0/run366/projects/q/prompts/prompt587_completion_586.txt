@@ -1,0 +1,5 @@
+  The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { throw new Error("Buggy code"); });
+```
+This would result in different behavior because the `then` method is not called on the original `Q.async(makeGenerator)` promise, but on a new promise that is created by calling `then` on the original promise. The `then` method is used to handle the resolution or rejection of a promise, and in this case, it is used to throw an error. This means that the `spawn` function will not return a promise for the return value of the generator, but instead will return a promise that is rejected with the error "Buggy code".

@@ -1,0 +1,16 @@
+  The PLACEHOLDER can be replaced with:
+```
+read(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment only passes the `err` argument to the `read` function, while the mutated code fragment passes both `err` and `data` arguments. This could cause the `read` function to behave differently, potentially leading to test failures.
+
+DONE.

@@ -1,0 +1,5 @@
+  The PLACEHOLDER can be replaced with:
+```
+deferred.reject(error);
+```
+This would result in different behavior because the original code fragment used `deferred.makeNodeResolver()` to create a node-style callback, which would have called the `onFulfilled` or `onRejected` callbacks with the result or error, respectively. However, the new code fragment uses `deferred.reject` directly, which would reject the promise with the error, without calling any callbacks. This would cause the promise to be in a rejected state, even if the original code fragment would have resolved the promise with a value.

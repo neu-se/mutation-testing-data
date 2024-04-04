@@ -1,0 +1,15 @@
+  The PLACEHOLDER can be replaced with:
+```
+this.then(function (promises) {
+    return all(array_map(promises, function (promise) {
+        promise = Q(promise);
+        function regardless() {
+            return promise.inspect();
+        }
+        return promise.then(regardless, regardless);
+    }));
+})
+```
+This would result in different behavior because it would cause the `regardless` function to be called twice for each promise, once for the fulfilled and once for the rejected case, which is not the intended behavior of the original code.
+
+DONE.

@@ -1,0 +1,11 @@
+  The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```
+This would result in different behavior because the original code fragment uses the `write` method of the `WriteStream` class, which takes a callback function as its second argument. However, the buggy code fragment uses the `write` method of the `Dirty` class, which does not take a callback function as its second argument. This would cause the code to behave differently and potentially cause errors.
+
+DONE.

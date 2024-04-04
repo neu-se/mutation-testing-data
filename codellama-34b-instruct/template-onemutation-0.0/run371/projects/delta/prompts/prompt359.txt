@@ -1,0 +1,217 @@
+Your task is to apply mutation testing to the following code:
+```
+            if (isEqual(thisOp.insert, otherOp.insert)) {
+              retDelta.retain(
+                opLength,
+                AttributeMap.diff(thisOp.attributes, otherOp.attributes),
+              );
+            } else {
+              retDelta.push(otherOp).delete(opLength);
+            }
+            break;
+        }
+        length -= opLength;
+      }
+    });
+    return retDelta.chop();
+  }
+
+  eachLine(
+    predicate: (
+      line: Delta,
+      attributes: AttributeMap,
+      index: number,
+    ) => boolean | void,
+    newline = '\n',
+  ): void {
+    const iter = new OpIterator(this.ops);
+    let line = new Delta();
+    let i = 0;
+    while (iter.hasNext()) {
+      if (iter.peekType() !== 'insert') {
+        return;
+      }
+      const thisOp = iter.peek();
+      const start = Op.length(thisOp) - iter.peekLength();
+      const index =
+        typeof thisOp.insert === 'string'
+          ? thisOp.insert.indexOf(newline, start) - start
+          : -1;
+      if (index < 0) {
+        line.push(iter.next());
+      } else if (index > 0) {
+        line.push(iter.next(index));
+      } else {
+        if (predicate(line, iter.next(1).attributes || {}, i) === false) {
+          return;
+        }
+        i += 1;
+        line = new Delta();
+      }
+    }
+    if (line.length() > 0) {
+      predicate(line, {}, i);
+    }
+  }
+
+  invert(base: Delta): Delta {
+    const inverted = new Delta();
+    this.reduce((baseIndex, op) => {
+      if (op.insert) {
+        inverted.delete(Op.length(op));
+      } else if (typeof op.retain === 'number' && op.attributes == null) {
+        inverted.retain(op.retain);
+        return baseIndex + op.retain;
+      } else if (op.delete || typeof op.retain === 'number') {
+        const length = (op.delete || op.retain) as number;
+        const slice = base.slice(baseIndex, baseIndex + length);
+        slice.forEach((baseOp) => {
+          if (op.delete) {
+            inverted.push(baseOp);
+          } else if (op.retain && op.attributes) {
+            inverted.retain(
+              Op.length(baseOp),
+              AttributeMap.invert(op.attributes, baseOp.attributes),
+            );
+          }
+        });
+        return baseIndex + length;
+      } else if (typeof op.retain === 'object' && op.retain !== null) {
+        const slice = base.slice(baseIndex, baseIndex + 1);
+        const baseOp = new OpIterator(slice.ops).next();
+        const [embedType, opData, baseOpData] = getEmbedTypeAndData(
+          op.retain,
+          baseOp.insert,
+        );
+        const handler = Delta.getHandler(embedType);
+        inverted.retain(
+          { [embedType]: handler.invert(opData, baseOpData) },
+          AttributeMap.invert(op.attributes, baseOp.attributes),
+        );
+        return baseIndex + 1;
+      }
+      return baseIndex;
+    }, 0);
+    return inverted.chop();
+  }
+
+  transform(index: number, priority?: boolean): number;
+  transform(other: Delta, priority?: boolean): Delta;
+  transform(arg: number | Delta, priority = false): typeof arg {
+    priority = !!priority;
+    if (typeof arg === 'number') {
+      return this.transformPosition(<PLACEHOLDER>);
+    }
+    const other: Delta = arg;
+    const thisIter = new OpIterator(this.ops);
+    const otherIter = new OpIterator(other.ops);
+    const delta = new Delta();
+    while (thisIter.hasNext() || otherIter.hasNext()) {
+      if (
+        thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() !== 'insert')
+      ) {
+        delta.retain(Op.length(thisIter.next()));
+      } else if (otherIter.peekType() === 'insert') {
+        delta.push(otherIter.next());
+      } else {
+        const length = Math.min(thisIter.peekLength(), otherIter.peekLength());
+        const thisOp = thisIter.next(length);
+        const otherOp = otherIter.next(length);
+        if (thisOp.delete) {
+          // Our delete either makes their delete redundant or removes their retain
+          continue;
+        } else if (otherOp.delete) {
+          delta.push(otherOp);
+        } else {
+          const thisData = thisOp.retain;
+          const otherData = otherOp.retain;
+          let transformedData: Op['retain'] =
+            typeof otherData === 'object' && otherData !== null
+              ? otherData
+              : length;
+          if (
+            typeof thisData === 'object' &&
+            thisData !== null &&
+            typeof otherData === 'object' &&
+            otherData !== null
+          ) {
+            const embedType = Object.keys(thisData)[0];
+            if (embedType === Object.keys(otherData)[0]) {
+              const handler = Delta.getHandler(embedType);
+              if (handler) {
+                transformedData = {
+                  [embedType]: handler.transform(
+                    thisData[embedType],
+                    otherData[embedType],
+                    priority,
+                  ),
+                };
+              }
+            }
+          }
+
+          // We retain either their retain or insert
+          delta.retain(
+            transformedData,
+            AttributeMap.transform(
+              thisOp.attributes,
+              otherOp.attributes,
+              priority,
+            ),
+          );
+        }
+      }
+    }
+    return delta.chop();
+  }
+
+  transformPosition(index: number, priority = false): number {
+    priority = !!priority;
+    const thisIter = new OpIterator(this.ops);
+    let offset = 0;
+    while (thisIter.hasNext() && offset <= index) {
+      const length = thisIter.peekLength();
+      const nextType = thisIter.peekType();
+      thisIter.next();
+      if (nextType === 'delete') {
+        index -= Math.min(length, index - offset);
+        continue;
+      } else if (nextType === 'insert' && (offset < index || !priority)) {
+        index += length;
+      }
+      offset += length;
+    }
+    return index;
+  }
+}
+
+export default Delta;
+
+export { Op, OpIterator, AttributeMap };
+
+if (typeof module === 'object') {
+  module.exports = Delta;
+  module.exports.default = Delta;
+}
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+arg, priority
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

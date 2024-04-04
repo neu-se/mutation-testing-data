@@ -1,0 +1,14 @@
+  The PLACEHOLDER can be replaced with:
+```
+_read(null, function (err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This would result in different behavior because the original code fragment uses the `read` function to read the next chunk of data, while the buggy code fragment uses the `_read` function, which may not be defined or may have different behavior.

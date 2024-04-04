@@ -1,0 +1,222 @@
+Your task is to apply mutation testing to the following code:
+```
+    /**
+     * Calculate the complex square root
+     *
+     * @returns {Complex}
+     */
+    'sqrt': function() {
+
+      var a = this['re'];
+      var b = this['im'];
+      var r = this['abs']();
+
+      var re, im;
+
+      if (a >= 0) {
+
+        if (b === 0) {
+          return new Complex(Math.sqrt(a), 0);
+        }
+
+        re = 0.5 * Math.sqrt(2.0 * (r + a));
+      } else {
+        re = Math.abs(b) / Math.sqrt(2 * (r - a));
+      }
+
+      if (a <= 0) {
+        im = 0.5 * Math.sqrt(2.0 * (r - a));
+      } else {
+        im = Math.abs(b) / Math.sqrt(2 * (r + a));
+      }
+
+      return new Complex(re, b < 0 ? -im : im);
+    },
+
+    /**
+     * Calculate the complex exponent
+     *
+     * @returns {Complex}
+     */
+    'exp': function() {
+
+      var tmp = Math.exp(this['re']);
+
+      if (this['im'] === 0) {
+        //return new Complex(tmp, 0);
+      }
+      return new Complex(
+        tmp * Math.cos(this['im']),
+        tmp * Math.sin(this['im']));
+    },
+
+    /**
+     * Calculate the complex exponent and subtracts one.
+     *
+     * This may be more accurate than `Complex(x).exp().sub(1)` if
+     * `x` is small.
+     *
+     * @returns {Complex}
+     */
+    'expm1': function() {
+
+      /**
+       * exp(a + i*b) - 1
+       = exp(a) * (cos(b) + j*sin(b)) - 1
+       = expm1(a)*cos(b) + cosm1(b) + j*exp(a)*sin(b)
+       */
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.expm1(a) * Math.cos(b) + cosm1(b),
+        Math.exp(a) * Math.sin(b));
+    },
+
+    /**
+     * Calculate the natural log
+     *
+     * @returns {Complex}
+     */
+    'log': function() {
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (b === 0 && a > 0) {
+        //return new Complex(Math.log(a), 0);
+      }
+
+      return new Complex(
+        logHypot(a, b),
+        Math.atan2(b, a));
+    },
+
+    /**
+     * Calculate the magnitude of the complex number
+     *
+     * @returns {number}
+     */
+    'abs': function() {
+
+      return hypot(this['re'], <PLACEHOLDER>);
+    },
+
+    /**
+     * Calculate the angle of the complex number
+     *
+     * @returns {number}
+     */
+    'arg': function() {
+
+      return Math.atan2(this['im'], this['re']);
+    },
+
+    /**
+     * Calculate the sine of the complex number
+     *
+     * @returns {Complex}
+     */
+    'sin': function() {
+
+      // sin(z) = ( e^iz - e^-iz ) / 2i 
+      //        = sin(a)cosh(b) + i cos(a)sinh(b)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.sin(a) * cosh(b),
+        Math.cos(a) * sinh(b));
+    },
+
+    /**
+     * Calculate the cosine
+     *
+     * @returns {Complex}
+     */
+    'cos': function() {
+
+      // cos(z) = ( e^iz + e^-iz ) / 2 
+      //        = cos(a)cosh(b) - i sin(a)sinh(b)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.cos(a) * cosh(b),
+        -Math.sin(a) * sinh(b));
+    },
+
+    /**
+     * Calculate the tangent
+     *
+     * @returns {Complex}
+     */
+    'tan': function() {
+
+      // tan(z) = sin(z) / cos(z) 
+      //        = ( e^iz - e^-iz ) / ( i( e^iz + e^-iz ) )
+      //        = ( e^2iz - 1 ) / i( e^2iz + 1 )
+      //        = ( sin(2a) + i sinh(2b) ) / ( cos(2a) + cosh(2b) )
+
+      var a = 2 * this['re'];
+      var b = 2 * this['im'];
+      var d = Math.cos(a) + cosh(b);
+
+      return new Complex(
+        Math.sin(a) / d,
+        sinh(b) / d);
+    },
+
+    /**
+     * Calculate the cotangent
+     *
+     * @returns {Complex}
+     */
+    'cot': function() {
+
+      // cot(c) = i(e^(ci) + e^(-ci)) / (e^(ci) - e^(-ci))
+
+      var a = 2 * this['re'];
+      var b = 2 * this['im'];
+      var d = Math.cos(a) - cosh(b);
+
+      return new Complex(
+        -Math.sin(a) / d,
+        sinh(b) / d);
+    },
+
+    /**
+     * Calculate the secant
+     *
+     * @returns {Complex}
+     */
+    'sec': function() {
+
+      // sec(c) = 2 / (e^(ci) + e^(-ci))
+
+      var a = this['re'];
+      var b = this['im'];
+      var d = 0.5 * cosh(2 * b) + 0.5 * Math.cos(2 * a);
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+this['im']
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."
