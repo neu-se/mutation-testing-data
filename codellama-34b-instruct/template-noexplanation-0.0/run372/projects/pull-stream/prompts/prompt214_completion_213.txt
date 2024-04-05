@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!err
+```
+This code fragment will negate the `err` variable, which means that if the `map` function returns an error, the `next` function will not be called. This could potentially cause the `asyncMap` function to hang indefinitely if the `map` function returns an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err && err.message
+```
+This code fragment will check if the `err` variable is truthy and if it has a `message` property. If the `map` function returns an error object with a `message` property, the `next` function will be called with the error message as the first argument. If the `map` function returns an error object without a `message` property, the `next` function will not be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err instanceof Error
+```
+This code fragment will check if the `err` variable is an instance of the `Error` class. If the `map` function

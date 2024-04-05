@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise
+```
+This change will cause the `put` method to always resolve the promise with a new deferred object, rather than the original deferred object. This will result in the `get` method always returning a rejected promise, even if the queue is not empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.defer(); })
+```
+This change will cause the `put` method to always resolve the promise with a new deferred object, but only after the current promise has been resolved. This will result in the `get` method always returning a rejected promise, even if the queue is not empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.reject(); })
+```
+This change will cause the `put` method to always reject the promise, even if the queue is not empty. This will result in the `

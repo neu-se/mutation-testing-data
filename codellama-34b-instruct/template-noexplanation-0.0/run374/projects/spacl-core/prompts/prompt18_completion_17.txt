@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/[*+][^/]|[^/][*+]/, '')
+```
+This code fragment replaces any occurrence of a wildcard character (`*`, `+`) followed by a non-slash character, or a non-slash character followed by a wildcard character, with an empty string. This change will cause the `compile` function to throw an error if the `spec` string contains malformed wildcards, as intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/[^/]:|:\/|:$/, '')
+```
+This code fragment replaces any occurrence of a colon (`:`) followed by a non-slash character, or a colon followed by a slash (`/`), or a slash followed by a colon, with an empty string. This change will cause the `compile` function to throw an error if the `spec` string contains malformed captures, as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/^.+\

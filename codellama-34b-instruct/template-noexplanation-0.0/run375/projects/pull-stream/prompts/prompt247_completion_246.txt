@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort, cb
+```
+This change will cause the `read` function to be called with `abort` as the first argument, even if `err` is not truthy. This could potentially cause the `read` function to behave differently than expected, and may reveal a weakness in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err || !abort, cb
+```
+This change will cause the `read` function to be called with `abort` as the first argument, only if `err` is falsy. This could potentially cause the `read` function to behave differently than expected, and may reveal a weakness in the test suite.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null, cb
+```
+This change will cause the `read` function to be called with `abort` as the first argument, only if `err` is truthy. This could potentially cause the `read` function to behave differently than expected

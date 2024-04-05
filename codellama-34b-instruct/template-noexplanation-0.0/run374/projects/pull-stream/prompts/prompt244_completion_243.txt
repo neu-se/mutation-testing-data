@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, cb)
+```
+This change will cause the `read` function to be called with `true` as the first argument, which may cause the function to behave differently than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err) {
+  cb(err || abort)
+})
+```
+This change will cause the `read` function to be called with `null` as the first argument, and a new function as the second argument. The new function will call the `cb` function with `err` or `abort` as the first argument, which may cause the function to behave differently than expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err, data) {
+  if (err) {
+    cb(err)
+  } else {
+    cb(null, data)
+  }
+})
+```
+This change will cause the `read` function to be called with `null` as the

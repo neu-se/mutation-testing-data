@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextType === 'retain'
+```
+This change will cause the `transformPosition` method to skip over `retain` operations, which may cause the method to return an incorrect result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextType === 'insert' && offset >= index
+```
+This change will cause the `transformPosition` method to only skip over `insert` operations that occur after the specified index, which may cause the method to return an incorrect result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextType === 'delete' && offset >= index
+```
+This change will cause the `transformPosition` method to only skip over `delete` operations that occur after the specified index, which may cause the method to return an incorrect result.
+
+DONE.

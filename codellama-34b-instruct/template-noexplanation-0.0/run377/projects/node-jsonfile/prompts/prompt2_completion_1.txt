@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This change will cause the `readFile` function to use `fs.readFileSync` instead of `fs.readFile`, which may have different behavior and could potentially cause the tests to fail.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { throws: false })
+```
+This change will cause the `readFile` function to use `fs.readFile` with the `throws` option set to `false`, which may cause the function to return a null value instead of throwing an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { encoding: 'utf8' })
+```
+This change will cause the `readFile` function to use `fs.readFile` with the `encoding` option set to `'utf8'`, which may cause the function to return a string value instead of a buffer

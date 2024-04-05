@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx) && false
+```
+This change will cause the `matches` method to always return `false`, even if the `rule.matches` method would have returned `true`. This can help identify cases where the `matches` method is not properly checking the path and context.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx) || true
+```
+This change will cause the `matches` method to always return `true`, even if the `rule.matches` method would have returned `false`. This can help identify cases where the `matches` method is not properly checking the path and context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.matches(path, ctx) && path.startsWith('/')
+```
+This change will cause the `matches` method to only return `true` if the path starts with a forward slash (`/`). This can help identify cases where the `matches` method is not properly checking the path and context.

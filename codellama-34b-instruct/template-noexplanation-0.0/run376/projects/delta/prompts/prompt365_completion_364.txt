@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() === 'insert')
+```
+This change will cause the `transform` method to always retain the `otherOp` when both `thisOp` and `otherOp` are inserts, regardless of the `priority` flag.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() !== 'delete')
+```
+This change will cause the `transform` method to always retain the `otherOp` when `thisOp` is an insert and `otherOp` is not a delete, regardless of the `priority` flag.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() === 'retain')
+```
+This change will cause the `transform` method

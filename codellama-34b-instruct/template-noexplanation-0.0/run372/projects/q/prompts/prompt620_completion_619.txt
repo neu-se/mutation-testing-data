@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("set", [key, value]).then(function() {
+    return Q(object).dispatch("get", [key]);
+});
+```
+This code fragment will cause the `set` operation to be performed before the `get` operation, which may not be the intended behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [key]).then(function(value) {
+    return Q(object).dispatch("set", [key, value]);
+});
+```
+This code fragment will cause the `get` operation to be performed before the `set` operation, which may not be the intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("set", [key, value]).then(function() {
+    return Q(object).dispatch("get", [key]);
+});
+```
+This code fragment will cause the `set` operation to be performed before the `get` operation, which may

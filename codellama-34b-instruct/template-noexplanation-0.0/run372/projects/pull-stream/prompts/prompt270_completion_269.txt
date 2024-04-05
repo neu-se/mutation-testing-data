@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+stream && 'function' === typeof stream
+```
+This change will cause the `nextStream` function to always return a function, even if the `stream` variable is not a function. This will result in the `nextChunk` function being called with a non-function argument, which will cause an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stream && 'object' === typeof stream && 'function' === typeof stream.read
+```
+This change will cause the `nextStream` function to only return a function if the `stream` variable is an object with a `read` method. This will result in the `nextChunk` function being called with a non-function argument, which will cause an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+stream && 'object' === typeof stream && 'function' === typeof stream.read && stream.read()
+```
+This change will cause the `nextStream` function to only return a function if the `stream` variable is an object

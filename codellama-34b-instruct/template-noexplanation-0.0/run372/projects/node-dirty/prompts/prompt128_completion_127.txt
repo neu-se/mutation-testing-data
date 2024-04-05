@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.uncork
+```
+This change will cause the `uncork` method to be called on the `this._writeStream` object, which is not the intended behavior. The `uncork` method is used to release the buffering of a stream, but in this case, it is not necessary and will likely cause unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.write(data, (err) => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+});
+```
+This change will cause the `write` method to be called on the `this._writeStream` object with the `data` argument and a callback function that emits an `error` event if there is an error and an `drain` event if

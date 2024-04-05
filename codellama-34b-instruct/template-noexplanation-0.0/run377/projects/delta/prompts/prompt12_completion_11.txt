@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+a[key] !== null && b[key] === undefined
+```
+This change will cause the `compose` function to treat `null` values as if they were not present in the `b` object, which may be unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a[key] !== undefined && b[key] !== undefined
+```
+This change will cause the `compose` function to only copy values from `a` to `b` if both `a` and `b` have a value for the same key. This may be a more conservative approach, but it could also lead to unexpected behavior if the `a` object has a value for a key that the `b` object does not.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+a[key] !== undefined && b[key] === null
+```
+This change will cause the `compose` function to treat `null` values in `b` as if they were not present, but it will still copy values from

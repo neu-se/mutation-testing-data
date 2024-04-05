@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches
+```
+This change will cause the `query` method to always return `null`, regardless of the input path and verb, because the `!` operator negates the result of the `matches` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches && false
+```
+This change will cause the `query` method to always return `false`, regardless of the input path and verb, because the `&&` operator short-circuits and returns the second operand if the first operand is truthy. Since `this.matches` is always truthy, the `false` operand will be returned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.matches || true
+```
+This change will cause the `query` method to always return `true`, regardless of the input path and verb, because the `||` operator short-circuits and returns the first operand if it is truthy. Since `this.matches` is always truthy, the `true

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort
+```
+This change will cause the `nextChunk` function to be called only when both `err` and `abort` are truthy, which is different from the original behavior where `nextChunk` was called when either `err` or `abort` was truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!err || abort
+```
+This change will cause the `nextChunk` function to be called only when `err` is falsy or `abort` is truthy, which is different from the original behavior where `nextChunk` was called when either `err` or `abort` was truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+err ? abort : null
+```
+This change will cause the `nextChunk` function to be called only when `err` is truthy, and `abort` will be passed as an argument to the `nextChunk` function. This is different from the original behavior where

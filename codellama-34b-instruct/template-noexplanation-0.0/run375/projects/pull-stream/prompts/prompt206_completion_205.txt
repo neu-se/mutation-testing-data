@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This code fragment will always evaluate to `true`, even if `aborted` is `true`. This will cause the `map` function to be called even if the stream has been aborted, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+aborted && !busy
+```
+This code fragment will evaluate to `true` if `aborted` is `true` and `busy` is `false`. This will cause the `map` function to be called only if the stream has been aborted and there are no pending mapper callbacks.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+aborted || busy
+```
+This code fragment will evaluate to `true` if `aborted` is `true` or `busy` is `true`. This will cause the `map` function to be called if the stream has been aborted or if there are pending mapper callbacks.
+
+DONE.

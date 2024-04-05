@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && false
+```
+This change will cause the `once` function to be called with `false` as the argument, which will not trigger the `onEnd` callback. This change will not affect the behavior of the `through` function, but it will cause the test suite to fail if it relies on the `onEnd` callback being called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end || true
+```
+This change will cause the `once` function to be called with `true` as the argument, which will trigger the `onEnd` callback. This change will not affect the behavior of the `through` function, but it will cause the test suite to fail if it relies on the `onEnd` callback being called with a specific argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end && onEnd
+```
+This change will cause the `once` function to be called with the `onEnd` callback as the argument, which will trigger the `onEnd` callback.

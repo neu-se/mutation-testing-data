@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+```
+This code fragment is a buggy version of the original code because it does not call the `this._flush()` method, which is necessary to ensure that the data is persisted to disk.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+this._flush();
+```
+This code fragment is a buggy version of the original code because it calls the `this._flush()` method with no arguments, which is not a valid way to call the method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs);
+this._flush(key);
+```
+This code fragment is a buggy version of the original code because it calls the `this._flush()` method with the wrong argument. The `key` argument should be a string, but in this case it is a list of callbacks.
+
+DONE.

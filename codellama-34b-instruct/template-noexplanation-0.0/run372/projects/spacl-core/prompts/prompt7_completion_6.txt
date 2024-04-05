@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/\/\//) === null
+```
+This change will cause the `Matcher` constructor to throw an error when the path specification contains consecutive slashes, which is not allowed in the specification language.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/\/\//) !== null && spec.match(/\/\//).length > 1
+```
+This change will cause the `Matcher` constructor to throw an error when the path specification contains consecutive slashes, and the number of consecutive slashes is greater than 1.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/\/\//) !== null && spec.match(/\/\//).length > 1 && spec.match(/\/\//).index === 0
+```
+This change will cause the `Matcher` constructor to throw an error when the path specification contains consecutive slashes, the number of consecutive slashes is greater than 1, and the first slash is at the beginning of the

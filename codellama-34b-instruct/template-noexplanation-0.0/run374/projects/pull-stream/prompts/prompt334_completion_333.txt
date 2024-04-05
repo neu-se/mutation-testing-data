@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && false
+```
+This change will cause the `cb` function to always be called with `end` set to `false`, even if the original `end` value was `true`. This will cause the stream to continue reading data even after it has reached the end, which may cause unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end || true
+```
+This change will cause the `cb` function to always be called with `end` set to `true`, even if the original `end` value was `false`. This will cause the stream to stop reading data as soon as it reaches the end, which may cause data to be lost.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end ^ true
+```
+This change will cause the `cb` function to always be called with `end` set to the opposite of its original value. This will cause the stream to toggle between reading and not reading data, which may cause unexpected behavior.
+
+DONE.

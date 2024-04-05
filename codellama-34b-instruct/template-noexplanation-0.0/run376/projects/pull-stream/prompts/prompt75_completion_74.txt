@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+done && function () {}
+```
+This change will cause the `done` callback to be called only if it is truthy, which may cause the test to fail if the `done` callback is not called when it should be.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+done || function () { throw new Error('done callback not called') }
+```
+This change will cause the `done` callback to be called only if it is falsy, which may cause the test to fail if the `done` callback is called when it should not be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+done ? function () {} : function () { throw new Error('done callback not called') }
+```
+This change will cause the `done` callback to be called only if it is truthy, and will throw an error if it is falsy, which may cause the test to fail if the `done` callback is not called when it should be.
+
+DONE.

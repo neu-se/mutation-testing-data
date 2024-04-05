@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+onAbort()
+```
+This change will cause the `abortCb` function to be called with the `onAbort` function as an argument, which is not the intended behavior. The `onAbort` function is a callback that should be called when the `abort` event is emitted, but it should not be called directly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onAbort.call(null)
+```
+This change will cause the `onAbort` function to be called with `null` as the `this` context, which is not the intended behavior. The `onAbort` function should be called with the correct `this` context, which is the object that emitted the `abort` event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onAbort.call(this)
+```
+This change will cause the `onAbort` function to be called with the correct `this` context, which is the object that emitted the `

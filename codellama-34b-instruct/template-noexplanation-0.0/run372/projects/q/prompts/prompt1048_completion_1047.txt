@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.resolve
+```
+This change will cause the `put` method to always resolve the promise, even if the queue is closed. This can lead to unexpected behavior in the `get` method, which assumes that the promise will be rejected if the queue is closed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject
+```
+This change will cause the `put` method to always reject the promise, even if the queue is not closed. This can lead to unexpected behavior in the `get` method, which assumes that the promise will be resolved if the queue is not closed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().resolve
+```
+This change will cause the `put` method to create a new deferred object and resolve it, even if the queue is closed. This can lead to unexpected behavior in the `get` method, which assumes that the promise will be rejected if the queue is closed.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.resume(null);
+```
+This code fragment is different from the original in that it passes `null` as the argument to `res.resume()`, whereas the original code fragment passes `res.pipe(createWriteStream(dest))`. This change could potentially cause the `res.pipe()` method to be called with an invalid argument, leading to a runtime error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.resume(undefined);
+```
+This code fragment is similar to the first option, but it passes `undefined` instead of `null` as the argument to `res.resume()`. This could also potentially cause a runtime error if the `res.pipe()` method is called with an invalid argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.resume(res.pipe(createWriteStream(dest)));
+```
+This code fragment is different from the first two options in that it passes the result of `res.pipe(createWriteStream(dest))` as the

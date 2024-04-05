@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).thenReject
+```
+This change will cause the `then` method to return a rejected promise instead of a resolved one, which will result in the `tap` method being called with the rejection reason instead of the resolution value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).then(function () { return value; })
+```
+This change will cause the `then` method to return a promise that is resolved with the value returned by the `callback` function, which will result in the `tap` method being called with the value returned by the `callback` function instead of the resolution value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).then(function () { throw new Error("test"); })
+```
+This change will cause the `then` method to return a promise that is rejected with an error, which will result in the `tap` method being called with the rejection reason instead of

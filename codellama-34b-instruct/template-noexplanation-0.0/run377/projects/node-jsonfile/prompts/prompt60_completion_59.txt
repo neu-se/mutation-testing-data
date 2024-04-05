@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!Buffer.isBuffer(content)
+```
+This change will cause the `stripBom` function to always execute the `content = content.toString('utf8')` line, even if `content` is not a buffer. This could potentially cause the function to throw an error if `content` is not a string or a buffer.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Buffer.isBuffer(content) && content.length > 0
+```
+This change will cause the `stripBom` function to only execute the `content = content.toString('utf8')` line if `content` is a buffer and its length is greater than 0. This could potentially cause the function to return a different result than the original code if `content` is a buffer with a length of 0.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Buffer.isBuffer(content) || content.length > 0
+```
+This change will cause the `stripBom` function to only execute the `

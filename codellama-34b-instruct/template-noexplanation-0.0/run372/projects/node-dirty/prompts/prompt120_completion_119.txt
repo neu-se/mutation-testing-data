@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites < 0
+```
+This change will cause the `if` statement to always evaluate to `false`, even if there are in-flight writes. This will prevent the `drain` event from being emitted, which could cause issues for code that relies on it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0
+```
+This change will cause the `if` statement to always evaluate to `true`, even if there are no in-flight writes. This will cause the `drain` event to be emitted more frequently than necessary, which could cause performance issues.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites === 0
+```
+This change will cause the `if` statement to always evaluate to `true`, even if there are in-flight writes. This will cause the `drain` event to be emitted more frequently than necessary, which could

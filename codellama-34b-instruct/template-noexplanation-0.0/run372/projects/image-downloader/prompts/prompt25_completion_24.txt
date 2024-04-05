@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+__filename
+```
+This will cause the `path.resolve()` method to use the current file's directory as the base path, rather than the directory specified in the `options.dest` property. This could potentially cause the `request()` function to be called with an incorrect path, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.dirname(options.dest)
+```
+This will cause the `path.resolve()` method to use the directory of the `options.dest` property as the base path, rather than the current file's directory. This could potentially cause the `request()` function to be called with an incorrect path, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.basename(options.dest)
+```
+This will cause the `path.resolve()` method to use the basename of the `options.dest` property as the base path, rather than the current file's directory. This could potentially cause the `request()` function

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'w' })
+```
+This code fragment creates a write stream to the `dest` file with the `w` flag, which means that the file will be overwritten if it already exists. This change in behavior could cause the test to fail if the test is expecting the file to be appended to instead of overwritten.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'a' })
+```
+This code fragment creates a write stream to the `dest` file with the `a` flag, which means that the file will be appended to if it already exists. This change in behavior could cause the test to fail if the test is expecting the file to be overwritten instead of appended to.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'wx' })
+```
+This code fragment creates a write stream to the `dest` file with the `wx` flag,

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb && function () {}
+```
+This change will cause the `sink.abort` function to always return a function, even if `cb` is not provided. This could potentially cause issues if the function is expected to return a value other than a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb || function (err) { throw err; }
+```
+This change will cause the `sink.abort` function to throw an error if `cb` is not provided. This could potentially cause issues if the function is expected to return a value other than a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb || function (err) { console.error(err); }
+```
+This change will cause the `sink.abort` function to log an error to the console if `cb` is not provided. This could potentially cause issues if the function is expected to return a value other than a function.
+
+DONE.

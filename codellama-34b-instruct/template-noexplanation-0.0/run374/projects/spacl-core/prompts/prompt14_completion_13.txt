@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/) === null
+```
+This change will cause the `Matcher` constructor to throw an error when the `spec` argument ends with a slash, which is the opposite of the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/) !== null && spec.match(/^.+\/$/) !== spec
+```
+This change will cause the `Matcher` constructor to throw an error when the `spec` argument ends with a slash and is not equal to the original `spec` argument.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.match(/^.+\/$/) !== null && spec.match(/^.+\/$/) !== spec && spec.match(/^.+\/$/) !== spec.match(/^.+\/$/)
+```
+This change will cause the `Matcher` constructor to throw an error when the `spec` argument ends with a slash, is not equal to the original `spec` argument

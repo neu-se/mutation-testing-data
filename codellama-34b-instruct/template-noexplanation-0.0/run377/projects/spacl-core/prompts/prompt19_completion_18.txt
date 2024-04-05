@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+string.length > 0 && string.endsWith('/')
+```
+This change will cause the `Matcher` class to incorrectly match strings that do not end with a slash, as the `string.length > 1` check will always evaluate to `true` if the string is not empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+string.length > 1 && string.endsWith('/') && string.charAt(string.length - 2) !== '/'
+```
+This change will cause the `Matcher` class to incorrectly match strings that end with a slash, as the `string.charAt(string.length - 2) !== '/'` check will always evaluate to `false` if the string ends with a slash.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+string.length > 1 && string.endsWith('/') && string.charAt(string.length - 2) === '/'
+```
+This change will cause the `Matcher` class

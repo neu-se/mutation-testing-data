@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host == null || baseUrlStr
+```
+This change will cause the `if` statement to always evaluate to `true`, regardless of the value of `parsedUrl.host`. This will result in the `baseUrlStr` being used as the `currentUrlStr` in the `URL.parse()` method, which may cause the method to return a different result than expected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host == null && baseUrlStr == null
+```
+This change will cause the `if` statement to only evaluate to `true` if both `parsedUrl.host` and `baseUrlStr` are `null`. This may cause the `URL.parse()` method to return a different result than expected, as the `baseUrlStr` will not be used as the `currentUrlStr` in the method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.host == null || baseUrlStr == null
+```
+This

@@ -1,0 +1,33 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.allSettled(promises).then(function (states) {
+    return states.map(function (state) {
+        return state.value;
+    });
+});
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.allSettled(promises).then(function (states) {
+    return states.filter(function (state) {
+        return state.state === "fulfilled";
+    }).map(function (state) {
+        return state.value;
+    });
+});
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.allSettled(promises).then(function (states) {
+    return states.reduce(function (acc, state) {
+        if (state.state === "fulfilled") {
+            acc.push(state.value);
+        }
+        return acc;
+    }, []);
+});
+```
+
+DONE.

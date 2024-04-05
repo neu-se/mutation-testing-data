@@ -1,0 +1,61 @@
+Your task is to apply mutation testing to the following code:
+```
+const path = require('path');
+const request = require('./lib/request');
+
+module.exports.image = ({ extractFilename = true, ...options } = {}) => {
+  if (!options.url) {
+    return Promise.reject(new Error('The options.url is required'));
+  }
+
+  if (!options.dest) {
+    return Promise.reject(new Error('The options.dest is required'));
+  }
+
+  if (extractFilename) {
+    if (!path.extname(options.dest)) {
+      const url = new URL(options.url);
+      const pathname = url.pathname;
+      const basename = path.basename(pathname);
+      const decodedBasename = decodeURIComponent(basename);
+
+      options.dest = <PLACEHOLDER>(options.dest, decodedBasename);
+    }
+  }
+
+  if (!path.isAbsolute(options.dest)) {
+    options.dest = path.resolve(__dirname, options.dest);
+  }
+
+  return request(options);
+};
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+path.join
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

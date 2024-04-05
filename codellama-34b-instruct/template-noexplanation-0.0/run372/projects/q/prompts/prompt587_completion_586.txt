@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { throw new Error("Test error"); });
+```
+This code fragment will cause the `makeGenerator` function to be called, and then a `Test error` will be thrown. This will cause the promise returned by `Q.async` to be rejected, which will in turn cause the promise returned by `spawn` to be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { return Q.reject("Test error"); });
+```
+This code fragment will cause the `makeGenerator` function to be called, and then a rejected promise with the value `"Test error"` will be returned. This will cause the promise returned by `Q.async` to be rejected, which will in turn cause the promise returned by `spawn` to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { return Q.resolve("Test error");

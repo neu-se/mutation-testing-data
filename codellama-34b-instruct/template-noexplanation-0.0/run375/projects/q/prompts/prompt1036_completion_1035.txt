@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise
+```
+This change will cause the `put` method to always resolve the promise returned by `Q.defer()`, rather than resolving it with the value passed to the `put` method. This will cause the `get` method to always return a rejected promise, rather than returning the value passed to the `put` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.reject(); })
+```
+This change will cause the `put` method to always reject the promise returned by `Q.defer()`, rather than resolving it with the value passed to the `put` method. This will cause the `get` method to always return a rejected promise, rather than returning the value passed to the `put` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.reject(new Error("Can't get

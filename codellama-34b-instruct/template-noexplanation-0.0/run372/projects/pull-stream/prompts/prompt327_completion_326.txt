@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && abort
+```
+This change will cause the `once` function to be called with a truthy value for `abort`, which will set `a` to `true` and call `onEnd` with `null`. This change will cause the test suite to fail if it relies on the `once` function being called with a falsy value for `abort`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end || abort
+```
+This change will cause the `once` function to be called with a truthy value for `abort` if `end` is truthy, which will set `a` to `true` and call `onEnd` with `null`. This change will cause the test suite to fail if it relies on the `once` function being called with a falsy value for `abort` when `end` is truthy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end ? abort : null
+```
+This change will cause the `once

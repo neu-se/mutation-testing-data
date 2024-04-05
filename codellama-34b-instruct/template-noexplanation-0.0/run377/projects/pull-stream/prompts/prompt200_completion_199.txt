@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!busy
+```
+This change will cause the `if` statement to always evaluate to `true`, even if `busy` is `false`. This will result in the `abortCb` function being called every time the `read` function is called, even if the `abort` parameter is not provided.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+busy && !aborted
+```
+This change will cause the `if` statement to only evaluate to `true` if `busy` is `true` and `aborted` is `false`. This will result in the `abortCb` function being called only if the `read` function is called with the `abort` parameter set to `true` and the `busy` flag is set to `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+busy || aborted
+```
+This change will cause the `if` statement to evaluate to `true` if either `busy` or `ab

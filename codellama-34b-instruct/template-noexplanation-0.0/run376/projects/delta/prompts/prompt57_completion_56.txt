@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ops != null && Array.isArray(ops)
+```
+This code fragment is similar to the original, but it checks if `ops` is an array instead of checking if `ops.ops` is an array. This change may cause the `Delta` constructor to behave differently if `ops` is not an array, but it does not affect the behavior of the `insert`, `delete`, and `retain` methods.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ops != null && typeof ops.ops === 'object'
+```
+This code fragment checks if `ops` is an object and if `ops.ops` is an object. This change may cause the `Delta` constructor to behave differently if `ops` is not an object, but it does not affect the behavior of the `insert`, `delete`, and `retain` methods.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ops != null && Array.isArray(ops.ops) && ops.ops.length >

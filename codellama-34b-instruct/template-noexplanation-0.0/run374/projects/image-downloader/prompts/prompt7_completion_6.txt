@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!extractFilename
+```
+This change will cause the code to always enter the `if` block, even if `extractFilename` is `false`. This will result in the `options.dest` path being modified, even if it is not necessary.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+extractFilename && path.extname(options.dest)
+```
+This change will cause the code to only enter the `if` block if `extractFilename` is `true` and `options.dest` has an extension. This will result in the `options.dest` path being modified only if it is necessary.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+extractFilename || path.extname(options.dest)
+```
+This change will cause the code to enter the `if` block if `extractFilename` is `true` or if `options.dest` has an extension. This will result in the `options.dest` path being modified only if it is necessary

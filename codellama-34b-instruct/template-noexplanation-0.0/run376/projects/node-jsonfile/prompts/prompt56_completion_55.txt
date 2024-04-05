@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+str.replaceAll
+```
+This change will cause the `stringify` function to replace all occurrences of `\n` with `EOL`, instead of just the first occurrence. This may cause the function to produce different output than expected, and could potentially break any tests that rely on the specific formatting of the output.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+str.replace(/[^\n]/g, EOL)
+```
+This change will cause the `stringify` function to replace all non-newline characters with `EOL`, instead of just the first occurrence. This may cause the function to produce different output than expected, and could potentially break any tests that rely on the specific formatting of the output.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+str.replace(/[^\n]/g, '')
+```
+This change will cause the `stringify` function to remove all non-newline characters from the output, instead of just the first occurrence. This may cause the function to produce different output than expected

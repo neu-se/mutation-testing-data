@@ -1,0 +1,231 @@
+Your task is to apply mutation testing to the following code:
+```
+       = expm1(a)*cos(b) + cosm1(b) + j*exp(a)*sin(b)
+       */
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.expm1(a) * Math.cos(b) + cosm1(b),
+        Math.exp(a) * Math.sin(b));
+    },
+
+    /**
+     * Calculate the natural log
+     *
+     * @returns {Complex}
+     */
+    'log': function() {
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (b === 0 && a > 0) {
+        //return new Complex(Math.log(a), 0);
+      }
+
+      return new Complex(
+        logHypot(a, b),
+        Math.atan2(b, a));
+    },
+
+    /**
+     * Calculate the magnitude of the complex number
+     *
+     * @returns {number}
+     */
+    'abs': function() {
+
+      return hypot(this['re'], this['im']);
+    },
+
+    /**
+     * Calculate the angle of the complex number
+     *
+     * @returns {number}
+     */
+    'arg': function() {
+
+      return Math.atan2(this['im'], this['re']);
+    },
+
+    /**
+     * Calculate the sine of the complex number
+     *
+     * @returns {Complex}
+     */
+    'sin': function() {
+
+      // sin(z) = ( e^iz - e^-iz ) / 2i 
+      //        = sin(a)cosh(b) + i cos(a)sinh(b)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.sin(a) * cosh(b),
+        Math.cos(a) * sinh(b));
+    },
+
+    /**
+     * Calculate the cosine
+     *
+     * @returns {Complex}
+     */
+    'cos': function() {
+
+      // cos(z) = ( e^iz + e^-iz ) / 2 
+      //        = cos(a)cosh(b) - i sin(a)sinh(b)
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.cos(a) * cosh(b),
+        -Math.sin(a) * sinh(b));
+    },
+
+    /**
+     * Calculate the tangent
+     *
+     * @returns {Complex}
+     */
+    'tan': function() {
+
+      // tan(z) = sin(z) / cos(z) 
+      //        = ( e^iz - e^-iz ) / ( i( e^iz + e^-iz ) )
+      //        = ( e^2iz - 1 ) / i( e^2iz + 1 )
+      //        = ( sin(2a) + i sinh(2b) ) / ( cos(2a) + cosh(2b) )
+
+      var a = 2 * this['re'];
+      var b = 2 * this['im'];
+      var d = Math.cos(<PLACEHOLDER>) + cosh(b);
+
+      return new Complex(
+        Math.sin(a) / d,
+        sinh(b) / d);
+    },
+
+    /**
+     * Calculate the cotangent
+     *
+     * @returns {Complex}
+     */
+    'cot': function() {
+
+      // cot(c) = i(e^(ci) + e^(-ci)) / (e^(ci) - e^(-ci))
+
+      var a = 2 * this['re'];
+      var b = 2 * this['im'];
+      var d = Math.cos(a) - cosh(b);
+
+      return new Complex(
+        -Math.sin(a) / d,
+        sinh(b) / d);
+    },
+
+    /**
+     * Calculate the secant
+     *
+     * @returns {Complex}
+     */
+    'sec': function() {
+
+      // sec(c) = 2 / (e^(ci) + e^(-ci))
+
+      var a = this['re'];
+      var b = this['im'];
+      var d = 0.5 * cosh(2 * b) + 0.5 * Math.cos(2 * a);
+
+      return new Complex(
+        Math.cos(a) * cosh(b) / d,
+        Math.sin(a) * sinh(b) / d);
+    },
+
+    /**
+     * Calculate the cosecans
+     *
+     * @returns {Complex}
+     */
+    'csc': function() {
+
+      // csc(c) = 2i / (e^(ci) - e^(-ci))
+
+      var a = this['re'];
+      var b = this['im'];
+      var d = 0.5 * cosh(2 * b) - 0.5 * Math.cos(2 * a);
+
+      return new Complex(
+        Math.sin(a) * cosh(b) / d,
+        -Math.cos(a) * sinh(b) / d);
+    },
+
+    /**
+     * Calculate the complex arcus sinus
+     *
+     * @returns {Complex}
+     */
+    'asin': function() {
+
+      // asin(c) = -i * log(ci + sqrt(1 - c^2))
+
+      var a = this['re'];
+      var b = this['im'];
+
+      var t1 = new Complex(
+        b * b - a * a + 1,
+        -2 * a * b)['sqrt']();
+
+      var t2 = new Complex(
+        t1['re'] - b,
+        t1['im'] + a)['log']();
+
+      return new Complex(t2['im'], -t2['re']);
+    },
+
+    /**
+     * Calculate the complex arcus cosinus
+     *
+     * @returns {Complex}
+     */
+    'acos': function() {
+
+      // acos(c) = i * log(c - i * sqrt(1 - c^2))
+
+      var a = this['re'];
+      var b = this['im'];
+
+      var t1 = new Complex(
+        b * b - a * a + 1,
+        -2 * a * b)['sqrt']();
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+a
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

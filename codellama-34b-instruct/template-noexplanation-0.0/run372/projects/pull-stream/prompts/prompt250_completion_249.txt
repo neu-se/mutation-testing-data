@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null, data)
+```
+This change will cause the `nextChunk` function to always return `null` as the first argument to the callback, even if there is an error. This will cause the `flatten` function to return a stream that always returns `null` as the first argument to the callback, even if there is an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(err, data)
+```
+This change will cause the `nextChunk` function to always return the error as the first argument to the callback, even if there is no error. This will cause the `flatten` function to return a stream that always returns the error as the first argument to the callback, even if there is no error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(null, null)
+```
+This change will cause the `nextChunk` function to always return `null` as the second argument to the callback, even if there is data. This will cause

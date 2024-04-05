@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+last ? terminate(cb) : cb(ended)
+```
+This code fragment is similar to the original code, but it uses the `last` variable instead of `ended` to determine whether to call `terminate` or `cb`. This change may cause the function to behave differently in certain cases, such as when `last` is true but `ended` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ended ? cb(ended) : cb(null, data)
+```
+This code fragment is similar to the original code, but it uses the `ended` variable instead of `last` to determine whether to call `cb` with an error or with the data. This change may cause the function to behave differently in certain cases, such as when `ended` is true but `last` is false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(null, data)
+```
+This code fragment is similar to the original code, but it always calls `cb` with the data,

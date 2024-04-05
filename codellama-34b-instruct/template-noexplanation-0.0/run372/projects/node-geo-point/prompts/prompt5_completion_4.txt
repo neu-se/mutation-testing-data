@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty('type') || !point.hasOwnProperty('coordinates')
+```
+This code fragment checks if the `point` object has the `type` and `coordinates` properties, but it does not check if the values of those properties are correct. This could cause the `fromGeoJSON` method to return an incorrect `GeoPoint` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.type !== 'Point'
+```
+This code fragment checks if the `type` property of the `point` object is not equal to `'Point'`. This could cause the `fromGeoJSON` method to throw a `TypeError` if the `type` property is not correct.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!Array.isArray(point.coordinates) || point.coordinates.length !== 2
+```
+This code fragment checks if the `coordinates` property of the `point` object is not an array or

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'end'
+```
+This change will cause the `output` stream to emit an `'end'` event instead of a `'close'` event, which may cause the `zipArchive.finalize()` method to be called before the `output` stream is fully written, leading to a buggy behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error'
+```
+This change will cause the `output` stream to emit an `'error'` event instead of a `'close'` event, which may cause the `zipArchive.finalize()` method to be called with an error, leading to a buggy behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'finish'
+```
+This change will cause the `output` stream to emit a `'finish'` event instead of a `'close'` event, which may cause the `zipArchive.finalize()` method to be called before the `output` stream is fully written, leading to a buggy behavior.
+
+DONE.

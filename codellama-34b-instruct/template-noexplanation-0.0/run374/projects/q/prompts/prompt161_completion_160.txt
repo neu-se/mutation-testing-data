@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+error, "stack", {value: stack, configurable: false}
+```
+This change will make the `configurable` property of the `stack` property of the `error` object `false`, which means that the property cannot be deleted or changed. This change will cause the `object_defineProperty` function to throw an error, which will be caught by the `makeStackTraceLong` function and the `stack` property will be set to `undefined`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+error, "stack", {value: stack, configurable: true, writable: false}
+```
+This change will make the `configurable` property of the `stack` property of the `error` object `true`, which means that the property can be deleted or changed. However, the `writable` property of the `stack` property will be set to `false`, which means that the property cannot be modified. This change will cause the `object_defineProperty` function to throw an error, which will be caught by the `makeStackTrace

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer()
+```
+This change will cause the `closed` variable to be initialized with a promise that is already resolved, which may cause the `get` method to return a resolved promise instead of a pending one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise
+```
+This change will cause the `closed` variable to be initialized with a promise that is already resolved, but it will also cause the `get` method to return a pending promise instead of a resolved one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.defer().promise.then(function() { return Q.reject(new Error("Can't get value from closed queue")); })
+```
+This change will cause the `closed` variable to be initialized with a promise that is already resolved, but it will also cause the `get` method to return a pending promise that is rejected with an error.
+
+DONE.

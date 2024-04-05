@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This change will cause the `nextStream` function to always return `true`, even if the `end` variable is not truthy. This will result in the `nextChunk` function being called repeatedly, even after the stream has ended, which could cause an infinite loop.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && stream
+```
+This change will cause the `nextStream` function to only return `true` if both the `end` variable and the `stream` variable are truthy. This will ensure that the `nextChunk` function is only called if the stream has not ended and there is still data to be read.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end || stream
+```
+This change will cause the `nextStream` function to return `true` if either the `end` variable or the `stream` variable is truthy. This will ensure that the `nextChunk` function is called if the stream has ended or if there is still

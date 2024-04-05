@@ -1,0 +1,22 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This change will cause the `nextStream` function to be called immediately, rather than being passed as a callback to the `read` function. This will likely cause the code to behave differently than expected, as the `nextStream` function is intended to be called as a callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nextStream(null, function(err, data) {
+  if (err) {
+    if (err === true) nextStream()
+    else read(true, function(abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err)
+    })
+  }
+  else cb(null, data)
+})
+```
+This change will cause the `nextStream` function to be called with a null error and a function that will be called with the error and data. This will likely cause the code to behave differently than expected, as the `nextStream` function is intended to be called with a stream and a callback.
+
+Option

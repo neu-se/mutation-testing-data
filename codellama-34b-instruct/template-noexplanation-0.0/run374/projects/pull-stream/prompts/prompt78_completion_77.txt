@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return
+```
+This will cause the function to return immediately, without executing any of the remaining code in the function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+throw new Error('intentional error')
+```
+This will cause the function to throw an error, which will be caught by the `try` block and passed to the `done` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, function (end, data) {
+  if (end) {
+    done(end === true ? null : end)
+  } else {
+    done(new Error('intentional error'))
+  }
+})
+```
+This will cause the function to call the `read` function with a null value for the `end` parameter, which will cause the `read` function to call the `done` callback with an error.
+
+DONE.

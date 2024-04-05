@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 1
+```
+This change will cause the `retain` method to always set the `attributes` property, even if the `attributes` object is empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length === 0
+```
+This change will cause the `retain` method to never set the `attributes` property, even if the `attributes` object is not empty.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 0 &&
+      Object.values(attributes).length > 0
+```
+This change will cause the `retain` method to only set the `attributes` property if the `attributes` object is not empty and has at least one non-empty

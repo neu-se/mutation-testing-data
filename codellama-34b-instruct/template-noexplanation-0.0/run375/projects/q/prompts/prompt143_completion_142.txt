@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+p.stack && (!error.__minimumStackCounter__ || error.__minimumStackCounter__ < p.stackCounter)
+```
+This change will cause the `makeStackTraceLong` function to always concatenate the stack trace of `promise` with the error stack trace, regardless of the value of `error.__minimumStackCounter__`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+p.stack && (!error.__minimumStackCounter__ || error.__minimumStackCounter__ === p.stackCounter)
+```
+This change will cause the `makeStackTraceLong` function to concatenate the stack trace of `promise` with the error stack trace only if `error.__minimumStackCounter__` is equal to `p.stackCounter`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+p.stack && (!error.__minimumStackCounter__ || error.__minimumStackCounter__ !== p.stackCounter)
+```
+This change will cause the `makeStackTraceLong` function to concatenate

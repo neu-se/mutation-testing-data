@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This change will cause the `if` statement to always evaluate to `true`, even if `abort` is not truthy. This will result in the `abortCb` function being called every time the `once` function is called, which may not be the desired behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && value
+```
+This change will cause the `if` statement to evaluate to `true` only if `abort` is truthy and `value` is not `null`. This may be a more appropriate behavior for the `once` function, as it will only call the `abortCb` function if both conditions are met.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || value
+```
+This change will cause the `if` statement to evaluate to `true` if either `abort` or `value` is truthy. This may be a more appropriate behavior for the `once` function, as it will

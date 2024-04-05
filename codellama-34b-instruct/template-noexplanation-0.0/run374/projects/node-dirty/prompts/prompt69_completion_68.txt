@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.emit('load', 1);
+```
+This change will cause the `load` event to be emitted with a value of `1`, instead of the actual number of keys in the database. This will cause the `forEach` method to iterate over the database, even though it is empty.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.emit('load', -1);
+```
+This change will cause the `load` event to be emitted with a value of `-1`, which is an invalid number of keys in the database. This will cause the `forEach` method to throw an error when it tries to access the database.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.emit('load', NaN);
+```
+This change will cause the `load` event to be emitted with a value of `NaN`, which is not a valid number. This will cause the `forEach` method to throw an error when it tries to access the database.
+
+DONE.

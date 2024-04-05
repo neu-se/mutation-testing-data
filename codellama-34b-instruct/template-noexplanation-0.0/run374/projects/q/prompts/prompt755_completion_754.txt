@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = allResolved;
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function (promises) {
+    return when(promises, function (promises) {
+        promises = array_map(promises, Q);
+        return when(all(array_map(promises, function (promise) {
+            return when(promise, noop, noop);
+        })), function () {
+            return promises;
+        });
+    });
+};
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.allResolved = function (promises) {
+    return when(promises, function (promises) {
+        promises = array_map(promises, Q);
+        return when(all(array_map(promises, function (promise) {
+            return when(promise, noop, noop);
+        })), function () {
+            return promises

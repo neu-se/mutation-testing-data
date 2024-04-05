@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(null);
+```
+This change sets the initial value of `ends` to `null`, which is different from the original code where it is set to a deferred object. This change can cause the `put` method to throw an error when it tries to call `resolve` on `ends`, which can reveal a weakness in the test suite if it does not handle this case properly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(undefined);
+```
+This change sets the initial value of `ends` to `undefined`, which is different from the original code where it is set to a deferred object. This change can cause the `put` method to throw an error when it tries to call `resolve` on `ends`, which can reveal a weakness in the test suite if it does not handle this case properly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var ends = Q.defer(Q.reject(

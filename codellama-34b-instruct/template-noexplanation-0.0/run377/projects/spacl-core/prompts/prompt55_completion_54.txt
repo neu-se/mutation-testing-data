@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}.`
+```
+This change adds a period at the end of the regular expression, which will cause the matcher to match any character after the last character in the path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}[^/]+`
+```
+This change adds a negated character class `[^/]+` at the end of the regular expression, which will cause the matcher to match any character after the last character in the path, as long as it is not a forward slash.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.$])/g, '\\$1')}(?:/[^/]+)*`
+```
+This change adds a non-capturing group `(?:/[^/]+)*` at the end of the regular expression, which will cause the matcher to match

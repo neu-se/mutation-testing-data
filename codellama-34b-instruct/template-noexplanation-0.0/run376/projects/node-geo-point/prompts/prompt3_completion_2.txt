@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+longitude <= -180 || longitude >= 180
+```
+This change will cause the `RangeError` to be thrown for any longitude value that is less than or equal to -180 degrees or greater than or equal to 180 degrees, which is the opposite of the original behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+longitude < -180 || longitude > 180 || longitude === 0
+```
+This change will cause the `RangeError` to be thrown for any longitude value that is less than -180 degrees, greater than 180 degrees, or equal to 0 degrees, which is a different set of conditions than the original behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+longitude < -180 || longitude > 180 || Math.abs(longitude) > 180
+```
+This change will cause the `RangeError` to be thrown for any longitude value that is less than

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && this._inFlightWrites > 0
+```
+This change will cause the `_flush` method to be called only when there are items in the queue and there are in-flight writes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size || this._inFlightWrites < 0
+```
+This change will cause the `_flush` method to be called only when there are items in the queue or there are in-flight writes that are less than zero.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.size && this._inFlightWrites === 0
+```
+This change will cause the `_flush` method to be called only when there are items in the queue and there are no in-flight writes.
+
+DONE.

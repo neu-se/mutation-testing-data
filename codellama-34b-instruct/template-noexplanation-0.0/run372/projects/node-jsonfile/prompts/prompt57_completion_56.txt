@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+/\r/g
+```
+This will cause the `replace` method to only match carriage return characters (`\r`), rather than newline characters (`\n`). This may cause the `stringify` function to produce different output than expected, and could potentially reveal a bug in the test suite.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/\r\n/g
+```
+This will cause the `replace` method to match both carriage return and newline characters (`\r\n`), rather than just newline characters. This may also cause the `stringify` function to produce different output than expected, and could potentially reveal a bug in the test suite.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[\r\n]+/g
+```
+This will cause the `replace` method to match one or more carriage return or newline characters (`\r\n`), rather than just newline characters. This may also cause the `stringify` function to produce different output than expected, and could potentially reveal a bug in the

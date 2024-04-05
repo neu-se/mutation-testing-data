@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'w' })
+```
+This code fragment creates a write stream with the `flags` option set to `'w'`, which will overwrite any existing file with the same name instead of appending to it. This change in behavior may cause the test suite to fail if it relies on the file being appended to instead of overwritten.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'a' })
+```
+This code fragment creates a write stream with the `flags` option set to `'a'`, which will append to the file instead of overwriting it. This change in behavior may cause the test suite to fail if it relies on the file being overwritten instead of appended to.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest, { flags: 'wx' })
+```
+This code fragment creates a write stream with the `flags` option set to `'wx'`, which will create

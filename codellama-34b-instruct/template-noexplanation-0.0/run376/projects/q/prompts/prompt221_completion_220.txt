@@ -1,0 +1,32 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+object_create
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object_create(Promise.prototype)
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+object_create(Promise.prototype, {
+    promiseDispatch: {
+        value: function (resolve, op, operands) {
+            var args = array_slice(arguments);
+            if (messages) {
+                messages.push(args);
+                if (op === "when" && operands[1]) { // progress operand
+                    progressListeners.push(operands[1]);
+                }
+            } else {
+                Q.nextTick(function () {
+                    resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+                });
+            }
+        }
+    },
+    inspect: {
+        value: function () {
+            if (!resolvedPromise) {
+                return { state: "pending" };

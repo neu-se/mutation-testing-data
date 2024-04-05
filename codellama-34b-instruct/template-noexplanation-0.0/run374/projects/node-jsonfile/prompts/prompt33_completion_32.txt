@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This change will cause the `writeFile` function to use the synchronous `writeFileSync` method instead of the asynchronous `writeFile` method. This could potentially cause issues if the function is called with a large file or if the file system is slow.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs))
+```
+This change will cause the `writeFile` function to use the `writeFile` method of the `fs` module instead of the `universalify.fromCallback` method. This could potentially cause issues if the `fs` module is not available or if the `writeFile` method is not implemented correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs, file))
+```
+This change will cause the `writeFile` function to use the `writeFile` method

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+timezones[name] === undefined
+```
+This change will cause the `memoizeTimezone` function to be called even if the `timezones` object already contains a property with the given `name`. This could potentially cause the `timezones` object to become out of sync with the `data.timezones` object, leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+timezones[name] === null
+```
+This change will cause the `memoizeTimezone` function to be called only if the `timezones` object does not contain a property with the given `name`. This could potentially cause the `timezones` object to become out of sync with the `data.timezones` object, leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!timezones[name] && timezones[name] !== undefined
+```
+This change will cause the `memoizeTimezone` function to be

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This change will cause the `abortCb` function to always return `true`, regardless of the value of the `abort` parameter. This will result in the `onAbort` callback being called with `null` as the argument, even if the `abort` parameter is not `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && onAbort(abort === true ? null : abort)
+```
+This change will cause the `abortCb` function to only call the `onAbort` callback if the `abort` parameter is `true`. If the `abort` parameter is not `true`, the function will return without calling the `onAbort` callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || onAbort(abort === true ? null : abort)
+```
+This change will cause the `abortCb` function to call the `onAbort` callback if the `

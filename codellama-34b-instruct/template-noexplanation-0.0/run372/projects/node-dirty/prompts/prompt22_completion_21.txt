@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+setTimeout(() => { if (cb) cb(); this.emit('drain'); }, 0);
+```
+This code fragment uses `setTimeout` instead of `setImmediate` to schedule the callback to be called after a delay of 0 milliseconds. This can help to simulate a situation where the callback is not called immediately, which can help to test the robustness of the code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.nextTick(() => { if (cb) cb(); this.emit('drain'); });
+```
+This code fragment uses `process.nextTick` instead of `setImmediate` to schedule the callback to be called after the current event loop iteration. This can help to simulate a situation where the callback is not called immediately, which can help to test the robustness of the code.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+setImmediate(() => { if (cb) cb(); this.emit('drain'); }, 100

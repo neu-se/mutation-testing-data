@@ -1,0 +1,127 @@
+Your task is to apply mutation testing to the following code:
+```
+import { Matcher } from './matcher'
+import { Queryable, QueryContext } from './queryable'
+
+/** Access-control rule for a single path. */
+export class Rule implements Queryable {
+  /** Pattern for determining which paths are governed by this rule. */
+  readonly regex: Matcher
+  /** Set of verbs governed by this rule; allowed verbs
+    * are marked as `true`, denied verbs as `false`. */
+  readonly verbs: { [index: string]: boolean } = {}
+
+  /** @param spec Path specification or pre-compiled matcher for
+    *             determining which paths this rule will apply to. */
+  constructor (spec: string | Matcher) {
+    this.regex = spec instanceof Matcher
+      ? spec
+      : new Matcher(spec)
+  }
+
+  /** Mark one or more verbs as allowed.
+    * @note Deny overrides allow within SPACL policies;
+    *       this method will have no effect on verbs
+    *       previously marked as denied. */
+  allow (...verbs: string[]): Rule {
+    for (<PLACEHOLDER> of verbs) {
+      if (!(verb in this.verbs)) {
+        this.verbs[verb] = true
+      }
+    }
+    return this
+  }
+
+  /** Mark one or more verbs as denied. */
+  deny (...verbs: string[]): Rule {
+    for (const verb of verbs) {
+      this.verbs[verb] = false
+    }
+    return this
+  }
+
+  /** Check whether an action is allowed on a path.
+    * @param path Path to be acted on.
+    * @param verb Action to be performed.
+    * @param ctx Query context for resolving context-dependent paths.
+    * @returns Returns `true` if the action is explicitly allowed,
+    *          `false` if the action is explicitly denied, or
+    *          `null` if the combination of path and action
+    *          is not governed by this rule. */
+  query (path: string, verb: string, ctx?: QueryContext): boolean | null {
+    if (this.matches(path, ctx) && verb in this.verbs) {
+      return this.verbs[verb]
+    }
+    return null
+  }
+
+  /** Check whether a path is governed by this rule.
+    * @param path Path to be checked.
+    * @param ctx Query context for resolving context-dependent paths. */
+  matches (path: string, ctx?: QueryContext): boolean {
+    const match = path.match(this.regex)
+    if (match === null) {
+      return false
+    }
+    const count = this.regex.props.length
+    if (count > 0) {
+      if (ctx === undefined) {
+        return false
+      }
+      for (let index = 0; index < count; index++) {
+        const prop = ctx[this.regex.props[index]]
+        if (prop === undefined || match[index + 1] !== prop) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  /** Create clone of a rule.
+    * @param spec Replacement path specification for the new rule. */
+  clone (spec: string | Matcher = this.regex): Rule {
+    const rule = new Rule(spec)
+    for (const verb in this.verbs) {
+      rule.verbs[verb] = this.verbs[verb]
+    }
+    return rule
+  }
+
+  /** Static constructor function; returns a new Rule.
+    * @param spec Path specification or pre-compiled matcher for
+    *             determining which paths this rule will apply to. */
+  static for (spec: string | Matcher): Rule {
+    return new Rule(spec)
+  }
+}
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+const verb
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

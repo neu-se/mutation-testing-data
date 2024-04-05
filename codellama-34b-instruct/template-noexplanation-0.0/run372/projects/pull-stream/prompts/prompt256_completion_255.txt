@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+_read = stream
+```
+This change will cause the `nextStream` function to always assign the current stream to the `_read` variable, even if it is not a valid stream. This will cause the `nextChunk` function to try to read from the `_read` variable, which will result in an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+_read = null
+```
+This change will cause the `nextStream` function to always assign `null` to the `_read` variable, even if it is not a valid stream. This will cause the `nextChunk` function to try to read from the `_read` variable, which will result in an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+_read = stream.pipe(values)
+```
+This change will cause the `nextStream` function to assign the result of piping the current stream through the `values` function to the `_read` variable. This will cause the `nextChunk` function to try

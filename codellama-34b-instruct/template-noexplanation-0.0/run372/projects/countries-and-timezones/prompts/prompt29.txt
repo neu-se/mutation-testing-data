@@ -1,0 +1,73 @@
+Your task is to apply mutation testing to the following code:
+```
+export default function buildTimezone(data, name) {
+  const timezone = data.timezones[name];
+  if (!timezone) return null;
+
+  const { a: aliasOf = null } = timezone;
+  const aliasTz = aliasOf ? data.timezones[aliasOf] : {};
+  const tz = {
+    ...aliasTz,
+    ...data.timezones[name],
+  };
+
+  const countries = tz.c || [];
+  const utcOffset = tz.u;
+  const dstOffset = Number.isInteger(tz.d) ? tz.d : utcOffset;
+
+  const result = {
+    name,
+    countries,
+    utcOffset,
+    utcOffsetStr: getOffsetStr(utcOffset),
+    dstOffset,
+    dstOffsetStr: getOffsetStr(dstOffset),
+    aliasOf,
+  };
+  if (timezone.r) result.deprecated = true;
+  return result;
+}
+
+function getOffsetStr(offset) {
+  const hours = Math.floor(<PLACEHOLDER>);
+  const min = offset % 60;
+  const sign = offset < 0 ? '-' : '+';
+
+  return `${sign}${getNumStr(hours)}:${getNumStr(min)}`;
+}
+
+function getNumStr(input) {
+  const num = Math.abs(input);
+  const prefix = num < 10 ? '0' : '';
+  return `${prefix}${num}`;
+}
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+offset / 60
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

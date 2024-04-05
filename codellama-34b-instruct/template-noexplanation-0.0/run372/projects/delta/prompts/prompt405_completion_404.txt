@@ -1,0 +1,34 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = () => {
+  throw new Error('This is a buggy implementation of Delta.getHandler');
+};
+```
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = (embedType) => {
+  return {
+    invert: (opData, baseOpData) => {
+      return {
+        [embedType]: opData,
+      };
+    },
+  };
+};
+```
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Delta.getHandler = (embedType) => {
+  return {
+    transform: (opData, otherOpData, priority) => {
+      return {
+        [embedType]: opData,
+      };
+    },
+  };
+};
+```
+
+DONE.

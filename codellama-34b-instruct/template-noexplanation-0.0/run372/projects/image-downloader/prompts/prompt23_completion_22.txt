@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+__filename
+```
+This will cause the `path.resolve()` method to use the current file's directory as the base path, rather than the directory of the file that contains the `image` function. This could potentially cause the `dest` path to be resolved incorrectly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+process.cwd()
+```
+This will cause the `path.resolve()` method to use the current working directory as the base path, rather than the directory of the file that contains the `image` function. This could potentially cause the `dest` path to be resolved incorrectly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.dirname(require.main.filename)
+```
+This will cause the `path.resolve()` method to use the directory of the file that contains the `image` function as the base path, rather than the directory of the file that contains the `require.main.filename` property. This could potentially cause the `dest` path to be resolved incorrectly.
