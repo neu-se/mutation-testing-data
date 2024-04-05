@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+var p = promise.source
+```
+This would result in different behavior because it would start the loop from the source promise instead of the current promise, which could cause the loop to never terminate if the source promise is not resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var p = promise.then(function() { return promise; })
+```
+This would result in different behavior because it would create a new promise that resolves to the current promise, which could cause the loop to never terminate if the current promise is not resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var p = promise.catch(function() { return promise; })
+```
+This would result in different behavior because it would create a new promise that resolves to the current promise if it is rejected, which could cause the loop to never terminate if the current promise is rejected.
+
+DONE.

@@ -1,0 +1,25 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value);
+```
+This would result in different behavior because it would cause the generator to return a promise for the result value, rather than the result value itself.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value).then(function (value) {
+    return value;
+});
+```
+This would result in different behavior because it would cause the generator to return a promise for the result value, rather than the result value itself, and would also add an unnecessary then() call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(result.value).then(function (value) {
+    return value;
+}, function (error) {
+    return error;
+});
+```
+This would result in different behavior because it would cause the generator to return a promise for the result value, rather than the result value itself, and would also add an unnecessary then() call with a rejection handler that simply returns the error.
+
+DONE.

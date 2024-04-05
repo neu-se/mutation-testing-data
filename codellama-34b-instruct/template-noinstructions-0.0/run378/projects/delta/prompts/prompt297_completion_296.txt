@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+predicate(line, {}, i) === false
+```
+This would result in different behavior because the `attributes` parameter would always be an empty object, even if the line has attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+predicate(line, iter.next(1).attributes, i) === false
+```
+This would result in different behavior because the `attributes` parameter would be the attributes of the next op, not the current op.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+predicate(line, iter.next(1).attributes || {}, i) === false
+```
+This would result in different behavior because the `attributes` parameter would be the attributes of the next op, or an empty object if the next op has no attributes.
+
+DONE.

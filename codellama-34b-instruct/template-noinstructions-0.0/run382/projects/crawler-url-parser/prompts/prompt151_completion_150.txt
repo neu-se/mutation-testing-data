@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl.host == pageurl.host
+```
+This would result in different behavior because it would cause the `gettype` function to always return "internal" for links on the same domain, regardless of the subdomain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl.host.includes(pageurl.host)
+```
+This would result in different behavior because it would cause the `gettype` function to return "internal" for links on the same domain or a subdomain of the page's domain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl.host.startsWith(pageurl.host)
+```
+This would result in different behavior because it would cause the `gettype` function to return "internal" for links on the same domain or a subdomain of the page's domain, but only if the link's host starts with the page's host.
+
+DONE.

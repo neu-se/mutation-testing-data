@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+trackUnhandledRejections
+```
+This would result in different behavior because it would cause the `untrackRejection` function to be called, which would remove the promise from the `unhandledRejections` array, even if it had not been handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!trackUnhandledRejections
+```
+This would result in different behavior because it would cause the `trackRejection` function to be called, which would add the promise to the `unhandledRejections` array, even if it had been handled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof process === "object" && typeof process.emit === "function"
+```
+This would result in different behavior because it would cause the `process.emit` function to be called, which would emit an "unhandledRejection" event, even if the rejection had been handled.
+
+DONE.

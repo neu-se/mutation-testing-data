@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(promises);
+```
+This would result in different behavior because the `deferred.resolve` method is called with the `promises` array, which contains the original promises, rather than the resolved values. This would cause the `all` method to return a promise that resolves to an array of promises, rather than an array of values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(promises.map(function(promise) { return promise.value; }));
+```
+This would result in different behavior because the `deferred.resolve` method is called with an array of resolved values, rather than an array of promises. This would cause the `all` method to return a promise that resolves to an array of values, rather than an array of promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(promises.map(function(promise) { return promise.inspect().value; }));
+```
+This

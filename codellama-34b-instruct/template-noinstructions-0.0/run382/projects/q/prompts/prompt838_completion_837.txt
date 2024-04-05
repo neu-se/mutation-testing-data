@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, onUnhandledError);
+```
+This would result in different behavior because the `onUnhandledError` function would be called with the rejection reason as its argument, even if the rejection is handled by a `catch` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function () {
+    onUnhandledError();
+});
+```
+This would result in different behavior because the `onUnhandledError` function would be called with no arguments, even if the rejection is handled by a `catch` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function (reason) {
+    onUnhandledError(reason);
+});
+```
+This would result in different behavior because the `onUnhandledError` function would be called with the rejection reason as its argument, even if the rejection is handled by a `catch` method.
+
+DONE

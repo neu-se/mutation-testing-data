@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._flush()
+```
+This would result in different behavior because the original code fragment only calls `_flush` if the queue is not empty and the stream is not waiting for a drain, but this code fragment would call `_flush` regardless of the state of the queue and stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._flush(true)
+```
+This would result in different behavior because the original code fragment only calls `_flush` with no arguments, but this code fragment would call `_flush` with the argument `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._flush(false)
+```
+This would result in different behavior because the original code fragment only calls `_flush` with no arguments, but this code fragment would call `_flush` with the argument `false`.
+
+DONE.

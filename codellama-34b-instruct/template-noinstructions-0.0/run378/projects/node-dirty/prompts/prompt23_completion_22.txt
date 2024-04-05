@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); }
+```
+This would result in different behavior because the `emit('drain')` call is missing, which could cause the `drain` event to not be emitted when it should be, leading to unexpected behavior in the code that relies on this event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { this.emit('drain'); }
+```
+This would result in different behavior because the `cb` callback is missing, which could cause the callback to not be called when it should be, leading to unexpected behavior in the code that relies on this callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain'); }
+```
+This would result in different behavior because the `cb` callback is called twice, which could cause the callback to be called more times than it should be, leading to unexpected behavior in the code that relies on this callback.
+
+DONE.

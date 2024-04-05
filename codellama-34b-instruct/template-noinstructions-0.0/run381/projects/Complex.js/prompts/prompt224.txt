@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+
+        return new Complex(
+          (a * x + b) / t,
+          (b * x - a) / t);
+
+      } else {
+
+        x = d / c;
+        t = d * x + c;
+
+        return new Complex(
+          (a + b * x) / t,
+          (b - a * x) / t);
+      }
+    },
+
+    /**
+     * Calculate the power of two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'pow': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      a = this['re'];
+      b = this['im'];
+
+      if (z['isZero']()) {
+        return Complex['ONE'];
+      }
+
+      // If the exponent is real
+      if (z['im'] === 0) {
+
+        if (b === 0 && a > 0) {
+
+          return new Complex(Math.pow(a, z['re']), 0);
+
+        } else if (a === 0) { // If base is fully imaginary
+
+          switch ((z['re'] % 4 + 4) % 4) {
+            case 0:
+              return new Complex(Math.pow(b, z['re']), 0);
+            case 1:
+              return new Complex(0, Math.pow(b, z['re']));
+            case 2:
+              return new Complex(-Math.pow(b, z['re']), 0);
+            case 3:
+              return new Complex(0, -Math.pow(b, z['re']));
+          }
+        }
+      }
+
+      /* I couldn't find a good formula, so here is a derivation and optimization
+       *
+       * z_1^z_2 = (a + bi)^(c + di)
+       *         = exp((c + di) * log(a + bi)
+       *         = pow(a^2 + b^2, (c + di) / 2) * exp(i(c + di)atan2(b, a))
+       * =>...
+       * Re = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * cos(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+       * Im = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * sin(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+       *
+       * =>...
+       * Re = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * cos(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+       * Im = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * sin(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+       *
+       * =>
+       * Re = exp(c * logsq2 - d * arg(z_1)) * cos(d * logsq2 + c * arg(z_1))
+       * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
+       *
+       */
+
+      if (a === 0 && b === 0 && z['re'] > 0 && z['im'] >= 0) {
+        return Complex['ZERO'];
+      }
+
+      var arg = Math.atan2(b, a);
+      var loh = logHypot(a, b);
+
+      a = Math.exp(z['re'] * loh - z['im'] * arg);
+      b = z['im'] * loh + z['re'] * arg;
+      return new Complex(
+        a * Math.cos(b),
+        a * Math.sin(b));
+    },
+
+    /**
+     * Calculate the complex square root
+     *
+     * @returns {Complex}
+     */
+    'sqrt': function() {
+
+      var a = this['re'];
+      var b = this['im'];
+      var r = this['abs']();
+
+      var re, im;
+
+      if (<PLACEHOLDER>) {
+
+        if (b === 0) {
+          return new Complex(Math.sqrt(a), 0);
+        }
+
+        re = 0.5 * Math.sqrt(2.0 * (r + a));
+      } else {
+        re = Math.abs(b) / Math.sqrt(2 * (r - a));
+      }
+
+      if (a <= 0) {
+        im = 0.5 * Math.sqrt(2.0 * (r - a));
+      } else {
+        im = Math.abs(b) / Math.sqrt(2 * (r + a));
+      }
+
+      return new Complex(re, b < 0 ? -im : im);
+    },
+
+    /**
+     * Calculate the complex exponent
+     *
+     * @returns {Complex}
+     */
+    'exp': function() {
+
+      var tmp = Math.exp(this['re']);
+
+      if (this['im'] === 0) {
+        //return new Complex(tmp, 0);
+      }
+      return new Complex(
+        tmp * Math.cos(this['im']),
+        tmp * Math.sin(this['im']));
+    },
+
+    /**
+     * Calculate the complex exponent and subtracts one.
+     *
+     * This may be more accurate than `Complex(x).exp().sub(1)` if
+     * `x` is small.
+     *
+     * @returns {Complex}
+     */
+    'expm1': function() {
+
+      /**
+       * exp(a + i*b) - 1
+       = exp(a) * (cos(b) + j*sin(b)) - 1
+       = expm1(a)*cos(b) + cosm1(b) + j*exp(a)*sin(b)
+       */
+
+      var a = this['re'];
+      var b = this['im'];
+
+      return new Complex(
+        Math.expm1(a) * Math.cos(b) + cosm1(b),
+        Math.exp(a) * Math.sin(b));
+    },
+
+    /**
+     * Calculate the natural log
+     *
+     * @returns {Complex}
+     */
+    'log': function() {
+
+      var a = this['re'];
+      var b = this['im'];
+
+      if (b === 0 && a > 0) {
+        //return new Complex(Math.log(a), 0);
+      }
+
+      return new Complex(
+        logHypot(a, b),
+        Math.atan2(b, a));
+    },
+
+    /**
+     * Calculate the magnitude of the complex number
+     *
+     * @returns {number}
+     */
+    'abs': function() {
+
+      return hypot(this['re'], this['im']);
+    },
+
+    /**
+     * Calculate the angle of the complex number
+     *
+     * @returns {number}
+     */
+    'arg': function() {
+
+      return Math.atan2(this['im'], this['re']);
+    },
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+a >= 0
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

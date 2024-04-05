@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+    }
+
+    return promise;
+}
+
+Promise.prototype.toString = function () {
+    return "[object Promise]";
+};
+
+Promise.prototype.then = function (fulfilled, rejected, progressed) {
+    var self = this;
+    var deferred = defer();
+    var done = false;   // ensure the untrusted promise makes at most a
+                        // single call to one of the callbacks
+
+    function _fulfilled(value) {
+        try {
+            return typeof fulfilled === "function" ? fulfilled(value) : value;
+        } catch (exception) {
+            return reject(exception);
+        }
+    }
+
+    function _rejected(exception) {
+        if (typeof rejected === "function") {
+            makeStackTraceLong(exception, self);
+            try {
+                return rejected(exception);
+            } catch (newException) {
+                return reject(newException);
+            }
+        }
+        return reject(exception);
+    }
+
+    function _progressed(value) {
+        return typeof progressed === "function" ? progressed(value) : value;
+    }
+
+    Q.nextTick(function () {
+        self.promiseDispatch(function (value) {
+            if (done) {
+                return;
+            }
+            done = true;
+
+            deferred.resolve(_fulfilled(value));
+        }, "when", [function (exception) {
+            if (done) {
+                return;
+            }
+            done = true;
+
+            deferred.resolve(_rejected(exception));
+        }]);
+    });
+
+    // Progress propagator need to be attached in the current tick.
+    self.promiseDispatch(void 0, "when", [void 0, function (value) {
+        var newValue;
+        var threw = false;
+        try {
+            newValue = _progressed(value);
+        } catch (e) {
+            threw = true;
+            if (Q.onerror) {
+                Q.onerror(e);
+            } else {
+                throw e;
+            }
+        }
+
+        if (!threw) {
+            deferred.notify(newValue);
+        }
+    }]);
+
+    return deferred.promise;
+};
+
+Q.tap = function (promise, callback) {
+    return Q(promise).tap(callback);
+};
+
+/**
+ * Works almost like "finally", but not called for rejections.
+ * Original resolution value is passed through callback unaffected.
+ * Callback may return a promise that will be awaited for.
+ * @param {Function} callback
+ * @returns {Q.Promise}
+ * @example
+ * doSomething()
+ *   .then(...)
+ *   .tap(console.log)
+ *   .then(...);
+ */
+Promise.prototype.tap = function (callback) {
+    callback = Q(callback);
+
+    return this.then(function (value) {
+        return callback.fcall(<PLACEHOLDER>).thenResolve(value);
+    });
+};
+
+/**
+ * Registers an observer on a promise.
+ *
+ * Guarantees:
+ *
+ * 1. that fulfilled and rejected will be called only once.
+ * 2. that either the fulfilled callback or the rejected callback will be
+ *    called, but not both.
+ * 3. that fulfilled and rejected will not be called in this turn.
+ *
+ * @param value      promise or immediate reference to observe
+ * @param fulfilled  function to be called with the fulfilled value
+ * @param rejected   function to be called with the rejection exception
+ * @param progressed function to be called on any progress notifications
+ * @return promise for the return value from the invoked callback
+ */
+Q.when = when;
+function when(value, fulfilled, rejected, progressed) {
+    return Q(value).then(fulfilled, rejected, progressed);
+}
+
+Promise.prototype.thenResolve = function (value) {
+    return this.then(function () { return value; });
+};
+
+Q.thenResolve = function (promise, value) {
+    return Q(promise).thenResolve(value);
+};
+
+Promise.prototype.thenReject = function (reason) {
+    return this.then(function () { throw reason; });
+};
+
+Q.thenReject = function (promise, reason) {
+    return Q(promise).thenReject(reason);
+};
+
+/**
+ * If an object is not a promise, it is as "near" as possible.
+ * If a promise is rejected, it is as "near" as possible too.
+ * If it’s a fulfilled promise, the fulfillment value is nearer.
+ * If it’s a deferred promise and the deferred has been resolved, the
+ * resolution is "nearer".
+ * @param object
+ * @returns most resolved (nearest) form of the object
+ */
+
+// XXX should we re-do this?
+Q.nearer = nearer;
+function nearer(value) {
+    if (isPromise(value)) {
+        var inspected = value.inspect();
+        if (inspected.state === "fulfilled") {
+            return inspected.value;
+        }
+    }
+    return value;
+}
+
+/**
+ * @returns whether the given object is a promise.
+ * Otherwise it is a fulfilled value.
+ */
+Q.isPromise = isPromise;
+function isPromise(object) {
+    return object instanceof Promise;
+}
+
+Q.isPromiseAlike = isPromiseAlike;
+function isPromiseAlike(object) {
+    return isObject(object) && typeof object.then === "function";
+}
+
+/**
+ * @returns whether the given object is a pending promise, meaning not
+ * fulfilled or rejected.
+ */
+Q.isPending = isPending;
+function isPending(object) {
+    return isPromise(object) && object.inspect().state === "pending";
+}
+
+Promise.prototype.isPending = function () {
+    return this.inspect().state === "pending";
+};
+
+/**
+ * @returns whether the given object is a value or fulfilled
+ * promise.
+ */
+Q.isFulfilled = isFulfilled;
+function isFulfilled(object) {
+    return !isPromise(object) || object.inspect().state === "fulfilled";
+}
+
+Promise.prototype.isFulfilled = function () {
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+value
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

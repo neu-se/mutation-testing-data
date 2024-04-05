@@ -1,0 +1,20 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    throw new Error("Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message);
+});
+```
+This would result in different behavior because the original code fragment would only throw an error if all promises were rejected, while this new code fragment would throw an error if any promise was rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    return Q.reject(new Error("Q can't get fulfillment value from any promise, all promises were rejected. Last error message: " + rejection.message));
+});
+```
+This would result in different behavior because the original code fragment would only throw an error if all promises were rejected, while this new code fragment would reject the promise with an error if any promise was rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {
+    return Q.

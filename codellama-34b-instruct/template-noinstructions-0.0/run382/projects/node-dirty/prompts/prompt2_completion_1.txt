@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, val);
+```
+This would result in different behavior because it would cause the `set` method to always set the value of the key to `val`, regardless of whether `val` is undefined or not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, val || null);
+```
+This would result in different behavior because it would cause the `set` method to set the value of the key to `null` if `val` is undefined, rather than deleting the key.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._data.set(key, val || this._data.get(key));
+```
+This would result in different behavior because it would cause the `set` method to set the value of the key to the current value of the key if `val` is undefined, rather than deleting the key.
+
+DONE.

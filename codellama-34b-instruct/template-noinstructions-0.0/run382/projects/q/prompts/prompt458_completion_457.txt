@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {})
+```
+This would result in different behavior because it would create a new promise that is resolved with the original promise's fulfillment value, but it would not propagate the rejection reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {}, function () {})
+```
+This would result in different behavior because it would create a new promise that is resolved with the original promise's fulfillment value, but it would also catch any rejections and convert them to fulfillments with a value of `undefined`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(function () {}, function (reason) { throw reason; })
+```
+This would result in different behavior because it would create a new promise that is resolved with the original promise's fulfillment value, but it would also catch any rejections and convert them to fulfillments with a value of `undefined`.
+
+DONE.

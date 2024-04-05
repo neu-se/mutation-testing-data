@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport && !hasStacks
+```
+This would result in different behavior because the `hasStacks` variable is negated, which would cause the `promise.stack` property to be set to `undefined` even if `Q.longStackSupport` is `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport || hasStacks
+```
+This would result in different behavior because the `hasStacks` variable is added to the `Q.longStackSupport` variable using the logical OR operator, which would cause the `promise.stack` property to be set to a non-empty string even if `Q.longStackSupport` is `false`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport && hasStacks
+```
+This would result in different behavior because the `hasStacks` variable is added to the `Q.longStackSupport` variable using the logical AND operator, which would cause the `promise.

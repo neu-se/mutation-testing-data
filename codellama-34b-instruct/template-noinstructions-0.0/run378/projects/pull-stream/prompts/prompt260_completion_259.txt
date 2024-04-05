@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return cb(err)
+```
+This would result in different behavior because the original code fragment `read(true, function(abortErr) { cb(err) })` would call the `read` function with an error object, but the new code fragment would call the `cb` function directly with the error object, bypassing the `read` function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return read(err, cb)
+```
+This would result in different behavior because the original code fragment `read(true, function(abortErr) { cb(err) })` would call the `read` function with an error object and a callback function, but the new code fragment would call the `read` function with an error object and a different callback function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return cb(null, err)
+```
+This would result in different behavior because the original code fragment `read(true, function(abortErr) { cb(err) }

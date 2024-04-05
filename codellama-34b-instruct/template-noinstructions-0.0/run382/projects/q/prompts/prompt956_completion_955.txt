@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.slice(0)
+```
+This would result in different behavior because `slice(0)` creates a shallow copy of the `nodeArgs` array, which may cause the `nodeArgs.push(deferred.makeNodeResolver())` line to fail if the `deferred.makeNodeResolver()` function returns a value that is not a function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.concat()
+```
+This would result in different behavior because `concat()` creates a new array that is a concatenation of the `nodeArgs` array and any additional arguments passed to it. This could cause the `nodeArgs.push(deferred.makeNodeResolver())` line to fail if the `deferred.makeNodeResolver()` function returns a value that is not a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nodeArgs.splice(0)
+```
+This would result in different behavior because `splice(0)` removes all elements from the `nodeArgs

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/, '')
+```
+This would result in different behavior because the regular expression is not anchored to the start of the string, so it would replace all occurrences of the BOM character, not just the first one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/g, '')
+```
+This would result in different behavior because the regular expression is anchored to the start of the string, but the `g` flag is not used, so it would only replace the first occurrence of the BOM character.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/g, ' ')
+```
+This would result in different behavior because the regular expression is anchored to the start of the string and the `g` flag is used, but the replacement string is a space character, not an empty string, so it would replace the BOM character with a space character.
+
+DONE.

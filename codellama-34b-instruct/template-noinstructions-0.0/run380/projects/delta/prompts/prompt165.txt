@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+    return this;
+  }
+
+  chop(): this {
+    const lastOp = this.ops[this.ops.length - 1];
+    if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {
+      this.ops.pop();
+    }
+    return this;
+  }
+
+  filter(predicate: (op: Op, index: number) => boolean): Op[] {
+    return this.ops.filter(predicate);
+  }
+
+  forEach(predicate: (op: Op, index: number) => void): void {
+    this.ops.forEach(predicate);
+  }
+
+  map<T>(predicate: (op: Op, index: number) => T): T[] {
+    return this.ops.map(predicate);
+  }
+
+  partition(predicate: (op: Op) => boolean): [Op[], Op[]] {
+    const passed: Op[] = [];
+    const failed: Op[] = [];
+    this.forEach((op) => {
+      const target = predicate(op) ? passed : failed;
+      target.push(op);
+    });
+    return [passed, failed];
+  }
+
+  reduce<T>(
+    predicate: (accum: T, curr: Op, index: number) => T,
+    initialValue: T,
+  ): T {
+    return this.ops.reduce(predicate, initialValue);
+  }
+
+  changeLength(): number {
+    return this.reduce((length, elem) => {
+      if (elem.insert) {
+        return length + Op.length(elem);
+      } else if (elem.delete) {
+        return length - elem.delete;
+      }
+      return length;
+    }, 0);
+  }
+
+  length(): number {
+    return this.reduce((length, elem) => {
+      return length + Op.length(elem);
+    }, 0);
+  }
+
+  slice(start = 0, end = Infinity): Delta {
+    const ops = [];
+    const iter = new OpIterator(this.ops);
+    let index = 0;
+    while (index < end && iter.hasNext()) {
+      let nextOp;
+      if (index < start) {
+        nextOp = iter.next(start - index);
+      } else {
+        nextOp = iter.next(end - index);
+        ops.push(nextOp);
+      }
+      index += Op.length(nextOp);
+    }
+    return new Delta(ops);
+  }
+
+  compose(other: Delta): Delta {
+    const thisIter = new OpIterator(this.ops);
+    const otherIter = new OpIterator(other.ops);
+    const ops = [];
+    const firstOther = otherIter.peek();
+    if (
+      firstOther != null &&
+      typeof firstOther.retain === 'number' &&
+      firstOther.attributes == null
+    ) {
+      let firstLeft = firstOther.retain;
+      while (
+        thisIter.peekType() === 'insert' &&
+        thisIter.peekLength() <= firstLeft
+      ) {
+        firstLeft -= thisIter.peekLength();
+        ops.push(thisIter.next());
+      }
+      if (firstOther.retain - firstLeft > 0) {
+        otherIter.next(firstOther.retain - firstLeft);
+      }
+    }
+    const delta = new Delta(ops);
+    while (thisIter.hasNext() || otherIter.hasNext()) {
+      if (otherIter.peekType() === 'insert') {
+        delta.push(otherIter.next());
+      } else if (<PLACEHOLDER>() === 'delete') {
+        delta.push(thisIter.next());
+      } else {
+        const length = Math.min(thisIter.peekLength(), otherIter.peekLength());
+        const thisOp = thisIter.next(length);
+        const otherOp = otherIter.next(length);
+        if (otherOp.retain) {
+          const newOp: Op = {};
+          if (typeof thisOp.retain === 'number') {
+            newOp.retain =
+              typeof otherOp.retain === 'number' ? length : otherOp.retain;
+          } else {
+            if (typeof otherOp.retain === 'number') {
+              if (thisOp.retain == null) {
+                newOp.insert = thisOp.insert;
+              } else {
+                newOp.retain = thisOp.retain;
+              }
+            } else {
+              const action = thisOp.retain == null ? 'insert' : 'retain';
+              const [embedType, thisData, otherData] = getEmbedTypeAndData(
+                thisOp[action],
+                otherOp.retain,
+              );
+              const handler = Delta.getHandler(embedType);
+              newOp[action] = {
+                [embedType]: handler.compose(
+                  thisData,
+                  otherData,
+                  action === 'retain',
+                ),
+              };
+            }
+          }
+          // Preserve null when composing with a retain, otherwise remove it for inserts
+          const attributes = AttributeMap.compose(
+            thisOp.attributes,
+            otherOp.attributes,
+            typeof thisOp.retain === 'number',
+          );
+          if (attributes) {
+            newOp.attributes = attributes;
+          }
+          delta.push(newOp);
+
+          // Optimization if rest of other is just retain
+          if (
+            !otherIter.hasNext() &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+          ) {
+            const rest = new Delta(thisIter.rest());
+            return delta.concat(rest).chop();
+          }
+
+          // Other op should be delete, we could be an insert or retain
+          // Insert + delete cancels out
+        } else if (
+          typeof otherOp.delete === 'number' &&
+          (typeof thisOp.retain === 'number' ||
+            (typeof thisOp.retain === 'object' && thisOp.retain !== null))
+        ) {
+          delta.push(otherOp);
+        }
+      }
+    }
+    return delta.chop();
+  }
+
+  concat(other: Delta): Delta {
+    const delta = new Delta(this.ops.slice());
+    if (other.ops.length > 0) {
+      delta.push(other.ops[0]);
+      delta.ops = delta.ops.concat(other.ops.slice(1));
+    }
+    return delta;
+  }
+
+  diff(other: Delta, cursor?: number | diff.CursorInfo): Delta {
+    if (this.ops === other.ops) {
+      return new Delta();
+    }
+    const strings = [this, other].map((delta) => {
+      return delta
+        .map((op) => {
+          if (op.insert != null) {
+            return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;
+          }
+          const prep = delta === other ? 'on' : 'with';
+          throw new Error('diff() called ' + prep + ' non-document');
+        })
+        .join('');
+    });
+    const retDelta = new Delta();
+    const diffResult = diff(strings[0], strings[1], cursor);
+    const thisIter = new OpIterator(this.ops);
+    const otherIter = new OpIterator(other.ops);
+    diffResult.forEach((component: diff.Diff) => {
+      let length = component[1].length;
+      while (length > 0) {
+        let opLength = 0;
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+thisIter.peekType
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

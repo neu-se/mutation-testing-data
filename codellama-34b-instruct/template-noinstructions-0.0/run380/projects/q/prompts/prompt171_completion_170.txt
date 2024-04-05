@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+isNodeFrame
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to always return `true`, which would cause the `filterStackString` function to always return an empty string, which would cause the `makeStackTraceLong` function to always return a promise that is rejected with an error that has an empty stack trace.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isInternalFrame
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to always return `false`, which would cause the `filterStackString` function to always return the original stack trace, which would cause the `makeStackTraceLong` function to always return a promise that is resolved with the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!isInternalFrame
+```
+This would result in different behavior because it would cause the `isInternalFrame` function to always return `true`, which would cause the `filterStackString` function to always return an empty string,

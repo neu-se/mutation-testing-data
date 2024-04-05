@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes === lastOp.attributes
+```
+This would result in different behavior because it would compare the attributes objects by reference instead of by value, which could cause the code to produce different results if the attributes objects are not the same reference.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.is(newOp.attributes, lastOp.attributes)
+```
+This would result in different behavior because it would compare the attributes objects using the `Object.is()` method, which checks for both value and reference equality, instead of just value equality.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+JSON.stringify(newOp.attributes) === JSON.stringify(lastOp.attributes)
+```
+This would result in different behavior because it would compare the attributes objects by converting them to JSON strings, which could cause the code to produce different results if the attributes objects have different property orders or if they contain functions or other non-JSON-serializable values.
+
+DONE.

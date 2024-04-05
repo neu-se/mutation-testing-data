@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest))
+```
+This would result in different behavior because the `pipe` method is not called on the `res` object, which is a stream, and therefore the data would not be written to the file.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+createWriteStream(dest).write(res)
+```
+This would result in different behavior because the `write` method is not called on the `createWriteStream` object, which is a stream, and therefore the data would not be written to the file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('error', reject)
+```
+This would result in different behavior because the `on` method is not called on the `res` object, which is a stream, and therefore the error event would not be handled.
+
+DONE.

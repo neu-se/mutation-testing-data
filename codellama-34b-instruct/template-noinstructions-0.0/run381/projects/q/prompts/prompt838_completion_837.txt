@@ -1,0 +1,21 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, onUnhandledError);
+```
+This would result in different behavior because the `onUnhandledError` function would be called with the rejection reason as its argument, but it would not be able to handle the rejection because it is not a function that returns a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function () {
+    throw new Error("Unhandled rejection");
+});
+```
+This would result in different behavior because the `throw` statement would cause the promise to be rejected with a new error, rather than the original rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.then(null, function (reason) {
+    return Q.reject(reason);
+});
+```
+This would result in different behavior because the `Q.reject` function would return a new rejected promise with the original rejection reason, rather than the `onUnhandledError` function

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+end && !abort
+```
+This would result in different behavior because the `end` variable is not being checked for truthiness, which could cause the `once` function to be called even if the stream has not ended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end || abort
+```
+This would result in different behavior because the `end` variable is being checked for truthiness, but the `abort` variable is not being checked, which could cause the `once` function to be called even if the stream has not been aborted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end && abort
+```
+This would result in different behavior because the `end` and `abort` variables are both being checked for truthiness, which could cause the `once` function to be called even if the stream has not ended and has not been aborted.
+
+DONE.

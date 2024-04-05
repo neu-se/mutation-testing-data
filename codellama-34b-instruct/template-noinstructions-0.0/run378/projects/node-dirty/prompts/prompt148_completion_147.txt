@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+cbs.slice()
+```
+This would result in different behavior because `cbs.slice()` creates a shallow copy of the `cbs` array, while `cbs` itself is a reference to the original array. If the `cbs` array is modified after the `new Proxy` call, the `cbs.slice()` version would not reflect those changes, while the original version would.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cbs.concat()
+```
+This would result in different behavior because `cbs.concat()` creates a new array that is a concatenation of the `cbs` array and any additional arrays passed as arguments. If the `cbs` array is modified after the `new Proxy` call, the `cbs.concat()` version would not reflect those changes, while the original version would.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cbs.map(cb => cb)
+```
+This would result in different behavior because `cbs

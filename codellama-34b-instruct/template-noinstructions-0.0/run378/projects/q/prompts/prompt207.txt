@@ -1,0 +1,233 @@
+Your task is to apply mutation testing to the following code:
+```
+    // cruft, then concatenating with the stack trace of `promise`. See #57.
+    if (hasStacks &&
+        promise.stack &&
+        typeof error === "object" &&
+        error !== null &&
+        error.stack
+    ) {
+        var stacks = [];
+        for (var p = promise; !!p; p = p.source) {
+            if (p.stack && (!error.__minimumStackCounter__ || error.__minimumStackCounter__ > p.stackCounter)) {
+                object_defineProperty(error, "__minimumStackCounter__", {value: p.stackCounter, configurable: true});
+                stacks.unshift(p.stack);
+            }
+        }
+        stacks.unshift(error.stack);
+
+        var concatedStacks = stacks.join("\n" + STACK_JUMP_SEPARATOR + "\n");
+        var stack = filterStackString(concatedStacks);
+        object_defineProperty(error, "stack", {value: stack, configurable: true});
+    }
+}
+
+function filterStackString(stackString) {
+    var lines = stackString.split("\n");
+    var desiredLines = [];
+    for (var i = 0; i < lines.length; ++i) {
+        var line = lines[i];
+
+        if (!isInternalFrame(line) && !isNodeFrame(line) && line) {
+            desiredLines.push(line);
+        }
+    }
+    return desiredLines.join("\n");
+}
+
+function isNodeFrame(stackLine) {
+    return stackLine.indexOf("(module.js:") !== -1 ||
+           stackLine.indexOf("(node.js:") !== -1;
+}
+
+function getFileNameAndLineNumber(stackLine) {
+    // Named functions: "at functionName (filename:lineNumber:columnNumber)"
+    // In IE10 function name can have spaces ("Anonymous function") O_o
+    var attempt1 = /at .+ \((.+):(\d+):(?:\d+)\)$/.exec(stackLine);
+    if (attempt1) {
+        return [attempt1[1], Number(attempt1[2])];
+    }
+
+    // Anonymous functions: "at filename:lineNumber:columnNumber"
+    var attempt2 = /at ([^ ]+):(\d+):(?:\d+)$/.exec(stackLine);
+    if (attempt2) {
+        return [attempt2[1], Number(attempt2[2])];
+    }
+
+    // Firefox style: "function@filename:lineNumber or @filename:lineNumber"
+    var attempt3 = /.*@(.+):(\d+)$/.exec(stackLine);
+    if (attempt3) {
+        return [attempt3[1], Number(attempt3[2])];
+    }
+}
+
+function isInternalFrame(stackLine) {
+    var fileNameAndLineNumber = getFileNameAndLineNumber(stackLine);
+
+    if (!fileNameAndLineNumber) {
+        return false;
+    }
+
+    var fileName = fileNameAndLineNumber[0];
+    var lineNumber = fileNameAndLineNumber[1];
+
+    return fileName === qFileName &&
+        lineNumber >= qStartingLine &&
+        lineNumber <= qEndingLine;
+}
+
+// discover own file name and line number range for filtering stack
+// traces
+function captureLine() {
+    if (!hasStacks) {
+        return;
+    }
+
+    try {
+        throw new Error();
+    } catch (e) {
+        var lines = e.stack.split("\n");
+        var firstLine = lines[0].indexOf("@") > 0 ? lines[1] : lines[2];
+        var fileNameAndLineNumber = getFileNameAndLineNumber(firstLine);
+        if (!fileNameAndLineNumber) {
+            return;
+        }
+
+        qFileName = fileNameAndLineNumber[0];
+        return fileNameAndLineNumber[1];
+    }
+}
+
+function deprecate(callback, name, alternative) {
+    return function () {
+        if (<PLACEHOLDER>) {
+            console.warn(name + " is deprecated, use " + alternative +
+                         " instead.", new Error("").stack);
+        }
+        return callback.apply(callback, arguments);
+    };
+}
+
+// end of shims
+// beginning of real work
+
+/**
+ * Constructs a promise for an immediate reference, passes promises through, or
+ * coerces promises from different systems.
+ * @param value immediate reference or promise
+ */
+function Q(value) {
+    // If the object is already a Promise, return it directly.  This enables
+    // the resolve function to both be used to created references from objects,
+    // but to tolerably coerce non-promises to promises.
+    if (value instanceof Promise) {
+        return value;
+    }
+
+    // assimilate thenables
+    if (isPromiseAlike(value)) {
+        return coerce(value);
+    } else {
+        return fulfill(value);
+    }
+}
+Q.resolve = Q;
+
+/**
+ * Performs a task in a future turn of the event loop.
+ * @param {Function} task
+ */
+Q.nextTick = nextTick;
+
+/**
+ * Controls whether or not long stack traces will be on
+ */
+Q.longStackSupport = false;
+
+/**
+ * The counter is used to determine the stopping point for building
+ * long stack traces. In makeStackTraceLong we walk backwards through
+ * the linked list of promises, only stacks which were created before
+ * the rejection are concatenated.
+ */
+var longStackCounter = 1;
+
+// enable long stacks if Q_DEBUG is set
+if (typeof process === "object" && process && process.env && process.env.Q_DEBUG) {
+    Q.longStackSupport = true;
+}
+
+/**
+ * Constructs a {promise, resolve, reject} object.
+ *
+ * `resolve` is a callback to invoke with a more resolved value for the
+ * promise. To fulfill the promise, invoke `resolve` with any value that is
+ * not a thenable. To reject the promise, invoke `resolve` with a rejected
+ * thenable, or invoke `reject` with the reason directly. To resolve the
+ * promise to another thenable, thus putting it in the same state, invoke
+ * `resolve` with that other thenable.
+ */
+Q.defer = defer;
+function defer() {
+    // if "messages" is an "Array", that indicates that the promise has not yet
+    // been resolved.  If it is "undefined", it has been resolved.  Each
+    // element of the messages array is itself an array of complete arguments to
+    // forward to the resolved promise.  We coerce the resolution value to a
+    // promise using the `resolve` function because it handles both fully
+    // non-thenable values and other thenables gracefully.
+    var messages = [], progressListeners = [], resolvedPromise;
+
+    var deferred = object_create(defer.prototype);
+    var promise = object_create(Promise.prototype);
+
+    promise.promiseDispatch = function (resolve, op, operands) {
+        var args = array_slice(arguments);
+        if (messages) {
+            messages.push(args);
+            if (op === "when" && operands[1]) { // progress operand
+                progressListeners.push(operands[1]);
+            }
+        } else {
+            Q.nextTick(function () {
+                resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+            });
+        }
+    };
+
+    // XXX deprecated
+    promise.valueOf = function () {
+        if (messages) {
+            return promise;
+        }
+        var nearerValue = nearer(resolvedPromise);
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+typeof console !== "undefined" &&
+            typeof console.warn === "function"
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

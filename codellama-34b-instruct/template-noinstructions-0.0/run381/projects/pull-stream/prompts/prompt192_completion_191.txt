@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+map(data, function (err, data) {
+  busy = false
+  if(aborted) {
+    cb(aborted)
+    abortCb && abortCb(aborted)
+  }
+  else if(err) next (err, cb)
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `busy` flag is not set to `false` before calling the `map` function, which could cause the `busy` flag to be stuck in an incorrect state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+map(data, function (err, data) {
+  if(aborted) {
+    cb(aborted)
+    abortCb && abortCb(aborted)
+  }
+  else if(err) next (err, cb)
+  else cb(null, data)
+})
+```
+This would result in different behavior because the `busy` flag is not set to `false` before calling the

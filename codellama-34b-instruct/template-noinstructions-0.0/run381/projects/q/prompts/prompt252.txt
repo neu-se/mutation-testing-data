@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+
+/**
+ * The counter is used to determine the stopping point for building
+ * long stack traces. In makeStackTraceLong we walk backwards through
+ * the linked list of promises, only stacks which were created before
+ * the rejection are concatenated.
+ */
+var longStackCounter = 1;
+
+// enable long stacks if Q_DEBUG is set
+if (typeof process === "object" && process && process.env && process.env.Q_DEBUG) {
+    Q.longStackSupport = true;
+}
+
+/**
+ * Constructs a {promise, resolve, reject} object.
+ *
+ * `resolve` is a callback to invoke with a more resolved value for the
+ * promise. To fulfill the promise, invoke `resolve` with any value that is
+ * not a thenable. To reject the promise, invoke `resolve` with a rejected
+ * thenable, or invoke `reject` with the reason directly. To resolve the
+ * promise to another thenable, thus putting it in the same state, invoke
+ * `resolve` with that other thenable.
+ */
+Q.defer = defer;
+function defer() {
+    // if "messages" is an "Array", that indicates that the promise has not yet
+    // been resolved.  If it is "undefined", it has been resolved.  Each
+    // element of the messages array is itself an array of complete arguments to
+    // forward to the resolved promise.  We coerce the resolution value to a
+    // promise using the `resolve` function because it handles both fully
+    // non-thenable values and other thenables gracefully.
+    var messages = [], progressListeners = [], resolvedPromise;
+
+    var deferred = object_create(defer.prototype);
+    var promise = object_create(Promise.prototype);
+
+    promise.promiseDispatch = function (resolve, op, operands) {
+        var args = array_slice(arguments);
+        if (messages) {
+            messages.push(args);
+            if (op === "when" && operands[1]) { // progress operand
+                progressListeners.push(operands[1]);
+            }
+        } else {
+            Q.nextTick(function () {
+                resolvedPromise.promiseDispatch.apply(resolvedPromise, args);
+            });
+        }
+    };
+
+    // XXX deprecated
+    promise.valueOf = function () {
+        if (messages) {
+            return promise;
+        }
+        var nearerValue = nearer(resolvedPromise);
+        if (isPromise(nearerValue)) {
+            resolvedPromise = nearerValue; // shorten chain
+        }
+        return nearerValue;
+    };
+
+    promise.inspect = function () {
+        if (!resolvedPromise) {
+            return { state: "pending" };
+        }
+        return resolvedPromise.inspect();
+    };
+
+    if (Q.longStackSupport && hasStacks) {
+        try {
+            throw new Error();
+        } catch (e) {
+            // NOTE: don't try to use `Error.captureStackTrace` or transfer the
+            // accessor around; that causes memory leaks as per GH-111. Just
+            // reify the stack trace as a string ASAP.
+            //
+            // At the same time, cut off the first line; it's always just
+            // "[object Promise]\n", as per the `toString`.
+            promise.stack = e.stack.substring(e.stack.indexOf("\n") + 1);
+            promise.stackCounter = longStackCounter++;
+        }
+    }
+
+    // NOTE: we do the checks for `resolvedPromise` in each method, instead of
+    // consolidating them into `become`, since otherwise we'd create new
+    // promises with the lines `become(whatever(value))`. See e.g. GH-252.
+
+    function become(newPromise) {
+        resolvedPromise = newPromise;
+
+        if (Q.longStackSupport && hasStacks) {
+            // Only hold a reference to the new promise if long stacks
+            // are enabled to reduce memory usage
+            promise.source = newPromise;
+        }
+
+        array_reduce(messages, function (undefined, message) {
+            Q.nextTick(function () {
+                <PLACEHOLDER>(newPromise, message);
+            });
+        }, void 0);
+
+        messages = void 0;
+        progressListeners = void 0;
+    }
+
+    deferred.promise = promise;
+    deferred.resolve = function (value) {
+        if (resolvedPromise) {
+            return;
+        }
+
+        become(Q(value));
+    };
+
+    deferred.fulfill = function (value) {
+        if (resolvedPromise) {
+            return;
+        }
+
+        become(fulfill(value));
+    };
+    deferred.reject = function (reason) {
+        if (resolvedPromise) {
+            return;
+        }
+
+        become(reject(reason));
+    };
+    deferred.notify = function (progress) {
+        if (resolvedPromise) {
+            return;
+        }
+
+        array_reduce(progressListeners, function (undefined, progressListener) {
+            Q.nextTick(function () {
+                progressListener(progress);
+            });
+        }, void 0);
+    };
+
+    return deferred;
+}
+
+/**
+ * Creates a Node-style callback that will resolve or reject the deferred
+ * promise.
+ * @returns a nodeback
+ */
+defer.prototype.makeNodeResolver = function () {
+    var self = this;
+    return function (error, value) {
+        if (error) {
+            self.reject(error);
+        } else if (arguments.length > 2) {
+            self.resolve(array_slice(arguments, 1));
+        } else {
+            self.resolve(value);
+        }
+    };
+};
+
+/**
+ * @param resolver {Function} a function that returns nothing and accepts
+ * the resolve, reject, and notify functions for a deferred.
+ * @returns a promise that may be resolved with the given resolve and reject
+ * functions, or rejected by a thrown exception in resolver
+ */
+Q.Promise = promise; // ES6
+Q.promise = promise;
+function promise(resolver) {
+    if (typeof resolver !== "function") {
+        throw new TypeError("resolver must be a function.");
+    }
+    var deferred = defer();
+    try {
+        resolver(deferred.resolve, deferred.reject, deferred.notify);
+    } catch (reason) {
+        deferred.reject(reason);
+    }
+    return deferred.promise;
+}
+
+promise.race = race; // ES6
+promise.all = all; // ES6
+promise.reject = reject; // ES6
+promise.resolve = Q; // ES6
+
+// XXX experimental.  This method is a way to denote that a local value is
+// serializable and should be immediately dispatched to a remote upon request,
+// instead of passing a reference.
+Q.passByCopy = function (object) {
+    //freeze(object);
+    //passByCopies.set(object, true);
+    return object;
+};
+
+Promise.prototype.passByCopy = function () {
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+newPromise.promiseDispatch.apply
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

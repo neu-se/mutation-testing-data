@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!abort
+```
+This would result in different behavior because the `!` operator negates the `abort` signal, causing the stream to continue even if it has been aborted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+abort && false
+```
+This would result in different behavior because the `&&` operator short-circuits the evaluation of the expression, causing the `false` value to be returned if `abort` is truthy, regardless of the value of `_read`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+abort || true
+```
+This would result in different behavior because the `||` operator short-circuits the evaluation of the expression, causing the `true` value to be returned if `abort` is falsy, regardless of the value of `_read`.
+
+DONE.

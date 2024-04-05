@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+hasStacks
+```
+This would result in different behavior because it would cause the `captureLine` function to always return `undefined`, which would prevent the `qFileName` and `qStartingLine` variables from being set, and the `isInternalFrame` function would always return `false`, which would cause the `filterStackString` function to return the entire stack trace, even if it contains internal frames.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!hasStacks
+```
+This would result in different behavior because it would cause the `captureLine` function to always return a value, which would set the `qFileName` and `qStartingLine` variables, and the `isInternalFrame` function would always return `true`, which would cause the `filterStackString` function to filter out internal frames from the stack trace.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+hasStacks && !isInternalFrame(stackLine)
+```
+This would result in different behavior because it

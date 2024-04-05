@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+resetUnhandledRejections();
+
+//// END UNHANDLED REJECTION TRACKING
+
+/**
+ * Constructs a rejected promise.
+ * @param reason value describing the failure
+ */
+Q.reject = reject;
+function reject(reason) {
+    var rejection = Promise({
+        "when": function (rejected) {
+            // note that the error has been handled
+            if (rejected) {
+                untrackRejection(this);
+            }
+            return rejected ? rejected(reason) : this;
+        }
+    }, function fallback() {
+        return this;
+    }, function inspect() {
+        return { state: "rejected", reason: reason };
+    });
+
+    // Note that the reason has not been handled.
+    trackRejection(rejection, reason);
+
+    return rejection;
+}
+
+/**
+ * Constructs a fulfilled promise for an immediate reference.
+ * @param value immediate reference
+ */
+Q.fulfill = fulfill;
+function fulfill(value) {
+    return Promise({
+        "when": function () {
+            return value;
+        },
+        "get": function (name) {
+            return value[name];
+        },
+        "set": function (name, rhs) {
+            value[name] = rhs;
+        },
+        "delete": function (name) {
+            delete value[name];
+        },
+        "post": function (name, args) {
+            // Mark Miller proposes that post with no name should apply a
+            // promised function.
+            if (name === null || name === void 0) {
+                return value.apply(void 0, args);
+            } else {
+                return value[name].apply(value, args);
+            }
+        },
+        "apply": function (thisp, args) {
+            return value.apply(thisp, args);
+        },
+        "keys": function () {
+            return object_keys(value);
+        }
+    }, void 0, function inspect() {
+        return { state: "fulfilled", value: value };
+    });
+}
+
+/**
+ * Converts thenables to Q promises.
+ * @param promise thenable promise
+ * @returns a Q promise
+ */
+function coerce(promise) {
+    var deferred = defer();
+    Q.nextTick(function () {
+        try {
+            promise.then(deferred.resolve, deferred.reject, deferred.notify);
+        } catch (exception) {
+            deferred.reject(exception);
+        }
+    });
+    return deferred.promise;
+}
+
+/**
+ * Annotates an object such that it will never be
+ * transferred away from this process over any promise
+ * communication channel.
+ * @param object
+ * @returns promise a wrapping of that object that
+ * additionally responds to the "isDef" message
+ * without a rejection.
+ */
+Q.master = master;
+function master(object) {
+    return Promise({
+        "isDef": function () {}
+    }, function fallback(op, args) {
+        return dispatch(object, op, <PLACEHOLDER>);
+    }, function () {
+        return Q(object).inspect();
+    });
+}
+
+/**
+ * Spreads the values of a promised array of arguments into the
+ * fulfillment callback.
+ * @param fulfilled callback that receives variadic arguments from the
+ * promised array
+ * @param rejected callback that receives the exception if the promise
+ * is rejected.
+ * @returns a promise for the return value or thrown exception of
+ * either callback.
+ */
+Q.spread = spread;
+function spread(value, fulfilled, rejected) {
+    return Q(value).spread(fulfilled, rejected);
+}
+
+Promise.prototype.spread = function (fulfilled, rejected) {
+    return this.all().then(function (array) {
+        return fulfilled.apply(void 0, array);
+    }, rejected);
+};
+
+/**
+ * The async function is a decorator for generator functions, turning
+ * them into asynchronous generators.  Although generators are only part
+ * of the newest ECMAScript 6 drafts, this code does not cause syntax
+ * errors in older engines.  This code should continue to work and will
+ * in fact improve over time as the language improves.
+ *
+ * ES6 generators are currently part of V8 version 3.19 with the
+ * --harmony-generators runtime flag enabled.  SpiderMonkey has had them
+ * for longer, but under an older Python-inspired form.  This function
+ * works on both kinds of generators.
+ *
+ * Decorates a generator function such that:
+ *  - it may yield promises
+ *  - execution will continue when that promise is fulfilled
+ *  - the value of the yield expression will be the fulfilled value
+ *  - it returns a promise for the return value (when the generator
+ *    stops iterating)
+ *  - the decorated function returns a promise for the return value
+ *    of the generator or the first rejected promise among those
+ *    yielded.
+ *  - if an error is thrown in the generator, it propagates through
+ *    every following yield until it is caught, or until it escapes
+ *    the generator function altogether, and is translated into a
+ *    rejection for the promise returned by the decorated generator.
+ */
+Q.async = async;
+function async(makeGenerator) {
+    return function () {
+        // when verb is "send", arg is a value
+        // when verb is "throw", arg is an exception
+        function continuer(verb, arg) {
+            var result;
+
+            // Until V8 3.19 / Chromium 29 is released, SpiderMonkey is the only
+            // engine that has a deployed base of browsers that support generators.
+            // However, SM's generators use the Python-inspired semantics of
+            // outdated ES6 drafts.  We would like to support ES6, but we'd also
+            // like to make it possible to use generators in deployed browsers, so
+            // we also support Python-style generators.  At some point we can remove
+            // this block.
+
+            if (typeof StopIteration === "undefined") {
+                // ES6 Generators
+                try {
+                    result = generator[verb](arg);
+                } catch (exception) {
+                    return reject(exception);
+                }
+                if (result.done) {
+                    return Q(result.value);
+                } else {
+                    return when(result.value, callback, errback);
+                }
+            } else {
+                // SpiderMonkey Generators
+                // FIXME: Remove this case when SM does ES6 generators.
+                try {
+                    result = generator[verb](arg);
+                } catch (exception) {
+                    if (isStopIteration(exception)) {
+                        return Q(exception.value);
+                    } else {
+                        return reject(exception);
+                    }
+                }
+                return when(result, callback, errback);
+            }
+        }
+        var generator = makeGenerator.apply(this, arguments);
+        var callback = continuer.bind(continuer, "next");
+        var errback = continuer.bind(continuer, "throw");
+        return callback();
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+args
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

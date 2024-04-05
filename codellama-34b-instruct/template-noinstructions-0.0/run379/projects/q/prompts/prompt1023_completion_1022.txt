@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(null)
+```
+This would result in different behavior because the `nodeback` argument is always `null`, which would cause the promise to be resolved with `null` instead of the original value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(function() {})
+```
+This would result in different behavior because the `nodeback` argument is always an empty function, which would cause the promise to be resolved with `undefined` instead of the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(function(error) { throw error; })
+```
+This would result in different behavior because the `nodeback` argument is always a function that throws an error, which would cause the promise to be rejected with the error instead of being resolved with the original value.
+
+DONE.

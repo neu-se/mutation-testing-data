@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.set(key, undefined, cb);
+```
+This would result in different behavior because it would cause the `set` method to be called with `undefined` as the value, which would delete the key from the database instead of updating it.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, undefined);
+```
+This would result in different behavior because it would cause the `set` method to be called with `undefined` as the callback, which would prevent the `drain` event from being emitted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.set(key, val, () => {});
+```
+This would result in different behavior because it would cause the `set` method to be called with an empty callback function, which would prevent the `drain` event from being emitted.
+
+DONE.

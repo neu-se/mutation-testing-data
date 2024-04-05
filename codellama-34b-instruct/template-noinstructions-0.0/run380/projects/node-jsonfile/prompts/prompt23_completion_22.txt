@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/, '')
+```
+This would result in different behavior because the `stripBom` function is not being called, which could cause issues with parsing JSON files that have a UTF-8 BOM (Byte Order Mark) at the beginning.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/, '').trim()
+```
+This would result in different behavior because the `trim` function is being called on the content before it is parsed, which could cause issues with parsing JSON files that have whitespace at the beginning or end.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+content.replace(/^\uFEFF/, '').toLowerCase()
+```
+This would result in different behavior because the `toLowerCase` function is being called on the content before it is parsed, which could cause issues with parsing JSON files that have uppercase characters.
+
+DONE.

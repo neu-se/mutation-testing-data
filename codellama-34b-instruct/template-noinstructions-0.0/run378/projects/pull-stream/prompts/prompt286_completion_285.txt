@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `!end` operator would always return `true`, even if `end` is `true`, which would cause the `mapper` function to be called with `null` instead of the expected `data`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && mapper(data)
+```
+This would result in different behavior because the `end` variable would be evaluated as a boolean, and if it is `true`, the `mapper` function would not be called at all, which would cause the `cb` function to be called with `null` instead of the expected `data`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end ? null : mapper(data)
+```
+This would result in different behavior because the `end` variable would be evaluated as a boolean, and if it is `true`, the `mapper` function would be called with `null` instead of the expected `data`, which would cause the `cb

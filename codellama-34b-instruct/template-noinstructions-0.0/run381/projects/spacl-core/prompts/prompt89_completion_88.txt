@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, policy.name]
+```
+This would result in different behavior because it would cause the `PolicyMap` to contain duplicate entries for each policy, with the same name and the same policy object. This could cause issues with the `query` and `matches` methods, which rely on the unique names of the policies to function correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, null]
+```
+This would result in different behavior because it would cause the `PolicyMap` to contain null values for each policy, which could cause issues with the `query` and `matches` methods, which rely on the presence of policy objects to function correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(policy) => [policy.name, new Policy(policy.name, policy.rules)]
+```
+This would result in different behavior because it would cause the `PolicyMap` to contain new policy objects with the same name and rules as

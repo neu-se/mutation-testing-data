@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport, 0
+```
+This would result in different behavior because it would remove the first element of the `reportedUnhandledRejections` array instead of the last one, which could cause the `process.emit("rejectionHandled", unhandledReasons[at], promise)` event to be emitted for the wrong reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+atReport, -1
+```
+This would result in different behavior because it would remove the last element of the `reportedUnhandledRejections` array instead of the first one, which could cause the `process.emit("rejectionHandled", unhandledReasons[at], promise)` event to be emitted for the wrong reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+atReport, 2
+```
+This would result in different behavior because it would remove the third element of the `reportedUnhandledRejections` array instead of the first one, which could cause the `process

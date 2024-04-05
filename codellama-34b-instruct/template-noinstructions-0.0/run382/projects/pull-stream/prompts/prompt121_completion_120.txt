@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+sink(null, function (end, data) {
+  //if ended immediately, and no initial...
+  if(end) return cb(end === true ? null : end)
+  acc = data;
+})
+```
+This would result in different behavior because the `sink` function is called with the `null` value as the first argument, which would cause the `drain` function to return a sink that does not have the same behavior as the original sink.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+sink(function (data) {
+  acc = reducer(acc, data)
+}, function (err) {
+  cb(err, acc)
+})
+```
+This would result in different behavior because the `sink` function is called with a different set of arguments, which would cause the `drain` function to return a sink that does not have the same behavior as the original sink.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+sink(

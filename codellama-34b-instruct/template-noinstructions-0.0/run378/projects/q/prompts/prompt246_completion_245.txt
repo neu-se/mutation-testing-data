@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport && !hasStacks
+```
+This would result in different behavior because it would cause the `promise.stack` property to be set even if `hasStacks` is false, which would cause the `promise.stack` property to be set even if the promise is not in the pending state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!Q.longStackSupport && hasStacks
+```
+This would result in different behavior because it would cause the `promise.stack` property to be set only if `Q.longStackSupport` is false and `hasStacks` is true, which would cause the `promise.stack` property to be set only if the promise is in the pending state and long stack support is disabled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.longStackSupport || hasStacks
+```
+This would result in different behavior because it would cause the `promise.stack` property to be set if either `Q.

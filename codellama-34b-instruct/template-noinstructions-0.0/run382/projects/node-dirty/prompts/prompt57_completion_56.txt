@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.close()
+```
+This would result in different behavior because the `close` method would be called twice, once for each event emitted by the `Dirty` instance.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.emit('drain')
+```
+This would result in different behavior because the `emit` method would be called twice, once for each event emitted by the `Dirty` instance.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'drain', () => this.emit('drain', this)
+```
+This would result in different behavior because the `emit` method would be called twice, once for each event emitted by the `Dirty` instance, and the `this` keyword would be passed as an argument to the `emit` method.
+
+DONE.

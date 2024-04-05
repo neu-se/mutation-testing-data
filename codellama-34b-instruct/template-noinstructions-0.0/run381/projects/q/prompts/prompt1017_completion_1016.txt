@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.reject);
+```
+This would result in different behavior because the original code fragment had a `.fail` method that was not being called in the buggy code fragment.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(deferred.resolve);
+```
+This would result in different behavior because the original code fragment had a `.fail` method that was not being called in the buggy code fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.dispatch("post", [name, nodeArgs]).fail(function() {});
+```
+This would result in different behavior because the original code fragment had a `.fail` method that was not being called in the buggy code fragment.
+
+DONE.

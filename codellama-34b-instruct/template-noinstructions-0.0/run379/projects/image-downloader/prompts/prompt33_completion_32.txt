@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+res.resume();
+```
+This would result in different behavior because the `resume` method would be called, which would start the flow of data from the response stream, but the data would not be consumed or stored anywhere, which could cause memory issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.destroy();
+```
+This would result in different behavior because the `destroy` method would be called, which would immediately close the response stream and free up any resources associated with it, but it would not consume or store the data in the response.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.on('data', () => {});
+```
+This would result in different behavior because the `on` method would be called with the `'data'` event, which would register a listener for the `'data'` event on the response stream, but the listener would not consume or store the data in the response.
+
+DONE.

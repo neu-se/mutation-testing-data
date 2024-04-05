@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(promise, noop, noop)
+```
+This would result in different behavior because `when` is a function that returns a promise, but `noop` is a function that returns `undefined`, so the promise returned by `when` would never be resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+when(promise, function () { throw new Error("test error"); }, noop)
+```
+This would result in different behavior because the function passed to `when` would throw an error, causing the promise to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+when(promise, function () { return Q.reject("test error"); }, noop)
+```
+This would result in different behavior because the function passed to `when` would return a rejected promise, causing the promise returned by `when` to be rejected.
+
+DONE.

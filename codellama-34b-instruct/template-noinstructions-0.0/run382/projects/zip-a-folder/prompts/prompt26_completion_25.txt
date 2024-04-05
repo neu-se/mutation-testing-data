@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions || { gzip: true }
+```
+This would result in different behavior because the `gzip` option would be set to `true` even if it was not specified in the `zipAFolderOptions` object, which could cause the archive to be compressed differently than intended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions || { store: true }
+```
+This would result in different behavior because the `store` option would be set to `true` even if it was not specified in the `zipAFolderOptions` object, which could cause the archive to be stored without compression, which could be different than intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+format, archiverOptions || { zlib: { level: 9 } }
+```
+This would result in different behavior because the `zlib` option would be set to `level: 9` even if it was not specified in the `zipAFolderOptions` object, which

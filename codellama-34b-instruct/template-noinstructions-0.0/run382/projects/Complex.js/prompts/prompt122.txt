@@ -1,0 +1,232 @@
+Your task is to apply mutation testing to the following code:
+```
+            } else if (c === '-') {
+              minus++;
+            } else if (c === 'i' || c === 'I') {
+
+              if (plus + minus === 0) {
+                parser_exit();
+              }
+
+              if (tokens[i + 1] !== ' ' && !isNaN(tokens[i + 1])) {
+                z['im'] += parseFloat((minus % 2 ? '-' : '') + tokens[i + 1]);
+                i++;
+              } else {
+                z['im'] += parseFloat((minus % 2 ? '-' : '') + '1');
+              }
+              plus = minus = 0;
+
+            } else {
+
+              if (plus + minus === 0 || isNaN(c)) {
+                parser_exit();
+              }
+
+              if (tokens[i + 1] === 'i' || tokens[i + 1] === 'I') {
+                z['im'] += parseFloat((minus % 2 ? '-' : '') + c);
+                i++;
+              } else {
+                z['re'] += parseFloat((minus % 2 ? '-' : '') + c);
+              }
+              plus = minus = 0;
+            }
+          }
+
+          // Still something on the stack
+          if (plus + minus > 0) {
+            parser_exit();
+          }
+          break;
+
+        case 'number':
+          z['im'] = 0;
+          z['re'] = a;
+          break;
+
+        default:
+          parser_exit();
+      }
+
+    if (isNaN(z['re']) || isNaN(z['im'])) {
+      // If a calculation is NaN, we treat it as NaN and don't throw
+      //parser_exit();
+    }
+
+    return z;
+  };
+
+  /**
+   * @constructor
+   * @returns {Complex}
+   */
+  function Complex(a, b) {
+
+    if (!(this instanceof Complex)) {
+      return new Complex(a, b);
+    }
+
+    var z = parse(a, b);
+
+    this['re'] = z['re'];
+    this['im'] = z['im'];
+  }
+
+  Complex.prototype = {
+
+    're': 0,
+    'im': 0,
+
+    /**
+     * Calculates the sign of a complex number, which is a normalized complex
+     *
+     * @returns {Complex}
+     */
+    'sign': function() {
+
+      var abs = this['abs']();
+
+      return new Complex(
+        this['re'] / abs,
+        this['im'] / abs);
+    },
+
+    /**
+     * Adds two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'add': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      // Infinity + Infinity = NaN
+      if (this['isInfinite'](<PLACEHOLDER>) && z['isInfinite']()) {
+        return Complex['NAN'];
+      }
+
+      // Infinity + z = Infinity { where z != Infinity }
+      if (this['isInfinite']() || z['isInfinite']()) {
+        return Complex['INFINITY'];
+      }
+
+      return new Complex(
+        this['re'] + z['re'],
+        this['im'] + z['im']);
+    },
+
+    /**
+     * Subtracts two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'sub': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      // Infinity - Infinity = NaN
+      if (this['isInfinite']() && z['isInfinite']()) {
+        return Complex['NAN'];
+      }
+
+      // Infinity - z = Infinity { where z != Infinity }
+      if (this['isInfinite']() || z['isInfinite']()) {
+        return Complex['INFINITY'];
+      }
+
+      return new Complex(
+        this['re'] - z['re'],
+        this['im'] - z['im']);
+    },
+
+    /**
+     * Multiplies two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'mul': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      // Infinity * 0 = NaN
+      if ((this['isInfinite']() && z['isZero']()) || (this['isZero']() && z['isInfinite']())) {
+        return Complex['NAN'];
+      }
+
+      // Infinity * z = Infinity { where z != 0 }
+      if (this['isInfinite']() || z['isInfinite']()) {
+        return Complex['INFINITY'];
+      }
+
+      // Short circuit for real values
+      if (z['im'] === 0 && this['im'] === 0) {
+        return new Complex(this['re'] * z['re'], 0);
+      }
+
+      return new Complex(
+        this['re'] * z['re'] - this['im'] * z['im'],
+        this['re'] * z['im'] + this['im'] * z['re']);
+    },
+
+    /**
+     * Divides two complex numbers
+     *
+     * @returns {Complex}
+     */
+    'div': function(a, b) {
+
+      var z = new Complex(a, b);
+
+      // 0 / 0 = NaN and Infinity / Infinity = NaN
+      if ((this['isZero']() && z['isZero']()) || (this['isInfinite']() && z['isInfinite']())) {
+        return Complex['NAN'];
+      }
+
+      // Infinity / 0 = Infinity
+      if (this['isInfinite']() || z['isZero']()) {
+        return Complex['INFINITY'];
+      }
+
+      // 0 / Infinity = 0
+      if (this['isZero']() || z['isInfinite']()) {
+        return Complex['ZERO'];
+      }
+
+      a = this['re'];
+      b = this['im'];
+
+      var c = z['re'];
+      var d = z['im'];
+      var t, x;
+
+      if (0 === d) {
+        // Divisor is real
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

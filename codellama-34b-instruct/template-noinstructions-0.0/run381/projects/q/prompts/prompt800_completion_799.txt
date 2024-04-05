@@ -1,0 +1,26 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    clearTimeout(timeoutId);
+    deferred.resolve(value);
+}, function (exception) {
+    clearTimeout(timeoutId);
+    deferred.reject(exception);
+});
+```
+This would result in different behavior because the original code fragment only had a rejection handler, but this new code fragment has both a rejection and a fulfillment handler.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.then(function (value) {
+    clearTimeout(timeoutId);
+    deferred.resolve(value);
+}, function (exception) {
+    clearTimeout(timeoutId);
+    deferred.reject(exception);
+}).catch(function (error) {
+    clearTimeout(timeoutId);
+    deferred.reject(error);
+});
+```
+This would result in different behavior because the original code fragment only had a rejection handler, but this new code fragment has both a rejection and a fulfillment handler, and also

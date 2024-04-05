@@ -1,0 +1,176 @@
+Your task is to apply mutation testing to the following code:
+```
+/**
+ * @license Complex.js v2.1.1 12/05/2020
+ *
+ * Copyright (c) 2020, Robert Eisele (robert@xarg.org)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ **/
+
+/**
+ *
+ * This class allows the manipulation of complex numbers.
+ * You can pass a complex number in different formats. Either as object, double, string or two integer parameters.
+ *
+ * Object form
+ * { re: <real>, im: <imaginary> }
+ * { arg: <angle>, abs: <radius> }
+ * { phi: <angle>, r: <radius> }
+ *
+ * Array / Vector form
+ * [ real, imaginary ]
+ *
+ * Double form
+ * 99.3 - Single double value
+ *
+ * String form
+ * '23.1337' - Simple real number
+ * '15+3i' - a simple complex number
+ * '3-i' - a simple complex number
+ *
+ * Example:
+ *
+ * var c = new Complex('99.3+8i');
+ * c.mul({r: 3, i: 9}).div(4.9).sub(3, 2);
+ *
+ */
+
+(function(root) {
+
+  'use strict';
+
+  var cosh = Math.cosh || function(x) {
+    return Math.abs(x) < 1e-9 ? 1 - x : (Math.exp(x) + Math.exp(-x)) * 0.5;
+  };
+
+  var sinh = Math.sinh || function(x) {
+    return Math.abs(x) < 1e-9 ? x : (Math.exp(x) - <PLACEHOLDER>(-x)) * 0.5;
+  };
+
+  /**
+   * Calculates cos(x) - 1 using Taylor series if x is small (-¼π ≤ x ≤ ¼π).
+   *
+   * @param {number} x
+   * @returns {number} cos(x) - 1
+   */
+  var cosm1 = function(x) {
+
+    var b = Math.PI / 4;
+    if (-b > x || x > b) {
+      return Math.cos(x) - 1.0;
+    }
+
+    /* Calculate horner form of polynomial of taylor series in Q
+    var fac = 1, alt = 1, pol = {};
+    for (var i = 0; i <= 16; i++) {
+      fac*= i || 1;
+      if (i % 2 == 0) {
+        pol[i] = new Fraction(1, alt * fac);
+        alt = -alt;
+      }
+    }
+    console.log(new Polynomial(pol).toHorner()); // (((((((1/20922789888000x^2-1/87178291200)x^2+1/479001600)x^2-1/3628800)x^2+1/40320)x^2-1/720)x^2+1/24)x^2-1/2)x^2+1
+    */
+
+    var xx = x * x;
+    return xx * (
+      xx * (
+        xx * (
+          xx * (
+            xx * (
+              xx * (
+                xx * (
+                  xx / 20922789888000
+                  - 1 / 87178291200)
+                + 1 / 479001600)
+              - 1 / 3628800)
+            + 1 / 40320)
+          - 1 / 720)
+        + 1 / 24)
+      - 1 / 2);
+  };
+
+  var hypot = function(x, y) {
+
+    var a = Math.abs(x);
+    var b = Math.abs(y);
+
+    if (a < 3000 && b < 3000) {
+      return Math.sqrt(a * a + b * b);
+    }
+
+    if (a < b) {
+      a = b;
+      b = x / y;
+    } else {
+      b = y / x;
+    }
+    return a * Math.sqrt(1 + b * b);
+  };
+
+  var parser_exit = function() {
+    throw SyntaxError('Invalid Param');
+  };
+
+  /**
+   * Calculates log(sqrt(a^2+b^2)) in a way to avoid overflows
+   *
+   * @param {number} a
+   * @param {number} b
+   * @returns {number}
+   */
+  function logHypot(a, b) {
+
+    var _a = Math.abs(a);
+    var _b = Math.abs(b);
+
+    if (a === 0) {
+      return Math.log(_b);
+    }
+
+    if (b === 0) {
+      return Math.log(_a);
+    }
+
+    if (_a < 3000 && _b < 3000) {
+      return Math.log(a * a + b * b) * 0.5;
+    }
+
+    /* I got 4 ideas to compute this property without overflow:
+     *
+     * Testing 1000000 times with random samples for a,b ∈ [1, 1000000000] against a big decimal library to get an error estimate
+     *
+     * 1. Only eliminate the square root: (OVERALL ERROR: 3.9122483030951116e-11)
+
+     Math.log(a * a + b * b) / 2
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+Math.exp
+```  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

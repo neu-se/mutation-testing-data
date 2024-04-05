@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+if (error instanceof Error)
+```
+This would result in different behavior because the `instanceof` operator checks if `error` is an instance of the `Error` class, but it does not check if it is a subclass of `Error`. If `error` is a subclass of `Error`, the `instanceof` operator would return `false`, and the `reject` method would not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+if (error.constructor === Error)
+```
+This would result in different behavior because the `constructor` property of an object is not always the same as the constructor function that created the object. In this case, the `constructor` property of `error` may be a subclass of `Error`, which would cause the `reject` method to not be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+if (Object.getPrototypeOf(error) === Error.prototype)
+```
+This would result in different behavior because the `Object.get
