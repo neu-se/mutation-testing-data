@@ -1,0 +1,112 @@
+*** using precomputed mutations ***
+[32m00:22:17 (2480) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m00:22:17 (2480) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m00:22:18 (2480) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/zip-a-folder/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[33m00:22:18 (2480) WARN OptionsValidator[39m Unknown stryker config option "usePrecomputed".
+[33m00:22:18 (2480) WARN OptionsValidator[39m Possible causes:
+     * Is it a typo on your end?
+     * Did you only write this property as a comment? If so, please postfix it with "_comment".
+     * You might be missing a plugin that is supposed to use it. Stryker loaded plugins from: ["@stryker-mutator/*"]
+     * The plugin that is using it did not contribute explicit validation. 
+     (disable "warnings.unknownOptions" to ignore this warning)
+[32m00:22:18 (2480) INFO ProjectReader[39m Found 1 of 231 file(s) to be mutated.
+*** using precomputed mutator ***
+*** retrieving 20 mutants from MUTATION_TESTING/template-basic_codellama-34b-instruct_0.0/mutants.json ***
+Mutant 0 in ZipAFolder.ts: {
+  src,
+  targetFilePath: tarFilePath,
+  format: 'tar',
+  zipAFolderOptions
+} replaced with {
+  src,
+  targetFilePath: tarFilePath,
+  format: 'tar',
+  zipAFolderOptions,
+  archiverOptions: {
+    gzip: true,
+    gzipOptions: {
+      level: o.compression
+    }
+  }
+}
+Mutant 1 in ZipAFolder.ts: o.compression === COMPRESSION_LEVEL.uncompressed replaced with o.compression === COMPRESSION_LEVEL.medium
+Mutant 2 in ZipAFolder.ts: !zipAFolderOptions?.customWriteStream && targetFilePath replaced with targetFilePath !== undefined
+Mutant 3 in ZipAFolder.ts: targetFilePath replaced with path.basename(targetFilePath)
+Mutant 4 in ZipAFolder.ts: targetBasePath === src replaced with targetBasePath !== src
+Mutant 5 in ZipAFolder.ts: !isGlob(src) replaced with fs.constants.R_OK
+Mutant 6 in ZipAFolder.ts: fs.promises.access(src, fs.constants.R_OK) replaced with fs.promises.access(path.resolve(targetBasePath, src))
+Mutant 7 in ZipAFolder.ts: src replaced with targetFilePath
+Mutant 8 in ZipAFolder.ts: fs.constants.R_OK replaced with fs.constants.R_OK | fs.constants.W_OK
+Mutant 9 in ZipAFolder.ts: fs.promises.access(targetBasePath, fs.constants.R_OK | fs.constants.W_OK) replaced with fs.promises.access(path.resolve(targetBasePath))
+Mutant 10 in ZipAFolder.ts: targetBasePath replaced with path.resolve(targetBasePath, path.basename(targetFilePath))
+Mutant 11 in ZipAFolder.ts: fs.constants.R_OK | fs.constants.W_OK replaced with fs.constants.W_OK
+Mutant 12 in ZipAFolder.ts: zipAFolderOptions && zipAFolderOptions.customWriteStream replaced with zipAFolderOptions?.customWriteStream
+Mutant 13 in ZipAFolder.ts: archiver(format, archiverOptions || {}) replaced with archiver(format)
+Mutant 14 in ZipAFolder.ts: archiverOptions || {} replaced with archiverOptions
+Mutant 15 in ZipAFolder.ts: output.on('close', resolve) replaced with output.on('close')
+Mutant 16 in ZipAFolder.ts: output.on('error', reject) replaced with output.on('error')
+Mutant 17 in ZipAFolder.ts: ',' replaced with path.sep
+Mutant 18 in ZipAFolder.ts: zipArchive.directory(src, false) replaced with zipArchive.directory(src)
+Mutant 19 in ZipAFolder.ts: false replaced with path.basename(src)
+[32m00:22:18 (2480) INFO Instrumenter[39m Instrumented 1 source file(s) with 20 mutant(s)
+[32m00:22:18 (2480) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m00:22:19 (2480) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m00:22:19 (2480) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m00:22:25 (2480) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 5 seconds (net 5673 ms, overhead 1 ms).
+Mutation testing 5% (elapsed: <1m, remaining: ~3m) 1/20 tested (1 survived, 0 timed out)
+Mutation testing 15% (elapsed: <1m, remaining: ~1m) 3/20 tested (1 survived, 0 timed out)
+Mutation testing 20% (elapsed: <1m, remaining: ~2m) 4/20 tested (1 survived, 0 timed out)
+Mutation testing 25% (elapsed: <1m, remaining: ~2m) 5/20 tested (1 survived, 1 timed out)
+Mutation testing 30% (elapsed: <1m, remaining: ~1m) 6/20 tested (1 survived, 2 timed out)
+Mutation testing 30% (elapsed: ~1m, remaining: ~2m) 6/20 tested (1 survived, 2 timed out)
+Mutation testing 35% (elapsed: ~1m, remaining: ~2m) 7/20 tested (1 survived, 3 timed out)
+Mutation testing 40% (elapsed: ~1m, remaining: ~2m) 8/20 tested (1 survived, 4 timed out)
+Mutation testing 45% (elapsed: ~1m, remaining: ~1m) 9/20 tested (1 survived, 5 timed out)
+Mutation testing 45% (elapsed: ~1m, remaining: ~2m) 9/20 tested (1 survived, 5 timed out)
+Mutation testing 50% (elapsed: ~1m, remaining: ~1m) 10/20 tested (1 survived, 6 timed out)
+Mutation testing 55% (elapsed: ~2m, remaining: ~1m) 11/20 tested (1 survived, 7 timed out)
+Mutation testing 60% (elapsed: ~2m, remaining: ~1m) 12/20 tested (1 survived, 8 timed out)
+Mutation testing 60% (elapsed: ~2m, remaining: ~1m) 12/20 tested (1 survived, 8 timed out)
+Mutation testing 65% (elapsed: ~2m, remaining: ~1m) 13/20 tested (1 survived, 9 timed out)
+Mutation testing 70% (elapsed: ~2m, remaining: ~1m) 14/20 tested (1 survived, 10 timed out)
+Mutation testing 70% (elapsed: ~2m, remaining: ~1m) 14/20 tested (1 survived, 10 timed out)
+Mutation testing 85% (elapsed: ~3m, remaining: <1m) 17/20 tested (1 survived, 11 timed out)
+Mutation testing 85% (elapsed: ~3m, remaining: <1m) 17/20 tested (1 survived, 11 timed out)
+Mutation testing 90% (elapsed: ~3m, remaining: <1m) 18/20 tested (1 survived, 12 timed out)
+Mutation testing 95% (elapsed: ~3m, remaining: <1m) 19/20 tested (1 survived, 13 timed out)
+
+All tests
+  ✓ All tests (killed 5)
+
+[Survived] PrecomputedMutator
+lib/ZipAFolder.ts:41:39
+-               await ZipAFolder.compress({src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions});
++               await ZipAFolder.compress({
++     src,
++     targetFilePath: tarFilePath,
++     format: 'tar',
++     zipAFolderOptions,
++     archiverOptions: {
++       gzip: true,
++       gzipOptions: {
++         level: o.compression
++       }
++     }
++   });
+
+Ran 0.30 tests per mutant on average.
+---------------|---------|----------|-----------|------------|----------|----------|
+File           | % score | # killed | # timeout | # survived | # no cov | # errors |
+---------------|---------|----------|-----------|------------|----------|----------|
+All files      |   95.00 |        5 |        14 |          1 |        0 |        0 |
+ ZipAFolder.ts |   95.00 |        5 |        14 |          1 |        0 |        0 |
+---------------|---------|----------|-----------|------------|----------|----------|
+[32m00:26:02 (2480) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/zip-a-folder/reports/mutation/mutation.html
+[32m00:26:02 (2480) INFO MutationTestExecutor[39m Done in 3 minutes 45 seconds.
+
+real	3m47.676s
+user	0m47.517s
+sys	0m6.421s

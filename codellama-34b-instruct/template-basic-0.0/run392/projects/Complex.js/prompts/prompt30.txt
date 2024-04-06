@@ -1,0 +1,215 @@
+Consider the following code fragment:
+```
+ *
+ * String form
+ * '23.1337' - Simple real number
+ * '15+3i' - a simple complex number
+ * '3-i' - a simple complex number
+ *
+ * Example:
+ *
+ * var c = new Complex('99.3+8i');
+ * c.mul({r: 3, i: 9}).div(4.9).sub(3, 2);
+ *
+ */
+
+(function(root) {
+
+  'use strict';
+
+  var cosh = Math.cosh || function(x) {
+    return Math.abs(x) < 1e-9 ? 1 - x : (Math.exp(x) + Math.exp(-x)) * 0.5;
+  };
+
+  var sinh = Math.sinh || function(x) {
+    return Math.abs(x) < 1e-9 ? x : (Math.exp(x) - Math.exp(-x)) * 0.5;
+  };
+
+  /**
+   * Calculates cos(x) - 1 using Taylor series if x is small (-¼π ≤ x ≤ ¼π).
+   *
+   * @param {number} x
+   * @returns {number} cos(x) - 1
+   */
+  var cosm1 = function(x) {
+
+    var b = Math.PI / 4;
+    if (-b > x || x > b) {
+      return Math.cos(x) - 1.0;
+    }
+
+    /* Calculate horner form of polynomial of taylor series in Q
+    var fac = 1, alt = 1, pol = {};
+    for (var i = 0; i <= 16; i++) {
+      fac*= i || 1;
+      if (i % 2 == 0) {
+        pol[i] = new Fraction(1, alt * fac);
+        alt = -alt;
+      }
+    }
+    console.log(new Polynomial(pol).toHorner()); // (((((((1/20922789888000x^2-1/87178291200)x^2+1/479001600)x^2-1/3628800)x^2+1/40320)x^2-1/720)x^2+1/24)x^2-1/2)x^2+1
+    */
+
+    var xx = x * x;
+    return xx * (
+      xx * (
+        xx * (
+          xx * (
+            xx * (
+              xx * (
+                xx * (
+                  xx / 20922789888000
+                  - 1 / 87178291200)
+                + 1 / 479001600)
+              - 1 / 3628800)
+            + 1 / 40320)
+          - 1 / 720)
+        + 1 / 24)
+      - 1 / 2);
+  };
+
+  var hypot = function(x, y) {
+
+    var a = Math.abs(x);
+    var b = Math.abs(y);
+
+    if (a < 3000 && b < 3000) {
+      return Math.sqrt(a * a + b * b);
+    }
+
+    if (a < b) {
+      a = b;
+      b = x / y;
+    } else {
+      b = y / x;
+    }
+    return a * Math.sqrt(1 + b * b);
+  };
+
+  var parser_exit = function() {
+    throw SyntaxError('Invalid Param');
+  };
+
+  /**
+   * Calculates log(sqrt(a^2+b^2)) in a way to avoid overflows
+   *
+   * @param {number} a
+   * @param {number} b
+   * @returns {number}
+   */
+  function logHypot(a, b) {
+
+    var _a = Math.abs(a);
+    var _b = <PLACEHOLDER>(b);
+
+    if (a === 0) {
+      return Math.log(_b);
+    }
+
+    if (b === 0) {
+      return Math.log(_a);
+    }
+
+    if (_a < 3000 && _b < 3000) {
+      return Math.log(a * a + b * b) * 0.5;
+    }
+
+    /* I got 4 ideas to compute this property without overflow:
+     *
+     * Testing 1000000 times with random samples for a,b ∈ [1, 1000000000] against a big decimal library to get an error estimate
+     *
+     * 1. Only eliminate the square root: (OVERALL ERROR: 3.9122483030951116e-11)
+
+     Math.log(a * a + b * b) / 2
+
+     *
+     *
+     * 2. Try to use the non-overflowing pythagoras: (OVERALL ERROR: 8.889760039210159e-10)
+
+     var fn = function(a, b) {
+     a = Math.abs(a);
+     b = Math.abs(b);
+     var t = Math.min(a, b);
+     a = Math.max(a, b);
+     t = t / a;
+
+     return Math.log(a) + Math.log(1 + t * t) / 2;
+     };
+
+     * 3. Abuse the identity cos(atan(y/x) = x / sqrt(x^2+y^2): (OVERALL ERROR: 3.4780178737037204e-10)
+
+     Math.log(a / Math.cos(Math.atan2(b, a)))
+
+     * 4. Use 3. and apply log rules: (OVERALL ERROR: 1.2014087502620896e-9)
+
+     Math.log(a) - Math.log(Math.cos(Math.atan2(b, a)))
+
+     */
+
+     a = a / 2;
+     b = b / 2;
+
+    return 0.5 * Math.log(a * a + b * b) + Math.LN2;
+  }
+
+  var parse = function(a, b) {
+
+    var z = { 're': 0, 'im': 0 };
+
+    if (a === undefined || a === null) {
+      z['re'] =
+      z['im'] = 0;
+    } else if (b !== undefined) {
+      z['re'] = a;
+      z['im'] = b;
+    } else
+      switch (typeof a) {
+
+        case 'object':
+
+          if ('im' in a && 're' in a) {
+            z['re'] = a['re'];
+            z['im'] = a['im'];
+          } else if ('abs' in a && 'arg' in a) {
+            if (!Number.isFinite(a['abs']) && Number.isFinite(a['arg'])) {
+              return Complex['INFINITY'];
+            }
+            z['re'] = a['abs'] * Math.cos(a['arg']);
+            z['im'] = a['abs'] * Math.sin(a['arg']);
+          } else if ('r' in a && 'phi' in a) {
+            if (!Number.isFinite(a['r']) && Number.isFinite(a['phi'])) {
+              return Complex['INFINITY'];
+            }
+            z['re'] = a['r'] * Math.cos(a['phi']);
+            z['im'] = a['r'] * Math.sin(a['phi']);
+          } else if (a.length === 2) { // Quick array check
+            z['re'] = a[0];
+            z['im'] = a[1];
+          } else {
+            parser_exit();
+          }
+          break;
+
+        case 'string':
+
+          z['im'] = /* void */
+          z['re'] = 0;
+
+          var tokens = a.match(/\d+\.?\d*e[+-]?\d+|\d+\.?\d*|\.\d+|./g);
+          var plus = 1;
+          var minus = 0;
+
+          if (tokens === null) {
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

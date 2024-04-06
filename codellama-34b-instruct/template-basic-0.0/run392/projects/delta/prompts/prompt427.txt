@@ -1,0 +1,42 @@
+Consider the following code fragment:
+```
+import AttributeMap from './AttributeMap';
+
+interface Op {
+  // only one property out of {insert, delete, retain} will be present
+  insert?: string | Record<string, unknown>;
+  delete?: number;
+  retain?: number | Record<string, unknown>;
+
+  attributes?: AttributeMap;
+}
+
+namespace Op {
+  export function length(op: Op): number {
+    if (typeof op.delete === 'number') {
+      return op.delete;
+    } else if (<PLACEHOLDER>) {
+      return op.retain;
+    } else if (typeof op.retain === 'object' && op.retain !== null) {
+      return 1;
+    } else {
+      return typeof op.insert === 'string' ? op.insert.length : 1;
+    }
+  }
+}
+
+export default Op;
+
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

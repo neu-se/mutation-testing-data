@@ -1,0 +1,215 @@
+Consider the following code fragment:
+```
+class Delta {
+  static Op = Op;
+  static OpIterator = OpIterator;
+  static AttributeMap = AttributeMap;
+  private static handlers: { [embedType: string]: EmbedHandler<unknown> } = {};
+
+  static registerEmbed<T>(embedType: string, handler: EmbedHandler<T>): void {
+    this.handlers[embedType] = handler;
+  }
+
+  static unregisterEmbed(embedType: string): void {
+    delete this.handlers[embedType];
+  }
+
+  private static getHandler(embedType: string): EmbedHandler<unknown> {
+    const handler = this.handlers[embedType];
+    if (!handler) {
+      throw new Error(`no handlers for embed type "${embedType}"`);
+    }
+    return handler;
+  }
+
+  ops: Op[];
+  constructor(ops?: Op[] | { ops: Op[] }) {
+    // Assume we are given a well formed ops
+    if (Array.isArray(ops)) {
+      this.ops = ops;
+    } else if (ops != null && Array.isArray(ops.ops)) {
+      this.ops = ops.ops;
+    } else {
+      this.ops = [];
+    }
+  }
+
+  insert(
+    arg: string | Record<string, unknown>,
+    attributes?: AttributeMap | null,
+  ): this {
+    const newOp: Op = {};
+    if (typeof arg === 'string' && arg.length === 0) {
+      return this;
+    }
+    newOp.insert = arg;
+    if (
+      attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 0
+    ) {
+      newOp.attributes = attributes;
+    }
+    return this.push(newOp);
+  }
+
+  delete(length: number): this {
+    if (length <= 0) {
+      return this;
+    }
+    return this.push({ delete: length });
+  }
+
+  retain(
+    length: number | Record<string, unknown>,
+    attributes?: AttributeMap | null,
+  ): this {
+    if (typeof length === 'number' && length <= 0) {
+      return this;
+    }
+    const newOp: Op = { retain: length };
+    if (
+      attributes != null &&
+      typeof attributes === 'object' &&
+      Object.keys(attributes).length > 0
+    ) {
+      newOp.attributes = attributes;
+    }
+    return this.push(newOp);
+  }
+
+  push(newOp: Op): this {
+    let index = this.ops.length;
+    let lastOp = this.ops[index - 1];
+    newOp = cloneDeep(newOp);
+    if (typeof lastOp === 'object') {
+      if (
+        typeof newOp.delete === 'number' &&
+        typeof lastOp.delete === 'number'
+      ) {
+        this.ops[index - 1] = { delete: lastOp.delete + newOp.delete };
+        return this;
+      }
+      // Since it does not matter if we insert before or after deleting at the same index,
+      // always prefer to insert first
+      if (typeof lastOp.delete === 'number' && newOp.insert != null) {
+        index -= 1;
+        lastOp = this.ops[index - 1];
+        if (typeof lastOp !== 'object') {
+          this.ops.unshift(newOp);
+          return this;
+        }
+      }
+      if (<PLACEHOLDER>) {
+        if (
+          typeof newOp.insert === 'string' &&
+          typeof lastOp.insert === 'string'
+        ) {
+          this.ops[index - 1] = { insert: lastOp.insert + newOp.insert };
+          if (typeof newOp.attributes === 'object') {
+            this.ops[index - 1].attributes = newOp.attributes;
+          }
+          return this;
+        } else if (
+          typeof newOp.retain === 'number' &&
+          typeof lastOp.retain === 'number'
+        ) {
+          this.ops[index - 1] = { retain: lastOp.retain + newOp.retain };
+          if (typeof newOp.attributes === 'object') {
+            this.ops[index - 1].attributes = newOp.attributes;
+          }
+          return this;
+        }
+      }
+    }
+    if (index === this.ops.length) {
+      this.ops.push(newOp);
+    } else {
+      this.ops.splice(index, 0, newOp);
+    }
+    return this;
+  }
+
+  chop(): this {
+    const lastOp = this.ops[this.ops.length - 1];
+    if (lastOp && typeof lastOp.retain === 'number' && !lastOp.attributes) {
+      this.ops.pop();
+    }
+    return this;
+  }
+
+  filter(predicate: (op: Op, index: number) => boolean): Op[] {
+    return this.ops.filter(predicate);
+  }
+
+  forEach(predicate: (op: Op, index: number) => void): void {
+    this.ops.forEach(predicate);
+  }
+
+  map<T>(predicate: (op: Op, index: number) => T): T[] {
+    return this.ops.map(predicate);
+  }
+
+  partition(predicate: (op: Op) => boolean): [Op[], Op[]] {
+    const passed: Op[] = [];
+    const failed: Op[] = [];
+    this.forEach((op) => {
+      const target = predicate(op) ? passed : failed;
+      target.push(op);
+    });
+    return [passed, failed];
+  }
+
+  reduce<T>(
+    predicate: (accum: T, curr: Op, index: number) => T,
+    initialValue: T,
+  ): T {
+    return this.ops.reduce(predicate, initialValue);
+  }
+
+  changeLength(): number {
+    return this.reduce((length, elem) => {
+      if (elem.insert) {
+        return length + Op.length(elem);
+      } else if (elem.delete) {
+        return length - elem.delete;
+      }
+      return length;
+    }, 0);
+  }
+
+  length(): number {
+    return this.reduce((length, elem) => {
+      return length + Op.length(elem);
+    }, 0);
+  }
+
+  slice(start = 0, end = Infinity): Delta {
+    const ops = [];
+    const iter = new OpIterator(this.ops);
+    let index = 0;
+    while (index < end && iter.hasNext()) {
+      let nextOp;
+      if (index < start) {
+        nextOp = iter.next(start - index);
+      } else {
+        nextOp = iter.next(end - index);
+        ops.push(nextOp);
+      }
+      index += Op.length(nextOp);
+    }
+    return new Delta(ops);
+  }
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

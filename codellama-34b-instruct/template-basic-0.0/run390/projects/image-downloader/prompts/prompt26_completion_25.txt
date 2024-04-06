@@ -1,0 +1,28 @@
+  The PLACEHOLDER can be replaced with:
+```
+request.get(options.url)
+  .then(response => response.body)
+  .then(body => {
+    if (extractFilename) {
+      const url = new URL(options.url);
+      const pathname = url.pathname;
+      const basename = path.basename(pathname);
+      const decodedBasename = decodeURIComponent(basename);
+
+      options.dest = path.join(options.dest, decodedBasename);
+    }
+
+    if (!path.isAbsolute(options.dest)) {
+      options.dest = path.resolve(__dirname, options.dest);
+    }
+
+    return body;
+  })
+  .then(body => {
+    return fs.writeFile(options.dest, body);
+  })
+  .catch(error => {
+    return Promise.reject(error);
+  });
+```
+DONE.

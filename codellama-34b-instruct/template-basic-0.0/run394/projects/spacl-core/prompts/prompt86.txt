@@ -1,0 +1,85 @@
+Consider the following code fragment:
+```
+import { Rule } from './rule'
+import { Queryable, QueryContext } from './queryable'
+
+/** Access-control policy. */
+export class Policy implements Queryable {
+  /** Policy name. */
+  readonly name: string
+  /** Rules comprising policy. */
+  readonly rules: Rule[]
+
+  constructor (name: string, ...rules: Rule[]) {
+    this.name = name
+    this.rules = rules
+  }
+
+  /** Add rules to a policy. */
+  push (...rules: Rule[]): Policy {
+    this.rules.push(...rules)
+    return this
+  }
+
+  /** Check whether an action is allowed on a path.
+    * @param path Path to be acted on.
+    * @param verb Action to be performed.
+    * @param ctx Query context for resolving context-dependent paths.
+    * @returns Returns `true` if the action is explicitly allowed,
+    *          `false` if the action is explicitly denied, or
+    *          `null` if the combination of path and action
+    *          is not governed by this policy. */
+  query (path: string, verb: string, ctx?: QueryContext): boolean | null {
+    let allow = null
+    for (const rule of this.rules) {
+      const res = rule.query(path, verb, ctx)
+      if (res === false) {
+        return false
+      }
+      if (res === true) {
+        allow = true
+      }
+    }
+    return allow
+  }
+
+  /** Check whether a path is governed by this policy.
+    * @param path Path to be checked.
+    * @param ctx Query context for resolving context-dependent paths. */
+  matches (path: string, ctx?: QueryContext): boolean {
+    for (const rule of this.rules) {
+      if (rule.matches(path, ctx)) {
+        return true
+      }
+    }
+    return false
+  }
+
+  /** Create clone of a policy.
+    * @param name Replacement name for new policy.
+    * @param deep Deep copy; clone underlying rules as well. */
+  clone (name: string = this.name, deep: boolean = true): Policy {
+    return deep
+      ? new Policy(name, ...this.rules.map((rule) => <PLACEHOLDER>()))
+      : new Policy(name, ...this.rules)
+  }
+
+  /** Static constructor function; returns a new Policy. */
+  static for (name: string, ...rules: Rule[]): Policy {
+    return new Policy(name, ...rules)
+  }
+}
+
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

@@ -1,0 +1,85 @@
+*** using precomputed mutations ***
+[32m23:10:14 (2483) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m23:10:14 (2483) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m23:10:14 (2483) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/node-jsonfile/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[33m23:10:15 (2483) WARN OptionsValidator[39m Unknown stryker config option "usePrecomputed".
+[33m23:10:15 (2483) WARN OptionsValidator[39m Possible causes:
+     * Is it a typo on your end?
+     * Did you only write this property as a comment? If so, please postfix it with "_comment".
+     * You might be missing a plugin that is supposed to use it. Stryker loaded plugins from: ["@stryker-mutator/*"]
+     * The plugin that is using it did not contribute explicit validation. 
+     (disable "warnings.unknownOptions" to ignore this warning)
+[32m23:10:15 (2483) INFO ProjectReader[39m Found 2 of 298 file(s) to be mutated.
+*** using precomputed mutator ***
+*** retrieving 22 mutants from MUTATION_TESTING/template-basic_codellama-34b-instruct_0.0/mutants.json ***
+Mutant 0 in index.js: typeof options === 'string' replaced with typeof options === 'object'
+Mutant 1 in index.js: universalify.fromCallback(fs.readFile)(file, options) replaced with universalify.fromCallback(fs.readFile)(file)
+Mutant 2 in index.js: JSON.parse(data, options ? options.reviver : null) replaced with JSON.parse(data)
+Mutant 3 in index.js: options ? options.reviver : null replaced with JSON.parse(data, options.reviver)
+Mutant 4 in index.js: shouldThrow replaced with err.code === 'ENOENT'
+Mutant 5 in index.js: typeof options === 'string' replaced with typeof options === 'object'
+Mutant 6 in index.js: fs.readFileSync(file, options) replaced with fs.readFileSync(content)
+Mutant 7 in index.js: file replaced with content
+Mutant 8 in index.js: JSON.parse(content, options.reviver) replaced with JSON.parse(content)
+Mutant 9 in index.js: stringify(obj, options) replaced with stringify(obj)
+Mutant 10 in index.js: options replaced with options.replacer
+Mutant 11 in index.js: universalify.fromCallback replaced with fs.writeFile
+not replacing universalify.fromCallback with fs.writeFile
+Mutant 12 in index.js: fs.writeFile replaced with fs.writeFileSync
+Mutant 13 in index.js: stringify(obj, options) replaced with stringify(stringify(obj, options))
+Mutant 14 in index.js: obj replaced with str
+Mutant 15 in index.js: options replaced with options.reviver
+Mutant 16 in index.js: fs.writeFileSync(file, str, options) replaced with fs.writeFileSync(str)
+Mutant 17 in utils.js: JSON.stringify(obj, replacer, spaces) replaced with JSON.stringify(obj)
+Mutant 18 in utils.js: str.replace(/\n/g, EOL) replaced with str.replace('<PLACEHOLDER>')
+Mutant 19 in utils.js: str.replace replaced with str
+Mutant 20 in utils.js: /\n/g replaced with /\r?\n/g
+Mutant 21 in utils.js: /^\uFEFF/ replaced with /^\ufeff/
+[32m23:10:15 (2483) INFO Instrumenter[39m Instrumented 2 source file(s) with 22 mutant(s)
+[32m23:10:15 (2483) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m23:10:16 (2483) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m23:10:16 (2483) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m23:10:17 (2483) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 0 seconds (net 834 ms, overhead 1 ms).
+Mutation testing 9% (elapsed: <1m, remaining: ~1m) 2/22 tested (1 survived, 1 timed out)
+Mutation testing 18% (elapsed: <1m, remaining: ~1m) 4/22 tested (1 survived, 1 timed out)
+Mutation testing 40% (elapsed: <1m, remaining: <1m) 9/22 tested (1 survived, 2 timed out)
+Mutation testing 50% (elapsed: <1m, remaining: <1m) 11/22 tested (1 survived, 4 timed out)
+Mutation testing 54% (elapsed: <1m, remaining: <1m) 12/22 tested (1 survived, 5 timed out)
+Mutation testing 77% (elapsed: ~1m, remaining: <1m) 17/22 tested (1 survived, 6 timed out)
+Mutation testing 86% (elapsed: ~1m, remaining: <1m) 19/22 tested (1 survived, 7 timed out)
+
+All tests
+  ✓ All tests (killed 11)
+
+[Survived] PrecomputedMutator
+index.js:19:20
+-     let data = await universalify.fromCallback(fs.readFile)(file, options)
++     let data = await universalify.fromCallback(fs.readFile)(file)
+
+[Survived] PrecomputedMutator
+utils.js:5:22
+-     return str.replace(/\n/g, EOL) + EOF
++     return str.replace(/\r?\n/g, EOL) + EOF
+
+[Survived] PrecomputedMutator
+utils.js:11:26
+-     return content.replace(/^\uFEFF/, '')
++     return content.replace(/^\ufeff/, '')
+
+Ran 0.64 tests per mutant on average.
+----------|---------|----------|-----------|------------|----------|----------|
+File      | % score | # killed | # timeout | # survived | # no cov | # errors |
+----------|---------|----------|-----------|------------|----------|----------|
+All files |   86.36 |       11 |         8 |          3 |        0 |        0 |
+ index.js |   94.12 |       10 |         6 |          1 |        0 |        0 |
+ utils.js |   60.00 |        1 |         2 |          2 |        0 |        0 |
+----------|---------|----------|-----------|------------|----------|----------|
+[32m23:11:31 (2483) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/node-jsonfile/reports/mutation/mutation.html
+[32m23:11:31 (2483) INFO MutationTestExecutor[39m Done in 1 minute 16 seconds.
+
+real	1m17.817s
+user	0m16.473s
+sys	0m3.154s

@@ -1,0 +1,65 @@
+Consider the following code fragment:
+```
+import { Policy } from './policy'
+import { QueryableMap, QueryContext } from './queryable'
+
+/** Queryable collection of policy documents. */
+export class PolicyMap extends Map<string, Policy> implements QueryableMap {
+  constructor (...policies: Policy[]) {
+    super(policies.map((policy) => [policy.name, policy]))
+  }
+
+  /** Add policies to colllection. */
+  push (...policies: Policy[]): this {
+    for (<PLACEHOLDER>) {
+      this.set(policy.name, policy)
+    }
+    return this
+  }
+
+  /** Check whether an action is allowed on a path.
+    * @param name Policy to be queried.
+    * @param path Path to be acted on.
+    * @param verb Action to be performed.
+    * @param ctx Query context for resolving context-dependent paths.
+    * @returns Returns `true` if the action is explicitly allowed,
+    *          `false` if the action is explicitly denied, or
+    *          `null` if the combination of policy, path and
+    *          action is not governed by this collection. */
+  query (name: string, path: string, verb: string, ctx?: QueryContext): boolean | null {
+    const policy = this.get(name)
+    return policy !== undefined
+      ? policy.query(path, verb, ctx)
+      : null
+  }
+
+  /** Check whether a path is governed by a policy in this collection.
+    * @param name Policy to be queried.
+    * @param path Path to be checked.
+    * @param ctx Query context for resolving context-dependent paths. */
+  matches (name: string, path: string, ctx?: QueryContext): boolean {
+    const policy = this.get(name)
+    return policy !== undefined
+      ? policy.matches(path, ctx)
+      : false
+  }
+
+  /** Static constructor function; returns a new PolicyMap. */
+  static for (...policies: Policy[]): PolicyMap {
+    return new PolicyMap(...policies)
+  }
+}
+
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

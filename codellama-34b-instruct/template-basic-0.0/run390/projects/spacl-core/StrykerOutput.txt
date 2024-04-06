@@ -1,0 +1,90 @@
+*** using precomputed mutations ***
+[32m23:22:23 (2469) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m23:22:23 (2469) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m23:22:23 (2469) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/spacl-core/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[33m23:22:24 (2469) WARN OptionsValidator[39m Unknown stryker config option "usePrecomputed".
+[33m23:22:24 (2469) WARN OptionsValidator[39m Possible causes:
+     * Is it a typo on your end?
+     * Did you only write this property as a comment? If so, please postfix it with "_comment".
+     * You might be missing a plugin that is supposed to use it. Stryker loaded plugins from: ["@stryker-mutator/*"]
+     * The plugin that is using it did not contribute explicit validation. 
+     (disable "warnings.unknownOptions" to ignore this warning)
+[32m23:22:24 (2469) INFO ProjectReader[39m Found 6 of 571 file(s) to be mutated.
+*** using precomputed mutator ***
+*** retrieving 31 mutants from MUTATION_TESTING/template-basic_codellama-34b-instruct_0.0/mutants.json ***
+failed to parse replacement spec.match(/[*+][^/]|[^/][*+]/) !== null: SyntaxError: Invalid regular expression: //[*+][^//: Unterminated character class
+failed to parse replacement /^(?:\/[^/]+){2,}$/: SyntaxError: Invalid regular expression: //^(?:\//: Unterminated group
+failed to parse replacement /^(?:\/[^/]+){0,1}$/: SyntaxError: Invalid regular expression: //^(?:\//: Unterminated group
+failed to parse replacement /(?<!\/)$/: SyntaxError: Invalid regular expression: //(?<!\//: Unterminated group
+Mutant 0 in matcher.ts: string.length > 1 && string.endsWith('/') replaced with string.match(this.regex) === null
+Mutant 1 in matcher.ts: max > 0 || any replaced with min < 2
+Mutant 2 in matcher.ts: final && opt && min < 1 replaced with min < 2
+Mutant 3 in matcher.ts: min > 0 replaced with opt && min < 2
+Mutant 4 in matcher.ts: parts.reduce((acc, seg) => seg + acc, '$') replaced with parts.reduce((a, b) => a + b)
+Mutant 5 in matcher.ts: (acc, seg) => seg + acc replaced with (a, b) => a + b
+failed to parse replacement '(?:/[^/]+)*': SyntaxError: Invalid regular expression: //[^//: Unterminated character class
+Mutant 6 in matcher.ts: spec.split('/').slice(1).reverse() replaced with spec.split('/')
+Mutant 7 in matcher.ts: part replaced with '*'
+Mutant 8 in matcher.ts: part.match(/:.+/) !== null replaced with part.startsWith(':')
+Mutant 9 in matcher.ts: /:.+/ replaced with /^[a-zA-Z0-9_]+$/
+Mutant 10 in matcher.ts: 1 replaced with part.slice(1)
+failed to parse replacement `/${part.replace(/([.$])/g, '\\$1')}`: SyntaxError: Invalid regular expression: //${part.replace(//: Unterminated group
+Mutant 11 in policy.ts: rule.query(path, verb, ctx) replaced with rule.query(path)
+Mutant 12 in policy.ts: rule.matches(path, ctx) replaced with rule.matches(path)
+Mutant 13 in policy.ts: rule => rule.clone() replaced with rule.clone()
+Mutant 14 in policymap.ts: this.set(policy.name, policy) replaced with this.set(policy.name)
+Mutant 15 in policymap.ts: policy.matches(path, ctx) replaced with policy.matches(path)
+Mutant 16 in rule.ts: !(verb in this.verbs) replaced with !this.verbs[verb]
+Mutant 17 in rule.ts: this.matches(path, ctx) && verb in this.verbs replaced with this.regex.test(path)
+Mutant 18 in rule.ts: this.matches(path, ctx) replaced with this.matches(path)
+Mutant 19 in rule.ts: path.match replaced with match[index + 1]
+Mutant 20 in rule.ts: this.regex replaced with this.regex.pattern
+Mutant 21 in rule.ts: count > 0 replaced with match.length > count
+Mutant 22 in rule.ts: ctx === undefined replaced with match[index + 1] !== prop
+Mutant 23 in rule.ts: index < count replaced with count
+Mutant 24 in rule.ts: prop === undefined || match[index + 1] !== prop replaced with prop !== match[index]
+[32m23:22:24 (2469) INFO Instrumenter[39m Instrumented 6 source file(s) with 25 mutant(s)
+[32m23:22:24 (2469) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m23:22:25 (2469) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m23:22:25 (2469) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m23:22:29 (2469) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 3 seconds (net 3877 ms, overhead 0 ms).
+Mutation testing 12% (elapsed: <1m, remaining: ~1m) 3/25 tested (1 survived, 0 timed out)
+Mutation testing 24% (elapsed: <1m, remaining: ~1m) 6/25 tested (1 survived, 0 timed out)
+Mutation testing 36% (elapsed: <1m, remaining: <1m) 9/25 tested (2 survived, 0 timed out)
+Mutation testing 48% (elapsed: <1m, remaining: <1m) 12/25 tested (2 survived, 0 timed out)
+Mutation testing 64% (elapsed: <1m, remaining: <1m) 16/25 tested (2 survived, 0 timed out)
+Mutation testing 76% (elapsed: ~1m, remaining: <1m) 19/25 tested (2 survived, 0 timed out)
+Mutation testing 88% (elapsed: ~1m, remaining: <1m) 22/25 tested (2 survived, 0 timed out)
+
+All tests
+  ✓ All tests (killed 23)
+
+[Survived] PrecomputedMutator
+src/matcher.ts:39:9
+-       if (string.length > 1 && string.endsWith('/')) {
++       if (string.match(this.regex) === null) {
+
+[Survived] PrecomputedMutator
+src/matcher.ts:111:13
+-           if (part.match(/:.+/) !== null) {
++           if (part.startsWith(':')) {
+
+Ran 1.00 tests per mutant on average.
+--------------|---------|----------|-----------|------------|----------|----------|
+File          | % score | # killed | # timeout | # survived | # no cov | # errors |
+--------------|---------|----------|-----------|------------|----------|----------|
+All files     |   92.00 |       23 |         0 |          2 |        0 |        0 |
+ matcher.ts   |   81.82 |        9 |         0 |          2 |        0 |        0 |
+ policy.ts    |  100.00 |        3 |         0 |          0 |        0 |        0 |
+ policymap.ts |  100.00 |        2 |         0 |          0 |        0 |        0 |
+ rule.ts      |  100.00 |        9 |         0 |          0 |        0 |        0 |
+--------------|---------|----------|-----------|------------|----------|----------|
+[32m23:23:47 (2469) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/spacl-core/reports/mutation/mutation.html
+[32m23:23:47 (2469) INFO MutationTestExecutor[39m Done in 1 minute 24 seconds.
+
+real	1m25.425s
+user	1m58.019s
+sys	0m9.161s

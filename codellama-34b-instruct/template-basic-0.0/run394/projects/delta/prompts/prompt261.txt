@@ -1,0 +1,215 @@
+Consider the following code fragment:
+```
+                thisOp[action],
+                otherOp.retain,
+              );
+              const handler = Delta.getHandler(embedType);
+              newOp[action] = {
+                [embedType]: handler.compose(
+                  thisData,
+                  otherData,
+                  action === 'retain',
+                ),
+              };
+            }
+          }
+          // Preserve null when composing with a retain, otherwise remove it for inserts
+          const attributes = AttributeMap.compose(
+            thisOp.attributes,
+            otherOp.attributes,
+            typeof thisOp.retain === 'number',
+          );
+          if (attributes) {
+            newOp.attributes = attributes;
+          }
+          delta.push(newOp);
+
+          // Optimization if rest of other is just retain
+          if (
+            !otherIter.hasNext() &&
+            isEqual(delta.ops[delta.ops.length - 1], newOp)
+          ) {
+            const rest = new Delta(thisIter.rest());
+            return delta.concat(rest).chop();
+          }
+
+          // Other op should be delete, we could be an insert or retain
+          // Insert + delete cancels out
+        } else if (
+          typeof otherOp.delete === 'number' &&
+          (typeof thisOp.retain === 'number' ||
+            (typeof thisOp.retain === 'object' && thisOp.retain !== null))
+        ) {
+          delta.push(otherOp);
+        }
+      }
+    }
+    return delta.chop();
+  }
+
+  concat(other: Delta): Delta {
+    const delta = new Delta(this.ops.slice());
+    if (other.ops.length > 0) {
+      delta.push(other.ops[0]);
+      delta.ops = delta.ops.concat(other.ops.slice(1));
+    }
+    return delta;
+  }
+
+  diff(other: Delta, cursor?: number | diff.CursorInfo): Delta {
+    if (this.ops === other.ops) {
+      return new Delta();
+    }
+    const strings = [this, other].map((delta) => {
+      return delta
+        .map((op) => {
+          if (op.insert != null) {
+            return typeof op.insert === 'string' ? op.insert : NULL_CHARACTER;
+          }
+          const prep = delta === other ? 'on' : 'with';
+          throw new Error('diff() called ' + prep + ' non-document');
+        })
+        .join('');
+    });
+    const retDelta = new Delta();
+    const diffResult = diff(strings[0], strings[1], cursor);
+    const thisIter = new OpIterator(this.ops);
+    const otherIter = new OpIterator(other.ops);
+    diffResult.forEach((component: diff.Diff) => {
+      let length = component[1].length;
+      while (length > 0) {
+        let opLength = 0;
+        switch (component[0]) {
+          case diff.INSERT:
+            opLength = Math.min(otherIter.peekLength(), length);
+            retDelta.push(otherIter.next(opLength));
+            break;
+          case diff.DELETE:
+            opLength = Math.min(length, thisIter.peekLength());
+            thisIter.next(opLength);
+            retDelta.delete(opLength);
+            break;
+          case diff.EQUAL:
+            opLength = Math.min(
+              thisIter.peekLength(),
+              otherIter.peekLength(),
+              length,
+            );
+            const thisOp = thisIter.next(opLength);
+            const otherOp = otherIter.next(opLength);
+            if (isEqual(thisOp.insert, otherOp.insert)) {
+              retDelta.retain(
+                opLength,
+                <PLACEHOLDER>(thisOp.attributes, otherOp.attributes),
+              );
+            } else {
+              retDelta.push(otherOp).delete(opLength);
+            }
+            break;
+        }
+        length -= opLength;
+      }
+    });
+    return retDelta.chop();
+  }
+
+  eachLine(
+    predicate: (
+      line: Delta,
+      attributes: AttributeMap,
+      index: number,
+    ) => boolean | void,
+    newline = '\n',
+  ): void {
+    const iter = new OpIterator(this.ops);
+    let line = new Delta();
+    let i = 0;
+    while (iter.hasNext()) {
+      if (iter.peekType() !== 'insert') {
+        return;
+      }
+      const thisOp = iter.peek();
+      const start = Op.length(thisOp) - iter.peekLength();
+      const index =
+        typeof thisOp.insert === 'string'
+          ? thisOp.insert.indexOf(newline, start) - start
+          : -1;
+      if (index < 0) {
+        line.push(iter.next());
+      } else if (index > 0) {
+        line.push(iter.next(index));
+      } else {
+        if (predicate(line, iter.next(1).attributes || {}, i) === false) {
+          return;
+        }
+        i += 1;
+        line = new Delta();
+      }
+    }
+    if (line.length() > 0) {
+      predicate(line, {}, i);
+    }
+  }
+
+  invert(base: Delta): Delta {
+    const inverted = new Delta();
+    this.reduce((baseIndex, op) => {
+      if (op.insert) {
+        inverted.delete(Op.length(op));
+      } else if (typeof op.retain === 'number' && op.attributes == null) {
+        inverted.retain(op.retain);
+        return baseIndex + op.retain;
+      } else if (op.delete || typeof op.retain === 'number') {
+        const length = (op.delete || op.retain) as number;
+        const slice = base.slice(baseIndex, baseIndex + length);
+        slice.forEach((baseOp) => {
+          if (op.delete) {
+            inverted.push(baseOp);
+          } else if (op.retain && op.attributes) {
+            inverted.retain(
+              Op.length(baseOp),
+              AttributeMap.invert(op.attributes, baseOp.attributes),
+            );
+          }
+        });
+        return baseIndex + length;
+      } else if (typeof op.retain === 'object' && op.retain !== null) {
+        const slice = base.slice(baseIndex, baseIndex + 1);
+        const baseOp = new OpIterator(slice.ops).next();
+        const [embedType, opData, baseOpData] = getEmbedTypeAndData(
+          op.retain,
+          baseOp.insert,
+        );
+        const handler = Delta.getHandler(embedType);
+        inverted.retain(
+          { [embedType]: handler.invert(opData, baseOpData) },
+          AttributeMap.invert(op.attributes, baseOp.attributes),
+        );
+        return baseIndex + 1;
+      }
+      return baseIndex;
+    }, 0);
+    return inverted.chop();
+  }
+
+  transform(index: number, priority?: boolean): number;
+  transform(other: Delta, priority?: boolean): Delta;
+  transform(arg: number | Delta, priority = false): typeof arg {
+    priority = !!priority;
+    if (typeof arg === 'number') {
+      return this.transformPosition(arg, priority);
+    }
+    const other: Delta = arg;
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."

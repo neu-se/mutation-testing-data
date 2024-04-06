@@ -1,0 +1,130 @@
+*** using precomputed mutations ***
+[32m08:00:42 (2533) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m08:00:42 (2533) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m08:00:42 (2533) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/countries-and-timezones/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[33m08:00:43 (2533) WARN OptionsValidator[39m Unknown stryker config option "usePrecomputed".
+[33m08:00:43 (2533) WARN OptionsValidator[39m Possible causes:
+     * Is it a typo on your end?
+     * Did you only write this property as a comment? If so, please postfix it with "_comment".
+     * You might be missing a plugin that is supposed to use it. Stryker loaded plugins from: ["@stryker-mutator/*"]
+     * The plugin that is using it did not contribute explicit validation. 
+     (disable "warnings.unknownOptions" to ignore this warning)
+[32m08:00:43 (2533) INFO ProjectReader[39m Found 3 of 481 file(s) to be mutated.
+*** using precomputed mutator ***
+*** retrieving 48 mutants from MUTATION_TESTING/template-basic_codellama-34b-instruct_0.0/mutants.json ***
+Mutant 0 in build-country.js: !name replaced with !tzMap.current || !tzMap.all
+Mutant 1 in build-country.js: getTimezonesMap replaced with data.timezones
+Mutant 2 in build-country.js: data replaced with data.timezones
+Mutant 3 in build-country.js: !timezonesMap replaced with timezonesMap === undefined
+Mutant 4 in build-country.js: !result[country] replaced with countries.includes(country)
+Mutant 5 in build-country.js: tz.r === undefined replaced with tz.current === id
+Mutant 6 in build-country.js: id replaced with tz
+Mutant 7 in build-country.js: id replaced with tz.r || aliasTz.r
+Mutant 8 in build-timezone.js: !timezone replaced with timezone === undefined
+Mutant 9 in build-timezone.js: Number.isInteger replaced with tz.d || utcOffset
+Mutant 10 in build-timezone.js: getOffsetStr replaced with `${hours}:${min}`
+Mutant 11 in build-timezone.js: utcOffset replaced with offset
+Mutant 12 in build-timezone.js: timezone.r replaced with tz.d !== utcOffset
+Mutant 13 in build-timezone.js: getNumStr replaced with `${min}`
+Mutant 14 in index.js: getCountry(id, options) replaced with getCountry(id)
+Mutant 15 in index.js: id replaced with "US"
+Mutant 16 in index.js: options replaced with {
+  memoizedTimezones: 0
+}
+Mutant 17 in index.js: totalTimezones !== memoizedTimezones replaced with memoizedTimezones < totalTimezones
+Mutant 18 in index.js: deliverTimezones(timezones, options) replaced with deliverTimezones(timezones)
+Mutant 19 in index.js: deliverTimezones replaced with timezones
+Mutant 20 in index.js: timezones replaced with tzs
+Mutant 21 in index.js: options replaced with options.deprecated
+Mutant 22 in index.js: buildCountry(data, id) replaced with buildCountry(data.countries[id])
+Mutant 23 in index.js: data replaced with data.countries
+Mutant 24 in index.js: id replaced with data.countries
+Mutant 25 in index.js: deliverCountry(countries[id], options) replaced with deliverCountry(countries[id])
+Mutant 26 in index.js: deliverCountry replaced with countries[id]
+Mutant 27 in index.js: !country replaced with countries[country.id]
+Mutant 28 in index.js: !timezones[name] replaced with timezones[name]
+Mutant 29 in index.js: buildTimezone(data, name) replaced with buildTimezone(data.timezones[name])
+Mutant 30 in index.js: data replaced with data.timezones
+Mutant 31 in index.js: !timezone replaced with timezone.deprecated
+Mutant 32 in index.js: timezone replaced with timezones
+Mutant 33 in index.js: getTimezone replaced with data.timezones[tzName]
+Mutant 34 in index.js: c => getCountry(c, options) replaced with countries[country.id]
+Mutant 35 in index.js: getCountry(c, options) replaced with getCountry(c)
+Mutant 36 in index.js: c replaced with countryId
+Mutant 37 in index.js: options replaced with {
+  ...options
+}
+Mutant 38 in index.js: getCountriesForTimezone(tzName, options) replaced with getCountriesForTimezone(tzName)
+Mutant 39 in index.js: tzName replaced with "UTC"
+Mutant 40 in index.js: options replaced with {
+  deprecated: true
+}
+Mutant 41 in index.js: getCountry(countryId, options) replaced with getCountry(countryId)
+Mutant 42 in index.js: options replaced with {
+  deprecated: true
+}
+Mutant 43 in index.js: !country replaced with tz.length > 0
+Mutant 44 in index.js: getTimezone replaced with tzs[key].name
+Mutant 45 in index.js: deprecated === true replaced with !deprecated
+Mutant 46 in index.js: !tzs[key].deprecated replaced with !tz.deprecated
+Mutant 47 in index.js: !country replaced with country.deprecated
+[32m08:00:43 (2533) INFO Instrumenter[39m Instrumented 3 source file(s) with 48 mutant(s)
+[32m08:00:43 (2533) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m08:00:44 (2533) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m08:00:44 (2533) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m08:00:47 (2533) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 2 seconds (net 2504 ms, overhead 1 ms).
+Mutation testing 12% (elapsed: <1m, remaining: ~1m) 6/48 tested (1 survived, 0 timed out)
+Mutation testing 27% (elapsed: <1m, remaining: <1m) 13/48 tested (2 survived, 0 timed out)
+Mutation testing 41% (elapsed: <1m, remaining: <1m) 20/48 tested (3 survived, 0 timed out)
+Mutation testing 58% (elapsed: <1m, remaining: <1m) 28/48 tested (3 survived, 0 timed out)
+Mutation testing 72% (elapsed: <1m, remaining: <1m) 35/48 tested (4 survived, 0 timed out)
+Mutation testing 87% (elapsed: ~1m, remaining: <1m) 42/48 tested (5 survived, 0 timed out)
+
+All tests
+  ✓ All tests (killed 43)
+
+[Survived] PrecomputedMutator
+src/build-country.js:18:7
+-     if (!timezonesMap) timezonesMap = buildTimezonesMap(data);
++     if (timezonesMap === undefined) timezonesMap = buildTimezonesMap(data);
+
+[Survived] PrecomputedMutator
+src/build-timezone.js:3:7
+-     if (!timezone) return null;
++     if (timezone === undefined) return null;
+
+[Survived] PrecomputedMutator
+src/index.js:17:7
+-     if (totalTimezones !== memoizedTimezones) Object.keys(data.timezones).forEach(getTimezone);
++     if (memoizedTimezones < totalTimezones) Object.keys(data.timezones).forEach(getTimezone);
+
+[Survived] PrecomputedMutator
+src/index.js:39:35
+-     memoizedTimezones = Object.keys(timezone).length;
++     memoizedTimezones = Object.keys(timezones).length;
+
+[Survived] PrecomputedMutator
+src/index.js:45:42
+-     return values.map((c) => getCountry(c, options));
++     return values.map((c) => getCountry(c, {
++     ...options
++   }));
+
+Ran 1.00 tests per mutant on average.
+-------------------|---------|----------|-----------|------------|----------|----------|
+File               | % score | # killed | # timeout | # survived | # no cov | # errors |
+-------------------|---------|----------|-----------|------------|----------|----------|
+All files          |   89.58 |       43 |         0 |          5 |        0 |        0 |
+ build-country.js  |   87.50 |        7 |         0 |          1 |        0 |        0 |
+ build-timezone.js |   83.33 |        5 |         0 |          1 |        0 |        0 |
+ index.js          |   91.18 |       31 |         0 |          3 |        0 |        0 |
+-------------------|---------|----------|-----------|------------|----------|----------|
+[32m08:01:55 (2533) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/countries-and-timezones/reports/mutation/mutation.html
+[32m08:01:55 (2533) INFO MutationTestExecutor[39m Done in 1 minute 12 seconds.
+
+real	1m14.165s
+user	1m21.766s
+sys	0m11.953s

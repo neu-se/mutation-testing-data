@@ -1,0 +1,139 @@
+Consider the following code fragment:
+```
+
+/** Extended regex for matching paths. */
+export class Matcher extends RegExp {
+  /** Original path specification that produced this matcher. */
+  readonly spec: string
+  /** Context properties referenced by path specification. */
+  readonly props: string[]
+
+  /** @param spec Path specification.
+    * @param version Specification language version. */
+  constructor (spec: string, version: '1' | '1.0' | '1.1' = '1.1') {
+    if (spec.match(/^[a-zA-Z0-9_/:~.$+*-]*$/) === null) {
+      throw new Error('Path contains invalid characters')
+    }
+    if (spec.match(/^\//) === null) {
+      throw new Error('Path must begin with a slash')
+    }
+    if (spec.match(/\/\//) !== null) {
+      throw new Error('Path contains empty segments')
+    }
+    if (spec.match(version === '1' || version === '1.0'
+      ? /[*+][^/]|[^/][*+]/
+      : /\*[^*/]|\+[^+/]|[^/*]\*|[^/+]\+|\*\*\*|\+\+\+/) !== null) {
+      throw new Error('Path contains malformed wildcards')
+    }
+    if (spec.match(/[^/]:|:\/|:$/) !== null) {
+      throw new Error('Path contains malformed captures')
+    }
+    if (spec.match(/^.+\/$/) !== null) {
+      throw new Error('Path must not end with a slash')
+    }
+    const { regex, props } = compile(spec)
+    super(regex)
+    this.spec = spec
+    this.props = props
+  }
+
+  [Symbol.match] (string: string): RegExpMatchArray | null {
+    if (string.length > 1 && string.endsWith('/')) {
+      return null
+    }
+    return super[Symbol.match](string)
+  }
+
+  /** Static constructor function; returns a new Matcher.
+    * @param spec Path specification.
+    * @param version Specification language version. */
+  static for (spec: string, version: '1' | '1.0' | '1.1' = '1.1'): Matcher {
+    return new Matcher(spec, version)
+  }
+}
+
+function compile (spec: string): {
+  regex: string
+  props: string[]
+} {
+  const parts: string[] = []
+  const props: string[] = []
+  let min = 0
+  let max = 0
+  let any = false
+  let opt = true
+  function flatten (final: boolean = false): void {
+    if (<PLACEHOLDER>) {
+      if (final && opt && min < 1) {
+        min = 1
+      } else if (min > 0) {
+        opt = false
+      }
+      parts.push(any
+        ? min < 2
+          ? min < 1
+            ? '(?:/[^/]+)*'
+            : '(?:/[^/]+)+'
+          : `(?:/[^/]+){${min},}`
+        : max === 1
+          ? min === 1
+            ? '/[^/]+'
+            : '(?:/[^/]+)?'
+          : min === max
+            ? `(?:/[^/]+){${min}}`
+            : `(?:/[^/]+){${min},${max}}`)
+    }
+    min = 0
+    max = 0
+    any = false
+  }
+  function finalise (): string {
+    flatten(true)
+    return (opt ? '^/$|^' : '^') + parts.reduce((acc, seg) => seg + acc, '$')
+  }
+  for (const part of spec.split('/').slice(1).reverse()) {
+    switch (part) {
+      case '+':
+        min++
+        max++
+        break
+      case '++':
+        max++
+        break
+      case '*':
+        min++
+        any = true
+        break
+      case '**':
+        any = true
+        break
+      default:
+        flatten()
+        opt = false
+        if (part.match(/:.+/) !== null) {
+          props.push(part.slice(1))
+          parts.push('/([^/]+)')
+        } else {
+          parts.push(`/${part.replace(/([.$])/g, '\\$1')}`)
+        }
+    }
+  }
+  return {
+    regex: finalise(),
+    props: props.reverse()
+  }
+}
+
+```
+
+Please provide a code fragment that PLACEHOLDER can be replaced with.  
+
+Provide your answer as a fenced code block containing a single line of code,
+using the following template:
+
+The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+
+Please conclude your response with "DONE."
