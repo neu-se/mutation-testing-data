@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function() { throw new Error("Buggy code"); });
+```
+This would result in different behavior because the `then` method is used to throw an error, which would cause the promise to be rejected, even if the original code fragment resolved the promise successfully.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).fail(function() { throw new Error("Buggy code"); });
+```
+This would result in different behavior because the `fail` method is used to throw an error, which would cause the promise to be rejected, even if the original code fragment resolved the promise successfully.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply(args).then(function() { return Q.reject("Buggy code"); });
+```
+This would result in different behavior because the `then` method is used to return a rejected promise, which would cause the promise to be

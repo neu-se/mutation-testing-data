@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!rule.query
+```
+This would result in different behavior because the `!` operator would invert the result of the `query` method, causing the policy to allow actions that would normally be denied, and deny actions that would normally be allowed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx)
+```
+This would result in different behavior because the `query` method would be called with the `ctx` parameter set to `null`, which would cause the policy to ignore any context-dependent paths and always return `null` for any action on any path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rule.query(path, verb, ctx)
+```
+This would result in different behavior because the `query` method would be called with the `ctx` parameter set to a different value than the one passed to the `Policy` constructor, which could cause the policy to return different results for the same action on the same path.
+
+DONE.

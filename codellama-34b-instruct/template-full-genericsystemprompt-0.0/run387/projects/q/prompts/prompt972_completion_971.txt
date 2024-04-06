@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+name, args.slice(1)
+```
+This would result in different behavior because it would pass a slice of the `args` array starting from the second element, instead of passing the `args` array as is.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+name, args.concat(deferred.makeNodeResolver())
+```
+This would result in different behavior because it would concatenate the `args` array with the result of `deferred.makeNodeResolver()`, which would change the number of arguments passed to the `name` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+name, args.map(function(arg) { return arg + 1; })
+```
+This would result in different behavior because it would pass a new array containing the result of adding 1 to each element of the `args` array, instead of passing the `args` array as is.
+
+DONE.

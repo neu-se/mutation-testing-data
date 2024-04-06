@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).fail
+```
+This would result in different behavior because `fail` is a different method than `done`, and it would not handle the promise's resolution in the same way.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function () { throw new Error("DONE"); })
+```
+This would result in different behavior because it would throw an error immediately after the promise is resolved, rather than waiting for the promise to be fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function () { return Q.reject("DONE"); })
+```
+This would result in different behavior because it would reject the promise with the reason "DONE", rather than resolving it.
+
+DONE.

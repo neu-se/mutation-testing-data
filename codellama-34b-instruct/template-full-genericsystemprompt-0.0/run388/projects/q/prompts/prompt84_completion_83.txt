@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+requestTick()
+```
+This would result in different behavior because `requestTick` is a function that schedules the `flush` function to be called later, but `requestTick()` would call the function immediately, which would cause the `flush` function to be called twice in a row, potentially leading to unexpected behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+requestTick.bind(null)
+```
+This would result in different behavior because `requestTick.bind(null)` would create a new function that is bound to the `null` context, which would cause the `flush` function to be called with the wrong context, potentially leading to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+requestTick.bind(undefined)
+```
+This would result in different behavior because `requestTick.bind(undefined)` would create a new function that is bound to the `undefined` context, which would cause the `flush` function to be called with the wrong context,

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/[*+]/g, '')
+```
+This would result in different behavior because the regular expression `/[*+]/g` matches any occurrence of `*` or `+` in the `spec` string, and replaces them with an empty string. This would cause the `compile` function to produce a different regular expression, which would result in different behavior when matching paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/[*+]/g, '\\$&')
+```
+This would result in different behavior because the regular expression `/[*+]/g` matches any occurrence of `*` or `+` in the `spec` string, and replaces them with the string `\$&`, which is a reference to the entire match. This would cause the `compile` function to produce a different regular expression, which would result in different behavior when matching paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.replace(/[*+]/g, '\\

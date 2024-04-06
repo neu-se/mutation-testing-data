@@ -1,0 +1,23 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+return <PLACEHOLDER>(value);
+```
+This would result in different behavior because it would return a rejected promise instead of a resolved one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return <PLACEHOLDER>(value).then(function () {
+    throw new Error("Test error");
+});
+```
+This would result in different behavior because it would throw an error after the promise is resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return <PLACEHOLDER>(value).then(function () {
+    return Q.reject(new Error("Test error"));
+});
+```
+This would result in different behavior because it would return a rejected promise instead of a resolved one.
+
+DONE.

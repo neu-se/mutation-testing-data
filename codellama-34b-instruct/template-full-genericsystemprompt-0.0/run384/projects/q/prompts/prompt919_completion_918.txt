@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver()
+```
+This would result in different behavior because the `makeNodeResolver` method is not defined on the `deferred` object, so it would throw a `TypeError`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(deferred.promise)
+```
+This would result in different behavior because the `makeNodeResolver` method expects a promise as its argument, but `deferred.promise` is not a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(Q.resolve(deferred.promise))
+```
+This would result in different behavior because the `makeNodeResolver` method expects a promise as its argument, but `Q.resolve(deferred.promise)` is not a promise.
+
+DONE.

@@ -1,0 +1,11 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+err && abort
+```
+This would result in different behavior because `err && abort` is a logical AND operation, while `err || abort` is a logical OR operation. In the context of the code, `err && abort` would only abort the current stream if both `err` and `abort` are truthy, while `err || abort` would abort the current stream if either `err` or `abort` is truthy.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!err || abort
+```
+This would result in different behavior because `!err || abort` is a logical OR operation with a negated `err` condition, while `err || abort` is a logical OR operation with a non-negated `err` condition. In the context of the code, `!err || abort` would abort the current stream if `err` is falsy or `abort` is truthy, while `err || abort` would abort the current stream if `err` is truthy or `abort` is truthy.

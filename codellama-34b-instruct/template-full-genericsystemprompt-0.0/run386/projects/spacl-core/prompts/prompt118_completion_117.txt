@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!this.matches
+```
+This would result in different behavior because the `!` operator would invert the result of the `matches` method, causing the `query` method to return `true` for paths that are not governed by the rule, and `false` for paths that are governed by the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.matches(path, ctx)
+```
+This would result in different behavior because the `matches` method would be called with the `path` and `ctx` arguments, which would cause the `query` method to return `true` for paths that are governed by the rule, and `false` for paths that are not governed by the rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.regex.test(path)
+```
+This would result in different behavior because the `test` method of the `regex` property would be called with the `path` argument, which would cause the `query` method to return `

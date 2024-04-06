@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream || targetFilePath
+```
+This would result in different behavior because it would always evaluate to `true` if `zipAFolderOptions` is defined and has a truthy `customWriteStream` property, regardless of the value of `targetFilePath`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream && !targetFilePath
+```
+This would result in different behavior because it would always evaluate to `false` if `zipAFolderOptions` is defined and has a truthy `customWriteStream` property, regardless of the value of `targetFilePath`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipAFolderOptions?.customWriteStream !== targetFilePath
+```
+This would result in different behavior because it would always evaluate to `true` if `zipAFolderOptions` is defined and has a truthy `customWriteStream` property that is not equal to `targetFilePath`, regardless of the value of `targetFile

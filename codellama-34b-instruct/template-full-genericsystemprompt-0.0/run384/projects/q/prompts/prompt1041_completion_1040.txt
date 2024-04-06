@@ -1,0 +1,28 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: next.promise
+});
+```
+This would result in different behavior because the `next.promise` would be resolved with the `head` value, instead of the `tail` value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: Q.reject(new Error("Can't get value from closed queue"))
+});
+```
+This would result in different behavior because the `tail` value would be a rejected promise, instead of a resolved promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ends.resolve({
+    head: value,
+    tail: Q.resolve(next.promise)
+});
+```
+This would result in different behavior because the `tail` value would be a resolved promise, instead of a rejected promise.
+
+DONE.

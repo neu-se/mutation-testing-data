@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+busy
+```
+This would result in different behavior because the `busy` variable is always `true` when the `map` function is called, which means that the `read` function will always be called with `abort` set to `true`, even if the source has not ended normally.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!aborted
+```
+This would result in different behavior because the `aborted` variable is only set to `true` when the `read` function is called with `abort` set to `true`, which means that the `map` function will not be called if the source has not ended normally.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!busy && !aborted
+```
+This would result in different behavior because the `busy` and `aborted` variables are both checked, which means that the `map` function will only be called if the source has not ended normally and the `busy` variable is `false`.
+

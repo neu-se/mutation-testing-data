@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).thenReject
+```
+This would result in different behavior because `thenReject` would cause the promise to be rejected, whereas `thenResolve` would cause it to be resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).then(function () { return value; })
+```
+This would result in different behavior because the callback would be called with `value` as an argument, but the promise would be resolved with the return value of the callback, which is not necessarily the same as `value`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall(value).then(function () { return Q.reject(value); })
+```
+This would result in different behavior because the callback would be called with `value` as an argument, but the promise would be rejected with the return value of the callback, which is not necessarily the same as `value`.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.rest.slice(1)
+```
+This would result in different behavior because `thisIter.rest` returns the remaining ops in the iterator, while `thisIter.rest.slice(1)` returns the remaining ops except for the first one. This would cause the `concat` method to skip the first op in the `other` delta, which could result in a different output.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.rest.slice(1)
+```
+This would result in different behavior because `otherIter.rest` returns the remaining ops in the iterator, while `otherIter.rest.slice(1)` returns the remaining ops except for the first one. This would cause the `concat` method to skip the first op in the `this` delta, which could result in a different output.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.rest.slice(0, -1)
+```
+This would result in different behavior because `

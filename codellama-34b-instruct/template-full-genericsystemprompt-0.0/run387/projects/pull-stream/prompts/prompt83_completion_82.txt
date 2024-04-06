@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because it would call the `read` function with a different set of arguments, which could potentially cause the function to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () { throw new Error('done callback not supplied') })
+```
+This would result in different behavior because it would call the `read` function with a different set of arguments, and if the `done` callback is not supplied, it would throw an error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () { console.warn('done callback not supplied') })
+```
+This would result in different behavior because it would call the `read` function with a different set of arguments, and if the `done` callback is not supplied, it would log a warning message to the console.
+
+DONE.

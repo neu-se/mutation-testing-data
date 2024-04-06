@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not called on the promise returned by `fapply`, which would prevent the promise from being rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because the `fail` method is called on the promise returned by `fapply`, but the `resolve` method is used instead of `reject`, which would cause the promise to be resolved instead of rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(function() {});
+```
+This would result in different behavior because the `fail` method is called on the promise returned by `fapply`, but the callback function is empty, which would prevent the promise from being rejected.
+
+DONE.

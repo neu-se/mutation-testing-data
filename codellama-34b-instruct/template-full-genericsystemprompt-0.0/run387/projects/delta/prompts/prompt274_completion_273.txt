@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() === 'delete'
+```
+This would result in different behavior because it would cause the `if` statement to evaluate to `true` when the next operation is a delete, rather than when it is not an insert.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() !== 'retain'
+```
+This would result in different behavior because it would cause the `if` statement to evaluate to `true` when the next operation is not a retain, rather than when it is an insert.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+iter.peekType() === 'insert' && iter.peekLength() > 0
+```
+This would result in different behavior because it would cause the `if` statement to evaluate to `true` when the next operation is an insert with a length greater than 0, rather than when it is not an insert.
+
+DONE.

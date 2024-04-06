@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return value; });
+```
+This would result in different behavior because the `then` method returns a new promise that is resolved with the return value of the callback function, which in this case is `value`. This means that the new promise will be resolved with `value`, even if the original promise was rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { throw new Error(); });
+```
+This would result in different behavior because the `then` method returns a new promise that is rejected with the error thrown by the callback function. This means that the new promise will be rejected, even if the original promise was resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(function() { return Q.reject(value); });
+```
+This would result in different behavior because the `then` method returns a new promise that is resolved with the return value of the callback function, which in this case is `

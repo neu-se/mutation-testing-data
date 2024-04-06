@@ -1,0 +1,24 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, onProgress);
+```
+This would result in different behavior because the `onProgress` callback would not be called for the `promise`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, noop);
+```
+This would result in different behavior because the `onProgress` callback would be replaced with `noop`, which would not update the progress of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+when(promise, onFulfilled, onRejected, function (progress) {
+    deferred.notify({
+        index: index,
+        value: progress
+    });
+});
+```
+This would result in different behavior because the `onProgress` callback would be replaced with a new function that would update the progress of the promise.
+
+DONE.

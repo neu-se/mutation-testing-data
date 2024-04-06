@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+base[key] !== attr[key] || attr[key] === undefined
+```
+This would result in different behavior because the `||` operator is used instead of `&&`, which would cause the `attr[key] === undefined` condition to be evaluated even if `base[key] !== attr[key]` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+base[key] !== attr[key] && attr[key] !== null
+```
+This would result in different behavior because the `null` value is explicitly checked for, which would cause the `attr[key] !== null` condition to be evaluated even if `base[key] !== attr[key]` is false.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+base[key] !== attr[key] && attr[key] !== undefined && attr[key] !== null
+```
+This would result in different behavior because the `undefined` and `null` values are explicitly checked for, which would cause the `attr[key

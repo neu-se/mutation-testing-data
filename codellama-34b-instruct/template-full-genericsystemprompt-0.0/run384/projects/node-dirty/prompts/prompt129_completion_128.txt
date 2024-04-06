@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(false);
+```
+This would result in different behavior because `cork` expects a boolean value, but `false` is not a valid value for it. The original code uses `true` to cork the stream, which means that the stream will be corked until `uncork` is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(this._queue.size);
+```
+This would result in different behavior because `cork` expects a boolean value, but `this._queue.size` is a number. The original code uses `true` to cork the stream, which means that the stream will be corked until `uncork` is called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._writeStream.cork(this._inFlightWrites > 0);
+```
+This would result in different behavior because `cork` expects a boolean value, but `this._

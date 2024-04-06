@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () {})
+```
+This would result in different behavior because it would call the `read` function with `abort` set to `true` instead of the original `err` value, which could cause the function to behave differently.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () { throw err; })
+```
+This would result in different behavior because it would throw an error instead of calling the `done` callback, which could cause the function to behave differently.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort || true, done || function () { return err; })
+```
+This would result in different behavior because it would return the `err` value instead of calling the `done` callback, which could cause the function to behave differently.
+
+DONE.

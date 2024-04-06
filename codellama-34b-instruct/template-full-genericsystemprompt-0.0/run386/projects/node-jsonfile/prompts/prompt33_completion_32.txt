@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFileSync)
+```
+This would result in different behavior because `fs.writeFileSync` is a synchronous function, whereas `fs.writeFile` is an asynchronous function. Using `fs.writeFileSync` would cause the program to block until the file is written, which could lead to performance issues.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile.bind(fs))
+```
+This would result in different behavior because `fs.writeFile.bind(fs)` creates a new function that is bound to the `fs` object, whereas `fs.writeFile` is a method that is called on the `fs` object. Using `fs.writeFile.bind(fs)` would cause the program to call the `writeFile` method on a different object, which could lead to unexpected behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile

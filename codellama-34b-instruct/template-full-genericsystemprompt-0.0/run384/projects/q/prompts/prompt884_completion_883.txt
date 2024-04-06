@@ -1,0 +1,18 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(deferred.reject);
+```
+This would result in different behavior because the `fail` method is not defined on the `this.fapply` promise, so the `deferred.reject` function would not be called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).catch(deferred.reject);
+```
+This would result in different behavior because the `catch` method is not defined on the `this.fapply` promise, so the `deferred.reject` function would not be called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).then(deferred.resolve, deferred.reject);
+```
+This would result in different behavior because the `then` method is not defined on the `this.fapply` promise, so the `deferred.resolve` and `deferred.reject` functions would not be called.
+

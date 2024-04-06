@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() === 'insert')
+```
+This would result in different behavior because the `!=` operator is replaced with `===` which would cause the code to always evaluate to `true` when `thisIter.peekType()` is `'insert'`, regardless of the value of `otherIter.peekType()`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&
+        (priority || otherIter.peekType() !== 'delete')
+```
+This would result in different behavior because the `!=` operator is replaced with `===` which would cause the code to always evaluate to `true` when `thisIter.peekType()` is `'insert'`, regardless of the value of `otherIter.peekType()`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert' &&

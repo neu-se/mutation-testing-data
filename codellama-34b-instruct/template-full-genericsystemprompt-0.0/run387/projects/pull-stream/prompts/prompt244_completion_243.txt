@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, cb)
+```
+This would result in different behavior because it would always call the `read` function with `true` as the first argument, which would cause the stream to be aborted immediately, regardless of the value of `err`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(err, cb)
+```
+This would result in different behavior because it would always call the `read` function with the `err` object as the first argument, which would cause the stream to be aborted if the `err` object is not null.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(null, cb)
+```
+This would result in different behavior because it would always call the `read` function with `null` as the first argument, which would cause the stream to be aborted if the `err` object is null.
+
+DONE.

@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+once(stream)
+```
+This would result in different behavior because `once` is a function that returns a new stream that only allows reading from the original stream once, whereas the original code fragment `once` is a function that returns a new stream that allows reading from the original stream multiple times.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+stream.pipe(once)
+```
+This would result in different behavior because `stream.pipe` is a method that pipes the data from the original stream to the `once` stream, whereas the original code fragment `once` is a function that returns a new stream that allows reading from the original stream multiple times.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+once(stream, { objectMode: true })
+```
+This would result in different behavior because `once` with the `objectMode` option set to `true` will only allow reading from the original stream once, whereas the original code fragment `once` without the `objectMode` option set will allow reading

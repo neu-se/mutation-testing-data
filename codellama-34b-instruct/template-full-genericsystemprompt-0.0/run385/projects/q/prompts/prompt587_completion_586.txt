@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).then(function () { throw new Error("Buggy code"); });
+```
+This would result in different behavior because the `then` method is not called on the original `Q.async(makeGenerator)` promise, but on a new promise that is created by the `then` method. This new promise will be rejected with the error "Buggy code", which will cause the promise chain to be rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator).catch(function () { throw new Error("Buggy code"); });
+```
+This would result in different behavior because the `catch` method is not called on the original `Q.async(makeGenerator)` promise, but on a new promise that is created by the `catch` method. This new promise will be rejected with the error "Buggy code", which will cause the promise chain to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(make

@@ -1,0 +1,15 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.fcall()
+```
+This would result in different behavior because `fcall` is a method that calls a function with the given arguments, but it does not return a promise, so the returned promise from `Q.finally` would not be fulfilled with the value returned by `callback`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () {})
+```
+This would result in different behavior because `fcall` is a method that calls a function with the given arguments, but it does not return a promise, so the returned promise from `Q.finally` would not be fulfilled with the value returned by `callback`. Additionally, the `then` method is called on the result of `fcall`, which is not a promise, so it would not be able to handle the resolution or rejection of the promise returned by `callback`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall().then(function () { return Q.resolve();

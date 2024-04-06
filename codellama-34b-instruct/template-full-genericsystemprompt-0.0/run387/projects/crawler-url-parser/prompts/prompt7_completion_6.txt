@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because the function is checking the `currentUrlStr` instead of the `baseUrlStr`, which could lead to false positives or false negatives in the URL parsing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/#.*$/, ''))
+```
+This would result in different behavior because the function is checking the `baseUrlStr` after removing the fragment, which could lead to false positives or false negatives in the URL parsing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(baseUrlStr.replace(/^\/\//, 'http://'))
+```
+This would result in different behavior because the function is checking the `baseUrlStr` after replacing the protocol with `http://`, which could lead to false positives or

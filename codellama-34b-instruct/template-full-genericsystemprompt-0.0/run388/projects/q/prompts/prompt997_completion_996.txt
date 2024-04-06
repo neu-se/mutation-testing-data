@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver()
+```
+This would result in different behavior because the `makeNodeResolver` method is not called, which would cause the `nodeArgs` array to be pushed to the `dispatch` method without a callback function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(null)
+```
+This would result in different behavior because the `makeNodeResolver` method is called with `null` as the argument, which would cause the `nodeArgs` array to be pushed to the `dispatch` method with a callback function that is not a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver(function() {})
+```
+This would result in different behavior because the `makeNodeResolver` method is called with an empty function as the argument, which would cause the `nodeArgs` array to be pushed to the `dispatch` method with a callback function that does not have the same behavior as the original `makeNodeResolver` method

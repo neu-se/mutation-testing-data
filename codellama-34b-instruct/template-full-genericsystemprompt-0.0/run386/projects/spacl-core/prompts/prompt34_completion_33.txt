@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(2).reverse()
+```
+This would result in different behavior because it would skip the first segment of the path, which could cause the matcher to fail to match certain paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).reverse().join('/')
+```
+This would result in different behavior because it would join the segments of the path with a '/' character, which could cause the matcher to fail to match certain paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).reverse().map(segment => segment.replace(/[*+]/g, ''))
+```
+This would result in different behavior because it would remove any wildcard characters from the segments of the path, which could cause the matcher to fail to match certain paths.
+
+DONE.

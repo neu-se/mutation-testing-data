@@ -1,0 +1,17 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('error'); }
+```
+This would result in different behavior because the `emit` method is called with the `'error'` event instead of the `'drain'` event, which would cause the `set` method to emit an `'error'` event instead of a `'drain'` event.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain', 0); }
+```
+This would result in different behavior because the `emit` method is called with the `'drain'` event and a value of `0` instead of the default value of `1`. This would cause the `set` method to emit a `'drain'` event with a value of `0` instead of the default value of `1`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => { if (cb) cb(); this.emit('drain', 2); }
+```
+This would result in

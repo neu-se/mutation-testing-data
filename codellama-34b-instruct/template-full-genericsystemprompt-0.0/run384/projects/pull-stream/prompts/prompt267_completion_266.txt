@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+!end
+```
+This would result in different behavior because the `!` operator negates the `end` value, causing the `nextStream` function to be called even if the stream has ended.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+end && stream
+```
+This would result in different behavior because the `&&` operator short-circuits the evaluation of the expression if `end` is falsy, so the `stream` variable would not be evaluated if `end` is falsy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end || stream
+```
+This would result in different behavior because the `||` operator short-circuits the evaluation of the expression if `end` is truthy, so the `stream` variable would not be evaluated if `end` is truthy.
+
+DONE.

@@ -1,0 +1,19 @@
+  Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.delete(key, cbs);
+```
+This would result in different behavior because `delete` would remove the key-value pair from the queue, whereas `set` would update the value associated with the key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.concat(this._queue.get(key)));
+```
+This would result in different behavior because `set` would overwrite the existing value associated with the key, whereas `concat` would append the new value to the existing one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.slice(0, -1));
+```
+This would result in different behavior because `slice` would remove the last element from the array, whereas `set` would update the value associated with the key.
+
+DONE.
