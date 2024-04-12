@@ -1,0 +1,2268 @@
+[32m13:05:58 (2166) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m13:05:58 (2166) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m13:05:59 (2166) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/pull-stream/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[32m13:05:59 (2166) INFO ProjectReader[39m Found 31 of 90 file(s) to be mutated.
+*** using standard mutators ***
+Mutant 0 in pull.js: {
+  var length = arguments.length;
+  if (typeof a === 'function' && a.length === 1) {
+    var args = new Array(length);
+    for (var i = 0; i < length; i++) args[i] = arguments[i];
+    return function (read) {
+      if (args == null) {
+        throw new TypeError("partial sink should only be called once!");
+      }
+
+      // Grab the reference after the check, because it's always an array now
+      // (engines like that kind of consistency).
+      var ref = args;
+      args = null;
+
+      // Prioritize common case of small number of pulls.
+      switch (length) {
+        case 1:
+          return pull(read, ref[0]);
+        case 2:
+          return pull(read, ref[0], ref[1]);
+        case 3:
+          return pull(read, ref[0], ref[1], ref[2]);
+        case 4:
+          return pull(read, ref[0], ref[1], ref[2], ref[3]);
+        default:
+          ref.unshift(read);
+          return pull.apply(null, ref);
+      }
+    };
+  }
+  var read = a;
+  if (read && typeof read.source === 'function') {
+    read = read.source;
+  }
+  for (var i = 1; i < length; i++) {
+    var s = arguments[i];
+    if (typeof s === 'function') {
+      read = s(read);
+    } else if (s && typeof s === 'object') {
+      s.sink(read);
+      read = s.source;
+    }
+  }
+  return read;
+} replaced with {}
+Mutant 1 in pull.js: typeof a === 'function' && a.length === 1 replaced with true
+Mutant 2 in pull.js: typeof a === 'function' && a.length === 1 replaced with false
+Mutant 3 in pull.js: typeof a === 'function' && a.length === 1 replaced with typeof a === 'function' || a.length === 1
+Mutant 4 in pull.js: typeof a === 'function' replaced with true
+Mutant 5 in pull.js: typeof a === 'function' replaced with typeof a !== 'function'
+Mutant 6 in pull.js: 'function' replaced with ""
+Mutant 7 in pull.js: a.length === 1 replaced with true
+Mutant 8 in pull.js: a.length === 1 replaced with a.length !== 1
+Mutant 9 in pull.js: {
+  var args = new Array(length);
+  for (var i = 0; i < length; i++) args[i] = arguments[i];
+  return function (read) {
+    if (args == null) {
+      throw new TypeError("partial sink should only be called once!");
+    }
+
+    // Grab the reference after the check, because it's always an array now
+    // (engines like that kind of consistency).
+    var ref = args;
+    args = null;
+
+    // Prioritize common case of small number of pulls.
+    switch (length) {
+      case 1:
+        return pull(read, ref[0]);
+      case 2:
+        return pull(read, ref[0], ref[1]);
+      case 3:
+        return pull(read, ref[0], ref[1], ref[2]);
+      case 4:
+        return pull(read, ref[0], ref[1], ref[2], ref[3]);
+      default:
+        ref.unshift(read);
+        return pull.apply(null, ref);
+    }
+  };
+} replaced with {}
+Mutant 10 in pull.js: new Array(length) replaced with new Array()
+Mutant 11 in pull.js: i < length replaced with false
+Mutant 12 in pull.js: i < length replaced with i <= length
+Mutant 13 in pull.js: i < length replaced with i >= length
+Mutant 14 in pull.js: i++ replaced with i--
+Mutant 15 in pull.js: {
+  if (args == null) {
+    throw new TypeError("partial sink should only be called once!");
+  }
+
+  // Grab the reference after the check, because it's always an array now
+  // (engines like that kind of consistency).
+  var ref = args;
+  args = null;
+
+  // Prioritize common case of small number of pulls.
+  switch (length) {
+    case 1:
+      return pull(read, ref[0]);
+    case 2:
+      return pull(read, ref[0], ref[1]);
+    case 3:
+      return pull(read, ref[0], ref[1], ref[2]);
+    case 4:
+      return pull(read, ref[0], ref[1], ref[2], ref[3]);
+    default:
+      ref.unshift(read);
+      return pull.apply(null, ref);
+  }
+} replaced with {}
+Mutant 16 in pull.js: args == null replaced with true
+Mutant 17 in pull.js: args == null replaced with false
+Mutant 18 in pull.js: args == null replaced with args != null
+Mutant 19 in pull.js: {
+  throw new TypeError("partial sink should only be called once!");
+} replaced with {}
+Mutant 20 in pull.js: "partial sink should only be called once!" replaced with ""
+Mutant 21 in pull.js: case 1:
+  return pull(read, ref[0]); replaced with case 1:
+Mutant 22 in pull.js: case 2:
+  return pull(read, ref[0], ref[1]); replaced with case 2:
+Mutant 23 in pull.js: case 3:
+  return pull(read, ref[0], ref[1], ref[2]); replaced with case 3:
+Mutant 24 in pull.js: case 4:
+  return pull(read, ref[0], ref[1], ref[2], ref[3]); replaced with case 4:
+Mutant 25 in pull.js: default:
+  ref.unshift(read);
+  return pull.apply(null, ref); replaced with default:
+Mutant 26 in pull.js: read && typeof read.source === 'function' replaced with true
+Mutant 27 in pull.js: read && typeof read.source === 'function' replaced with false
+Mutant 28 in pull.js: read && typeof read.source === 'function' replaced with read || typeof read.source === 'function'
+Mutant 29 in pull.js: typeof read.source === 'function' replaced with true
+Mutant 30 in pull.js: typeof read.source === 'function' replaced with typeof read.source !== 'function'
+Mutant 31 in pull.js: 'function' replaced with ""
+Mutant 32 in pull.js: {
+  read = read.source;
+} replaced with {}
+Mutant 33 in pull.js: i < length replaced with false
+Mutant 34 in pull.js: i < length replaced with i <= length
+Mutant 35 in pull.js: i < length replaced with i >= length
+Mutant 36 in pull.js: i++ replaced with i--
+Mutant 37 in pull.js: {
+  var s = arguments[i];
+  if (typeof s === 'function') {
+    read = s(read);
+  } else if (s && typeof s === 'object') {
+    s.sink(read);
+    read = s.source;
+  }
+} replaced with {}
+Mutant 38 in pull.js: typeof s === 'function' replaced with true
+Mutant 39 in pull.js: typeof s === 'function' replaced with false
+Mutant 40 in pull.js: typeof s === 'function' replaced with typeof s !== 'function'
+Mutant 41 in pull.js: 'function' replaced with ""
+Mutant 42 in pull.js: {
+  read = s(read);
+} replaced with {}
+Mutant 43 in pull.js: s && typeof s === 'object' replaced with true
+Mutant 44 in pull.js: s && typeof s === 'object' replaced with false
+Mutant 45 in pull.js: s && typeof s === 'object' replaced with s || typeof s === 'object'
+Mutant 46 in pull.js: typeof s === 'object' replaced with true
+Mutant 47 in pull.js: typeof s === 'object' replaced with typeof s !== 'object'
+Mutant 48 in pull.js: 'object' replaced with ""
+Mutant 49 in pull.js: {
+  s.sink(read);
+  read = s.source;
+} replaced with {}
+Mutant 50 in collect.js: {
+  return reduce(function (arr, item) {
+    arr.push(item);
+    return arr;
+  }, [], cb);
+} replaced with {}
+Mutant 51 in collect.js: {
+  arr.push(item);
+  return arr;
+} replaced with {}
+Mutant 52 in collect.js: [] replaced with ["Stryker was here"]
+Mutant 53 in concat.js: {
+  return reduce(function (a, b) {
+    return a + b;
+  }, '', cb);
+} replaced with {}
+Mutant 54 in concat.js: {
+  return a + b;
+} replaced with {}
+Mutant 55 in concat.js: a + b replaced with a - b
+Mutant 56 in concat.js: '' replaced with "Stryker was here!"
+Mutant 57 in drain.js: {
+  var read, abort;
+
+  // Declared here so that it captures the drain's stack trace
+  var doneLackingErr;
+  if (!done) {
+    doneLackingErr = new Error('no done callback supplied');
+  }
+  function sink(_read) {
+    read = _read;
+    if (abort) return sink.abort()
+    //this function is much simpler to write if you
+    //just use recursion, but by using a while loop
+    //we do not blow the stack if the stream happens to be sync.
+    ;
+    (function next() {
+      var loop = true,
+        cbed = false;
+      while (loop) {
+        cbed = false;
+        read(null, function (end, data) {
+          cbed = true;
+          if (end = end || abort) {
+            loop = false;
+            if (done) done(end === true ? null : end);else if (end && end !== true) {
+              console.warn(doneLackingErr);
+              throw end;
+            }
+          } else if (op && false === op(data) || abort) {
+            loop = false;
+            read(abort || true, done || function () {});
+          } else if (!loop) {
+            next();
+          }
+        });
+        if (!cbed) {
+          loop = false;
+          return;
+        }
+      }
+    })();
+  }
+  sink.abort = function (err, cb) {
+    if ('function' == typeof err) cb = err, err = true;
+    abort = err || true;
+    if (read) return read(abort, cb || function () {});
+  };
+  return sink;
+} replaced with {}
+Mutant 58 in drain.js: !done replaced with done
+Mutant 59 in drain.js: !done replaced with true
+Mutant 60 in drain.js: !done replaced with false
+Mutant 61 in drain.js: {
+  doneLackingErr = new Error('no done callback supplied');
+} replaced with {}
+Mutant 62 in drain.js: 'no done callback supplied' replaced with ""
+Mutant 63 in drain.js: {
+  read = _read;
+  if (abort) return sink.abort()
+  //this function is much simpler to write if you
+  //just use recursion, but by using a while loop
+  //we do not blow the stack if the stream happens to be sync.
+  ;
+  (function next() {
+    var loop = true,
+      cbed = false;
+    while (loop) {
+      cbed = false;
+      read(null, function (end, data) {
+        cbed = true;
+        if (end = end || abort) {
+          loop = false;
+          if (done) done(end === true ? null : end);else if (end && end !== true) {
+            console.warn(doneLackingErr);
+            throw end;
+          }
+        } else if (op && false === op(data) || abort) {
+          loop = false;
+          read(abort || true, done || function () {});
+        } else if (!loop) {
+          next();
+        }
+      });
+      if (!cbed) {
+        loop = false;
+        return;
+      }
+    }
+  })();
+} replaced with {}
+Mutant 64 in drain.js: abort replaced with true
+Mutant 65 in drain.js: abort replaced with false
+Mutant 66 in drain.js: {
+  var loop = true,
+    cbed = false;
+  while (loop) {
+    cbed = false;
+    read(null, function (end, data) {
+      cbed = true;
+      if (end = end || abort) {
+        loop = false;
+        if (done) done(end === true ? null : end);else if (end && end !== true) {
+          console.warn(doneLackingErr);
+          throw end;
+        }
+      } else if (op && false === op(data) || abort) {
+        loop = false;
+        read(abort || true, done || function () {});
+      } else if (!loop) {
+        next();
+      }
+    });
+    if (!cbed) {
+      loop = false;
+      return;
+    }
+  }
+} replaced with {}
+Mutant 67 in drain.js: true replaced with false
+Mutant 68 in drain.js: false replaced with true
+Mutant 69 in drain.js: loop replaced with false
+Mutant 70 in drain.js: {
+  cbed = false;
+  read(null, function (end, data) {
+    cbed = true;
+    if (end = end || abort) {
+      loop = false;
+      if (done) done(end === true ? null : end);else if (end && end !== true) {
+        console.warn(doneLackingErr);
+        throw end;
+      }
+    } else if (op && false === op(data) || abort) {
+      loop = false;
+      read(abort || true, done || function () {});
+    } else if (!loop) {
+      next();
+    }
+  });
+  if (!cbed) {
+    loop = false;
+    return;
+  }
+} replaced with {}
+Mutant 71 in drain.js: false replaced with true
+Mutant 72 in drain.js: {
+  cbed = true;
+  if (end = end || abort) {
+    loop = false;
+    if (done) done(end === true ? null : end);else if (end && end !== true) {
+      console.warn(doneLackingErr);
+      throw end;
+    }
+  } else if (op && false === op(data) || abort) {
+    loop = false;
+    read(abort || true, done || function () {});
+  } else if (!loop) {
+    next();
+  }
+} replaced with {}
+Mutant 73 in drain.js: true replaced with false
+Mutant 74 in drain.js: end = end || abort replaced with true
+Mutant 75 in drain.js: end = end || abort replaced with false
+Mutant 76 in drain.js: end || abort replaced with true
+Mutant 77 in drain.js: end || abort replaced with false
+Mutant 78 in drain.js: end || abort replaced with end && abort
+Mutant 79 in drain.js: {
+  loop = false;
+  if (done) done(end === true ? null : end);else if (end && end !== true) {
+    console.warn(doneLackingErr);
+    throw end;
+  }
+} replaced with {}
+Mutant 80 in drain.js: false replaced with true
+Mutant 81 in drain.js: done replaced with true
+Mutant 82 in drain.js: done replaced with false
+Mutant 83 in drain.js: end === true replaced with true
+Mutant 84 in drain.js: end === true replaced with false
+Mutant 85 in drain.js: end === true replaced with end !== true
+Mutant 86 in drain.js: true replaced with false
+Mutant 87 in drain.js: end && end !== true replaced with true
+Mutant 88 in drain.js: end && end !== true replaced with false
+Mutant 89 in drain.js: end && end !== true replaced with end || end !== true
+Mutant 90 in drain.js: end !== true replaced with true
+Mutant 91 in drain.js: end !== true replaced with end === true
+Mutant 92 in drain.js: true replaced with false
+Mutant 93 in drain.js: {
+  console.warn(doneLackingErr);
+  throw end;
+} replaced with {}
+Mutant 94 in drain.js: op && false === op(data) || abort replaced with true
+Mutant 95 in drain.js: op && false === op(data) || abort replaced with false
+Mutant 96 in drain.js: op && false === op(data) || abort replaced with op && false === op(data) && abort
+Mutant 97 in drain.js: op && false === op(data) replaced with false
+Mutant 98 in drain.js: op && false === op(data) replaced with op || false === op(data)
+Mutant 99 in drain.js: false === op(data) replaced with true
+Mutant 100 in drain.js: false === op(data) replaced with false !== op(data)
+Mutant 101 in drain.js: false replaced with true
+Mutant 102 in drain.js: {
+  loop = false;
+  read(abort || true, done || function () {});
+} replaced with {}
+Mutant 103 in drain.js: false replaced with true
+Mutant 104 in drain.js: abort || true replaced with true
+Mutant 105 in drain.js: abort || true replaced with false
+Mutant 106 in drain.js: abort || true replaced with abort && true
+Mutant 107 in drain.js: true replaced with false
+Mutant 108 in drain.js: done || function () {} replaced with true
+Mutant 109 in drain.js: done || function () {} replaced with false
+Mutant 110 in drain.js: done || function () {} replaced with done && function () {}
+Mutant 111 in drain.js: !loop replaced with loop
+Mutant 112 in drain.js: !loop replaced with true
+Mutant 113 in drain.js: !loop replaced with false
+Mutant 114 in drain.js: {
+  next();
+} replaced with {}
+Mutant 115 in drain.js: !cbed replaced with cbed
+Mutant 116 in drain.js: !cbed replaced with true
+Mutant 117 in drain.js: !cbed replaced with false
+Mutant 118 in drain.js: {
+  loop = false;
+  return;
+} replaced with {}
+Mutant 119 in drain.js: false replaced with true
+Mutant 120 in drain.js: {
+  if ('function' == typeof err) cb = err, err = true;
+  abort = err || true;
+  if (read) return read(abort, cb || function () {});
+} replaced with {}
+Mutant 121 in drain.js: 'function' == typeof err replaced with true
+Mutant 122 in drain.js: 'function' == typeof err replaced with false
+Mutant 123 in drain.js: 'function' == typeof err replaced with 'function' != typeof err
+Mutant 124 in drain.js: 'function' replaced with ""
+Mutant 125 in drain.js: true replaced with false
+Mutant 126 in drain.js: err || true replaced with true
+Mutant 127 in drain.js: err || true replaced with false
+Mutant 128 in drain.js: err || true replaced with err && true
+Mutant 129 in drain.js: true replaced with false
+Mutant 130 in drain.js: read replaced with true
+Mutant 131 in drain.js: read replaced with false
+Mutant 132 in drain.js: cb || function () {} replaced with true
+Mutant 133 in drain.js: cb || function () {} replaced with false
+Mutant 134 in drain.js: cb || function () {} replaced with cb && function () {}
+Mutant 135 in find.js: {
+  return e;
+} replaced with {}
+Mutant 136 in find.js: {
+  var ended = false;
+  if (!cb) cb = test, test = id;else test = prop(test) || id;
+  return drain(function (data) {
+    if (test(data)) {
+      ended = true;
+      cb(null, data);
+      return false;
+    }
+  }, function (err) {
+    if (ended) return; //already called back
+    cb(err === true ? null : err, null);
+  });
+} replaced with {}
+Mutant 137 in find.js: false replaced with true
+Mutant 138 in find.js: !cb replaced with cb
+Mutant 139 in find.js: !cb replaced with true
+Mutant 140 in find.js: !cb replaced with false
+Mutant 141 in find.js: prop(test) || id replaced with true
+Mutant 142 in find.js: prop(test) || id replaced with false
+Mutant 143 in find.js: prop(test) || id replaced with prop(test) && id
+Mutant 144 in find.js: {
+  if (test(data)) {
+    ended = true;
+    cb(null, data);
+    return false;
+  }
+} replaced with {}
+Mutant 145 in find.js: test(data) replaced with true
+Mutant 146 in find.js: test(data) replaced with false
+Mutant 147 in find.js: {
+  ended = true;
+  cb(null, data);
+  return false;
+} replaced with {}
+Mutant 148 in find.js: true replaced with false
+Mutant 149 in find.js: false replaced with true
+Mutant 150 in find.js: {
+  if (ended) return; //already called back
+  cb(err === true ? null : err, null);
+} replaced with {}
+Mutant 151 in find.js: ended replaced with true
+Mutant 152 in find.js: ended replaced with false
+Mutant 153 in find.js: err === true replaced with true
+Mutant 154 in find.js: err === true replaced with false
+Mutant 155 in find.js: err === true replaced with err !== true
+Mutant 156 in find.js: true replaced with false
+Mutant 157 in index.js: {
+  drain: require('./drain'),
+  onEnd: require('./on-end'),
+  log: require('./log'),
+  find: require('./find'),
+  reduce: require('./reduce'),
+  collect: require('./collect'),
+  concat: require('./concat')
+} replaced with {}
+Mutant 158 in log.js: {
+  return drain(function (data) {
+    console.log(data);
+  }, done);
+} replaced with {}
+Mutant 159 in log.js: {
+  console.log(data);
+} replaced with {}
+Mutant 160 in on-end.js: {
+  return drain(null, done);
+} replaced with {}
+Mutant 161 in reduce.js: {
+  if (!cb) cb = acc, acc = null;
+  var sink = drain(function (data) {
+    acc = reducer(acc, data);
+  }, function (err) {
+    cb(err, acc);
+  });
+  if (arguments.length === 2) return function (source) {
+    source(null, function (end, data) {
+      //if ended immediately, and no initial...
+      if (end) return cb(end === true ? null : end);
+      acc = data;
+      sink(source);
+    });
+  };else return sink;
+} replaced with {}
+Mutant 162 in reduce.js: !cb replaced with cb
+Mutant 163 in reduce.js: !cb replaced with true
+Mutant 164 in reduce.js: !cb replaced with false
+Mutant 165 in reduce.js: {
+  acc = reducer(acc, data);
+} replaced with {}
+Mutant 166 in reduce.js: {
+  cb(err, acc);
+} replaced with {}
+Mutant 167 in reduce.js: arguments.length === 2 replaced with true
+Mutant 168 in reduce.js: arguments.length === 2 replaced with false
+Mutant 169 in reduce.js: arguments.length === 2 replaced with arguments.length !== 2
+Mutant 170 in reduce.js: {
+  source(null, function (end, data) {
+    //if ended immediately, and no initial...
+    if (end) return cb(end === true ? null : end);
+    acc = data;
+    sink(source);
+  });
+} replaced with {}
+Mutant 171 in reduce.js: {
+  //if ended immediately, and no initial...
+  if (end) return cb(end === true ? null : end);
+  acc = data;
+  sink(source);
+} replaced with {}
+Mutant 172 in reduce.js: end replaced with true
+Mutant 173 in reduce.js: end replaced with false
+Mutant 174 in reduce.js: end === true replaced with true
+Mutant 175 in reduce.js: end === true replaced with false
+Mutant 176 in reduce.js: end === true replaced with end !== true
+Mutant 177 in reduce.js: true replaced with false
+Mutant 178 in count.js: {
+  var i = 0;
+  max = max || Infinity;
+  return function (end, cb) {
+    if (end) return cb && cb(end);
+    if (i > max) return cb(true);
+    cb(null, i++);
+  };
+} replaced with {}
+Mutant 179 in count.js: max || Infinity replaced with true
+Mutant 180 in count.js: max || Infinity replaced with false
+Mutant 181 in count.js: max || Infinity replaced with max && Infinity
+Mutant 182 in count.js: {
+  if (end) return cb && cb(end);
+  if (i > max) return cb(true);
+  cb(null, i++);
+} replaced with {}
+Mutant 183 in count.js: end replaced with true
+Mutant 184 in count.js: end replaced with false
+Mutant 185 in count.js: cb && cb(end) replaced with true
+Mutant 186 in count.js: cb && cb(end) replaced with false
+Mutant 187 in count.js: cb && cb(end) replaced with cb || cb(end)
+Mutant 188 in count.js: i > max replaced with true
+Mutant 189 in count.js: i > max replaced with false
+Mutant 190 in count.js: i > max replaced with i >= max
+Mutant 191 in count.js: i > max replaced with i <= max
+Mutant 192 in count.js: true replaced with false
+Mutant 193 in count.js: i++ replaced with i--
+Mutant 194 in empty.js: {
+  return function (abort, cb) {
+    cb(true);
+  };
+} replaced with {}
+Mutant 195 in empty.js: {
+  cb(true);
+} replaced with {}
+Mutant 196 in empty.js: true replaced with false
+Mutant 197 in error.js: {
+  return function (abort, cb) {
+    cb(err);
+  };
+} replaced with {}
+Mutant 198 in error.js: {
+  cb(err);
+} replaced with {}
+Mutant 199 in index.js: {
+  keys: require('./keys'),
+  once: require('./once'),
+  values: require('./values'),
+  count: require('./count'),
+  infinite: require('./infinite'),
+  empty: require('./empty'),
+  error: require('./error')
+} replaced with {}
+Mutant 200 in infinite.js: {
+  generate = generate || Math.random;
+  return function (end, cb) {
+    if (end) return cb && cb(end);
+    return cb(null, generate());
+  };
+} replaced with {}
+Mutant 201 in infinite.js: generate || Math.random replaced with true
+Mutant 202 in infinite.js: generate || Math.random replaced with false
+Mutant 203 in infinite.js: generate || Math.random replaced with generate && Math.random
+Mutant 204 in infinite.js: {
+  if (end) return cb && cb(end);
+  return cb(null, generate());
+} replaced with {}
+Mutant 205 in infinite.js: end replaced with true
+Mutant 206 in infinite.js: end replaced with false
+Mutant 207 in infinite.js: cb && cb(end) replaced with true
+Mutant 208 in infinite.js: cb && cb(end) replaced with false
+Mutant 209 in infinite.js: cb && cb(end) replaced with cb || cb(end)
+Mutant 210 in keys.js: {
+  return values(Object.keys(object));
+} replaced with {}
+Mutant 211 in once.js: {
+  return function (abort, cb) {
+    if (abort) return abortCb(cb, abort, onAbort);
+    if (value != null) {
+      var _value = value;
+      value = null;
+      cb(null, _value);
+    } else cb(true);
+  };
+} replaced with {}
+Mutant 212 in once.js: {
+  if (abort) return abortCb(cb, abort, onAbort);
+  if (value != null) {
+    var _value = value;
+    value = null;
+    cb(null, _value);
+  } else cb(true);
+} replaced with {}
+Mutant 213 in once.js: abort replaced with true
+Mutant 214 in once.js: abort replaced with false
+Mutant 215 in once.js: value != null replaced with true
+Mutant 216 in once.js: value != null replaced with false
+Mutant 217 in once.js: value != null replaced with value == null
+Mutant 218 in once.js: {
+  var _value = value;
+  value = null;
+  cb(null, _value);
+} replaced with {}
+Mutant 219 in once.js: true replaced with false
+Mutant 220 in values.js: {
+  if (!array) return function (abort, cb) {
+    if (abort) return abortCb(cb, abort, onAbort);
+    return cb(true);
+  };
+  if (!Array.isArray(array)) array = Object.keys(array).map(function (k) {
+    return array[k];
+  });
+  var i = 0;
+  return function (abort, cb) {
+    if (abort) return abortCb(cb, abort, onAbort);
+    if (i >= array.length) cb(true);else cb(null, array[i++]);
+  };
+} replaced with {}
+Mutant 221 in values.js: !array replaced with array
+Mutant 222 in values.js: !array replaced with true
+Mutant 223 in values.js: !array replaced with false
+Mutant 224 in values.js: {
+  if (abort) return abortCb(cb, abort, onAbort);
+  return cb(true);
+} replaced with {}
+Mutant 225 in values.js: abort replaced with true
+Mutant 226 in values.js: abort replaced with false
+Mutant 227 in values.js: true replaced with false
+Mutant 228 in values.js: !Array.isArray(array) replaced with Array.isArray(array)
+Mutant 229 in values.js: !Array.isArray(array) replaced with true
+Mutant 230 in values.js: !Array.isArray(array) replaced with false
+Mutant 231 in values.js: {
+  return array[k];
+} replaced with {}
+Mutant 232 in values.js: {
+  if (abort) return abortCb(cb, abort, onAbort);
+  if (i >= array.length) cb(true);else cb(null, array[i++]);
+} replaced with {}
+Mutant 233 in values.js: abort replaced with true
+Mutant 234 in values.js: abort replaced with false
+Mutant 235 in values.js: i >= array.length replaced with true
+Mutant 236 in values.js: i >= array.length replaced with false
+Mutant 237 in values.js: i >= array.length replaced with i > array.length
+Mutant 238 in values.js: i >= array.length replaced with i < array.length
+Mutant 239 in values.js: true replaced with false
+Mutant 240 in values.js: i++ replaced with i--
+Mutant 241 in async-map.js: {
+  return e;
+} replaced with {}
+Mutant 242 in async-map.js: {
+  if (!map) return id;
+  map = prop(map);
+  var busy = false,
+    abortCb,
+    aborted;
+  return function (read) {
+    return function next(abort, cb) {
+      if (aborted) return cb(aborted);
+      if (abort) {
+        aborted = abort;
+        if (!busy) read(abort, function (err) {
+          //incase the source has already ended normally,
+          //we should pass our own error.
+          cb(abort);
+        });else read(abort, function (err) {
+          //if we are still busy, wait for the mapper to complete.
+          if (busy) abortCb = cb;else cb(abort);
+        });
+      } else read(null, function (end, data) {
+        if (end) cb(end);else if (aborted) cb(aborted);else {
+          busy = true;
+          map(data, function (err, data) {
+            busy = false;
+            if (aborted) {
+              cb(aborted);
+              abortCb && abortCb(aborted);
+            } else if (err) next(err, cb);else cb(null, data);
+          });
+        }
+      });
+    };
+  };
+} replaced with {}
+Mutant 243 in async-map.js: !map replaced with map
+Mutant 244 in async-map.js: !map replaced with true
+Mutant 245 in async-map.js: !map replaced with false
+Mutant 246 in async-map.js: false replaced with true
+Mutant 247 in async-map.js: {
+  return function next(abort, cb) {
+    if (aborted) return cb(aborted);
+    if (abort) {
+      aborted = abort;
+      if (!busy) read(abort, function (err) {
+        //incase the source has already ended normally,
+        //we should pass our own error.
+        cb(abort);
+      });else read(abort, function (err) {
+        //if we are still busy, wait for the mapper to complete.
+        if (busy) abortCb = cb;else cb(abort);
+      });
+    } else read(null, function (end, data) {
+      if (end) cb(end);else if (aborted) cb(aborted);else {
+        busy = true;
+        map(data, function (err, data) {
+          busy = false;
+          if (aborted) {
+            cb(aborted);
+            abortCb && abortCb(aborted);
+          } else if (err) next(err, cb);else cb(null, data);
+        });
+      }
+    });
+  };
+} replaced with {}
+Mutant 248 in async-map.js: {
+  if (aborted) return cb(aborted);
+  if (abort) {
+    aborted = abort;
+    if (!busy) read(abort, function (err) {
+      //incase the source has already ended normally,
+      //we should pass our own error.
+      cb(abort);
+    });else read(abort, function (err) {
+      //if we are still busy, wait for the mapper to complete.
+      if (busy) abortCb = cb;else cb(abort);
+    });
+  } else read(null, function (end, data) {
+    if (end) cb(end);else if (aborted) cb(aborted);else {
+      busy = true;
+      map(data, function (err, data) {
+        busy = false;
+        if (aborted) {
+          cb(aborted);
+          abortCb && abortCb(aborted);
+        } else if (err) next(err, cb);else cb(null, data);
+      });
+    }
+  });
+} replaced with {}
+Mutant 249 in async-map.js: aborted replaced with true
+Mutant 250 in async-map.js: aborted replaced with false
+Mutant 251 in async-map.js: abort replaced with true
+Mutant 252 in async-map.js: abort replaced with false
+Mutant 253 in async-map.js: {
+  aborted = abort;
+  if (!busy) read(abort, function (err) {
+    //incase the source has already ended normally,
+    //we should pass our own error.
+    cb(abort);
+  });else read(abort, function (err) {
+    //if we are still busy, wait for the mapper to complete.
+    if (busy) abortCb = cb;else cb(abort);
+  });
+} replaced with {}
+Mutant 254 in async-map.js: !busy replaced with busy
+Mutant 255 in async-map.js: !busy replaced with true
+Mutant 256 in async-map.js: !busy replaced with false
+Mutant 257 in async-map.js: {
+  //incase the source has already ended normally,
+  //we should pass our own error.
+  cb(abort);
+} replaced with {}
+Mutant 258 in async-map.js: {
+  //if we are still busy, wait for the mapper to complete.
+  if (busy) abortCb = cb;else cb(abort);
+} replaced with {}
+Mutant 259 in async-map.js: busy replaced with true
+Mutant 260 in async-map.js: busy replaced with false
+Mutant 261 in async-map.js: {
+  if (end) cb(end);else if (aborted) cb(aborted);else {
+    busy = true;
+    map(data, function (err, data) {
+      busy = false;
+      if (aborted) {
+        cb(aborted);
+        abortCb && abortCb(aborted);
+      } else if (err) next(err, cb);else cb(null, data);
+    });
+  }
+} replaced with {}
+Mutant 262 in async-map.js: end replaced with true
+Mutant 263 in async-map.js: end replaced with false
+Mutant 264 in async-map.js: aborted replaced with true
+Mutant 265 in async-map.js: aborted replaced with false
+Mutant 266 in async-map.js: {
+  busy = true;
+  map(data, function (err, data) {
+    busy = false;
+    if (aborted) {
+      cb(aborted);
+      abortCb && abortCb(aborted);
+    } else if (err) next(err, cb);else cb(null, data);
+  });
+} replaced with {}
+Mutant 267 in async-map.js: true replaced with false
+Mutant 268 in async-map.js: {
+  busy = false;
+  if (aborted) {
+    cb(aborted);
+    abortCb && abortCb(aborted);
+  } else if (err) next(err, cb);else cb(null, data);
+} replaced with {}
+Mutant 269 in async-map.js: false replaced with true
+Mutant 270 in async-map.js: aborted replaced with true
+Mutant 271 in async-map.js: aborted replaced with false
+Mutant 272 in async-map.js: {
+  cb(aborted);
+  abortCb && abortCb(aborted);
+} replaced with {}
+Mutant 273 in async-map.js: abortCb && abortCb(aborted) replaced with true
+Mutant 274 in async-map.js: abortCb && abortCb(aborted) replaced with false
+Mutant 275 in async-map.js: abortCb && abortCb(aborted) replaced with abortCb || abortCb(aborted)
+Mutant 276 in async-map.js: err replaced with true
+Mutant 277 in async-map.js: err replaced with false
+Mutant 278 in filter-not.js: {
+  test = tester(test);
+  return filter(function (data) {
+    return !test(data);
+  });
+} replaced with {}
+Mutant 279 in filter-not.js: {
+  return !test(data);
+} replaced with {}
+Mutant 280 in filter-not.js: !test(data) replaced with test(data)
+Mutant 281 in filter.js: {
+  //regexp
+  test = tester(test);
+  return function (read) {
+    return function next(end, cb) {
+      var sync,
+        loop = true;
+      while (loop) {
+        loop = false;
+        sync = true;
+        read(end, function (end, data) {
+          if (!end && !test(data)) return sync ? loop = true : next(end, cb);
+          cb(end, data);
+        });
+        sync = false;
+      }
+    };
+  };
+} replaced with {}
+Mutant 282 in filter.js: {
+  return function next(end, cb) {
+    var sync,
+      loop = true;
+    while (loop) {
+      loop = false;
+      sync = true;
+      read(end, function (end, data) {
+        if (!end && !test(data)) return sync ? loop = true : next(end, cb);
+        cb(end, data);
+      });
+      sync = false;
+    }
+  };
+} replaced with {}
+Mutant 283 in filter.js: {
+  var sync,
+    loop = true;
+  while (loop) {
+    loop = false;
+    sync = true;
+    read(end, function (end, data) {
+      if (!end && !test(data)) return sync ? loop = true : next(end, cb);
+      cb(end, data);
+    });
+    sync = false;
+  }
+} replaced with {}
+Mutant 284 in filter.js: true replaced with false
+Mutant 285 in filter.js: loop replaced with false
+Mutant 286 in filter.js: {
+  loop = false;
+  sync = true;
+  read(end, function (end, data) {
+    if (!end && !test(data)) return sync ? loop = true : next(end, cb);
+    cb(end, data);
+  });
+  sync = false;
+} replaced with {}
+Mutant 287 in filter.js: false replaced with true
+Mutant 288 in filter.js: true replaced with false
+Mutant 289 in filter.js: {
+  if (!end && !test(data)) return sync ? loop = true : next(end, cb);
+  cb(end, data);
+} replaced with {}
+Mutant 290 in filter.js: !end && !test(data) replaced with true
+Mutant 291 in filter.js: !end && !test(data) replaced with false
+Mutant 292 in filter.js: !end && !test(data) replaced with !end || !test(data)
+Mutant 293 in filter.js: !end replaced with end
+Mutant 294 in filter.js: !test(data) replaced with test(data)
+Mutant 295 in filter.js: true replaced with false
+Mutant 296 in filter.js: false replaced with true
+Mutant 297 in flatten.js: {
+  return function (read) {
+    var _read;
+    return function (abort, cb) {
+      if (abort) {
+        //abort the current stream, and then stream of streams.
+        _read ? _read(abort, function (err) {
+          read(err || abort, cb);
+        }) : read(abort, cb);
+      } else if (_read) nextChunk();else nextStream();
+      function nextChunk() {
+        _read(null, function (err, data) {
+          if (err) {
+            if (err === true) nextStream();else read(true, function (abortErr) {
+              // TODO: what do we do with the abortErr?
+              cb(err);
+            });
+          } else cb(null, data);
+        });
+      }
+      function nextStream() {
+        _read = null;
+        read(null, function (end, stream) {
+          if (end) return cb(end);
+          if (stream && 'object' === typeof stream) stream = values(stream);else if ('function' !== typeof stream) stream = once(stream);
+          _read = stream;
+          nextChunk();
+        });
+      }
+    };
+  };
+} replaced with {}
+Mutant 298 in flatten.js: {
+  var _read;
+  return function (abort, cb) {
+    if (abort) {
+      //abort the current stream, and then stream of streams.
+      _read ? _read(abort, function (err) {
+        read(err || abort, cb);
+      }) : read(abort, cb);
+    } else if (_read) nextChunk();else nextStream();
+    function nextChunk() {
+      _read(null, function (err, data) {
+        if (err) {
+          if (err === true) nextStream();else read(true, function (abortErr) {
+            // TODO: what do we do with the abortErr?
+            cb(err);
+          });
+        } else cb(null, data);
+      });
+    }
+    function nextStream() {
+      _read = null;
+      read(null, function (end, stream) {
+        if (end) return cb(end);
+        if (stream && 'object' === typeof stream) stream = values(stream);else if ('function' !== typeof stream) stream = once(stream);
+        _read = stream;
+        nextChunk();
+      });
+    }
+  };
+} replaced with {}
+Mutant 299 in flatten.js: {
+  if (abort) {
+    //abort the current stream, and then stream of streams.
+    _read ? _read(abort, function (err) {
+      read(err || abort, cb);
+    }) : read(abort, cb);
+  } else if (_read) nextChunk();else nextStream();
+  function nextChunk() {
+    _read(null, function (err, data) {
+      if (err) {
+        if (err === true) nextStream();else read(true, function (abortErr) {
+          // TODO: what do we do with the abortErr?
+          cb(err);
+        });
+      } else cb(null, data);
+    });
+  }
+  function nextStream() {
+    _read = null;
+    read(null, function (end, stream) {
+      if (end) return cb(end);
+      if (stream && 'object' === typeof stream) stream = values(stream);else if ('function' !== typeof stream) stream = once(stream);
+      _read = stream;
+      nextChunk();
+    });
+  }
+} replaced with {}
+Mutant 300 in flatten.js: abort replaced with true
+Mutant 301 in flatten.js: abort replaced with false
+Mutant 302 in flatten.js: {
+  //abort the current stream, and then stream of streams.
+  _read ? _read(abort, function (err) {
+    read(err || abort, cb);
+  }) : read(abort, cb);
+} replaced with {}
+Mutant 303 in flatten.js: {
+  read(err || abort, cb);
+} replaced with {}
+Mutant 304 in flatten.js: err || abort replaced with true
+Mutant 305 in flatten.js: err || abort replaced with false
+Mutant 306 in flatten.js: err || abort replaced with err && abort
+Mutant 307 in flatten.js: _read replaced with true
+Mutant 308 in flatten.js: _read replaced with false
+Mutant 309 in flatten.js: {
+  _read(null, function (err, data) {
+    if (err) {
+      if (err === true) nextStream();else read(true, function (abortErr) {
+        // TODO: what do we do with the abortErr?
+        cb(err);
+      });
+    } else cb(null, data);
+  });
+} replaced with {}
+Mutant 310 in flatten.js: {
+  if (err) {
+    if (err === true) nextStream();else read(true, function (abortErr) {
+      // TODO: what do we do with the abortErr?
+      cb(err);
+    });
+  } else cb(null, data);
+} replaced with {}
+Mutant 311 in flatten.js: err replaced with true
+Mutant 312 in flatten.js: err replaced with false
+Mutant 313 in flatten.js: {
+  if (err === true) nextStream();else read(true, function (abortErr) {
+    // TODO: what do we do with the abortErr?
+    cb(err);
+  });
+} replaced with {}
+Mutant 314 in flatten.js: err === true replaced with true
+Mutant 315 in flatten.js: err === true replaced with false
+Mutant 316 in flatten.js: err === true replaced with err !== true
+Mutant 317 in flatten.js: true replaced with false
+Mutant 318 in flatten.js: true replaced with false
+Mutant 319 in flatten.js: {
+  // TODO: what do we do with the abortErr?
+  cb(err);
+} replaced with {}
+Mutant 320 in flatten.js: {
+  _read = null;
+  read(null, function (end, stream) {
+    if (end) return cb(end);
+    if (stream && 'object' === typeof stream) stream = values(stream);else if ('function' !== typeof stream) stream = once(stream);
+    _read = stream;
+    nextChunk();
+  });
+} replaced with {}
+Mutant 321 in flatten.js: {
+  if (end) return cb(end);
+  if (stream && 'object' === typeof stream) stream = values(stream);else if ('function' !== typeof stream) stream = once(stream);
+  _read = stream;
+  nextChunk();
+} replaced with {}
+Mutant 322 in flatten.js: end replaced with true
+Mutant 323 in flatten.js: end replaced with false
+Mutant 324 in flatten.js: stream && 'object' === typeof stream replaced with true
+Mutant 325 in flatten.js: stream && 'object' === typeof stream replaced with false
+Mutant 326 in flatten.js: stream && 'object' === typeof stream replaced with stream || 'object' === typeof stream
+Mutant 327 in flatten.js: 'object' === typeof stream replaced with true
+Mutant 328 in flatten.js: 'object' === typeof stream replaced with 'object' !== typeof stream
+Mutant 329 in flatten.js: 'object' replaced with ""
+Mutant 330 in flatten.js: 'function' !== typeof stream replaced with true
+Mutant 331 in flatten.js: 'function' !== typeof stream replaced with false
+Mutant 332 in flatten.js: 'function' !== typeof stream replaced with 'function' === typeof stream
+Mutant 333 in flatten.js: 'function' replaced with ""
+Mutant 334 in index.js: {
+  map: require('./map'),
+  asyncMap: require('./async-map'),
+  filter: require('./filter'),
+  filterNot: require('./filter-not'),
+  through: require('./through'),
+  take: require('./take'),
+  unique: require('./unique'),
+  nonUnique: require('./non-unique'),
+  flatten: require('./flatten')
+} replaced with {}
+Mutant 335 in map.js: {
+  return e;
+} replaced with {}
+Mutant 336 in map.js: {
+  if (!mapper) return id;
+  mapper = prop(mapper);
+  return function (read) {
+    return function (abort, cb) {
+      read(abort, function (end, data) {
+        try {
+          data = !end ? mapper(data) : null;
+        } catch (err) {
+          return read(err, function () {
+            return cb(err);
+          });
+        }
+        cb(end, data);
+      });
+    };
+  };
+} replaced with {}
+Mutant 337 in map.js: !mapper replaced with mapper
+Mutant 338 in map.js: !mapper replaced with true
+Mutant 339 in map.js: !mapper replaced with false
+Mutant 340 in map.js: {
+  return function (abort, cb) {
+    read(abort, function (end, data) {
+      try {
+        data = !end ? mapper(data) : null;
+      } catch (err) {
+        return read(err, function () {
+          return cb(err);
+        });
+      }
+      cb(end, data);
+    });
+  };
+} replaced with {}
+Mutant 341 in map.js: {
+  read(abort, function (end, data) {
+    try {
+      data = !end ? mapper(data) : null;
+    } catch (err) {
+      return read(err, function () {
+        return cb(err);
+      });
+    }
+    cb(end, data);
+  });
+} replaced with {}
+Mutant 342 in map.js: {
+  try {
+    data = !end ? mapper(data) : null;
+  } catch (err) {
+    return read(err, function () {
+      return cb(err);
+    });
+  }
+  cb(end, data);
+} replaced with {}
+Mutant 343 in map.js: {
+  data = !end ? mapper(data) : null;
+} replaced with {}
+Mutant 344 in map.js: !end replaced with end
+Mutant 345 in map.js: {
+  return read(err, function () {
+    return cb(err);
+  });
+} replaced with {}
+Mutant 346 in map.js: {
+  return cb(err);
+} replaced with {}
+Mutant 347 in non-unique.js: {
+  return unique(field, true);
+} replaced with {}
+Mutant 348 in non-unique.js: true replaced with false
+Mutant 349 in take.js: {
+  opts = opts || {};
+  var last = opts.last || false; // whether the first item for which !test(item) should still pass
+  var ended = false;
+  if ('number' === typeof test) {
+    last = true;
+    var n = test;
+    test = function () {
+      return --n;
+    };
+  }
+  return function (read) {
+    function terminate(cb) {
+      read(true, function (err) {
+        last = false;
+        cb(err || true);
+      });
+    }
+    return function (end, cb) {
+      if (ended && !end) last ? terminate(cb) : cb(ended);else if (ended = end) read(ended, cb);else read(null, function (end, data) {
+        if (ended = ended || end) {
+          //last ? terminate(cb) :
+          cb(ended);
+        } else if (!test(data)) {
+          ended = true;
+          last ? cb(null, data) : terminate(cb);
+        } else cb(null, data);
+      });
+    };
+  };
+} replaced with {}
+Mutant 350 in take.js: opts || {} replaced with true
+Mutant 351 in take.js: opts || {} replaced with false
+Mutant 352 in take.js: opts || {} replaced with opts && {}
+Mutant 353 in take.js: opts.last || false replaced with true
+Mutant 354 in take.js: opts.last || false replaced with false
+Mutant 355 in take.js: opts.last || false replaced with opts.last && false
+Mutant 356 in take.js: false replaced with true
+Mutant 357 in take.js: false replaced with true
+Mutant 358 in take.js: 'number' === typeof test replaced with true
+Mutant 359 in take.js: 'number' === typeof test replaced with false
+Mutant 360 in take.js: 'number' === typeof test replaced with 'number' !== typeof test
+Mutant 361 in take.js: 'number' replaced with ""
+Mutant 362 in take.js: {
+  last = true;
+  var n = test;
+  test = function () {
+    return --n;
+  };
+} replaced with {}
+Mutant 363 in take.js: true replaced with false
+Mutant 364 in take.js: {
+  return --n;
+} replaced with {}
+Mutant 365 in take.js: --n replaced with ++n
+Mutant 366 in take.js: {
+  function terminate(cb) {
+    read(true, function (err) {
+      last = false;
+      cb(err || true);
+    });
+  }
+  return function (end, cb) {
+    if (ended && !end) last ? terminate(cb) : cb(ended);else if (ended = end) read(ended, cb);else read(null, function (end, data) {
+      if (ended = ended || end) {
+        //last ? terminate(cb) :
+        cb(ended);
+      } else if (!test(data)) {
+        ended = true;
+        last ? cb(null, data) : terminate(cb);
+      } else cb(null, data);
+    });
+  };
+} replaced with {}
+Mutant 367 in take.js: {
+  read(true, function (err) {
+    last = false;
+    cb(err || true);
+  });
+} replaced with {}
+Mutant 368 in take.js: true replaced with false
+Mutant 369 in take.js: {
+  last = false;
+  cb(err || true);
+} replaced with {}
+Mutant 370 in take.js: false replaced with true
+Mutant 371 in take.js: err || true replaced with true
+Mutant 372 in take.js: err || true replaced with false
+Mutant 373 in take.js: err || true replaced with err && true
+Mutant 374 in take.js: true replaced with false
+Mutant 375 in take.js: {
+  if (ended && !end) last ? terminate(cb) : cb(ended);else if (ended = end) read(ended, cb);else read(null, function (end, data) {
+    if (ended = ended || end) {
+      //last ? terminate(cb) :
+      cb(ended);
+    } else if (!test(data)) {
+      ended = true;
+      last ? cb(null, data) : terminate(cb);
+    } else cb(null, data);
+  });
+} replaced with {}
+Mutant 376 in take.js: ended && !end replaced with true
+Mutant 377 in take.js: ended && !end replaced with false
+Mutant 378 in take.js: ended && !end replaced with ended || !end
+Mutant 379 in take.js: !end replaced with end
+Mutant 380 in take.js: ended = end replaced with true
+Mutant 381 in take.js: ended = end replaced with false
+Mutant 382 in take.js: {
+  if (ended = ended || end) {
+    //last ? terminate(cb) :
+    cb(ended);
+  } else if (!test(data)) {
+    ended = true;
+    last ? cb(null, data) : terminate(cb);
+  } else cb(null, data);
+} replaced with {}
+Mutant 383 in take.js: ended = ended || end replaced with true
+Mutant 384 in take.js: ended = ended || end replaced with false
+Mutant 385 in take.js: ended || end replaced with true
+Mutant 386 in take.js: ended || end replaced with false
+Mutant 387 in take.js: ended || end replaced with ended && end
+Mutant 388 in take.js: {
+  //last ? terminate(cb) :
+  cb(ended);
+} replaced with {}
+Mutant 389 in take.js: !test(data) replaced with test(data)
+Mutant 390 in take.js: !test(data) replaced with true
+Mutant 391 in take.js: !test(data) replaced with false
+Mutant 392 in take.js: {
+  ended = true;
+  last ? cb(null, data) : terminate(cb);
+} replaced with {}
+Mutant 393 in take.js: true replaced with false
+Mutant 394 in through.js: {
+  var a = false;
+  function once(abort) {
+    if (a || !onEnd) return;
+    a = true;
+    onEnd(abort === true ? null : abort);
+  }
+  return function (read) {
+    return function (end, cb) {
+      if (end) once(end);
+      return read(end, function (end, data) {
+        if (!end) op && op(data);else once(end);
+        cb(end, data);
+      });
+    };
+  };
+} replaced with {}
+Mutant 395 in through.js: false replaced with true
+Mutant 396 in through.js: {
+  if (a || !onEnd) return;
+  a = true;
+  onEnd(abort === true ? null : abort);
+} replaced with {}
+Mutant 397 in through.js: a || !onEnd replaced with true
+Mutant 398 in through.js: a || !onEnd replaced with false
+Mutant 399 in through.js: a || !onEnd replaced with a && !onEnd
+Mutant 400 in through.js: !onEnd replaced with onEnd
+Mutant 401 in through.js: true replaced with false
+Mutant 402 in through.js: abort === true replaced with true
+Mutant 403 in through.js: abort === true replaced with false
+Mutant 404 in through.js: abort === true replaced with abort !== true
+Mutant 405 in through.js: true replaced with false
+Mutant 406 in through.js: {
+  return function (end, cb) {
+    if (end) once(end);
+    return read(end, function (end, data) {
+      if (!end) op && op(data);else once(end);
+      cb(end, data);
+    });
+  };
+} replaced with {}
+Mutant 407 in through.js: {
+  if (end) once(end);
+  return read(end, function (end, data) {
+    if (!end) op && op(data);else once(end);
+    cb(end, data);
+  });
+} replaced with {}
+Mutant 408 in through.js: end replaced with true
+Mutant 409 in through.js: end replaced with false
+Mutant 410 in through.js: {
+  if (!end) op && op(data);else once(end);
+  cb(end, data);
+} replaced with {}
+Mutant 411 in through.js: !end replaced with end
+Mutant 412 in through.js: !end replaced with true
+Mutant 413 in through.js: !end replaced with false
+Mutant 414 in through.js: op && op(data) replaced with true
+Mutant 415 in through.js: op && op(data) replaced with false
+Mutant 416 in through.js: op && op(data) replaced with op || op(data)
+Mutant 417 in unique.js: {
+  return e;
+} replaced with {}
+Mutant 418 in unique.js: {
+  field = prop(field) || id;
+  var seen = {};
+  return filter(function (data) {
+    var key = field(data);
+    if (seen[key]) return !!invert; //false, by default
+    else seen[key] = true;
+    return !invert; //true by default
+  });
+} replaced with {}
+Mutant 419 in unique.js: prop(field) || id replaced with true
+Mutant 420 in unique.js: prop(field) || id replaced with false
+Mutant 421 in unique.js: prop(field) || id replaced with prop(field) && id
+Mutant 422 in unique.js: {
+  var key = field(data);
+  if (seen[key]) return !!invert; //false, by default
+  else seen[key] = true;
+  return !invert; //true by default
+} replaced with {}
+Mutant 423 in unique.js: seen[key] replaced with true
+Mutant 424 in unique.js: seen[key] replaced with false
+Mutant 425 in unique.js: !!invert replaced with !invert
+Mutant 426 in unique.js: !invert replaced with invert
+Mutant 427 in unique.js: true replaced with false
+Mutant 428 in unique.js: !invert replaced with invert
+Mutant 429 in abort-cb.js: {
+  cb(abort);
+  onAbort && onAbort(abort === true ? null : abort);
+  return;
+} replaced with {}
+Mutant 430 in abort-cb.js: onAbort && onAbort(abort === true ? null : abort) replaced with true
+Mutant 431 in abort-cb.js: onAbort && onAbort(abort === true ? null : abort) replaced with false
+Mutant 432 in abort-cb.js: onAbort && onAbort(abort === true ? null : abort) replaced with onAbort || onAbort(abort === true ? null : abort)
+Mutant 433 in abort-cb.js: abort === true replaced with true
+Mutant 434 in abort-cb.js: abort === true replaced with false
+Mutant 435 in abort-cb.js: abort === true replaced with abort !== true
+Mutant 436 in abort-cb.js: true replaced with false
+Mutant 437 in prop.js: {
+  return key && ('string' == typeof key ? function (data) {
+    return data[key];
+  } : 'object' === typeof key && 'function' === typeof key.exec //regexp
+  ? function (data) {
+    var v = key.exec(data);
+    return v && v[0];
+  } : key);
+} replaced with {}
+Mutant 438 in prop.js: key && ('string' == typeof key ? function (data) {
+  return data[key];
+} : 'object' === typeof key && 'function' === typeof key.exec //regexp
+? function (data) {
+  var v = key.exec(data);
+  return v && v[0];
+} : key) replaced with true
+Mutant 439 in prop.js: key && ('string' == typeof key ? function (data) {
+  return data[key];
+} : 'object' === typeof key && 'function' === typeof key.exec //regexp
+? function (data) {
+  var v = key.exec(data);
+  return v && v[0];
+} : key) replaced with false
+Mutant 440 in prop.js: key && ('string' == typeof key ? function (data) {
+  return data[key];
+} : 'object' === typeof key && 'function' === typeof key.exec //regexp
+? function (data) {
+  var v = key.exec(data);
+  return v && v[0];
+} : key) replaced with key || ('string' == typeof key ? function (data) {
+  return data[key];
+} : 'object' === typeof key && 'function' === typeof key.exec //regexp
+? function (data) {
+  var v = key.exec(data);
+  return v && v[0];
+} : key)
+Mutant 441 in prop.js: 'string' == typeof key replaced with true
+Mutant 442 in prop.js: 'string' == typeof key replaced with false
+Mutant 443 in prop.js: 'string' == typeof key replaced with 'string' != typeof key
+Mutant 444 in prop.js: 'string' replaced with ""
+Mutant 445 in prop.js: {
+  return data[key];
+} replaced with {}
+Mutant 446 in prop.js: 'object' === typeof key && 'function' === typeof key.exec //regexp replaced with true
+Mutant 447 in prop.js: 'object' === typeof key && 'function' === typeof key.exec //regexp replaced with false
+Mutant 448 in prop.js: 'object' === typeof key && 'function' === typeof key.exec //regexp replaced with 'object' === typeof key || 'function' === typeof key.exec //regexp
+Mutant 449 in prop.js: 'object' === typeof key replaced with true
+Mutant 450 in prop.js: 'object' === typeof key replaced with 'object' !== typeof key
+Mutant 451 in prop.js: 'object' replaced with ""
+Mutant 452 in prop.js: 'function' === typeof key.exec replaced with true
+Mutant 453 in prop.js: 'function' === typeof key.exec replaced with 'function' !== typeof key.exec
+Mutant 454 in prop.js: 'function' replaced with ""
+Mutant 455 in prop.js: {
+  var v = key.exec(data);
+  return v && v[0];
+} replaced with {}
+Mutant 456 in prop.js: v && v[0] replaced with true
+Mutant 457 in prop.js: v && v[0] replaced with false
+Mutant 458 in prop.js: v && v[0] replaced with v || v[0]
+Mutant 459 in tester.js: {
+  return e;
+} replaced with {}
+Mutant 460 in tester.js: {
+  return 'object' === typeof test && 'function' === typeof test.test //regexp
+  ? function (data) {
+    return test.test(data);
+  } : prop(test) || id;
+} replaced with {}
+Mutant 461 in tester.js: 'object' === typeof test && 'function' === typeof test.test //regexp replaced with true
+Mutant 462 in tester.js: 'object' === typeof test && 'function' === typeof test.test //regexp replaced with false
+Mutant 463 in tester.js: 'object' === typeof test && 'function' === typeof test.test //regexp replaced with 'object' === typeof test || 'function' === typeof test.test //regexp
+Mutant 464 in tester.js: 'object' === typeof test replaced with true
+Mutant 465 in tester.js: 'object' === typeof test replaced with 'object' !== typeof test
+Mutant 466 in tester.js: 'object' replaced with ""
+Mutant 467 in tester.js: 'function' === typeof test.test replaced with true
+Mutant 468 in tester.js: 'function' === typeof test.test replaced with 'function' !== typeof test.test
+Mutant 469 in tester.js: 'function' replaced with ""
+Mutant 470 in tester.js: {
+  return test.test(data);
+} replaced with {}
+Mutant 471 in tester.js: prop(test) || id replaced with true
+Mutant 472 in tester.js: prop(test) || id replaced with false
+Mutant 473 in tester.js: prop(test) || id replaced with prop(test) && id
+[32m13:06:00 (2166) INFO Instrumenter[39m Instrumented 31 source file(s) with 474 mutant(s)
+[32m13:06:00 (2166) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m13:06:00 (2166) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m13:06:00 (2166) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m13:06:02 (2166) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 1 second (net 1801 ms, overhead 1 ms).
+Mutation testing 2% (elapsed: <1m, remaining: ~7m) 10/474 tested (1 survived, 0 timed out)
+Mutation testing 2% (elapsed: <1m, remaining: ~10m) 14/474 tested (3 survived, 0 timed out)
+Mutation testing 4% (elapsed: <1m, remaining: ~11m) 20/474 tested (5 survived, 1 timed out)
+Mutation testing 5% (elapsed: <1m, remaining: ~11m) 25/474 tested (10 survived, 1 timed out)
+Mutation testing 7% (elapsed: <1m, remaining: ~10m) 35/474 tested (15 survived, 1 timed out)
+Mutation testing 9% (elapsed: ~1m, remaining: ~9m) 45/474 tested (18 survived, 1 timed out)
+Mutation testing 11% (elapsed: ~1m, remaining: ~9m) 53/474 tested (23 survived, 1 timed out)
+Mutation testing 12% (elapsed: ~1m, remaining: ~9m) 60/474 tested (25 survived, 1 timed out)
+Mutation testing 14% (elapsed: ~1m, remaining: ~8m) 69/474 tested (30 survived, 1 timed out)
+Mutation testing 14% (elapsed: ~1m, remaining: ~9m) 71/474 tested (30 survived, 2 timed out)
+Mutation testing 15% (elapsed: ~1m, remaining: ~9m) 75/474 tested (30 survived, 3 timed out)
+Mutation testing 16% (elapsed: ~2m, remaining: ~10m) 77/474 tested (30 survived, 4 timed out)
+Mutation testing 16% (elapsed: ~2m, remaining: ~11m) 78/474 tested (30 survived, 5 timed out)
+Mutation testing 16% (elapsed: ~2m, remaining: ~11m) 80/474 tested (30 survived, 7 timed out)
+Mutation testing 17% (elapsed: ~2m, remaining: ~11m) 83/474 tested (31 survived, 8 timed out)
+Mutation testing 18% (elapsed: ~2m, remaining: ~11m) 90/474 tested (34 survived, 8 timed out)
+Mutation testing 20% (elapsed: ~2m, remaining: ~10m) 99/474 tested (38 survived, 8 timed out)
+Mutation testing 22% (elapsed: ~3m, remaining: ~10m) 107/474 tested (41 survived, 8 timed out)
+Mutation testing 24% (elapsed: ~3m, remaining: ~9m) 117/474 tested (42 survived, 8 timed out)
+Mutation testing 24% (elapsed: ~3m, remaining: ~10m) 118/474 tested (42 survived, 9 timed out)
+Mutation testing 26% (elapsed: ~3m, remaining: ~9m) 124/474 tested (43 survived, 10 timed out)
+Mutation testing 27% (elapsed: ~3m, remaining: ~9m) 131/474 tested (46 survived, 10 timed out)
+Mutation testing 29% (elapsed: ~3m, remaining: ~9m) 138/474 tested (47 survived, 10 timed out)
+Mutation testing 30% (elapsed: ~4m, remaining: ~8m) 146/474 tested (48 survived, 10 timed out)
+Mutation testing 32% (elapsed: ~4m, remaining: ~8m) 153/474 tested (48 survived, 10 timed out)
+Mutation testing 33% (elapsed: ~4m, remaining: ~8m) 159/474 tested (53 survived, 10 timed out)
+Mutation testing 36% (elapsed: ~4m, remaining: ~7m) 171/474 tested (55 survived, 10 timed out)
+Mutation testing 37% (elapsed: ~4m, remaining: ~7m) 177/474 tested (59 survived, 10 timed out)
+Mutation testing 39% (elapsed: ~4m, remaining: ~7m) 189/474 tested (61 survived, 10 timed out)
+Mutation testing 41% (elapsed: ~5m, remaining: ~7m) 196/474 tested (62 survived, 10 timed out)
+Mutation testing 43% (elapsed: ~5m, remaining: ~6m) 204/474 tested (62 survived, 11 timed out)
+Mutation testing 43% (elapsed: ~5m, remaining: ~6m) 207/474 tested (63 survived, 12 timed out)
+Mutation testing 44% (elapsed: ~5m, remaining: ~6m) 213/474 tested (63 survived, 12 timed out)
+Mutation testing 45% (elapsed: ~5m, remaining: ~6m) 215/474 tested (64 survived, 13 timed out)
+Mutation testing 46% (elapsed: ~5m, remaining: ~6m) 219/474 tested (64 survived, 14 timed out)
+Mutation testing 47% (elapsed: ~6m, remaining: ~6m) 224/474 tested (65 survived, 15 timed out)
+Mutation testing 48% (elapsed: ~6m, remaining: ~6m) 228/474 tested (69 survived, 15 timed out)
+Mutation testing 48% (elapsed: ~6m, remaining: ~6m) 230/474 tested (70 survived, 16 timed out)
+Mutation testing 49% (elapsed: ~6m, remaining: ~6m) 233/474 tested (70 survived, 17 timed out)
+Mutation testing 49% (elapsed: ~6m, remaining: ~6m) 236/474 tested (70 survived, 18 timed out)
+Mutation testing 50% (elapsed: ~6m, remaining: ~6m) 239/474 tested (70 survived, 19 timed out)
+Mutation testing 50% (elapsed: ~7m, remaining: ~6m) 240/474 tested (70 survived, 20 timed out)
+Mutation testing 52% (elapsed: ~7m, remaining: ~6m) 249/474 tested (72 survived, 21 timed out)
+Mutation testing 52% (elapsed: ~7m, remaining: ~6m) 251/474 tested (73 survived, 22 timed out)
+Mutation testing 54% (elapsed: ~7m, remaining: ~6m) 260/474 tested (74 survived, 23 timed out)
+Mutation testing 55% (elapsed: ~7m, remaining: ~6m) 265/474 tested (74 survived, 24 timed out)
+Mutation testing 58% (elapsed: ~7m, remaining: ~5m) 279/474 tested (74 survived, 24 timed out)
+Mutation testing 59% (elapsed: ~8m, remaining: ~5m) 282/474 tested (74 survived, 25 timed out)
+Mutation testing 60% (elapsed: ~8m, remaining: ~5m) 286/474 tested (74 survived, 25 timed out)
+Mutation testing 60% (elapsed: ~8m, remaining: ~5m) 288/474 tested (74 survived, 27 timed out)
+Mutation testing 61% (elapsed: ~8m, remaining: ~5m) 290/474 tested (75 survived, 27 timed out)
+Mutation testing 61% (elapsed: ~8m, remaining: ~5m) 293/474 tested (75 survived, 29 timed out)
+Mutation testing 62% (elapsed: ~8m, remaining: ~5m) 296/474 tested (75 survived, 30 timed out)
+Mutation testing 63% (elapsed: ~9m, remaining: ~5m) 302/474 tested (76 survived, 30 timed out)
+Mutation testing 65% (elapsed: ~9m, remaining: ~4m) 309/474 tested (78 survived, 30 timed out)
+Mutation testing 65% (elapsed: ~9m, remaining: ~4m) 312/474 tested (78 survived, 30 timed out)
+Mutation testing 67% (elapsed: ~9m, remaining: ~4m) 318/474 tested (78 survived, 31 timed out)
+Mutation testing 68% (elapsed: ~9m, remaining: ~4m) 324/474 tested (78 survived, 31 timed out)
+Mutation testing 69% (elapsed: ~9m, remaining: ~4m) 331/474 tested (78 survived, 31 timed out)
+Mutation testing 71% (elapsed: ~10m, remaining: ~3m) 339/474 tested (79 survived, 31 timed out)
+Mutation testing 73% (elapsed: ~10m, remaining: ~3m) 348/474 tested (80 survived, 31 timed out)
+Mutation testing 73% (elapsed: ~10m, remaining: ~3m) 350/474 tested (80 survived, 32 timed out)
+Mutation testing 75% (elapsed: ~10m, remaining: ~3m) 356/474 tested (80 survived, 32 timed out)
+Mutation testing 77% (elapsed: ~10m, remaining: ~3m) 365/474 tested (80 survived, 32 timed out)
+Mutation testing 78% (elapsed: ~10m, remaining: ~2m) 373/474 tested (82 survived, 33 timed out)
+Mutation testing 79% (elapsed: ~11m, remaining: ~2m) 376/474 tested (84 survived, 33 timed out)
+Mutation testing 79% (elapsed: ~11m, remaining: ~2m) 378/474 tested (84 survived, 35 timed out)
+Mutation testing 79% (elapsed: ~11m, remaining: ~2m) 379/474 tested (84 survived, 36 timed out)
+Mutation testing 81% (elapsed: ~11m, remaining: ~2m) 387/474 tested (84 survived, 37 timed out)
+Mutation testing 82% (elapsed: ~11m, remaining: ~2m) 391/474 tested (86 survived, 37 timed out)
+Mutation testing 83% (elapsed: ~11m, remaining: ~2m) 394/474 tested (86 survived, 39 timed out)
+Mutation testing 85% (elapsed: ~12m, remaining: ~2m) 403/474 tested (87 survived, 39 timed out)
+Mutation testing 86% (elapsed: ~12m, remaining: ~1m) 410/474 tested (92 survived, 39 timed out)
+Mutation testing 88% (elapsed: ~12m, remaining: ~1m) 418/474 tested (92 survived, 39 timed out)
+Mutation testing 89% (elapsed: ~12m, remaining: ~1m) 424/474 tested (92 survived, 39 timed out)
+Mutation testing 90% (elapsed: ~12m, remaining: ~1m) 431/474 tested (92 survived, 39 timed out)
+Mutation testing 93% (elapsed: ~12m, remaining: <1m) 441/474 tested (92 survived, 39 timed out)
+Mutation testing 94% (elapsed: ~13m, remaining: <1m) 448/474 tested (96 survived, 39 timed out)
+Mutation testing 95% (elapsed: ~13m, remaining: <1m) 454/474 tested (102 survived, 39 timed out)
+Mutation testing 96% (elapsed: ~13m, remaining: <1m) 459/474 tested (107 survived, 39 timed out)
+Mutation testing 98% (elapsed: ~13m, remaining: <1m) 466/474 tested (112 survived, 39 timed out)
+Mutation testing 99% (elapsed: ~13m, remaining: <1m) 470/474 tested (116 survived, 39 timed out)
+
+All tests
+  ✓ All tests (killed 318)
+
+[Survived] BooleanLiteral
+sinks/drain.js:8:7
+-     if (!done) {
++     if (done) {
+
+[Survived] ConditionalExpression
+sinks/drain.js:8:7
+-     if (!done) {
++     if (true) {
+
+[Survived] ConditionalExpression
+sinks/drain.js:8:7
+-     if (!done) {
++     if (false) {
+
+[Survived] BlockStatement
+sinks/drain.js:8:14
+-     if (!done) {
+-       doneLackingErr = new Error('no done callback supplied')
+-     }
++     if (!done) {}
+
+[Survived] StringLiteral
+sinks/drain.js:9:32
+-       doneLackingErr = new Error('no done callback supplied')
++       doneLackingErr = new Error("")
+
+[Survived] ConditionalExpression
+sinks/drain.js:14:8
+-       if(abort) return sink.abort()
++       if(false) return sink.abort()
+
+[Survived] BooleanLiteral
+sinks/drain.js:19:33
+-           var loop = true, cbed = false
++           var loop = true, cbed = true
+
+[Survived] ConditionalExpression
+sinks/drain.js:26:18
+-                 if(done) done(end === true ? null : end)
++                 if(true) done(end === true ? null : end)
+
+[Survived] ConditionalExpression
+sinks/drain.js:27:23
+-                 else if(end && end !== true) {
++                 else if(true) {
+
+[Survived] ConditionalExpression
+sinks/drain.js:27:23
+-                 else if(end && end !== true) {
++                 else if(false) {
+
+[Survived] LogicalOperator
+sinks/drain.js:27:23
+-                 else if(end && end !== true) {
++                 else if(end || end !== true) {
+
+[Survived] ConditionalExpression
+sinks/drain.js:27:30
+-                 else if(end && end !== true) {
++                 else if(end && true) {
+
+[Survived] EqualityOperator
+sinks/drain.js:27:30
+-                 else if(end && end !== true) {
++                 else if(end && end === true) {
+
+[Survived] BooleanLiteral
+sinks/drain.js:27:38
+-                 else if(end && end !== true) {
++                 else if(end && end !== false) {
+
+[Survived] BlockStatement
+sinks/drain.js:27:44
+-                 else if(end && end !== true) {
+-                   console.warn(doneLackingErr)
+-                   throw end
+-                 }
++                 else if(end && end !== true) {}
+
+[Survived] ConditionalExpression
+sinks/drain.js:34:20
+-                 read(abort || true, done || function () {})
++                 read(true, done || function () {})
+
+[Survived] ConditionalExpression
+sinks/drain.js:34:20
+-                 read(abort || true, done || function () {})
++                 read(false, done || function () {})
+
+[Survived] LogicalOperator
+sinks/drain.js:34:20
+-                 read(abort || true, done || function () {})
++                 read(abort && true, done || function () {})
+
+[Survived] BooleanLiteral
+sinks/drain.js:34:29
+-                 read(abort || true, done || function () {})
++                 read(abort || false, done || function () {})
+
+[Survived] ConditionalExpression
+sinks/drain.js:49:8
+-       if('function' == typeof err)
++       if(false)
+
+[Survived] StringLiteral
+sinks/drain.js:49:8
+-       if('function' == typeof err)
++       if("" == typeof err)
+
+[Survived] BooleanLiteral
+sinks/drain.js:50:23
+-         cb = err, err = true
++         cb = err, err = false
+
+[Survived] ConditionalExpression
+sinks/drain.js:52:8
+-       if(read) return read(abort, cb || function () {})
++       if(true) return read(abort, cb || function () {})
+
+[Survived] ConditionalExpression
+sinks/drain.js:52:8
+-       if(read) return read(abort, cb || function () {})
++       if(false) return read(abort, cb || function () {})
+
+[Survived] ConditionalExpression
+sinks/find.js:9:6
+-     if(!cb)
++     if(false)
+
+[Survived] ConditionalExpression
+sinks/find.js:22:8
+-       cb(err === true ? null : err, null)
++       cb(true ? null : err, null)
+
+[Survived] ConditionalExpression
+sinks/find.js:22:8
+-       cb(err === true ? null : err, null)
++       cb(false ? null : err, null)
+
+[Survived] EqualityOperator
+sinks/find.js:22:8
+-       cb(err === true ? null : err, null)
++       cb(err !== true ? null : err, null)
+
+[Survived] BooleanLiteral
+sinks/find.js:22:16
+-       cb(err === true ? null : err, null)
++       cb(err === false ? null : err, null)
+
+[Survived] BlockStatement
+sinks/log.js:5:38
+-   module.exports = function log (done) {
+-     return drain(function (data) {
+-       console.log(data)
+-     }, done)
+-   }
++   module.exports = function log (done) {}
+
+[Survived] BlockStatement
+sinks/log.js:6:32
+-     return drain(function (data) {
+-       console.log(data)
+-     }, done)
++     return drain(function (data) {}, done)
+
+[Survived] ConditionalExpression
+sinks/reduce.js:12:7
+-     if (arguments.length === 2)
++     if (false)
+
+[Survived] ConditionalExpression
+sinks/reduce.js:16:12
+-           if(end) return cb(end === true ? null : end)
++           if(false) return cb(end === true ? null : end)
+
+[Survived] ConditionalExpression
+sinks/reduce.js:16:27
+-           if(end) return cb(end === true ? null : end)
++           if(end) return cb(true ? null : end)
+
+[Survived] ConditionalExpression
+sinks/reduce.js:16:27
+-           if(end) return cb(end === true ? null : end)
++           if(end) return cb(false ? null : end)
+
+[Survived] EqualityOperator
+sinks/reduce.js:16:27
+-           if(end) return cb(end === true ? null : end)
++           if(end) return cb(end !== true ? null : end)
+
+[Survived] BooleanLiteral
+sinks/reduce.js:16:35
+-           if(end) return cb(end === true ? null : end)
++           if(end) return cb(end === false ? null : end)
+
+[Survived] ConditionalExpression
+sources/count.js:6:8
+-       if(end) return cb && cb(end)
++       if(false) return cb && cb(end)
+
+[Survived] EqualityOperator
+sources/count.js:7:8
+-       if(i > max)
++       if(i >= max)
+
+[Survived] ConditionalExpression
+sources/infinite.js:5:8
+-       if(end) return cb && cb(end)
++       if(false) return cb && cb(end)
+
+[Survived] ConditionalExpression
+sources/once.js:6:8
+-       if(abort)
++       if(false)
+
+[Survived] ConditionalExpression
+sources/values.js:5:6
+-     if(!array)
++     if(false)
+
+[Survived] BlockStatement
+sources/values.js:6:33
+-       return function (abort, cb) {
+-         if(abort) return abortCb(cb, abort, onAbort)
+-         return cb(true)
+-       }
++       return function (abort, cb) {}
+
+[Survived] ConditionalExpression
+sources/values.js:7:10
+-         if(abort) return abortCb(cb, abort, onAbort)
++         if(true) return abortCb(cb, abort, onAbort)
+
+[Survived] ConditionalExpression
+sources/values.js:7:10
+-         if(abort) return abortCb(cb, abort, onAbort)
++         if(false) return abortCb(cb, abort, onAbort)
+
+[Survived] BooleanLiteral
+sources/values.js:8:17
+-         return cb(true)
++         return cb(false)
+
+[Survived] ConditionalExpression
+sources/values.js:10:6
+-     if(!Array.isArray(array))
++     if(true)
+
+[Survived] BlockStatement
+throughs/async-map.js:3:17
+-   function id (e) { return e }
++   function id (e) {}
+
+[Survived] ConditionalExpression
+throughs/async-map.js:7:6
+-     if(!map) return id
++     if(false) return id
+
+[Survived] ConditionalExpression
+throughs/async-map.js:12:10
+-         if(aborted) return cb(aborted)
++         if(false) return cb(aborted)
+
+[Survived] ConditionalExpression
+throughs/async-map.js:15:12
+-           if(!busy) read(abort, function (err) {
++           if(false) read(abort, function (err) {
+
+[Survived] BooleanLiteral
+throughs/filter.js:13:16
+-           sync = true
++           sync = false
+
+[Survived] BooleanLiteral
+throughs/filter.js:19:16
+-           sync = false
++           sync = true
+
+[Survived] ConditionalExpression
+throughs/flatten.js:13:16
+-             read(err || abort, cb)
++             read(true, cb)
+
+[Survived] LogicalOperator
+throughs/flatten.js:13:16
+-             read(err || abort, cb)
++             read(err && abort, cb)
+
+[Survived] BlockStatement
+throughs/map.js:3:17
+-   function id (e) { return e }
++   function id (e) {}
+
+[Survived] ConditionalExpression
+throughs/map.js:7:6
+-     if(!mapper) return id
++     if(false) return id
+
+[Survived] BooleanLiteral
+throughs/take.js:19:16
+-           last = false; cb(err || true)
++           last = true; cb(err || true)
+
+[Survived] ConditionalExpression
+throughs/take.js:19:26
+-           last = false; cb(err || true)
++           last = false; cb(true)
+
+[Survived] LogicalOperator
+throughs/take.js:19:26
+-           last = false; cb(err || true)
++           last = false; cb(err && true)
+
+[Survived] BooleanLiteral
+throughs/take.js:19:33
+-           last = false; cb(err || true)
++           last = false; cb(err || false)
+
+[Survived] LogicalOperator
+throughs/take.js:28:22
+-             if(ended = ended || end) {
++             if(ended = ended && end) {
+
+[Survived] BlockStatement
+throughs/take.js:28:36
+-             if(ended = ended || end) {
+-               //last ? terminate(cb) :
+-               cb(ended)
+-             }
++             if(ended = ended || end) {}
+
+[Survived] ConditionalExpression
+throughs/through.js:10:11
+-       onEnd(abort === true ? null : abort)
++       onEnd(true ? null : abort)
+
+[Survived] ConditionalExpression
+throughs/through.js:10:11
+-       onEnd(abort === true ? null : abort)
++       onEnd(false ? null : abort)
+
+[Survived] EqualityOperator
+throughs/through.js:10:11
+-       onEnd(abort === true ? null : abort)
++       onEnd(abort !== true ? null : abort)
+
+[Survived] BooleanLiteral
+throughs/through.js:10:21
+-       onEnd(abort === true ? null : abort)
++       onEnd(abort === false ? null : abort)
+
+[Survived] ConditionalExpression
+throughs/through.js:15:10
+-         if(end) once(end)
++         if(true) once(end)
+
+[Survived] ConditionalExpression
+throughs/through.js:15:10
+-         if(end) once(end)
++         if(false) once(end)
+
+[Survived] ConditionalExpression
+util/prop.js:3:5
+-       'string' == typeof key
++       false
+
+[Survived] StringLiteral
+util/prop.js:3:5
+-       'string' == typeof key
++       "" == typeof key
+
+[Survived] BlockStatement
+util/prop.js:4:23
+-       ? function (data) { return data[key] }
++       ? function (data) {}
+
+[Survived] ConditionalExpression
+util/prop.js:5:7
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : false //regexp
+
+[Survived] LogicalOperator
+util/prop.js:5:7
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : 'object' === typeof key || 'function' === typeof key.exec //regexp //regexp
+
+[Survived] ConditionalExpression
+util/prop.js:5:7
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : true && 'function' === typeof key.exec //regexp
+
+[Survived] EqualityOperator
+util/prop.js:5:7
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : 'object' !== typeof key && 'function' === typeof key.exec //regexp
+
+[Survived] StringLiteral
+util/prop.js:5:7
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : "" === typeof key && 'function' === typeof key.exec //regexp
+
+[Survived] ConditionalExpression
+util/prop.js:5:34
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : 'object' === typeof key && true //regexp
+
+[Survived] EqualityOperator
+util/prop.js:5:34
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : 'object' === typeof key && 'function' !== typeof key.exec //regexp
+
+[Survived] StringLiteral
+util/prop.js:5:34
+-       : 'object' === typeof key && 'function' === typeof key.exec //regexp
++       : 'object' === typeof key && "" === typeof key.exec //regexp
+
+[Survived] BlockStatement
+util/prop.js:6:23
+-       ? function (data) { var v = key.exec(data); return v && v[0] }
++       ? function (data) {}
+
+[Survived] ConditionalExpression
+util/prop.js:6:56
+-       ? function (data) { var v = key.exec(data); return v && v[0] }
++       ? function (data) { var v = key.exec(data); return true }
+
+[Survived] ConditionalExpression
+util/prop.js:6:56
+-       ? function (data) { var v = key.exec(data); return v && v[0] }
++       ? function (data) { var v = key.exec(data); return false }
+
+[Survived] LogicalOperator
+util/prop.js:6:56
+-       ? function (data) { var v = key.exec(data); return v && v[0] }
++       ? function (data) { var v = key.exec(data); return v || v[0] }
+
+[Survived] BlockStatement
+util/tester.js:3:17
+-   function id (e) { return e }
++   function id (e) {}
+
+[Survived] ConditionalExpression
+util/tester.js:7:5
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       false //regexp
+
+[Survived] LogicalOperator
+util/tester.js:7:5
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       'object' === typeof test || 'function' === typeof test.test //regexp //regexp
+
+[Survived] ConditionalExpression
+util/tester.js:7:5
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       true && 'function' === typeof test.test //regexp
+
+[Survived] EqualityOperator
+util/tester.js:7:5
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       'object' !== typeof test && 'function' === typeof test.test //regexp
+
+[Survived] StringLiteral
+util/tester.js:7:5
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       "" === typeof test && 'function' === typeof test.test //regexp
+
+[Survived] ConditionalExpression
+util/tester.js:7:33
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       'object' === typeof test && true //regexp
+
+[Survived] EqualityOperator
+util/tester.js:7:33
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       'object' === typeof test && 'function' !== typeof test.test //regexp
+
+[Survived] StringLiteral
+util/tester.js:7:33
+-       'object' === typeof test && 'function' === typeof test.test //regexp
++       'object' === typeof test && "" === typeof test.test //regexp
+
+[Survived] ConditionalExpression
+pull.js:5:7
+-     if (typeof a === 'function' && a.length === 1) {
++     if (true && a.length === 1) {
+
+[Survived] ArrayDeclaration
+pull.js:6:16
+-       var args = new Array(length)
++       var args = new Array()
+
+[Survived] EqualityOperator
+pull.js:7:20
+-       for(var i = 0; i < length; i++)
++       for(var i = 0; i <= length; i++)
+
+[Survived] ConditionalExpression
+pull.js:10:11
+-         if (args == null) {
++         if (false) {
+
+[Survived] BlockStatement
+pull.js:10:25
+-         if (args == null) {
+-           throw new TypeError("partial sink should only be called once!")
+-         }
++         if (args == null) {}
+
+[Survived] StringLiteral
+pull.js:11:29
+-           throw new TypeError("partial sink should only be called once!")
++           throw new TypeError("")
+
+[Survived] ConditionalExpression
+pull.js:21:7
+-         case 1: return pull(read, ref[0])
++         case 1:
+
+[Survived] ConditionalExpression
+pull.js:22:7
+-         case 2: return pull(read, ref[0], ref[1])
++         case 2:
+
+[Survived] ConditionalExpression
+pull.js:23:7
+-         case 3: return pull(read, ref[0], ref[1], ref[2])
++         case 3:
+
+[Survived] ConditionalExpression
+pull.js:24:7
+-         case 4: return pull(read, ref[0], ref[1], ref[2], ref[3])
++         case 4:
+
+[Survived] ConditionalExpression
+pull.js:25:7
+-         default:
+-           ref.unshift(read)
+-           return pull.apply(null, ref)
++         default:
+
+[Survived] ConditionalExpression
+pull.js:34:7
+-     if (read && typeof read.source === 'function') {
++     if (false) {
+
+[Survived] StringLiteral
+pull.js:34:38
+-     if (read && typeof read.source === 'function') {
++     if (read && typeof read.source === "") {
+
+[Survived] BlockStatement
+pull.js:34:50
+-     if (read && typeof read.source === 'function') {
+-       read = read.source
+-     }
++     if (read && typeof read.source === 'function') {}
+
+[Survived] EqualityOperator
+pull.js:38:19
+-     for (var i = 1; i < length; i++) {
++     for (var i = 1; i <= length; i++) {
+
+[Survived] ConditionalExpression
+pull.js:40:9
+-       if (typeof s === 'function') {
++       if (true) {
+
+[Survived] ConditionalExpression
+pull.js:42:16
+-       } else if (s && typeof s === 'object') {
++       } else if (true) {
+
+[Survived] ConditionalExpression
+pull.js:42:16
+-       } else if (s && typeof s === 'object') {
++       } else if (false) {
+
+[Survived] LogicalOperator
+pull.js:42:16
+-       } else if (s && typeof s === 'object') {
++       } else if (s || typeof s === 'object') {
+
+[Survived] ConditionalExpression
+pull.js:42:21
+-       } else if (s && typeof s === 'object') {
++       } else if (s && true) {
+
+[Survived] EqualityOperator
+pull.js:42:21
+-       } else if (s && typeof s === 'object') {
++       } else if (s && typeof s !== 'object') {
+
+[Survived] StringLiteral
+pull.js:42:34
+-       } else if (s && typeof s === 'object') {
++       } else if (s && typeof s === "") {
+
+[Survived] BlockStatement
+pull.js:42:44
+-       } else if (s && typeof s === 'object') {
+-         s.sink(read)
+-         read = s.source
+-       }
++       } else if (s && typeof s === 'object') {}
+
+Ran 0.92 tests per mutant on average.
+----------------|---------|----------|-----------|------------|----------|----------|
+File            | % score | # killed | # timeout | # survived | # no cov | # errors |
+----------------|---------|----------|-----------|------------|----------|----------|
+All files       |   75.53 |      318 |        40 |        116 |        0 |        0 |
+ sinks          |   71.09 |       82 |         9 |         37 |        0 |        0 |
+  collect.js    |  100.00 |        3 |         0 |          0 |        0 |        0 |
+  concat.js     |  100.00 |        4 |         0 |          0 |        0 |        0 |
+  drain.js      |   69.23 |       45 |         9 |         24 |        0 |        0 |
+  find.js       |   77.27 |       17 |         0 |          5 |        0 |        0 |
+  index.js      |  100.00 |        1 |         0 |          0 |        0 |        0 |
+  log.js        |    0.00 |        0 |         0 |          2 |        0 |        0 |
+  on-end.js     |  100.00 |        1 |         0 |          0 |        0 |        0 |
+  reduce.js     |   64.71 |       11 |         0 |          6 |        0 |        0 |
+ sources        |   84.13 |       42 |        11 |         10 |        0 |        0 |
+  count.js      |   87.50 |       14 |         0 |          2 |        0 |        0 |
+  empty.js      |  100.00 |        2 |         1 |          0 |        0 |        0 |
+  error.js      |  100.00 |        2 |         0 |          0 |        0 |        0 |
+  index.js      |  100.00 |        1 |         0 |          0 |        0 |        0 |
+  infinite.js   |   90.00 |        8 |         1 |          1 |        0 |        0 |
+  keys.js       |  100.00 |        1 |         0 |          0 |        0 |        0 |
+  once.js       |   88.89 |        5 |         3 |          1 |        0 |        0 |
+  values.js     |   71.43 |        9 |         6 |          6 |        0 |        0 |
+ throughs       |   88.30 |      148 |        18 |         22 |        0 |        0 |
+  async-map.js  |   89.19 |       30 |         3 |          4 |        0 |        0 |
+  filter-not.js |  100.00 |        2 |         1 |          0 |        0 |        0 |
+  filter.js     |   87.50 |        9 |         5 |          2 |        0 |        0 |
+  flatten.js    |   94.59 |       34 |         1 |          2 |        0 |        0 |
+  index.js      |  100.00 |        1 |         0 |          0 |        0 |        0 |
+  map.js        |   83.33 |       10 |         0 |          2 |        0 |        0 |
+  non-unique.js |  100.00 |        2 |         0 |          0 |        0 |        0 |
+  take.js       |   86.67 |       31 |         8 |          6 |        0 |        0 |
+  through.js    |   73.91 |       17 |         0 |          6 |        0 |        0 |
+  unique.js     |  100.00 |       12 |         0 |          0 |        0 |        0 |
+ util           |   46.67 |       20 |         1 |         24 |        0 |        0 |
+  abort-cb.js   |  100.00 |        8 |         0 |          0 |        0 |        0 |
+  prop.js       |   31.82 |        7 |         0 |         15 |        0 |        0 |
+  tester.js     |   40.00 |        5 |         1 |          9 |        0 |        0 |
+ pull.js        |   54.00 |       26 |         1 |         23 |        0 |        0 |
+----------------|---------|----------|-----------|------------|----------|----------|
+[32m13:19:51 (2166) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/pull-stream/reports/mutation/mutation.html
+[32m13:19:51 (2166) INFO MutationTestExecutor[39m Done in 13 minutes 52 seconds.
+
+real	13m54.180s
+user	5m7.397s
+sys	1m4.166s

@@ -1,0 +1,439 @@
+[32m13:06:29 (2192) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m13:06:29 (2192) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m13:06:30 (2192) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/countries-and-timezones/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[32m13:06:30 (2192) INFO ProjectReader[39m Found 3 of 47 file(s) to be mutated.
+*** using standard mutators ***
+Mutant 0 in build-country.js: {
+  const name = data.countries[id];
+  if (!name) return null;
+  const tzMap = getTimezonesMap(data)[id] || {};
+  return {
+    id,
+    name,
+    timezones: tzMap.current || [],
+    allTimezones: tzMap.all || []
+  };
+} replaced with {}
+Mutant 1 in build-country.js: !name replaced with name
+Mutant 2 in build-country.js: !name replaced with true
+Mutant 3 in build-country.js: !name replaced with false
+Mutant 4 in build-country.js: getTimezonesMap(data)[id] || {} replaced with true
+Mutant 5 in build-country.js: getTimezonesMap(data)[id] || {} replaced with false
+Mutant 6 in build-country.js: getTimezonesMap(data)[id] || {} replaced with getTimezonesMap(data)[id] && {}
+Mutant 7 in build-country.js: {
+  id,
+  name,
+  timezones: tzMap.current || [],
+  allTimezones: tzMap.all || []
+} replaced with {}
+Mutant 8 in build-country.js: tzMap.current || [] replaced with true
+Mutant 9 in build-country.js: tzMap.current || [] replaced with false
+Mutant 10 in build-country.js: tzMap.current || [] replaced with tzMap.current && []
+Mutant 11 in build-country.js: [] replaced with ["Stryker was here"]
+Mutant 12 in build-country.js: tzMap.all || [] replaced with true
+Mutant 13 in build-country.js: tzMap.all || [] replaced with false
+Mutant 14 in build-country.js: tzMap.all || [] replaced with tzMap.all && []
+Mutant 15 in build-country.js: [] replaced with ["Stryker was here"]
+Mutant 16 in build-country.js: {
+  if (!timezonesMap) timezonesMap = buildTimezonesMap(data);
+  return timezonesMap;
+} replaced with {}
+Mutant 17 in build-country.js: !timezonesMap replaced with timezonesMap
+Mutant 18 in build-country.js: !timezonesMap replaced with true
+Mutant 19 in build-country.js: !timezonesMap replaced with false
+Mutant 20 in build-country.js: {
+  return Object.keys(data.timezones).reduce((result, id) => {
+    const tz = data.timezones[id];
+    const {
+      c,
+      a
+    } = tz;
+    const aliasTz = data.timezones[a] || {};
+    const countries = c || aliasTz.c;
+    if (!countries) return result;
+    countries.forEach(country => {
+      if (!result[country]) Object.assign(result, {
+        [country]: {
+          current: [],
+          all: []
+        }
+      });
+      if (tz.r === undefined) result[country].current.push(id);
+      result[country].all.push(id);
+    });
+    return result;
+  }, {});
+} replaced with {}
+Mutant 21 in build-country.js: {
+  const tz = data.timezones[id];
+  const {
+    c,
+    a
+  } = tz;
+  const aliasTz = data.timezones[a] || {};
+  const countries = c || aliasTz.c;
+  if (!countries) return result;
+  countries.forEach(country => {
+    if (!result[country]) Object.assign(result, {
+      [country]: {
+        current: [],
+        all: []
+      }
+    });
+    if (tz.r === undefined) result[country].current.push(id);
+    result[country].all.push(id);
+  });
+  return result;
+} replaced with {}
+Mutant 22 in build-country.js: data.timezones[a] || {} replaced with true
+Mutant 23 in build-country.js: data.timezones[a] || {} replaced with false
+Mutant 24 in build-country.js: data.timezones[a] || {} replaced with data.timezones[a] && {}
+Mutant 25 in build-country.js: c || aliasTz.c replaced with true
+Mutant 26 in build-country.js: c || aliasTz.c replaced with false
+Mutant 27 in build-country.js: c || aliasTz.c replaced with c && aliasTz.c
+Mutant 28 in build-country.js: !countries replaced with countries
+Mutant 29 in build-country.js: !countries replaced with true
+Mutant 30 in build-country.js: !countries replaced with false
+Mutant 31 in build-country.js: {
+  if (!result[country]) Object.assign(result, {
+    [country]: {
+      current: [],
+      all: []
+    }
+  });
+  if (tz.r === undefined) result[country].current.push(id);
+  result[country].all.push(id);
+} replaced with {}
+Mutant 32 in build-country.js: !result[country] replaced with result[country]
+Mutant 33 in build-country.js: !result[country] replaced with true
+Mutant 34 in build-country.js: !result[country] replaced with false
+Mutant 35 in build-country.js: {
+  [country]: {
+    current: [],
+    all: []
+  }
+} replaced with {}
+Mutant 36 in build-country.js: {
+  current: [],
+  all: []
+} replaced with {}
+Mutant 37 in build-country.js: [] replaced with ["Stryker was here"]
+Mutant 38 in build-country.js: [] replaced with ["Stryker was here"]
+Mutant 39 in build-country.js: tz.r === undefined replaced with true
+Mutant 40 in build-country.js: tz.r === undefined replaced with false
+Mutant 41 in build-country.js: tz.r === undefined replaced with tz.r !== undefined
+Mutant 42 in build-timezone.js: {
+  const timezone = data.timezones[name];
+  if (!timezone) return null;
+  const {
+    a: aliasOf = null
+  } = timezone;
+  const aliasTz = aliasOf ? data.timezones[aliasOf] : {};
+  const tz = {
+    ...aliasTz,
+    ...data.timezones[name]
+  };
+  const countries = tz.c || [];
+  const utcOffset = tz.u;
+  const dstOffset = Number.isInteger(tz.d) ? tz.d : utcOffset;
+  const result = {
+    name,
+    countries,
+    utcOffset,
+    utcOffsetStr: getOffsetStr(utcOffset),
+    dstOffset,
+    dstOffsetStr: getOffsetStr(dstOffset),
+    aliasOf
+  };
+  if (timezone.r) result.deprecated = true;
+  return result;
+} replaced with {}
+Mutant 43 in build-timezone.js: !timezone replaced with timezone
+Mutant 44 in build-timezone.js: !timezone replaced with true
+Mutant 45 in build-timezone.js: !timezone replaced with false
+Mutant 46 in build-timezone.js: {
+  ...aliasTz,
+  ...data.timezones[name]
+} replaced with {}
+Mutant 47 in build-timezone.js: tz.c || [] replaced with true
+Mutant 48 in build-timezone.js: tz.c || [] replaced with false
+Mutant 49 in build-timezone.js: tz.c || [] replaced with tz.c && []
+Mutant 50 in build-timezone.js: [] replaced with ["Stryker was here"]
+Mutant 51 in build-timezone.js: {
+  name,
+  countries,
+  utcOffset,
+  utcOffsetStr: getOffsetStr(utcOffset),
+  dstOffset,
+  dstOffsetStr: getOffsetStr(dstOffset),
+  aliasOf
+} replaced with {}
+Mutant 52 in build-timezone.js: timezone.r replaced with true
+Mutant 53 in build-timezone.js: timezone.r replaced with false
+Mutant 54 in build-timezone.js: true replaced with false
+Mutant 55 in build-timezone.js: {
+  const hours = Math.floor(offset / 60);
+  const min = offset % 60;
+  const sign = offset < 0 ? '-' : '+';
+  return `${sign}${getNumStr(hours)}:${getNumStr(min)}`;
+} replaced with {}
+Mutant 56 in build-timezone.js: offset / 60 replaced with offset * 60
+Mutant 57 in build-timezone.js: offset % 60 replaced with offset * 60
+Mutant 58 in build-timezone.js: offset < 0 replaced with true
+Mutant 59 in build-timezone.js: offset < 0 replaced with false
+Mutant 60 in build-timezone.js: offset < 0 replaced with offset <= 0
+Mutant 61 in build-timezone.js: offset < 0 replaced with offset >= 0
+Mutant 62 in build-timezone.js: '-' replaced with ""
+Mutant 63 in build-timezone.js: '+' replaced with ""
+Mutant 64 in build-timezone.js: `${sign}${getNumStr(hours)}:${getNumStr(min)}` replaced with ``
+Mutant 65 in build-timezone.js: {
+  const num = Math.abs(input);
+  const prefix = num < 10 ? '0' : '';
+  return `${prefix}${num}`;
+} replaced with {}
+Mutant 66 in build-timezone.js: num < 10 replaced with true
+Mutant 67 in build-timezone.js: num < 10 replaced with false
+Mutant 68 in build-timezone.js: num < 10 replaced with num <= 10
+Mutant 69 in build-timezone.js: num < 10 replaced with num >= 10
+Mutant 70 in build-timezone.js: '0' replaced with ""
+Mutant 71 in build-timezone.js: '' replaced with "Stryker was here!"
+Mutant 72 in build-timezone.js: `${prefix}${num}` replaced with ``
+Mutant 73 in index.js: {
+  return Object.keys(data.countries).reduce((prev, id) => {
+    return Object.assign(prev, {
+      [id]: getCountry(id, options)
+    });
+  }, {});
+} replaced with {}
+Mutant 74 in index.js: {
+  return Object.assign(prev, {
+    [id]: getCountry(id, options)
+  });
+} replaced with {}
+Mutant 75 in index.js: {
+  [id]: getCountry(id, options)
+} replaced with {}
+Mutant 76 in index.js: {
+  if (totalTimezones !== memoizedTimezones) Object.keys(data.timezones).forEach(getTimezone);
+  return deliverTimezones(timezones, options);
+} replaced with {}
+Mutant 77 in index.js: totalTimezones !== memoizedTimezones replaced with true
+Mutant 78 in index.js: totalTimezones !== memoizedTimezones replaced with false
+Mutant 79 in index.js: totalTimezones !== memoizedTimezones replaced with totalTimezones === memoizedTimezones
+Mutant 80 in index.js: {
+  if (!countries[id]) memoizeCountry(buildCountry(data, id));
+  return deliverCountry(countries[id], options);
+} replaced with {}
+Mutant 81 in index.js: !countries[id] replaced with countries[id]
+Mutant 82 in index.js: !countries[id] replaced with true
+Mutant 83 in index.js: !countries[id] replaced with false
+Mutant 84 in index.js: {
+  if (!country) return;
+  countries[country.id] = country;
+} replaced with {}
+Mutant 85 in index.js: !country replaced with country
+Mutant 86 in index.js: !country replaced with true
+Mutant 87 in index.js: !country replaced with false
+Mutant 88 in index.js: {
+  if (!timezones[name]) memoizeTimezone(buildTimezone(data, name));
+  return timezones[name] ? {
+    ...timezones[name]
+  } : null;
+} replaced with {}
+Mutant 89 in index.js: !timezones[name] replaced with timezones[name]
+Mutant 90 in index.js: !timezones[name] replaced with true
+Mutant 91 in index.js: !timezones[name] replaced with false
+Mutant 92 in index.js: {
+  ...timezones[name]
+} replaced with {}
+Mutant 93 in index.js: {
+  if (!timezone) return;
+  timezones[timezone.name] = timezone;
+  memoizedTimezones = Object.keys(timezone).length;
+} replaced with {}
+Mutant 94 in index.js: !timezone replaced with timezone
+Mutant 95 in index.js: !timezone replaced with true
+Mutant 96 in index.js: !timezone replaced with false
+Mutant 97 in index.js: {
+  const timezone = getTimezone(tzName) || {};
+  const values = timezone.countries || [];
+  return values.map(c => getCountry(c, options));
+} replaced with {}
+Mutant 98 in index.js: getTimezone(tzName) || {} replaced with true
+Mutant 99 in index.js: getTimezone(tzName) || {} replaced with false
+Mutant 100 in index.js: getTimezone(tzName) || {} replaced with getTimezone(tzName) && {}
+Mutant 101 in index.js: timezone.countries || [] replaced with true
+Mutant 102 in index.js: timezone.countries || [] replaced with false
+Mutant 103 in index.js: timezone.countries || [] replaced with timezone.countries && []
+Mutant 104 in index.js: [] replaced with ["Stryker was here"]
+Mutant 105 in index.js: c => getCountry(c, options) replaced with () => undefined
+Mutant 106 in index.js: {
+  const [main] = getCountriesForTimezone(tzName, options);
+  return main || null;
+} replaced with {}
+Mutant 107 in index.js: main || null replaced with true
+Mutant 108 in index.js: main || null replaced with false
+Mutant 109 in index.js: main || null replaced with main && null
+Mutant 110 in index.js: {
+  const country = getCountry(countryId, options);
+  if (!country) return null;
+  const values = country.timezones || [];
+  return values.map(getTimezone);
+} replaced with {}
+Mutant 111 in index.js: !country replaced with country
+Mutant 112 in index.js: !country replaced with true
+Mutant 113 in index.js: !country replaced with false
+Mutant 114 in index.js: country.timezones || [] replaced with true
+Mutant 115 in index.js: country.timezones || [] replaced with false
+Mutant 116 in index.js: country.timezones || [] replaced with country.timezones && []
+Mutant 117 in index.js: [] replaced with ["Stryker was here"]
+Mutant 118 in index.js: {
+  const {
+    deprecated
+  } = options || {};
+  if (deprecated === true) return tzs;
+  return Object.keys(tzs).reduce((prev, key) => {
+    if (!tzs[key].deprecated) Object.assign(prev, {
+      [key]: tzs[key]
+    });
+    return prev;
+  }, {});
+} replaced with {}
+Mutant 119 in index.js: options || {} replaced with true
+Mutant 120 in index.js: options || {} replaced with false
+Mutant 121 in index.js: options || {} replaced with options && {}
+Mutant 122 in index.js: deprecated === true replaced with true
+Mutant 123 in index.js: deprecated === true replaced with false
+Mutant 124 in index.js: deprecated === true replaced with deprecated !== true
+Mutant 125 in index.js: true replaced with false
+Mutant 126 in index.js: {
+  if (!tzs[key].deprecated) Object.assign(prev, {
+    [key]: tzs[key]
+  });
+  return prev;
+} replaced with {}
+Mutant 127 in index.js: !tzs[key].deprecated replaced with tzs[key].deprecated
+Mutant 128 in index.js: !tzs[key].deprecated replaced with true
+Mutant 129 in index.js: !tzs[key].deprecated replaced with false
+Mutant 130 in index.js: {
+  [key]: tzs[key]
+} replaced with {}
+Mutant 131 in index.js: {
+  if (!country) return null;
+  const {
+    deprecated
+  } = options || {};
+  const {
+    allTimezones,
+    ...other
+  } = country;
+  const tz = deprecated ? country.allTimezones : country.timezones;
+  return {
+    ...other,
+    timezones: tz
+  };
+} replaced with {}
+Mutant 132 in index.js: !country replaced with country
+Mutant 133 in index.js: !country replaced with true
+Mutant 134 in index.js: !country replaced with false
+Mutant 135 in index.js: options || {} replaced with true
+Mutant 136 in index.js: options || {} replaced with false
+Mutant 137 in index.js: options || {} replaced with options && {}
+Mutant 138 in index.js: {
+  ...other,
+  timezones: tz
+} replaced with {}
+Mutant 139 in index.js: {
+  getCountry,
+  getTimezone,
+  getAllCountries,
+  getAllTimezones,
+  getTimezonesForCountry,
+  getCountriesForTimezone,
+  getCountryForTimezone
+} replaced with {}
+[32m13:06:30 (2192) INFO Instrumenter[39m Instrumented 3 source file(s) with 140 mutant(s)
+[32m13:06:30 (2192) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m13:06:31 (2192) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m13:06:31 (2192) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m13:06:34 (2192) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 2 seconds (net 2550 ms, overhead 1 ms).
+Mutation testing 4% (elapsed: <1m, remaining: ~3m) 6/140 tested (0 survived, 0 timed out)
+Mutation testing 9% (elapsed: <1m, remaining: ~3m) 13/140 tested (1 survived, 0 timed out)
+Mutation testing 13% (elapsed: <1m, remaining: ~3m) 19/140 tested (3 survived, 0 timed out)
+Mutation testing 18% (elapsed: <1m, remaining: ~2m) 26/140 tested (3 survived, 0 timed out)
+Mutation testing 23% (elapsed: <1m, remaining: ~2m) 33/140 tested (3 survived, 0 timed out)
+Mutation testing 28% (elapsed: ~1m, remaining: ~2m) 40/140 tested (3 survived, 0 timed out)
+Mutation testing 34% (elapsed: ~1m, remaining: ~2m) 48/140 tested (3 survived, 0 timed out)
+Mutation testing 39% (elapsed: ~1m, remaining: ~2m) 55/140 tested (3 survived, 0 timed out)
+Mutation testing 44% (elapsed: ~1m, remaining: ~1m) 62/140 tested (3 survived, 0 timed out)
+Mutation testing 49% (elapsed: ~1m, remaining: ~1m) 69/140 tested (3 survived, 0 timed out)
+Mutation testing 55% (elapsed: ~1m, remaining: ~1m) 77/140 tested (3 survived, 0 timed out)
+Mutation testing 60% (elapsed: ~2m, remaining: ~1m) 84/140 tested (4 survived, 0 timed out)
+Mutation testing 65% (elapsed: ~2m, remaining: ~1m) 91/140 tested (4 survived, 0 timed out)
+Mutation testing 70% (elapsed: ~2m, remaining: <1m) 98/140 tested (4 survived, 0 timed out)
+Mutation testing 75% (elapsed: ~2m, remaining: <1m) 105/140 tested (4 survived, 0 timed out)
+Mutation testing 79% (elapsed: ~2m, remaining: <1m) 111/140 tested (4 survived, 0 timed out)
+Mutation testing 84% (elapsed: ~2m, remaining: <1m) 118/140 tested (5 survived, 0 timed out)
+Mutation testing 89% (elapsed: ~3m, remaining: <1m) 125/140 tested (5 survived, 0 timed out)
+Mutation testing 94% (elapsed: ~3m, remaining: <1m) 132/140 tested (5 survived, 0 timed out)
+Mutation testing 99% (elapsed: ~3m, remaining: <1m) 139/140 tested (5 survived, 0 timed out)
+
+All tests
+  ✓ All tests (killed 134)
+
+[Survived] ArrayDeclaration
+src/build-country.js:12:33
+-       timezones: tzMap.current || [],
++       timezones: tzMap.current || ["Stryker was here"],
+
+[Survived] ArrayDeclaration
+src/build-country.js:13:32
+-       allTimezones: tzMap.all || [],
++       allTimezones: tzMap.all || ["Stryker was here"],
+
+[Survived] ConditionalExpression
+src/build-country.js:18:7
+-     if (!timezonesMap) timezonesMap = buildTimezonesMap(data);
++     if (true) timezonesMap = buildTimezonesMap(data);
+
+[Survived] ConditionalExpression
+src/index.js:17:7
+-     if (totalTimezones !== memoizedTimezones) Object.keys(data.timezones).forEach(getTimezone);
++     if (true) Object.keys(data.timezones).forEach(getTimezone);
+
+[Survived] ArrayDeclaration
+src/index.js:56:39
+-     const values = country.timezones || [];
++     const values = country.timezones || ["Stryker was here"];
+
+[Survived] ObjectLiteral
+src/index.js:77:16
+-   export default {
+-     getCountry,
+-     getTimezone,
+-     getAllCountries,
+-     getAllTimezones,
+-     getTimezonesForCountry,
+-     getCountriesForTimezone,
+-     getCountryForTimezone,
+-   };
++   export default {};
+
+Ran 1.00 tests per mutant on average.
+-------------------|---------|----------|-----------|------------|----------|----------|
+File               | % score | # killed | # timeout | # survived | # no cov | # errors |
+-------------------|---------|----------|-----------|------------|----------|----------|
+All files          |   95.71 |      134 |         0 |          6 |        0 |        0 |
+ build-country.js  |   92.86 |       39 |         0 |          3 |        0 |        0 |
+ build-timezone.js |  100.00 |       31 |         0 |          0 |        0 |        0 |
+ index.js          |   95.52 |       64 |         0 |          3 |        0 |        0 |
+-------------------|---------|----------|-----------|------------|----------|----------|
+[32m13:09:54 (2192) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/countries-and-timezones/reports/mutation/mutation.html
+[32m13:09:54 (2192) INFO MutationTestExecutor[39m Done in 3 minutes 24 seconds.
+
+real	3m25.884s
+user	3m44.462s
+sys	0m33.397s

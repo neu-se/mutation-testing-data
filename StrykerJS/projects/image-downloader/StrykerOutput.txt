@@ -1,0 +1,252 @@
+[32m13:06:20 (2097) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m13:06:20 (2097) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m13:06:20 (2097) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/image-downloader/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[32m13:06:21 (2097) INFO ProjectReader[39m Found 3 of 19 file(s) to be mutated.
+*** using standard mutators ***
+Mutant 0 in index.js: true replaced with false
+Mutant 1 in index.js: {
+  if (!options.url) {
+    return Promise.reject(new Error('The options.url is required'));
+  }
+  if (!options.dest) {
+    return Promise.reject(new Error('The options.dest is required'));
+  }
+  if (extractFilename) {
+    if (!path.extname(options.dest)) {
+      const url = new URL(options.url);
+      const pathname = url.pathname;
+      const basename = path.basename(pathname);
+      const decodedBasename = decodeURIComponent(basename);
+      options.dest = path.join(options.dest, decodedBasename);
+    }
+  }
+  if (!path.isAbsolute(options.dest)) {
+    options.dest = path.resolve(__dirname, options.dest);
+  }
+  return request(options);
+} replaced with {}
+Mutant 2 in index.js: !options.url replaced with options.url
+Mutant 3 in index.js: !options.url replaced with true
+Mutant 4 in index.js: !options.url replaced with false
+Mutant 5 in index.js: {
+  return Promise.reject(new Error('The options.url is required'));
+} replaced with {}
+Mutant 6 in index.js: 'The options.url is required' replaced with ""
+Mutant 7 in index.js: !options.dest replaced with options.dest
+Mutant 8 in index.js: !options.dest replaced with true
+Mutant 9 in index.js: !options.dest replaced with false
+Mutant 10 in index.js: {
+  return Promise.reject(new Error('The options.dest is required'));
+} replaced with {}
+Mutant 11 in index.js: 'The options.dest is required' replaced with ""
+Mutant 12 in index.js: extractFilename replaced with true
+Mutant 13 in index.js: extractFilename replaced with false
+Mutant 14 in index.js: {
+  if (!path.extname(options.dest)) {
+    const url = new URL(options.url);
+    const pathname = url.pathname;
+    const basename = path.basename(pathname);
+    const decodedBasename = decodeURIComponent(basename);
+    options.dest = path.join(options.dest, decodedBasename);
+  }
+} replaced with {}
+Mutant 15 in index.js: !path.extname(options.dest) replaced with path.extname(options.dest)
+Mutant 16 in index.js: !path.extname(options.dest) replaced with true
+Mutant 17 in index.js: !path.extname(options.dest) replaced with false
+Mutant 18 in index.js: {
+  const url = new URL(options.url);
+  const pathname = url.pathname;
+  const basename = path.basename(pathname);
+  const decodedBasename = decodeURIComponent(basename);
+  options.dest = path.join(options.dest, decodedBasename);
+} replaced with {}
+Mutant 19 in index.js: !path.isAbsolute(options.dest) replaced with path.isAbsolute(options.dest)
+Mutant 20 in index.js: !path.isAbsolute(options.dest) replaced with true
+Mutant 21 in index.js: !path.isAbsolute(options.dest) replaced with false
+Mutant 22 in index.js: {
+  options.dest = path.resolve(__dirname, options.dest);
+} replaced with {}
+Mutant 23 in TimeoutError.js: {
+  super('TimeoutError');
+} replaced with {}
+Mutant 24 in TimeoutError.js: 'TimeoutError' replaced with ""
+Mutant 25 in request.js: ({
+  url,
+  dest,
+  ...options
+}) => new Promise((resolve, reject) => {
+  const request = url.trimLeft().startsWith('https') ? https : http;
+  request.get(url, options, res => {
+    if (res.statusCode !== 200) {
+      // Consume response data to free up memory
+      res.resume();
+      reject(new Error('Request Failed.\n' + `Status Code: ${res.statusCode}`));
+      return;
+    }
+    res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({
+      filename: dest
+    }));
+  }).on('timeout', () => reject(new TimeoutError())).on('error', reject);
+}) replaced with () => undefined
+Mutant 26 in request.js: {
+  const request = url.trimLeft().startsWith('https') ? https : http;
+  request.get(url, options, res => {
+    if (res.statusCode !== 200) {
+      // Consume response data to free up memory
+      res.resume();
+      reject(new Error('Request Failed.\n' + `Status Code: ${res.statusCode}`));
+      return;
+    }
+    res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({
+      filename: dest
+    }));
+  }).on('timeout', () => reject(new TimeoutError())).on('error', reject);
+} replaced with {}
+Mutant 27 in request.js: url.trimLeft().startsWith('https') replaced with url.trimLeft().endsWith('https')
+Mutant 28 in request.js: 'https' replaced with ""
+Mutant 29 in request.js: {
+  if (res.statusCode !== 200) {
+    // Consume response data to free up memory
+    res.resume();
+    reject(new Error('Request Failed.\n' + `Status Code: ${res.statusCode}`));
+    return;
+  }
+  res.pipe(createWriteStream(dest)).on('error', reject).once('close', () => resolve({
+    filename: dest
+  }));
+} replaced with {}
+Mutant 30 in request.js: res.statusCode !== 200 replaced with true
+Mutant 31 in request.js: res.statusCode !== 200 replaced with false
+Mutant 32 in request.js: res.statusCode !== 200 replaced with res.statusCode === 200
+Mutant 33 in request.js: {
+  // Consume response data to free up memory
+  res.resume();
+  reject(new Error('Request Failed.\n' + `Status Code: ${res.statusCode}`));
+  return;
+} replaced with {}
+Mutant 34 in request.js: 'Request Failed.\n' replaced with ""
+Mutant 35 in request.js: `Status Code: ${res.statusCode}` replaced with ``
+Mutant 36 in request.js: 'error' replaced with ""
+Mutant 37 in request.js: 'close' replaced with ""
+Mutant 38 in request.js: () => resolve({
+  filename: dest
+}) replaced with () => undefined
+Mutant 39 in request.js: {
+  filename: dest
+} replaced with {}
+Mutant 40 in request.js: 'timeout' replaced with ""
+Mutant 41 in request.js: () => reject(new TimeoutError()) replaced with () => undefined
+Mutant 42 in request.js: 'error' replaced with ""
+[32m13:06:21 (2097) INFO Instrumenter[39m Instrumented 3 source file(s) with 43 mutant(s)
+[32m13:06:21 (2097) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m13:06:22 (2097) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m13:06:22 (2097) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m13:06:28 (2097) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 6 seconds (net 6722 ms, overhead 1 ms).
+Mutation testing 4% (elapsed: <1m, remaining: ~3m) 2/43 tested (0 survived, 0 timed out)
+Mutation testing 9% (elapsed: <1m, remaining: ~3m) 4/43 tested (0 survived, 0 timed out)
+Mutation testing 11% (elapsed: <1m, remaining: ~3m) 5/43 tested (0 survived, 0 timed out)
+Mutation testing 16% (elapsed: <1m, remaining: ~3m) 7/43 tested (1 survived, 0 timed out)
+Mutation testing 18% (elapsed: <1m, remaining: ~3m) 8/43 tested (1 survived, 0 timed out)
+Mutation testing 23% (elapsed: ~1m, remaining: ~3m) 10/43 tested (1 survived, 0 timed out)
+Mutation testing 27% (elapsed: ~1m, remaining: ~3m) 12/43 tested (2 survived, 0 timed out)
+Mutation testing 30% (elapsed: ~1m, remaining: ~3m) 13/43 tested (2 survived, 0 timed out)
+Mutation testing 34% (elapsed: ~1m, remaining: ~2m) 15/43 tested (2 survived, 0 timed out)
+Mutation testing 39% (elapsed: ~1m, remaining: ~2m) 17/43 tested (2 survived, 0 timed out)
+Mutation testing 41% (elapsed: ~1m, remaining: ~2m) 18/43 tested (2 survived, 0 timed out)
+Mutation testing 46% (elapsed: ~2m, remaining: ~2m) 20/43 tested (3 survived, 0 timed out)
+Mutation testing 51% (elapsed: ~2m, remaining: ~2m) 22/43 tested (5 survived, 0 timed out)
+Mutation testing 53% (elapsed: ~2m, remaining: ~2m) 23/43 tested (6 survived, 0 timed out)
+Mutation testing 60% (elapsed: ~2m, remaining: ~1m) 26/43 tested (7 survived, 0 timed out)
+Mutation testing 60% (elapsed: ~2m, remaining: ~1m) 26/43 tested (7 survived, 0 timed out)
+Mutation testing 62% (elapsed: ~2m, remaining: ~1m) 27/43 tested (7 survived, 1 timed out)
+Mutation testing 67% (elapsed: ~3m, remaining: ~1m) 29/43 tested (7 survived, 1 timed out)
+Mutation testing 67% (elapsed: ~3m, remaining: ~1m) 29/43 tested (7 survived, 1 timed out)
+Mutation testing 72% (elapsed: ~3m, remaining: ~1m) 31/43 tested (7 survived, 2 timed out)
+Mutation testing 74% (elapsed: ~3m, remaining: ~1m) 32/43 tested (7 survived, 2 timed out)
+Mutation testing 79% (elapsed: ~3m, remaining: <1m) 34/43 tested (7 survived, 2 timed out)
+Mutation testing 83% (elapsed: ~3m, remaining: <1m) 36/43 tested (9 survived, 2 timed out)
+Mutation testing 86% (elapsed: ~4m, remaining: <1m) 37/43 tested (10 survived, 2 timed out)
+Mutation testing 86% (elapsed: ~4m, remaining: <1m) 37/43 tested (10 survived, 2 timed out)
+Mutation testing 88% (elapsed: ~4m, remaining: <1m) 38/43 tested (10 survived, 3 timed out)
+Mutation testing 90% (elapsed: ~4m, remaining: <1m) 39/43 tested (10 survived, 4 timed out)
+Mutation testing 95% (elapsed: ~4m, remaining: <1m) 41/43 tested (10 survived, 4 timed out)
+
+All tests
+  ✓ All tests (killed 28)
+
+[Survived] StringLiteral
+lib/request.js:13:26
+-           reject(new Error('Request Failed.\n' +
++           reject(new Error("" +
+
+[Survived] StringLiteral
+lib/request.js:14:26
+-                            `Status Code: ${res.statusCode}`));
++                            ``));
+
+[Survived] StringLiteral
+lib/request.js:20:13
+-           .on('error', reject)
++           .on("", reject)
+
+[Survived] StringLiteral
+lib/request.js:24:9
+-       .on('error', reject);
++       .on("", reject);
+
+[Survived] StringLiteral
+lib/TimeoutError.js:3:11
+-       super('TimeoutError');
++       super("");
+
+[Survived] StringLiteral
+index.js:6:37
+-       return Promise.reject(new Error('The options.url is required'));
++       return Promise.reject(new Error(""));
+
+[Survived] StringLiteral
+index.js:10:37
+-       return Promise.reject(new Error('The options.dest is required'));
++       return Promise.reject(new Error(""));
+
+[Survived] BooleanLiteral
+index.js:24:7
+-     if (!path.isAbsolute(options.dest)) {
++     if (path.isAbsolute(options.dest)) {
+
+[Survived] ConditionalExpression
+index.js:24:7
+-     if (!path.isAbsolute(options.dest)) {
++     if (true) {
+
+[Survived] ConditionalExpression
+index.js:24:7
+-     if (!path.isAbsolute(options.dest)) {
++     if (false) {
+
+[Survived] BlockStatement
+index.js:24:39
+-     if (!path.isAbsolute(options.dest)) {
+-       options.dest = path.resolve(__dirname, options.dest);
+-     }
++     if (!path.isAbsolute(options.dest)) {}
+
+Ran 0.91 tests per mutant on average.
+------------------|---------|----------|-----------|------------|----------|----------|
+File              | % score | # killed | # timeout | # survived | # no cov | # errors |
+------------------|---------|----------|-----------|------------|----------|----------|
+All files         |   74.42 |       28 |         4 |         11 |        0 |        0 |
+ lib              |   75.00 |       11 |         4 |          5 |        0 |        0 |
+  request.js      |   77.78 |       10 |         4 |          4 |        0 |        0 |
+  TimeoutError.js |   50.00 |        1 |         0 |          1 |        0 |        0 |
+ index.js         |   73.91 |       17 |         0 |          6 |        0 |        0 |
+------------------|---------|----------|-----------|------------|----------|----------|
+[32m13:11:18 (2097) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/image-downloader/reports/mutation/mutation.html
+[32m13:11:18 (2097) INFO MutationTestExecutor[39m Done in 4 minutes 58 seconds.
+
+real	4m59.719s
+user	0m53.527s
+sys	0m8.650s

@@ -1,0 +1,826 @@
+[32m13:06:19 (2162) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m13:06:19 (2162) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m13:06:19 (2162) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llm-mutation-testing/llm-mutation-testing/node-dirty/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[32m13:06:20 (2162) INFO ProjectReader[39m Found 2 of 38 file(s) to be mutated.
+*** using standard mutators ***
+Mutant 0 in dirty.js: {
+  super();
+  this.path = path;
+  this._data = new Map();
+  this._queue = new Map(); // Maps key to a list of callbacks.
+  this._readStream = null;
+  this._writeStream = null;
+  this._waitForDrain = false;
+  this._inFlightWrites = 0;
+  this._load();
+} replaced with {}
+Mutant 1 in dirty.js: false replaced with true
+Mutant 2 in dirty.js: {
+  if (val === undefined) {
+    this._data.delete(key);
+  } else {
+    this._data.set(key, val);
+  }
+  if (this.path) {
+    const cbs = this._queue.get(key) || [];
+    if (cb) cbs.push(cb);
+    this._queue.set(key, cbs);
+    this._flush();
+  } else {
+    setImmediate(() => {
+      if (cb) cb();
+      this.emit('drain');
+    });
+  }
+} replaced with {}
+Mutant 3 in dirty.js: val === undefined replaced with true
+Mutant 4 in dirty.js: val === undefined replaced with false
+Mutant 5 in dirty.js: val === undefined replaced with val !== undefined
+Mutant 6 in dirty.js: {
+  this._data.delete(key);
+} replaced with {}
+Mutant 7 in dirty.js: {
+  this._data.set(key, val);
+} replaced with {}
+Mutant 8 in dirty.js: this.path replaced with true
+Mutant 9 in dirty.js: this.path replaced with false
+Mutant 10 in dirty.js: {
+  const cbs = this._queue.get(key) || [];
+  if (cb) cbs.push(cb);
+  this._queue.set(key, cbs);
+  this._flush();
+} replaced with {}
+Mutant 11 in dirty.js: this._queue.get(key) || [] replaced with true
+Mutant 12 in dirty.js: this._queue.get(key) || [] replaced with false
+Mutant 13 in dirty.js: this._queue.get(key) || [] replaced with this._queue.get(key) && []
+Mutant 14 in dirty.js: [] replaced with ["Stryker was here"]
+Mutant 15 in dirty.js: cb replaced with true
+Mutant 16 in dirty.js: cb replaced with false
+Mutant 17 in dirty.js: {
+  setImmediate(() => {
+    if (cb) cb();
+    this.emit('drain');
+  });
+} replaced with {}
+Mutant 18 in dirty.js: {
+  if (cb) cb();
+  this.emit('drain');
+} replaced with {}
+Mutant 19 in dirty.js: cb replaced with true
+Mutant 20 in dirty.js: cb replaced with false
+Mutant 21 in dirty.js: 'drain' replaced with ""
+Mutant 22 in dirty.js: {
+  return this._data.get(key);
+} replaced with {}
+Mutant 23 in dirty.js: {
+  return this._data.size;
+} replaced with {}
+Mutant 24 in dirty.js: {
+  this.set(key, undefined, cb);
+} replaced with {}
+Mutant 25 in dirty.js: {
+  for (const [key, val] of this._data) {
+    if (fn(key, val) === false) break;
+  }
+} replaced with {}
+Mutant 26 in dirty.js: {
+  if (fn(key, val) === false) break;
+} replaced with {}
+Mutant 27 in dirty.js: fn(key, val) === false replaced with true
+Mutant 28 in dirty.js: fn(key, val) === false replaced with false
+Mutant 29 in dirty.js: fn(key, val) === false replaced with fn(key, val) !== false
+Mutant 30 in dirty.js: false replaced with true
+Mutant 31 in dirty.js: {
+  this.set(key, updater(this.get(key)), cb);
+} replaced with {}
+Mutant 32 in dirty.js: {
+  if (this._queue.size || this._inFlightWrites > 0) {
+    this.once('drain', () => this.close());
+    return;
+  }
+  if (this._readStream) this._readStream.destroy();
+  if (this._writeStream) this._writeStream.end(() => this._writeStream.destroy());
+} replaced with {}
+Mutant 33 in dirty.js: this._queue.size || this._inFlightWrites > 0 replaced with true
+Mutant 34 in dirty.js: this._queue.size || this._inFlightWrites > 0 replaced with false
+Mutant 35 in dirty.js: this._queue.size || this._inFlightWrites > 0 replaced with this._queue.size && this._inFlightWrites > 0
+Mutant 36 in dirty.js: this._inFlightWrites > 0 replaced with false
+Mutant 37 in dirty.js: this._inFlightWrites > 0 replaced with this._inFlightWrites >= 0
+Mutant 38 in dirty.js: this._inFlightWrites > 0 replaced with this._inFlightWrites <= 0
+Mutant 39 in dirty.js: {
+  this.once('drain', () => this.close());
+  return;
+} replaced with {}
+Mutant 40 in dirty.js: 'drain' replaced with ""
+Mutant 41 in dirty.js: () => this.close() replaced with () => undefined
+Mutant 42 in dirty.js: this._readStream replaced with true
+Mutant 43 in dirty.js: this._readStream replaced with false
+Mutant 44 in dirty.js: this._writeStream replaced with true
+Mutant 45 in dirty.js: this._writeStream replaced with false
+Mutant 46 in dirty.js: () => this._writeStream.destroy() replaced with () => undefined
+Mutant 47 in dirty.js: {
+  let buffer = '';
+  if (!this.path) {
+    process.nextTick(() => {
+      this.emit('load', 0);
+    });
+    return;
+  }
+  this._readStream = fs.createReadStream(this.path, {
+    encoding: 'utf-8',
+    flags: 'r'
+  });
+  this._readStream.on('error', err => {
+    if (err.code === 'ENOENT') {
+      this.emit('load', 0);
+      return;
+    }
+    this.emit('error', err);
+  }).on('data', chunk => {
+    buffer += chunk;
+    if (chunk.lastIndexOf('\n') === -1) return;
+    const arr = buffer.split('\n');
+    buffer = arr.pop();
+    arr.forEach(rowStr => {
+      if (!rowStr) {
+        this.emit('error', new Error('Empty lines never appear in a healthy database'));
+        return;
+      }
+      let row;
+      try {
+        row = JSON.parse(rowStr);
+        if (!('key' in row)) {
+          throw new Error();
+        }
+      } catch (e) {
+        this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
+        return '';
+      }
+      if (row.val === undefined) {
+        this._data.delete(row.key);
+      } else {
+        this._data.set(row.key, row.val);
+      }
+      return '';
+    });
+  }).on('end', () => {
+    if (buffer.length) {
+      this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
+    }
+    this.emit('load', this._data.size);
+  }).on('close', () => {
+    this._readStream = null;
+    this.emit('read_close');
+  });
+  this._writeStream = fs.createWriteStream(this.path, {
+    encoding: 'utf-8',
+    flags: 'a'
+  });
+  this._writeStream.on('drain', () => {
+    this._waitForDrain = false;
+    if (!this._queue.size) {
+      if (this._inFlightWrites <= 0) this.emit('drain');
+    } else {
+      this._flush();
+    }
+  });
+  this._writeStream.on('close', () => {
+    this._writeStream = null;
+    this.emit('write_close');
+  });
+} replaced with {}
+Mutant 48 in dirty.js: '' replaced with "Stryker was here!"
+Mutant 49 in dirty.js: !this.path replaced with this.path
+Mutant 50 in dirty.js: !this.path replaced with true
+Mutant 51 in dirty.js: !this.path replaced with false
+Mutant 52 in dirty.js: {
+  process.nextTick(() => {
+    this.emit('load', 0);
+  });
+  return;
+} replaced with {}
+Mutant 53 in dirty.js: {
+  this.emit('load', 0);
+} replaced with {}
+Mutant 54 in dirty.js: 'load' replaced with ""
+Mutant 55 in dirty.js: {
+  encoding: 'utf-8',
+  flags: 'r'
+} replaced with {}
+Mutant 56 in dirty.js: 'utf-8' replaced with ""
+Mutant 57 in dirty.js: 'r' replaced with ""
+Mutant 58 in dirty.js: 'error' replaced with ""
+Mutant 59 in dirty.js: {
+  if (err.code === 'ENOENT') {
+    this.emit('load', 0);
+    return;
+  }
+  this.emit('error', err);
+} replaced with {}
+Mutant 60 in dirty.js: err.code === 'ENOENT' replaced with true
+Mutant 61 in dirty.js: err.code === 'ENOENT' replaced with false
+Mutant 62 in dirty.js: err.code === 'ENOENT' replaced with err.code !== 'ENOENT'
+Mutant 63 in dirty.js: 'ENOENT' replaced with ""
+Mutant 64 in dirty.js: {
+  this.emit('load', 0);
+  return;
+} replaced with {}
+Mutant 65 in dirty.js: 'load' replaced with ""
+Mutant 66 in dirty.js: 'error' replaced with ""
+Mutant 67 in dirty.js: 'data' replaced with ""
+Mutant 68 in dirty.js: {
+  buffer += chunk;
+  if (chunk.lastIndexOf('\n') === -1) return;
+  const arr = buffer.split('\n');
+  buffer = arr.pop();
+  arr.forEach(rowStr => {
+    if (!rowStr) {
+      this.emit('error', new Error('Empty lines never appear in a healthy database'));
+      return;
+    }
+    let row;
+    try {
+      row = JSON.parse(rowStr);
+      if (!('key' in row)) {
+        throw new Error();
+      }
+    } catch (e) {
+      this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
+      return '';
+    }
+    if (row.val === undefined) {
+      this._data.delete(row.key);
+    } else {
+      this._data.set(row.key, row.val);
+    }
+    return '';
+  });
+} replaced with {}
+Mutant 69 in dirty.js: buffer += chunk replaced with buffer -= chunk
+Mutant 70 in dirty.js: chunk.lastIndexOf('\n') === -1 replaced with true
+Mutant 71 in dirty.js: chunk.lastIndexOf('\n') === -1 replaced with false
+Mutant 72 in dirty.js: chunk.lastIndexOf('\n') === -1 replaced with chunk.lastIndexOf('\n') !== -1
+Mutant 73 in dirty.js: '\n' replaced with ""
+Mutant 74 in dirty.js: -1 replaced with +1
+Mutant 75 in dirty.js: '\n' replaced with ""
+Mutant 76 in dirty.js: {
+  if (!rowStr) {
+    this.emit('error', new Error('Empty lines never appear in a healthy database'));
+    return;
+  }
+  let row;
+  try {
+    row = JSON.parse(rowStr);
+    if (!('key' in row)) {
+      throw new Error();
+    }
+  } catch (e) {
+    this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
+    return '';
+  }
+  if (row.val === undefined) {
+    this._data.delete(row.key);
+  } else {
+    this._data.set(row.key, row.val);
+  }
+  return '';
+} replaced with {}
+Mutant 77 in dirty.js: !rowStr replaced with rowStr
+Mutant 78 in dirty.js: !rowStr replaced with true
+Mutant 79 in dirty.js: !rowStr replaced with false
+Mutant 80 in dirty.js: {
+  this.emit('error', new Error('Empty lines never appear in a healthy database'));
+  return;
+} replaced with {}
+Mutant 81 in dirty.js: 'error' replaced with ""
+Mutant 82 in dirty.js: 'Empty lines never appear in a healthy database' replaced with ""
+Mutant 83 in dirty.js: {
+  row = JSON.parse(rowStr);
+  if (!('key' in row)) {
+    throw new Error();
+  }
+} replaced with {}
+Mutant 84 in dirty.js: !('key' in row) replaced with 'key' in row
+Mutant 85 in dirty.js: !('key' in row) replaced with true
+Mutant 86 in dirty.js: !('key' in row) replaced with false
+Mutant 87 in dirty.js: 'key' replaced with ""
+Mutant 88 in dirty.js: {
+  throw new Error();
+} replaced with {}
+Mutant 89 in dirty.js: {
+  this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
+  return '';
+} replaced with {}
+Mutant 90 in dirty.js: 'error' replaced with ""
+Mutant 91 in dirty.js: `Could not load corrupted row: ${rowStr}` replaced with ``
+Mutant 92 in dirty.js: '' replaced with "Stryker was here!"
+Mutant 93 in dirty.js: row.val === undefined replaced with true
+Mutant 94 in dirty.js: row.val === undefined replaced with false
+Mutant 95 in dirty.js: row.val === undefined replaced with row.val !== undefined
+Mutant 96 in dirty.js: {
+  this._data.delete(row.key);
+} replaced with {}
+Mutant 97 in dirty.js: {
+  this._data.set(row.key, row.val);
+} replaced with {}
+Mutant 98 in dirty.js: '' replaced with "Stryker was here!"
+Mutant 99 in dirty.js: 'end' replaced with ""
+Mutant 100 in dirty.js: {
+  if (buffer.length) {
+    this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
+  }
+  this.emit('load', this._data.size);
+} replaced with {}
+Mutant 101 in dirty.js: buffer.length replaced with true
+Mutant 102 in dirty.js: buffer.length replaced with false
+Mutant 103 in dirty.js: {
+  this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
+} replaced with {}
+Mutant 104 in dirty.js: 'error' replaced with ""
+Mutant 105 in dirty.js: `Corrupted row at the end of the db: ${buffer}` replaced with ``
+Mutant 106 in dirty.js: 'load' replaced with ""
+Mutant 107 in dirty.js: 'close' replaced with ""
+Mutant 108 in dirty.js: {
+  this._readStream = null;
+  this.emit('read_close');
+} replaced with {}
+Mutant 109 in dirty.js: 'read_close' replaced with ""
+Mutant 110 in dirty.js: {
+  encoding: 'utf-8',
+  flags: 'a'
+} replaced with {}
+Mutant 111 in dirty.js: 'utf-8' replaced with ""
+Mutant 112 in dirty.js: 'a' replaced with ""
+Mutant 113 in dirty.js: 'drain' replaced with ""
+Mutant 114 in dirty.js: {
+  this._waitForDrain = false;
+  if (!this._queue.size) {
+    if (this._inFlightWrites <= 0) this.emit('drain');
+  } else {
+    this._flush();
+  }
+} replaced with {}
+Mutant 115 in dirty.js: false replaced with true
+Mutant 116 in dirty.js: !this._queue.size replaced with this._queue.size
+Mutant 117 in dirty.js: !this._queue.size replaced with true
+Mutant 118 in dirty.js: !this._queue.size replaced with false
+Mutant 119 in dirty.js: {
+  if (this._inFlightWrites <= 0) this.emit('drain');
+} replaced with {}
+Mutant 120 in dirty.js: this._inFlightWrites <= 0 replaced with true
+Mutant 121 in dirty.js: this._inFlightWrites <= 0 replaced with false
+Mutant 122 in dirty.js: this._inFlightWrites <= 0 replaced with this._inFlightWrites < 0
+Mutant 123 in dirty.js: this._inFlightWrites <= 0 replaced with this._inFlightWrites > 0
+Mutant 124 in dirty.js: 'drain' replaced with ""
+Mutant 125 in dirty.js: {
+  this._flush();
+} replaced with {}
+Mutant 126 in dirty.js: 'close' replaced with ""
+Mutant 127 in dirty.js: {
+  this._writeStream = null;
+  this.emit('write_close');
+} replaced with {}
+Mutant 128 in dirty.js: 'write_close' replaced with ""
+Mutant 129 in dirty.js: {
+  if (!this._queue.size || this._waitForDrain) return;
+  this._writeStream.cork();
+  for (const [key, cbs] of this._queue) {
+    this._queue.delete(key);
+    const data = `${JSON.stringify({
+      key,
+      val: this._data.get(key)
+    })}\n`;
+    ++this._inFlightWrites;
+    this._waitForDrain = !this._writeStream.write(data, err => {
+      if (!cbs.length && err != null) this.emit('error', err);
+      if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+      for (const cb of cbs) cb(err);
+    });
+    if (this._waitForDrain) break;
+  }
+  this._writeStream.uncork();
+} replaced with {}
+Mutant 130 in dirty.js: !this._queue.size || this._waitForDrain replaced with true
+Mutant 131 in dirty.js: !this._queue.size || this._waitForDrain replaced with false
+Mutant 132 in dirty.js: !this._queue.size || this._waitForDrain replaced with !this._queue.size && this._waitForDrain
+Mutant 133 in dirty.js: !this._queue.size replaced with this._queue.size
+Mutant 134 in dirty.js: {
+  this._queue.delete(key);
+  const data = `${JSON.stringify({
+    key,
+    val: this._data.get(key)
+  })}\n`;
+  ++this._inFlightWrites;
+  this._waitForDrain = !this._writeStream.write(data, err => {
+    if (!cbs.length && err != null) this.emit('error', err);
+    if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+    for (const cb of cbs) cb(err);
+  });
+  if (this._waitForDrain) break;
+} replaced with {}
+Mutant 135 in dirty.js: `${JSON.stringify({
+  key,
+  val: this._data.get(key)
+})}\n` replaced with ``
+Mutant 136 in dirty.js: {
+  key,
+  val: this._data.get(key)
+} replaced with {}
+Mutant 137 in dirty.js: ++this._inFlightWrites replaced with --this._inFlightWrites
+Mutant 138 in dirty.js: !this._writeStream.write(data, err => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+}) replaced with this._writeStream.write(data, err => {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+})
+Mutant 139 in dirty.js: {
+  if (!cbs.length && err != null) this.emit('error', err);
+  if (--this._inFlightWrites <= 0 && !this._waitForDrain) this.emit('drain');
+  for (const cb of cbs) cb(err);
+} replaced with {}
+Mutant 140 in dirty.js: !cbs.length && err != null replaced with true
+Mutant 141 in dirty.js: !cbs.length && err != null replaced with false
+Mutant 142 in dirty.js: !cbs.length && err != null replaced with !cbs.length || err != null
+Mutant 143 in dirty.js: !cbs.length replaced with cbs.length
+Mutant 144 in dirty.js: err != null replaced with true
+Mutant 145 in dirty.js: err != null replaced with err == null
+Mutant 146 in dirty.js: 'error' replaced with ""
+Mutant 147 in dirty.js: --this._inFlightWrites <= 0 && !this._waitForDrain replaced with true
+Mutant 148 in dirty.js: --this._inFlightWrites <= 0 && !this._waitForDrain replaced with false
+Mutant 149 in dirty.js: --this._inFlightWrites <= 0 && !this._waitForDrain replaced with --this._inFlightWrites <= 0 || !this._waitForDrain
+Mutant 150 in dirty.js: --this._inFlightWrites <= 0 replaced with true
+Mutant 151 in dirty.js: --this._inFlightWrites <= 0 replaced with --this._inFlightWrites < 0
+Mutant 152 in dirty.js: --this._inFlightWrites <= 0 replaced with --this._inFlightWrites > 0
+Mutant 153 in dirty.js: --this._inFlightWrites replaced with ++this._inFlightWrites
+Mutant 154 in dirty.js: !this._waitForDrain replaced with this._waitForDrain
+Mutant 155 in dirty.js: 'drain' replaced with ""
+Mutant 156 in dirty.js: this._waitForDrain replaced with true
+Mutant 157 in dirty.js: this._waitForDrain replaced with false
+Mutant 158 in dirty.js: {
+  apply: (target, thisArg, args) => new Dirty(...args)
+} replaced with {}
+Mutant 159 in dirty.js: (target, thisArg, args) => new Dirty(...args) replaced with () => undefined
+[32m13:06:20 (2162) INFO Instrumenter[39m Instrumented 2 source file(s) with 160 mutant(s)
+[32m13:06:20 (2162) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m13:06:21 (2162) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m13:06:21 (2162) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m13:06:21 (2162) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 0 seconds (net 646 ms, overhead 1 ms).
+Mutation testing 1% (elapsed: <1m, remaining: ~13m) 2/160 tested (0 survived, 1 timed out)
+Mutation testing 6% (elapsed: <1m, remaining: ~5m) 10/160 tested (0 survived, 2 timed out)
+Mutation testing 10% (elapsed: <1m, remaining: ~4m) 17/160 tested (0 survived, 3 timed out)
+Mutation testing 11% (elapsed: <1m, remaining: ~5m) 18/160 tested (0 survived, 4 timed out)
+Mutation testing 15% (elapsed: <1m, remaining: ~4m) 25/160 tested (0 survived, 5 timed out)
+Mutation testing 21% (elapsed: ~1m, remaining: ~3m) 35/160 tested (2 survived, 5 timed out)
+Mutation testing 28% (elapsed: ~1m, remaining: ~2m) 45/160 tested (9 survived, 5 timed out)
+Mutation testing 31% (elapsed: ~1m, remaining: ~2m) 50/160 tested (10 survived, 6 timed out)
+Mutation testing 33% (elapsed: ~1m, remaining: ~2m) 54/160 tested (10 survived, 7 timed out)
+Mutation testing 36% (elapsed: ~1m, remaining: ~2m) 59/160 tested (12 survived, 8 timed out)
+Mutation testing 40% (elapsed: ~1m, remaining: ~2m) 65/160 tested (13 survived, 9 timed out)
+Mutation testing 45% (elapsed: ~2m, remaining: ~2m) 72/160 tested (15 survived, 11 timed out)
+Mutation testing 55% (elapsed: ~2m, remaining: ~1m) 89/160 tested (23 survived, 11 timed out)
+Mutation testing 61% (elapsed: ~2m, remaining: ~1m) 99/160 tested (28 survived, 11 timed out)
+Mutation testing 65% (elapsed: ~2m, remaining: ~1m) 104/160 tested (30 survived, 13 timed out)
+Mutation testing 70% (elapsed: ~2m, remaining: ~1m) 112/160 tested (36 survived, 14 timed out)
+Mutation testing 78% (elapsed: ~2m, remaining: <1m) 126/160 tested (49 survived, 14 timed out)
+Mutation testing 80% (elapsed: ~3m, remaining: <1m) 129/160 tested (49 survived, 14 timed out)
+Mutation testing 83% (elapsed: ~3m, remaining: <1m) 133/160 tested (51 survived, 16 timed out)
+Mutation testing 83% (elapsed: ~3m, remaining: <1m) 134/160 tested (51 survived, 17 timed out)
+Mutation testing 86% (elapsed: ~3m, remaining: <1m) 139/160 tested (51 survived, 19 timed out)
+Mutation testing 91% (elapsed: ~3m, remaining: <1m) 147/160 tested (54 survived, 20 timed out)
+Mutation testing 93% (elapsed: ~3m, remaining: <1m) 150/160 tested (54 survived, 21 timed out)
+Mutation testing 95% (elapsed: ~4m, remaining: <1m) 152/160 tested (54 survived, 22 timed out)
+Mutation testing 96% (elapsed: ~4m, remaining: <1m) 154/160 tested (54 survived, 24 timed out)
+Mutation testing 96% (elapsed: ~4m, remaining: <1m) 155/160 tested (54 survived, 25 timed out)
+
+All tests
+  ✓ All tests (killed 78)
+
+[Survived] BooleanLiteral
+lib/dirty/dirty.js:70:28
+-         if (fn(key, val) === false) break;
++         if (fn(key, val) === true) break;
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:87:9
+-       if (this._queue.size || this._inFlightWrites > 0) {
++       if (false) {
+
+[Survived] LogicalOperator
+lib/dirty/dirty.js:87:9
+-       if (this._queue.size || this._inFlightWrites > 0) {
++       if (this._queue.size && this._inFlightWrites > 0) {
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:87:29
+-       if (this._queue.size || this._inFlightWrites > 0) {
++       if (this._queue.size || false) {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:87:55
+-       if (this._queue.size || this._inFlightWrites > 0) {
+-         this.once('drain', () => this.close());
+-         return;
+-       }
++       if (this._queue.size || this._inFlightWrites > 0) {}
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:88:17
+-         this.once('drain', () => this.close());
++         this.once("", () => this.close());
+
+[Survived] ArrowFunction
+lib/dirty/dirty.js:88:26
+-         this.once('drain', () => this.close());
++         this.once('drain', () => undefined);
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:91:9
+-       if (this._readStream) this._readStream.destroy();
++       if (false) this._readStream.destroy();
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:92:9
+-       if (this._writeStream) this._writeStream.end(() => this._writeStream.destroy());
++       if (true) this._writeStream.end(() => this._writeStream.destroy());
+
+[Survived] ArrowFunction
+lib/dirty/dirty.js:92:50
+-       if (this._writeStream) this._writeStream.end(() => this._writeStream.destroy());
++       if (this._writeStream) this._writeStream.end(() => undefined);
+
+[Survived] ObjectLiteral
+lib/dirty/dirty.js:106:55
+-       this._readStream = fs.createReadStream(this.path, {
+-         encoding: 'utf-8',
+-         flags: 'r',
+-       });
++       this._readStream = fs.createReadStream(this.path, {});
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:107:17
+-         encoding: 'utf-8',
++         encoding: "",
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:113:15
+-             if (err.code === 'ENOENT') {
++             if (true) {
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:118:21
+-             this.emit('error', err);
++             this.emit("", err);
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:122:15
+-             if (chunk.lastIndexOf('\n') === -1) return;
++             if (false) return;
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:122:33
+-             if (chunk.lastIndexOf('\n') === -1) return;
++             if (chunk.lastIndexOf("") === -1) return;
+
+[Survived] UnaryOperator
+lib/dirty/dirty.js:122:43
+-             if (chunk.lastIndexOf('\n') === -1) return;
++             if (chunk.lastIndexOf('\n') === +1) return;
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:126:17
+-               if (!rowStr) {
++               if (false) {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:126:26
+-               if (!rowStr) {
+-                 this.emit('error', new Error('Empty lines never appear in a healthy database'));
+-                 return;
+-               }
++               if (!rowStr) {}
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:127:25
+-                 this.emit('error', new Error('Empty lines never appear in a healthy database'));
++                 this.emit("", new Error('Empty lines never appear in a healthy database'));
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:127:44
+-                 this.emit('error', new Error('Empty lines never appear in a healthy database'));
++                 this.emit('error', new Error(""));
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:134:19
+-                 if (!('key' in row)) {
++                 if (false) {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:134:36
+-                 if (!('key' in row)) {
+-                   throw new Error();
+-                 }
++                 if (!('key' in row)) {}
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:137:25
+-               } catch (e) {
+-                 this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
+-                 return '';
+-               }
++               } catch (e) {}
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:138:25
+-                 this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
++                 this.emit("", new Error(`Could not load corrupted row: ${rowStr}`));
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:138:44
+-                 this.emit('error', new Error(`Could not load corrupted row: ${rowStr}`));
++                 this.emit('error', new Error(``));
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:139:22
+-                 return '';
++                 return "Stryker was here!";
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:147:20
+-               return '';
++               return "Stryker was here!";
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:151:15
+-             if (buffer.length) {
++             if (false) {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:151:30
+-             if (buffer.length) {
+-               this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
+-             }
++             if (buffer.length) {}
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:152:23
+-               this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
++               this.emit("", new Error(`Corrupted row at the end of the db: ${buffer}`));
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:152:42
+-               this.emit('error', new Error(`Corrupted row at the end of the db: ${buffer}`));
++               this.emit('error', new Error(``));
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:156:13
+-           .on('close', () => {
++           .on("", () => {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:156:28
+-           .on('close', () => {
+-             this._readStream = null;
+-             this.emit('read_close');
+-           });
++           .on('close', () => {});
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:158:21
+-             this.emit('read_close');
++             this.emit("");
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:162:17
+-         encoding: 'utf-8',
++         encoding: "",
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:166:26
+-       this._writeStream.on('drain', () => {
++       this._writeStream.on("", () => {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:166:41
+-       this._writeStream.on('drain', () => {
+-         this._waitForDrain = false;
+-         if (!this._queue.size) {
+-           if (this._inFlightWrites <= 0) this.emit('drain');
+-         } else {
+-           this._flush();
+-         }
+-       });
++       this._writeStream.on('drain', () => {});
+
+[Survived] BooleanLiteral
+lib/dirty/dirty.js:167:28
+-         this._waitForDrain = false;
++         this._waitForDrain = true;
+
+[Survived] BooleanLiteral
+lib/dirty/dirty.js:168:11
+-         if (!this._queue.size) {
++         if (this._queue.size) {
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:168:11
+-         if (!this._queue.size) {
++         if (true) {
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:168:11
+-         if (!this._queue.size) {
++         if (false) {
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:168:30
+-         if (!this._queue.size) {
+-           if (this._inFlightWrites <= 0) this.emit('drain');
+-         } else {
++         if (!this._queue.size) {} else {
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:169:13
+-           if (this._inFlightWrites <= 0) this.emit('drain');
++           if (true) this.emit('drain');
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:169:13
+-           if (this._inFlightWrites <= 0) this.emit('drain');
++           if (false) this.emit('drain');
+
+[Survived] EqualityOperator
+lib/dirty/dirty.js:169:13
+-           if (this._inFlightWrites <= 0) this.emit('drain');
++           if (this._inFlightWrites < 0) this.emit('drain');
+
+[Survived] EqualityOperator
+lib/dirty/dirty.js:169:13
+-           if (this._inFlightWrites <= 0) this.emit('drain');
++           if (this._inFlightWrites > 0) this.emit('drain');
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:169:50
+-           if (this._inFlightWrites <= 0) this.emit('drain');
++           if (this._inFlightWrites <= 0) this.emit("");
+
+[Survived] BlockStatement
+lib/dirty/dirty.js:170:14
+-         } else {
+-           this._flush();
+-         }
++         } else {}
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:182:9
+-       if (!this._queue.size || this._waitForDrain) return;
++       if (false) return;
+
+[Survived] LogicalOperator
+lib/dirty/dirty.js:182:9
+-       if (!this._queue.size || this._waitForDrain) return;
++       if (!this._queue.size && this._waitForDrain) return;
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:189:13
+-           if (!cbs.length && err != null) this.emit('error', err);
++           if (false) this.emit('error', err);
+
+[Survived] BooleanLiteral
+lib/dirty/dirty.js:189:13
+-           if (!cbs.length && err != null) this.emit('error', err);
++           if (cbs.length && err != null) this.emit('error', err);
+
+[Survived] StringLiteral
+lib/dirty/dirty.js:189:51
+-           if (!cbs.length && err != null) this.emit('error', err);
++           if (!cbs.length && err != null) this.emit("", err);
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:193:11
+-         if (this._waitForDrain) break;
++         if (true) break;
+
+[Survived] ConditionalExpression
+lib/dirty/dirty.js:193:11
+-         if (this._waitForDrain) break;
++         if (false) break;
+
+Ran 0.84 tests per mutant on average.
+----------|---------|----------|-----------|------------|----------|----------|
+File      | % score | # killed | # timeout | # survived | # no cov | # errors |
+----------|---------|----------|-----------|------------|----------|----------|
+All files |   65.00 |       78 |        26 |         56 |        0 |        0 |
+ dirty.js |   65.00 |       78 |        26 |         56 |        0 |        0 |
+----------|---------|----------|-----------|------------|----------|----------|
+[32m13:10:45 (2162) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llm-mutation-testing/llm-mutation-testing/node-dirty/reports/mutation/mutation.html
+[32m13:10:45 (2162) INFO MutationTestExecutor[39m Done in 4 minutes 25 seconds.
+
+real	4m27.328s
+user	1m25.736s
+sys	0m16.631s
