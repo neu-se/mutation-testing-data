@@ -14,3 +14,5 @@ The top-level StrykerJS directory contains the results of applying the standard 
 The file `issta2024-submitted-with-appendix.pdf` is a version of the ISSTA submission with an appendix that provides more detailed data for the experiments reported on in the paper.
 
 The file `llmorpheus.tgz` contains an anonymized snapshot of the code for LLMorpheus. LLMorpheus will be open-sourced later this month. We plan submit LLMorpheus to the ISSTA Artifact Evaluation track.
+
+The remaining files are concerned with the experiments in which we manually inspected and classified a subset of the surviving mutants.
