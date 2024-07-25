@@ -1,6 +1,6 @@
 # mutation-testing-data
 
-This directory contains all experimental data associated with a paper entitled "LLMorpheus: Mutation Testing using Large Language Models" that is submitted to ISSTA 2024.
+This directory contains all experimental data associated with a paper entitled "LLMorpheus: Mutation Testing using Large Language Models" that is currently under submission.
 
 The directory contains subdirectories for each of the LLMs used in the evaluation:
   - codellama-13b-instruct
