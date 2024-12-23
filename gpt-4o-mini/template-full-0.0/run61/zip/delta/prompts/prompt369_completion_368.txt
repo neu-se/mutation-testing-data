@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'delete'
+```
+This would result in different behavior because it would cause the code to treat the 'delete' operation as if it were an 'insert', potentially leading to incorrect transformations when merging two Deltas, as it would prioritize deletes over inserts.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'retain'
+```
+This would result in different behavior because it would change the logic to always prioritize 'retain' operations over 'insert' operations, which could lead to unexpected results when handling Deltas that involve both inserts and retains.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'insert' && !priority
+```
+This would result in different behavior because it would change the condition to only allow inserts when priority is false, which could lead to ignoring important insert operations when priority is true, thus altering the expected transformation of the Deltas.
+
+DONE.

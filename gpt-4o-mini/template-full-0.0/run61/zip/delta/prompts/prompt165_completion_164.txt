@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength
+```
+This would result in different behavior because it checks the length of the next operation instead of its type, which could lead to incorrect handling of operations when composing deltas.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType
+```
+This would result in different behavior because it checks the type of the operation from the `other` delta instead of the current delta, potentially causing the composition logic to behave incorrectly when merging operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert'
+```
+This would result in different behavior because it changes the condition to only handle 'insert' operations, ignoring 'delete' and 'retain' types, which could lead to loss of operations during the composition process.
+
+DONE.

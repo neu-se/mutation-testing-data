@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+baseIndex - length
+```
+This would result in different behavior because it would incorrectly subtract the length from the base index, potentially leading to an out-of-bounds error or incorrect slicing of the base Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseIndex + 1
+```
+This would result in different behavior because it would always increment the base index by 1, regardless of the actual length of the operation, which could lead to skipping over operations or incorrect indexing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseIndex + op.retain
+```
+This would result in different behavior because it would use the `retain` property of the operation instead of the calculated `length`, which could lead to incorrect slicing and handling of the Delta operations based on the wrong index.
+
+DONE.

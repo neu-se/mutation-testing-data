@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+op.insert
+```
+This would result in different behavior because it checks for the presence of an insert operation instead of a delete operation, which would lead to incorrect handling of the operation when inverting, potentially causing data loss or corruption.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.retain === undefined
+```
+This would result in different behavior because it checks if the retain property is undefined instead of checking for a delete operation, which would skip over valid delete operations and incorrectly process the inversion logic.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op.length > 0
+```
+This would result in different behavior because it checks if the length of the operation is greater than zero instead of checking for a delete operation, which could lead to incorrect assumptions about the operation's nature and result in improper handling of the inversion.
+
+DONE.

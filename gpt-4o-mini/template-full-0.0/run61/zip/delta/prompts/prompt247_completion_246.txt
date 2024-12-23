@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+opLength + 1
+```
+This would result in different behavior because it would cause one extra character to be deleted than intended, potentially leading to incorrect document state after the diff operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+0
+```
+This would result in different behavior because it would effectively ignore the length of the operation, resulting in no characters being deleted, which could lead to inconsistencies in the document.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength()
+```
+This would result in different behavior because it would use the length of the next operation in the iterator instead of the current operation's length, potentially leading to incorrect deletions based on the state of the iterator rather than the intended operation.
+
+DONE.

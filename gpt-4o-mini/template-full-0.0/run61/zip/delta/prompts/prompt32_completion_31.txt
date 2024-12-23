@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base)
+```
+This would result in different behavior because it would iterate over the keys of the `base` object instead of the `attr` object, potentially leading to incorrect mappings and missing attributes that should have been compared.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attr).filter(key => attr[key] !== null)
+```
+This would result in different behavior because it would only consider keys in `attr` that are not `null`, thus ignoring any keys that might be present in `attr` with a value of `null`, which could lead to loss of important information during the inversion process.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attr).map(key => key + '1')
+```
+This would result in different behavior because it would modify the keys of `attr` by appending '1' to each key, leading to a mismatch between the keys being compared and potentially causing incorrect results in the inversion logic.
+
+DONE.

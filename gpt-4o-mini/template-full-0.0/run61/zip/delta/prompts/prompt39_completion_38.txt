@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+a[key] != null
+```
+This would result in different behavior because it would allow both `null` and `undefined` values in `a` to be treated as valid, thus potentially overwriting values in `b` that should not be overwritten when `priority` is true.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a[key] === null
+```
+This would result in different behavior because it would only allow the key to be added to `attrs` if the corresponding value in `a` is explicitly `null`, ignoring `undefined` values and potentially leading to loss of data that should be preserved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+b[key] !== undefined
+```
+This would result in different behavior because it would check if the value in `b` is defined instead of checking `a`, which could lead to incorrect overwriting of values in `attrs` based on the presence of keys in `b` rather than the intended logic of preserving values from `a`.
+
+DONE.

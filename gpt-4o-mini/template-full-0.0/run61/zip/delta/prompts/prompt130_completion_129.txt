@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+end + index
+```
+This would result in different behavior because it changes the calculation from a subtraction to an addition, which would likely cause the `nextOp` to be fetched incorrectly, potentially leading to an out-of-bounds error or incorrect data being processed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+start - index + 1
+```
+This would result in different behavior because it modifies the range of the `nextOp` being fetched by adding 1, which could lead to skipping an operation or fetching an unintended operation, thus altering the expected output.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Math.max(0, end - index)
+```
+This would result in different behavior because it ensures that the value passed to `iter.next()` is never negative, which could change the logic of how many operations are processed, potentially leading to fewer operations being included in the resulting `Delta`.
+
+DONE.

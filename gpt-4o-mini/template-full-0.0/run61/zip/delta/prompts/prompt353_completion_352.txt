@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.slice(0, inverted.length);
+```
+This would result in different behavior because `slice` creates a shallow copy of the `inverted` object, which may not remove any unnecessary elements, unlike `chop`, which is likely intended to clean up or finalize the `Delta` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.push(new Op());
+```
+This would result in different behavior because adding a new operation to the `inverted` object changes its state by introducing an additional operation, which alters the intended output of the `invert` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(0);
+```
+This would result in different behavior because calling `retain` with a value of `0` may not have the same effect as `chop`, potentially leading to an incorrect representation of the inverted operations by retaining nothing instead of finalizing the `Delta`.
+
+DONE.

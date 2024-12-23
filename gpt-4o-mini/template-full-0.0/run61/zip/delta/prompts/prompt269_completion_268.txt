@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.concat(new Delta());
+```
+This would result in different behavior because instead of chopping the delta to remove any empty operations, it would concatenate an empty delta, potentially leading to an incorrect representation of the operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(new Op());
+```
+This would result in different behavior because it would add a new empty operation to the delta instead of removing unnecessary operations, which could lead to an inflated delta size and incorrect operation sequence.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return retDelta;
+```
+This would result in different behavior because it would return the delta without applying the chop method, which means that any empty operations would remain in the delta, potentially affecting subsequent operations or transformations.
+
+DONE.

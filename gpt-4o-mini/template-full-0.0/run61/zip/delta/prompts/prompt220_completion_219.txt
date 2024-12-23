@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+op.insert === undefined
+```
+This would result in different behavior because it checks specifically for `undefined`, which would allow `null` values to pass through, potentially leading to incorrect handling of operations that should be considered as having an insert value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.insert == null
+```
+This would result in different behavior because it uses a loose equality check, which would evaluate to true for both `null` and `undefined`, thus changing the logic to treat both cases as equivalent, potentially leading to unexpected results in the diffing process.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op.insert === ''
+```
+This would result in different behavior because it specifically checks for an empty string, which would cause the code to treat operations with empty inserts as valid, potentially altering the expected output of the diff function when empty inserts are not intended to be processed.
+
+DONE.

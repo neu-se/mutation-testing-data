@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+attributes = Object.keys(attributes).reduce<AttributeMap>((copy, key) => { copy[key] = attributes[key]; return copy; }, {});
+```
+This would result in different behavior because it would create a shallow copy of the `attributes` object instead of filtering out null values, potentially retaining keys with null values when `keepNull` is false.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+attributes = Object.keys(b).reduce<AttributeMap>((copy, key) => { if (attributes[key] === undefined) { copy[key] = attributes[key]; } return copy; }, {});
+```
+This would result in different behavior because it would incorrectly assign `undefined` values from `attributes` to `copy`, leading to the loss of valid keys that should have been retained.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+attributes = Object.keys(a).reduce<AttributeMap>((copy, key) => { if (attributes[key] != null) { copy[key] = attributes[key]; } return copy; }, {});
+```
+This would result in different behavior because it would filter based on the keys of `

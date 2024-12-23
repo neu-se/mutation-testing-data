@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+1
+```
+This would result in different behavior because the NULL_CHARACTER would now represent the character with a Unicode value of 1 instead of 0, potentially leading to incorrect behavior in the diffing process where the character is expected to be a null character.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+-1
+```
+This would result in different behavior because the NULL_CHARACTER would now represent an invalid character (as negative values are not valid Unicode code points), which could cause unexpected errors or behavior in the application when attempting to use this character in string operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+String.fromCharCode(65)
+```
+This would result in different behavior because the NULL_CHARACTER would now represent the character 'A' (Unicode value 65), which would change the semantics of the diffing process, as it would no longer be a placeholder for null but instead an actual character, potentially leading to incorrect diffs.
+
+DONE.

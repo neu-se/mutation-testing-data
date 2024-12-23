@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+component[1]
+```
+This would result in different behavior because it changes the case being processed from the first component of the diff to the second, potentially leading to incorrect handling of the operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+diff.EQUAL
+```
+This would result in different behavior because it forces all operations to be treated as equal, ignoring the actual type of operation (insert or delete), which could lead to incorrect delta generation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+diff.DELETE
+```
+This would result in different behavior because it would treat all operations as deletions, causing the function to skip over insert operations entirely, which would disrupt the intended diff logic.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.push(newOp.retain);
+```
+This would result in different behavior because it attempts to push the `retain` property of `newOp` instead of the entire `newOp` object, which could lead to incorrect operations being added to the `delta`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push({ ...newOp, insert: null });
+```
+This would result in different behavior because it modifies `newOp` by setting the `insert` property to `null`, which could change the intended operation from an insert to a no-op, potentially altering the final result of the `compose` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(newOp.delete);
+```
+This would result in different behavior because it pushes the `delete` property of `newOp`, which may not exist or be relevant, leading to unexpected behavior in the `delta` operations and potentially causing errors or incorrect results.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+op.retain || op.attributes
+```
+This would result in different behavior because it would allow the condition to pass if either `op.retain` is truthy or `op.attributes` is truthy, potentially leading to incorrect handling of operations that should not be retained.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.retain && !op.attributes
+```
+This would result in different behavior because it would only allow the condition to pass if `op.retain` is truthy and `op.attributes` is falsy, which could lead to skipping valid operations that have attributes, thus altering the expected behavior of the `invert` function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!op.retain && op.attributes
+```
+This would result in different behavior because it would allow the condition to pass only when `op.retain` is falsy and `op.attributes` is truthy, which could cause the function to incorrectly process operations that should be retained but have no attributes.
+
+DONE.

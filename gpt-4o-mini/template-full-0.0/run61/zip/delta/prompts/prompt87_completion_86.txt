@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes, {}
+```
+This would result in different behavior because it will always compare `newOp.attributes` with an empty object, which will always return false unless `newOp.attributes` is also an empty object, thus potentially skipping the merging logic for attributes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+lastOp.attributes, newOp.attributes
+```
+This would result in different behavior because it will compare `lastOp.attributes` with `newOp.attributes`, which could lead to incorrect merging of operations if the attributes are not the same, potentially causing unexpected results in the final operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes, lastOp.insert
+```
+This would result in different behavior because it compares `newOp.attributes` with `lastOp.insert`, which are fundamentally different types (object vs. string/number), leading to a false comparison and preventing the merging of operations based on attributes.
+
+DONE.

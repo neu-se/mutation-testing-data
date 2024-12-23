@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops.push(otherIter.next());
+```
+This would result in different behavior because it directly modifies the `ops` array of the `delta` object instead of using the `push` method, which may lead to inconsistencies in the `Delta` object's state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(thisIter.next());
+```
+This would result in different behavior because it pushes an operation from `thisIter` instead of `otherIter`, which would incorrectly combine operations from the wrong source, potentially altering the intended composition of the two `Delta` objects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(null);
+```
+This would result in different behavior because it pushes a `null` value into the `delta`, which is likely not a valid operation and could lead to unexpected results or errors when the `Delta` is processed later.
+
+DONE.

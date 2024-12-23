@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'delete'
+```
+This would result in different behavior because it would cause the code to push operations from the `otherIter` when the current operation from `thisIter` is a delete, rather than when the current operation from `otherIter` is an insert.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() !== 'insert'
+```
+This would result in different behavior because it would push operations from `otherIter` whenever the type is anything other than 'insert', potentially leading to incorrect compositions when the expected behavior is to only handle 'insert' types.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'retain'
+```
+This would result in different behavior because it would push operations from `otherIter` when the current operation from `thisIter` is a retain, which could lead to incorrect handling of the operations and disrupt the intended composition logic.
+
+DONE.

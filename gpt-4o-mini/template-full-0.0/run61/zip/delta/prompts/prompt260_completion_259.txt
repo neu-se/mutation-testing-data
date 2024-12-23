@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisOp.insert, thisOp.insert
+```
+This would result in different behavior because it compares the same `insert` property from `thisOp` instead of comparing `thisOp.insert` with `otherOp.insert`, potentially leading to incorrect equality checks.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherOp.retain, thisOp.retain
+```
+This would result in different behavior because it compares the `retain` properties of `otherOp` and `thisOp`, which may not be relevant to the context of the operation being performed, leading to incorrect handling of the operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisOp.delete, otherOp.delete
+```
+This would result in different behavior because it compares the `delete` properties of both operations instead of their `insert` properties, which could lead to incorrect logic in determining how to handle the operations in the diff process.
+
+DONE.

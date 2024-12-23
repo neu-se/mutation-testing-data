@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops.map(op => op)
+```
+This would result in different behavior because `map` creates a new array by applying a function to each element, which may not preserve the original references of the objects in `other.ops`, potentially leading to unintended side effects if the objects are mutated later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+other.ops.concat([null])
+```
+This would result in different behavior because appending `null` to the array changes its length and content, which could lead to unexpected results when processing the `delta` since it would now include an additional `null` entry.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+other.ops.slice(0, 1)
+```
+This would result in different behavior because slicing the array to only include the first element would ignore all subsequent operations in `other.ops`, potentially leading to incomplete or incorrect delta operations.
+
+DONE.
