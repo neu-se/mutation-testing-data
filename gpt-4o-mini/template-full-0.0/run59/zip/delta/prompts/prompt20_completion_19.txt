@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+a
+```
+This would result in different behavior because it would compare the keys of `a` instead of `b`, potentially leading to incorrect differences being reported when `a` and `b` have different structures.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(b).slice(0, 1)
+```
+This would result in different behavior because it would only consider the first key of `b` for comparison, ignoring all other keys and potentially missing significant differences between `a` and `b`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+b[key] === null
+```
+This would result in different behavior because it would treat `null` values in `b` as equal to values in `a`, which could lead to incorrect results when `null` is a valid value in the comparison.
+
+DONE.

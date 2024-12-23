@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+object.hasOwnProperty('lat')
+```
+This would result in different behavior because it checks for the existence of a property named 'lat' instead of 'latitude', which would cause the validation to fail for valid objects that have a 'latitude' property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+object['latitude'] === undefined || object['longitude'] === undefined
+```
+This would result in different behavior because it checks if the properties 'latitude' or 'longitude' are explicitly undefined, which would not throw an error for objects that do not have these properties, potentially allowing invalid objects to pass through.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!object.latitude || !object.longitude
+```
+This would result in different behavior because it checks if the values of 'latitude' or 'longitude' are falsy (e.g., 0, null, undefined), which would incorrectly allow an object with valid properties but falsy values to pass the validation.
+
+DONE.

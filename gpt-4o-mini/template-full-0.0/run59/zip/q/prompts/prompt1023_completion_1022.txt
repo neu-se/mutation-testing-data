@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then
+```
+This would result in different behavior because it would return a promise instead of invoking the nodeback callback, potentially leading to unhandled promise rejections if the caller expects a callback to be executed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(null)
+```
+This would result in different behavior because it would call `nodeify` with a `null` argument, effectively ignoring the nodeback and returning a promise, which may not be the intended behavior if the user expects a callback to be executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).nodeify(undefined)
+```
+This would result in different behavior because it would treat `undefined` as a falsy value, leading to the promise being returned instead of executing the nodeback, which could cause confusion for users expecting a callback to be called.
+
+DONE.

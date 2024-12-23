@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert'
+```
+This would result in different behavior because it would incorrectly process an 'insert' operation instead of a 'delete' operation, potentially leading to incorrect delta composition.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength() > 0
+```
+This would result in different behavior because it checks if there are any operations left to process, rather than specifically checking for a 'delete' type, which could lead to unintended handling of operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'delete'
+```
+This would result in different behavior because it incorrectly references the type of the operation from the `otherIter` iterator instead of the `thisIter`, which could lead to incorrect logic in the delta composition process.
+
+DONE.

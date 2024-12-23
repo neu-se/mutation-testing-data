@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return Q.reject(exception.value);
+```
+This would result in different behavior because it would cause the function to return a rejected promise with the value of the exception instead of resolving it, which changes the intended flow of handling the generator's return value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return Q(object).then(function() { return exception.value; });
+```
+This would result in different behavior because it would create a new promise that resolves with the exception value instead of stopping the generator and returning the value directly, potentially leading to unexpected promise chaining.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return Q(object).inspect();
+```
+This would result in different behavior because it would call the `inspect` method on the promise, which does not return the value of the exception but rather an inspection object, thus altering the expected return type and behavior of the generator.
+
+DONE.

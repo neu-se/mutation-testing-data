@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+path, verb
+```
+This would result in different behavior because the `ctx` parameter is omitted, which may lead to incorrect evaluations if the rules depend on context for their decision-making.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path, 'GET', ctx
+```
+This would result in different behavior because the verb is hardcoded to 'GET', which means that the query will only evaluate rules for the 'GET' action, ignoring other verbs that may be relevant.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path, verb, null
+```
+This would result in different behavior because passing `null` as the context may lead to rules that expect a valid context to fail or behave unexpectedly, potentially allowing actions that should be denied.
+
+DONE.

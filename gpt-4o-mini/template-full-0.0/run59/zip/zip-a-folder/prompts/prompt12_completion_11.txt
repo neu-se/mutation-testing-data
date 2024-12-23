@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+await fs.promises.stat(src);
+```
+This would result in different behavior because `fs.promises.stat` checks for the existence of the file or directory and retrieves its stats, but does not check for read permissions specifically, which could lead to a situation where the code proceeds even if the file is not accessible for reading.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+await fs.promises.access(src, fs.constants.W_OK);
+```
+This would result in different behavior because this code checks only for write permissions instead of read permissions, which means that the code could incorrectly assume that the source is accessible for reading when it might not be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+await fs.promises.access(src, fs.constants.R_OK | fs.constants.W_OK);
+```
+This would result in different behavior because this code checks for both read and write permissions, which is stricter than the original check for read permissions only. If the source is readable but not writable, the code would throw an error, potentially leading to unexpected behavior.
+
+DONE.

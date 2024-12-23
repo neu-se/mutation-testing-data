@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'delete'
+```
+This would result in different behavior because it would cause the code to retain the current operation when the other operation is a delete, which is not the intended logic. This could lead to incorrect retention of operations when merging deltas.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert' && !priority
+```
+This would result in different behavior because it would change the condition to only allow retaining the current operation when the other operation is an insert and priority is false. This could lead to unexpected results when priority is true, potentially ignoring important operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'retain'
+```
+This would result in different behavior because it would cause the code to treat retain operations as inserts, which could lead to incorrect handling of operations and potentially result in data loss or corruption during the transformation process.
+
+DONE.

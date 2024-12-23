@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!this._waitForDrain
+```
+This would result in different behavior because it would cause the loop to continue even when `_waitForDrain` is true, potentially leading to multiple writes being attempted before the previous writes have completed, which could result in data corruption or loss.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.size > 0
+```
+This would result in different behavior because it would allow the loop to break only when there are no items left in the queue, which could lead to the `_writeStream` being corked indefinitely if the queue is not emptied properly, preventing any further writes from occurring.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0
+```
+This would result in different behavior because it would break the loop if there are any in-flight writes, which could prevent the flushing of the queue if there are pending writes, leading to a situation where data is not written to the stream as expected.
+
+DONE.

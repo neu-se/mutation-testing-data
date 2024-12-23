@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+a[key]
+```
+This would result in different behavior because it compares the value of `a[key]` with `a[key]` instead of comparing it with `b[key]`, which would always evaluate to `true` if `a[key]` is defined, leading to incorrect diff results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+undefined
+```
+This would result in different behavior because it would always consider `a[key]` to be different from `undefined`, causing all keys in `a` to be included in the resulting attributes, regardless of their actual values in `b`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+b[key] === null
+```
+This would result in different behavior because it would only consider `a[key]` to be different if `b[key]` is explicitly `null`, ignoring other falsy values (like `undefined` or `0`), which could lead to missing attributes in the diff result.
+
+DONE.

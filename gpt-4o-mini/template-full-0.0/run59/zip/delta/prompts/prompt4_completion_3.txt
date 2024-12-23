@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+b || {}
+```
+This would result in different behavior because if `b` is `null` or `undefined`, it will default to an empty object, potentially losing any attributes that were supposed to be copied from `b`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.assign({}, a)
+```
+This would result in different behavior because it would copy attributes from `a` instead of `b`, which means the resulting `attributes` object would not contain any properties from `b`, leading to incorrect composition.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(a).length > 0 ? a : b
+```
+This would result in different behavior because it would prioritize `a` over `b` when `a` has keys, which contradicts the intended behavior of merging attributes from both `a` and `b`.
+
+DONE.

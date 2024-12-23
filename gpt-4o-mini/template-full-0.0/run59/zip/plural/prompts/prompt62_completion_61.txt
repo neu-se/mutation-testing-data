@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/bacterium$/, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly pluralizes "bacterium" to "bacteriums" instead of the correct "bacteria".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/bacterium/, 'bacterias')
+```
+This would result in different behavior because it uses a string instead of a regular expression, and it incorrectly pluralizes "bacterium" to "bacterias", which is not a valid plural form.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/bacterium$/, function(w) { return w.substr(0, w.length - 1) + 'a' })
+```
+This would result in different behavior because it incorrectly changes "bacterium" to "bacteria" by removing the last character and adding 'a', which is not the correct pluralization rule.
+
+DONE.

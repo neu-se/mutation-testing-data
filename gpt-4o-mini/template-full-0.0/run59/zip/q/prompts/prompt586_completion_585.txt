@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.done(makeGenerator.apply(this, arguments));
+```
+This would result in different behavior because it immediately calls `Q.done` with the result of `makeGenerator`, which may not be a promise, leading to potential unhandled promise rejections instead of returning a promise for the generator's return value.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.done(generator.next());
+```
+This would result in different behavior because it calls `generator.next()` directly, which does not handle the asynchronous nature of the generator and may lead to incorrect handling of yielded promises.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.done(callback());
+```
+This would result in different behavior because it calls `callback()` directly, which may not be defined at that point, leading to a runtime error instead of properly managing the generator's execution flow.
+
+DONE.

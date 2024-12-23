@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would always call the `once` function regardless of the value of `end`, potentially leading to premature termination of the stream.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because it would never call the `once` function, meaning that the `onEnd` callback would never be executed, even when the stream ends.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+end === null
+```
+This would result in different behavior because it would only call the `once` function when `end` is explicitly `null`, which may not cover all cases where the stream should end, leading to missed callbacks.
+
+DONE.

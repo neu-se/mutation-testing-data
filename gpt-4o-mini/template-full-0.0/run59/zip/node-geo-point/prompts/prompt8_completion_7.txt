@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty('type') && point.coordinates
+```
+This would result in different behavior because it checks if the 'type' property exists and if 'coordinates' is truthy, which could lead to a situation where an object with 'type' but falsy 'coordinates' (like `null` or `undefined`) would pass the check, whereas the original code checks for the existence of both properties separately.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.type === 'Point' || !point.hasOwnProperty('coordinates')
+```
+This would result in different behavior because it uses a logical OR instead of AND, meaning that if either condition is true (the type is 'Point' or the coordinates property does not exist), the check would pass, potentially allowing invalid GeoJSON objects to be processed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty('type') && point.hasOwnProperty('coordinates')
+```
+This would result in different behavior because it checks for the absence of the 'type' property while requiring the presence of 'coordinates', which would incorrectly validate an object that

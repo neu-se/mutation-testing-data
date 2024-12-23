@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'warning', resolve
+```
+This would result in different behavior because instead of rejecting the promise on an error, it would resolve it, potentially leading to silent failures where errors are ignored.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+'error', () => {}
+```
+This would result in different behavior because it would not call the `reject` function at all, meaning that any errors encountered would not propagate, and the promise would never be rejected, leading to unhandled promise rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+'error', () => { reject(new Error('Custom error message')); }
+```
+This would result in different behavior because it would reject the promise with a custom error message instead of the original error message, potentially obscuring the actual error that occurred and making debugging more difficult.
+
+DONE.

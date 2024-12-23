@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest, { flags: 'a' }))
+```
+This would result in different behavior because it appends data to the destination file instead of overwriting it, which could lead to unexpected results if the file already exists.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('finish', () => resolve({ filename: 'unknown' }));
+```
+This would result in different behavior because it resolves with a hardcoded filename 'unknown' instead of the actual destination filename, which could confuse the caller about where the data was written.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+res.pipe(createWriteStream(dest)).on('close', () => reject(new Error('Stream closed unexpectedly')));
+```
+This would result in different behavior because it rejects the promise with an error when the stream closes, instead of resolving it, which would prevent successful completion of the operation.
+
+DONE.

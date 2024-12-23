@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!isPromise(promise) || (snapshot = promise.inspect()).state !== "fulfilled"
+```
+This would result in different behavior because it checks for the negation of the promise state, leading to the condition being true if the promise is not a promise or if it is not fulfilled, which would incorrectly allow non-fulfilled promises to be processed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+isPromise(promise) && (snapshot = promise.inspect()).state === "pending"
+```
+This would result in different behavior because it changes the condition to check for promises that are still pending instead of fulfilled, which would cause the code to treat pending promises as if they were fulfilled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+isPromise(promise) && (snapshot = promise.inspect()).state === "rejected"
+```
+This would result in different behavior because it checks for promises that are rejected instead of fulfilled, which would lead to the code incorrectly processing rejected promises as if they were successfully fulfilled.
+
+DONE.

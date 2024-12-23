@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+keepNull === true
+```
+This would result in different behavior because it would only execute the block that reduces the attributes if `keepNull` is explicitly `true`, potentially leading to attributes being retained even when they are `null`, which is contrary to the original intent of ignoring `null` values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!keepNull && keepNull
+```
+This would result in different behavior because this condition will always evaluate to `false`, causing the block to never execute, which means that all attributes from `b` will be included regardless of their values, including `null`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+keepNull || true
+```
+This would result in different behavior because this condition will always evaluate to `true`, causing the block to always execute, which means that all attributes from `b` will be reduced, regardless of whether `keepNull` is `true` or `false`, thus ignoring the original logic.
+
+DONE.

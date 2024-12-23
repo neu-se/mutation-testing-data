@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.thenReject(promise, reason);
+```
+This would result in different behavior because it would call `thenReject` on the `Q` object instead of the promise instance, potentially leading to incorrect rejection handling and not utilizing the promise's own rejection mechanism.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promise).thenReject(reason);
+```
+This would result in different behavior because it wraps the promise in a new `Q` promise, which may not preserve the original promise's state or context, leading to unexpected results when handling rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise.thenReject(reason);
+```
+This would result in different behavior because it assumes that `promise` has a `thenReject` method, which may not be the case if `promise` is not an instance of `Promise`, leading to a runtime error instead of properly rejecting the promise.
+
+DONE.

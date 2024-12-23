@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: src, format: 'tar', zipAFolderOptions}
+```
+This would result in different behavior because it sets the `targetFilePath` to the same value as `src`, which would cause the error "Source and target folder must be different." to be thrown, whereas the original code would not.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: tarFilePath, format: 'zip', zipAFolderOptions}
+```
+This would result in different behavior because it changes the `format` from 'tar' to 'zip', which would lead to the use of zip compression instead of tar compression, potentially altering the output file type and structure.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions: { compression: COMPRESSION_LEVEL.uncompressed }}
+```
+This would result in different behavior because it explicitly sets the compression level to `uncompressed`, which would bypass any compression and create a tar file without compression, while the original code would use

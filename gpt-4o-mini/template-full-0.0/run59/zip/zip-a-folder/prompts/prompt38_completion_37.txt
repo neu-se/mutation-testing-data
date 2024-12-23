@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+src.length === 0
+```
+This would result in different behavior because it checks if the `src` string is empty instead of verifying if it is a glob pattern, which would lead to incorrect handling of valid glob patterns.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!isGlob(src)
+```
+This would result in different behavior because it negates the original check, causing the code to treat glob patterns as regular strings and potentially skip the glob processing altogether.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.includes('*')
+```
+This would result in different behavior because it only checks if the `src` string contains an asterisk, which is a common character in glob patterns, but does not comprehensively validate the entire glob pattern, leading to incorrect processing of valid glob inputs.
+
+DONE.

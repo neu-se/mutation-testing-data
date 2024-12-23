@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+read(true, cb)
+```
+This would result in different behavior because it forces the `read` function to be called with `true` as the first argument, which may not be the intended behavior when aborting the stream, potentially leading to unexpected results or errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+read(null, function(err) { cb(err) })
+```
+This would result in different behavior because it changes the callback function to only pass the error to `cb`, ignoring the original abort signal, which could lead to the stream not being aborted properly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+read(abort, function(err) { cb(null) })
+```
+This would result in different behavior because it calls `cb` with `null` regardless of whether there was an error, effectively masking any errors that occur during the read operation and potentially leading to silent failures in the stream processing.
+
+DONE.

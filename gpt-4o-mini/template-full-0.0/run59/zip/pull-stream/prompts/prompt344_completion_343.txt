@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+console.log(abort)
+```
+This would result in different behavior because instead of executing the `onAbort` function if it exists, it will log the value of `abort` to the console, which does not invoke any callback and may lead to unexpected behavior in the application.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+onAbort(abort)
+```
+This would result in different behavior because it will call the `onAbort` function with the value of `abort`, regardless of whether `abort` is `true` or `false`, potentially leading to unintended side effects if `onAbort` is not designed to handle all values of `abort`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+onAbort(abort === false ? null : abort)
+```
+This would result in different behavior because it changes the condition to only pass `null` to `onAbort` when `abort` is `false`, which alters the logic and may not align with the original intent of handling the `abort` value correctly.
+
+DONE.

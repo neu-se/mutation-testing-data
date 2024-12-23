@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!fs.existsSync(src)
+```
+This would result in different behavior because it checks if the source path does not exist, which would lead to an error being thrown even if the path is valid, unlike the original `isGlob` check that determines if the source is a glob pattern.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.length === 0
+```
+This would result in different behavior because it checks if the source string is empty, which would incorrectly allow an empty string to pass through as a valid source, whereas the original `isGlob` function checks for glob patterns.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.includes('*')
+```
+This would result in different behavior because it only checks if the source string contains an asterisk, which is a simplistic check for glob patterns and may incorrectly classify non-glob strings as valid, unlike the comprehensive check performed by `isGlob`.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.reject(makeGenerator());
+```
+This would result in different behavior because it immediately rejects the promise with the result of calling `makeGenerator()`, rather than wrapping the generator in a promise, which would lead to unhandled promise rejections instead of executing the generator function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(makeGenerator());
+```
+This would result in different behavior because it resolves the promise with the result of calling `makeGenerator()`, which would not allow the generator to yield values or handle asynchronous operations properly, effectively bypassing the generator's intended behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.async(makeGenerator)().then(null, function() {});
+```
+This would result in different behavior because it attaches a `then` handler that ignores the rejection, which could lead to silent failures in the generator's execution, making it difficult to detect errors that occur during the asynchronous operations.
+
+DONE.

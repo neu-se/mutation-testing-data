@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promise).then(callback);
+```
+This would result in different behavior because it would change the execution flow to use `then` instead of `tap`, meaning the callback would be executed after the promise is resolved, potentially altering the promise chain and not allowing the original value to be passed through unaffected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promise).tap(callback).then(function() { return "modified"; });
+```
+This would result in different behavior because it would modify the return value of the promise chain to always return the string "modified" after the callback is executed, instead of passing through the original value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(promise).tap(callback).thenReject("error");
+```
+This would result in different behavior because it would cause the promise to always reject with the string "error" after the callback is executed, regardless of the original promise's state, thus changing the expected outcome of the promise handling.
+
+DONE.

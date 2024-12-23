@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(false, array[i++])
+```
+This would result in different behavior because it changes the first argument of the callback from `true` to `false`, which may alter the expected flow of logic in the consuming code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, array[i--])
+```
+This would result in different behavior because it uses the post-decrement operator `--`, which will decrease the index `i` after the current value is used, potentially leading to an out-of-bounds access on the next call.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(true, array[i + 1])
+```
+This would result in different behavior because it accesses the next element in the array (using `i + 1`) instead of the current element (using `i`), which could lead to skipping elements in the array.
+
+DONE.

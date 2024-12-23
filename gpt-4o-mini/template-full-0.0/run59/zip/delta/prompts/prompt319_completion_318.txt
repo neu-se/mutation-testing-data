@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.push(op.retain);
+```
+This would result in different behavior because instead of retaining the operation, it incorrectly pushes the retain value as a new operation, which alters the structure of the inverted Delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(Op.length(op));
+```
+This would result in different behavior because it deletes the length of the operation instead of retaining it, which would lead to loss of data in the inverted Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(op.retain + 1);
+```
+This would result in different behavior because it incorrectly increments the retain value by 1, which could lead to an off-by-one error in the retained operations, potentially causing inconsistencies in the Delta.
+
+DONE.

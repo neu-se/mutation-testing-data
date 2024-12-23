@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'./default/destination'
+```
+This would result in different behavior because it sets a fixed relative path for `options.dest`, which may not point to the intended destination, potentially leading to file write errors or overwriting files in an unintended location.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.join('..', options.dest)
+```
+This would result in different behavior because it changes the destination to a parent directory of the current directory, which could lead to unexpected file placements outside the intended directory structure.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+options.url.split('/').pop()
+```
+This would result in different behavior because it sets `options.dest` to the last segment of the URL path instead of the intended destination path, which could result in saving the file with an incorrect name or in an incorrect location.
+
+DONE.

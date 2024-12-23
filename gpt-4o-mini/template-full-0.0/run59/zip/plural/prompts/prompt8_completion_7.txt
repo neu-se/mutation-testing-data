@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+[match, result, 'extra']
+```
+This would result in different behavior because the addition of an extra element in the array will cause the `rules` array to contain an unexpected third element, which may lead to errors or incorrect behavior when the `plural` function attempts to access the elements of the rule.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+[match, null]
+```
+This would result in different behavior because setting the result to `null` means that when this rule is matched, the function will return `null` instead of the expected plural form, leading to incorrect pluralization results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+[match, function(w) { return w + 'es' }]
+```
+This would result in different behavior because this change would cause all matched words to be pluralized by simply appending 'es', ignoring the specific pluralization rules defined for different word endings, which could lead to incorrect plural forms for many words.
+
+DONE.

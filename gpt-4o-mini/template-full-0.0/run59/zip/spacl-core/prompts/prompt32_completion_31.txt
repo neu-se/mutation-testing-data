@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => acc + seg, '^'
+```
+This would result in different behavior because it changes the order of concatenation from "seg + acc" to "acc + seg", which alters the final regex pattern generated.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => seg.toUpperCase() + acc, '$'
+```
+This would result in different behavior because it modifies each segment to uppercase before concatenation, which could lead to a regex that does not match the intended paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(acc, seg) => acc + seg.replace(/[^a-zA-Z0-9]/g, ''), '$'
+```
+This would result in different behavior because it removes any non-alphanumeric characters from each segment before concatenation, potentially altering the intended regex pattern and its matching behavior.
+
+DONE.

@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+currentUrl.url, baseUrl.url
+```
+This would result in different behavior because it changes the parameters passed to the `gettype` function from the entire `currentUrl` and `baseUrl` objects to just their `url` properties, potentially leading to incorrect type classification if the URLs are valid but the objects contain additional relevant information.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrl.path, baseUrl.path
+```
+This would result in different behavior because it alters the parameters passed to the `gettype` function to only consider the `path` properties of the URLs, ignoring the host and other critical components that are necessary for accurate type determination, which could lead to misclassification of the URL types.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+currentUrl.host, baseUrl.host
+```
+This would result in different behavior because it changes the parameters to only include the `host` properties of the URLs, which may not provide enough context for the `gettype` function to accurately determine the relationship between the URLs, potentially resulting in incorrect classifications such as treating different paths on the same host

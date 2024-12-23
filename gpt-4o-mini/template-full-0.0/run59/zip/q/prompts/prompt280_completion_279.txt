@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+arguments[0]
+```
+This would result in different behavior because it directly accesses the first argument instead of slicing the arguments array, which would lead to the function resolving with the entire arguments object instead of just the relevant values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+arguments.length > 1 ? arguments[1] : null
+```
+This would result in different behavior because it only resolves with the second argument if it exists, otherwise it resolves with `null`, which changes the expected behavior of resolving with the first argument when multiple arguments are provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+arguments[arguments.length - 1]
+```
+This would result in different behavior because it resolves with the last argument instead of the first, which could lead to unexpected results if the last argument is not the intended value to resolve the promise with.
+
+DONE.

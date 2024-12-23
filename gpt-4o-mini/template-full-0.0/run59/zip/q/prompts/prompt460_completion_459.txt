@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+at === -1
+```
+This would result in different behavior because it would cause the code block to execute when the promise is not found in the `unhandledRejections` array, leading to incorrect handling of the rejection.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+at > 0
+```
+This would result in different behavior because it would only allow the untracking of the rejection if the promise is found at an index greater than 0, potentially skipping the first occurrence and leading to untracked rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+at == null
+```
+This would result in different behavior because it would cause the code block to execute when the `at` variable is `null`, which is not a valid index, thus leading to an attempt to untrack a promise that does not exist in the `unhandledRejections` array.
+
+DONE.

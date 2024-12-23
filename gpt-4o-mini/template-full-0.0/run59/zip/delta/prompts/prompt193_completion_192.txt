@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!otherIter.hasNext()
+```
+This would result in different behavior because it negates the condition, causing the optimization to trigger when there are no more operations in `otherIter`, potentially leading to incorrect concatenation of operations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.hasNext()
+```
+This would result in different behavior because it checks if there are more operations in `thisIter` instead of `otherIter`, which could lead to incorrect handling of the operations and potentially missing operations from `other`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'insert'
+```
+This would result in different behavior because it changes the condition to check if the next operation in `otherIter` is an insert, which could lead to incorrect assumptions about the state of the operations and affect the resulting delta.
+
+DONE.

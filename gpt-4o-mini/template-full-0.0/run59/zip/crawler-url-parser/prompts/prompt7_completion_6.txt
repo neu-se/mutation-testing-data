@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!baseUrlStr || _has_illegal_chars(baseUrlStr)
+```
+This would result in different behavior because it will return `null` if `baseUrlStr` is falsy (e.g., `null` or `undefined`), which is the opposite of the original condition that checks if `baseUrlStr` is truthy and has illegal characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && !(_has_illegal_chars(baseUrlStr))
+```
+This would result in different behavior because it will allow the function to proceed if `baseUrlStr` does not have illegal characters, which is the opposite of the original logic that returns `null` if illegal characters are found.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+baseUrlStr && _has_illegal_chars(currentUrlStr)
+```
+This would result in different behavior because it incorrectly checks `currentUrlStr` for illegal characters instead of `baseUrlStr`, potentially allowing invalid base URLs to be processed without returning `null`.
+
+DONE.

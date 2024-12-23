@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.indexOf(promise)
+```
+This would result in different behavior because it uses the native `indexOf` method instead of the custom `array_indexOf`, which may not handle the same data types or conditions, potentially leading to incorrect results when checking for the promise's presence in the `unhandledRejections` array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(unhandledRejections, promise) === 0
+```
+This would result in different behavior because it checks if the promise is the first element in the `unhandledRejections` array, which would incorrectly trigger the `process.emit` call only if the promise is at index 0, ignoring other valid cases.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(unhandledRejections, promise) > 0
+```
+This would result in different behavior because it checks if the promise is found at any index greater than 0, which would skip the first element and potentially miss emitting the `unhandledRejection` event for promises that are present at the first index.
+
+DONE.

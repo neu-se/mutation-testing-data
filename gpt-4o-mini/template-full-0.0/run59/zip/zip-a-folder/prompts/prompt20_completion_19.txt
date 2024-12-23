@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.createReadStream(targetFilePath);
+```
+This would result in different behavior because it attempts to create a read stream instead of a write stream, which would lead to an error when trying to write to the output.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.createWriteStream(targetFilePath, { flags: 'a' });
+```
+This would result in different behavior because it opens the file in append mode instead of the default write mode, which could lead to unexpected data being appended rather than overwriting the existing file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.createWriteStream(targetFilePath, { encoding: 'utf8' });
+```
+This would result in different behavior because it specifies an encoding for the write stream, which is not appropriate for binary data being written by the archiver, potentially corrupting the output file.
+
+DONE.

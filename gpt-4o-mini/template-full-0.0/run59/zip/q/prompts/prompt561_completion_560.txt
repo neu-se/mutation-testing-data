@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+arg
+```
+This would result in different behavior because it would incorrectly use the argument passed to the `throw` verb instead of the exception that was caught, potentially leading to unhandled exceptions being treated as valid values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would always treat the caught exception as a `StopIteration`, causing the generator to return the value of the exception instead of propagating it, which could mask errors in the generator.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+false
+```
+This would result in different behavior because it would always reject the promise with the caught exception, regardless of whether it was a `StopIteration`, leading to incorrect handling of generator completion and potentially breaking the expected flow of the generator.
+
+DONE.

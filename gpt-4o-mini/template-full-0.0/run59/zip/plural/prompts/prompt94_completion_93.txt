@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/^(?:wo)?man$/i, function(w) { return w.replace(/a/, 'o') })
+```
+This would result in different behavior because it changes the replacement character from 'e' to 'o', which alters the pluralization of words like "woman" to "womon" instead of "women".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/^(?:wo)?man$/i, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly pluralizes "woman" to "womans" instead of the correct "women", which is a significant grammatical error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/^(?:wo)?man$/i, function(w) { return w.replace(/man/, 'men') })
+```
+This would result in different behavior because it changes the regex to only replace "man" with "men", which would not handle the "woman" case correctly, leading to incorrect pluralization for "woman".
+
+DONE.

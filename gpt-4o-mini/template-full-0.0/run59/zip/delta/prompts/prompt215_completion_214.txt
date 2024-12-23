@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.ops.push(...other.ops);
+```
+This would result in different behavior because it modifies the original `delta.ops` array by adding elements to it, rather than creating a new array that concatenates the two, which could lead to unintended side effects if `delta` is used elsewhere.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.ops = other.ops.slice();
+```
+This would result in different behavior because it completely replaces `delta.ops` with `other.ops`, losing any existing operations in `delta`, rather than appending `other.ops` to it.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ops = delta.ops.concat(other.ops.reverse());
+```
+This would result in different behavior because it concatenates the reversed `other.ops` to `delta.ops`, changing the order of operations and potentially altering the outcome of subsequent operations.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+parts.unshift(`/${part.replace(/([.$])/g, '\\$1')}`)
+```
+This would result in different behavior because it adds the new segment to the beginning of the `parts` array instead of the end, which would change the order of the segments in the final regex.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parts.push(`/${part.replace(/([.*])/g, '\\$1')}`)
+```
+This would result in different behavior because it incorrectly escapes the wildcard characters, potentially leading to a regex that does not match the intended paths correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parts.push(`/${part.replace(/([.*])/g, '\\$1') + '.*'}`)
+```
+This would result in different behavior because it appends `.*` to the end of each segment, allowing for additional characters after each path segment, which may not be the intended behavior for path matching.
+
+DONE.

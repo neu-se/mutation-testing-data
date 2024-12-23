@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites > 0 || this._waitForDrain
+```
+This would result in different behavior because it changes the logic to emit 'drain' when there are in-flight writes or when waiting for the drain, which is the opposite of the original condition that checks for no in-flight writes and not waiting for drain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites === 0 && this._waitForDrain
+```
+This would result in different behavior because it emits 'drain' only when there are no in-flight writes but still waiting for the drain, which is a narrower condition than the original, potentially leading to missed 'drain' events.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._inFlightWrites < 0 && this._waitForDrain
+```
+This would result in different behavior because it introduces an invalid condition (in-flight writes should not be negative), which would never be true, thus preventing the 'drain' event from being emitted under any circumstances.
+
+DONE.

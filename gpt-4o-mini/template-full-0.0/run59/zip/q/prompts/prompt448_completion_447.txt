@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.unshift(promise);
+```
+This would result in different behavior because it adds the promise to the beginning of the `unhandledRejections` array instead of the end, which could affect the order in which unhandled rejections are processed or reported.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.splice(0, 1);
+```
+This would result in different behavior because it removes the first element from the `unhandledRejections` array, potentially losing track of the first unhandled rejection instead of adding the current promise to the list.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.push(null);
+```
+This would result in different behavior because it adds a `null` value to the `unhandledRejections` array instead of the actual promise, which could lead to incorrect handling of unhandled rejections as it would not reference the original promise.
+
+DONE.

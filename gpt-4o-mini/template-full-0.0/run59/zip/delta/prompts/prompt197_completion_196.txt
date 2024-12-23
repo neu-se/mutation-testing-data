@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp.retain = 0;
+```
+This would result in different behavior because it sets the `retain` property of `newOp` to `0`, which may lead to unexpected results when composing operations, as it effectively indicates that no characters should be retained, potentially altering the intended behavior of the `compose` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+newOp.insert = thisOp.insert + "bug";
+```
+This would result in different behavior because it appends the string "bug" to the `insert` property of `newOp`, which changes the content being inserted and could lead to incorrect results when the composed delta is applied, as it modifies the data being processed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.delete = 1;
+```
+This would result in different behavior because it sets the `delete` property of `newOp` to `1`, which indicates that one character should be deleted instead of preserving the operation as intended, potentially leading to data loss in the composed delta.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.parse(parsedUrl);
+```
+This would result in different behavior because `URL.parse` returns a URL object instead of a formatted string, which would lead to the `ret.url` being an object rather than a string representation of the URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+parsedUrl.href;
+```
+This would result in different behavior because `parsedUrl.href` returns the full URL as a string, but it may not include the same formatting as `URL.format`, potentially omitting certain components or altering the structure of the URL.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.format({ ...parsedUrl, protocol: 'ftp:' });
+```
+This would result in different behavior because it forces the protocol to be 'ftp:', which is not a valid protocol for web URLs in this context, potentially leading to incorrect URL handling or validation failures.
+
+DONE.

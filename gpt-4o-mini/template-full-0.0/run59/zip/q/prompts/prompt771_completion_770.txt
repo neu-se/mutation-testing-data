@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(promises).allResolved
+```
+This would result in different behavior because it would return a promise that resolves when all promises are settled (fulfilled or rejected), rather than returning their states, which is the intended behavior of `allSettled`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(promises).then(function() { return "All settled"; })
+```
+This would result in different behavior because it would always resolve to the string "All settled" regardless of the actual state of the promises, instead of returning an array of their states.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(promises).map(function(p) { return p; })
+```
+This would result in different behavior because it would attempt to map the promises to themselves, which does not provide the states of the promises, unlike `allSettled`, which is supposed to return an array of states for each promise.
+
+DONE.

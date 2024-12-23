@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisOp.attributes, null
+```
+This would result in different behavior because it would always pass `null` as the second argument, potentially leading to unexpected results when composing attributes, as it ignores the actual attributes of `otherOp`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherOp.attributes, thisOp.attributes
+```
+This would result in different behavior because it swaps the order of the attributes being composed, which could lead to different results in the final composed attributes, depending on how the `compose` function is implemented.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisOp.attributes, { unexpected: true }
+```
+This would result in different behavior because it introduces a new object with an unexpected property, which could alter the behavior of the `compose` function and lead to incorrect attribute handling.
+
+DONE.

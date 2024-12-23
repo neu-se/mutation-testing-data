@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+result.value
+```
+This would result in different behavior because it accesses the `value` property of the result instead of checking if the result is done, which could lead to incorrect handling of the generator's state and potentially cause unhandled promise rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result.done === false
+```
+This would result in different behavior because it checks if the `done` property is explicitly `false`, which would incorrectly allow the promise to resolve even when the generator has completed its execution, leading to unexpected behavior in promise resolution.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+result.done !== true
+```
+This would result in different behavior because it checks if the `done` property is not `true`, which could allow the promise to resolve incorrectly when the generator has actually finished, thus breaking the intended flow of asynchronous execution.
+
+DONE.

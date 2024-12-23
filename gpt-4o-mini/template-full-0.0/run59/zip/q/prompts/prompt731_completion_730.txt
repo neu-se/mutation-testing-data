@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+{ index: index, value: null }
+```
+This would result in different behavior because it changes the `value` property to `null`, which means that the progress notifications will not carry the actual progress value, potentially leading to confusion or loss of information about the progress of the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+{ index: index + 1, value: progress }
+```
+This would result in different behavior because it modifies the `index` property by incrementing it, which could lead to incorrect indexing in the progress notifications, causing the consumer of the promise to misinterpret which promise is currently reporting progress.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+{ index: -1, value: progress }
+```
+This would result in different behavior because it sets the `index` property to `-1`, which is an invalid index and could lead to errors or unexpected behavior when the progress notifications are processed, as it does not correspond to any valid promise in the array.
+
+DONE.

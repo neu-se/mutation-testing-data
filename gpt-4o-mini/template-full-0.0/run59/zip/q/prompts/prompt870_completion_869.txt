@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).then(args);
+```
+This would result in different behavior because it attempts to call `then` on the result of `Q(callback)`, which is not the intended use of `nfapply` that expects to apply the callback with the provided arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(args);
+```
+This would result in different behavior because `fapply` is used instead of `nfapply`, which means it will not handle the Node-style callback correctly, potentially leading to incorrect promise resolution.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).nfapply([]);
+```
+This would result in different behavior because it calls `nfapply` with an empty array, ignoring the provided `args`, which would lead to the callback being invoked without any arguments, potentially causing unexpected results.
+
+DONE.

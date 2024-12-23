@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).catch(rejected)
+```
+This would result in different behavior because it changes the promise handling to only catch rejections, potentially ignoring fulfilled values and altering the flow of the promise chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(void 0, void 0)
+```
+This would result in different behavior because it effectively ignores both fulfillment and rejection handlers, leading to unhandled promise rejections and potentially causing silent failures in the promise chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(rejected)
+```
+This would result in different behavior because it incorrectly uses the `rejected` callback as the fulfillment handler, which would cause the promise to resolve with the rejection handler instead of the fulfillment value, leading to unexpected results.
+
+DONE.

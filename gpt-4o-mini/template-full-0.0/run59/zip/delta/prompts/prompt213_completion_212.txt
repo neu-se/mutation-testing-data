@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.delete(other.ops[0]);
+```
+This would result in different behavior because instead of adding the first operation from `other.ops` to `delta`, it would remove it, potentially leading to a loss of data that should have been included in the concatenated delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(other.ops[1]);
+```
+This would result in different behavior because it would attempt to push the second operation from `other.ops` instead of the first, which could lead to incorrect concatenation if `other.ops` has fewer than two operations, resulting in an undefined behavior or error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.ops.push(other.ops[0]);
+```
+This would result in different behavior because it directly manipulates the `ops` array of `delta` instead of using the `push` method, which may bypass any additional logic or checks that the `push` method might have, potentially leading to an inconsistent state in the `delta` object.
+
+DONE.

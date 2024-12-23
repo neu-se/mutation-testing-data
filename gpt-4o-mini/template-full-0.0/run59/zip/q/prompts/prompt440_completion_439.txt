@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length, promise
+```
+This would result in different behavior because it checks the length of the `unhandledRejections` array instead of checking if the `promise` is in the array, which would always return `false` if there are any unhandled rejections, leading to the `unhandledRejection` event never being emitted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections[0], promise
+```
+This would result in different behavior because it checks only the first element of the `unhandledRejections` array against the `promise`, which means that if the `promise` is not the first unhandled rejection, it will not emit the `unhandledRejection` event, potentially missing other unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons, promise
+```
+This would result in different behavior because it incorrectly checks the `unhandledReasons` array instead of the `unhandledRejections` array, which would lead to the `unhandledRejection` event being emitted based on the reasons for rejection rather

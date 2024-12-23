@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'/' + path
+```
+This would result in different behavior because it alters the `path` by prepending a forward slash, which may lead to incorrect policy queries if the original path does not start with a slash.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path + '/*'
+```
+This would result in different behavior because it appends a wildcard to the `path`, potentially allowing access to more resources than intended, as it changes the specificity of the path being queried.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+path.toUpperCase()
+```
+This would result in different behavior because it transforms the `path` to uppercase, which may cause mismatches in policy queries if the original paths are case-sensitive.
+
+DONE.

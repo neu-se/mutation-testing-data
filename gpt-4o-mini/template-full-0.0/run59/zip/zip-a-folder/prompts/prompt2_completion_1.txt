@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({src, targetFilePath: tarFilePath, format: 'zip', zipAFolderOptions});
+```
+This would result in different behavior because it incorrectly uses the 'zip' format instead of 'tar', which could lead to an invalid archive being created.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions, archiverOptions: {gzip: false}});
+```
+This would result in different behavior because it sets the `gzip` option to `false`, which would create a tar archive without gzip compression, contrary to the original intention of creating a gzipped tar archive.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+await ZipAFolder.compress({src, targetFilePath: tarFilePath, format: 'tar', zipAFolderOptions, archiverOptions: {gzipOptions: {level: 0}}});
+```
+This would result in different behavior because it sets the gzip compression level to `0`, effectively creating an uncompressed tar archive instead of

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(object)
+```
+This would result in different behavior because it would convert the `object` into a resolved promise immediately, rather than treating it as a promise or immediate reference, potentially leading to unexpected results when the `dispatch` method is called.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(function() { return this; })
+```
+This would result in different behavior because it would create a new promise that resolves to `this` after the original promise resolves, rather than directly dispatching the operation, which could alter the expected flow of operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, args, null])
+```
+This would result in different behavior because it adds an additional `null` argument to the `dispatch` call, which could lead to errors or unexpected behavior in the handling of the method invocation, as the method signature would not match the expected parameters.
+
+DONE.

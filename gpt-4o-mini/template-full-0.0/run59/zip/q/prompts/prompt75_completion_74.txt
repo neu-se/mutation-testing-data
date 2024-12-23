@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+setTimeout(flush, 100);
+```
+This would result in different behavior because it changes the delay before the `flush` function is called, potentially causing tasks to be executed later than intended, which could lead to unexpected results in task execution order.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+requestTick = function () { requestPortTick(); };
+```
+This would result in different behavior because it reassigns `requestTick` to call `requestPortTick` directly, which may lead to an infinite loop if `requestPortTick` is not properly defined or if it does not eventually call `flush`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+requestPortTick = function () { channel.port2.postMessage(1); };
+```
+This would result in different behavior because it changes the message payload sent through the `MessageChannel`, which could affect how the receiving end processes the message, potentially leading to incorrect task execution or missed messages.
+
+DONE.

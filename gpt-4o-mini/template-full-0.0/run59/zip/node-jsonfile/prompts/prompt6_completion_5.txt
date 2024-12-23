@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromPromise
+```
+This would result in different behavior because it would change the function being called from a callback-based function to a promise-based function, potentially leading to unhandled promise rejections if the read operation fails.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync
+```
+This would result in different behavior because it would switch from an asynchronous read operation to a synchronous one, which could block the event loop and lead to performance issues, especially in a context where non-blocking I/O is expected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.readFileSync(file, options)
+```
+This would result in different behavior because it would attempt to read the file synchronously instead of asynchronously, which would not return a promise and could cause the function to return undefined or throw an error if the file does not exist.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+fulfilled, rejected, function() { return null; }
+```
+This would result in different behavior because the `progressed` callback is replaced with a function that always returns `null`, which may lead to unexpected results in promise chains that rely on progress notifications.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fulfilled, function() { throw new Error("Rejected"); }, progressed
+```
+This would result in different behavior because the `rejected` callback is replaced with a function that always throws an error, causing the promise to be rejected immediately regardless of the actual rejection reason.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return "Fulfilled"; }, rejected, progressed
+```
+This would result in different behavior because the `fulfilled` callback is replaced with a function that always returns the string "Fulfilled", which ignores the actual value passed to it and could lead to misleading results in promise handling.
+
+DONE.

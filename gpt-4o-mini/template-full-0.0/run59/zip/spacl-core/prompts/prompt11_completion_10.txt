@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.match(/[^/]:|:\/|:$/) === null
+```
+This would result in different behavior because it changes the condition to check for the absence of malformed captures instead of their presence, potentially allowing invalid captures to pass through without throwing an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.match(/:.*:/) !== null
+```
+This would result in different behavior because it checks for the presence of colons that are not at the beginning or end of the string, which may incorrectly validate certain path specifications that should be considered malformed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.includes(':') && spec.match(/[^/]/) !== null
+```
+This would result in different behavior because it introduces a condition that requires the presence of a colon and at least one non-slash character, which could incorrectly validate paths that should be flagged as malformed due to improper capture syntax.
+
+DONE.

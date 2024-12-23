@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/^\/|^(?!localhost)\w+:/.test(currentUrlStr)
+```
+This would result in different behavior because it incorrectly allows URLs that start with a single forward slash ("/") or any protocol that is not "localhost", which could lead to treating relative URLs as absolute.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!/^\.*\/|^(?!127\.0\.0\.1)\w+:/.test(currentUrlStr)
+```
+This would result in different behavior because it changes the localhost check from "localhost" to the IP address "127.0.0.1", potentially allowing other local addresses to be treated as valid, which could lead to incorrect URL parsing.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!/^\.*\/|^(?!\w+:).test(currentUrlStr)
+```
+This would result in different behavior because it removes the localhost check entirely, allowing any protocol to be considered valid, which could lead to incorrect handling of URLs that should be treated as relative.
+
+DONE.

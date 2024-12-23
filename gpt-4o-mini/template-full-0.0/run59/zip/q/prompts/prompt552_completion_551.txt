@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(callback, errback);
+```
+This would result in different behavior because it changes the promise resolution mechanism from using `when` to `then`, which may not handle the promise's state in the same way, potentially leading to unhandled promise rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).catch(errback);
+```
+This would result in different behavior because it alters the flow to only handle rejections through the `errback`, ignoring the fulfillment callback, which could lead to missed successful resolutions.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).finally(callback);
+```
+This would result in different behavior because it executes the `callback` regardless of whether the promise is fulfilled or rejected, which is different from the original intent of only executing the `callback` on fulfillment.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+var closed = Q.defer(true);
+```
+This would result in different behavior because it initializes the `closed` promise as resolved immediately, which means that any subsequent calls to `get` will not be able to resolve the promise correctly, leading to unexpected behavior when trying to retrieve values from the queue.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var closed = Q.defer(null);
+```
+This would result in different behavior because it initializes the `closed` promise with `null`, which may lead to confusion in the promise resolution process, potentially causing the queue to behave incorrectly when it is closed, as it would not properly handle the error state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var closed = Q.defer(false);
+```
+This would result in different behavior because it initializes the `closed` promise with a boolean value `false`, which is not a valid state for a promise and could lead to incorrect handling of the closed state of the queue, causing the queue to behave as if it is still open when it should be closed.
+
+DONE.

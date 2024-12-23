@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/\?.*$/
+```
+This would result in different behavior because it would remove the query string from the URL instead of the fragment, potentially allowing parameters to be included in the parsed URL that were originally intended to be discarded.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/#.*|\/$/
+```
+This would result in different behavior because it would remove both the fragment and any trailing slashes from the URL, which could lead to different URL normalization than intended, affecting how the URL is processed downstream.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/#.*|\/\?/
+```
+This would result in different behavior because it would remove the fragment and any occurrence of a slash followed by a query string, which could lead to malformed URLs being processed, as it would not handle the query string correctly in all cases.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.call(null, value)
+```
+This would result in different behavior because it changes the context in which the callback is executed, potentially leading to different results if the callback relies on `this` being a specific object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback(value).then(value => value + 1)
+```
+This would result in different behavior because it modifies the value returned by the callback by adding 1 to it, which alters the original value passed through the promise chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback(value).catch(() => value)
+```
+This would result in different behavior because it changes the handling of any errors thrown by the callback, returning the original value instead of propagating the error, which could lead to silent failures in the promise chain.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+continuer, "next"
+```
+This would result in different behavior because it would cause the generator to continue execution with the next value instead of throwing an exception, potentially leading to unhandled errors or incorrect results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+continuer, "return"
+```
+This would result in different behavior because it would attempt to return a value from the generator instead of throwing an exception, which could lead to unexpected behavior if the generator is not designed to handle return values properly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return reject(new Error("Forced error")); }
+```
+This would result in different behavior because it would always reject the promise with a new error, regardless of the actual exception thrown in the generator, thus masking the original error and making debugging more difficult.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+void 0, function() { throw new Error("Custom rejection"); }
+```
+This would result in different behavior because it introduces a custom error message that will always throw an error when the promise is rejected, rather than simply passing the rejection reason through.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function() { return "Ignored"; }, rejected
+```
+This would result in different behavior because it changes the fulfilled handler to return a string "Ignored", which would not fulfill the promise with the original value, potentially leading to unexpected results in promise chaining.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+rejected, void 0
+```
+This would result in different behavior because it swaps the positions of the fulfilled and rejected handlers, causing the promise to handle rejections as if they were fulfillments, which is not the intended behavior.
+
+DONE.

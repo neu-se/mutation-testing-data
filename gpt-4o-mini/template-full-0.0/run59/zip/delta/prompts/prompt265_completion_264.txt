@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(otherOp).retain(1);
+```
+This would result in different behavior because instead of deleting the operation, it retains one unit of the operation, which could lead to incorrect state in the delta as it would not remove the intended content.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(otherOp).insert('bug');
+```
+This would result in different behavior because it attempts to insert a string 'bug' instead of deleting the operation, which would alter the content of the delta in an unintended way, potentially leading to data corruption.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(otherOp).delete(0);
+```
+This would result in different behavior because it attempts to delete zero units of the operation, effectively making no change to the delta, which could lead to misleading results in the context of the diff operation.
+
+DONE.

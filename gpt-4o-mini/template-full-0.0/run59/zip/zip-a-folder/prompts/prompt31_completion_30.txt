@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+output.on('finish', reject);
+```
+This would result in different behavior because the 'finish' event is emitted when the writable stream has finished writing, which is not the same as the 'error' event. This change would cause the promise to reject on a different event, potentially leading to unhandled errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('data', reject);
+```
+This would result in different behavior because the 'data' event is emitted when there is data available to read from the stream, which is not related to errors. This change would cause the promise to reject incorrectly when data is being written, rather than when an error occurs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('error', resolve);
+```
+This would result in different behavior because resolving the promise on an 'error' event would indicate success instead of failure, leading to misleading results in the application logic where the promise is used.
+
+DONE.

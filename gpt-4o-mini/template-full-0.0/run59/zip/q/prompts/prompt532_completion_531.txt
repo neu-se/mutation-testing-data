@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(fulfilled, rejected);
+```
+This would result in different behavior because it uses the `then` method instead of `spread`, which does not unpack the array of values into separate arguments for the `fulfilled` callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).all().then(fulfilled, rejected);
+```
+This would result in different behavior because it uses `all()` which expects an array of promises and resolves them all, rather than spreading the values of a promised array into the fulfillment callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).map(fulfilled, rejected);
+```
+This would result in different behavior because `map` is not a valid method in this context and would likely throw an error, whereas `spread` is designed to handle the fulfillment of promises and pass the values correctly.
+
+DONE.

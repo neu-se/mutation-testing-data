@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+atReport + 1
+```
+This would result in different behavior because it would attempt to access the next index in the `reportedUnhandledRejections` array instead of the current index, potentially leading to an incorrect emission of the "rejectionHandled" event for the wrong promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+atReport - 1
+```
+This would result in different behavior because it would attempt to access the previous index in the `reportedUnhandledRejections` array, which could lead to an incorrect promise being emitted as handled, thus failing to track the correct promise rejection.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+0
+```
+This would result in different behavior because it would always refer to the first element in the `reportedUnhandledRejections` array, regardless of which promise was actually being untracked, leading to incorrect handling of the rejection event.
+
+DONE.

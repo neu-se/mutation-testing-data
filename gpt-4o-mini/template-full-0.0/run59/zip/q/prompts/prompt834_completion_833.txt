@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+fulfilled || rejected
+```
+This would result in different behavior because it omits the `progress` handler, which means that any progress notifications will not be handled, potentially leading to unresponsive behavior in scenarios where progress updates are important.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fulfilled && rejected
+```
+This would result in different behavior because it uses the logical AND operator, which will only execute the promise chain if both `fulfilled` and `rejected` are truthy, effectively ignoring the promise resolution if either is falsy, leading to unexpected promise handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.catch(rejected)
+```
+This would result in different behavior because it changes the promise chain to only handle rejections through the `catch` method, which may not properly handle fulfilled values, potentially causing the promise to not resolve as expected.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/die$/, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly pluralizes "die" to "dies" instead of the correct "dice", which would lead to incorrect pluralization for that specific word.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/die$/, 'dices')
+```
+This would result in different behavior because it would return "dices" as the plural form of "die", which is incorrect; the correct plural is "dice".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/die$/, function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because it would incorrectly apply the rule for words ending in "y", resulting in "die" being pluralized to "dies" instead of the correct "dice".
+
+DONE.

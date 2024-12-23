@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/\?.*$/, ''
+```
+This would result in different behavior because it removes the query string (everything after the `?`) from the URL instead of removing the fragment (everything after the `#`), which could lead to different parsing results when the URL contains query parameters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/#.*$/, 'http://example.com'
+```
+This would result in different behavior because it replaces the fragment with a fixed URL (`http://example.com`) instead of removing it, which would change the resulting URL to always include that fixed value regardless of the original URL's fragment.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/#.*$/, 'undefined'
+```
+This would result in different behavior because it replaces the fragment with the string `'undefined'`, which would alter the URL in a way that could lead to unexpected results, as it would not be a valid fragment and could confuse the URL parsing logic.
+
+DONE.

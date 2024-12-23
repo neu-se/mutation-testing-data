@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+otherIter.next()
+```
+This would result in different behavior because it retrieves the next operation instead of just peeking at the current one, potentially altering the flow of the composition by consuming an operation that may not have been intended to be processed yet.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType()
+```
+This would result in different behavior because it checks the type of the current operation from `thisIter` instead of `otherIter`, which could lead to incorrect handling of operations when composing two deltas, as it would ignore the operations from the `other` delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength() + 1
+```
+This would result in different behavior because it adds 1 to the length of the next operation in `otherIter`, which could cause the logic to incorrectly assume that there is more content to process than there actually is, potentially leading to out-of-bounds errors or skipped operations.
+
+DONE.

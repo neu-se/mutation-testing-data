@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]o$/i, function(w) { return w + 's' }
+```
+This would result in different behavior because it changes the condition to match words that end with a vowel followed by 'o', and incorrectly appends 's' instead of 'es'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]o$/i, function(w) { return w.substr(0, w.length - 1) + 'es' }
+```
+This would result in different behavior because it incorrectly removes the last character of the word before appending 'es', which is not the intended pluralization rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^aeiou]o$/i, function(w) { return w + 'ies' }
+```
+This would result in different behavior because it incorrectly appends 'ies' to words ending in a consonant followed by 'o', which is not the correct pluralization for such words.
+
+DONE.

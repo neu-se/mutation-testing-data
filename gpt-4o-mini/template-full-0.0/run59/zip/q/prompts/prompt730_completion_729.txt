@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve({ index: index, value: progress });
+```
+This would result in different behavior because it resolves the deferred promise with the progress value instead of notifying about the progress, which changes the intended behavior of tracking progress updates.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject({ index: index, value: progress });
+```
+This would result in different behavior because it rejects the deferred promise with the progress value, which is not the intended use of the notify method that should be used for progress updates, leading to incorrect handling of promise states.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.notify({ index: index, value: null });
+```
+This would result in different behavior because it sends a notification with a null value instead of the actual progress value, which would misrepresent the progress of the promise and could lead to confusion in the handling of progress updates.
+
+DONE.

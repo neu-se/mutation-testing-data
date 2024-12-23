@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!cb
+```
+This would result in different behavior because it would only push the callback to the queue if `cb` is falsy (i.e., `null`, `undefined`, `0`, `false`, etc.), which means that valid callbacks would be ignored, potentially leading to unexecuted callbacks.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cbs.length > 0
+```
+This would result in different behavior because it would only push the callback if there are already callbacks in the list, which would prevent the first callback from being executed, leading to a situation where the initial callback is never called.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+key === null
+```
+This would result in different behavior because it would only push the callback if the key is `null`, which is likely an invalid condition in this context, causing all valid keys to skip the callback execution entirely.
+
+DONE.

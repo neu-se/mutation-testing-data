@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(value).catch(rejected)
+```
+This would result in different behavior because it changes the handling of the promise by using a `catch` method instead of `then`, which means that the `rejected` callback will be invoked for any errors, potentially altering the flow of error handling.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(fulfilled, function() { return rejected; })
+```
+This would result in different behavior because it modifies the `rejected` callback to be a function that returns the `rejected` variable instead of calling it directly, which could lead to unexpected results if `rejected` is not a function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(value).then(null, rejected)
+```
+This would result in different behavior because it explicitly sets the `fulfilled` callback to `null`, meaning that the fulfilled value will not be processed, and only the `rejected` callback will be invoked in case of a rejection, which changes the promise's resolution behavior.
+
+DONE.

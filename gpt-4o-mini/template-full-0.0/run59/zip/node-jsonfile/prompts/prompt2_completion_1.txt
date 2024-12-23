@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFileSync)
+```
+This would result in different behavior because it uses the synchronous version of the file reading function, which will block the event loop and may lead to performance issues or unhandled exceptions if the file is large or does not exist.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.writeFile)
+```
+This would result in different behavior because it incorrectly attempts to use the `writeFile` method instead of `readFile`, leading to an error since the function is expected to read a file, not write to one.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+universalify.fromCallback(fs.readFile, { encoding: 'utf8' })
+```
+This would result in different behavior because it explicitly sets the encoding option to 'utf8', which may not match the expected encoding of the file being read, potentially resulting in incorrect data being parsed or an error if the file is not in UTF-8 format.
+
+DONE.

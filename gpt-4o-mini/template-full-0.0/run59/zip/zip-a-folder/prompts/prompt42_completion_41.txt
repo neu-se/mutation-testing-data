@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.directory(globPart, true);
+```
+This would result in different behavior because changing the second argument from `false` to `true` would cause the globbed files to be stored in the archive with their full paths instead of relative paths, potentially leading to unexpected directory structures in the resulting archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.append(globPart, { name: 'wrongName.txt' });
+```
+This would result in different behavior because using `zipArchive.append` instead of `zipArchive.glob` would not process the glob pattern correctly, and it would append a single file with a fixed name ('wrongName.txt') instead of including the files that match the glob pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(src);
+```
+This would result in different behavior because using `src` directly instead of `globPart` would treat the entire source string as a single glob pattern, which may not match any files if `src` contains multiple patterns separated by commas, leading to an empty archive.
+
+DONE.

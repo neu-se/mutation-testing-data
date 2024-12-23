@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'/' + path
+```
+This would result in different behavior because it prepends a forward slash to the path, potentially causing the `matches` method to fail if the regex does not account for this change.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path + 'extra'
+```
+This would result in different behavior because it appends the string 'extra' to the path, which may lead to a mismatch in the regex matching process, resulting in the rule not being applied as intended.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ctx ? path : ''
+```
+This would result in different behavior because it changes the condition to return an empty string if `ctx` is undefined, which would likely cause the `matches` method to return false, even if the path was valid.
+
+DONE.

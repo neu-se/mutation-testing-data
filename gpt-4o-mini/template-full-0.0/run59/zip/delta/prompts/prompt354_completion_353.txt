@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return inverted;
+```
+This would result in different behavior because it would return the `inverted` Delta without chopping it, potentially leaving trailing empty operations that should have been removed, leading to incorrect Delta representation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return inverted.chop(true);
+```
+This would result in different behavior because it would forcefully chop the inverted Delta, potentially removing valid operations that should be retained, thus altering the intended structure of the Delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return inverted.chop(false);
+```
+This would result in different behavior because it would not chop the inverted Delta at all, which could lead to returning an unprocessed Delta that includes operations that should have been removed, resulting in incorrect output.
+
+DONE.

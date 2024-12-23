@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+(rule) => rule
+```
+This would result in different behavior because it returns the original rule without cloning it, meaning any changes to the cloned policy will affect the original rules.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(rule) => null
+```
+This would result in different behavior because it replaces each rule with `null`, effectively creating a policy with no valid rules, which would lead to unexpected results when querying the policy.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(rule) => ({ ...rule, modified: true })
+```
+This would result in different behavior because it creates a shallow copy of the rule with an additional property `modified` set to `true`, which could alter the behavior of the rules if they rely on the presence or absence of that property.
+
+DONE.

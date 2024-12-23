@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(reason);
+```
+This would result in different behavior because it incorrectly resolves the promise with the error reason instead of rejecting it, which would lead to a fulfilled promise instead of a rejected one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify(reason);
+```
+This would result in different behavior because it would call the notify function instead of the reject function, which is intended for reporting progress rather than handling errors, thus not properly rejecting the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject("An error occurred");
+```
+This would result in different behavior because it replaces the original reason with a static string message, which may not accurately represent the actual error that occurred, leading to loss of error context.
+
+DONE.

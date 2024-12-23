@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+cb, abort, null
+```
+This would result in different behavior because passing `null` instead of `onAbort` means that the callback will not receive the intended abort handling function, potentially leading to unhandled abort scenarios.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb, true, onAbort
+```
+This would result in different behavior because passing `true` instead of `abort` will cause the abort callback to be invoked regardless of the actual abort condition, which could lead to incorrect handling of the abort state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb, abort, cb
+```
+This would result in different behavior because passing `cb` as the third argument instead of `onAbort` means that the abort callback will be the same as the main callback, which could lead to recursive calls or unexpected behavior when an abort is triggered.
+
+DONE.

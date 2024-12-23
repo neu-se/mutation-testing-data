@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/\/index\.html$/, '/'
+```
+This would result in different behavior because it specifically targets URLs ending with "index.html" instead of any file with an "index" prefix followed by a dot and any extension, potentially missing other valid index files like "index.php" or "index.asp".
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/\/default\.[a-z]{3}$/, '/'
+```
+This would result in different behavior because it restricts the matching to only three-letter file extensions for "default", which may not match files like "default.html" or "default.php", thus failing to normalize those URLs.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/\/index\.[a-z]{2,}$/, '/'
+```
+This would result in different behavior because it changes the regex to match any file extension that is two or more characters long, which could incorrectly match files that should not be treated as index files, such as "index.ab" or "index.abc".
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve
+```
+This would result in different behavior because instead of creating a Node-style resolver that handles the callback, it would immediately resolve the promise with no callback, potentially leading to unhandled errors if the original function expects a callback.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject
+```
+This would result in different behavior because it would cause the promise to be rejected immediately instead of waiting for the Node-style callback to be invoked, which would prevent any successful resolution from occurring.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() {}
+```
+This would result in different behavior because it replaces the expected Node-style resolver with an empty function, meaning that the callback would never be called, leading to the promise hanging indefinitely without resolving or rejecting.
+
+DONE.

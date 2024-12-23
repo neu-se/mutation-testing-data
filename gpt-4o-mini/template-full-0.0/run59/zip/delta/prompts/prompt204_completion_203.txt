@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.rest()
+```
+This would result in different behavior because it uses `thisIter` instead of the original `rest`, potentially leading to an incorrect state of the `Delta` object being returned, as it may not represent the remaining operations correctly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+new Delta(thisIter.rest().slice(1))
+```
+This would result in different behavior because it slices the result of `thisIter.rest()`, which would omit the first operation, potentially altering the intended composition of the `Delta` object.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+new Delta(thisIter.rest()).concat(new Delta(this.ops))
+```
+This would result in different behavior because it concatenates the original operations with the remaining operations, which could lead to a `Delta` that contains duplicate operations or an incorrect sequence of operations.
+
+DONE.

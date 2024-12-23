@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+"rejectionHandled", unhandledReasons[at + 1], promise
+```
+This would result in different behavior because it attempts to access an index that is out of bounds for the `unhandledReasons` array, potentially leading to an `undefined` value being emitted instead of the correct reason.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+"rejectionHandled", "An error occurred", promise
+```
+This would result in different behavior because it emits a static string message ("An error occurred") instead of the actual reason for the rejection, which could mislead consumers of the event.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+"rejectionHandled", unhandledReasons[at], null
+```
+This would result in different behavior because it emits `null` as the promise instead of the actual promise object, which could cause issues for any listeners expecting a valid promise reference.
+
+DONE.

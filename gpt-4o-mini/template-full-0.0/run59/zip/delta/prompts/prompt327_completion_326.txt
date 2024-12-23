@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+inverted.retain(Op.length(baseOp));
+```
+This would result in different behavior because instead of pushing the base operation into the inverted Delta, it retains the length of the base operation, potentially losing the actual operation data and altering the intended transformation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+inverted.push({ insert: 'error' });
+```
+This would result in different behavior because it pushes a new operation with a fixed string 'error' into the inverted Delta, which does not reflect the actual operation being processed, leading to incorrect results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+inverted.delete(Op.length(baseOp));
+```
+This would result in different behavior because it deletes the length of the base operation instead of pushing it, which would remove data from the inverted Delta rather than adding it, resulting in a loss of information.
+
+DONE.

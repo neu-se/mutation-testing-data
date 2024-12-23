@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.values
+```
+This would result in different behavior because `Object.values` returns an array of the object's own enumerable property values, rather than the keys, which would lead to incorrect iteration and potentially missing attributes in the resulting object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attr).filter(key => attr[key] !== null)
+```
+This would result in different behavior because this code filters out keys with `null` values, which would change the logic of the inversion process and potentially omit valid attributes that should be included in the result.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.entries(attr)
+```
+This would result in different behavior because `Object.entries` returns an array of key-value pairs, which would not work with the subsequent `reduce` method as it expects an array of keys, leading to incorrect processing of the attributes.
+
+DONE.

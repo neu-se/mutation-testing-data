@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve()
+```
+This would result in different behavior because it creates a resolved promise instead of a deferred object, meaning that the promise returned will not have the ability to reject or resolve externally, which changes the intended asynchronous control flow.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+defer().resolve()
+```
+This would result in different behavior because it immediately resolves the deferred object, which means that the promise will be resolved right away instead of waiting for the asynchronous operation to complete, potentially leading to unexpected behavior in the promise chain.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+defer().reject()
+```
+This would result in different behavior because it immediately rejects the deferred object, causing the promise to be in a rejected state from the start, which would lead to any subsequent `.then()` handlers for success to be skipped and only the failure handlers to be executed.
+
+DONE.

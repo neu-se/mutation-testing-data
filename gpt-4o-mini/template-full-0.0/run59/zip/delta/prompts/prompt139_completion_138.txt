@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength
+```
+This would result in different behavior because it changes the condition from checking the type of the next operation to checking the length of the next operation, which could lead to incorrect handling of operations that are not of type 'insert'.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType
+```
+This would result in different behavior because it switches the context from checking the type of the current operation in `thisIter` to checking the type of the operation in `otherIter`, potentially leading to incorrect logic when composing the two deltas.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'delete'
+```
+This would result in different behavior because it changes the condition to check if the next operation is a 'delete' instead of 'insert', which could cause the logic to incorrectly process operations that should be treated as inserts.
+
+DONE.

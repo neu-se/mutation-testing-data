@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+array_lastIndexOf
+```
+This would result in different behavior because `array_lastIndexOf` would search for the last occurrence of the promise in the `unhandledRejections` array instead of the first, potentially leading to incorrect handling of the rejection tracking.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(unhandledRejections, promise) + 1
+```
+This would result in different behavior because adding 1 to the index would cause the function to return an index that is out of bounds if the promise is not found, leading to unexpected behavior when trying to access the `unhandledReasons` array.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+array_indexOf(unhandledRejections, promise) === 0 ? -1 : 0
+```
+This would result in different behavior because it would incorrectly return -1 if the promise is the first element in the array, causing the rejection to be untracked even when it should be, leading to potential memory leaks or incorrect state management.
+
+DONE.

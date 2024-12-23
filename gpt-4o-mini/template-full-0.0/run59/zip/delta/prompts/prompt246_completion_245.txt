@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(thisIter.next(opLength));
+```
+This would result in different behavior because instead of deleting the specified number of operations from `retDelta`, it would incorrectly add the operations from `thisIter` to `retDelta`, potentially altering the intended result of the `diff` operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(opLength);
+```
+This would result in different behavior because it would retain the specified number of operations instead of deleting them, which would lead to an incorrect representation of the differences between the two `Delta` objects.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.delete(opLength + 1);
+```
+This would result in different behavior because it would delete one more operation than intended, which could lead to data loss or an incorrect state in the resulting `Delta` object.
+
+DONE.

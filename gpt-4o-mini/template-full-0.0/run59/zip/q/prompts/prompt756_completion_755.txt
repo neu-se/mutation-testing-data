@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+all
+```
+This would result in different behavior because it would cause the `allResolved` function to call the `all` function instead, which would reject the promise if any of the input promises are rejected, contrary to the intended behavior of `allResolved`, which should never reject.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject(promises)
+```
+This would result in different behavior because it would immediately reject the promise with the input `promises`, regardless of their state, instead of resolving with an array of promises that have settled.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.resolve(promises.length)
+```
+This would result in different behavior because it would resolve the promise with the length of the `promises` array instead of resolving with the array of promises themselves, which would not provide the expected results for the caller.
+
+DONE.

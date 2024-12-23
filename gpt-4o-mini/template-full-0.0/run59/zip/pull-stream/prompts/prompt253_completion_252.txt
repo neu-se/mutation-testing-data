@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+nextStream()
+```
+This would result in different behavior because it would skip the processing of the current chunk and immediately attempt to read the next stream, potentially leading to data loss or incorrect sequencing of data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(new Error('Stream aborted'))
+```
+This would result in different behavior because it would immediately call the callback with an error, indicating that the stream has been aborted, rather than continuing to process the current stream, which could disrupt the expected flow of data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+nextChunk()
+```
+This would result in different behavior because it would create an infinite loop by continuously calling `nextChunk` without ever transitioning to the next stream, leading to a stack overflow or unresponsive behavior.
+
+DONE.

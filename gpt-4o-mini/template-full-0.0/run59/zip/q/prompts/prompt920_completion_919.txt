@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because passing `null` instead of a valid resolver function would cause the promise to never resolve, leading to a hanging promise that never completes.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function() { throw new Error("Error in resolver"); }
+```
+This would result in different behavior because using a function that throws an error would cause the promise to reject immediately, rather than resolving successfully, which changes the expected flow of the promise handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+function() { return "unexpected value"; }
+```
+This would result in different behavior because returning a string instead of a function would cause the promise to resolve with an unexpected value, which could lead to incorrect handling of the resolved value in subsequent promise chains.
+
+DONE.

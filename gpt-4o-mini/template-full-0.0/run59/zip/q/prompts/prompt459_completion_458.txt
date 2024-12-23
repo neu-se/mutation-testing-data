@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length, promise
+```
+This would result in different behavior because it would always refer to the length of the `unhandledRejections` array instead of the actual promise, potentially leading to incorrect indexing and failure to untrack the correct promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons, promise
+```
+This would result in different behavior because it would incorrectly use the `unhandledReasons` array instead of `unhandledRejections`, which would cause the function to attempt to find the promise in the wrong array, leading to untracked promises not being removed correctly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections[0], promise
+```
+This would result in different behavior because it would always refer to the first element of the `unhandledRejections` array, regardless of which promise is being untracked, potentially leading to incorrect behavior if multiple promises are being tracked.
+
+DONE.

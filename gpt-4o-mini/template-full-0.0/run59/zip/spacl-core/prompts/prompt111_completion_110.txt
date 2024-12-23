@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+['GET', 'POST']
+```
+This would result in different behavior because it would only allow the verbs 'GET' and 'POST', ignoring any verbs passed to the `allow` method, potentially leading to unintended access control.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(this.verbs)
+```
+This would result in different behavior because it would attempt to allow all verbs that are currently in the `verbs` object, rather than the ones specified in the method call, which could lead to incorrect permissions being granted.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+verbs.concat(['DELETE'])
+```
+This would result in different behavior because it would append 'DELETE' to the list of verbs being allowed, regardless of whether 'DELETE' was originally passed to the method, potentially allowing actions that should be denied.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+line = new Delta();
+```
+This would result in different behavior because it resets the `line` variable to a new `Delta` instance, potentially losing any accumulated operations that should have been processed by the predicate function.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+line.push(iter.next(1));
+```
+This would result in different behavior because it pushes the next operation into `line` instead of passing `line` to the predicate function, which means the predicate will not be called with the current line of operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+line = null;
+```
+This would result in different behavior because it sets `line` to `null`, which would cause a runtime error when the code attempts to access properties or methods on `line` later in the function, disrupting the flow of execution.
+
+DONE.

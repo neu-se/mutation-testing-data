@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, []);
+```
+This would result in different behavior because it initializes the queue for the key with an empty array, effectively discarding any callbacks that were previously associated with that key.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, cbs.concat());
+```
+This would result in different behavior because it creates a shallow copy of the callbacks array, which means that any modifications to the original `cbs` array after this point will not affect the callbacks stored in `_queue`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this._queue.set(key, null);
+```
+This would result in different behavior because it sets the queue for the key to `null`, which would lead to errors when trying to access or invoke callbacks later, as the code expects an array of callbacks.
+
+DONE.

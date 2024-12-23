@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve, deferred.resolve, deferred.notify
+```
+This would result in different behavior because it incorrectly uses `deferred.resolve` twice instead of using `deferred.reject`, which means that any rejection of the promise would not be handled properly, leading to unhandled promise rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.notify, deferred.reject, deferred.resolve
+```
+This would result in different behavior because it changes the order of the callbacks, which could lead to unexpected behavior in how the promise resolves or rejects, potentially causing the fulfillment callback to be called before the rejection callback.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.reject, deferred.notify, deferred.resolve
+```
+This would result in different behavior because it places `deferred.reject` as the first callback, which would cause the promise to reject immediately without waiting for the `then` method to be called, leading to a promise that is always rejected regardless of the input.
+
+DONE.

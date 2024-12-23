@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+prev[tzs[key].name] = tzs[key];
+```
+This would result in different behavior because it changes the key used in the `prev` object from the original `key` to `tzs[key].name`, which may lead to overwriting existing entries in `prev` if multiple timezones share the same name.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev[key] = { ...tzs[key], deprecated: true };
+```
+This would result in different behavior because it modifies the `deprecated` property of each timezone to `true`, effectively marking all timezones as deprecated regardless of their original state, which could lead to incorrect data being returned.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prev[key] = null;
+```
+This would result in different behavior because it sets each timezone entry in `prev` to `null`, effectively removing all timezones from the returned object, which would lead to a loss of all timezone data.
+
+DONE.

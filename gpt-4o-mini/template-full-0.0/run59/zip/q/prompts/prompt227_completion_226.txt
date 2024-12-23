@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+messages.length === 0
+```
+This would result in different behavior because it would only push the arguments to the `messages` array if it is empty, potentially causing the promise to not store any messages if it has already received messages before.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!messages
+```
+This would result in different behavior because it would check if `messages` is falsy (undefined or null), which would prevent any arguments from being pushed to `messages` after the promise has been resolved, effectively ignoring any further dispatches.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+args.length > 1
+```
+This would result in different behavior because it would only push the arguments to the `messages` array if there are more than one argument, which could lead to missing important dispatch information if the operation only has a single argument.
+
+DONE.

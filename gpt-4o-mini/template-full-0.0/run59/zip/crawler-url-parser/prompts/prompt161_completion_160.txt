@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part !== pageurl_without_last_part
+```
+This would result in different behavior because it checks for inequality instead of equality, which would lead to the "samelevel" type being incorrectly assigned when the two paths are actually the same.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part.length > pageurl_without_last_part.length
+```
+This would result in different behavior because it compares the lengths of the two paths instead of their actual values, potentially categorizing them incorrectly based on their length rather than their content.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+linkurl_without_last_part.includes(pageurl_without_last_part)
+```
+This would result in different behavior because it checks if the `pageurl_without_last_part` is a substring of `linkurl_without_last_part`, which could lead to incorrect categorization if the two paths are not meant to be compared in that manner.
+
+DONE.

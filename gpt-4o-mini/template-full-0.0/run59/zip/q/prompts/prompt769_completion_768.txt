@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return allResolved(this);
+```
+This would result in different behavior because it would create a recursive call to `allResolved`, potentially leading to a stack overflow error instead of properly resolving the promises.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return all(this).then(function() { return promises; });
+```
+This would result in different behavior because it would call `all` instead of `allResolved`, which would reject the promise if any of the promises in the array are rejected, contrary to the intended behavior of `allResolved` which should never reject.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return when(this, function(promises) { return promises; });
+```
+This would result in different behavior because it would immediately resolve with the original promises without processing them, bypassing any handling of their resolution states, which is not the intended functionality of `allResolved`.
+
+DONE.

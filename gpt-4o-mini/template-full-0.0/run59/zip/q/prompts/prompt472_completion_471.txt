@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.pop()
+```
+This would result in different behavior because `pop()` removes the last element from the `reportedUnhandledRejections` array instead of removing the specific promise that was reported, potentially leading to incorrect tracking of which promises have been handled.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections.splice(at, 0, promise)
+```
+This would result in different behavior because it attempts to insert the promise at the index `at` instead of removing it, which would cause the array to grow and lead to incorrect handling of unhandled rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+reportedUnhandledRejections[at] = null
+```
+This would result in different behavior because it sets the specific index in the `reportedUnhandledRejections` array to `null` instead of removing the promise, which would leave a `null` value in the array and could lead to confusion or errors when checking for reported unhandled rejections.
+
+DONE.

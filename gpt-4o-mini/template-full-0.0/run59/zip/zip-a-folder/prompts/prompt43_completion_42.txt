@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart + '/*');
+```
+This would result in different behavior because it changes the glob pattern to include all files and directories within the matched glob, potentially including unintended files that were not part of the original glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart.replace('*', '?'));
+```
+This would result in different behavior because it modifies the glob pattern to match only a single character instead of any sequence of characters, which could lead to missing files that were intended to be included.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+zipArchive.glob(globPart.toUpperCase());
+```
+This would result in different behavior because it changes the glob pattern to uppercase, which may not match any files if the file system is case-sensitive, leading to no files being added to the archive.
+
+DONE.

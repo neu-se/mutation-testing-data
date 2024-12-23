@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+callback(value).thenReject(new Error("Rejected"));
+```
+This would result in different behavior because it changes the resolution of the promise to always reject with a new error, regardless of the original value, which is not the intended behavior of passing the value through unchanged.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback(value).then(function() { return null; });
+```
+This would result in different behavior because it modifies the resolution to always return `null`, which discards the original value instead of passing it through unaffected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback(value).then(function() { throw "Error"; });
+```
+This would result in different behavior because it forces the promise to always throw a string error, which is not a standard error object, leading to unexpected handling of the rejection in promise chains.
+
+DONE.

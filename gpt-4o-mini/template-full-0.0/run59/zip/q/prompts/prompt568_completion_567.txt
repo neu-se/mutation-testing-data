@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.reject(result.value)
+```
+This would result in different behavior because instead of calling the `callback` function to continue the generator execution, it would reject the promise with the value of `result.value`, effectively terminating the generator prematurely.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(result.value)
+```
+This would result in different behavior because it would resolve the promise with `result.value` instead of continuing the generator execution with the `callback`, which could lead to unexpected results if `result.value` is not a promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.all(result)
+```
+This would result in different behavior because it attempts to resolve an array of promises (if `result` is treated as an iterable), which is not the intended behavior of continuing the generator execution, potentially causing errors if `result` is not an array.
+
+DONE.

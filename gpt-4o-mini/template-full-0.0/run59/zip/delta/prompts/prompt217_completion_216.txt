@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops.map(op => ({ ...op }))
+```
+This would result in different behavior because it creates a shallow copy of each operation in `other.ops`, which may not preserve references to nested objects, potentially leading to unintended mutations if the original operations are modified later.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+other.ops.concat([null])
+```
+This would result in different behavior because it appends a `null` value to the `delta.ops` array, which could lead to unexpected results when processing the operations, as the `null` value does not represent a valid operation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+other.ops.reverse()
+```
+This would result in different behavior because it reverses the order of the operations in `other.ops`, which would change the sequence in which they are applied, potentially altering the final result of the concatenation.
+
+DONE.

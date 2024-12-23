@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+`/${part}`
+```
+This would result in different behavior because it does not escape special regex characters (like `.` or `$`), potentially leading to incorrect regex patterns that match unintended strings.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+`/${part.toUpperCase()}`
+```
+This would result in different behavior because it transforms the path segment to uppercase, which may not match the intended case-sensitive paths, leading to mismatches in path matching.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+`/${part.replace(/([.*])/g, '\\$1')}`
+```
+This would result in different behavior because it incorrectly escapes the `*` character instead of the `.` and `$`, which could lead to unexpected matches in the regex pattern.
+
+DONE.

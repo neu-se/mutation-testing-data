@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude - 180) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because it incorrectly subtracts 180 from the longitude instead of adding it, which would lead to incorrect tile calculations.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+(coordinate.longitude + 90) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because it adds 90 to the longitude instead of 180, which would misplace the calculated tile position significantly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+(coordinate.latitude + 180) / 360 * Math.pow(2, zoom)
+```
+This would result in different behavior because it mistakenly uses the latitude instead of the longitude, leading to completely incorrect tile calculations based on the wrong coordinate.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+callback.call()
+```
+This would result in different behavior because `callback.call()` does not pass the context of the promise to the callback, which may lead to unexpected results if the callback relies on `this` being the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback.fcall.bind(null)
+```
+This would result in different behavior because `callback.fcall.bind(null)` binds the callback to `null`, which means that the context of `this` inside the callback will not refer to the promise, potentially causing errors if the callback expects to access properties of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback.fcall.call(this, reason)
+```
+This would result in different behavior because `callback.fcall.call(this, reason)` attempts to call `fcall` with the current context and passes `reason` as an argument, which may not be the intended behavior if `fcall` is not designed to accept any arguments.
+
+DONE.

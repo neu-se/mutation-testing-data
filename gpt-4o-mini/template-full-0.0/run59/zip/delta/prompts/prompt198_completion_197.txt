@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+newOp, delta.ops[delta.ops.length - 1]
+```
+This would result in different behavior because it swaps the order of the operands, potentially leading to incorrect composition of operations in the `Delta` object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.ops[0], newOp
+```
+This would result in different behavior because it always uses the first operation in the `delta.ops` array instead of the last one, which could lead to incorrect results when composing operations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+newOp.attributes, delta.ops[delta.ops.length - 1].attributes
+```
+This would result in different behavior because it compares and uses the attributes of the new operation and the last operation instead of the operations themselves, which could lead to incorrect attribute handling in the composed `Delta`.
+
+DONE.

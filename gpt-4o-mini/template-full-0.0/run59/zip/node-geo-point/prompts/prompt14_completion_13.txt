@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+typeof point.coordinates === 'object'
+```
+This would result in different behavior because it would incorrectly allow non-array objects (like objects with properties) to pass the check, leading to potential runtime errors when the code expects an array.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+point.coordinates.length === 3
+```
+This would result in different behavior because it would require the coordinates array to have exactly three elements instead of two, causing valid GeoJSON points to be rejected.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.coordinates instanceof Array
+```
+This would result in different behavior because it would only check if `point.coordinates` is an instance of `Array`, which may not work correctly in environments with different global contexts (like iframes), potentially allowing non-array types to pass the check.
+
+DONE.

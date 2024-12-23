@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+result.value
+```
+This would result in different behavior because it attempts to access the `value` property of the `result` object, which may not exist, leading to an undefined value being returned instead of the expected result.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+result.done ? Q(0) : when(result.value, callback, errback);
+```
+This would result in different behavior because it changes the fulfilled value to `0` when the generator is done, instead of returning the actual value from the generator, which could lead to incorrect results in promise handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+callback();
+```
+This would result in different behavior because it calls the `callback` function immediately without waiting for the promise to resolve, potentially leading to unexpected behavior or errors if the generator is not ready to yield a value.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve()
+```
+This would result in different behavior because `deferred.resolve()` immediately resolves the promise with a value, whereas `deferred.makeNodeResolver()` creates a function that expects a Node-style callback, which will resolve or reject the promise based on the callback's arguments.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("An error occurred"))
+```
+This would result in different behavior because `deferred.reject(new Error("An error occurred"))` will immediately reject the promise with a specific error, while `deferred.makeNodeResolver()` is intended to handle the resolution or rejection based on the callback provided by the Node-style function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.makeNodeResolver.bind(null, "unexpected")
+```
+This would result in different behavior because `deferred.makeNodeResolver.bind(null, "unexpected")` binds the first argument of the resolver to the string "unexpected", which is not a valid Node-style callback, potentially leading to unexpected behavior or errors when the callback is invoked.
+
+DONE.

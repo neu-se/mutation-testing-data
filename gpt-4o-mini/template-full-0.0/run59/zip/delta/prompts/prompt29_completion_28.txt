@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Object.keys(attr)
+```
+This would result in different behavior because it would iterate over the keys of `attr` instead of `base`, potentially leading to incorrect mappings in the `baseInverted` object, as it would not consider the original base values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base).filter(key => base[key] !== null)
+```
+This would result in different behavior because it would only include keys from `base` that are not `null`, which could lead to missing keys in the `baseInverted` object that should have been included, altering the intended logic of the function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.keys(base).filter(key => base[key] === undefined)
+```
+This would result in different behavior because it would only include keys from `base` that are `undefined`, which would result in an empty `baseInverted` object if all keys in `base` have defined values, thus failing to capture the intended differences.
+
+DONE.

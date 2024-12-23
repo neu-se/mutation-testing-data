@@ -1,0 +1,21 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+const verb = verbs[0]
+```
+This would result in different behavior because it only allows the first verb in the `verbs` array to be marked as allowed, ignoring any additional verbs passed to the `allow` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+for (const verb of Object.keys(this.verbs)) {
+```
+This would result in different behavior because it iterates over the keys of the existing `verbs` object instead of the provided `verbs` array, potentially marking verbs that were not intended to be allowed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+for (const verb of verbs) {
+  this.verbs[verb] = false
+}
+```
+This would result in different behavior because it incorrectly marks all provided verbs as denied instead of allowed, effectively negating the purpose of the `allow` method.
+
+DONE.

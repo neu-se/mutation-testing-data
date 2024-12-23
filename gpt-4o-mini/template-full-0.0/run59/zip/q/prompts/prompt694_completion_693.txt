@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(object)
+```
+This would result in different behavior because it would immediately resolve the promise with the provided object, rather than dispatching the "apply" method, which may lead to different handling of the promise's state and its eventual resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject(object)
+```
+This would result in different behavior because it would create a rejected promise with the provided object, instead of dispatching the "apply" method, which would prevent the function from being called and lead to an error state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("apply", [null, args])
+```
+This would result in different behavior because it would pass `null` as the first argument to the `dispatch` method instead of `void 0`, which could change how the function is executed and affect the context in which it runs.
+
+DONE.

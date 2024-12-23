@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!options.dest.startsWith('/')
+```
+This would result in different behavior because it checks if the destination path does not start with a forward slash, which would incorrectly allow relative paths instead of validating if the path is absolute.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+options.dest === ''
+```
+This would result in different behavior because it checks if the destination path is an empty string, which would not properly validate whether the path is absolute or not, potentially leading to incorrect path resolution.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+options.dest.includes('..')
+```
+This would result in different behavior because it checks if the destination path contains a parent directory reference (`..`), which does not determine if the path is absolute and could incorrectly allow paths that are not absolute.
+
+DONE.

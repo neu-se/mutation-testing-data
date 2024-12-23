@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.defer("invalid");
+```
+This would result in different behavior because it passes an invalid argument to the `Q.defer` function, which may cause the promise to not be created properly, leading to unexpected behavior when trying to resolve or reject the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred = Q.defer();
+```
+This would result in different behavior because it reassigns the `deferred` variable to a new promise, effectively losing the reference to the original `deferred` object, which could lead to unresolved promises and incorrect handling of the promise's state.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred = null;
+```
+This would result in different behavior because setting `deferred` to `null` would cause any subsequent calls to `deferred.resolve`, `deferred.reject`, or `deferred.notify` to throw an error, as `null` does not have these methods, leading to unhandled promise rejections.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'*.txt'
+```
+This would result in different behavior because it hardcodes the glob pattern to only match `.txt` files, ignoring the actual `src` input, which could lead to missing other file types that should be included in the archive.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src + '/*'
+```
+This would result in different behavior because it changes the `src` to a path that appends a wildcard, which may not correctly match the intended files if `src` is already a glob pattern or a directory, potentially leading to incorrect file selection.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.replace(/\\/g, '/')
+```
+This would result in different behavior because it modifies the `src` by replacing backslashes with forward slashes, which could lead to incorrect path resolution on Windows systems, potentially causing the archiving process to fail if the paths are not correctly recognized.
+
+DONE.

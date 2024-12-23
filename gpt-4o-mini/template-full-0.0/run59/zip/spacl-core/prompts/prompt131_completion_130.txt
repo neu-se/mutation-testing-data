@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+prop !== undefined && match[index + 1] === prop
+```
+This would result in different behavior because it incorrectly checks for the presence of `prop` and requires that the matched value is equal to `prop`, which would lead to allowing paths that should be denied.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prop === null || match[index + 1] === prop
+```
+This would result in different behavior because it allows `null` properties to pass the check, which could lead to incorrect matches being considered valid when they should not be.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+prop === undefined && match[index + 1] === prop
+```
+This would result in different behavior because it would only allow the match if `prop` is `undefined`, which contradicts the original logic and would cause valid paths to be incorrectly denied.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+delta.delete(otherOp.delete);
+```
+This would result in different behavior because it would remove a specified number of operations from the `delta` instead of adding the `otherOp`, potentially leading to data loss or incorrect state in the resulting `Delta`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+delta.push(thisIter.next());
+```
+This would result in different behavior because it would push the next operation from `thisIter` instead of `otherOp`, which could lead to an incorrect composition of operations and alter the intended result of the `compose` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+delta.push(otherOp.retain);
+```
+This would result in different behavior because it would attempt to push a numeric value (the retain count) into the `delta`, which is not a valid operation and could cause runtime errors or unexpected behavior in the `Delta` object.
+
+DONE.

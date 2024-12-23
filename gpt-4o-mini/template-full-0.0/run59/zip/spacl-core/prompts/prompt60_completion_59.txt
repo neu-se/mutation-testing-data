@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'^(.*)$'
+```
+This would result in different behavior because it changes the regex to match any string instead of the intended path format, allowing invalid paths to be considered valid.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+finalise() + '.*'
+```
+This would result in different behavior because it appends a wildcard to the end of the regex, which could match additional characters after a valid path, potentially allowing incorrect matches.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+parts.join('') + '$'
+```
+This would result in different behavior because it concatenates the parts without the necessary anchors, leading to a regex that may not correctly enforce the start and end of the path, allowing for unintended matches.
+
+DONE.

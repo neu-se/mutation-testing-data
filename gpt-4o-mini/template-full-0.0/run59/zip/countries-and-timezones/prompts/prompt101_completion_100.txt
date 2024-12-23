@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+tzs[key].deprecated === false
+```
+This would result in different behavior because it explicitly checks for `false` instead of checking for falsiness, which could lead to cases where a value of `undefined` or `null` would be treated as valid, potentially including deprecated timezones.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!tzs[key].active
+```
+This would result in different behavior because it changes the condition to check for an `active` property instead of `deprecated`, which may not be present in the `tzs` object, leading to incorrect filtering of timezones.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+tzs[key].deprecated !== true
+```
+This would result in different behavior because it checks for strict inequality against `true`, which means that if `deprecated` is `undefined`, `null`, or any other value, it would still pass the condition, potentially including timezones that should be excluded.
+
+DONE.

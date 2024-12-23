@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+other.ops[other.ops.length - 1]
+```
+This would result in different behavior because it retrieves the last operation from the `other.ops` array instead of the first, potentially altering the composition of the delta by using a different operation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+other.ops[0] || {}
+```
+This would result in different behavior because it defaults to an empty object if `other.ops[0]` is `undefined`, which could lead to unexpected behavior in the composition process if the first operation is not present.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+other.ops[0].delete
+```
+This would result in different behavior because it attempts to access the `delete` property of the first operation in `other.ops`, which may not exist or be defined, leading to potential errors or incorrect behavior in the delta composition.
+
+DONE.

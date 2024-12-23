@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/[^/]+:|:\/|:$/
+```
+This would result in different behavior because it allows for one or more characters before a colon, which could incorrectly validate paths that should be considered malformed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[^/]*:|:\/|:$/
+```
+This would result in different behavior because it allows for zero or more characters before a colon, potentially allowing empty captures which should be invalid.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^/]:|:\/|:/
+```
+This would result in different behavior because it allows paths that end with a colon, which should not be valid according to the original specification.
+
+DONE.

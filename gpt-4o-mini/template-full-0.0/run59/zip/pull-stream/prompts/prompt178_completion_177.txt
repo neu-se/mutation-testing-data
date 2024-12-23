@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return cb(false, abort)
+```
+This would result in different behavior because it changes the callback invocation to pass `false` as the first argument instead of calling `abortCb`, which may lead to incorrect handling of the abort condition.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return cb(null, onAbort)
+```
+This would result in different behavior because it incorrectly passes the `onAbort` function as the second argument to the callback instead of invoking `abortCb`, which could lead to unexpected results when the callback is executed.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return cb(abort, null)
+```
+This would result in different behavior because it swaps the order of the arguments in the callback, passing `abort` as the first argument and `null` as the second, which is not the intended behavior and could confuse the caller about the state of the operation.
+
+DONE.

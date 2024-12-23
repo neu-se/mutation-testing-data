@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.done(makeGenerator());
+```
+This would result in different behavior because it calls `makeGenerator()` directly instead of wrapping it in a promise, which means that any errors thrown by the generator will not be caught and handled properly, potentially leading to unhandled promise rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.done(makeGenerator.call(this, arguments));
+```
+This would result in different behavior because it incorrectly passes `arguments` to `makeGenerator`, which may not be the intended way to invoke the generator function, potentially leading to unexpected results or errors if the generator expects a different set of parameters.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.done(makeGenerator.apply(this, []));
+```
+This would result in different behavior because it calls `makeGenerator` with an empty array instead of the actual arguments, which means that the generator will not receive any input parameters, potentially causing it to behave incorrectly or throw errors if it relies on those parameters.
+
+DONE.

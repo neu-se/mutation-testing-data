@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/(?:bison|cod|deer|fowl|halibut|moose|sheep)s/i, function(w) { return w })
+```
+This would result in different behavior because it incorrectly matches plural forms of the specified animals, which should not change, but the regex now requires an 's' at the end, potentially causing incorrect pluralization for other words.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/[^aeiou]y$/i, function(w) { return w.substr(0, w.length - 1) + 'ies' })
+```
+This would result in different behavior because it removes the specific rule for words ending in 'quy', which would lead to incorrect pluralization for words like "soliloquy" that should follow a different rule.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/man$/i, function(w) { return w.replace(/a/, 'e') })
+```
+This would result in different behavior because it changes the regex to only match "man" without the optional "wo" prefix,

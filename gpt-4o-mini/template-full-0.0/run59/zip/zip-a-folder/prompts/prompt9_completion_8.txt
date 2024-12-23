@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+src.length === 0
+```
+This would result in different behavior because it checks if the `src` string is empty instead of checking if it is a glob pattern, which would allow the code to proceed even if `src` is a valid glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.includes('*')
+```
+This would result in different behavior because it checks if the `src` string contains an asterisk character, which is a common indicator of a glob pattern, but does not cover all glob cases, potentially leading to incorrect assumptions about the nature of `src`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!src.startsWith('/')
+```
+This would result in different behavior because it checks if `src` does not start with a forward slash, which is unrelated to whether `src` is a glob pattern, and could incorrectly allow or disallow access based on the path format.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+callback && typeof callback.call === "function"
+```
+This would result in different behavior because it would incorrectly allow the execution of the `finally` callback if `callback` is defined and has a `call` method, which does not guarantee that it can be applied correctly in the context of the promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+callback === null
+```
+This would result in different behavior because it would only throw an error if `callback` is explicitly `null`, allowing any other falsy values (like `undefined` or `false`) to pass through, which could lead to unexpected behavior when the `finally` callback is invoked.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+typeof callback !== "object"
+```
+This would result in different behavior because it would throw an error if `callback` is not an object, which would incorrectly reject valid function callbacks that are not objects, such as function literals or arrow functions.
+
+DONE.

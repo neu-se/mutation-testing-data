@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+src.split(';')
+```
+This would result in different behavior because it changes the delimiter from a comma to a semicolon, which would cause the glob parts to be split incorrectly, potentially leading to no files being matched if the original `src` string does not contain semicolons.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.split('').forEach((globPart) => {
+```
+This would result in different behavior because it splits the `src` string into individual characters instead of splitting it by a specific delimiter, which would cause each character to be treated as a separate glob part, likely resulting in incorrect file matching.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.split(',').map(part => part.trim()).forEach((globPart) => {
+```
+This would result in different behavior because it introduces a `map` function that trims whitespace from each part after splitting, which could lead to different glob patterns being used if the original `src` had leading or trailing spaces, potentially affecting the matching of files.
+
+DONE.

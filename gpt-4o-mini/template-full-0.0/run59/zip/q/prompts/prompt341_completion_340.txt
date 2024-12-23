@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred = Promise.resolve();
+```
+This would result in different behavior because it creates a resolved promise immediately, which would cause the `then` callbacks to be executed right away, rather than waiting for the original promise to resolve.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred = Promise.reject();
+```
+This would result in different behavior because it creates a rejected promise immediately, which would cause the `rejected` callback to be executed right away, regardless of the state of the original promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred = { resolve: function() {}, notify: function() {} };
+```
+This would result in different behavior because it creates a `deferred` object that lacks the proper promise functionality, meaning that the `then` method would not work as intended, leading to unhandled promise states.
+
+DONE.

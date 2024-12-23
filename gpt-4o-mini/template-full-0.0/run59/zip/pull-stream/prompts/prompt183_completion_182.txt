@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+i > array.length
+```
+This would result in different behavior because it will incorrectly allow the callback to be invoked when `i` is greater than the length of the array, which could lead to an attempt to access an undefined element.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+i === array.length - 1
+```
+This would result in different behavior because it will only call the callback with `true` when `i` is the last index of the array, potentially skipping the last element and causing an off-by-one error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+i < 0
+```
+This would result in different behavior because it will never be true for a valid index, meaning the callback will always return `null` and never provide an element from the array, effectively breaking the functionality.
+
+DONE.

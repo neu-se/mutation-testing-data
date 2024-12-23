@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!isGlob(src)
+```
+This would result in different behavior because it negates the original check, causing the code to treat a glob pattern as a regular directory, which could lead to incorrect handling of the source input.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+src.includes('*')
+```
+This would result in different behavior because it checks if the source string contains an asterisk, which is a common character in glob patterns, rather than using the `isGlob` function, potentially leading to false positives for non-glob paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+src.length > 0
+```
+This would result in different behavior because it simply checks if the source string is non-empty, ignoring the actual format of the string, which could allow any string to be processed as a glob, regardless of whether it is a valid glob pattern or not.
+
+DONE.

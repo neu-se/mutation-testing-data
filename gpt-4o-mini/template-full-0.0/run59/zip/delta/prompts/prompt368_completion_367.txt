@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType()
+```
+This would result in different behavior because it incorrectly checks the type of the current operation from `thisIter` instead of `otherIter`, potentially leading to incorrect transformations when the two Deltas are being compared.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekLength() > 0 ? 'insert' : 'delete'
+```
+This would result in different behavior because it forces the condition to always evaluate to 'insert' if there are any operations in `otherIter`, which could lead to incorrect handling of operations that should be treated as 'delete'.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType() === 'delete' ? 'insert' : 'delete'
+```
+This would result in different behavior because it inverts the logic of the type check, causing the code to treat 'delete' operations as 'insert', which would disrupt the intended transformation logic between the two Deltas.
+
+DONE.

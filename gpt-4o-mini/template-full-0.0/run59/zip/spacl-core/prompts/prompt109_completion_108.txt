@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+path + ctx
+```
+This would result in different behavior because it concatenates the `path` and `ctx` values as strings, which may lead to incorrect evaluations in the `matches` method, as it changes the expected input format.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.toUpperCase()
+```
+This would result in different behavior because it transforms the `path` to uppercase, which may cause mismatches if the policy's path is case-sensitive, leading to incorrect results in the `matches` method.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+ctx || path
+```
+This would result in different behavior because it uses the `ctx` if it is truthy; otherwise, it falls back to `path`. This could lead to unexpected results if `ctx` is not intended to be used in this context, potentially ignoring the actual `path` value.
+
+DONE.

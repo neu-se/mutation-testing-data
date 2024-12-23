@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return new GeoPoint(latitude + 1, longitude);
+```
+This would result in different behavior because it incorrectly adds 1 to the latitude, which would shift the destination point north by approximately 111 kilometers, regardless of the actual distance and bearing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return new GeoPoint(latitude, longitude + 360);
+```
+This would result in different behavior because it incorrectly adds 360 to the longitude, which would wrap the longitude around and result in an invalid geographical point, as longitudes should be normalized to the range of -180 to 180 degrees.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return new GeoPoint(φ2, λ1);
+```
+This would result in different behavior because it incorrectly uses the original longitude (λ1) instead of the calculated longitude (λ2), effectively ignoring the bearing and distance calculations, leading to an incorrect destination point.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+src
+```
+This would result in different behavior because it would check the read and write permissions of the source directory instead of the target directory, potentially allowing operations that should be restricted.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.join(targetBasePath, 'dummy.txt')
+```
+This would result in different behavior because it checks permissions on a non-existent file (`dummy.txt`) in the target directory, which would always throw an error, regardless of the actual permissions of the target directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+targetFilePath
+```
+This would result in different behavior because it would check the permissions of the target file path instead of the target directory, which could lead to a situation where the directory is writable but the file is not, causing unexpected permission errors.
+
+DONE.

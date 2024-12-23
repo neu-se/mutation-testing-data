@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.merge(op.attributes, baseOp.attributes)
+```
+This would result in different behavior because instead of inverting the attributes, it would merge them, potentially leading to incorrect attribute handling during the transformation process.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.invert(op.attributes)
+```
+This would result in different behavior because it would attempt to invert only the current operation's attributes without considering the base operation's attributes, which could lead to loss of context and incorrect transformations.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.diff(op.attributes, baseOp.attributes)
+```
+This would result in different behavior because it would compute the difference between the two sets of attributes instead of inverting them, which could lead to incorrect attribute states in the resulting Delta.
+
+DONE.

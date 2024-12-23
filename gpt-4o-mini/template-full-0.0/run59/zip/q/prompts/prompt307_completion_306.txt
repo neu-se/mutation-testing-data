@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).catch(reject);
+```
+This would result in different behavior because it will only handle the rejection of the promise and will not resolve it, potentially causing the race function to never resolve if any promise in the array is rejected.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(reject);
+```
+This would result in different behavior because it will immediately call the `reject` function with the resolved value of the promise instead of resolving the race, which is not the intended behavior of the race function.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).then(resolve, resolve);
+```
+This would result in different behavior because it will resolve the race promise with the value of the first promise that resolves, regardless of whether it was intended to handle rejections, thus ignoring the rejection behavior entirely.
+
+DONE.

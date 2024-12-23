@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: null }
+```
+This would result in different behavior because it assigns `null` to the timezone instead of the actual timezone object, effectively omitting all timezones from the returned object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+prev, { [key]: tzs[key].deprecated ? tzs[key] : null }
+```
+This would result in different behavior because it would include the timezone only if it is marked as deprecated, potentially filtering out valid timezones that are not deprecated.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.assign(prev, { [key]: tzs[key].name })
+```
+This would result in different behavior because it assigns only the name of the timezone instead of the entire timezone object, losing all other properties associated with the timezone.
+
+DONE.

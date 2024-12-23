@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(ended, null)
+```
+This would result in different behavior because it changes the order of the arguments passed to the callback, which may lead to incorrect handling of the data and the end state.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, undefined)
+```
+This would result in different behavior because it passes `undefined` as the data instead of the actual `data`, which could cause downstream consumers of the callback to behave incorrectly when they expect valid data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(1, data)
+```
+This would result in different behavior because it passes a constant value `1` as the first argument instead of the actual `ended` state, which could mislead the caller about whether the reading has ended or not.
+
+DONE.

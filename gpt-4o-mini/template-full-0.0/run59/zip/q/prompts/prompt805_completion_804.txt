@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object)["then"](callback)
+```
+This would result in different behavior because it would change the promise chain to resolve with the `callback` immediately instead of waiting for the promise to settle, potentially leading to incorrect handling of the promise's resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object)["catch"](callback)
+```
+This would result in different behavior because it would only handle rejections of the promise, ignoring the fulfillment case and potentially leading to unhandled promise rejections.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object)["done"](callback)
+```
+This would result in different behavior because it would attempt to finalize the promise chain immediately, which could lead to unhandled errors being thrown instead of allowing the `callback` to execute after the promise settles.
+
+DONE.

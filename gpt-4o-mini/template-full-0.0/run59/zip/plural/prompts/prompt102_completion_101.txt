@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/bison|cod|deer|fowl|halibut|moose|sheep/i, function(w) { return w })
+```
+This would result in different behavior because it changes the regex to match only the words without the word boundary `\b`, which could lead to incorrect matches in cases where these words are part of larger words.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/bison|cod|deer|fowl|halibut|moose|sheep/i, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly adds an 's' to the end of the matched uncountable nouns, which contradicts the original intent of the rule that these nouns do not have a plural form.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/bison|cod|deer|fowl|halibut|moose|sheep/i, function(w) { return w.toUpperCase() })
+```
+This would result in different behavior because it transforms the

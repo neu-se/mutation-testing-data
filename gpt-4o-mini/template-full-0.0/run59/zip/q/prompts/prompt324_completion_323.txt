@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+fallback.apply(promise, args);
+```
+This would result in different behavior because it uses `apply` instead of `call`, which means that the `args` array will be treated as individual arguments rather than as a single array, potentially leading to unexpected results if `args` contains more than one element.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+reject(new Error("Operation not supported: " + op));
+```
+This would result in different behavior because it directly rejects the promise with a new error message instead of attempting to call the fallback function, which means that the promise will be rejected without any chance of executing the fallback logic.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+descriptor[op]();
+```
+This would result in different behavior because it calls the method on the descriptor without passing any arguments, which could lead to errors if the method expects arguments, resulting in a failure to execute the intended operation correctly.
+
+DONE.

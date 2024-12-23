@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+retDelta.delete(opLength);
+```
+This would result in different behavior because instead of adding the operation to `retDelta`, it would remove `opLength` number of operations, potentially leading to data loss and incorrect results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+retDelta.retain(opLength + 1);
+```
+This would result in different behavior because it would incorrectly retain one more operation than intended, which could lead to an off-by-one error in the resulting delta.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+retDelta.push(thisIter.next(opLength));
+```
+This would result in different behavior because it would push the next operation from `thisIter` instead of `otherOp`, which could lead to incorrect merging of operations from different sources.
+
+DONE.

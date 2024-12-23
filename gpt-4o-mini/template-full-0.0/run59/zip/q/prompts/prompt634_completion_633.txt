@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q.get(object, key)
+```
+This would result in different behavior because it attempts to retrieve the value of the property `key` from the `object` instead of deleting the property, which would lead to an unexpected result when the intention is to remove a property.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.set(object, key, null)
+```
+This would result in different behavior because it sets the property `key` on the `object` to `null` instead of deleting it, which means the property will still exist but with a value of `null`, rather than being removed entirely.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q.dispatch(object, "get", [key])
+```
+This would result in different behavior because it sends a "get" operation to the `object` instead of a "delete" operation, which would not remove the property but instead attempt to retrieve its value, leading to incorrect functionality.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+row.val === null
+```
+This would result in different behavior because it checks if `row.val` is `null` instead of `undefined`, which means that rows with an `undefined` value would be incorrectly processed as valid and stored in `_data`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+row.val !== undefined && row.val !== null
+```
+This would result in different behavior because it allows any value that is not `undefined` or `null` to be stored, which could lead to unexpected values being added to `_data`, including falsy values like `0` or `''`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+!row.val
+```
+This would result in different behavior because it evaluates to `true` for any falsy value (including `undefined`, `null`, `0`, `''`, and `false`), which would cause more rows to be deleted than intended, potentially leading to data loss.
+
+DONE.

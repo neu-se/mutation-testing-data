@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).sort()
+```
+This would result in different behavior because it changes the order of the segments in the path, which could affect how the regex is compiled and how paths are matched.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+spec.split(',').slice(1).reverse()
+```
+This would result in different behavior because it changes the delimiter from '/' to ',', which would not correctly split the path segments, leading to incorrect regex generation.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+spec.split('/').slice(1).map(part => part.toUpperCase())
+```
+This would result in different behavior because it transforms each segment to uppercase, which could lead to mismatches when comparing against case-sensitive paths.
+
+DONE.

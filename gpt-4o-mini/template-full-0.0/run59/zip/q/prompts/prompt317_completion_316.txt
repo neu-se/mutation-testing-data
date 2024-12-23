@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it would cause the `promise` variable to be `null`, leading to runtime errors when methods are called on it, as `null` does not have the properties or methods of a Promise object.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Object.create(null)
+```
+This would result in different behavior because it creates an object with no prototype, meaning that the `promise` object would not inherit any methods from `Promise.prototype`, resulting in missing functionality when trying to use promise methods like `then` or `catch`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Object.create(Promise.prototype, { customProp: { value: 42 } })
+```
+This would result in different behavior because it creates a new object that has an additional property `customProp` with a value of `42`, which could interfere with the expected behavior of the Promise object, potentially leading to unexpected results when accessing properties or methods.
+
+DONE.

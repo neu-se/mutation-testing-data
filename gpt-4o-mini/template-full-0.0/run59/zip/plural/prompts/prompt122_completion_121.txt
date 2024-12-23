@@ -1,0 +1,15 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/tea|sugar|water|air|rice|knowledge|beauty|anger|fear|love|money|research|safety|evidence/i, function(w) { return w + 's' })
+```
+This would result in different behavior because it incorrectly adds an 's' to uncountable nouns, which should not have a plural form.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/(?:tea|sugar|water|air|rice|knowledge|beauty|anger|fear|love|money|research|safety|evidence)/i, function(w) { return w })
+```
+This would result in different behavior because it removes the word boundary `\b`, allowing for partial matches, which could incorrectly match substrings of other words.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/(?:tea|sugar|water|air|rice|knowledge|beauty|anger|fear|love|money|research|safety|evidence)\b/i, function(w) { return w.toUpperCase() })

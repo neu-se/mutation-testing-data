@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+URL.resolve(parsedBaseUrl, parsedBaseUrl)
+```
+This would result in different behavior because it uses `parsedBaseUrl` instead of `parsedUrl`, which means it will always resolve the base URL against itself rather than the current URL, leading to incorrect URL resolution.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+URL.resolve(parsedBaseUrl, 'http://example.com')
+```
+This would result in different behavior because it uses a hardcoded URL ('http://example.com') instead of the dynamically parsed `parsedUrl`, which would ignore the actual current URL being processed and always resolve to the same endpoint.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+URL.format(parsedBaseUrl)
+```
+This would result in different behavior because it formats the base URL instead of resolving it with the current URL, which means the function would return the base URL as a string rather than a resolved URL object, potentially breaking the expected output structure.
+
+DONE.

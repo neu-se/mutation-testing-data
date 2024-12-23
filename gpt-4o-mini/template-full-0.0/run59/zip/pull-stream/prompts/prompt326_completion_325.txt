@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+console.error(end)
+```
+This would result in different behavior because instead of calling the `once` function when `end` is truthy, it logs the `end` value to the console, which may prevent the intended cleanup or finalization logic from executing.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+return
+```
+This would result in different behavior because it exits the function early without calling `once`, meaning that the `onEnd` callback will never be invoked, potentially leading to resource leaks or unhandled states.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+once(true)
+```
+This would result in different behavior because it calls the `once` function with `true` as an argument, which would cause the `onEnd` callback to be invoked with `null`, regardless of the actual `end` value, potentially leading to incorrect handling of the stream's end state.
+
+DONE.

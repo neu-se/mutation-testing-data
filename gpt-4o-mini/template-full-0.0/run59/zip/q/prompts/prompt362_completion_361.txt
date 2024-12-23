@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+_rejected(new Error("Custom rejection error"));
+```
+This would result in different behavior because it forces the promise to always reject with a custom error message, regardless of the fulfillment value, which changes the expected outcome of the promise chain.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(null);
+```
+This would result in different behavior because it resolves the promise with `null` instead of the fulfilled value, which could lead to unexpected results in subsequent `.then()` calls that expect a valid value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve(value + 1);
+```
+This would result in different behavior because it modifies the fulfilled value by incrementing it by 1, which changes the outcome of the promise chain and could lead to incorrect results if the original value was expected.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+op.retain
+```
+This would result in different behavior because it would incorrectly use the `retain` property of the operation instead of its length, potentially leading to incorrect deletions in the inverted delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.insert.length
+```
+This would result in different behavior because it would assume that the `insert` property is always a string or an array, which may not be the case, leading to runtime errors or incorrect behavior when `insert` is `null` or an unsupported type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+0
+```
+This would result in different behavior because it would always delete zero characters, effectively making the delete operation a no-op, which could lead to incorrect results when inverting the delta.
+
+DONE.

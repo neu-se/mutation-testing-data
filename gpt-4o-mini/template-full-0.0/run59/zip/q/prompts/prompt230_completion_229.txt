@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+op === "when" && operands[0]
+```
+This would result in different behavior because it checks the first operand instead of the second, which may lead to incorrect handling of progress listeners when the expected operand is not the first one.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op !== "when" && operands[1]
+```
+This would result in different behavior because it changes the condition to check if the operation is not "when", which would cause progress listeners to be added incorrectly or not at all when the operation is "when".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op === "then" && operands[1]
+```
+This would result in different behavior because it changes the operation being checked from "when" to "then", which would lead to progress listeners being added only for "then" operations, potentially missing "when" operations entirely.
+
+DONE.

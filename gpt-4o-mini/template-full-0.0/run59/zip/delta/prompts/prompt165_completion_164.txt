@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekLength
+```
+This would result in different behavior because it changes the method being called from checking the type of the next operation to checking the length of the next operation, which could lead to incorrect handling of operations in the composition logic.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+otherIter.peekType
+```
+This would result in different behavior because it switches the context from checking the type of the current operation in `thisIter` to checking the type of the operation in `otherIter`, potentially leading to incorrect logic when composing operations from two different deltas.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+thisIter.peekType() === 'insert'
+```
+This would result in different behavior because it introduces a specific condition that checks if the operation is an 'insert', which could alter the flow of the composition logic and lead to missing or incorrectly processing operations that are not inserts.
+
+DONE.

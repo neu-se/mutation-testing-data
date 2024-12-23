@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+addRule(/criterion/, 'criteria')
+```
+This would result in different behavior because it uses a string instead of a regular expression for the first argument, which means it will not match the word "criterion" unless it is exactly that string, potentially missing other cases that should be handled by the original regex.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+addRule(/criteria$/, function(w) { return w + 's' })
+```
+This would result in different behavior because it changes the rule to match words ending with "criteria" and appends 's' instead of returning 'criteria' as the plural, which is incorrect for the word "criterion".
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+addRule(/criterion$/, function(w) { return w + 'es' })
+```
+This would result in different behavior because it incorrectly assumes that the plural of "criterion" is formed by adding 'es', which is not the correct pluralization, leading to incorrect results for that specific case.
+
+DONE.

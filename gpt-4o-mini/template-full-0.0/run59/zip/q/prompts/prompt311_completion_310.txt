@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Promise.resolve(answerP[i])
+```
+This would result in different behavior because it would resolve the promise immediately with the value of `answerP[i]`, rather than treating it as a promise that needs to be settled, potentially leading to incorrect behavior if `answerP[i]` is not already a promise.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q.reject(answerPs[i])
+```
+This would result in different behavior because it would reject the promise with the value of `answerPs[i]`, causing the entire race to fail immediately if any of the promises in the array are rejected, rather than waiting for the first promise to settle.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(answerPs[i]).catch(reject)
+```
+This would result in different behavior because it would handle the rejection of each promise individually and call `reject` for each one, rather than allowing the race to resolve with the first settled promise, which could lead to unexpected results in the promise race behavior.
+
+DONE.

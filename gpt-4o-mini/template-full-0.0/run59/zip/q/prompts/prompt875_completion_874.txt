@@ -1,0 +1,21 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer(true);
+```
+This would result in different behavior because it initializes the deferred object with a resolved state instead of a pending state, causing the promise to resolve immediately rather than waiting for the Node function to complete.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer();
+deferred.resolve();
+```
+This would result in different behavior because it resolves the deferred promise immediately after creation, bypassing the intended asynchronous behavior of waiting for the Node function to execute.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+var deferred = defer();
+deferred.reject(new Error("Forced rejection"));
+```
+This would result in different behavior because it forces the promise to reject immediately upon creation, regardless of the outcome of the Node function, which is not the intended behavior of waiting for the function to complete.
+
+DONE.

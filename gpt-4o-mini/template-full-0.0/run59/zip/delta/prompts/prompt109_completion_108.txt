@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!op
+```
+This would result in different behavior because it will push operations to the `passed` array only if the operation is falsy, which is the opposite of the original intent where operations are pushed based on the truthiness of the predicate.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+op.attributes != null
+```
+This would result in different behavior because it will push operations to the `passed` array only if the `attributes` property of the operation is not null, which may exclude valid operations that should be included based on the original predicate.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+op.insert === undefined
+```
+This would result in different behavior because it will push operations to the `passed` array only if the `insert` property is explicitly undefined, potentially excluding operations that have valid `insert` values, thus changing the filtering logic significantly.
+
+DONE.

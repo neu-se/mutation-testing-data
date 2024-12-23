@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(null)
+```
+This would result in different behavior because it would call the callback with a `null` value instead of the `aborted` error, potentially leading to incorrect handling of the abort condition in the calling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb('error')
+```
+This would result in different behavior because it would pass a string 'error' to the callback instead of the actual `aborted` error, which could mislead the caller about the nature of the error that occurred.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(aborted + 1)
+```
+This would result in different behavior because it attempts to perform an arithmetic operation on the `aborted` value, which is likely an error object, leading to unexpected results and potentially crashing the application if the error handling does not account for this.
+
+DONE.

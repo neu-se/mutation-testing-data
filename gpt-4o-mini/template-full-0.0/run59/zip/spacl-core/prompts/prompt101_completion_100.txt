@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+'GET'
+```
+This would result in different behavior because it changes the action being queried from the intended `verb` to a hardcoded string `'GET'`, which may not reflect the actual action intended by the caller, potentially leading to incorrect authorization results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path
+```
+This would result in different behavior because it replaces the `verb` with the `path`, which is not the intended parameter for the `query` method. This could lead to incorrect evaluations of whether the action is allowed, as it would be checking the path against the policy instead of the action.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because it forces the query to always return a result as if the action is not governed by the policy, regardless of the actual `verb` provided. This would effectively bypass any checks related to the action being performed.
+
+DONE.

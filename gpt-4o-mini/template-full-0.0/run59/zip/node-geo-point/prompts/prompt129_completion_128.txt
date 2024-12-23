@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+return { x: Math.floor((coordinate.longitude + 180) / 360 * Math.pow(2, zoom)) + 1, y };
+```
+This would result in different behavior because it adds 1 to the x-coordinate calculation, which would shift the tile position incorrectly.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const x = Math.ceil((coordinate.longitude + 180) / 360 * Math.pow(2, zoom));
+const y = Math.ceil((1 - Math.log(Math.tan(coordinate.latitude * Math.PI / 180) + 1 / Math.cos(coordinate.latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));
+return { x, y };
+```
+This would result in different behavior because it uses `Math.ceil` instead of `Math.floor`, which would round up the tile coordinates, potentially leading to incorrect tile assignments.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+return { x: Math.floor((coordinate.latitude + 180) / 360 * Math.pow(2, zoom)), y };
+```
+This

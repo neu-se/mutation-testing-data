@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).then(deferred.reject);
+```
+This would result in different behavior because it incorrectly uses `then` instead of `fail`, meaning that any rejection from the promise would not be handled properly, potentially leading to unhandled promise rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).done(deferred.reject);
+```
+This would result in different behavior because `done` is used instead of `fail`, which would cause the rejection to be ignored and not propagate to the `deferred`, leading to a situation where the promise appears to resolve successfully even when it fails.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.fapply(nodeArgs).fail(function() { deferred.resolve(); });
+```
+This would result in different behavior because it changes the rejection handling to resolve the deferred instead of rejecting it, which would cause the promise to resolve successfully regardless of the original promise's failure.
+
+DONE.

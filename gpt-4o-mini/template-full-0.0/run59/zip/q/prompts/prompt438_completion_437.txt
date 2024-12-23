@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+unhandledReasons
+```
+This would result in different behavior because it would check if the promise is in the `unhandledReasons` array instead of the `unhandledRejections` array, leading to incorrect tracking of unhandled rejections.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+unhandledRejections.length
+```
+This would result in different behavior because it would compare the promise against the length of the `unhandledRejections` array, which is a number, rather than checking for the presence of the promise itself, causing the tracking logic to fail.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+promise
+```
+This would result in different behavior because it would directly use the promise object instead of checking its presence in the `unhandledRejections` array, which would always evaluate to true, leading to incorrect emission of the "unhandledRejection" event for every promise.
+
+DONE.

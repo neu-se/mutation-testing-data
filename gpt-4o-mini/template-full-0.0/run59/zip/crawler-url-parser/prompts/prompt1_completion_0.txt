@@ -1,0 +1,15 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+/[^a-zA-Z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/.test
+```
+This would result in different behavior because it changes the character class to include uppercase letters (A-Z) but excludes lowercase letters (a-z), potentially allowing illegal characters that were previously disallowed.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/g.test
+```
+This would result in different behavior because it adds the global flag `g`, which is not applicable for the `test` method and may lead to unexpected results or errors, as `test` is not designed to work with the global flag.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+/[^\w\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i.test

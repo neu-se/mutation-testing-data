@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+self.resolve(array_slice(arguments, 0));
+```
+This would result in different behavior because it would pass the entire `arguments` array starting from index 0, which includes the error as the first element, potentially causing the promise to resolve with an unexpected value instead of rejecting with the error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+self.resolve(array_slice(arguments, 2));
+```
+This would result in different behavior because it would skip the first two arguments, which means if there are only two arguments (error and value), the promise would resolve with an empty array instead of the intended value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+self.resolve(value);
+```
+This would result in different behavior because it would ignore the `arguments` entirely and only resolve the promise with the `value` variable, which may not be the intended behavior if there are multiple arguments passed.
+
+DONE.

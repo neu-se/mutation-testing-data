@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+!ended
+```
+This would result in different behavior because it would allow the callback to be invoked again even if it had already been called, potentially leading to multiple invocations of the callback with the same error or data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+err !== null
+```
+This would result in different behavior because it would only prevent the callback from being called if the error is explicitly `null`, allowing other falsy values (like `undefined` or `false`) to trigger the callback, which could lead to unexpected results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+true
+```
+This would result in different behavior because it would always return from the function, preventing the callback from being called regardless of whether it had already been invoked or not, effectively silencing any errors.
+
+DONE.

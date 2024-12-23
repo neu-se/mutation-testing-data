@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+point.hasOwnProperty('coordinates') && point.hasOwnProperty('type')
+```
+This would result in different behavior because it checks for both properties to exist, meaning that if one is missing, it will not throw an error, potentially allowing invalid objects to pass through.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+!point.hasOwnProperty('coordinates')
+```
+This would result in different behavior because it will throw an error if the 'coordinates' property does not exist, but it will not check for the 'type' property, allowing objects with missing 'type' to be considered valid.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+point.type === 'Point' && point.coordinates.length === 2
+```
+This would result in different behavior because it combines the checks into a single condition, which could lead to a situation where the function does not throw an error if the 'type' is correct but 'coordinates' is not an array or does not have the correct length.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+null
+```
+This would result in different behavior because passing `null` instead of the `onAbort` callback would mean that no abort handling function is provided, potentially leading to unhandled abort scenarios.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+function() { throw new Error('Abort!'); }
+```
+This would result in different behavior because replacing `onAbort` with a function that throws an error would cause the program to crash when an abort occurs, rather than executing the intended abort handling logic.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+() => cb(false)
+```
+This would result in different behavior because replacing `onAbort` with a function that calls `cb(false)` would indicate a failure instead of handling the abort correctly, which could lead to incorrect assumptions about the state of the operation.
+
+DONE.

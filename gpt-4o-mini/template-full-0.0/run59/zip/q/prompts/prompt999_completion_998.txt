@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("get", [name, nodeArgs]).fail
+```
+This would result in different behavior because it changes the method from "post" to "get", which may not be supported by the object and could lead to unexpected results or errors.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs, "extraArg"]).fail
+```
+This would result in different behavior because it adds an extra argument to the dispatch call, which could alter the expected behavior of the method being invoked and potentially lead to incorrect results.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).dispatch("post", [name, nodeArgs]).catch
+```
+This would result in different behavior because it changes the method from "fail" to "catch", which may not handle errors in the same way as "fail", potentially leading to unhandled promise rejections.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+a[key] === b[key]
+```
+This would result in different behavior because it checks for equality instead of inequality, meaning that attributes that are equal in both objects would not be included in the resulting attributes, which is the opposite of the intended functionality.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+a[key] !== null
+```
+This would result in different behavior because it would treat `null` values as equal, meaning that if `b[key]` is `undefined` and `a[key]` is `null`, it would not add the key to the attributes, which is not the intended behavior of comparing both values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+b[key] === undefined
+```
+This would result in different behavior because it would only check if `b[key]` is `undefined`, ignoring the value of `a[key]`, which would lead to incorrect attributes being included in the result when `a[key]` has a defined value.
+
+DONE.

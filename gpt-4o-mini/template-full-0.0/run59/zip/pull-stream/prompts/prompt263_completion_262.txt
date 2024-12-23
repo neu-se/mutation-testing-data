@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+cb(true, data)
+```
+This would result in different behavior because it changes the first argument of the callback to `true`, which may indicate a successful operation instead of the expected `null`, potentially leading to incorrect handling of the data.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+cb(null, null)
+```
+This would result in different behavior because it passes `null` for both arguments of the callback, which may cause the consumer of the callback to misinterpret the result as an error or an empty response, rather than the actual data.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+cb(data, null)
+```
+This would result in different behavior because it swaps the order of the arguments, passing the data as the first argument and `null` as the second, which could confuse the callback's expected error-first convention and lead to incorrect processing of the data.
+
+DONE.

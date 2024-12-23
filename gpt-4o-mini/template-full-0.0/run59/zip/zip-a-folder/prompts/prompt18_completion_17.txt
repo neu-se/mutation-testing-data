@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+fs.constants.R_OK & fs.constants.W_OK
+```
+This would result in different behavior because using the bitwise AND operator (`&`) instead of the bitwise OR operator (`|`) would require both read and write permissions to be granted simultaneously, which is stricter than the original condition.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+fs.constants.W_OK
+```
+This would result in different behavior because checking only for write permission (`fs.constants.W_OK`) would ignore the read permission check, potentially allowing access when the source directory is not readable.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+fs.constants.R_OK | fs.constants.F_OK
+```
+This would result in different behavior because using `fs.constants.F_OK` checks for the existence of the file or directory instead of checking for write permission, which could lead to a situation where the target directory exists but is not writable.
+
+DONE.

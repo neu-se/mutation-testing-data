@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+currentUrl.type = "internal";
+```
+This would result in different behavior because it assigns a fixed type of "internal" to all URLs, regardless of their actual relationship to the base URL, thus failing to accurately categorize the links.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+currentUrl.type = gettype(linkurl, pageurl) === "external" ? "internal" : "external";
+```
+This would result in different behavior because it incorrectly assigns the type based on the opposite condition, leading to a misclassification of URLs as "internal" when they should be "external" and vice versa.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+currentUrl.type = linkurl.domain === pageurl.domain ? "subdomain" : "internal";
+```
+This would result in different behavior because it simplifies the logic to only check if the domains are the same, ignoring other important factors like subdomain levels and path differences, which could lead to incorrect type assignments.
+
+DONE.

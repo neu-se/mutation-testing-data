@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(object).catch(fulfilled, rejected, progress);
+```
+This would result in different behavior because it changes the method from `done`, which is meant to handle unhandled rejections, to `catch`, which only handles rejections and does not call the fulfilled handler.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(object).then(rejected, fulfilled, progress);
+```
+This would result in different behavior because it swaps the positions of the fulfilled and rejected handlers, meaning that the fulfilled handler would be called on rejection and the rejected handler on fulfillment, leading to incorrect promise resolution handling.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(object).finally(fulfilled, rejected, progress);
+```
+This would result in different behavior because it uses the `finally` method, which does not handle fulfillment or rejection but instead executes the callback regardless of the promise's outcome, potentially leading to unhandled rejections.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+const rule of this.rules.slice(1)
+```
+This would result in different behavior because it skips the first rule in the `rules` array, potentially leading to a situation where the first rule is never evaluated, which could change the outcome of the `query` method.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+const rule of this.rules.concat(new Rule('deny-all'))
+```
+This would result in different behavior because it adds a new rule that denies all actions, which would cause the `query` method to always return `false` if this rule is evaluated, regardless of the other rules.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+const rule of this.rules.filter(r => r.isActive)
+```
+This would result in different behavior because it only evaluates rules that are marked as active, potentially ignoring inactive rules that might allow the action, thus changing the outcome of the `query` method.
+
+DONE.

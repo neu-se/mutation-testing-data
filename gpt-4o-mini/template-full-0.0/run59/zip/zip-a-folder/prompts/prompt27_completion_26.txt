@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+output.once('close', resolve);
+```
+This would result in different behavior because using `once` instead of `on` will cause the `resolve` function to be called only the first time the 'close' event is emitted, potentially missing subsequent 'close' events if they occur.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+output.on('finish', resolve);
+```
+This would result in different behavior because the 'finish' event is emitted when all data has been written to the stream, which may not correspond to the completion of the archiving process, leading to premature resolution of the promise.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+output.on('error', resolve);
+```
+This would result in different behavior because resolving the promise on an 'error' event would indicate success instead of failure, which could lead to misleading results in the application logic.
+
+DONE.

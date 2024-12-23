@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.merge(thisOp.attributes, otherOp.attributes);
+```
+This would result in different behavior because `merge` might combine attributes instead of calculating the differences, potentially leading to incorrect attribute handling in the resulting delta.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.subtract(thisOp.attributes, otherOp.attributes);
+```
+This would result in different behavior because `subtract` could remove attributes from `thisOp` based on `otherOp`, which is not the intended operation of finding differences, leading to loss of necessary attributes.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+AttributeMap.equals(thisOp.attributes, otherOp.attributes);
+```
+This would result in different behavior because `equals` checks for equality rather than computing the differences, which would not modify the attributes in the delta as expected, potentially causing incorrect delta results.
+
+DONE.

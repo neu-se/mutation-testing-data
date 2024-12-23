@@ -1,0 +1,20 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+this.verbs[verb] = true
+```
+This would result in different behavior because it would incorrectly mark all verbs as allowed, regardless of whether they were intended to be denied, thus bypassing the intended access control logic.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+this.verbs[verb] = undefined
+```
+This would result in different behavior because it would remove the verb from the `verbs` object entirely, leading to a situation where the verb would not be recognized in the `query` method, potentially allowing actions that should be denied.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+this.verbs[verb] = true
+this.verbs['*'] = false
+```
+This would result in different behavior because it would allow the specific verb while simultaneously denying all other verbs (if '*' is treated as a wildcard), which could lead to unintended access permissions being granted.
+
+DONE.

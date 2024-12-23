@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).fail(deferred.resolve);
+```
+This would result in different behavior because it incorrectly resolves the deferred promise on failure instead of rejecting it, which would lead to the promise being fulfilled even when an error occurs.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).then(deferred.reject);
+```
+This would result in different behavior because it attempts to reject the deferred promise on success instead of on failure, which would cause the promise to be incorrectly rejected when it should be resolved.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+Q(callback).fapply(nodeArgs).done(deferred.reject);
+```
+This would result in different behavior because the `done` method is used for handling success and does not handle errors properly, which would lead to unhandled promise rejections if an error occurs during the execution of the callback.
+
+DONE.

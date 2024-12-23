@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+deferred.reject("Timeout occurred");
+```
+This would result in different behavior because it changes the rejection reason from a generic error object to a specific string message, which may not be handled the same way by the calling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+deferred.reject(new Error("Custom timeout error"));
+```
+This would result in different behavior because it creates a new error object with a custom message, which could lead to different error handling behavior compared to the original timeout error.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+deferred.resolve("Resolved before timeout");
+```
+This would result in different behavior because it resolves the promise instead of rejecting it, which contradicts the intended functionality of the timeout method, potentially leading to unexpected behavior in the promise chain.
+
+DONE.
