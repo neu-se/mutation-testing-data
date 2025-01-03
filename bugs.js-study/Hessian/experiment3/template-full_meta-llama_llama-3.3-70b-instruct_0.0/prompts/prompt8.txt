@@ -1,0 +1,177 @@
+Your task is to apply mutation testing to the following code:
+```
+/**!
+ * hessian.js - lib/encoder.js
+ * Copyright(c) 2014
+ * MIT Licensed
+ *
+ * Authors:
+ *   dead_horse <dead_horse@qq.com> (http://deadhorse.me)
+ *   fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ */
+
+'use strict';
+
+var ByteBuffer = require('byte');
+var debug = require('debug')('hessian:v1:encoder');
+var utils = require('../utils');
+var javaObject = require('../object');
+var is = require('is-type-of');
+
+function Encoder(options) {
+  options = options || {};
+  //array of buffer
+  this.byteBuffer = new ByteBuffer({
+    size: options.size
+  });
+  this.objects = [];
+}
+
+var proto = Encoder.prototype;
+
+proto._assertType = function (method, expectType, val, desc) {
+  var valType = typeof val;
+  if (!is[expectType](val)) {
+    var msg = 'hessian ' + method +
+      ' expect input type is `' + expectType + '`, but got `' + valType + '`' + ' : ' + JSON.stringify(val) + ' ' + (desc || '');
+    throw new TypeError(msg);
+  }
+};
+
+/**
+ * get the encode buffer
+ * @return {Buffer}
+ */
+proto.get = function () {
+  return <PLACEHOLDER>();
+};
+
+/**
+ * clean the buf
+ */
+proto.reset = proto.clean = function () {
+  this.byteBuffer.reset();
+  this.objects = [];
+  return this;
+};
+
+/**
+ * encode null
+ * : N
+ */
+proto.writeNull = function () {
+  this.byteBuffer.putChar('N');
+  return this;
+};
+
+/**
+ * encode bool
+ * : T
+ * : F
+ */
+proto.writeBool = function (val) {
+  this.byteBuffer.putChar(val ? 'T' : 'F');
+  return this;
+};
+
+/**
+ * encode int
+ * : I 0x00 0x00 0x00 0x10
+ */
+proto.writeInt = function (val) {
+  this._assertType('writeInt', 'int32', val);
+  this.byteBuffer
+    .putChar('I')
+    .putInt(val);
+  return this;
+};
+
+/**
+ * encode long
+ * warning: we won't check if the long value is out of bound, be careful!
+ * : L 0x00 0x00 0x00 0x00 0x10 0x32 0x33 0x12
+ */
+proto.writeLong = function (val) {
+  this.byteBuffer
+    .putChar('L')
+    .putLong(val);
+  return this;
+};
+
+/**
+ * encode double
+ * : D 0x00 0x00 0x00 0x00 0x10 0x32 0x33 0x12
+ */
+proto.writeDouble = function (val) {
+  this._assertType('writeDouble', 'number', val);
+  this.byteBuffer
+    .putChar('D')
+    .putDouble(val);
+  return this;
+};
+
+/**
+ * encode date
+ * 1.0: http://hessian.caucho.com/doc/hessian-1.0-spec.xtp#date
+ * : d 0x00 0x00 0x00 0x00 0x10 0x32 0x33 0x12
+ */
+proto.writeDate = function (milliEpoch) {
+  if (milliEpoch instanceof Date) {
+    milliEpoch = milliEpoch.getTime();
+  }
+  this._assertType('writeDate', 'number', milliEpoch);
+
+  this.byteBuffer
+    .putChar('d')
+    .putLong(milliEpoch);
+  return this;
+};
+
+/**
+ * encode buffer
+ * : b 0x80 0x00 [...]
+ *   B 0x00 0x03 [0x01 0x02 0x03]
+ */
+proto.writeBytes = function (buf) {
+  this._assertType('writeBytes', 'buffer', buf);
+  var offset = 0;
+  while (buf.length - offset > utils.MAX_BYTE_TRUNK_SIZE) {
+    this.byteBuffer
+      .putChar('b')
+      .putUInt16(utils.MAX_BYTE_TRUNK_SIZE)
+      .put(buf.slice(offset, offset + utils.MAX_BYTE_TRUNK_SIZE));
+
+    offset += utils.MAX_BYTE_TRUNK_SIZE;
+  }
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+this.byteBuffer.array
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

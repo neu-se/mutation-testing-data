@@ -1,0 +1,1035 @@
+[32m15:17:06 (2392) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m15:17:06 (2392) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m15:17:06 (2392) WARN PluginLoader[39m Error during loading "@stryker-mutator/karma-runner" plugin:
+  Cannot find module 'karma'
+Require stack:
+- /home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/util/dist/src/require-resolve.js
+[32m15:17:06 (2392) INFO ProjectReader[39m Found 1 of 27 file(s) to be mutated.
+*** using standard mutators ***
+Mutant 0 in crawler-url-parser.js: {
+  removeDirectoryIndex: true,
+  removeTrailingSlash: true,
+  stripWWW: true,
+  stripFragment: true,
+  normalizeHttps: false,
+  normalizeProtocol: true,
+  removeQueryParameters: [/^utm_\w+/i, 'ref']
+} replaced with {}
+Mutant 1 in crawler-url-parser.js: true replaced with false
+Mutant 2 in crawler-url-parser.js: true replaced with false
+Mutant 3 in crawler-url-parser.js: true replaced with false
+Mutant 4 in crawler-url-parser.js: true replaced with false
+Mutant 5 in crawler-url-parser.js: false replaced with true
+Mutant 6 in crawler-url-parser.js: true replaced with false
+Mutant 7 in crawler-url-parser.js: [/^utm_\w+/i, 'ref'] replaced with []
+Mutant 8 in crawler-url-parser.js: /^utm_\w+/i replaced with /utm_\w+/i
+Mutant 9 in crawler-url-parser.js: /^utm_\w+/i replaced with /^utm_\w/i
+Mutant 10 in crawler-url-parser.js: /^utm_\w+/i replaced with /^utm_\W+/i
+Mutant 11 in crawler-url-parser.js: 'ref' replaced with ""
+Mutant 12 in crawler-url-parser.js: {
+  return /[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i.test(str);
+} replaced with {}
+Mutant 13 in crawler-url-parser.js: /[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i replaced with /[a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i
+Mutant 14 in crawler-url-parser.js: {
+  let ret = {
+    url: null,
+    baseurl: null,
+    protocol: null,
+    host: null,
+    domain: null,
+    subdomain: null,
+    path: null,
+    search: null,
+    querycount: 0
+  };
+  if (typeof currentUrlStr === 'undefined') return null;
+  if (currentUrlStr && _has_illegal_chars(currentUrlStr)) return null;
+  if (baseUrlStr && _has_illegal_chars(baseUrlStr)) return null;
+  currentUrlStr = currentUrlStr.replace(/^\/\//, 'http://');
+  currentUrlStr = currentUrlStr.replace(/#.*$/, '');
+  if (baseUrlStr) {
+    baseUrlStr = baseUrlStr.replace(/^\/\//, 'http://');
+    baseUrlStr = baseUrlStr.replace(/#.*$/, '');
+  } else {
+    if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
+      currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
+    }
+  }
+  let parsedUrl = URL.parse(currentUrlStr, true, true);
+  delete parsedUrl.hash;
+  if (parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:') return null;
+
+  //current url is relative like "abc", "/abc" or "../abc"
+  if (parsedUrl.host == null && baseUrlStr) {
+    let parsedBaseUrl = URL.parse(baseUrlStr, true, true);
+    delete parsedUrl.hash;
+    ret.baseurl = URL.format(parsedBaseUrl);
+    let absoluteUrl = URL.parse(URL.resolve(parsedBaseUrl, parsedUrl));
+    currentUrlStr = URL.format(absoluteUrl);
+  }
+  parsedUrl = URL.parse(currentUrlStr, true, true);
+  delete parsedUrl.hash;
+  ret.url = URL.format(parsedUrl);
+  ret.protocol = parsedUrl.protocol;
+  ret.host = parsedUrl.host;
+  ret.path = parsedUrl.pathname;
+  if (ret.host) {
+    let parsedHost = psl.parse(ret.host);
+    ret.domain = parsedHost.domain;
+    ret.subdomain = parsedHost.subdomain;
+  }
+  ret.search = parsedUrl.search;
+  ret.querycount = parsedUrl.search ? parsedUrl.search.split("=").length - 1 : 0;
+  return ret;
+} replaced with {}
+Mutant 15 in crawler-url-parser.js: {
+  url: null,
+  baseurl: null,
+  protocol: null,
+  host: null,
+  domain: null,
+  subdomain: null,
+  path: null,
+  search: null,
+  querycount: 0
+} replaced with {}
+Mutant 16 in crawler-url-parser.js: typeof currentUrlStr === 'undefined' replaced with true
+Mutant 17 in crawler-url-parser.js: typeof currentUrlStr === 'undefined' replaced with false
+Mutant 18 in crawler-url-parser.js: typeof currentUrlStr === 'undefined' replaced with typeof currentUrlStr !== 'undefined'
+Mutant 19 in crawler-url-parser.js: 'undefined' replaced with ""
+Mutant 20 in crawler-url-parser.js: currentUrlStr && _has_illegal_chars(currentUrlStr) replaced with true
+Mutant 21 in crawler-url-parser.js: currentUrlStr && _has_illegal_chars(currentUrlStr) replaced with false
+Mutant 22 in crawler-url-parser.js: currentUrlStr && _has_illegal_chars(currentUrlStr) replaced with currentUrlStr || _has_illegal_chars(currentUrlStr)
+Mutant 23 in crawler-url-parser.js: baseUrlStr && _has_illegal_chars(baseUrlStr) replaced with true
+Mutant 24 in crawler-url-parser.js: baseUrlStr && _has_illegal_chars(baseUrlStr) replaced with false
+Mutant 25 in crawler-url-parser.js: baseUrlStr && _has_illegal_chars(baseUrlStr) replaced with baseUrlStr || _has_illegal_chars(baseUrlStr)
+Mutant 26 in crawler-url-parser.js: /^\/\// replaced with /\/\//
+Mutant 27 in crawler-url-parser.js: 'http://' replaced with ""
+Mutant 28 in crawler-url-parser.js: /#.*$/ replaced with /#.*/
+Mutant 29 in crawler-url-parser.js: /#.*$/ replaced with /#.$/
+Mutant 30 in crawler-url-parser.js: '' replaced with "Stryker was here!"
+Mutant 31 in crawler-url-parser.js: baseUrlStr replaced with true
+Mutant 32 in crawler-url-parser.js: baseUrlStr replaced with false
+Mutant 33 in crawler-url-parser.js: {
+  baseUrlStr = baseUrlStr.replace(/^\/\//, 'http://');
+  baseUrlStr = baseUrlStr.replace(/#.*$/, '');
+} replaced with {}
+Mutant 34 in crawler-url-parser.js: /^\/\// replaced with /\/\//
+Mutant 35 in crawler-url-parser.js: 'http://' replaced with ""
+Mutant 36 in crawler-url-parser.js: /#.*$/ replaced with /#.*/
+Mutant 37 in crawler-url-parser.js: /#.*$/ replaced with /#.$/
+Mutant 38 in crawler-url-parser.js: '' replaced with "Stryker was here!"
+Mutant 39 in crawler-url-parser.js: {
+  if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
+    currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
+  }
+} replaced with {}
+Mutant 40 in crawler-url-parser.js: !/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr) replaced with /^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)
+Mutant 41 in crawler-url-parser.js: !/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr) replaced with true
+Mutant 42 in crawler-url-parser.js: !/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr) replaced with false
+Mutant 43 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /\.*\/|^(?!localhost)\w+:/
+Mutant 44 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /^\.\/|^(?!localhost)\w+:/
+Mutant 45 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /^\.*\/|(?!localhost)\w+:/
+Mutant 46 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /^\.*\/|^(?=localhost)\w+:/
+Mutant 47 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /^\.*\/|^(?!localhost)\w:/
+Mutant 48 in crawler-url-parser.js: /^\.*\/|^(?!localhost)\w+:/ replaced with /^\.*\/|^(?!localhost)\W+:/
+Mutant 49 in crawler-url-parser.js: {
+  currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
+} replaced with {}
+Mutant 50 in crawler-url-parser.js: /^(?!(?:\w+:)?\/\/)/ replaced with /(?!(?:\w+:)?\/\/)/
+Mutant 51 in crawler-url-parser.js: /^(?!(?:\w+:)?\/\/)/ replaced with /^(?=(?:\w+:)?\/\/)/
+Mutant 52 in crawler-url-parser.js: /^(?!(?:\w+:)?\/\/)/ replaced with /^(?!(?:\w+:)\/\/)/
+Mutant 53 in crawler-url-parser.js: /^(?!(?:\w+:)?\/\/)/ replaced with /^(?!(?:\w:)?\/\/)/
+Mutant 54 in crawler-url-parser.js: /^(?!(?:\w+:)?\/\/)/ replaced with /^(?!(?:\W+:)?\/\/)/
+Mutant 55 in crawler-url-parser.js: 'http://' replaced with ""
+Mutant 56 in crawler-url-parser.js: true replaced with false
+Mutant 57 in crawler-url-parser.js: true replaced with false
+Mutant 58 in crawler-url-parser.js: parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' replaced with true
+Mutant 59 in crawler-url-parser.js: parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' replaced with false
+Mutant 60 in crawler-url-parser.js: parsedUrl.protocol && parsedUrl.protocol != 'http:' && parsedUrl.protocol != 'https:' replaced with parsedUrl.protocol && parsedUrl.protocol != 'http:' || parsedUrl.protocol != 'https:'
+Mutant 61 in crawler-url-parser.js: parsedUrl.protocol && parsedUrl.protocol != 'http:' replaced with true
+Mutant 62 in crawler-url-parser.js: parsedUrl.protocol && parsedUrl.protocol != 'http:' replaced with parsedUrl.protocol || parsedUrl.protocol != 'http:'
+Mutant 63 in crawler-url-parser.js: parsedUrl.protocol != 'http:' replaced with true
+Mutant 64 in crawler-url-parser.js: parsedUrl.protocol != 'http:' replaced with parsedUrl.protocol == 'http:'
+Mutant 65 in crawler-url-parser.js: 'http:' replaced with ""
+Mutant 66 in crawler-url-parser.js: parsedUrl.protocol != 'https:' replaced with true
+Mutant 67 in crawler-url-parser.js: parsedUrl.protocol != 'https:' replaced with parsedUrl.protocol == 'https:'
+Mutant 68 in crawler-url-parser.js: 'https:' replaced with ""
+Mutant 69 in crawler-url-parser.js: parsedUrl.host == null && baseUrlStr replaced with true
+Mutant 70 in crawler-url-parser.js: parsedUrl.host == null && baseUrlStr replaced with false
+Mutant 71 in crawler-url-parser.js: parsedUrl.host == null && baseUrlStr replaced with parsedUrl.host == null || baseUrlStr
+Mutant 72 in crawler-url-parser.js: parsedUrl.host == null replaced with true
+Mutant 73 in crawler-url-parser.js: parsedUrl.host == null replaced with parsedUrl.host != null
+Mutant 74 in crawler-url-parser.js: {
+  let parsedBaseUrl = URL.parse(baseUrlStr, true, true);
+  delete parsedUrl.hash;
+  ret.baseurl = URL.format(parsedBaseUrl);
+  let absoluteUrl = URL.parse(URL.resolve(parsedBaseUrl, parsedUrl));
+  currentUrlStr = URL.format(absoluteUrl);
+} replaced with {}
+Mutant 75 in crawler-url-parser.js: true replaced with false
+Mutant 76 in crawler-url-parser.js: true replaced with false
+Mutant 77 in crawler-url-parser.js: true replaced with false
+Mutant 78 in crawler-url-parser.js: true replaced with false
+Mutant 79 in crawler-url-parser.js: ret.host replaced with true
+Mutant 80 in crawler-url-parser.js: ret.host replaced with false
+Mutant 81 in crawler-url-parser.js: {
+  let parsedHost = psl.parse(ret.host);
+  ret.domain = parsedHost.domain;
+  ret.subdomain = parsedHost.subdomain;
+} replaced with {}
+Mutant 82 in crawler-url-parser.js: parsedUrl.search.split("=").length - 1 replaced with parsedUrl.search.split("=").length + 1
+Mutant 83 in crawler-url-parser.js: "=" replaced with ""
+Mutant 84 in crawler-url-parser.js: {
+  let urlMap = new Map();
+  var baseUrl = parse(sourceUrl);
+  let $ = typeof data === "string" ? cheerio.load(data) : data;
+  let embedBaseUrlStr = $('base').attr('href');
+  let embedBaseUrl = parse(embedBaseUrlStr);
+  baseUrl = embedBaseUrl ? embedBaseUrl : baseUrl;
+  let baseUrlStr = baseUrl ? baseUrl.url : null;
+  $('a').each(function (i, el) {
+    let href = $(this).attr('href');
+    let text = $(this).text().trim();
+    //href = href.replace(/;.*$/g,"");
+    if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+    let currentUrl = parse(href, baseUrlStr);
+    if (currentUrl && currentUrl.url) {
+      if (urlMap.has(currentUrl.url)) {
+        let tmpUrl = urlMap.get(currentUrl.url);
+        if (!tmpUrl.text.includes(text)) {
+          tmpUrl.text = `${tmpUrl.text} ${text}`;
+        }
+      } else {
+        currentUrl.text = text == null ? "" : text;
+        currentUrl.baseurl = baseUrlStr;
+        urlMap.set(currentUrl.url, currentUrl);
+      }
+    }
+  });
+
+  //remove base url
+  urlMap.delete(baseUrlStr);
+  for (let currentUrl of urlMap.values()) {
+    currentUrl.type = gettype(currentUrl, baseUrl);
+  }
+  let retArr = Array.from(urlMap.values());
+  retArr = retArr.map(function (el) {
+    return {
+      url: el.url,
+      text: el.text,
+      type: el.type
+    };
+  });
+  return retArr;
+} replaced with {}
+Mutant 85 in crawler-url-parser.js: typeof data === "string" replaced with true
+Mutant 86 in crawler-url-parser.js: typeof data === "string" replaced with false
+Mutant 87 in crawler-url-parser.js: typeof data === "string" replaced with typeof data !== "string"
+Mutant 88 in crawler-url-parser.js: "string" replaced with ""
+Mutant 89 in crawler-url-parser.js: 'base' replaced with ""
+Mutant 90 in crawler-url-parser.js: 'href' replaced with ""
+Mutant 91 in crawler-url-parser.js: 'a' replaced with ""
+Mutant 92 in crawler-url-parser.js: {
+  let href = $(this).attr('href');
+  let text = $(this).text().trim();
+  //href = href.replace(/;.*$/g,"");
+  if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+  let currentUrl = parse(href, baseUrlStr);
+  if (currentUrl && currentUrl.url) {
+    if (urlMap.has(currentUrl.url)) {
+      let tmpUrl = urlMap.get(currentUrl.url);
+      if (!tmpUrl.text.includes(text)) {
+        tmpUrl.text = `${tmpUrl.text} ${text}`;
+      }
+    } else {
+      currentUrl.text = text == null ? "" : text;
+      currentUrl.baseurl = baseUrlStr;
+      urlMap.set(currentUrl.url, currentUrl);
+    }
+  }
+} replaced with {}
+Mutant 93 in crawler-url-parser.js: 'href' replaced with ""
+Mutant 94 in crawler-url-parser.js: $(this).text().trim() replaced with $(this).text()
+Mutant 95 in crawler-url-parser.js: typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href) replaced with true
+Mutant 96 in crawler-url-parser.js: typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href) replaced with false
+Mutant 97 in crawler-url-parser.js: typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href) replaced with (typeof href == "undefined" || href.length < 3) && /^(javascript|mailto:|ftp:)/ig.test(href)
+Mutant 98 in crawler-url-parser.js: typeof href == "undefined" || href.length < 3 replaced with false
+Mutant 99 in crawler-url-parser.js: typeof href == "undefined" || href.length < 3 replaced with typeof href == "undefined" && href.length < 3
+Mutant 100 in crawler-url-parser.js: typeof href == "undefined" replaced with false
+Mutant 101 in crawler-url-parser.js: typeof href == "undefined" replaced with typeof href != "undefined"
+Mutant 102 in crawler-url-parser.js: "undefined" replaced with ""
+Mutant 103 in crawler-url-parser.js: href.length < 3 replaced with false
+Mutant 104 in crawler-url-parser.js: href.length < 3 replaced with href.length <= 3
+Mutant 105 in crawler-url-parser.js: href.length < 3 replaced with href.length >= 3
+Mutant 106 in crawler-url-parser.js: /^(javascript|mailto:|ftp:)/ig replaced with /(javascript|mailto:|ftp:)/ig
+Mutant 107 in crawler-url-parser.js: currentUrl && currentUrl.url replaced with true
+Mutant 108 in crawler-url-parser.js: currentUrl && currentUrl.url replaced with false
+Mutant 109 in crawler-url-parser.js: currentUrl && currentUrl.url replaced with currentUrl || currentUrl.url
+Mutant 110 in crawler-url-parser.js: {
+  if (urlMap.has(currentUrl.url)) {
+    let tmpUrl = urlMap.get(currentUrl.url);
+    if (!tmpUrl.text.includes(text)) {
+      tmpUrl.text = `${tmpUrl.text} ${text}`;
+    }
+  } else {
+    currentUrl.text = text == null ? "" : text;
+    currentUrl.baseurl = baseUrlStr;
+    urlMap.set(currentUrl.url, currentUrl);
+  }
+} replaced with {}
+Mutant 111 in crawler-url-parser.js: urlMap.has(currentUrl.url) replaced with true
+Mutant 112 in crawler-url-parser.js: urlMap.has(currentUrl.url) replaced with false
+Mutant 113 in crawler-url-parser.js: {
+  let tmpUrl = urlMap.get(currentUrl.url);
+  if (!tmpUrl.text.includes(text)) {
+    tmpUrl.text = `${tmpUrl.text} ${text}`;
+  }
+} replaced with {}
+Mutant 114 in crawler-url-parser.js: !tmpUrl.text.includes(text) replaced with tmpUrl.text.includes(text)
+Mutant 115 in crawler-url-parser.js: !tmpUrl.text.includes(text) replaced with true
+Mutant 116 in crawler-url-parser.js: !tmpUrl.text.includes(text) replaced with false
+Mutant 117 in crawler-url-parser.js: {
+  tmpUrl.text = `${tmpUrl.text} ${text}`;
+} replaced with {}
+Mutant 118 in crawler-url-parser.js: `${tmpUrl.text} ${text}` replaced with ``
+Mutant 119 in crawler-url-parser.js: {
+  currentUrl.text = text == null ? "" : text;
+  currentUrl.baseurl = baseUrlStr;
+  urlMap.set(currentUrl.url, currentUrl);
+} replaced with {}
+Mutant 120 in crawler-url-parser.js: text == null replaced with true
+Mutant 121 in crawler-url-parser.js: text == null replaced with false
+Mutant 122 in crawler-url-parser.js: text == null replaced with text != null
+Mutant 123 in crawler-url-parser.js: "" replaced with "Stryker was here!"
+Mutant 124 in crawler-url-parser.js: {
+  currentUrl.type = gettype(currentUrl, baseUrl);
+} replaced with {}
+Mutant 125 in crawler-url-parser.js: {
+  return {
+    url: el.url,
+    text: el.text,
+    type: el.type
+  };
+} replaced with {}
+Mutant 126 in crawler-url-parser.js: {
+  url: el.url,
+  text: el.text,
+  type: el.type
+} replaced with {}
+Mutant 127 in crawler-url-parser.js: {
+  if (typeof linkurl == "string") linkurl = parse(linkurl);
+  if (typeof pageurl == "string") pageurl = parse(pageurl);
+  let linkurl_subdomain_len = linkurl.subdomain ? linkurl.subdomain.length : 0;
+  let pageurl_subdomain_len = pageurl.subdomain ? pageurl.subdomain.length : 0;
+  let linkurl_path = linkurl.path ? linkurl.path : "";
+  let pageurl_path = pageurl.path ? pageurl.path : "";
+  linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
+  pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
+  let linkurl_parts = linkurl_path.split("/").filter(function (elem, index, array) {
+    return elem.length > 0;
+  });
+  let pageurl_parts = pageurl_path.split("/").filter(function (elem, index, array) {
+    return elem.length > 0;
+  });
+  if (pageurl.host == linkurl.host) {
+    let part_count_diff = linkurl_parts.length - pageurl_parts.length;
+    if (part_count_diff == 0) {
+      let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+      let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+      if (linkurl_without_last_part == pageurl_without_last_part) return "samelevel";
+    } else if (part_count_diff == 1) {
+      if (linkurl_path.includes(pageurl_path)) return "sublevel";
+    } else if (part_count_diff == -1) {
+      if (pageurl_path.includes(linkurl_path)) return "uplevel";
+    }
+    return "internal";
+  } else if (linkurl.domain == pageurl.domain) {
+    if (linkurl_subdomain_len < pageurl_subdomain_len) return "updomain";
+    return "subdomain";
+  }
+  return "external";
+} replaced with {}
+Mutant 128 in crawler-url-parser.js: typeof linkurl == "string" replaced with true
+Mutant 129 in crawler-url-parser.js: typeof linkurl == "string" replaced with false
+Mutant 130 in crawler-url-parser.js: typeof linkurl == "string" replaced with typeof linkurl != "string"
+Mutant 131 in crawler-url-parser.js: "string" replaced with ""
+Mutant 132 in crawler-url-parser.js: typeof pageurl == "string" replaced with true
+Mutant 133 in crawler-url-parser.js: typeof pageurl == "string" replaced with false
+Mutant 134 in crawler-url-parser.js: typeof pageurl == "string" replaced with typeof pageurl != "string"
+Mutant 135 in crawler-url-parser.js: "string" replaced with ""
+Mutant 136 in crawler-url-parser.js: "" replaced with "Stryker was here!"
+Mutant 137 in crawler-url-parser.js: "" replaced with "Stryker was here!"
+Mutant 138 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[a-z]+/
+Mutant 139 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[a-z]$/
+Mutant 140 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[^a-z]+$/
+Mutant 141 in crawler-url-parser.js: '/' replaced with ""
+Mutant 142 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[a-z]+/
+Mutant 143 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[a-z]$/
+Mutant 144 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[^a-z]+$/
+Mutant 145 in crawler-url-parser.js: '/' replaced with ""
+Mutant 146 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[a-z]+/
+Mutant 147 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[a-z]$/
+Mutant 148 in crawler-url-parser.js: /\/index\.[a-z]+$/ replaced with /\/index\.[^a-z]+$/
+Mutant 149 in crawler-url-parser.js: '/' replaced with ""
+Mutant 150 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[a-z]+/
+Mutant 151 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[a-z]$/
+Mutant 152 in crawler-url-parser.js: /\/default\.[a-z]+$/ replaced with /\/default\.[^a-z]+$/
+Mutant 153 in crawler-url-parser.js: '/' replaced with ""
+Mutant 154 in crawler-url-parser.js: linkurl_path.split("/").filter(function (elem, index, array) {
+  return elem.length > 0;
+}) replaced with linkurl_path.split("/")
+Mutant 155 in crawler-url-parser.js: "/" replaced with ""
+Mutant 156 in crawler-url-parser.js: {
+  return elem.length > 0;
+} replaced with {}
+Mutant 157 in crawler-url-parser.js: elem.length > 0 replaced with true
+Mutant 158 in crawler-url-parser.js: elem.length > 0 replaced with false
+Mutant 159 in crawler-url-parser.js: elem.length > 0 replaced with elem.length >= 0
+Mutant 160 in crawler-url-parser.js: elem.length > 0 replaced with elem.length <= 0
+Mutant 161 in crawler-url-parser.js: pageurl_path.split("/").filter(function (elem, index, array) {
+  return elem.length > 0;
+}) replaced with pageurl_path.split("/")
+Mutant 162 in crawler-url-parser.js: "/" replaced with ""
+Mutant 163 in crawler-url-parser.js: {
+  return elem.length > 0;
+} replaced with {}
+Mutant 164 in crawler-url-parser.js: elem.length > 0 replaced with true
+Mutant 165 in crawler-url-parser.js: elem.length > 0 replaced with false
+Mutant 166 in crawler-url-parser.js: elem.length > 0 replaced with elem.length >= 0
+Mutant 167 in crawler-url-parser.js: elem.length > 0 replaced with elem.length <= 0
+Mutant 168 in crawler-url-parser.js: pageurl.host == linkurl.host replaced with true
+Mutant 169 in crawler-url-parser.js: pageurl.host == linkurl.host replaced with false
+Mutant 170 in crawler-url-parser.js: pageurl.host == linkurl.host replaced with pageurl.host != linkurl.host
+Mutant 171 in crawler-url-parser.js: {
+  let part_count_diff = linkurl_parts.length - pageurl_parts.length;
+  if (part_count_diff == 0) {
+    let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+    let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+    if (linkurl_without_last_part == pageurl_without_last_part) return "samelevel";
+  } else if (part_count_diff == 1) {
+    if (linkurl_path.includes(pageurl_path)) return "sublevel";
+  } else if (part_count_diff == -1) {
+    if (pageurl_path.includes(linkurl_path)) return "uplevel";
+  }
+  return "internal";
+} replaced with {}
+Mutant 172 in crawler-url-parser.js: linkurl_parts.length - pageurl_parts.length replaced with linkurl_parts.length + pageurl_parts.length
+Mutant 173 in crawler-url-parser.js: part_count_diff == 0 replaced with true
+Mutant 174 in crawler-url-parser.js: part_count_diff == 0 replaced with false
+Mutant 175 in crawler-url-parser.js: part_count_diff == 0 replaced with part_count_diff != 0
+Mutant 176 in crawler-url-parser.js: {
+  let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+  let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
+  if (linkurl_without_last_part == pageurl_without_last_part) return "samelevel";
+} replaced with {}
+Mutant 177 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[\/]?/
+Mutant 178 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/])[\/]?$/
+Mutant 179 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[\/]*)[\/]?$/
+Mutant 180 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[\/]$/
+Mutant 181 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[^\/]?$/
+Mutant 182 in crawler-url-parser.js: "" replaced with "Stryker was here!"
+Mutant 183 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[\/]?/
+Mutant 184 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/])[\/]?$/
+Mutant 185 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[\/]*)[\/]?$/
+Mutant 186 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[\/]$/
+Mutant 187 in crawler-url-parser.js: /(\/[^\/]*)[\/]?$/ replaced with /(\/[^\/]*)[^\/]?$/
+Mutant 188 in crawler-url-parser.js: "" replaced with "Stryker was here!"
+Mutant 189 in crawler-url-parser.js: linkurl_without_last_part == pageurl_without_last_part replaced with true
+Mutant 190 in crawler-url-parser.js: linkurl_without_last_part == pageurl_without_last_part replaced with false
+Mutant 191 in crawler-url-parser.js: linkurl_without_last_part == pageurl_without_last_part replaced with linkurl_without_last_part != pageurl_without_last_part
+Mutant 192 in crawler-url-parser.js: "samelevel" replaced with ""
+Mutant 193 in crawler-url-parser.js: part_count_diff == 1 replaced with true
+Mutant 194 in crawler-url-parser.js: part_count_diff == 1 replaced with false
+Mutant 195 in crawler-url-parser.js: part_count_diff == 1 replaced with part_count_diff != 1
+Mutant 196 in crawler-url-parser.js: {
+  if (linkurl_path.includes(pageurl_path)) return "sublevel";
+} replaced with {}
+Mutant 197 in crawler-url-parser.js: linkurl_path.includes(pageurl_path) replaced with true
+Mutant 198 in crawler-url-parser.js: linkurl_path.includes(pageurl_path) replaced with false
+Mutant 199 in crawler-url-parser.js: "sublevel" replaced with ""
+Mutant 200 in crawler-url-parser.js: part_count_diff == -1 replaced with true
+Mutant 201 in crawler-url-parser.js: part_count_diff == -1 replaced with false
+Mutant 202 in crawler-url-parser.js: part_count_diff == -1 replaced with part_count_diff != -1
+Mutant 203 in crawler-url-parser.js: -1 replaced with +1
+Mutant 204 in crawler-url-parser.js: {
+  if (pageurl_path.includes(linkurl_path)) return "uplevel";
+} replaced with {}
+Mutant 205 in crawler-url-parser.js: pageurl_path.includes(linkurl_path) replaced with true
+Mutant 206 in crawler-url-parser.js: pageurl_path.includes(linkurl_path) replaced with false
+Mutant 207 in crawler-url-parser.js: "uplevel" replaced with ""
+Mutant 208 in crawler-url-parser.js: "internal" replaced with ""
+Mutant 209 in crawler-url-parser.js: linkurl.domain == pageurl.domain replaced with true
+Mutant 210 in crawler-url-parser.js: linkurl.domain == pageurl.domain replaced with false
+Mutant 211 in crawler-url-parser.js: linkurl.domain == pageurl.domain replaced with linkurl.domain != pageurl.domain
+Mutant 212 in crawler-url-parser.js: {
+  if (linkurl_subdomain_len < pageurl_subdomain_len) return "updomain";
+  return "subdomain";
+} replaced with {}
+Mutant 213 in crawler-url-parser.js: linkurl_subdomain_len < pageurl_subdomain_len replaced with true
+Mutant 214 in crawler-url-parser.js: linkurl_subdomain_len < pageurl_subdomain_len replaced with false
+Mutant 215 in crawler-url-parser.js: linkurl_subdomain_len < pageurl_subdomain_len replaced with linkurl_subdomain_len <= pageurl_subdomain_len
+Mutant 216 in crawler-url-parser.js: linkurl_subdomain_len < pageurl_subdomain_len replaced with linkurl_subdomain_len >= pageurl_subdomain_len
+Mutant 217 in crawler-url-parser.js: "updomain" replaced with ""
+Mutant 218 in crawler-url-parser.js: "subdomain" replaced with ""
+Mutant 219 in crawler-url-parser.js: "external" replaced with ""
+Mutant 220 in crawler-url-parser.js: !module.parent replaced with module.parent
+Mutant 221 in crawler-url-parser.js: !module.parent replaced with true
+Mutant 222 in crawler-url-parser.js: !module.parent replaced with false
+Mutant 223 in crawler-url-parser.js: {
+  console.log("for testing purpose");
+  //getlevel("www.domain.com/aaa/bbb/","www.domain.com/aaa/bbb/ccc");
+  //let res1 = getlevel("sub.domain.com/aaa/bbb/","sub.domain.com/aaa/bbb/ccc");
+  //let res2 = getlevel("sub.domain.com/aaa/bbb/ccc/ddd","sub.domain.com/aaa/bbb/ccc");
+  //let res3 = getlevel("sub.domain.com/aaa/bbb/eee","sub.domain.com/aaa/bbb/ccc");
+  //debugger;
+
+  //let res = parse("ddd","http://www.stackoverflow.com/aaa/bbb/ccc/");
+
+  //let page = 'http://journals.tubitak.gov.tr/';
+  //let link = 'http://journals.tubitak.gov.tr/genel/telifhakki.pdf';
+  //let res = gettype(link, page);
+  //debugger
+  //res = gettype(page, link);
+  //debugger
+  //process.exit();
+
+  let url = "https ://www.npmjs.com/package/electron-window-manager";
+  let res = parse(url);
+  debugger;
+} replaced with {}
+Mutant 224 in crawler-url-parser.js: "for testing purpose" replaced with ""
+Mutant 225 in crawler-url-parser.js: "https ://www.npmjs.com/package/electron-window-manager" replaced with ""
+[32m15:17:07 (2392) INFO Instrumenter[39m Instrumented 1 source file(s) with 226 mutant(s)
+[33m15:17:07 (2392) WARN DisableTypeChecksPreprocessor[39m Unable to disable type checking for file "/home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/test/05_tubitak.html". Shouldn't type checking be disabled for this file? Consider configuring a more restrictive "disableTypeChecks" settings (or turn it completely off with `false`) ParseError: Parse error in /home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/test/05_tubitak.html (73:43) Opening tag "a" not terminated.
+    at ngHtmlParser (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/instrumenter/dist/src/parsers/html-parser.js:28:15)
+    at async parse (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/instrumenter/dist/src/parsers/html-parser.js:11:18)
+    at async DisableTypeChecksPreprocessor.disableTypeChecks [as impl] (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/instrumenter/dist/src/disable-type-checks.js:28:17)
+    at async file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/core/dist/src/sandbox/disable-type-checks-preprocessor.js:27:41
+    at async Promise.all (index 22)
+    at async DisableTypeChecksPreprocessor.preprocess (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/core/dist/src/sandbox/disable-type-checks-preprocessor.js:24:9)
+    at async MultiPreprocessor.preprocess (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/core/dist/src/sandbox/multi-preprocessor.js:8:13)
+    at async MutantInstrumenterExecutor.execute (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/core/dist/src/process/2-mutant-instrumenter-executor.js:30:9)
+    at async Stryker.runMutationTest (file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/node_modules/@stryker-mutator/core/dist/src/stryker.js:33:48)
+[33m15:17:07 (2392) WARN DisableTypeChecksPreprocessor[39m (disable "warnings.preprocessorErrors" to ignore this warning
+[32m15:17:07 (2392) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m15:17:08 (2392) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m15:17:08 (2392) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[32m15:17:12 (2392) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1 tests in 4 seconds (net 4446 ms, overhead 0 ms).
+Mutation testing 1% (elapsed: <1m, remaining: ~9m) 4/226 tested (4 survived, 0 timed out)
+Mutation testing 4% (elapsed: <1m, remaining: ~7m) 10/226 tested (10 survived, 0 timed out)
+Mutation testing 6% (elapsed: <1m, remaining: ~7m) 15/226 tested (12 survived, 0 timed out)
+Mutation testing 8% (elapsed: <1m, remaining: ~6m) 20/226 tested (13 survived, 0 timed out)
+Mutation testing 11% (elapsed: <1m, remaining: ~6m) 26/226 tested (13 survived, 0 timed out)
+Mutation testing 13% (elapsed: ~1m, remaining: ~6m) 31/226 tested (16 survived, 0 timed out)
+Mutation testing 15% (elapsed: ~1m, remaining: ~6m) 36/226 tested (16 survived, 0 timed out)
+Mutation testing 18% (elapsed: ~1m, remaining: ~6m) 41/226 tested (19 survived, 0 timed out)
+Mutation testing 20% (elapsed: ~1m, remaining: ~5m) 46/226 tested (20 survived, 0 timed out)
+Mutation testing 23% (elapsed: ~1m, remaining: ~5m) 52/226 tested (24 survived, 0 timed out)
+Mutation testing 25% (elapsed: ~1m, remaining: ~5m) 57/226 tested (28 survived, 0 timed out)
+Mutation testing 27% (elapsed: ~2m, remaining: ~5m) 63/226 tested (29 survived, 0 timed out)
+Mutation testing 30% (elapsed: ~2m, remaining: ~5m) 68/226 tested (29 survived, 0 timed out)
+Mutation testing 32% (elapsed: ~2m, remaining: ~4m) 73/226 tested (30 survived, 0 timed out)
+Mutation testing 34% (elapsed: ~2m, remaining: ~4m) 79/226 tested (34 survived, 0 timed out)
+Mutation testing 37% (elapsed: ~2m, remaining: ~4m) 85/226 tested (34 survived, 0 timed out)
+Mutation testing 39% (elapsed: ~2m, remaining: ~4m) 90/226 tested (35 survived, 0 timed out)
+Mutation testing 42% (elapsed: ~3m, remaining: ~4m) 96/226 tested (36 survived, 0 timed out)
+Mutation testing 44% (elapsed: ~3m, remaining: ~3m) 101/226 tested (41 survived, 0 timed out)
+Mutation testing 46% (elapsed: ~3m, remaining: ~3m) 106/226 tested (44 survived, 0 timed out)
+Mutation testing 49% (elapsed: ~3m, remaining: ~3m) 112/226 tested (45 survived, 0 timed out)
+Mutation testing 51% (elapsed: ~3m, remaining: ~3m) 117/226 tested (50 survived, 0 timed out)
+Mutation testing 53% (elapsed: ~3m, remaining: ~3m) 122/226 tested (54 survived, 0 timed out)
+Mutation testing 56% (elapsed: ~4m, remaining: ~3m) 127/226 tested (56 survived, 0 timed out)
+Mutation testing 58% (elapsed: ~4m, remaining: ~2m) 132/226 tested (56 survived, 0 timed out)
+Mutation testing 61% (elapsed: ~4m, remaining: ~2m) 138/226 tested (58 survived, 0 timed out)
+Mutation testing 63% (elapsed: ~4m, remaining: ~2m) 143/226 tested (61 survived, 0 timed out)
+Mutation testing 65% (elapsed: ~4m, remaining: ~2m) 148/226 tested (66 survived, 0 timed out)
+Mutation testing 68% (elapsed: ~4m, remaining: ~2m) 154/226 tested (72 survived, 0 timed out)
+Mutation testing 70% (elapsed: ~5m, remaining: ~2m) 159/226 tested (72 survived, 0 timed out)
+Mutation testing 72% (elapsed: ~5m, remaining: ~1m) 164/226 tested (72 survived, 0 timed out)
+Mutation testing 74% (elapsed: ~5m, remaining: ~1m) 169/226 tested (72 survived, 0 timed out)
+Mutation testing 77% (elapsed: ~5m, remaining: ~1m) 175/226 tested (72 survived, 0 timed out)
+Mutation testing 79% (elapsed: ~5m, remaining: ~1m) 180/226 tested (72 survived, 0 timed out)
+Mutation testing 81% (elapsed: ~5m, remaining: ~1m) 185/226 tested (73 survived, 0 timed out)
+Mutation testing 84% (elapsed: ~6m, remaining: ~1m) 191/226 tested (75 survived, 0 timed out)
+Mutation testing 86% (elapsed: ~6m, remaining: <1m) 196/226 tested (75 survived, 0 timed out)
+Mutation testing 88% (elapsed: ~6m, remaining: <1m) 201/226 tested (76 survived, 0 timed out)
+Mutation testing 91% (elapsed: ~6m, remaining: <1m) 206/226 tested (76 survived, 0 timed out)
+Mutation testing 93% (elapsed: ~6m, remaining: <1m) 212/226 tested (76 survived, 0 timed out)
+Mutation testing 96% (elapsed: ~6m, remaining: <1m) 217/226 tested (77 survived, 0 timed out)
+Mutation testing 98% (elapsed: ~7m, remaining: <1m) 222/226 tested (79 survived, 0 timed out)
+
+All tests
+  ✓ All tests (killed 143)
+
+[Survived] ObjectLiteral
+crawler-url-parser.js:5:34
+-   const result_normalize_options = {
+-   	removeDirectoryIndex: true,
+-   	removeTrailingSlash: true,
+-   	stripWWW: true,
+-   	stripFragment: true,
+-   	normalizeHttps: false,
+-   	normalizeProtocol: true,
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
+-   }
++   const result_normalize_options = {}
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:6:24
+-   	removeDirectoryIndex: true,
++   	removeDirectoryIndex: false,
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:7:23
+-   	removeTrailingSlash: true,
++   	removeTrailingSlash: false,
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:8:12
+-   	stripWWW: true,
++   	stripWWW: false,
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:9:17
+-   	stripFragment: true,
++   	stripFragment: false,
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:10:18
+-   	normalizeHttps: false,
++   	normalizeHttps: true,
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:11:21
+-   	normalizeProtocol: true,
++   	normalizeProtocol: false,
+
+[Survived] ArrayDeclaration
+crawler-url-parser.js:12:25
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
++   	removeQueryParameters: []
+
+[Survived] Regex
+crawler-url-parser.js:12:26
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
++   	removeQueryParameters: [/utm_\w+/i, 'ref']
+
+[Survived] Regex
+crawler-url-parser.js:12:26
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
++   	removeQueryParameters: [/^utm_\w/i, 'ref']
+
+[Survived] Regex
+crawler-url-parser.js:12:26
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
++   	removeQueryParameters: [/^utm_\W+/i, 'ref']
+
+[Survived] StringLiteral
+crawler-url-parser.js:12:39
+-   	removeQueryParameters: [/^utm_\w+/i, 'ref']
++   	removeQueryParameters: [/^utm_\w+/i, ""]
+
+[Survived] ObjectLiteral
+crawler-url-parser.js:20:12
+-   	let ret = {
+-   		url: null,
+-   		baseurl: null,
+-   		protocol: null,
+-   		host: null,
+-   		domain: null,
+-   		subdomain: null,
+-   		path: null,
+-   		search: null,
+-   		querycount: 0
+-   	}
++   	let ret = {}
+
+[Survived] StringLiteral
+crawler-url-parser.js:35:49
+-   	currentUrlStr = currentUrlStr.replace(/^\/\//, 'http://');
++   	currentUrlStr = currentUrlStr.replace(/^\/\//, "");
+
+[Survived] Regex
+crawler-url-parser.js:36:40
+-   	currentUrlStr = currentUrlStr.replace(/#.*$/, '');
++   	currentUrlStr = currentUrlStr.replace(/#.*/, '');
+
+[Survived] Regex
+crawler-url-parser.js:36:40
+-   	currentUrlStr = currentUrlStr.replace(/#.*$/, '');
++   	currentUrlStr = currentUrlStr.replace(/#.$/, '');
+
+[Survived] Regex
+crawler-url-parser.js:40:35
+-   		baseUrlStr = baseUrlStr.replace(/#.*$/, '');
++   		baseUrlStr = baseUrlStr.replace(/#.*/, '');
+
+[Survived] Regex
+crawler-url-parser.js:40:35
+-   		baseUrlStr = baseUrlStr.replace(/#.*$/, '');
++   		baseUrlStr = baseUrlStr.replace(/#.$/, '');
+
+[Survived] StringLiteral
+crawler-url-parser.js:40:43
+-   		baseUrlStr = baseUrlStr.replace(/#.*$/, '');
++   		baseUrlStr = baseUrlStr.replace(/#.*$/, "Stryker was here!");
+
+[Survived] Regex
+crawler-url-parser.js:42:8
+-   		if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
++   		if (!/^\.*\/|(?!localhost)\w+:/.test(currentUrlStr)) {
+
+[Survived] Regex
+crawler-url-parser.js:42:8
+-   		if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
++   		if (!/^\.*\/|^(?=localhost)\w+:/.test(currentUrlStr)) {
+
+[Survived] Regex
+crawler-url-parser.js:42:8
+-   		if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
++   		if (!/^\.*\/|^(?!localhost)\w:/.test(currentUrlStr)) {
+
+[Survived] Regex
+crawler-url-parser.js:42:8
+-   		if (!/^\.*\/|^(?!localhost)\w+:/.test(currentUrlStr)) {
++   		if (!/^\.*\/|^(?!localhost)\W+:/.test(currentUrlStr)) {
+
+[Survived] Regex
+crawler-url-parser.js:43:42
+-   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
++   			currentUrlStr = currentUrlStr.replace(/(?!(?:\w+:)?\/\/)/, 'http://');
+
+[Survived] Regex
+crawler-url-parser.js:43:42
+-   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
++   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)\/\/)/, 'http://');
+
+[Survived] Regex
+crawler-url-parser.js:43:42
+-   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
++   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w:)?\/\/)/, 'http://');
+
+[Survived] Regex
+crawler-url-parser.js:43:42
+-   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\w+:)?\/\/)/, 'http://');
++   			currentUrlStr = currentUrlStr.replace(/^(?!(?:\W+:)?\/\/)/, 'http://');
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:47:43
+-   	let parsedUrl = URL.parse(currentUrlStr, true, true);
++   	let parsedUrl = URL.parse(currentUrlStr, false, true);
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:47:49
+-   	let parsedUrl = URL.parse(currentUrlStr, true, true);
++   	let parsedUrl = URL.parse(currentUrlStr, true, false);
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:54:6
+-   	if (parsedUrl.host == null && baseUrlStr) {
++   	if (true && baseUrlStr) {
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:55:45
+-   		let parsedBaseUrl = URL.parse(baseUrlStr, true, true);
++   		let parsedBaseUrl = URL.parse(baseUrlStr, false, true);
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:55:51
+-   		let parsedBaseUrl = URL.parse(baseUrlStr, true, true);
++   		let parsedBaseUrl = URL.parse(baseUrlStr, true, false);
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:63:39
+-   	parsedUrl = URL.parse(currentUrlStr, true, true);
++   	parsedUrl = URL.parse(currentUrlStr, false, true);
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:63:45
+-   	parsedUrl = URL.parse(currentUrlStr, true, true);
++   	parsedUrl = URL.parse(currentUrlStr, true, false);
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:87:10
+-   	let $ = typeof data === "string" ? cheerio.load(data) : data;
++   	let $ = true ? cheerio.load(data) : data;
+
+[Survived] MethodExpression
+crawler-url-parser.js:95:14
+-   		let text = $(this).text().trim();
++   		let text = $(this).text();
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:97:7
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (false) return;
+
+[Survived] LogicalOperator
+crawler-url-parser.js:97:7
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if ((typeof href == "undefined" || href.length < 3) && /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:97:7
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (false || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] LogicalOperator
+crawler-url-parser.js:97:7
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (typeof href == "undefined" && href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:97:7
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (false || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] StringLiteral
+crawler-url-parser.js:97:22
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (typeof href == "" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:97:37
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (typeof href == "undefined" || false || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] EqualityOperator
+crawler-url-parser.js:97:37
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (typeof href == "undefined" || href.length <= 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] Regex
+crawler-url-parser.js:97:56
+-   		if (typeof href == "undefined" || href.length < 3 || /^(javascript|mailto:|ftp:)/ig.test(href)) return;
++   		if (typeof href == "undefined" || href.length < 3 || /(javascript|mailto:|ftp:)/ig.test(href)) return;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:102:8
+-   			if (urlMap.has(currentUrl.url)) {
++   			if (false) {
+
+[Survived] BlockStatement
+crawler-url-parser.js:102:36
+-   			if (urlMap.has(currentUrl.url)) {
+-   				let tmpUrl = urlMap.get(currentUrl.url);
+-   				if (!tmpUrl.text.includes(text)) {
+-   					tmpUrl.text = `${tmpUrl.text} ${text}`;
+-   				}
+-   			} else {
++   			if (urlMap.has(currentUrl.url)) {} else {
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:104:9
+-   				if (!tmpUrl.text.includes(text)) {
++   				if (tmpUrl.text.includes(text)) {
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:104:9
+-   				if (!tmpUrl.text.includes(text)) {
++   				if (true) {
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:104:9
+-   				if (!tmpUrl.text.includes(text)) {
++   				if (false) {
+
+[Survived] BlockStatement
+crawler-url-parser.js:104:38
+-   				if (!tmpUrl.text.includes(text)) {
+-   					tmpUrl.text = `${tmpUrl.text} ${text}`;
+-   				}
++   				if (!tmpUrl.text.includes(text)) {}
+
+[Survived] StringLiteral
+crawler-url-parser.js:105:20
+-   					tmpUrl.text = `${tmpUrl.text} ${text}`;
++   					tmpUrl.text = ``;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:108:23
+-   				currentUrl.text = text == null ? "" : text;
++   				currentUrl.text = true ? "" : text;
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:108:23
+-   				currentUrl.text = text == null ? "" : text;
++   				currentUrl.text = false ? "" : text;
+
+[Survived] EqualityOperator
+crawler-url-parser.js:108:23
+-   				currentUrl.text = text == null ? "" : text;
++   				currentUrl.text = text != null ? "" : text;
+
+[Survived] StringLiteral
+crawler-url-parser.js:108:38
+-   				currentUrl.text = text == null ? "" : text;
++   				currentUrl.text = text == null ? "Stryker was here!" : text;
+
+[Survived] StringLiteral
+crawler-url-parser.js:144:51
+-   	let linkurl_path = linkurl.path ? linkurl.path : "";
++   	let linkurl_path = linkurl.path ? linkurl.path : "Stryker was here!";
+
+[Survived] StringLiteral
+crawler-url-parser.js:145:51
+-   	let pageurl_path = pageurl.path ? pageurl.path : "";
++   	let pageurl_path = pageurl.path ? pageurl.path : "Stryker was here!";
+
+[Survived] Regex
+crawler-url-parser.js:146:38
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+/, '/').replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] StringLiteral
+crawler-url-parser.js:146:58
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, "").replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:146:71
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:146:71
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:146:71
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[^a-z]+$/, '/');
+
+[Survived] StringLiteral
+crawler-url-parser.js:146:93
+-   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	linkurl_path = linkurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, "");
+
+[Survived] Regex
+crawler-url-parser.js:147:38
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+/, '/').replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:147:38
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]$/, '/').replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:147:38
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[^a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] StringLiteral
+crawler-url-parser.js:147:58
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, "").replace(/\/default\.[a-z]+$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:147:71
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:147:71
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]$/, '/');
+
+[Survived] Regex
+crawler-url-parser.js:147:71
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[^a-z]+$/, '/');
+
+[Survived] StringLiteral
+crawler-url-parser.js:147:93
+-   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, '/');
++   	pageurl_path = pageurl_path.replace(/\/index\.[a-z]+$/, '/').replace(/\/default\.[a-z]+$/, "");
+
+[Survived] Regex
+crawler-url-parser.js:161:57
+-   			let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
++   			let linkurl_without_last_part = linkurl_path.replace(/(\/[^\/]*)[^\/]?$/, "");
+
+[Survived] Regex
+crawler-url-parser.js:162:57
+-   			let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[\/]?$/, "");
++   			let pageurl_without_last_part = pageurl_path.replace(/(\/[^\/]*)[^\/]?$/, "");
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:163:8
+-   			if (linkurl_without_last_part == pageurl_without_last_part) return "samelevel"
++   			if (true) return "samelevel"
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:166:14
+-   		} else if (part_count_diff == -1) {
++   		} else if (true) {
+
+[Survived] EqualityOperator
+crawler-url-parser.js:172:7
+-   		if (linkurl_subdomain_len < pageurl_subdomain_len) return "updomain";
++   		if (linkurl_subdomain_len <= pageurl_subdomain_len) return "updomain";
+
+[Survived] BooleanLiteral
+crawler-url-parser.js:185:5
+-   if (!module.parent) {
++   if (module.parent) {
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:185:5
+-   if (!module.parent) {
++   if (true) {
+
+[Survived] ConditionalExpression
+crawler-url-parser.js:185:5
+-   if (!module.parent) {
++   if (false) {
+
+[Survived] BlockStatement
+crawler-url-parser.js:185:21
+-   if (!module.parent) {
+-   	console.log("for testing purpose");
+-   	//getlevel("www.domain.com/aaa/bbb/","www.domain.com/aaa/bbb/ccc");
+-   	//let res1 = getlevel("sub.domain.com/aaa/bbb/","sub.domain.com/aaa/bbb/ccc");
+-   	//let res2 = getlevel("sub.domain.com/aaa/bbb/ccc/ddd","sub.domain.com/aaa/bbb/ccc");
+-   	//let res3 = getlevel("sub.domain.com/aaa/bbb/eee","sub.domain.com/aaa/bbb/ccc");
+-   	//debugger;
+-   	//let res = parse("ddd","http://www.stackoverflow.com/aaa/bbb/ccc/");
+-   	//let page = 'http://journals.tubitak.gov.tr/';
+-   	//let link = 'http://journals.tubitak.gov.tr/genel/telifhakki.pdf';
+-   	//let res = gettype(link, page);
+-   	//debugger
+-   	//res = gettype(page, link);
+-   	//debugger
+-   	//process.exit();
+-   	let url = "https ://www.npmjs.com/package/electron-window-manager";
+-   	let res = parse(url);
+-   	debugger;
+-   }
++   if (!module.parent) {}
+
+[Survived] StringLiteral
+crawler-url-parser.js:186:14
+-   	console.log("for testing purpose");
++   	console.log("");
+
+[Survived] StringLiteral
+crawler-url-parser.js:204:12
+-   	let url = "https ://www.npmjs.com/package/electron-window-manager";
++   	let url = "";
+
+Ran 1.00 tests per mutant on average.
+-----------------------|---------|----------|-----------|------------|----------|----------|
+File                   | % score | # killed | # timeout | # survived | # no cov | # errors |
+-----------------------|---------|----------|-----------|------------|----------|----------|
+All files              |   63.27 |      143 |         0 |         83 |        0 |        0 |
+ crawler-url-parser.js |   63.27 |      143 |         0 |         83 |        0 |        0 |
+-----------------------|---------|----------|-----------|------------|----------|----------|
+[32m15:24:18 (2392) INFO HtmlReporter[39m Your report can be found at: file:///home/runner/work/llmorpheus/llmorpheus/crawler-url-parser/reports/mutation/mutation.html
+[32m15:24:18 (2392) INFO MutationTestExecutor[39m Done in 7 minutes 12 seconds.
+
+real	7m13.529s
+user	6m12.483s
+sys	0m35.779s

@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+      .putChar('b')
+      .putUInt16(utils.MAX_BYTE_TRUNK_SIZE)
+      .put(buf.slice(offset, offset + utils.MAX_BYTE_TRUNK_SIZE));
+
+    offset += utils.MAX_BYTE_TRUNK_SIZE;
+  }
+
+  this.byteBuffer
+    .putChar('B')
+    .putUInt16(buf.length - offset)
+    .put(buf.slice(offset));
+  return this;
+};
+
+/**
+ * encode string
+ * : s 0x80 0x00 [...]
+ *   S 0x00 0x03 [0x01 0x02 0x03]
+ */
+proto.writeString = function (str) {
+  this._assertType('writeString', 'string', str);
+  var offset = 0;
+
+  var length = str.length;
+  var strOffset = 0;
+  while (length > 0x8000) {
+    var sublen = 0x8000;
+    // chunk can't end in high surrogate
+    var tail = str.charCodeAt(strOffset + sublen - 1);
+
+    if (0xd800 <= tail && tail <= 0xdbff) {
+      debug('writeString got tail: 0x%s', tail.toString(16));
+      sublen--;
+    }
+
+    this.byteBuffer
+      .put(0x73) // 's'
+      .putUInt16(sublen)
+      .putRawString(str.slice(strOffset, strOffset + sublen));
+
+    length -= sublen;
+    strOffset += sublen;
+    debug('writeString strOffset: %s, length: %s, sublen: %s', strOffset, length, sublen);
+  }
+
+  debug('writeString left length: %s', length);
+  this.byteBuffer
+    .put(0x53) // 'S'
+    .putUInt16(length)
+    .putRawString(str.slice(strOffset));
+
+  return this;
+};
+
+var _typecache = {};
+
+/**
+ * encode type
+ * v1.0
+ * ```
+ * type ::= 0x74(t) type-string-length(putUInt16) type-string(putRawString)
+ * ```
+ */
+proto.writeType = function (type) {
+  type = type || '';
+  if (_typecache[type]) {
+    this.byteBuffer.put(_typecache[type]);
+    return this;
+  }
+
+  var start = this.byteBuffer.position();
+
+  this.byteBuffer
+    .put(0x74)
+    .putUInt16(type.length)
+    .putRawString(type);
+
+  var end = this.byteBuffer.position();
+  _typecache[type] = this.byteBuffer.copy(start, end);
+
+  return this;
+};
+
+/**
+ * encode ref
+ * v1.0
+ * ```
+ * ref ::= R(0x52) int(putInt)
+ * ```
+ */
+proto.writeRef = function (refId) {
+  this.byteBuffer
+    .putChar('R')
+    .putInt(refId);
+
+  return this;
+};
+
+proto._checkRef = function (obj) {
+  var refIndex = this.objects.indexOf(obj);
+  if (<PLACEHOLDER>) {
+    // already have this object
+    // just write ref
+    debug('writeObject with a refIndex: %d', refIndex);
+    this.writeRef(refIndex);
+    return true;
+  }
+  // a new comming object
+  this.objects.push(obj);
+  return false;
+};
+
+/**
+ * A sparse array
+ *
+ * @param {Object} obj simple obj
+ * @return {this}
+ */
+proto._writeHashMap = function (obj) {
+  debug('_writeHashMap() %j, fields: %j', obj);
+
+  // Real code in java impl:
+  // http://grepcode.com/file/repo1.maven.org/maven2/com.caucho/hessian/3.1.3/com/caucho/hessian/io/Hessian2Output.java#Hessian2Output.writeMapBegin%28java.lang.String%29
+  // M(0x4d) type(writeType) (<key> <value>) z(0x7a)
+  this.byteBuffer.put(0x4d);
+  // hashmap's type is null
+  this.writeType('');
+
+  // hash map must sort keys
+  var keys = Object.keys(obj).sort();
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    this.writeString(k);
+    this.write(obj[k]);
+  }
+  this.byteBuffer.put(0x7a);
+  return this;
+};
+
+// M(0x4d) type(writeType) (<key> <value>) z(0x7a)
+proto._writeObject = function (obj) {
+  this._assertType('writeObject / writeMap', 'object', obj.$, obj.$class);
+  this.byteBuffer.put(0x4d);
+  this.writeType(obj.$class);
+
+  var val = obj.$;
+  var keys = Object.keys(val);
+  for (var i = 0, len = keys.length; i < len; i++) {
+    var key = keys[i];
+    this.writeString(key);
+    this.write(val[key]);
+  }
+  this.byteBuffer.put(0x7a);
+  return this;
+};
+
+/**
+ * encode object
+ *   support circular
+ *   support all kind of java object
+ * : {a: 1}
+ * : {$class: 'java.lang.Map', $: {a: 1}}
+ */
+proto.writeObject = function (obj) {
+  if (is.nullOrUndefined(obj) || 
+    // : { a: { '$class': 'xxx', '$': null } }
+    (is.string(obj.$class) && is.nullOrUndefined(obj.$))) {
+    debug('writeObject with a null');
+    return this.writeNull();
+  }
+  this._assertType('writeObject / writeMap', 'object', obj);
+
+  if (this._checkRef(obj)) {
+    // if is ref, will write by _checkRef
+    return this;
+  }
+
+  var className = '';
+  var realObj;
+  if (!obj.$class || !obj.$) {
+    // : {a: 1}
+    realObj = obj;
+  } else {
+    // : {$class: 'java.utils.HashMap', $: {a: 1}}
+    className = obj.$class === javaObject.DEFAULT_CLASSNAME.map ? '' : obj.$class;
+    realObj = obj.$;
+  }
+
+  if (!className) {
+    return this._writeHashMap(realObj);
+  }
+
+  debug('writeObject with complex object, className: %s', className);
+  return this._writeObject(obj);
+};
+
+proto.writeMap = proto.writeObject;
+
+proto._writeListBegin = function (length, type) {
+  this.byteBuffer.putChar('V');
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+refIndex >= 0
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

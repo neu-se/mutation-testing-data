@@ -1,0 +1,185 @@
+Your task is to apply mutation testing to the following code:
+```
+'use strict';
+
+var moment = require('moment');
+var swig = require('swig');
+var Promise = require('bluebird');
+var pathFn = require('path');
+var _ = require('lodash');
+var yaml = require('js-yaml');
+var util = require('hexo-util');
+var fs = require('hexo-fs');
+var yfm = require('hexo-front-matter');
+
+var slugize = util.slugize;
+var escapeRegExp = util.escapeRegExp;
+
+var rEscapeContent = /<escape(?:[^>]*)>([\s\S]*?)<\/escape>/g;
+var rSwigVar = /\{\{[\s\S]*?\}\}/g;
+var rSwigComment = /\{#[\s\S]*?#\}/g;
+var rSwigBlock = /\{%[\s\S]*?%\}/g;
+var rSwigFullBlock = /\{% *(.+?)(?: *| +.*)%\}[\s\S]+?\{% *end\1 *%\}/g;
+var placeholder = '\uFFFC';
+var rPlaceholder = /(?:<|&lt;)\!--\uFFFC(\d+)--(?:>|&gt;)/g;
+
+var preservedKeys = {
+  title: true,
+  slug: true,
+  path: true,
+  layout: true,
+  date: true,
+  content: true
+};
+
+swig.setDefaults({
+  autoescape: false
+});
+
+function Post(context){
+  this.context = context;
+}
+
+Post.prototype.create = function(data, replace, callback){
+  if (!callback && typeof replace === 'function'){
+    callback = replace;
+    replace = false;
+  }
+
+  var ctx = this.context;
+  var config = ctx.config;
+
+  data.slug = slugize((data.slug || data.title).toString(), {transform: config.filename_case});
+  data.layout = (data.layout || config.default_layout).toLowerCase();
+  data.date = data.date ? moment(data.date) : moment(<PLACEHOLDER>);
+
+  return Promise.all([
+    // Get the post path
+    ctx.execFilter('new_post_path', data, {
+      args: [replace],
+      context: ctx
+    }),
+    // Get the scaffold
+    this._getScaffold(data.layout)
+  ]).spread(function(path, scaffold){
+    data.date = data.date.format('YYYY-MM-DD HH:mm:ss');
+
+    // Split data part from the raw scaffold
+    var split = yfm.split(scaffold);
+    var separator = split.separator || '---';
+    var jsonMode = separator[0] === ';';
+
+    var frontMatter;
+
+    if (jsonMode){
+      frontMatter = prepareJFM(_.clone(data));
+    } else {
+      frontMatter = prepareYFM(_.clone(data));
+    }
+
+    // Compile front-matter with data
+    var content = swig.compile(split.data)(frontMatter) + '\n';
+
+    // Parse front-matter
+    var compiled;
+
+    if (jsonMode){
+      compiled = JSON.parse('{' + content + '}');
+    } else {
+      compiled = yaml.load(content);
+    }
+
+    // Add data which are not in the front-matter
+    var keys = Object.keys(data);
+    var key = '';
+    var obj = {};
+
+    for (var i = 0, len = keys.length; i < len; i++){
+      key = keys[i];
+
+      if (!preservedKeys[key] && !compiled.hasOwnProperty(key)){
+        obj[key] = data[key];
+      }
+    }
+
+    if (Object.keys(obj).length){
+      if (jsonMode){
+        if (content){
+          content = content.trim() + ',\n';
+        }
+
+        content += JSON.stringify(obj, null, '  ')
+          // Remove indention
+          .replace(/\n {2}/g, function(){
+            return '\n';
+          })
+          // Remove prefixing and trailing braces
+          .replace(/^{\n|}$/g, '');
+      } else {
+        content += yaml.dump(obj);
+      }
+    }
+
+    // Add separators
+    if (split.prefixSeparator) content = separator + '\n' + content;
+    content += separator + '\n';
+
+    // Concat content
+    content += split.content;
+
+    if (data.content){
+      content += '\n' + data.content;
+    }
+
+    var result = {
+      path: path,
+      content: content
+    };
+
+    return Promise.all([
+      // Write content to file
+      fs.writeFile(path, content),
+      // Create asset folder
+      createAssetFolder(path, config.post_asset_folder)
+    ]).then(function(){
+      ctx.emit('new', result);
+    }).thenReturn(result);
+  }).nodeify(callback);
+};
+
+// Prepare data for JSON front-matter:
+// - Add quotations for strings
+function prepareJFM(data){
+  var keys = Object.keys(data);
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."
