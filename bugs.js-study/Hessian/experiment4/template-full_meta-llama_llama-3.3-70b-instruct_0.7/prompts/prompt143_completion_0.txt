@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+obj === null
+```
+This would result in different behavior because it only checks if the object is null, but not if it's undefined, and also doesn't check for the specific case where the object has a `$class` property but its `$` property is null or undefined.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+is.nullOrUndefined(obj.$) || (is.string(obj.$class) && is.nullOrUndefined(obj))
+```
+This would result in different behavior because it checks if `obj.$` is null or undefined, instead of `obj`, and also checks if `obj` is null or undefined when `obj.$class` is a string, instead of checking `obj.$`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+!obj || (is.string(obj.$class) && !obj.$)
+```
+This would result in different behavior because it uses the logical NOT operator to check if `obj` is falsy, which includes not only null and undefined, but also other falsy values like 0, '', etc., and also checks if `obj.$` is falsy

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+data.title.toString()
+```
+This would result in different behavior because it always uses the title as the slug, even if a slug is provided, which could lead to unexpected slug values.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+(data.slug || '').toString()
+```
+This would result in different behavior because it uses an empty string as the default value if neither slug nor title is provided, which could result in a slug of an empty string.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(data.title + '').toString()
+```
+This would result in different behavior because it always uses the title as the slug and converts it to a string using the + operator, which could lead to different results if the title is not a string, and it ignores the provided slug.
+
+DONE.
