@@ -1,0 +1,3806 @@
+
+> memfs@3.4.4 test
+> jest --maxWorkers 2
+
+FAIL src/__tests__/volume/writeSync.test.ts
+  ● .writeSync(fd, buffer, offset, length, position) › Write binary data to file
+
+    EEXIST: file already exists, open '/data.bin'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/writeSync.test.ts:14:50)
+
+FAIL src/__tests__/volume/closeSync.test.ts
+  ● .closeSync(fd) › Correct error when file descriptor is not a number
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: "fd must be a file descriptor"
+    Received: "EEXIST: file already exists, open '/foo'"
+
+      16 |       expect(err.message).toEqual('fd must be a file descriptor');
+      17 |     }
+    > 18 |   });
+         |      ^
+      19 |   it('Closing file descriptor that does not exist', () => {
+      20 |     const vol = new Volume();
+      21 |     try {
+
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:18:33)
+
+  ● .closeSync(fd) › Closing same file descriptor twice throws EBADF
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:32:22)
+
+  ● .closeSync(fd) › Closing a file decreases the number of open files
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:43:22)
+
+  ● .closeSync(fd) › When closing a file, its descriptor is added to the pool of descriptors to be reused
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:49:22)
+
+PASS src/__tests__/volume/writeFileSync.test.ts
+FAIL src/__tests__/volume/write.test.ts (5.078 s)
+  ● write(fs, str, position, encoding, callback) › Simple write to file
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/test']
+
+      12 |     vol.write(fd, 'lol', 0, 'utf8', (err, bytes, str) => {
+      13 |       expect(err).toEqual(null);
+    > 14 |       expect(bytes).toEqual(3);
+         |                         ^
+      15 |       expect(str).toEqual('lol');
+      16 |       expect(vol.readFileSync('/test', 'utf8')).toEqual('lol');
+      17 |       done();
+
+      at src/__tests__/volume/write.test.ts:14:25
+      at Immediate.<anonymous> (src/volume.ts:1076:17)
+
+  ● write(fs, str, position, encoding, callback) › Simple write to file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+       8 | describe('write(fs, str, position, encoding, callback)', () => {
+       9 |   it('Simple write to file', done => {
+    > 10 |     const vol = create();
+         |     ^
+      11 |     const fd = vol.openSync('/test', 'w');
+      12 |     vol.write(fd, 'lol', 0, 'utf8', (err, bytes, str) => {
+      13 |       expect(err).toEqual(null);
+
+      at src/__tests__/volume/write.test.ts:10:5
+      at Object.<anonymous> (src/__tests__/volume/write.test.ts:9:1)
+
+PASS src/__tests__/volume/openSync.test.ts
+PASS src/__tests__/volume/rmSync.test.ts
+PASS src/__tests__/volume/rmPromise.test.ts
+FAIL src/__tests__/volume/renameSync.test.ts
+  ● renameSync(fromPath, toPath) › Renames a file
+
+    EEXIST: file already exists, open '/baz'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/renameSync.test.ts:11:20)
+
+FAIL src/__tests__/volume/copyFileSync.test.ts
+  ● copyFileSync(src, dest[, flags]) › copies file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:29:13)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_EXCL flag set › should copy file, if destination does not exit
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:37:17)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_EXCL flag set › should throw, if file already exists
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:49:24)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_FICLONE flag set › copies file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:58:17)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_FICLONE_FORCE flag set › always fails with ENOSYS
+
+    expect(received).toThrowError(expected)
+
+    Expected pattern: /ENOSYS/
+    Received message: "EEXIST: file already exists, open '/foo'"
+
+          126 |     case EACCES:
+          127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+        > 128 |     case ENOTEMPTY:
+              |                 ^
+          129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+          130 |     case EMFILE:
+          131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at src/__tests__/volume/copyFileSync.test.ts:69:21
+      at Object.<anonymous> (node_modules/expect/build/toThrowMatchers.js:83:11)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:70:16)
+
+PASS src/__tests__/volume/readdirSync.test.ts
+FAIL src/__tests__/volume/appendFile.test.ts (11.902 s)
+  ● appendFile(file, data[, options], callback) › Simple write to non-existing file
+
+    EEXIST: file already exists, open '/test'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/appendFile.test.ts:8:24
+      at Immediate.<anonymous> (src/volume.ts:701:13)
+
+  ● appendFile(file, data[, options], callback) › Simple write to non-existing file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      3 | describe('appendFile(file, data[, options], callback)', () => {
+      4 |   it('Simple write to non-existing file', done => {
+    > 5 |     const vol = create();
+        |     ^
+      6 |     vol.appendFile('/test', 'hello', (err, res) => {
+      7 |       expect(vol.readFileSync('/test', 'utf8')).toEqual('hello');
+      8 |       done();
+
+      at src/__tests__/volume/appendFile.test.ts:5:5
+      at Object.<anonymous> (src/__tests__/volume/appendFile.test.ts:4:1)
+
+  ● appendFile(file, data[, options], callback) › Append to existing file
+
+    EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/appendFile.test.ts:15:24
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● appendFile(file, data[, options], callback) › Append to existing file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      10 |   });
+      11 |   it('Append to existing file', done => {
+    > 12 |     const vol = create({ '/a': 'b' });
+         |     ^
+      13 |     vol.appendFile('/a', 'c', (err, res) => {
+      14 |       expect(vol.readFileSync('/a', 'utf8')).toEqual('bc');
+      15 |       done();
+
+      at src/__tests__/volume/appendFile.test.ts:12:5
+      at Object.<anonymous> (src/__tests__/volume/appendFile.test.ts:4:1)
+
+PASS src/__tests__/volume/mkdirSync.test.ts
+FAIL src/__tests__/volume/copyFile.test.ts (5.051 s)
+  ● copyFile(src, dest[, flags], callback) › copies a file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFile.test.ts:14:20)
+
+  ● copyFile(src, dest[, flags], callback) › honors COPYFILE_EXCL flag
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/copyFile.test.ts:35:24
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● copyFile(src, dest[, flags], callback) › honors COPYFILE_EXCL flag
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      24 |
+      25 |       expect(vol.readFileSync('/foo', 'utf8')).toBe('hello world');
+    > 26 |       expect(vol.readFileSync('/bar', 'utf8')).toBe('hello world');
+         |     ^
+      27 |       done();
+      28 |     });
+      29 |   });
+
+      at src/__tests__/volume/copyFile.test.ts:26:5
+      at Object.<anonymous> (src/__tests__/volume/copyFile.test.ts:5:1)
+
+FAIL src/__tests__/volume/toString.test.ts
+  ● toString › allow files to be named "toString", #463
+
+    EEXIST: file already exists, open '/toString'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/toString.test.ts:8:20)
+
+FAIL src/__tests__/volume/WriteStream.test.ts (5.067 s)
+  ● WriteStream › Can write basic file
+
+    Unhandled error. (Error: EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate._onImmediate (src/volume.ts:695:33)
+      at processImmediate (node:internal/timers:483:21) {
+        code: 'EEXIST'
+      })
+      at class_2.<anonymous> (src/volume.ts:2114:18)
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● WriteStream › Can write basic file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      12 |   });
+      13 |   it('Can write basic file', done => {
+    > 14 |     const fs = createFs({ '/a': 'b' });
+         |     ^
+      15 |     const ws = new fs.WriteStream('/a', 'utf8');
+      16 |     ws.end('d');
+      17 |     ws.on('finish', () => {
+
+      at src/__tests__/volume/WriteStream.test.ts:14:5
+      at Object.<anonymous> (src/__tests__/volume/WriteStream.test.ts:4:1)
+
+FAIL src/__tests__/volume/readSync.test.ts
+  ● .readSync(fd, buffer, offset, length, position) › Basic read file
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/readSync.test.ts:8:38)
+
+FAIL src/__tests__/volume/appendFileSync.test.ts
+  ● appendFileSync(file, data, options) › Simple write to non-existing file
+
+    EEXIST: file already exists, open '/test'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/appendFileSync.test.ts:8:20)
+
+  ● appendFileSync(file, data, options) › Append to existing file
+
+    EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Volume.Object.<anonymous>.Volume.appendFileSync (src/volume.ts:1402:14)
+      at Object.<anonymous> (src/__tests__/volume/appendFileSync.test.ts:12:13)
+
+PASS src/__tests__/volume/rename.test.ts
+PASS src/__tests__/volume/realpathSync.test.ts
+PASS src/__tests__/volume/statSync.test.ts
+PASS src/__tests__/node.test.ts
+PASS src/__tests__/index.test.ts
+PASS src/__tests__/setTimeoutUnref.test.ts
+PASS src/__tests__/process.test.ts
+PASS src/__tests__/setImmediate.test.ts
+FAIL src/__tests__/volume/ReadStream.test.ts (5.056 s)
+  ● ReadStream › Can read basic file
+
+    Unhandled error. (Error: EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate._onImmediate (src/volume.ts:695:33)
+      at processImmediate (node:internal/timers:483:21) {
+        code: 'EEXIST'
+      })
+      at src/volume.ts:1976:18
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● ReadStream › Can read basic file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      12 |   });
+      13 |   it('Can read basic file', done => {
+    > 14 |     const fs = createFs({ '/a': 'b' });
+         |     ^
+      15 |     const rs = new fs.ReadStream('/a', 'utf8');
+      16 |     rs.on('data', data => {
+      17 |       expect(String(data)).toEqual('b');
+
+      at src/__tests__/volume/ReadStream.test.ts:14:5
+      at Object.<anonymous> (src/__tests__/volume/ReadStream.test.ts:4:1)
+
+PASS src/__tests__/volume/existsSync.test.ts
+PASS src/__tests__/volume/exists.test.ts
+FAIL src/__tests__/volume/callback-error.test.ts
+  ● Test suite failed to run
+
+    TypeError: Cannot assign to read only property 'performance' of object '[object global]'
+
+    > 1 | jest.useFakeTimers('modern');
+        |                          ^
+      2 |
+      3 | // Fixes https://github.com/streamich/memfs/issues/542
+      4 | it('should throw error instead of callback', () => {
+
+      at hijackMethod (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:946:32)
+      at Object.install (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:1733:17)
+      at FakeTimers.useFakeTimers (node_modules/@jest/fake-timers/build/modernFakeTimers.js:110:36)
+      at Object.<anonymous> (src/__tests__/volume/callback-error.test.ts:1:26)
+
+FAIL src/__tests__/promises.test.ts
+  ● Promises API › FileHandle › fd › FileHandle should have a fd property
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › appendFile(data[, options]) › Append data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › appendFile(data[, options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chmod(mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chmod(mode) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chown(uid, gid) › Change uid and gid of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chown(uid, gid) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › datasync() › Synchronize data with an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › datasync() › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › read(buffer, offset, length, position) › Read data from an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › read(buffer, offset, length, position) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › readFile([options]) › Read data from an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › readFile([options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › stat() › Return stats of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › stat() › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › truncate([len]) › Truncate an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › truncate([len]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › utimes(atime, mtime) › Changes times of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › utimes(atime, mtime) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › write(buffer[, offset[, length[, position]]]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › write(buffer[, offset[, length[, position]]]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › writeFile(data[, options]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › writeFile(data[, options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › appendFile(path, data[, options]) › Append data to existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › appendFile(path, data[, options]) › Append data to existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › chmod(path, mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.chmodBase (src/volume.ts:1700:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › copyFile(src, dest[, flags]) › Copy existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › lchmod(path, mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/bar'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.lchmodBase (src/volume.ts:1719:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › open(path, flags[, mode]) › Open an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › readFile(id[, options]) › Read existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › readFile(id[, options]) › Read existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › rename(oldPath, newPath) › Rename existing file
+
+    EEXIST: file already exists, open '/bar'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/promises.test.ts:1027:36
+      at step (src/__tests__/promises.test.ts:33:23)
+      at Object.next (src/__tests__/promises.test.ts:14:53)
+      at fulfilled (src/__tests__/promises.test.ts:5:58)
+
+  ● Promises API › truncate(path[, len]) › Truncate an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.truncateBase (src/volume.ts:1505:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › utimes(path, atime, mtime) › Changes times of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.utimesBase (src/volume.ts:1538:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › writeFile(id, data[, options]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › writeFile(id, data[, options]) › Write data to existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+FAIL src/__tests__/volume.test.ts (40.417 s)
+  ● volume › Volume › .fromJSON(json[, cwd]) › Invalid JSON throws error
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      219 |           '/dir/dir/dir2/hello.sh': 'world',
+      220 |           '/hello.js': 'console.log(123)',
+    > 221 |           '/dir/dir/test.txt': 'Windows',
+          |                                          ^
+      222 |         };
+      223 |         vol.fromJSON(json);
+      224 |         expect(vol.toJSON()).toEqual(json);
+
+      at Object.<anonymous> (src/__tests__/volume.test.ts:221:81)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error with exclude flag if file exists
+
+    expect(received).toHaveProperty(path, value)
+
+    Matcher error: received value must not be null nor undefined
+
+    Received has value: null
+
+      384 |     });
+      385 |     describe('.open(path, flags[, mode], callback)', () => {
+    > 386 |       const vol = new Volume();
+          |                                ^
+      387 |       vol.mkdirSync('/test-dir');
+      388 |       it('Create new file at root (/test.txt)', done => {
+      389 |         vol.open('/test.txt', 'w', (err, fd) => {
+
+      at src/__tests__/volume.test.ts:386:33
+      at Immediate.<anonymous> (src/volume.ts:701:13)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error with exclude flag if file exists
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      381 |         expect(fd2 !== fd3).toBe(true);
+      382 |         expect(fd3 !== fd4).toBe(true);
+    > 383 |       });
+          |          ^
+      384 |     });
+      385 |     describe('.open(path, flags[, mode], callback)', () => {
+      386 |       const vol = new Volume();
+
+      at src/__tests__/volume.test.ts:383:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error on incorrect flags for directory
+
+    expect(received).toHaveProperty(path, value)
+
+    Expected path: "code"
+
+    Expected value: "EISDIR"
+    Received value: "EEXIST"
+
+      440 |           expect(err).toBeInstanceOf(TypeError);
+      441 |           expect(err.message).toBe('mode must be an int');
+    > 442 |           done();
+          |                  ^
+      443 |         }
+      444 |       });
+      445 |       it('Properly sets permissions from mode when creating a new file', done => {
+
+      at src/__tests__/volume.test.ts:442:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error on incorrect flags for directory
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      438 |           throw Error('This should not throw');
+      439 |         } catch (err) {
+    > 440 |           expect(err).toBeInstanceOf(TypeError);
+          |             ^
+      441 |           expect(err.message).toBe('mode must be an int');
+      442 |           done();
+      443 |         }
+
+      at src/__tests__/volume.test.ts:440:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Properly opens directory as read-only
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/test-dir']
+
+      446 |         vol.writeFileSync('/a.txt', 'foo');
+      447 |         const stats = vol.statSync('/a.txt');
+    > 448 |         // Write a new file, copying the mode from the old file
+          |                                 ^
+      449 |         vol.open('/b.txt', 'w', stats.mode, (err, fd) => {
+      450 |           expect(err).toBe(null);
+      451 |           expect(vol.root.getChild('b.txt')).toBeInstanceOf(Link);
+
+      at src/__tests__/volume.test.ts:448:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Properly opens directory as read-only
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      444 |       });
+      445 |       it('Properly sets permissions from mode when creating a new file', done => {
+    > 446 |         vol.writeFileSync('/a.txt', 'foo');
+          |             ^
+      447 |         const stats = vol.statSync('/a.txt');
+      448 |         // Write a new file, copying the mode from the old file
+      449 |         vol.open('/b.txt', 'w', stats.mode, (err, fd) => {
+
+      at src/__tests__/volume.test.ts:446:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file at root (/text.txt)
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:475:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file with path passed as URL
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:481:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Specify encoding as string
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:485:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Specify encoding in object
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:489:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file deep in tree (/dir1/dir2/test-file)
+
+    EEXIST: file already exists, open '/dir1/dir2/test-file'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:498:31)
+
+  ● volume › Volume › .readFile(path[, options], callback) › Read file at root (/file.txt)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/file.txt']
+
+      528 |       });
+      529 |       it('Attempt to read a directory should throw EISDIR', () => {
+    > 530 |         const vol = new Volume();
+          |                                 ^
+      531 |         vol.mkdirSync('/test');
+      532 |         const fn = () => vol.readFileSync('/test');
+      533 |         expect(fn).toThrowError('EISDIR');
+
+      at src/__tests__/volume.test.ts:530:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .readFile(path[, options], callback) › Read file at root (/file.txt)
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      526 |           // TODO: Check the right error message.
+      527 |         }
+    > 528 |       });
+          |          ^
+      529 |       it('Attempt to read a directory should throw EISDIR', () => {
+      530 |         const vol = new Volume();
+      531 |         vol.mkdirSync('/test');
+
+      at src/__tests__/volume.test.ts:528:13
+      at src/__tests__/volume.test.ts:523:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Simple write to a file descriptor
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:544:28)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Multiple writes to a file
+
+    EEXIST: file already exists, open '/multi.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:559:28)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Overwrite part of file
+
+    EEXIST: file already exists, open '/overwrite.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:566:28)
+
+  ● volume › Volume › .write(fd, buffer, offset, length, position, callback) › Simple write to a file descriptor
+
+    EBADF: bad file descriptor, close
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.getFileByFdOrThrow (src/volume.ts:658:19)
+      at Volume.Object.<anonymous>.Volume.closeSync (src/volume.ts:893:25)
+      at src/__tests__/volume.test.ts:575:25
+      at Immediate.<anonymous> (src/volume.ts:1076:17)
+
+  ● volume › Volume › .write(fd, buffer, offset, length, position, callback) › Simple write to a file descriptor
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      568 |           const b = vol.writeSync(fd, data);
+      569 |           expect(b).toBe(data.length);
+    > 570 |           bytes += b;
+          |             ^
+      571 |         }
+      572 |         vol.closeSync(fd);
+      573 |         const result = datas.join('');
+
+      at src/__tests__/volume.test.ts:570:13
+      at src/__tests__/volume.test.ts:569:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Read from symlink
+
+    EEXIST: file already exists, open '/test2.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:623:28)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Symlink to a folder
+
+    EEXIST: file already exists, open '/b1/a2/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:629:32)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Symlink to a folder to a folder
+
+    EEXIST: file already exists, open '/c1/a2/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:635:25)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Multiple hops to folders
+
+    EEXIST: file already exists, open '/c1/c2/c3/c4/c5/final/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:647:25)
+
+  ● volume › Volume › .statSync(path) › Modification new write
+
+    EEXIST: file already exists, open '/mtime.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:790:25)
+
+  ● volume › Volume › .statSync(path) › Modification new write
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      784 |       it('Returns basic file stats', () => {
+      785 |         const stats = vol.statSync('/dojo.js');
+    > 786 |         expect(stats).toBeInstanceOf(Stats);
+          |             ^
+      787 |         expect(stats.size).toBe(data.length);
+      788 |         expect(stats.isFile()).toBe(true);
+      789 |         expect(stats.isDirectory()).toBe(false);
+
+      at src/__tests__/volume.test.ts:786:13
+      at src/__tests__/volume.test.ts:758:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .fstatSync(fd) › Returns basic file stats
+
+    EEXIST: file already exists, open '/dojo.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:806:30)
+
+  ● volume › Volume › .fstatSync(fd) › Returns file stats using BigInt
+
+    EEXIST: file already exists, open '/dojo.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:814:30)
+
+  ● volume › Volume › .linkSync(existingPath, newPath) › Create a new link
+
+    EEXIST: file already exists, open '/1.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:833:28)
+
+  ● volume › Volume › .ftruncateSync(fd[, len]) › Truncates to 0 single file
+
+    EEXIST: file already exists, open '/trunky'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:914:28)
+
+  ● volume › Volume › .truncateSync(path[, len]) › Truncates to 0 single file
+
+    EEXIST: file already exists, open '/trunky'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:927:28)
+
+  ● volume › Volume › .truncateSync(path[, len]) › Partial truncate
+
+    EEXIST: file already exists, open '/1'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:934:28)
+
+  ● volume › Volume › .utimesSync(path, atime, mtime) › Set times on file
+
+    EEXIST: file already exists, open '/lol'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.utimesBase (src/volume.ts:1538:23)
+      at Volume.Object.<anonymous>.Volume.utimesSync (src/volume.ts:1547:14)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:946:21)
+
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    EEXIST: file already exists, open '/lol.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:1058:25)
+
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1046 |         expect(!!vol.root.getChild('dir')).toBe(false);
+      1047 |       });
+    > 1048 |       it('Remove dir /dir1/dir2/dir3 recursively', () => {
+           |             ^
+      1049 |         const vol = new Volume();
+      1050 |         vol.mkdirSync('/dir1/dir2/dir3', { recursive: true });
+      1051 |         vol.rmdirSync('/dir1', { recursive: true });
+
+      at src/__tests__/volume.test.ts:1048:13
+      at src/__tests__/volume.test.ts:1047:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .unwatchFile(path[, listener]) › Stops watching before .writeFile
+
+    EEXIST: file already exists, open '/lol.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:1073:25)
+
+  ● volume › Volume › .unwatchFile(path[, listener]) › Stops watching before .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1062 |           done();
+      1063 |         });
+    > 1064 |       });
+           |          ^
+      1065 |     });
+      1066 |     describe('.watchFile(path[, options], listener)', () => {
+      1067 |       it('Calls listener on .writeFile', done => {
+
+      at src/__tests__/volume.test.ts:1064:13
+      at src/__tests__/volume.test.ts:1063:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+Summary of all failing tests
+FAIL src/__tests__/volume/writeSync.test.ts
+  ● .writeSync(fd, buffer, offset, length, position) › Write binary data to file
+
+    EEXIST: file already exists, open '/data.bin'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/writeSync.test.ts:14:50)
+
+FAIL src/__tests__/volume/closeSync.test.ts
+  ● .closeSync(fd) › Correct error when file descriptor is not a number
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: "fd must be a file descriptor"
+    Received: "EEXIST: file already exists, open '/foo'"
+
+      16 |       expect(err.message).toEqual('fd must be a file descriptor');
+      17 |     }
+    > 18 |   });
+         |      ^
+      19 |   it('Closing file descriptor that does not exist', () => {
+      20 |     const vol = new Volume();
+      21 |     try {
+
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:18:33)
+
+  ● .closeSync(fd) › Closing same file descriptor twice throws EBADF
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:32:22)
+
+  ● .closeSync(fd) › Closing a file decreases the number of open files
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:43:22)
+
+  ● .closeSync(fd) › When closing a file, its descriptor is added to the pool of descriptors to be reused
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/closeSync.test.ts:49:22)
+
+FAIL src/__tests__/volume/write.test.ts (5.078 s)
+  ● write(fs, str, position, encoding, callback) › Simple write to file
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/test']
+
+      12 |     vol.write(fd, 'lol', 0, 'utf8', (err, bytes, str) => {
+      13 |       expect(err).toEqual(null);
+    > 14 |       expect(bytes).toEqual(3);
+         |                         ^
+      15 |       expect(str).toEqual('lol');
+      16 |       expect(vol.readFileSync('/test', 'utf8')).toEqual('lol');
+      17 |       done();
+
+      at src/__tests__/volume/write.test.ts:14:25
+      at Immediate.<anonymous> (src/volume.ts:1076:17)
+
+  ● write(fs, str, position, encoding, callback) › Simple write to file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+       8 | describe('write(fs, str, position, encoding, callback)', () => {
+       9 |   it('Simple write to file', done => {
+    > 10 |     const vol = create();
+         |     ^
+      11 |     const fd = vol.openSync('/test', 'w');
+      12 |     vol.write(fd, 'lol', 0, 'utf8', (err, bytes, str) => {
+      13 |       expect(err).toEqual(null);
+
+      at src/__tests__/volume/write.test.ts:10:5
+      at Object.<anonymous> (src/__tests__/volume/write.test.ts:9:1)
+
+FAIL src/__tests__/volume/renameSync.test.ts
+  ● renameSync(fromPath, toPath) › Renames a file
+
+    EEXIST: file already exists, open '/baz'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/renameSync.test.ts:11:20)
+
+FAIL src/__tests__/volume/copyFileSync.test.ts
+  ● copyFileSync(src, dest[, flags]) › copies file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:29:13)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_EXCL flag set › should copy file, if destination does not exit
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:37:17)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_EXCL flag set › should throw, if file already exists
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:49:24)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_FICLONE flag set › copies file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:58:17)
+
+  ● copyFileSync(src, dest[, flags]) › when COPYFILE_FICLONE_FORCE flag set › always fails with ENOSYS
+
+    expect(received).toThrowError(expected)
+
+    Expected pattern: /ENOSYS/
+    Received message: "EEXIST: file already exists, open '/foo'"
+
+          126 |     case EACCES:
+          127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+        > 128 |     case ENOTEMPTY:
+              |                 ^
+          129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+          130 |     case EMFILE:
+          131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Volume.Object.<anonymous>.Volume.copyFileSync (src/volume.ts:1163:21)
+      at src/__tests__/volume/copyFileSync.test.ts:69:21
+      at Object.<anonymous> (node_modules/expect/build/toThrowMatchers.js:83:11)
+      at Object.<anonymous> (src/__tests__/volume/copyFileSync.test.ts:70:16)
+
+FAIL src/__tests__/volume/appendFile.test.ts (11.902 s)
+  ● appendFile(file, data[, options], callback) › Simple write to non-existing file
+
+    EEXIST: file already exists, open '/test'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/appendFile.test.ts:8:24
+      at Immediate.<anonymous> (src/volume.ts:701:13)
+
+  ● appendFile(file, data[, options], callback) › Simple write to non-existing file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      3 | describe('appendFile(file, data[, options], callback)', () => {
+      4 |   it('Simple write to non-existing file', done => {
+    > 5 |     const vol = create();
+        |     ^
+      6 |     vol.appendFile('/test', 'hello', (err, res) => {
+      7 |       expect(vol.readFileSync('/test', 'utf8')).toEqual('hello');
+      8 |       done();
+
+      at src/__tests__/volume/appendFile.test.ts:5:5
+      at Object.<anonymous> (src/__tests__/volume/appendFile.test.ts:4:1)
+
+  ● appendFile(file, data[, options], callback) › Append to existing file
+
+    EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/appendFile.test.ts:15:24
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● appendFile(file, data[, options], callback) › Append to existing file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      10 |   });
+      11 |   it('Append to existing file', done => {
+    > 12 |     const vol = create({ '/a': 'b' });
+         |     ^
+      13 |     vol.appendFile('/a', 'c', (err, res) => {
+      14 |       expect(vol.readFileSync('/a', 'utf8')).toEqual('bc');
+      15 |       done();
+
+      at src/__tests__/volume/appendFile.test.ts:12:5
+      at Object.<anonymous> (src/__tests__/volume/appendFile.test.ts:4:1)
+
+FAIL src/__tests__/volume/copyFile.test.ts (5.051 s)
+  ● copyFile(src, dest[, flags], callback) › copies a file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/copyFile.test.ts:14:20)
+
+  ● copyFile(src, dest[, flags], callback) › honors COPYFILE_EXCL flag
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/volume/copyFile.test.ts:35:24
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● copyFile(src, dest[, flags], callback) › honors COPYFILE_EXCL flag
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      24 |
+      25 |       expect(vol.readFileSync('/foo', 'utf8')).toBe('hello world');
+    > 26 |       expect(vol.readFileSync('/bar', 'utf8')).toBe('hello world');
+         |     ^
+      27 |       done();
+      28 |     });
+      29 |   });
+
+      at src/__tests__/volume/copyFile.test.ts:26:5
+      at Object.<anonymous> (src/__tests__/volume/copyFile.test.ts:5:1)
+
+FAIL src/__tests__/volume/toString.test.ts
+  ● toString › allow files to be named "toString", #463
+
+    EEXIST: file already exists, open '/toString'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/toString.test.ts:8:20)
+
+FAIL src/__tests__/volume/WriteStream.test.ts (5.067 s)
+  ● WriteStream › Can write basic file
+
+    Unhandled error. (Error: EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate._onImmediate (src/volume.ts:695:33)
+      at processImmediate (node:internal/timers:483:21) {
+        code: 'EEXIST'
+      })
+      at class_2.<anonymous> (src/volume.ts:2114:18)
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● WriteStream › Can write basic file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      12 |   });
+      13 |   it('Can write basic file', done => {
+    > 14 |     const fs = createFs({ '/a': 'b' });
+         |     ^
+      15 |     const ws = new fs.WriteStream('/a', 'utf8');
+      16 |     ws.end('d');
+      17 |     ws.on('finish', () => {
+
+      at src/__tests__/volume/WriteStream.test.ts:14:5
+      at Object.<anonymous> (src/__tests__/volume/WriteStream.test.ts:4:1)
+
+FAIL src/__tests__/volume/readSync.test.ts
+  ● .readSync(fd, buffer, offset, length, position) › Basic read file
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume/readSync.test.ts:8:38)
+
+FAIL src/__tests__/volume/appendFileSync.test.ts
+  ● appendFileSync(file, data, options) › Simple write to non-existing file
+
+    EEXIST: file already exists, open '/test'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume/appendFileSync.test.ts:8:20)
+
+  ● appendFileSync(file, data, options) › Append to existing file
+
+    EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Volume.Object.<anonymous>.Volume.appendFileSync (src/volume.ts:1402:14)
+      at Object.<anonymous> (src/__tests__/volume/appendFileSync.test.ts:12:13)
+
+FAIL src/__tests__/volume/ReadStream.test.ts (5.056 s)
+  ● ReadStream › Can read basic file
+
+    Unhandled error. (Error: EEXIST: file already exists, open '/a'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate._onImmediate (src/volume.ts:695:33)
+      at processImmediate (node:internal/timers:483:21) {
+        code: 'EEXIST'
+      })
+      at src/volume.ts:1976:18
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● ReadStream › Can read basic file
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      12 |   });
+      13 |   it('Can read basic file', done => {
+    > 14 |     const fs = createFs({ '/a': 'b' });
+         |     ^
+      15 |     const rs = new fs.ReadStream('/a', 'utf8');
+      16 |     rs.on('data', data => {
+      17 |       expect(String(data)).toEqual('b');
+
+      at src/__tests__/volume/ReadStream.test.ts:14:5
+      at Object.<anonymous> (src/__tests__/volume/ReadStream.test.ts:4:1)
+
+FAIL src/__tests__/volume/callback-error.test.ts
+  ● Test suite failed to run
+
+    TypeError: Cannot assign to read only property 'performance' of object '[object global]'
+
+    > 1 | jest.useFakeTimers('modern');
+        |                          ^
+      2 |
+      3 | // Fixes https://github.com/streamich/memfs/issues/542
+      4 | it('should throw error instead of callback', () => {
+
+      at hijackMethod (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:946:32)
+      at Object.install (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:1733:17)
+      at FakeTimers.useFakeTimers (node_modules/@jest/fake-timers/build/modernFakeTimers.js:110:36)
+      at Object.<anonymous> (src/__tests__/volume/callback-error.test.ts:1:26)
+
+FAIL src/__tests__/promises.test.ts
+  ● Promises API › FileHandle › fd › FileHandle should have a fd property
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › appendFile(data[, options]) › Append data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › appendFile(data[, options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chmod(mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chmod(mode) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chown(uid, gid) › Change uid and gid of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › chown(uid, gid) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › datasync() › Synchronize data with an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › datasync() › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › read(buffer, offset, length, position) › Read data from an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › read(buffer, offset, length, position) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › readFile([options]) › Read data from an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › readFile([options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › stat() › Return stats of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › stat() › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › truncate([len]) › Truncate an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › truncate([len]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › utimes(atime, mtime) › Changes times of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › utimes(atime, mtime) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › write(buffer[, offset[, length[, position]]]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › write(buffer[, offset[, length[, position]]]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › writeFile(data[, options]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › FileHandle › writeFile(data[, options]) › Reject when the file handle was closed
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › appendFile(path, data[, options]) › Append data to existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › appendFile(path, data[, options]) › Append data to existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › chmod(path, mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.chmodBase (src/volume.ts:1700:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › copyFile(src, dest[, flags]) › Copy existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Volume.Object.<anonymous>.Volume.copyFileBase (src/volume.ts:1149:24)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › lchmod(path, mode) › Change mode of existing file
+
+    EEXIST: file already exists, open '/bar'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.lchmodBase (src/volume.ts:1719:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › open(path, flags[, mode]) › Open an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › readFile(id[, options]) › Read existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › readFile(id[, options]) › Read existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › rename(oldPath, newPath) › Rename existing file
+
+    EEXIST: file already exists, open '/bar'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at src/__tests__/promises.test.ts:1027:36
+      at step (src/__tests__/promises.test.ts:33:23)
+      at Object.next (src/__tests__/promises.test.ts:14:53)
+      at fulfilled (src/__tests__/promises.test.ts:5:58)
+
+  ● Promises API › truncate(path[, len]) › Truncate an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.truncateBase (src/volume.ts:1505:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › utimes(path, atime, mtime) › Changes times of an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.utimesBase (src/volume.ts:1538:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › writeFile(id, data[, options]) › Write data to an existing file
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+  ● Promises API › writeFile(id, data[, options]) › Write data to existing file using FileHandle
+
+    EEXIST: file already exists, open '/foo'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Immediate.<anonymous> (src/volume.ts:695:33)
+
+FAIL src/__tests__/volume.test.ts (40.417 s)
+  ● volume › Volume › .fromJSON(json[, cwd]) › Invalid JSON throws error
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      219 |           '/dir/dir/dir2/hello.sh': 'world',
+      220 |           '/hello.js': 'console.log(123)',
+    > 221 |           '/dir/dir/test.txt': 'Windows',
+          |                                          ^
+      222 |         };
+      223 |         vol.fromJSON(json);
+      224 |         expect(vol.toJSON()).toEqual(json);
+
+      at Object.<anonymous> (src/__tests__/volume.test.ts:221:81)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error with exclude flag if file exists
+
+    expect(received).toHaveProperty(path, value)
+
+    Matcher error: received value must not be null nor undefined
+
+    Received has value: null
+
+      384 |     });
+      385 |     describe('.open(path, flags[, mode], callback)', () => {
+    > 386 |       const vol = new Volume();
+          |                                ^
+      387 |       vol.mkdirSync('/test-dir');
+      388 |       it('Create new file at root (/test.txt)', done => {
+      389 |         vol.open('/test.txt', 'w', (err, fd) => {
+
+      at src/__tests__/volume.test.ts:386:33
+      at Immediate.<anonymous> (src/volume.ts:701:13)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error with exclude flag if file exists
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      381 |         expect(fd2 !== fd3).toBe(true);
+      382 |         expect(fd3 !== fd4).toBe(true);
+    > 383 |       });
+          |          ^
+      384 |     });
+      385 |     describe('.open(path, flags[, mode], callback)', () => {
+      386 |       const vol = new Volume();
+
+      at src/__tests__/volume.test.ts:383:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error on incorrect flags for directory
+
+    expect(received).toHaveProperty(path, value)
+
+    Expected path: "code"
+
+    Expected value: "EISDIR"
+    Received value: "EEXIST"
+
+      440 |           expect(err).toBeInstanceOf(TypeError);
+      441 |           expect(err.message).toBe('mode must be an int');
+    > 442 |           done();
+          |                  ^
+      443 |         }
+      444 |       });
+      445 |       it('Properly sets permissions from mode when creating a new file', done => {
+
+      at src/__tests__/volume.test.ts:442:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Error on incorrect flags for directory
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      438 |           throw Error('This should not throw');
+      439 |         } catch (err) {
+    > 440 |           expect(err).toBeInstanceOf(TypeError);
+          |             ^
+      441 |           expect(err.message).toBe('mode must be an int');
+      442 |           done();
+      443 |         }
+
+      at src/__tests__/volume.test.ts:440:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Properly opens directory as read-only
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/test-dir']
+
+      446 |         vol.writeFileSync('/a.txt', 'foo');
+      447 |         const stats = vol.statSync('/a.txt');
+    > 448 |         // Write a new file, copying the mode from the old file
+          |                                 ^
+      449 |         vol.open('/b.txt', 'w', stats.mode, (err, fd) => {
+      450 |           expect(err).toBe(null);
+      451 |           expect(vol.root.getChild('b.txt')).toBeInstanceOf(Link);
+
+      at src/__tests__/volume.test.ts:448:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .open(path, flags[, mode], callback) › Properly opens directory as read-only
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      444 |       });
+      445 |       it('Properly sets permissions from mode when creating a new file', done => {
+    > 446 |         vol.writeFileSync('/a.txt', 'foo');
+          |             ^
+      447 |         const stats = vol.statSync('/a.txt');
+      448 |         // Write a new file, copying the mode from the old file
+      449 |         vol.open('/b.txt', 'w', stats.mode, (err, fd) => {
+
+      at src/__tests__/volume.test.ts:446:13
+      at src/__tests__/volume.test.ts:365:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file at root (/text.txt)
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:475:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file with path passed as URL
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:481:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Specify encoding as string
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:485:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Specify encoding in object
+
+    EEXIST: file already exists, open '/text.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:489:31)
+
+  ● volume › Volume › .readFileSync(path[, options]) › Read file deep in tree (/dir1/dir2/test-file)
+
+    EEXIST: file already exists, open '/dir1/dir2/test-file'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:498:31)
+
+  ● volume › Volume › .readFile(path[, options], callback) › Read file at root (/file.txt)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: null
+    Received: [Error: EEXIST: file already exists, open '/file.txt']
+
+      528 |       });
+      529 |       it('Attempt to read a directory should throw EISDIR', () => {
+    > 530 |         const vol = new Volume();
+          |                                 ^
+      531 |         vol.mkdirSync('/test');
+      532 |         const fn = () => vol.readFileSync('/test');
+      533 |         expect(fn).toThrowError('EISDIR');
+
+      at src/__tests__/volume.test.ts:530:33
+      at Immediate.<anonymous> (src/volume.ts:698:17)
+
+  ● volume › Volume › .readFile(path[, options], callback) › Read file at root (/file.txt)
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      526 |           // TODO: Check the right error message.
+      527 |         }
+    > 528 |       });
+          |          ^
+      529 |       it('Attempt to read a directory should throw EISDIR', () => {
+      530 |         const vol = new Volume();
+      531 |         vol.mkdirSync('/test');
+
+      at src/__tests__/volume.test.ts:528:13
+      at src/__tests__/volume.test.ts:523:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Simple write to a file descriptor
+
+    EEXIST: file already exists, open '/test.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:544:28)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Multiple writes to a file
+
+    EEXIST: file already exists, open '/multi.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:559:28)
+
+  ● volume › Volume › .writeSync(fd, str, position, encoding) › Overwrite part of file
+
+    EEXIST: file already exists, open '/overwrite.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:566:28)
+
+  ● volume › Volume › .write(fd, buffer, offset, length, position, callback) › Simple write to a file descriptor
+
+    EBADF: bad file descriptor, close
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.getFileByFdOrThrow (src/volume.ts:658:19)
+      at Volume.Object.<anonymous>.Volume.closeSync (src/volume.ts:893:25)
+      at src/__tests__/volume.test.ts:575:25
+      at Immediate.<anonymous> (src/volume.ts:1076:17)
+
+  ● volume › Volume › .write(fd, buffer, offset, length, position, callback) › Simple write to a file descriptor
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      568 |           const b = vol.writeSync(fd, data);
+      569 |           expect(b).toBe(data.length);
+    > 570 |           bytes += b;
+          |             ^
+      571 |         }
+      572 |         vol.closeSync(fd);
+      573 |         const result = datas.join('');
+
+      at src/__tests__/volume.test.ts:570:13
+      at src/__tests__/volume.test.ts:569:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Read from symlink
+
+    EEXIST: file already exists, open '/test2.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:623:28)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Symlink to a folder
+
+    EEXIST: file already exists, open '/b1/a2/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:629:32)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Symlink to a folder to a folder
+
+    EEXIST: file already exists, open '/c1/a2/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:635:25)
+
+  ● volume › Volume › .symlinkSync(target, path[, type]) › Complex, deep, multi-step symlinks get resolved › Multiple hops to folders
+
+    EEXIST: file already exists, open '/c1/c2/c3/c4/c5/final/a3/a4/a5/hello.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:647:25)
+
+  ● volume › Volume › .statSync(path) › Modification new write
+
+    EEXIST: file already exists, open '/mtime.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:790:25)
+
+  ● volume › Volume › .statSync(path) › Modification new write
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      784 |       it('Returns basic file stats', () => {
+      785 |         const stats = vol.statSync('/dojo.js');
+    > 786 |         expect(stats).toBeInstanceOf(Stats);
+          |             ^
+      787 |         expect(stats.size).toBe(data.length);
+      788 |         expect(stats.isFile()).toBe(true);
+      789 |         expect(stats.isDirectory()).toBe(false);
+
+      at src/__tests__/volume.test.ts:786:13
+      at src/__tests__/volume.test.ts:758:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .fstatSync(fd) › Returns basic file stats
+
+    EEXIST: file already exists, open '/dojo.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:806:30)
+
+  ● volume › Volume › .fstatSync(fd) › Returns file stats using BigInt
+
+    EEXIST: file already exists, open '/dojo.js'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:814:30)
+
+  ● volume › Volume › .linkSync(existingPath, newPath) › Create a new link
+
+    EEXIST: file already exists, open '/1.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:833:28)
+
+  ● volume › Volume › .ftruncateSync(fd[, len]) › Truncates to 0 single file
+
+    EEXIST: file already exists, open '/trunky'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:914:28)
+
+  ● volume › Volume › .truncateSync(path[, len]) › Truncates to 0 single file
+
+    EEXIST: file already exists, open '/trunky'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:927:28)
+
+  ● volume › Volume › .truncateSync(path[, len]) › Partial truncate
+
+    EEXIST: file already exists, open '/1'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.readFileBase (src/volume.ts:955:23)
+      at Volume.Object.<anonymous>.Volume.readFileSync (src/volume.ts:970:21)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:934:28)
+
+  ● volume › Volume › .utimesSync(path, atime, mtime) › Set times on file
+
+    EEXIST: file already exists, open '/lol'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.openSync (src/volume.ts:869:21)
+      at Volume.Object.<anonymous>.Volume.utimesBase (src/volume.ts:1538:23)
+      at Volume.Object.<anonymous>.Volume.utimesSync (src/volume.ts:1547:14)
+      at Object.<anonymous> (src/__tests__/volume.test.ts:946:21)
+
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    EEXIST: file already exists, open '/lol.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:1058:25)
+
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1046 |         expect(!!vol.root.getChild('dir')).toBe(false);
+      1047 |       });
+    > 1048 |       it('Remove dir /dir1/dir2/dir3 recursively', () => {
+           |             ^
+      1049 |         const vol = new Volume();
+      1050 |         vol.mkdirSync('/dir1/dir2/dir3', { recursive: true });
+      1051 |         vol.rmdirSync('/dir1', { recursive: true });
+
+      at src/__tests__/volume.test.ts:1048:13
+      at src/__tests__/volume.test.ts:1047:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+  ● volume › Volume › .unwatchFile(path[, listener]) › Stops watching before .writeFile
+
+    EEXIST: file already exists, open '/lol.txt'
+
+      126 |     case EACCES:
+      127 |       return `EACCES: permission denied, ${func}${pathFormatted}`;
+    > 128 |     case ENOTEMPTY:
+          |                 ^
+      129 |       return `ENOTEMPTY: directory not empty, ${func}${pathFormatted}`;
+      130 |     case EMFILE:
+      131 |       return `EMFILE: too many open files, ${func}${pathFormatted}`;
+
+      at createError (src/volume.ts:128:17)
+      at Volume.Object.<anonymous>.Volume.openFile (src/volume.ts:840:19)
+      at Volume.Object.<anonymous>.Volume.openBase (src/volume.ts:858:25)
+      at Volume.Object.<anonymous>.Volume.writeFileBase (src/volume.ts:1089:23)
+      at Volume.Object.<anonymous>.Volume.writeFileSync (src/volume.ts:1114:14)
+      at Timeout._onTimeout (src/__tests__/volume.test.ts:1073:25)
+
+  ● volume › Volume › .unwatchFile(path[, listener]) › Stops watching before .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1062 |           done();
+      1063 |         });
+    > 1064 |       });
+           |          ^
+      1065 |     });
+      1066 |     describe('.watchFile(path[, options], listener)', () => {
+      1067 |       it('Calls listener on .writeFile', done => {
+
+      at src/__tests__/volume.test.ts:1064:13
+      at src/__tests__/volume.test.ts:1063:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+
+Test Suites: 15 failed, 16 passed, 31 total
+Tests:       86 failed, 19 skipped, 214 passed, 319 total
+Snapshots:   6 passed, 6 total
+Time:        59.306 s
+Ran all test suites.

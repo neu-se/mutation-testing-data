@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+      for (const path of paths) {
+        const filename = pathToFilename(path);
+        const link = this.getResolvedLink(filename);
+        if (!link) continue;
+        links.push(link);
+      }
+    } else {
+      links.push(this.root);
+    }
+
+    if (!links.length) return json;
+    for (const link of links) this._toJSON(link, json, isRelative ? link.getPath() : '');
+    return json;
+  }
+
+  fromJSON(json: DirectoryJSON, cwd: string = process.cwd()) {
+    for (let filename in json) {
+      const data = json[filename];
+
+      filename = resolve(filename, cwd);
+
+      if (typeof data === 'string') {
+        const dir = dirname(filename);
+        this.mkdirpBase(dir, MODE.DIR);
+
+        this.writeFileSync(filename, data);
+      } else {
+        this.mkdirpBase(filename, MODE.DIR);
+      }
+    }
+  }
+
+  fromNestedJSON(json: NestedDirectoryJSON, cwd?: string) {
+    this.fromJSON(flattenJSON(json), cwd);
+  }
+
+  reset() {
+    this.ino = 0;
+    this.inodes = {};
+    this.releasedInos = [];
+    this.fds = {};
+    this.releasedFds = [];
+    this.openFiles = 0;
+
+    this.root = this.createLink();
+    this.root.setNode(this.createNode(true));
+  }
+
+  // Legacy interface
+  mountSync(mountpoint: string, json: DirectoryJSON) {
+    this.fromJSON(json, mountpoint);
+  }
+
+  private openLink(link: Link, flagsNum: number, resolveSymlinks: boolean = true): File {
+    if (this.openFiles >= this.maxFiles) {
+      // Too many open files.
+      throw createError(EMFILE, 'open', link.getPath());
+    }
+
+    // Resolve symlinks.
+    let realLink: Link | null = link;
+    if (resolveSymlinks) realLink = this.resolveSymlinks(link);
+    if (!realLink) throw createError(ENOENT, 'open', link.getPath());
+
+    const node = realLink.getNode();
+
+    // Check whether node is a directory
+    if (node.isDirectory()) {
+      if ((flagsNum & (O_RDONLY | O_RDWR | O_WRONLY)) !== O_RDONLY) throw createError(EISDIR, 'open', link.getPath());
+    } else {
+      if (flagsNum & O_DIRECTORY) throw createError(ENOTDIR, 'open', link.getPath());
+    }
+
+    // Check node permissions
+    if (!(flagsNum & O_WRONLY)) {
+      if (!node.canRead()) {
+        throw createError(EACCES, 'open', link.getPath());
+      }
+    }
+    if (flagsNum & O_RDWR) {
+    }
+
+    const file = new this.props.File(link, node, flagsNum, this.newFdNumber());
+    this.fds[file.fd] = file;
+    this.openFiles++;
+
+    if (flagsNum & O_TRUNC) file.truncate();
+
+    return file;
+  }
+
+  private openFile(
+    filename: string,
+    flagsNum: number,
+    modeNum: number | undefined,
+    resolveSymlinks: boolean = true,
+  ): File {
+    const steps = filenameToSteps(filename);
+    let link: Link | null = resolveSymlinks ? this.getResolvedLink(steps) : this.getLink(steps);
+
+    if (link && flagsNum & O_EXCL) throw createError(<PLACEHOLDER>);
+
+    // Try creating a new file, if it does not exist.
+    if (!link && flagsNum & O_CREAT) {
+      // const dirLink: Link = this.getLinkParent(steps);
+      const dirLink: Link | null = this.getResolvedLink(steps.slice(0, steps.length - 1));
+      // if(!dirLink) throw createError(ENOENT, 'open', filename);
+      if (!dirLink) throw createError(ENOENT, 'open', sep + steps.join(sep));
+
+      if (flagsNum & O_CREAT && typeof modeNum === 'number') {
+        link = this.createLink(dirLink, steps[steps.length - 1], false, modeNum);
+      }
+    }
+
+    if (link) return this.openLink(link, flagsNum, resolveSymlinks);
+    throw createError(ENOENT, 'open', filename);
+  }
+
+  private openBase(filename: string, flagsNum: number, modeNum: number, resolveSymlinks: boolean = true): number {
+    const file = this.openFile(filename, flagsNum, modeNum, resolveSymlinks);
+    if (!file) throw createError(ENOENT, 'open', filename);
+    return file.fd;
+  }
+
+  openSync(path: PathLike, flags: TFlags, mode: TMode = MODE.DEFAULT): number {
+    // Validate (1) mode; (2) path; (3) flags - in that order.
+    const modeNum = modeToNumber(mode);
+    const fileName = pathToFilename(path);
+    const flagsNum = flagsToNumber(flags);
+    return this.openBase(fileName, flagsNum, modeNum);
+  }
+
+  open(path: PathLike, flags: TFlags, /* ... */ callback: TCallback<number>);
+  open(path: PathLike, flags: TFlags, mode: TMode, callback: TCallback<number>);
+  open(path: PathLike, flags: TFlags, a: TMode | TCallback<number>, b?: TCallback<number>) {
+    let mode: TMode = a as TMode;
+    let callback: TCallback<number> = b as TCallback<number>;
+
+    if (typeof a === 'function') {
+      mode = MODE.DEFAULT;
+      callback = a;
+    }
+    mode = mode || MODE.DEFAULT;
+
+    const modeNum = modeToNumber(mode);
+    const fileName = pathToFilename(path);
+    const flagsNum = flagsToNumber(flags);
+
+    this.wrapAsync(this.openBase, [fileName, flagsNum, modeNum], callback);
+  }
+
+  private closeFile(file: File) {
+    if (!this.fds[file.fd]) return;
+
+    this.openFiles--;
+    delete this.fds[file.fd];
+    this.releasedFds.push(file.fd);
+  }
+
+  closeSync(fd: number) {
+    validateFd(fd);
+    const file = this.getFileByFdOrThrow(fd, 'close');
+    this.closeFile(file);
+  }
+
+  close(fd: number, callback: TCallback<void>) {
+    validateFd(fd);
+    this.wrapAsync(this.closeSync, [fd], callback);
+  }
+
+  private openFileOrGetById(id: TFileId, flagsNum: number, modeNum?: number): File {
+    if (typeof id === 'number') {
+      const file = this.fds[id];
+      if (!file) throw createError(ENOENT);
+      return file;
+    } else {
+      return this.openFile(pathToFilename(id), flagsNum, modeNum);
+    }
+  }
+
+  private readBase(fd: number, buffer: Buffer | Uint8Array, offset: number, length: number, position: number): number {
+    const file = this.getFileByFdOrThrow(fd);
+    return file.read(buffer, Number(offset), Number(length), position);
+  }
+
+  readSync(fd: number, buffer: Buffer | Uint8Array, offset: number, length: number, position: number): number {
+    validateFd(fd);
+    return this.readBase(fd, buffer, offset, length, position);
+  }
+
+  read(
+    fd: number,
+    buffer: Buffer | Uint8Array,
+    offset: number,
+    length: number,
+    position: number,
+    callback: (err?: Error | null, bytesRead?: number, buffer?: Buffer | Uint8Array) => void,
+  ) {
+    validateCallback(callback);
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+EEXIST, 'open', filename
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

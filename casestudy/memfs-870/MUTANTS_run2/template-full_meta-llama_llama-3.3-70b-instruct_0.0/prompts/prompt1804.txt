@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+    this.mkdir(path, { mode, recursive: true }, callback);
+  }
+
+  private mkdtempBase(prefix: string, encoding?: TEncodingExtended, retry: number = 5): TDataOut {
+    const filename = prefix + this.genRndStr();
+    try {
+      this.mkdirBase(filename, MODE.DIR);
+      return strToEncoding(filename, encoding);
+    } catch (err) {
+      if (err.code === EEXIST) {
+        if (retry > 1) return this.mkdtempBase(prefix, encoding, retry - 1);
+        else throw Error('Could not create temp dir.');
+      } else throw err;
+    }
+  }
+
+  mkdtempSync(prefix: string, options?: IOptions): TDataOut {
+    const { encoding } = getDefaultOpts(options);
+
+    if (!prefix || typeof prefix !== 'string') throw new TypeError('filename prefix is required');
+
+    nullCheck(prefix);
+
+    return this.mkdtempBase(prefix, encoding);
+  }
+
+  mkdtemp(prefix: string, callback: TCallback<void>);
+  mkdtemp(prefix: string, options: IOptions, callback: TCallback<void>);
+  mkdtemp(prefix: string, a: TCallback<void> | IOptions, b?: TCallback<void>) {
+    const [{ encoding }, callback] = getDefaultOptsAndCb(a, b);
+
+    if (!prefix || typeof prefix !== 'string') throw new TypeError('filename prefix is required');
+
+    if (!nullCheck(prefix)) return;
+
+    this.wrapAsync(this.mkdtempBase, [prefix, encoding], callback);
+  }
+
+  private rmdirBase(filename: string, options?: IRmdirOptions) {
+    const opts = getRmdirOptions(options);
+    const link = this.getLinkAsDirOrThrow(filename, 'rmdir');
+
+    // Check directory is empty.
+    if (link.length && !opts.recursive) throw createError(ENOTEMPTY, 'rmdir', filename);
+
+    this.deleteLink(link);
+  }
+
+  rmdirSync(path: PathLike, options?: IRmdirOptions) {
+    this.rmdirBase(pathToFilename(path), options);
+  }
+
+  rmdir(path: PathLike, callback: TCallback<void>);
+  rmdir(path: PathLike, options: IRmdirOptions, callback: TCallback<void>);
+  rmdir(path: PathLike, a: TCallback<void> | IRmdirOptions, b?: TCallback<void>) {
+    const opts: IRmdirOptions = getRmdirOptions(a);
+    const callback: TCallback<void> = validateCallback(typeof a === 'function' ? a : b);
+    this.wrapAsync(this.rmdirBase, [pathToFilename(path), opts], callback);
+  }
+
+  private rmBase(filename: string, options: IRmOptions = {}): void {
+    const link = this.getResolvedLink(filename);
+    if (!link) {
+      // "stat" is used to match Node's native error message.
+      if (!options.force) throw createError(ENOENT, 'stat', filename);
+      return;
+    }
+    if (link.getNode().isDirectory()) {
+      if (!options.recursive) {
+        throw createError(ERR_FS_EISDIR, 'rm', filename);
+      }
+    }
+    this.deleteLink(link);
+  }
+
+  public rmSync(path: PathLike, options?: IRmOptions): void {
+    this.rmBase(pathToFilename(path), options);
+  }
+
+  public rm(path: PathLike, callback: TCallback<void>): void;
+  public rm(path: PathLike, options: IRmOptions, callback: TCallback<void>): void;
+  public rm(path: PathLike, a: TCallback<void> | IRmOptions, b?: TCallback<void>): void {
+    const [opts, callback] = getRmOptsAndCb(a, b);
+    this.wrapAsync(this.rmBase, [pathToFilename(path), opts], callback);
+  }
+
+  private fchmodBase(fd: number, modeNum: number) {
+    const file = this.getFileByFdOrThrow(fd, 'fchmod');
+    file.chmod(modeNum);
+  }
+
+  fchmodSync(fd: number, mode: TMode) {
+    this.fchmodBase(fd, modeToNumber(mode));
+  }
+
+  fchmod(fd: number, mode: TMode, callback: TCallback<void>) {
+    this.wrapAsync(this.fchmodBase, [fd, modeToNumber(mode)], callback);
+  }
+
+  private chmodBase(filename: string, modeNum: number) {
+    const fd = this.openSync(<PLACEHOLDER>, 'r');
+    try {
+      this.fchmodBase(fd, modeNum);
+    } finally {
+      this.closeSync(fd);
+    }
+  }
+
+  chmodSync(path: PathLike, mode: TMode) {
+    const modeNum = modeToNumber(mode);
+    const filename = pathToFilename(path);
+    this.chmodBase(filename, modeNum);
+  }
+
+  chmod(path: PathLike, mode: TMode, callback: TCallback<void>) {
+    const modeNum = modeToNumber(mode);
+    const filename = pathToFilename(path);
+    this.wrapAsync(this.chmodBase, [filename, modeNum], callback);
+  }
+
+  private lchmodBase(filename: string, modeNum: number) {
+    const fd = this.openBase(filename, O_RDWR, 0, false);
+    try {
+      this.fchmodBase(fd, modeNum);
+    } finally {
+      this.closeSync(fd);
+    }
+  }
+
+  lchmodSync(path: PathLike, mode: TMode) {
+    const modeNum = modeToNumber(mode);
+    const filename = pathToFilename(path);
+    this.lchmodBase(filename, modeNum);
+  }
+
+  lchmod(path: PathLike, mode: TMode, callback: TCallback<void>) {
+    const modeNum = modeToNumber(mode);
+    const filename = pathToFilename(path);
+    this.wrapAsync(this.lchmodBase, [filename, modeNum], callback);
+  }
+
+  private fchownBase(fd: number, uid: number, gid: number) {
+    this.getFileByFdOrThrow(fd, 'fchown').chown(uid, gid);
+  }
+
+  fchownSync(fd: number, uid: number, gid: number) {
+    validateUid(uid);
+    validateGid(gid);
+    this.fchownBase(fd, uid, gid);
+  }
+
+  fchown(fd: number, uid: number, gid: number, callback: TCallback<void>) {
+    validateUid(uid);
+    validateGid(gid);
+    this.wrapAsync(this.fchownBase, [fd, uid, gid], callback);
+  }
+
+  private chownBase(filename: string, uid: number, gid: number) {
+    const link = this.getResolvedLinkOrThrow(filename, 'chown');
+    const node = link.getNode();
+    node.chown(uid, gid);
+
+    // if(node.isFile() || node.isSymlink()) {
+    //
+    // } else if(node.isDirectory()) {
+    //
+    // } else {
+    // TODO: What do we do here?
+    // }
+  }
+
+  chownSync(path: PathLike, uid: number, gid: number) {
+    validateUid(uid);
+    validateGid(gid);
+    this.chownBase(pathToFilename(path), uid, gid);
+  }
+
+  chown(path: PathLike, uid: number, gid: number, callback: TCallback<void>) {
+    validateUid(uid);
+    validateGid(gid);
+    this.wrapAsync(this.chownBase, [pathToFilename(path), uid, gid], callback);
+  }
+
+  private lchownBase(filename: string, uid: number, gid: number) {
+    this.getLinkOrThrow(filename, 'lchown').getNode().chown(uid, gid);
+  }
+
+  lchownSync(path: PathLike, uid: number, gid: number) {
+    validateUid(uid);
+    validateGid(gid);
+    this.lchownBase(pathToFilename(path), uid, gid);
+  }
+
+  lchown(path: PathLike, uid: number, gid: number, callback: TCallback<void>) {
+    validateUid(uid);
+    validateGid(gid);
+    this.wrapAsync(this.lchownBase, [pathToFilename(path), uid, gid], callback);
+  }
+
+  private statWatchers: Record<string, StatWatcher> = {};
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+filename
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

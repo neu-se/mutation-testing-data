@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.toUpperCase()
+```
+This would result in different behavior because the `isGlob` function would be checking if the uppercase version of the pattern is a glob, which could lead to incorrect results if the pattern contains case-sensitive glob characters.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.replace(GLOBSTAR, '')
+```
+This would result in different behavior because the `isGlob` function would be checking if the pattern with all globstar characters removed is a glob, which could lead to incorrect results if the pattern relies on the globstar for its glob behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pattern + '*'
+```
+This would result in different behavior because the `isGlob` function would be checking if the pattern with an additional wildcard character appended is a glob, which could lead to incorrect results if the pattern is already a glob or if the additional wildcard character changes its behavior.
+
+DONE.

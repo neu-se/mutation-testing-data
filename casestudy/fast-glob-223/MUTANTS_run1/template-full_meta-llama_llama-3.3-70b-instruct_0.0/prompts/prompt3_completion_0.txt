@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+micromatch
+```
+This would result in different behavior because `micromatch` is a module that provides a function for matching glob patterns, whereas `isGlob` is a function that checks if a string is a glob pattern, so using `micromatch` directly would not correctly check if the pattern is a glob.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+() => true
+```
+This would result in different behavior because this code fragment would always return `true`, indicating that every pattern is dynamic, whereas the original `isGlob` function checks if a string is a glob pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pattern => pattern.indexOf(GLOBSTAR) !== -1
+```
+This would result in different behavior because this code fragment checks if the pattern contains the `GLOBSTAR` character, whereas the original `isGlob` function checks if the entire string is a glob pattern, which may include other special characters.
+
+DONE.

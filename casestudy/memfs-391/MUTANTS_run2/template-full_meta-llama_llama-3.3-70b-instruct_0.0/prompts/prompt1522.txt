@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+  }
+
+  readlinkSync(path: PathLike, options?: IOptions): TDataOut {
+    const opts = getDefaultOpts(options);
+    const filename = pathToFilename(path);
+    return this.readlinkBase(filename, opts.encoding);
+  }
+
+  readlink(path: PathLike, callback: TCallback<TDataOut>);
+  readlink(path: PathLike, options: IOptions, callback: TCallback<TDataOut>);
+  readlink(path: PathLike, a: TCallback<TDataOut> | IOptions, b?: TCallback<TDataOut>) {
+    const [opts, callback] = getDefaultOptsAndCb(a, b);
+    const filename = pathToFilename(path);
+    this.wrapAsync(this.readlinkBase, [filename, opts.encoding], callback);
+  }
+
+  private fsyncBase(fd: number) {
+    this.getFileByFdOrThrow(fd, 'fsync');
+  }
+
+  fsyncSync(fd: number) {
+    this.fsyncBase(fd);
+  }
+
+  fsync(fd: number, callback: TCallback<void>) {
+    this.wrapAsync(this.fsyncBase, [fd], callback);
+  }
+
+  private fdatasyncBase(fd: number) {
+    this.getFileByFdOrThrow(fd, 'fdatasync');
+  }
+
+  fdatasyncSync(fd: number) {
+    this.fdatasyncBase(fd);
+  }
+
+  fdatasync(fd: number, callback: TCallback<void>) {
+    this.wrapAsync(this.fdatasyncBase, [fd], callback);
+  }
+
+  private ftruncateBase(fd: number, len?: number) {
+    const file = this.getFileByFdOrThrow(fd, 'ftruncate');
+    file.truncate(len);
+  }
+
+  ftruncateSync(fd: number, len?: number) {
+    this.ftruncateBase(fd, len);
+  }
+
+  ftruncate(fd: number, callback: TCallback<void>);
+  ftruncate(fd: number, len: number, callback: TCallback<void>);
+  ftruncate(fd: number, a: TCallback<void> | number, b?: TCallback<void>) {
+    const len: number = typeof a === 'number' ? a : 0;
+    const callback: TCallback<void> = validateCallback(typeof a === 'number' ? b : a);
+
+    this.wrapAsync(this.ftruncateBase, [fd, len], callback);
+  }
+
+  private truncateBase(path: PathLike, len?: number) {
+    const fd = this.openSync(path, 'r+');
+    try {
+      this.ftruncateSync(fd, len);
+    } finally {
+      this.closeSync(fd);
+    }
+  }
+
+  truncateSync(id: TFileId, len?: number) {
+    if (isFd(id)) return this.ftruncateSync(id as number, len);
+
+    this.truncateBase(id as PathLike, len);
+  }
+
+  truncate(id: TFileId, callback: TCallback<void>);
+  truncate(id: TFileId, len: number, callback: TCallback<void>);
+  truncate(id: TFileId, a: TCallback<void> | number, b?: TCallback<void>) {
+    const len: number = typeof a === 'number' ? a : 0;
+    const callback: TCallback<void> = validateCallback(typeof a === 'number' ? b : a);
+
+    if (isFd(id)) return this.ftruncate(id as number, len, callback);
+
+    this.wrapAsync(this.truncateBase, [id, len], callback);
+  }
+
+  private futimesBase(fd: number, atime: number, mtime: number) {
+    const file = this.getFileByFdOrThrow(fd, 'futimes');
+    const node = file.node;
+    node.atime = new Date(atime * 1000);
+    node.mtime = new Date(mtime * 1000);
+  }
+
+  futimesSync(fd: number, atime: TTime, mtime: TTime) {
+    this.futimesBase(fd, toUnixTimestamp(atime), toUnixTimestamp(mtime));
+  }
+
+  futimes(fd: number, atime: TTime, mtime: TTime, callback: TCallback<void>) {
+    this.wrapAsync(this.futimesBase, [fd, toUnixTimestamp(atime), toUnixTimestamp(mtime)], callback);
+  }
+
+  private utimesBase(filename: string, atime: number, mtime: number) {
+    const fd = <PLACEHOLDER>(filename, 'r');
+    try {
+      this.futimesBase(fd, atime, mtime);
+    } finally {
+      this.closeSync(fd);
+    }
+  }
+
+  utimesSync(path: PathLike, atime: TTime, mtime: TTime) {
+    this.utimesBase(pathToFilename(path), toUnixTimestamp(atime), toUnixTimestamp(mtime));
+  }
+
+  utimes(path: PathLike, atime: TTime, mtime: TTime, callback: TCallback<void>) {
+    this.wrapAsync(this.utimesBase, [pathToFilename(path), toUnixTimestamp(atime), toUnixTimestamp(mtime)], callback);
+  }
+
+  private mkdirBase(filename: string, modeNum: number) {
+    const steps = filenameToSteps(filename);
+
+    // This will throw if user tries to create root dir `fs.mkdirSync('/')`.
+    if (!steps.length) {
+      throw createError(EEXIST, 'mkdir', filename);
+    }
+
+    const dir = this.getLinkParentAsDirOrThrow(filename, 'mkdir');
+
+    // Check path already exists.
+    const name = steps[steps.length - 1];
+    if (dir.getChild(name)) throw createError(EEXIST, 'mkdir', filename);
+
+    dir.createChild(name, this.createNode(true, modeNum));
+  }
+
+  /**
+   * Creates directory tree recursively.
+   * @param filename
+   * @param modeNum
+   */
+  private mkdirpBase(filename: string, modeNum: number) {
+    const steps = filenameToSteps(filename);
+    let link = this.root;
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i];
+
+      if (!link.getNode().isDirectory()) throw createError(ENOTDIR, 'mkdir', link.getPath());
+
+      const child = link.getChild(step);
+      if (child) {
+        if (child.getNode().isDirectory()) link = child;
+        else throw createError(ENOTDIR, 'mkdir', child.getPath());
+      } else {
+        link = link.createChild(step, this.createNode(true, modeNum));
+      }
+    }
+  }
+
+  mkdirSync(path: PathLike, options?: TMode | IMkdirOptions) {
+    const opts = getMkdirOptions(options);
+    const modeNum = modeToNumber(opts.mode, 0o777);
+    const filename = pathToFilename(path);
+    if (opts.recursive) this.mkdirpBase(filename, modeNum);
+    else this.mkdirBase(filename, modeNum);
+  }
+
+  mkdir(path: PathLike, callback: TCallback<void>);
+  mkdir(path: PathLike, mode: TMode | IMkdirOptions, callback: TCallback<void>);
+  mkdir(path: PathLike, a: TCallback<void> | TMode | IMkdirOptions, b?: TCallback<void>) {
+    const opts: TMode | IMkdirOptions = getMkdirOptions(a);
+    const callback: TCallback<void> = validateCallback(typeof a === 'function' ? a : b);
+    const modeNum = modeToNumber(opts.mode, 0o777);
+    const filename = pathToFilename(path);
+    if (opts.recursive) this.wrapAsync(this.mkdirpBase, [filename, modeNum], callback);
+    else this.wrapAsync(this.mkdirBase, [filename, modeNum], callback);
+  }
+
+  // legacy interface
+  mkdirpSync(path: PathLike, mode?: TMode) {
+    this.mkdirSync(path, { mode, recursive: true });
+  }
+
+  mkdirp(path: PathLike, callback: TCallback<void>);
+  mkdirp(path: PathLike, mode: TMode, callback: TCallback<void>);
+  mkdirp(path: PathLike, a: TCallback<void> | TMode, b?: TCallback<void>) {
+    const mode: TMode | undefined = typeof a === 'function' ? undefined : a;
+    const callback: TCallback<void> = validateCallback(typeof a === 'function' ? a : b);
+    this.mkdir(path, { mode, recursive: true }, callback);
+  }
+
+  private mkdtempBase(prefix: string, encoding?: TEncodingExtended, retry: number = 5): TDataOut {
+    const filename = prefix + this.genRndStr();
+    try {
+      this.mkdirBase(filename, MODE.DIR);
+      return strToEncoding(filename, encoding);
+    } catch (err) {
+      if (err.code === EEXIST) {
+        if (retry > 1) return this.mkdtempBase(prefix, encoding, retry - 1);
+        else throw Error('Could not create temp dir.');
+      } else throw err;
+    }
+  }
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+this.openSync
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+isGlob.bind(null, { strict: true })
+```
+This would result in different behavior because the `bind` method is used to set the `this` context and the second argument of `bind` is used to set the arguments for the function, which in this case changes the `strict` option from `false` to `true`, potentially altering the glob matching behavior.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+micromatch.isMatch
+```
+This would result in different behavior because `micromatch.isMatch` is a different function that checks if a string matches a pattern, whereas `isGlob` checks if a string is a glob pattern, which could lead to incorrect results if the input string is not a valid glob pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+() => true
+```
+This would result in different behavior because this replacement always returns `true`, indicating that every pattern is dynamic, which would likely cause incorrect results in the `isDynamicPattern` function and potentially elsewhere in the codebase.
+
+DONE.

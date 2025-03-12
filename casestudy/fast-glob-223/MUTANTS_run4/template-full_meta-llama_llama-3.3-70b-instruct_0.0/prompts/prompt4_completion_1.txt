@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.toLowerCase()
+```
+This would result in different behavior because the `isGlob` function would be called with a lowercase version of the pattern, potentially changing the result if the original pattern contained uppercase characters that are significant in glob patterns.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pattern + '/'
+```
+This would result in different behavior because the `isGlob` function would be called with a pattern that has an additional trailing slash, which could affect the glob matching behavior.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.replace(GLOBSTAR, '')
+```
+This would result in different behavior because the `isGlob` function would be called with a pattern that has all occurrences of `**` removed, potentially changing the result if the original pattern relied on the `**` wildcard for matching.
+
+DONE.

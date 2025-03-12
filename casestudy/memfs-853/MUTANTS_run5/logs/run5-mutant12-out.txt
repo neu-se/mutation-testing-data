@@ -1,0 +1,111 @@
+
+> memfs@3.4.4 test
+> jest --maxWorkers 2
+
+PASS src/__tests__/volume/appendFile.test.ts
+PASS src/__tests__/promises.test.ts
+PASS src/__tests__/volume/writeSync.test.ts
+PASS src/__tests__/node.test.ts
+PASS src/__tests__/index.test.ts
+PASS src/__tests__/volume/write.test.ts
+PASS src/__tests__/volume/openSync.test.ts
+PASS src/__tests__/volume/writeFileSync.test.ts
+PASS src/__tests__/volume/closeSync.test.ts
+PASS src/__tests__/volume/copyFileSync.test.ts
+PASS src/__tests__/volume/renameSync.test.ts
+PASS src/__tests__/volume/rmSync.test.ts
+PASS src/__tests__/volume/rmPromise.test.ts
+PASS src/__tests__/volume/WriteStream.test.ts
+PASS src/__tests__/volume/realpathSync.test.ts
+PASS src/__tests__/volume/readdirSync.test.ts
+PASS src/__tests__/volume/existsSync.test.ts
+PASS src/__tests__/volume/copyFile.test.ts
+PASS src/__tests__/volume/appendFileSync.test.ts
+PASS src/__tests__/process.test.ts
+PASS src/__tests__/volume/readSync.test.ts
+PASS src/__tests__/volume/mkdirSync.test.ts
+PASS src/__tests__/volume/exists.test.ts
+PASS src/__tests__/volume/ReadStream.test.ts
+PASS src/__tests__/setImmediate.test.ts
+PASS src/__tests__/setTimeoutUnref.test.ts
+PASS src/__tests__/volume/toString.test.ts
+PASS src/__tests__/volume/statSync.test.ts
+PASS src/__tests__/volume/rename.test.ts
+FAIL src/__tests__/volume/callback-error.test.ts
+  ● Test suite failed to run
+
+    TypeError: Cannot assign to read only property 'performance' of object '[object global]'
+
+    > 1 | jest.useFakeTimers('modern');
+        |                          ^
+      2 |
+      3 | // Fixes https://github.com/streamich/memfs/issues/542
+      4 | it('should throw error instead of callback', () => {
+
+      at hijackMethod (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:946:32)
+      at Object.install (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:1733:17)
+      at FakeTimers.useFakeTimers (node_modules/@jest/fake-timers/build/modernFakeTimers.js:110:36)
+      at Object.<anonymous> (src/__tests__/volume/callback-error.test.ts:1:26)
+
+FAIL src/__tests__/volume.test.ts (7.138 s)
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1046 |         expect(!!vol.root.getChild('dir')).toBe(false);
+      1047 |       });
+    > 1048 |       it('Remove dir /dir1/dir2/dir3 recursively', () => {
+           |             ^
+      1049 |         const vol = new Volume();
+      1050 |         vol.mkdirSync('/dir1/dir2/dir3', { recursive: true });
+      1051 |         vol.rmdirSync('/dir1', { recursive: true });
+
+      at src/__tests__/volume.test.ts:1048:13
+      at src/__tests__/volume.test.ts:1047:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+Summary of all failing tests
+FAIL src/__tests__/volume/callback-error.test.ts
+  ● Test suite failed to run
+
+    TypeError: Cannot assign to read only property 'performance' of object '[object global]'
+
+    > 1 | jest.useFakeTimers('modern');
+        |                          ^
+      2 |
+      3 | // Fixes https://github.com/streamich/memfs/issues/542
+      4 | it('should throw error instead of callback', () => {
+
+      at hijackMethod (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:946:32)
+      at Object.install (node_modules/@sinonjs/fake-timers/src/fake-timers-src.js:1733:17)
+      at FakeTimers.useFakeTimers (node_modules/@jest/fake-timers/build/modernFakeTimers.js:110:36)
+      at Object.<anonymous> (src/__tests__/volume/callback-error.test.ts:1:26)
+
+FAIL src/__tests__/volume.test.ts (7.138 s)
+  ● volume › Volume › .watchFile(path[, options], listener) › Calls listener on .writeFile
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+
+      1046 |         expect(!!vol.root.getChild('dir')).toBe(false);
+      1047 |       });
+    > 1048 |       it('Remove dir /dir1/dir2/dir3 recursively', () => {
+           |             ^
+      1049 |         const vol = new Volume();
+      1050 |         vol.mkdirSync('/dir1/dir2/dir3', { recursive: true });
+      1051 |         vol.rmdirSync('/dir1', { recursive: true });
+
+      at src/__tests__/volume.test.ts:1048:13
+      at src/__tests__/volume.test.ts:1047:9
+      at src/__tests__/volume.test.ts:31:5
+      at Object.<anonymous> (src/__tests__/volume.test.ts:10:1)
+
+
+Test Suites: 2 failed, 29 passed, 31 total
+Tests:       1 failed, 19 skipped, 299 passed, 319 total
+Snapshots:   6 passed, 6 total
+Time:        7.942 s
+Ran all test suites.
