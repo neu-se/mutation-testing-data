@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fs.accessSync
+```
+This would result in different behavior because `fs.accessSync` checks if the file can be accessed for reading or writing, whereas `fs.existsSync` checks if the file exists, which could lead to different outcomes depending on the file system permissions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function(filename) { return true; }
+```
+This would result in different behavior because this function always returns `true`, indicating that the destination file always exists, which would cause the function to either always throw an error or always attempt to delete the file if `clobber` is `true`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+path.dirname
+```
+This would result in different behavior because `path.dirname` returns the directory name of the given file path, rather than checking if the file exists, which would cause the `if` statement condition to always be truthy for non-empty strings, leading to incorrect handling of the destination file.
+
+DONE.

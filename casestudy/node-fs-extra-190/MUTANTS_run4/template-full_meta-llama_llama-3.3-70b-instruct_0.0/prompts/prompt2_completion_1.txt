@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+function(file) { return false; }
+```
+This would result in different behavior because it would always return false, indicating that the destination file does not exist, even if it does, thus never attempting to delete the existing file or throwing an error.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fs.existsSync.bind(null, srcFile)
+```
+This would result in different behavior because it would check for the existence of the source file instead of the destination file, potentially leading to incorrect handling of file existence.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function(file) { return true; }
+```
+This would result in different behavior because it would always return true, indicating that the destination file exists, even if it does not, thus always attempting to delete the non-existent file or throwing an error when the file does not exist.
+
+DONE.

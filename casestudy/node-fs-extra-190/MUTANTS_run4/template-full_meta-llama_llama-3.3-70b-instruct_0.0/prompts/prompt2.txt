@@ -1,0 +1,73 @@
+Your task is to apply mutation testing to the following code:
+```
+var fs = require('graceful-fs')
+
+var BUF_LENGTH = 64 * 1024
+var _buff = new Buffer(BUF_LENGTH)
+
+function copyFileSync (srcFile, destFile, options) {
+  var clobber = options.clobber
+  var preserveTimestamps = options.preserveTimestamps
+
+  if (<PLACEHOLDER>(destFile)) {
+    if (clobber) {
+      fs.unlinkSync(destFile)
+    } else {
+      throw Error('EEXIST')
+    }
+  }
+
+  var fdr = fs.openSync(srcFile, 'r')
+  var stat = fs.fstatSync(fdr)
+  var fdw = fs.openSync(destFile, 'w', stat.mode)
+  var bytesRead = 1
+  var pos = 0
+
+  while (bytesRead > 0) {
+    bytesRead = fs.readSync(fdr, _buff, 0, BUF_LENGTH, pos)
+    fs.writeSync(fdw, _buff, 0, bytesRead)
+    pos += bytesRead
+  }
+
+  if (preserveTimestamps) {
+    fs.futimesSync(fdw, stat.atime, stat.mtime)
+  }
+
+  fs.closeSync(fdr)
+  fs.closeSync(fdw)
+}
+
+module.exports = copyFileSync
+
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+fs.existsSync
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

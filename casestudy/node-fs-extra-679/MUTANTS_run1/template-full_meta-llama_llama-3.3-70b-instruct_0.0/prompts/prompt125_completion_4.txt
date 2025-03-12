@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb(new Error('Unexpected error'))
+```
+This would result in different behavior because it always returns an error, instead of returning `null` or `undefined` when the destination parent is the same as the source parent or the root path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null, { srcStat, destStat: srcStat })
+```
+This would result in different behavior because it returns the source stat as the destination stat, instead of returning `null` or `undefined` when the destination parent is the same as the source parent or the root path.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null, true)
+```
+This would result in different behavior because it returns a boolean value `true` instead of returning `null` or `undefined` when the destination parent is the same as the source parent or the root path, which could cause issues in the calling code that expects a specific type of return value.
+
+DONE.

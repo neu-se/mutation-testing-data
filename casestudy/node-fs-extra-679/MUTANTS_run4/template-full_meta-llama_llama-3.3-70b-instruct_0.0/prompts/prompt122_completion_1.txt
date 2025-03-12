@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+path.dirname
+```
+This would result in different behavior because `path.dirname` returns the directory name of the given path, whereas `path.parse` returns an object containing information about the path, and accessing the `root` property of this object gives the root directory. Using `path.dirname` would cause the function to incorrectly check if the destination parent is the same as its own directory name instead of the root directory.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+path.join
+```
+This would result in different behavior because `path.join` concatenates paths, whereas `path.parse` parses a path and returns an object with its components. Using `path.join` would cause the function to incorrectly concatenate the destination parent with itself instead of checking its root directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+process.cwd
+```
+This would result in different behavior because `process.cwd` returns the current working directory of the process, whereas `path.parse` returns an object containing information about a given path. Using `process.cwd` would cause the function to incorrectly check if the destination parent is the same as the current working directory

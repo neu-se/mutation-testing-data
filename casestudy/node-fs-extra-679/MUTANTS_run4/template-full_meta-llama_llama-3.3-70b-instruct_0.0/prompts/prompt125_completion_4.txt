@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb(new Error('Invalid path'))
+```
+This would result in different behavior because it always returns an error, instead of calling the callback function with no arguments as the original code does when the destination parent path is the same as the source parent path or the root path.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null, { srcStat, destStat: srcStat })
+```
+This would result in different behavior because it assumes that the destination statistics are the same as the source statistics, which is not necessarily true.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null)
+```
+This would result in different behavior because it only calls the callback function with no arguments or error, but does not pass the statistics of the source file, unlike the original code which expects the statistics to be returned in certain cases.
+
+DONE.

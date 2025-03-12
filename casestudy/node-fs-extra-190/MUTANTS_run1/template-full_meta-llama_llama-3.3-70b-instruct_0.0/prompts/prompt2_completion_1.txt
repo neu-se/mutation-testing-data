@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fs.existsSync(destFile) === false
+```
+This would result in different behavior because it checks for the non-existence of the destination file instead of its existence, potentially leading to overwriting of existing files without warning when `clobber` is `true`.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+fs.lstatSync(destFile)
+```
+This would result in different behavior because `fs.lstatSync(destFile)` returns the stats of the file, not a boolean indicating its existence, which would cause a TypeError when used in an `if` statement.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+fs.accessSync(destFile, fs.constants.F_OK)
+```
+This would result in different behavior because `fs.accessSync` checks if the file can be accessed, not just if it exists, and would throw an error if the file does not exist or is inaccessible, instead of returning a boolean value.
+
+DONE.
