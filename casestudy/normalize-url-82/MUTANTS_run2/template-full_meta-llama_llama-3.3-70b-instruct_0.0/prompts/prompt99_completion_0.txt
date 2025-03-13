@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+options.removeTrailingSlash && urlObj.pathname !== '/'
+```
+This would result in different behavior because it changes the conditional logic to only remove the trailing slash when `removeTrailingSlash` is true and the pathname is not the root directory.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+urlObj.pathname === '/' && urlObj.hash === ''
+```
+This would result in different behavior because it removes the dependency on `removeTrailingSlash` and only removes the trailing slash when the pathname is the root directory and there is no hash.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+!options.removeTrailingSlash || urlObj.hash !== ''
+```
+This would result in different behavior because it inverts the logic of `removeTrailingSlash` and also removes the trailing slash when there is a hash present, which is the opposite of the original behavior.
+
+DONE.
