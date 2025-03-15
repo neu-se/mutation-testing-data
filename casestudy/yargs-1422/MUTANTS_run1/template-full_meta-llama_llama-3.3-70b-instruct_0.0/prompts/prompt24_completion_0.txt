@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+middleware.applyBeforeValidation === beforeValidation
+```
+This would result in different behavior because it changes the conditional check to skip the middleware when `applyBeforeValidation` matches `beforeValidation`, instead of skipping when they don't match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!middleware.applyBeforeValidation
+```
+This would result in different behavior because it always skips the middleware when `applyBeforeValidation` is false, regardless of the value of `beforeValidation`.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+typeof middleware.applyBeforeValidation === 'undefined'
+```
+This would result in different behavior because it skips the middleware when `applyBeforeValidation` is undefined, which could happen if the middleware was not properly initialized, instead of checking its value against `beforeValidation`.
+
+DONE.

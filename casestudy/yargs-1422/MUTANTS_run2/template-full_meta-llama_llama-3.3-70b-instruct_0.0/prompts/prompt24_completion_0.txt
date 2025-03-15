@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+middleware.applyBeforeValidation === beforeValidation
+```
+This would result in different behavior because it inverts the original condition, causing the function to skip the middleware execution when `applyBeforeValidation` matches `beforeValidation`, instead of skipping when they don't match.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!beforeValidation
+```
+This would result in different behavior because it ignores the `middleware.applyBeforeValidation` property and only considers the `beforeValidation` parameter, causing the function to skip middleware execution whenever `beforeValidation` is falsy, regardless of the middleware's `applyBeforeValidation` setting.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+middleware.applyBeforeValidation
+```
+This would result in different behavior because it removes the comparison with `beforeValidation` and only checks if `middleware.applyBeforeValidation` is truthy, causing the function to skip middleware execution whenever `applyBeforeValidation` is falsy, without considering the `beforeValidation` parameter.
+
+DONE.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+(currentContext.commands.length < 0) || (commandKeys.length < 0)
+```
+This would result in different behavior because it changes the condition to always be false, since lengths cannot be negative, thus never checking for unknown arguments in the current context commands.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+(argv._.length > 0)
+```
+This would result in different behavior because it only checks if there are any non-option arguments (`argv._`) and ignores the presence of commands, potentially missing unknown arguments when no non-option arguments are provided.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(yargs.getContext().options.length > 0)
+```
+This would result in different behavior because it checks the number of options defined in the current context instead of the number of commands, potentially leading to incorrect checks for unknown arguments when options are present but no commands are defined.
+
+DONE.
