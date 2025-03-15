@@ -1,0 +1,739 @@
+
+> yargs@13.3.0 pretest
+> standard
+
+
+> yargs@13.3.0 test
+> nyc --cache mocha --require ./test/before.js --timeout=12000 --check-leaks
+
+
+
+  Argsert
+    ✓ does not warn if optional argument is not provided
+    ✓ warn if wrong type is provided for optional argument
+    ✓ does not warn if optional argument is valid
+    ✓ warns if required argument is not provided
+    ✓ warns if required argument is of wrong type
+    ✓ supports a combination of required and optional arguments
+    ✓ warns if too many arguments are provided
+    ✓ configures function to accept 0 parameters, if only arguments object is provided
+    ✓ allows for any type if * is provided
+    ✓ should ignore trailing undefined values
+    ✓ should not ignore undefined values that are not trailing
+    ✓ supports null as special type
+
+  Command
+    ✓ preserves top-level envPrefix
+    ✓ respects order of positional arguments when matching commands
+    ✓ handles positional arguments if command is invoked using .parse()
+    ✓ invokes command handler repeatedly if parse() is called multiple times
+    ✓ allows command handler to be invoked repeatedly when help is enabled
+    ✓ does not require builder function to return
+    ✓ allows builder function to parse argv without returning
+    ✓ allows builder function to return parsed argv
+    ✓ ignores extra spaces in command string
+    ✓ executes a command via alias
+    ✓ should kick along [demand] configuration to commands
+    ✓ should support numeric commands
+    ✓ should not execute command if it is proceeded by another positional argument
+    ✓ should allow positional arguments for inner commands in strict mode, when no handler is provided
+    ✓ fails when the promise returned by the command handler rejects
+    ✓ succeeds when the promise returned by the command handler resolves
+    ✓ does not coerce number from positional with leading "+"
+    positional arguments
+      ✓ parses command string and populates optional and required positional arguments
+      ✓ populates inner argv with positional arguments
+      ✓ populates outer argv with positional arguments
+      ✓ populates argv with camel-case variants of arguments when possible
+      ✓ populates argv with camel-case variants of variadic args when possible
+      ✓ populates subcommand's inner argv with positional arguments
+      ✓ ignores positional args for aliases
+      ✓ does not overwrite existing values in argv for keys that are not positional
+      ✓ does not load config twice when command executed
+    variadic
+      ✓ allows required arguments to be variadic
+      ✓ allows optional arguments to be variadic
+      ✓ fails if required arguments are missing
+      ✓ does not fail if zero optional arguments are provided
+      ✓ only allows the last argument to be variadic
+      ✓ allows camel-case, variadic arguments, and strict mode to be combined
+    missing positional arguments
+      ✓ fails if a required argument is missing
+      ✓ does not fail if optional argument is missing
+    API
+      ✓ accepts string, string as first 2 arguments
+      ✓ accepts array, string as first 2 arguments
+      ✓ accepts string, boolean as first 2 arguments
+      ✓ accepts array, boolean as first 2 arguments
+      ✓ accepts function as 3rd argument
+      ✓ accepts options object as 3rd argument
+      ✓ accepts module (with builder function and handler function) as 3rd argument
+      ✓ accepts module (with builder object and handler function) as 3rd argument
+      ✓ accepts module (describe key, builder function) as 1st argument
+      ✓ accepts module (description key, builder function) as 1st argument
+      ✓ accepts module (desc key, builder function) as 1st argument
+      ✓ accepts module (false describe, builder function) as 1st argument
+      ✓ accepts module (missing describe, builder function) as 1st argument
+      ✓ accepts module (describe key, builder object) as 1st argument
+      ✓ accepts module (missing handler function) as 1st argument
+      ✓ accepts module (with command array) as 1st argument
+      ✓ accepts module (with command string and aliases array) as 1st argument
+      ✓ accepts module (with command array and aliases array) as 1st argument
+      ✓ accepts module (with command string and aliases string) as 1st argument
+    commandDir
+      ✓ supports relative dirs
+      ✓ supports nested subcommands
+      ✓ supports a "recurse" boolean option
+      ✓ supports a "visit" function option
+      ✓ detects and ignores cyclic dir references
+      ✓ derives 'command' string from filename when not exported
+    help command
+      ✓ displays command help appropriately
+    positional aliases
+      ✓ allows an alias to be defined for a required positional argument
+      ✓ allows an alias to be defined for an optional positional argument
+      ✓ allows variadic and positional arguments to be combined
+    global parsing hints
+      config
+        ✓ does not load config for command if global is false
+        ✓ loads config for command by default
+      validation
+        ✓ resets implies logic for command if global is false
+        ✓ applies conflicts logic for command by default
+        ✓ resets conflicts logic for command if global is false
+        ✓ applies custom checks globally by default
+        ✓ resets custom check if global is false
+        ✓ applies demandOption globally
+      strict
+        ✓ defaults to false when not called
+        ✓ can be enabled just for a command
+        ✓ applies strict globally by default
+        ✓ does not fail strict check due to postional command arguments
+        ✓ does not fail strict check due to postional command arguments in nested commands
+        ✓ allows a command to override global`
+        ✓ does not fire command if validation fails
+      types
+        ✓ applies array type globally
+        ✓ allows global setting to be disabled for array type
+        ✓ applies choices type globally
+      aliases
+        ✓ defaults to applying aliases globally
+        ✓ allows global application of alias to be disabled
+      coerce
+        ✓ defaults to applying coerce rules globally
+        ✓ should bubble errors thrown by coerce function inside commands
+      defaults
+        ✓ applies defaults globally
+      describe
+        ✓ flags an option as global if a description is set
+      help
+        ✓ applies help globally
+      version
+        ✓ applies version globally
+      groups
+        ✓ should apply custom option groups globally
+    default commands
+      ✓ executes default command if no positional arguments given
+      ✓ executes default command if undefined positional arguments and only command
+      ✓ executes default command if defined positional arguments and only command
+      ✓ allows $0 as an alias for a default command
+      ✓ does not execute default command if another command is provided
+      ✓ allows default command to be set as alias
+      ✓ allows command to be run when alias is default command
+      ✓ the last default command set should take precedence
+      strict
+        ✓ executes default command when strict mode is enabled
+        ✓ allows default command aliases, when strict mode is enabled
+    usage
+      ✓ allows you to configure a default command
+      ✓ throws exception if default command does not have leading $0
+
+  Completion
+    default completion behavior
+      ✓ avoids repeating already included commands
+      ✓ avoids repeating already included options
+      ✓ avoids repeating options whose aliases are already included
+      ✓ completes options for the correct command
+      ✓ does not complete hidden commands
+      ✓ does not include possitional arguments
+      ✓ works if command has no options
+      ✓ returns arguments as completion suggestion, if next contains '-'
+    generateCompletionScript()
+      ✓ replaces completion command variable with custom completion command in script
+      ✓ if $0 has a .js extension, a ./ prefix is added
+    completion()
+      ✓ shows completion script if command registered with completion(cmd) is called
+      ✓ allows a custom function to be registered for completion
+      ✓ passes current arg for completion and the parsed arguments thus far to custom function
+      ✓ if a promise is returned, completions can be asynchronous
+      ✓ if a promise is returned, errors are handled
+      ✓ if a callback parameter is provided, completions can be asynchronous
+    bash
+      ✓ returns a list of commands as completion suggestions
+      ✓ avoids interruption from command recommendations
+      ✓ avoids interruption from default command
+      ✓ completes options for a command
+      ✓ does not apply validation when --get-yargs-completions is passed in
+      generateCompletionScript()
+        ✓ replaces application variable with $0 in script
+      getCompletion()
+        ✓ returns default completion to callback
+    zsh
+      ✓ returns a list of commands as completion suggestions
+      ✓ avoids interruption from command recommendations
+      ✓ avoids interruption from default command
+      ✓ completes options for a command
+      ✓ replaces application variable with $0 in script
+      ✓ does not apply validation when --get-yargs-completions is passed in
+      ✓ bails out early when full command matches
+      getCompletion()
+        ✓ returns default completion to callback
+
+  integration tests
+    ✓ should run as a shell script with no arguments (288ms)
+    ✓ should run as a shell script with arguments (291ms)
+    ✓ should run as a node script with no arguments (279ms)
+    ✓ should run as a node script with arguments (292ms)
+    ✓ allows --help to be completed without returning help message (296ms)
+    ✓ flushes all output when --help is executed (1268ms)
+    ✓ correctly fills positional command args with preceding option (279ms)
+    ✓ correctly fills positional command args with = assignment in preceding option (335ms)
+    path returned by "which"
+      ✓ should match the actual path to the script file (322ms)
+      ✓ should match the actual path to the script file, with arguments (309ms)
+    load root package.json
+      version #
+        ✓ defaults to appropriate version # when yargs is installed normally (342ms)
+        ✓ defaults to appropriate version # when yargs is symlinked (309ms)
+      parser settings
+        ✓ reads parser config settings when yargs is installed normally (259ms)
+        ✓ reads parser config settings when yargs is installed as a symlink (286ms)
+        ✓ reads parser config settings when somebody obscures require.main (287ms)
+        ✓ reads parser config settings when entry file has no extension (291ms)
+        ✓ is overridden by yargs.parserConfiguration (265ms)
+
+  middleware
+    ✓ should add a list of callbacks to global middleware
+    ✓ should throw exception if middleware is not a function
+    ✓ should add a single callback to global middleware
+    ✓ runs the middleware before reaching the handler
+    ✓ runs all middleware before reaching the handler
+    ✓ should be able to register middleware regardless of when middleware is called
+    ✓ doesn't modify globalMiddleware array when executing middleware
+    ✓ allows middleware to be added in builder
+    ✓ passes yargs object to middleware
+    ✓ applies aliases before middleware is called
+    async
+      ✓ fails when the promise returned by the middleware rejects
+      ✓ calls the command handler when all middleware promises resolve
+    applyBeforeValidation=true
+      ✓ runs before validation
+      ✓ throws an error if promise returned and applyBeforeValidation enabled
+      ✓ runs before validation, when middleware is added in builder
+      ✓ applies aliases before middleware is called, for global middleware
+      ✓ applies aliases before middleware is called, when middleware is added in builder
+
+  usage tests
+    ✓ should return valid values when check passes
+    ✓ should display missing arguments when check fails with a thrown exception
+    ✓ should display missing arguments when check fails with a return value
+    ✓ should return a valid result when check condition passes
+    ✓ should display a failed message when check condition fails
+    ✓ should return a valid result when demanding a count of non-hyphenated values
+    ✓ should return a failure message when not enough non-hyphenated arguments are found after a demand count
+    ✓ should return a custom failure message when not enough non-hyphenated arguments are found after a demand count
+    ✓ should return a valid result when setting defaults for singles
+    ✓ should return a valid result when default is set for an alias
+    ✓ should print a single line when failing and default is set for an alias
+    ✓ should allow you to set default values for a hash of options
+    ✓ should display example on fail
+    ✓ should succeed when rebase
+    ✓ should not print usage string if help() is called without arguments
+    ✓ should add --help as an option for printing usage text if help() is called without arguments
+    demand options
+      ✓ should show an error along with a custom message on demand fail
+      ✓ should return valid values when demand passes
+      ✓ should not show a custom message if msg is null
+      using .demand()
+        ✓ should show an error along with the missing arguments on demand fail
+        ✓ missing argument message given if one command, but an argument not on the list is provided
+        ✓ missing command message if all the required arguments exist, but not enough commands are provided
+        ✓ no failure occurs if the required arguments and the required number of commands are provided
+        ✓ missing command message if all the required arguments exist, but not enough commands are provided
+        using .require()
+          ✓ should show an error along with the missing arguments on demand fail
+          ✓ missing argument message given if one command and an argument not on the list are provided
+      min/max demanded count
+        ✓ does not output an error if '_' count is within the min/max range
+        ✓ outputs an error if '_' count is above max
+        ✓ outputs an error if '_' count is below min
+        ✓ allows a customer error message to be provided
+        ✓ shouldn't interpret the second argument as a max when it is an array
+    when exitProcess is false
+      when check fails with a thrown exception
+        ✓ should display missing arguments once
+      fail()
+        ✓ is called with the original error message as the first parameter
+        ✓ is invoked with yargs instance as third argument
+        when check() throws error
+          ✓ fail() is called with the original error object as the second parameter
+        when command() throws error
+          ✓ fail() is called with the original error object as the second parameter
+    required arguments
+      ✓ still requires argument if 'type' hints are given
+      with options object
+        ✓ should show a failure message if a required option is missing
+        ✓ should show a failure message if more than one required option is missing
+      with requiresArg method
+        ✓ should show a failure message if a required option is missing
+    with strict() option set
+      ✓ should fail given an option argument that is not demanded
+      ✓ should fail given an option argument without a corresponding description
+      ✓ should fail given multiple option arguments without corresponding descriptions
+      ✓ should pass given option arguments with corresponding descriptions
+    demand option with boolean flag
+      ✓ should not report missing required arguments when given an alias
+      with demand option
+        ✓ should report missing required arguments
+      with required option
+        ✓ should report missing required arguments
+    help option
+      ✓ should display usage
+      ✓ should not show both dashed and camelCase aliases
+      when exitProcess is false
+        ✓ should not validate arguments (required argument)
+        ✓ should not validate arguments (nargs)
+    version option
+      ✓ should display version
+      ✓ accepts version option as first argument, and version number as second argument
+      ✓ should default to 'version' as version option
+      when exitProcess is false
+        ✓ should not validate arguments (required argument)
+        ✓ should not validate arguments (nargs)
+    showHelpOnFail
+      ✓ should display user supplied message
+    exitProcess
+      ✓ should not call process.exit on error if disabled
+    scriptName
+      ✓ should display user supplied scriptName
+    wrap
+      ✓ should wrap argument descriptions onto multiple lines
+      - should wrap based on window-size if no wrap is provided
+      ✓ should not raise an exception when long default and description are provided
+      ✓ should wrap the left-hand-column if it takes up more than 50% of the screen
+      ✓ should not wrap left-hand-column if no description is provided
+      ✓ should wrap the usage string
+      ✓ should align span columns when ansi colors are not used in a description
+      ✓ should align span columns when ansi colors are used in a description
+    commands
+      ✓ should output a list of available commands
+      ✓ should not show hidden commands
+      ✓ allows completion command to be hidden
+      ✓ preserves global wrap() for commands that do not override it
+      ✓ allows a command to override global wrap()
+      ✓ resets groups for a command handler, respecting order
+      ✓ allows global option to be disabled
+      ✓ can add to preserved groups
+      ✓ can bump up preserved groups
+      ✓ should list a module command only once
+      ✓ allows a builder function to override default usage() string
+      ✓ allows a builder function to disable default usage() with null
+      ✓ displays given command chain with positional args in default usage for subcommand with builder object
+      ✓ displays given command chain with positional args in default usage for subcommand with builder function
+      ✓ displays aliases for commands that have them (no wrap)
+      ✓ displays aliases for commands that have them (with wrap)
+      ✓ allows a builder to add more than one usage with mutiple usage calls
+      ✓ allows a builder to disable usage with null after mutiple usage calls
+      ✓ does not display $0 twice when default commands are enabled
+    epilogue
+      ✓ should display an epilog message at the end of the usage instructions
+      ✓ replaces $0 in epilog string
+    default
+      ✓ should indicate that the default is a generated-value, if function is provided
+      ✓ if a named function is provided, should use name rather than (generated-value)
+      ✓ default-description take precedence if one is provided
+      ✓ serializes object and array defaults
+    defaultDescription
+      using option() without default()
+        ✓ should output given desc with default value
+        ✓ should output given desc without default value
+        ✓ should prefer given desc over function desc
+      using option() with default()
+        ✓ should prefer default() desc when given last
+        ✓ should prefer option() desc when given last
+        ✓ should prefer option() desc over default() function
+      using positional() without default()
+        ✓ should output given desc with default value
+        ✓ should output given desc without default value
+        ✓ should prefer given desc over function desc
+      using positional() with default()
+        ✓ should prefer default() desc when given last
+        ✓ should prefer positional() desc when given last
+        ✓ should prefer positional() desc over default() function
+    normalizeAliases
+      ✓ should display 'description' string in help message if set for alias
+      ✓ should display 'required' string in help message if set for alias
+      ✓ should display 'type' string in help message if set for alias
+      ✓ should display 'type' number in help message if set for alias
+    showHelp
+      ✓ should show help regardless of whether argv has been called
+      ✓ should call the correct console.log method
+      ✓ should provide a help string to handler when provided
+    $0
+      ✓ is detected correctly for a basic script
+      ✓ is detected correctly when argv contains "node"
+      ✓ is detected correctly when dirname contains "node"
+      ✓ is detected correctly when dirname and argv contain "node"
+      ✓ is detected correctly when argv contains "iojs"
+      ✓ is detected correctly when dirname contains "iojs"
+      ✓ is detected correctly when dirname and argv contain "iojs"
+      ✓ is detected correctly when argv contains "node.exe"
+      ✓ is detected correctly when argv contains "iojs.exe"
+      ✓ is resolved to the relative path if it is shorter
+      ✓ is not resolved to the relative path if it is larger
+    choices
+      ✓ should output choices when defined for non-hidden options
+      ✓ should not output choices when defined for hidden options
+    count
+      ✓ should indicate when an option is a count
+    array
+      ✓ should indicate when an option is an array
+    group
+      ✓ allows an an option to be placed in an alternative group
+      ✓ does not print the 'Options:' group if no keys are in it
+      ✓ displays alias keys appropriately within a grouping
+      ✓ allows a group to be provided as the only information about an option
+      ✓ allows multiple options to be grouped at the same time
+      ✓ allows group to be provided in the options object
+      ✓ only displays a duplicated option once per group
+    cjk
+      ✓ should calculate width of cjk text correctly
+    default command
+      ✓ should display top-level help with no command given
+      ✓ should display top-level help with sorting with no command given if sorting enabled
+      ✓ should display default command as ./$0 if it has no aliases
+      ✓ should display positionals that have been configured
+      ✓ should display options that have been configured
+    positional
+      ✓ should display help section for positionals
+      ✓ shows that variadic positional arguments are arrays
+      ✓ indicates that <foo> positional arguments are required
+      ✓ displays aliases appropriately
+      ✓ displays type information
+      ✓ displays choices array
+    hidden options
+      ✓ --help should display all options except for hidden ones
+      ✓ --help should display all options except for hidden ones even with a default
+      ✓ --help should display all options except for hidden ones even in a group
+      ✓ --help should display all groups except for ones with only hidden options
+      ✓ --help should display all options (including hidden ones) with --show-hidden
+      ✓ --help should display all groups (including ones with only hidden options) with --show-hidden
+      ✓ --help should display --custom-show-hidden
+      ✓ --help should display all options with --custom-show-hidden
+
+  validation tests
+    implies
+      ✓ fails if '_' populated, and implied argument not set
+      ✓ fails if key implies values in '_', but '_' is not populated
+      ✓ fails if either implied argument is not set and displays only failed
+      ✓ fails if --no-foo's implied argument is not set
+      ✓ fails if a key is set, along with a key that it implies should not be set
+      ✓ fails if implied key (with "no" in the name) is not set
+      ✓ doesn't fail if implied key (with "no" in the name) is set
+      ✓ fails if implied key (with "no" in the name) is given when it should not
+      ✓ doesn't fail if implied key (with "no" in the name) that should not be given is not set
+      ✓ allows key to be specified with option shorthand
+    conflicts
+      ✓ fails if both arguments are supplied
+      ✓ fails if argument is supplied along with either conflicting argument
+      ✓ should not fail if no conflicting arguments are provided
+      ✓ should not fail if argument with conflict is provided, but not the argument it conflicts with
+      ✓ should not fail if conflicting argument is provided, without argument with conflict
+      ✓ allows an object to be provided defining conflicting option pairs
+      ✓ takes into account aliases when applying conflicts logic
+      ✓ allows key to be specified with option shorthand
+      ✓ should fail if alias of conflicting argument is provided
+      ✓ should fail if alias of argument with conflict is provided
+      ✓ should use appropriate translation
+    demand
+      ✓ fails with standard error message if msg is not defined
+      ✓ fails in strict mode with invalid command
+      ✓ fails in strict mode with extra positionals
+      ✓ does not fail in strict mode when no commands configured
+      ✓ should recognize context variables in strict mode
+      ✓ should recognize context variables in strict mode, when running sub-commands
+      ✓ fails when a required argument is missing
+      ✓ fails when required arguments are present, but a command is missing
+      ✓ fails without a message if msg is null
+      ✓ custom failure message should be printed for both min and max constraints
+      ✓ interprets min relative to command
+      ✓ interprets max relative to command
+    requiresArg
+      ✓ fails when a required argument value of type number is missing
+      ✓ fails when a required argument value of type string is missing
+      ✓ fails when a required argument value of type boolean is missing
+      ✓ fails when a required argument value of type array is missing
+      ✓ does not fail if argument with required value is not provided
+      ✓ does not fail if argument with required value is not provided to subcommand
+    choices
+      ✓ fails with one invalid value
+      ✓ fails with one valid and one invalid value
+      ✓ fails with multiple invalid values for same argument
+      ✓ fails with case-insensitive value
+      ✓ fails with multiple invalid arguments
+      ✓ succeeds when demandOption is true and valid choice is provided
+      ✓ fails when demandOption is true and choice is not provided
+      ✓ succeeds when demandOption is false and no choice is provided
+      ✓ succeeds when demandOption is not provided and no choice is provided
+    config
+      ✓ should raise an appropriate error if JSON file is not found
+      ✓ should not raise an exception if config file is set as default argument value
+      ✓ should be displayed in the help message
+      ✓ should be displayed in the help message with its default name
+      ✓ should allow help message to be overridden
+      ✓ outputs an error returned by the parsing function
+      ✓ outputs an error if thrown by the parsing function
+    defaults
+      ✓ should not fail when demanded options with defaults are missing
+    strict mode
+      ✓ does not fail when command with subcommands called
+      ✓ does not fail for hidden options
+      ✓ does not fail if an alias is provided, rather than option itself
+    demandOption
+      ✓ allows an array of options to be demanded
+      ✓ allows demandOption in option shorthand
+    demandCommand
+      ✓ should return a custom failure message when too many non-hyphenated arguments are found after a demand count
+      ✓ allows a custom min message to be provided
+      ✓ allows a custom min and max message to be provided
+      ✓ defaults to demanding 1 command
+
+  yargs dsl tests
+    ✓ should use bin name for $0, eliminating path
+    ✓ accepts an object for aliases
+    ✓ do not populates argv with placeholder keys for unset options
+    ✓ accepts an object for implies
+    ✓ accepts an object for describes
+    ✓ a function can be provided, to execute when a parsing failure occurs
+    ✓ should set alias to string if option is string
+    ✓ should allow a valid choice
+    ✓ should allow defaultDescription to be set with .option()
+    ✓ should not require config object for an option
+    hide
+      ✓ should add the key to hiddenOptions
+    showHidden
+      ✓ should have a default show-hidden private option pre-configured
+      ✓ should not have show-hidden as an actual option described by default
+      ✓ should set show-hidden option
+      ✓ should set custom-show-hidden option
+    showHelpOnFail
+      ✓ should display custom failure message, if string is provided as first argument
+      ✓ calling with no arguments should default to displaying help
+    exitProcess
+      ✓ should set exit process to true, if no argument provided
+      when exitProcess is set to false and a failure occurs
+        ✓ should throw an exception
+        ✓ should output the errors to stderr once
+    reset
+      ✓ should put yargs back into its initial state
+      ✓ does not invoke parse with an error if reset has been called and option is not global
+    command
+      ✓ executes command handler with parsed argv
+      ✓ runs all middleware before reaching the handler
+      ✓ recommends a similar command if no command handler is found
+      ✓ does not recommend a similiar command if no similar command exists
+      ✓ recommends the longest match first
+      ✓ does not print command recommendation if help message will be shown
+      ✓ skips executing root-level command if builder's help is executed
+      ✓ executes top-level help if no handled command is provided
+      ✓ accepts an object for describing a command's options
+      ✓ accepts a module with a 'builder' and 'handler' key
+      ✓ accepts a module with a keys 'command', 'describe', 'builder', and 'handler'
+      ✓ derives 'command' string from filename when missing
+      ✓ throws error for non-module command object missing 'command' string
+    terminalWidth
+      - returns the maximum width of the terminal
+    number
+      ✓ accepts number arguments when a number type is specified
+      ✓ should expose an options short-hand for numbers
+    choices
+      ✓ accepts an object
+      ✓ accepts a string and array
+      ✓ accepts a string and single value
+    locale
+      ✓ uses english as a default locale
+      ✓ detects the operating system's locale
+      ✓ should not detect the OS locale if detectLocale is 'false'
+      ✓ allows a locale other than the default 'en' to be specified
+      ✓ handles a missing locale
+      ✓ properly translates a region-specific locale file
+      ✓ uses locale string for help option default desc on .locale().help()
+      ✓ uses locale string for help option default desc on .help().locale()
+      updateLocale
+        ✓ allows you to override the default locale strings
+        ✓ allows you to use updateStrings() as an alias for updateLocale()
+    env
+      ✓ translates no arg as empty prefix (parser applies all env vars)
+      ✓ accepts true as a valid prefix (parser applies all env vars)
+      ✓ accepts empty string as a valid prefix (parser applies all env vars)
+      ✓ accepts a string prefix
+      ✓ translates false as undefined prefix (disables parsing of env vars)
+    parse
+      ✓ parses a simple string
+      ✓ parses a quoted string
+      ✓ parses an array
+      ✓ ignores implicit help command (with short-circuit)
+      ✓ allows an optional context object to be provided
+      ✓ overrides parsed value of argv with context object
+      ✓ parses process.parse() if no arguments are provided
+    parsed
+      ✓ should be false before parsing
+      ✓ should not be false after parsing
+    function passed as second argument to parse
+      ✓ does not print to stdout
+      ✓ gets passed error as first argument
+      ✓ gets passed argv as second argument
+      ✓ gets passed output as third argument
+      ✓ reinstates original exitProcess setting after invocation
+      ✓ does not call callback if subsequently called without callback
+      ✓ resets error state between calls to parse
+      commands
+        ✓ does not invoke command handler if output is populated
+        ✓ invokes command handler normally if no output is populated
+        ✓ allows context object to be passed to parse
+        ✓ does not fail if context object has cyclical reference
+        ✓ allows nested sub-commands to be invoked multiple times
+        ✓ overwrites the prior context object, when parse is called multiple times
+        ✓ populates argv appropriately when parse is called multiple times
+        ✓ populates output appropriately when parse is called multiple times
+        ✓ resets errors when parse is called multiple times
+        ✓ preserves top-level config when parse is called multiple times
+    config
+      ✓ allows a parsing function to be provided as a second argument
+      ✓ allows key to be specified with option shorthand
+      ✓ can be disabled with option shorthand
+      ✓ allows to pass a configuration object
+      extends
+        ✓ applies default configurations when given config object
+        ✓ protects against circular extended configurations
+        ✓ handles aboslute paths
+        1) tolerates null prototype config objects
+        ✓ allows a module to be extended, rather than a JSON file
+        ✓ ignores an extends key that does not look like a path or module
+        ✓ allows files with .*rc extension to be extended
+    normalize
+      ✓ normalizes paths passed as arguments
+      ✓ normalizes path when when it is updated
+      ✓ allows key to be specified with option shorthand
+      ✓ can be disabled with option shorthand
+    narg
+      ✓ accepts a key as the first argument and a count as the second
+      ✓ accepts a hash of keys and counts
+      ✓ allows key to be specified with option shorthand
+    global
+      ✓ does not reset a global options when reset is called
+      ✓ does not reset alias of global option
+      ✓ should set help to global option by default
+      ✓ should set version to global option by default
+      ✓ should not reset usage descriptions of global options
+      ✓ should not reset implications of global options
+      ✓ should expose an options short-hand for declaring global options
+    pkgConf
+      ✓ uses values from package.json
+      ✓ combines yargs defaults with package.json values
+      ✓ should use value from package.json, if argv value is using default value
+      ✓ should apply value from config object to all aliases
+      ✓ is cool with a key not existing
+      ✓ allows an alternative cwd to be specified
+      ✓ doesn't mess up other pkg lookups when cwd is specified
+      ✓ handles an invalid package.json
+      ✓ should apply default configurations from extended packages
+      ✓ should apply extended configurations from cwd when no path is given
+    parserConfiguration
+      ✓ overrides the default parser configuration 
+    skipValidation
+      ✓ skips validation if an option with skipValidation is present
+      ✓ does not skip validation if no option with skipValidation is present
+      ✓ allows key to be specified with option shorthand
+      ✓ allows having an option that skips validation but not skipping validation if that option is not used
+    .help()
+      ✓ enables `--help` option and `help` command without arguments
+      ✓ enables `--help` option and `help` command with `true` argument
+      ✓ enables given string as help option and command with string argument
+      ✓ enables given string as help option and command with custom description with two string arguments
+      ✓ enables given string as help option and command with custom description with two string arguments and `true` argument
+    .help() with .alias()
+      ✓ uses multi-char (but not single-char) help alias as command
+    .coerce()
+      ✓ supports string and function args (as option key and coerce function)
+      ✓ supports object arg (as map of multiple options)
+      ✓ supports array and function args (as option keys and coerce function)
+      ✓ allows an error to be handled by fail() handler
+      ✓ supports an option alias
+      ✓ supports a global option within command
+      ✓ is supported by .option()
+      ✓ supports positional and variadic args for a command
+      ✓ returns camelcase args for a command
+      ✓ allows an error from positional arg to be handled by fail() handler
+    stop parsing
+      ✓ populates argv._ with unparsed arguments after "--"
+    yargs context
+      ✓ should begin with initial state
+      ✓ should track number of resets
+      ✓ should track commands being executed
+    positional
+      ✓ defaults array with no arguments to []
+      ✓ populates array with appropriate arguments
+      ✓ allows a conflicting argument to be specified
+      ✓ allows a default to be set
+      ✓ allows a defaultDescription to be set
+      ✓ allows an implied argument to be specified
+      ✓ allows an alias to be provided
+      ✓ allows normalize to be specified
+      ✓ allows a choices array to be specified
+      ✓ allows a coerce method to be provided
+      ✓ allows a boolean type to be specified
+      ✓ allows a number type to be specified
+      ✓ allows a string type to be specified
+      ✓ allows positional arguments for subcommands to be configured
+      ✓ can only be used as part of a command's builder function
+      ✓ does not parse large scientific notation values, when type string
+
+
+  552 passing (8s)
+  2 pending
+  1 failing
+
+  1) yargs dsl tests
+       config
+         extends
+           tolerates null prototype config objects:
+     TypeError: config.hasOwnProperty is not a function
+      at applyExtends (lib/apply-extends.js:1:5026)
+      at Object.config (yargs.js:27:102)
+      at Context.<anonymous> (test/yargs.js:1297:12)
+      at process.processImmediate (node:internal/timers:483:21)
+
+
+
+--------------------------|----------|----------|----------|----------|-------------------|
+File                      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+--------------------------|----------|----------|----------|----------|-------------------|
+All files                 |    99.01 |    94.01 |    99.31 |    99.81 |                   |
+ yargs                    |    99.21 |    93.96 |    99.15 |    99.71 |                   |
+  index.js                |      100 |      100 |      100 |      100 |                   |
+  yargs.js                |     99.2 |     93.9 |    99.12 |    99.71 |         1007,1008 |
+ yargs/lib                |    98.85 |    94.05 |    99.42 |    99.88 |                   |
+  apply-extends.js        |     96.3 |    92.86 |      100 |      100 |                23 |
+  argsert.js              |      100 |    96.15 |      100 |      100 |                67 |
+  command.js              |    99.59 |    95.16 |      100 |      100 |... 07,211,228,274 |
+  completion-templates.js |      100 |      100 |      100 |      100 |                   |
+  completion.js           |      100 |    93.02 |      100 |      100 |          65,76,82 |
+  is-promise.js           |      100 |      100 |      100 |      100 |                   |
+  levenshtein.js          |     87.5 |    66.67 |      100 |      100 |             27,28 |
+  middleware.js           |      100 |    95.24 |      100 |      100 |                23 |
+  obj-filter.js           |     87.5 |    83.33 |    66.67 |      100 |                 4 |
+  usage.js                |    98.17 |    93.41 |      100 |    99.65 |               484 |
+  validation.js           |      100 |    95.61 |      100 |      100 | 32,36,107,175,217 |
+  yerror.js               |      100 |      100 |      100 |      100 |                   |
+--------------------------|----------|----------|----------|----------|-------------------|

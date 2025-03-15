@@ -1,0 +1,2098 @@
+
+> yargs@17.5.1 pretest
+> npm run compile -- -p tsconfig.test.json && cross-env NODE_ENV=test npm run build:cjs
+
+
+> yargs@17.5.1 compile
+> rimraf build && tsc -p tsconfig.test.json
+
+
+> yargs@17.5.1 postcompile
+> npm run build:cjs
+
+
+> yargs@17.5.1 build:cjs
+> rollup -c rollup.config.cjs
+
+
+> yargs@17.5.1 postbuild:cjs
+> rimraf ./build/index.cjs.d.ts
+
+
+> yargs@17.5.1 build:cjs
+> rollup -c rollup.config.cjs
+
+
+> yargs@17.5.1 postbuild:cjs
+> rimraf ./build/index.cjs.d.ts
+
+
+> yargs@17.5.1 test
+> c8 mocha --enable-source-maps ./test/*.cjs --require ./test/before.cjs --timeout=12000 --check-leaks
+
+
+
+  ✔ should expose yargs-parser as Parser
+  Argsert
+    ✔ does not warn if optional argument is not provided
+    ✔ warn if wrong type is provided for optional argument
+    ✔ does not warn if optional argument is valid
+    ✔ warns if required argument is not provided
+    ✔ warns if required argument is of wrong type
+    ✔ supports a combination of required and optional arguments
+    ✔ warns if too many arguments are provided
+    ✔ warn with argument position if wrong type is provided for argument
+    ✔ warn with generic argument position if wrong type is provided for seventh or greater argument
+    ✔ configures function to accept 0 parameters, if only arguments object is provided
+    ✔ allows for any type if * is provided
+    ✔ should ignore trailing undefined values
+    ✔ should not ignore undefined values that are not trailing
+    ✔ supports null as special type
+    ✔ should throw on warnings, when under test
+
+  Command
+    ✔ preserves top-level envPrefix
+    ✔ respects order of positional arguments when matching commands
+    ✔ handles positional arguments if command is invoked using .parse()
+    ✔ invokes command handler repeatedly if parse() is called multiple times
+    ✔ allows command handler to be invoked repeatedly when help is enabled
+    ✔ does not require builder function to return
+    ✔ allows builder function to parse argv without returning
+    ✔ allows builder function to return parsed argv
+    ✔ ignores extra spaces in command string
+    ✔ executes a command via alias
+    ✔ should kick along [demand] configuration to commands
+    ✔ should support numeric commands
+    ✔ should not execute command if it is preceded by another positional argument
+    ✔ should allow positional arguments for inner commands in strict mode, when no handler is provided
+    ✔ does not coerce number from positional with leading "+"
+    ✔ allows an array of commands to be provided
+    ✔ allows async exception in handler to be caught
+    ✔ reports error if error occurs parsing positional
+    positional arguments
+      ✔ parses command string and populates optional and required positional arguments
+      ✔ populates inner argv with positional arguments
+      ✔ populates outer argv with positional arguments when unknown-options-as-args is not set
+      ✔ populates outer argv with positional arguments when unknown-options-as-args is set
+      ✔ populates argv with camel-case variants of arguments when possible
+      ✔ populates argv with camel-case variants of variadic args when possible
+      ✔ populates subcommand's inner argv with positional arguments
+      ✔ ignores positional args for aliases
+      ✔ does not overwrite existing values in argv for keys that are not positional
+      ✔ does not load config twice when command executed
+      ✔ handles -- in conjunction with positional arguments
+      ✔ continues to support populate-- for commands, post #1457
+      ✔ does not overwrite options in argv if variadic
+      ✔ does not overwrite options in argv if variadic and when using default command
+      ✔ does not combine positional default and provided values
+      ✔ does not combine config values and provided values
+      ✔ does not overwrite options in argv if variadic and preserves falsy values
+    variadic
+      ✔ allows required arguments to be variadic
+      ✔ allows optional arguments to be variadic
+      ✔ fails if required arguments are missing
+      ✔ does not fail if zero optional arguments are provided
+      ✔ only allows the last argument to be variadic
+      ✔ allows camel-case, variadic arguments, and strict mode to be combined
+    missing positional arguments
+      ✔ fails if a required argument is missing
+      ✔ does not fail if optional argument is missing
+    API
+      ✔ accepts string, string as first 2 arguments
+      ✔ accepts array, string as first 2 arguments
+      ✔ accepts string, boolean as first 2 arguments
+      ✔ accepts array, boolean as first 2 arguments
+      ✔ accepts function as 3rd argument
+      ✔ accepts options object as 3rd argument
+      ✔ accepts module (with builder function and handler function) as 3rd argument
+      ✔ accepts module (with builder object and handler function) as 3rd argument
+      ✔ accepts module (describe key, builder function) as 1st argument
+      ✔ accepts module (description key, builder function) as 1st argument
+      ✔ accepts module (desc key, builder function) as 1st argument
+      ✔ accepts module (false describe, builder function) as 1st argument
+      ✔ accepts module (missing describe, builder function) as 1st argument
+      ✔ accepts module (describe key, builder object) as 1st argument
+      ✔ accepts module (missing handler function) as 1st argument
+      ✔ accepts module (with command array) as 1st argument
+      ✔ accepts module (with command string and aliases array) as 1st argument
+      ✔ accepts module (with command array and aliases array) as 1st argument
+      ✔ accepts module (with command string and aliases string) as 1st argument
+      ✔ accepts deprecated as 5th argument
+    commandDir
+      ✔ supports relative dirs
+      1) supports nested subcommands
+      ✔ supports a "recurse" boolean option
+      ✔ supports a "visit" function option
+      ✔ detects and ignores cyclic dir references
+      ✔ derives 'command' string from filename when not exported
+    help command
+      ✔ displays command help appropriately
+    positional aliases
+      ✔ allows an alias to be defined for a required positional argument
+      ✔ allows an alias to be defined for an optional positional argument
+      ✔ allows several aliases to be defined for a required positional argument
+      ✔ allows several aliases to be defined for an optional positional argument
+      ✔ allows variadic and positional arguments to be combined
+    global parsing hints
+      config
+        ✔ does not load config for command if global is false
+        ✔ loads config for command by default
+      validation
+        ✔ resets implies logic for command if global is false
+        ✔ applies conflicts logic for command by default
+        ✔ resets conflicts logic for command if global is false
+        ✔ applies custom checks globally by default
+        ✔ resets custom check if global is false
+        ✔ allows each builder to specify own middleware
+        ✔ applies demandOption globally
+      strict
+        ✔ defaults to false when not called
+        ✔ can be enabled just for a command
+        ✔ applies strict globally by default
+        ✔ does not fail strict check due to postional command arguments
+        ✔ does not fail strict check due to postional command arguments in nested commands
+        ✔ allows a command to override global`
+        ✔ does not fire command if validation fails
+      types
+        ✔ applies array type globally
+        ✔ allows global setting to be disabled for array type
+        ✔ applies choices type globally
+      aliases
+        ✔ defaults to applying aliases globally
+        ✔ allows global application of alias to be disabled
+      coerce
+        ✔ defaults to applying coerce rules globally
+        ✔ should bubble errors thrown by coerce function inside commands
+        ✔ should not be applied multiple times for nested commands
+        ✔ should not run or set new properties on argv when related argument is not passed
+        ✔ should not add aliases to argv if strip-aliased config is true
+      defaults
+        ✔ applies defaults globally
+      describe
+        ✔ flags an option as global if a description is set
+      help
+        ✔ applies help globally
+      version
+        ✔ applies version globally
+      groups
+        ✔ should apply custom option groups globally
+    default commands
+      ✔ executes default command if no positional arguments given
+      ✔ executes default command if undefined positional arguments and only command
+      ✔ executes default command if defined positional arguments and only command
+      ✔ allows $0 as an alias for a default command
+      ✔ does not execute default command if another command is provided
+      ✔ allows default command to be set as alias
+      ✔ allows command to be run when alias is default command
+      ✔ the last default command set should take precedence
+      strict
+        ✔ executes default command when strict mode is enabled
+        ✔ allows default command aliases, when strict mode is enabled
+    deprecated command
+      using arg
+        ✔ shows deprecated notice with boolean
+        ✔ shows deprecated notice with string
+      using module
+        ✔ shows deprecated notice with boolean
+        ✔ shows deprecated notice with string
+    usage
+      ✔ allows you to configure a default command
+      ✔ throws exception if default command does not have leading $0
+    async
+      ✔ fails when the promise returned by the command handler rejects
+      ✔ returns promise that resolves arguments once handler succeeds
+      ✔ returns promise that can be caught, when fail(false)
+      2) displays error and appropriate help message when handler fails
+    async builder
+      ✔ allows positionals to be configured asynchronously
+      ✔ does not print to stdout when parse callback is provided
+      ✔ allows command to be defined in async builder
+      ✔ allows deeply nested command to be defined in async builder (49ms)
+      helpOrVersionSet
+        ✔ --help
+    builder
+      helpOrVersionSet
+        ✔ --version
+        ✔ --help
+        ✔ help
+        ✔ cmd
+
+  Completion
+    default completion behavior
+      calling yargs(--get-yargs-completions, …)
+        ✔ avoids repeating already included commands
+        ✔ avoids repeating already included options
+        ✔ avoids repeating options whose aliases are already included
+        ✔ completes short options with a single dash when the user did not already enter two dashes
+        ✔ completes short options with two dashes when the user already entered two dashes
+        ✔ completes single digit options with two dashes
+        ✔ completes with no- prefix flags defaulting to true when boolean-negation is set
+        ✔ avoids repeating flags whose negated counterparts are already included
+        ✔ ignores no- prefix flags when boolean-negation is not set
+        ✔ includes flags that have default
+        ✔ completes options for the correct command
+        ✔ ignores positionals for the correct command
+        ✔ does not complete hidden commands
+        ✔ does not include positional arguments
+        ✔ works if command has no options
+        ✔ returns arguments as completion suggestion, if next contains '-'
+        ✔ completes choices if previous option requires a choice
+        ✔ completes choices if previous option requires a choice and space has been entered
+        ✔ completes choices if previous option requires a choice and a partial choice has been entered
+        ✔ completes choices if previous option or one of its aliases requires a choice
+        ✔ completes choices if previous option or one of its aliases requires a choice and space has been entered
+        ✔ completes choices if previous option or one of its aliases requires a choice and a partial choice has been entered
+        ✔ completes choices for first positional
+        ✔ options choices should not be display with positional choices
+        ✔ completes choices for positional with prefix
+        ✔ completes choices for second positional after option
+        ✔ completes choices for nested command
+        ✔ works if positional has no choices
+      calling yargs(./completion, --get-yargs-completions, …)
+        ✔ avoids repeating already included commands
+        ✔ avoids repeating already included options
+        ✔ avoids repeating options whose aliases are already included
+        ✔ completes short options with a single dash when the user did not already enter two dashes
+        ✔ completes short options with two dashes when the user already entered two dashes
+        ✔ completes single digit options with two dashes
+        ✔ completes with no- prefix flags defaulting to true when boolean-negation is set
+        ✔ avoids repeating flags whose negated counterparts are already included
+        ✔ ignores no- prefix flags when boolean-negation is not set
+        ✔ includes flags that have default
+        ✔ completes options for the correct command
+        ✔ ignores positionals for the correct command
+        ✔ does not complete hidden commands
+        ✔ does not include positional arguments
+        ✔ works if command has no options
+        ✔ returns arguments as completion suggestion, if next contains '-'
+        ✔ completes choices if previous option requires a choice
+        ✔ completes choices if previous option requires a choice and space has been entered
+        ✔ completes choices if previous option requires a choice and a partial choice has been entered
+        ✔ completes choices if previous option or one of its aliases requires a choice
+        ✔ completes choices if previous option or one of its aliases requires a choice and space has been entered
+        ✔ completes choices if previous option or one of its aliases requires a choice and a partial choice has been entered
+        ✔ completes choices for first positional
+        ✔ options choices should not be display with positional choices
+        ✔ completes choices for positional with prefix
+        ✔ completes choices for second positional after option
+        ✔ completes choices for nested command
+        ✔ works if positional has no choices
+    generateCompletionScript()
+      ✔ replaces completion command variable with custom completion command in script
+      ✔ if $0 has a .js extension, a ./ prefix is added
+      ✔ allows $0 and cmd to be set
+    completion()
+      ✔ shows completion script if command registered with completion(cmd) is called
+      ✔ allows a custom function to be registered for completion
+      ✔ passes current arg for completion and the parsed arguments thus far to custom function
+      ✔ allows the custom completion function to use the default completion w/o filter
+      ✔ allows custom completion to be combined with default completion, using filter
+      ✔ allows calling callback instead of default completion function
+      ✔ if a promise is returned, completions can be asynchronous
+      ✔ if a promise is returned, errors are handled
+      ✔ if a callback parameter is provided, completions can be asynchronous
+    bash
+      ✔ returns a list of commands as completion suggestions
+      ✔ avoids interruption from command recommendations
+      ✔ avoids interruption from default command
+      ✔ completes options for a command
+      ✔ does not complete hidden options for command
+      ✔ does not apply validation when --get-yargs-completions is passed in
+      generateCompletionScript()
+        ✔ replaces application variable with $0 in script
+      getCompletion()
+        ✔ returns default completion to callback
+        ✔ returns default completion to callback for options
+    zsh
+      ✔ returns a list of commands as completion suggestions
+      ✔ avoids interruption from command recommendations
+      ✔ avoids interruption from default command
+      3) completes options for a command
+      ✔ replaces application variable with $0 in script
+      4) does not apply validation when --get-yargs-completions is passed in
+      ✔ bails out early when full command matches
+      getCompletion()
+        ✔ returns default completion to callback
+    async
+      getCompletion
+        ✔ allows completions to be awaited
+      completion
+        ✔ does not apply validation if async completion command provided
+
+  helpers
+    ✔ does not expose additional helpers beyond blessed list
+    applyExtends
+      ✔ exposes applyExtends helper
+    Parser
+      ✔ exposes functional argument parser
+    hideBin
+      ✔ exposes helper for hiding node bin
+
+  integration tests
+    ✔ should run as a shell script with no arguments (120ms)
+    ✔ should run as a shell script with arguments (102ms)
+    ✔ should run as a node script with no arguments (259ms)
+    ✔ should run as a node script with arguments (267ms)
+    ✔ allows --help to be completed without returning help message (101ms)
+    5) flushes all output when --help is executed
+    ✔ correctly fills positional command args with preceding option (110ms)
+    ✔ correctly fills positional command args with = assignment in preceding option (110ms)
+    path returned by "which"
+      ✔ should match the actual path to the script file (102ms)
+      ✔ should match the actual path to the script file, with arguments (106ms)
+    load root package.json
+      version #
+        ✔ defaults to appropriate version # when yargs is installed normally (172ms)
+        ✔ defaults to appropriate version # when yargs is symlinked (120ms)
+      parser settings
+        ✔ reads parser config settings when yargs is installed normally (132ms)
+        ✔ reads parser config settings when yargs is installed as a symlink (131ms)
+        ✔ reads parser config settings when somebody obscures require.main (127ms)
+        ✔ reads parser config settings when entry file has no extension (111ms)
+
+  isPromise
+    ✔ returns `false` on non promise value
+    ✔ returns `true` on es6 promise
+    ✔ returns `true` on some other thenable
+    ✔ returns `false` if some falsy value is passed
+    ✔ returns `false` if passed object has no `then` property
+    ✔ returns `false` if `then` is not a function
+
+  middleware
+    ✔ runs the middleware before reaching the handler
+    ✔ runs all middleware before reaching the handler
+    ✔ should be able to register middleware regardless of when middleware is called
+    ✔ doesn't modify globalMiddleware array when executing middleware
+    ✔ allows middleware to be added in builder
+    ✔ passes yargs object to middleware
+    ✔ applies aliases before middleware is called
+    ✔ should run even if no command is matched
+    ✔ throws error if middleware not function
+    applyBeforeValidation=true
+      ✔ runs before validation
+      ✔ resolves async middleware, before applying validation
+      ✔ still throws error when async middleware is used
+      ✔ does not cause an unexpected error when async middleware and strict are both used
+      ✔ runs before validation, when middleware is added in builder
+      ✔ applies aliases before middleware is called, for global middleware
+      ✔ applies aliases before middleware is called, when middleware is added in builder
+    async
+      ✔ fails when the promise returned by the middleware rejects
+      ✔ it allows middleware rejection to be caught
+      ✔ it awaits middleware before awaiting handler, when applyBeforeValidation is "false"
+      ✔ calls the command handler when all middleware promises resolve
+      ✔ calls an async middleware only once for nested subcommands
+      $0
+        ✔ applies global middleware when no commands are provided, with implied $0
+        ✔ applies middleware before performing validation, with implied $0 (106ms)
+        ✔ applies middleware before performing validation, with explicit $0 (108ms)
+    synchronous $0
+      ✔ applies global middleware when no commands are provided
+      ✔ applies global middleware when default command is provided, with explicit $0
+      ✔ applies middleware before performing validation, with implicit $0
+    async check
+      ✔ applies aliases prior to calling check
+      success
+        ✔ returns promise if check is async
+        ✔ returns promise if check and middleware is async
+        ✔ allows async check to be used with command
+        ✔ allows async check to be used with command and middleware
+      failure
+        ✔ allows failed check to be caught
+        ✔ allows error to be caught before calling command
+        ✔ allows error to be caught before calling command and middleware
+    async coerce
+      ✔ allows two commands to register different coerce methods
+      ✔ coerce is applied to argument and aliases
+      ✔ applies coerce before validation
+      ✔ allows error to be caught
+
+  ObjFilter
+    ✔ returns a new reference to the original object if no filter function is given
+
+  parseCommand
+    ✔ should throw if no command is specified
+
+  usage tests
+    ✔ should return valid values when check passes
+    ✔ should display missing arguments when check fails with a thrown exception
+    ✔ should display missing arguments when check fails with a return value
+    ✔ should return a valid result when check condition passes
+    ✔ should display a failed message when check condition fails
+    ✔ should return a valid result when demanding a count of non-hyphenated values
+    ✔ should return a failure message when not enough non-hyphenated arguments are found after a demand count
+    ✔ should return a custom failure message when not enough non-hyphenated arguments are found after a demand count
+    ✔ should return a valid result when setting defaults for singles
+    ✔ should return a valid result when default is set for an alias
+    ✔ should print a single line when failing and default is set for an alias
+    ✔ should allow you to set default values for a hash of options
+    ✔ should display example on fail
+    ✔ should display examples on fail when passing multiple examples at once
+    ✔ should not print usage string if help() is called without arguments
+    ✔ should add --help as an option for printing usage text if help() is called without arguments
+    ✔ should allow setting the same description for several keys
+    ✔ allows setting help and version with aliases and custom description
+    6) allows multiple option calls to not clobber description
+    demand options
+      ✔ should show an error along with a custom message on demand fail
+      ✔ should return valid values when demand passes
+      ✔ should not show a custom message if msg is null
+      using .demand()
+        ✔ should show an error along with the missing arguments on demand fail
+        ✔ missing argument message given if one command, but an argument not on the list is provided
+        ✔ missing command message if all the required arguments exist, but not enough commands are provided
+        ✔ no failure occurs if the required arguments and the required number of commands are provided
+        ✔ missing command message if all the required arguments exist, but not enough commands are provided
+        using .require()
+          ✔ should show an error along with the missing arguments on demand fail
+          ✔ missing argument message given if one command and an argument not on the list are provided
+      min/max demanded count
+        ✔ does not output an error if '_' count is within the min/max range
+        ✔ outputs an error if '_' count is above max
+        ✔ outputs an error if '_' count is below min
+        ✔ allows a customer error message to be provided
+        ✔ shouldn't interpret the second argument as a max when it is an array
+    deprecate options
+      using .option(x, {deprecate: [boolean|string]})
+        7) {deprecated: true} should show [deprecated]
+        8) {deprecated: string} should show [deprecated: string]
+        9) {deprecated: boolean} in sub-command
+        10) {deprecated: string} in sub-command
+      using .deprecateOption(x, [string])
+        11) .deprecateOption(x) should show [deprecated]
+        12) .deprecateOption(x, string) should show [deprecated: string]
+        13) .deprecateOption(x) in a sub-command
+        14) .deprecateOption(x, string) in a sub-command
+    when exitProcess is false
+      when check fails with a thrown exception
+        ✔ should display missing arguments once
+      fail()
+        ✔ is called with the original error message as the first parameter
+        15) is invoked with yargs instance as third argument
+        ✔ allows "false" to be provided to prevent exit/output
+        ✔ does not allow "true" as argument
+        when check() throws error
+          ✔ fail() is called with the original error object as the second parameter
+        when command() throws error
+          ✔ fail() is called with the original error object as the second parameter
+    required arguments
+      ✔ still requires argument if 'type' hints are given
+      with options object
+        16) should show a failure message if a required option is missing
+        17) should show a failure message if more than one required option is missing
+      with requiresArg method
+        18) should show a failure message if a required option is missing
+    with strict() option set
+      ✔ should fail given an option argument that is not demanded
+      19) should fail given an option argument without a corresponding description
+      ✔ should wrap whitespace in quotes if provided as an unknown argument
+      20) should fail given multiple option arguments without corresponding descriptions
+      ✔ should pass given option arguments with corresponding descriptions
+      with hyphens in options
+        ✔ fails when an invalid argument is provided
+        ✔ accepts valid options
+        ✔ works with aliases
+        ✔ accepts mixed options with values
+    demand option with boolean flag
+      ✔ should not report missing required arguments when given an alias
+      with demand option
+        21) should report missing required arguments
+      with required option
+        22) should report missing required arguments
+    help option
+      ✔ should display usage
+      ✔ should not show both dashed and camelCase aliases
+      23) should use 2 dashes for general 1-digit usage
+      24) should use single dashes for 1-digit boolean key usage
+      25) should use single dashes for 1-digit boolean alias usage
+      26) should use 2 dashes for multiple-digit alias usage
+      when exitProcess is false
+        ✔ should not validate arguments (required argument)
+        ✔ should not validate arguments (nargs)
+    version option
+      ✔ should display version
+      ✔ accepts version option as first argument, and version number as second argument
+      ✔ should default to 'version' as version option
+      when an option or alias "version" is set
+        ✔ emits warning if version is not disabled
+        ✔ does not emit warning if version is disabled
+      when exitProcess is false
+        ✔ should not validate arguments (required argument)
+        ✔ should not validate arguments (nargs)
+    showHelpOnFail
+      ✔ should display user supplied message
+      should handle being chained both globally and on a command 
+        ✔ chained on to command
+        ✔ chained on globally
+        ✔ chained on command and globally (priority given to command message)
+    exitProcess
+      ✔ should not call process.exit on error if disabled
+    scriptName
+      ✔ should display user supplied scriptName
+      ✔ should not alter the user supplied scriptName
+    wrap
+      ✔ should wrap argument descriptions onto multiple lines
+      - should wrap based on window-size if no wrap is provided
+      ✔ should not wrap when YARGS_DISABLED_WRAP is provided
+      ✔ should not raise an exception when long default and description are provided
+      ✔ should wrap the left-hand-column if it takes up more than 50% of the screen
+      ✔ should not wrap left-hand-column if no description is provided
+      ✔ should wrap the usage string
+      27) should align span columns when ansi colors are not used in a description
+      28) should align span columns when ansi colors are used in a description
+      ✔ should not indent usage when no wrap is specified
+    commands
+      ✔ should output a list of available commands
+      ✔ should not show hidden commands
+      ✔ allows completion command to be hidden
+      29) preserves global wrap() for commands that do not override it
+      30) allows a command to override global wrap()
+      ✔ resets groups for a command handler, respecting order
+      ✔ allows global option to be disabled
+      ✔ can add to preserved groups
+      ✔ can bump up preserved groups
+      31) should display global non empty groups for commands
+      32) should display global non empty groups for subcommands
+      ✔ should list a module command only once
+      ✔ allows a builder function to override default usage() string
+      ✔ allows a builder function to disable default usage() with null
+      ✔ displays given command chain with positional args in default usage for subcommand with builder object
+      ✔ displays given command chain with positional args in default usage for subcommand with builder function
+      ✔ displays aliases for commands that have them (no wrap)
+      ✔ displays aliases for commands that have them (with wrap)
+      ✔ allows a builder to add more than one usage with multiple usage calls
+      ✔ allows a builder to disable usage with null after mutiple usage calls
+      ✔ does not display $0 twice when default commands are enabled
+    epilogue
+      ✔ should display an epilog message at the end of the usage instructions
+      ✔ supports multiple epilogs
+      ✔ replaces $0 in epilog string
+    default
+      ✔ should indicate that the default is a generated-value, if function is provided
+      ✔ if a named function is provided, should use name rather than (generated-value)
+      ✔ default-description take precedence if one is provided
+      ✔ serializes object and array defaults
+    defaultDescription
+      using option() without default()
+        ✔ should output given desc with default value
+        33) should output given desc without default value
+        ✔ should prefer given desc over function desc
+      using option() with default()
+        ✔ should prefer default() desc when given last
+        ✔ should prefer option() desc when given last
+        ✔ should prefer option() desc over default() function
+      using positional() without default()
+        ✔ should output given desc with default value
+        ✔ should output given desc without default value
+        ✔ should prefer given desc over function desc
+      using positional() with default()
+        ✔ should prefer default() desc when given last
+        ✔ should prefer positional() desc when given last
+        ✔ should prefer positional() desc over default() function
+    normalizeAliases
+      ✔ should display 'description' string in help message if set for alias
+      ✔ should display 'required' string in help message if set for alias
+      ✔ should display 'type' string in help message if set for alias
+      ✔ should display 'type' number in help message if set for alias
+    showHelp
+      34) should show help regardless of whether argv has been called
+      35) should print the help using console.error when no arguments were specified
+      36) should call the correct console.log method when specified
+      37) should call the callback to print when specified
+      ✔ should not run handler or middleware
+      ✔ should not run default command
+    showVersion
+      ✔ should show version regardless of whether argv has been called
+      ✔ should call the correct console.log method when specified
+      ✔ should call the callback to print when specified
+    $0
+      ✔ is detected correctly for a basic script
+      ✔ is detected correctly when argv contains "node"
+      ✔ is detected correctly when dirname contains "node"
+      ✔ is detected correctly when dirname and argv contain "node"
+      ✔ is detected correctly when argv contains "iojs"
+      ✔ is detected correctly when dirname contains "iojs"
+      ✔ is detected correctly when dirname and argv contain "iojs"
+      ✔ is detected correctly when argv contains "node.exe"
+      ✔ is detected correctly when argv contains "iojs.exe"
+      ✔ is resolved to the relative path if it is shorter
+      ✔ is not resolved to the relative path if it is larger
+    choices
+      38) should output choices when defined for non-hidden options
+      ✔ should not output choices when defined for hidden options
+    count
+      39) should indicate when an option is a count
+    array
+      40) should indicate when an option is an array
+    group
+      41) allows an an option to be placed in an alternative group
+      ✔ does not print the 'Options:' group if no keys are in it
+      ✔ displays alias keys appropriately within a grouping
+      ✔ allows a group to be provided as the only information about an option
+      ✔ allows multiple options to be grouped at the same time
+      ✔ allows group to be provided in the options object
+      ✔ only displays a duplicated option once per group
+    cjk
+      ✔ should calculate width of cjk text correctly
+    default command
+      ✔ should display top-level help with no command given
+      ✔ should display top-level help with sorting with no command given if sorting enabled
+      ✔ should display default command as ./$0 if it has no aliases
+      ✔ should display positionals that have been configured
+      ✔ should display options that have been configured
+      42) should display options (with descriptions) on failed default command
+    positional
+      43) should display help section for positionals
+      44) shows that variadic positional arguments are arrays
+      45) indicates that <foo> positional arguments are required
+      46) displays aliases appropriately
+      47) displays type information
+      48) displays choices array
+    hidden options
+      49) --help should display all options except for hidden ones
+      50) --help should display all options except for hidden ones even with a default
+      51) --help should display all options except for hidden ones even in a group
+      52) --help should display all groups except for ones with only hidden options
+      53) --help should display all options (including hidden ones) with --show-hidden
+      54) --help should display all groups (including ones with only hidden options) with --show-hidden
+      55) --help should display --custom-show-hidden
+      56) --help should display all options with --custom-show-hidden
+    help message caching
+      ✔ should display proper usage when an async handler fails (103ms)
+      ✔ should not display a cached help message for the next parsing (105ms)
+    usage for default command
+      default only
+        ✔ should contain the expected output for --help
+        ✔ should contain the expected output for showhelp
+        ✔ should contain the expected output for getHelp
+        ✔ should contain the expected output for getHelp when called from within handler
+        ✔ should contain the expected output for showHelp when called from within handler
+        ✔ should contain the expected output for showHelp, when exception occurs
+      multiple
+        ✔ should contain the expected output for --help
+        ✔ should contain the expected output for showHelp
+        ✔ should contain the expected output for showHelp when called from within handler
+        ✔ should contain the expected output for getHelp
+        ✔ should contain the expected output for getHelp when called from within handler
+      positional
+        57) should contain the expected output for --help
+        58) should contain the expected output for showHelp
+    async builder
+      ✔ shows appropriate usage instructions for nested command
+      positional
+        59) should contain the expected output for --help
+        60) should contain the expected output for getHelp
+
+  validation tests
+    check
+      ✔ fails if error is thrown in check callback
+      ✔ does not fail if error is not thrown in check callback, and true is returned
+      ✔ callback has access to options
+    implies
+      ✔ fails if '_' populated, and implied argument not set
+      ✔ fails if key implies values in '_', but '_' is not populated
+      ✔ fails if either implied argument is not set and displays only failed
+      ✔ fails if --no-foo's implied argument is not set
+      ✔ fails if a key is set, along with a key that it implies should not be set
+      ✔ fails if implied key (with "no" in the name) is not set
+      ✔ doesn't fail if implied key exists with value 0
+      ✔ doesn't fail if implied key exists with value false
+      ✔ doesn't fail if implied key (with "no" in the name) is set
+      ✔ fails if implied key (with "no" in the name) is given when it should not
+      ✔ doesn't fail if implied key (with "no" in the name) that should not be given is not set
+      ✔ allows key to be specified with option shorthand
+    conflicts
+      ✔ fails if both arguments are supplied
+      ✔ fails if argument is supplied along with either conflicting argument
+      ✔ fails if conflicting arguments are provided, and strip-dashed is enabled
+      ✔ should not fail if no conflicting arguments are provided
+      ✔ should not fail if argument with conflict is provided, but not the argument it conflicts with
+      ✔ should not fail if conflicting argument is provided, without argument with conflict
+      ✔ allows an object to be provided defining conflicting option pairs
+      ✔ takes into account aliases when applying conflicts logic
+      ✔ allows key to be specified with option shorthand
+      ✔ should fail if alias of conflicting argument is provided
+      ✔ should fail if alias of argument with conflict is provided
+      ✔ should use appropriate translation
+    demand
+      ✔ fails with standard error message if msg is not defined
+      ✔ fails in strict mode when no commands defined but command is passed
+      ✔ fails because of undefined command and not because of argument after --
+      ✔ fails in strict mode with invalid command
+      ✔ fails in strict mode with extra positionals
+      ✔ fails in strict mode with extra positionals for default command
+      ✔ does not fail in strict mode when no commands configured
+      ✔ should recognize context variables in strict mode
+      ✔ should recognize context variables in strict mode, when running sub-commands
+      ✔ fails when a required argument is missing
+      ✔ fails when required arguments are present, but a command is missing
+      ✔ fails without a message if msg is null
+      ✔ custom failure message should be printed for both min and max constraints
+      ✔ interprets min relative to command
+      ✔ interprets max relative to command
+    requiresArg
+      ✔ fails when a required argument value of type number is missing
+      ✔ fails when a required argument value of type string is missing
+      ✔ fails when a required argument value of type boolean is missing
+      ✔ fails when a required argument value of type array is missing
+      ✔ does not fail if argument with required value is not provided
+      ✔ does not fail if argument with required value is not provided to subcommand
+    choices
+      ✔ fails with one invalid value
+      ✔ fails with one valid and one invalid value
+      ✔ fails with multiple invalid values for same argument
+      ✔ fails with case-insensitive value
+      ✔ fails with multiple invalid arguments
+      ✔ succeeds when demandOption is true and valid choice is provided
+      ✔ fails when demandOption is true and choice is not provided
+      ✔ succeeds when demandOption is false and no choice is provided
+      ✔ succeeds when demandOption is not provided and no choice is provided
+    config
+      ✔ should raise an appropriate error if JSON file is not found
+      ✔ should not raise an exception if config file is set as default argument value
+      ✔ should be displayed in the help message
+      ✔ should be displayed in the help message with its default name
+      ✔ should allow help message to be overridden
+      ✔ outputs an error returned by the parsing function
+      ✔ outputs an error if thrown by the parsing function
+    defaults
+      ✔ should not fail when demanded options with defaults are missing
+    strict mode
+      ✔ does not fail when command with subcommands called
+      ✔ does not fail for hidden options
+      ✔ does not fail for hidden options but does for unknown arguments
+      ✔ does not fail if an alias is provided, rather than option itself
+      ✔ does not fail when unrecognized option is passed after --
+      ✔ does not fail when options are defined using array/boolean/count/number/string
+    demandOption
+      ✔ allows an array of options to be demanded
+      ✔ allows demandOption in option shorthand
+    demandCommand
+      ✔ should return a custom failure message when too many non-hyphenated arguments are found after a demand count
+      ✔ allows a custom min message to be provided
+      ✔ allows a custom min and max message to be provided
+      ✔ defaults to demanding 1 command
+      ✔ treats positionals in "--" towards count requirement
+    strictCommands
+      ✔ succeeds in parse if command is known
+      ✔ succeeds in parse if top level and inner command are known
+      ✔ fails with error if command is unknown
+      ✔ fails with error if inner command is unknown
+      ✔ does not apply implicit strictCommands to inner commands
+      ✔ allows strictCommands to be applied to inner commands
+    strictOptions
+      ✔ succeeds if option is known and command is unknown
+      ✔ fails if option is unknown
+      ✔ applies strict options when commands are invoked
+      ✔ allows strict options to be turned off
+
+  yargs dsl tests
+    ✔ should use bin name for $0, eliminating path
+    ✔ should not remove the 1st argument of bundled electron apps
+    ✔ should remove the 1st argument of unbundled electron apps
+    ✔ accepts an object for aliases
+    ✔ does not populate argv with placeholder keys for unset options
+    ✔ accepts an object for implies
+    ✔ accepts an object for describes
+    ✔ a function can be provided, to execute when a parsing failure occurs
+    ✔ should set alias to string if option is string
+    ✔ should allow a valid choice
+    ✔ should ignore a missing array choice with an empty default
+    ✔ should allow defaultDescription to be set with .option()
+    ✔ should not require config object for an option
+    ✔ should not fail if command handler freezes object
+    ✔ should allow array and requires arg to be used in conjunction
+    ✔ throws error for unsupported Node.js versions
+    hide
+      ✔ should add the key to hiddenOptions
+    showHidden
+      ✔ should have a default show-hidden private option pre-configured
+      ✔ should not have show-hidden as an actual option described by default
+      ✔ should set show-hidden option
+      ✔ should set custom-show-hidden option
+    showHelpOnFail
+      ✔ should display custom failure message, if string is provided as first argument
+      ✔ calling with no arguments should default to displaying help
+    exitProcess
+      ✔ should set exit process to true, if no argument provided
+      when exitProcess is set to false and a failure occurs
+        ✔ should throw an exception
+        ✔ should output the errors to stderr once
+    reset
+      ✔ should put yargs back into its initial state
+      ✔ does not invoke parse with an error if reset has been called and option is not global
+    command
+      ✔ executes command handler with parsed argv
+      ✔ runs all middleware before reaching the handler
+      ✔ recommends a similar command if no command handler is found
+      ✔ does not recommend a similiar command if no similar command exists
+      ✔ recommends the longest match first
+      ✔ counts tranposition as one mistake
+      ✔ does not print command recommendation if help message will be shown
+      ✔ skips executing root-level command if builder's help is executed
+      ✔ executes top-level help if no handled command is provided
+      ✔ accepts an object for describing a command's options
+      ✔ accepts a module with a 'builder' and 'handler' key
+      ✔ accepts a module with a keys 'command', 'describe', 'builder', and 'handler'
+      ✔ derives 'command' string from filename when missing
+      ✔ throws error for non-module command object missing 'command' string
+    terminalWidth
+      ✔ returns the maximum width of the terminal
+    number
+      ✔ accepts number arguments when a number type is specified
+      ✔ should expose an options short-hand for numbers
+    choices
+      ✔ accepts an object
+      ✔ accepts a string and array
+      ✔ accepts a string and single value
+    locale
+      ✔ uses english as a default locale
+      ✔ detects the operating system's locale
+      ✔ should not detect the OS locale if detectLocale is 'false'
+      ✔ allows a locale other than the default 'en' to be specified
+      ✔ handles a missing locale
+      ✔ properly translates a region-specific locale file
+      ✔ uses locale string for help option default desc on .locale().help()
+      ✔ uses locale string for help option default desc on .help().locale()
+      ✔ does not enter infinite loop when locale is invalid
+      updateLocale
+        ✔ allows you to override the default locale strings
+        ✔ also works on default option group
+        ✔ allows you to use updateStrings() as an alias for updateLocale()
+    env
+      ✔ translates no arg as empty prefix (parser applies all env vars)
+      ✔ accepts true as a valid prefix (parser applies all env vars)
+      ✔ accepts empty string as a valid prefix (parser applies all env vars)
+      ✔ accepts a string prefix
+      ✔ translates false as undefined prefix (disables parsing of env vars)
+    parse
+      ✔ parses a simple string
+      ✔ parses a quoted string
+      ✔ parses an array
+      ✔ ignores implicit help command (with short-circuit)
+      ✔ allows an optional context object to be provided
+      ✔ overrides parsed value of argv with context object
+      ✔ parses process.parse() if no arguments are provided
+      ✔ can be called multiple times with the same behavior
+    parsed
+      ✔ should be false before parsing
+      ✔ should not be false after parsing
+    function passed as second argument to parse
+      ✔ does not print to stdout
+      ✔ gets passed error as first argument
+      ✔ gets passed argv as second argument
+      ✔ gets passed output as third argument
+      ✔ reinstates original exitProcess setting after invocation
+      ✔ does not call callback if subsequently called without callback
+      ✔ resets error state between calls to parse
+      commands
+        ✔ does not invoke command handler if output is populated
+        ✔ invokes command handler normally if no output is populated
+        ✔ allows context object to be passed to parse
+        ✔ does not fail if context object has cyclical reference
+        ✔ allows nested sub-commands to be invoked multiple times
+        ✔ overwrites the prior context object, when parse is called multiple times
+        ✔ populates argv appropriately when parse is called multiple times
+        ✔ populates output appropriately when parse is called multiple times
+        ✔ resets errors when parse is called multiple times
+        ✔ preserves top-level config when parse is called multiple times
+    config
+      ✔ allows a parsing function to be provided as a second argument
+      ✔ allows key to be specified with option shorthand
+      ✔ can be disabled with option shorthand
+      ✔ allows to pass a configuration object
+      extends
+        ✔ applies default configurations when given config object
+        ✔ protects against circular extended configurations
+        ✔ handles absolute paths
+        ✔ tolerates null prototype config objects
+        ✔ allows a module to be extended, rather than a JSON file
+        ✔ ignores an extends key that does not look like a path or module
+        ✔ allows files with .*rc extension to be extended
+        ✔ deep merges configs when extending when deep-merge-config=true
+        ✔ deep merges multiple configs when extending when deep-merge-config=true
+        ✔ does not deep merge objects by default
+    normalize
+      ✔ normalizes paths passed as arguments
+      ✔ normalizes path when when it is updated
+      ✔ allows key to be specified with option shorthand
+      ✔ can be disabled with option shorthand
+    narg
+      ✔ accepts a key as the first argument and a count as the second
+      ✔ accepts a hash of keys and counts
+      ✔ allows key to be specified with option shorthand
+    global
+      ✔ does not reset a global options when reset is called
+      ✔ does not reset alias of global option
+      ✔ should set help to global option by default
+      ✔ should set version to global option by default
+      ✔ should not reset usage descriptions of global options
+      ✔ should not reset implications of global options
+      ✔ should expose an options short-hand for declaring global options
+    pkgConf
+      ✔ uses values from package.json
+      ✔ combines yargs defaults with package.json values
+      ✔ should use value from package.json, if argv value is using default value
+      ✔ should apply value from config object to all aliases
+      ✔ is cool with a key not existing
+      ✔ allows an alternative cwd to be specified
+      ✔ doesn't mess up other pkg lookups when cwd is specified
+      ✔ handles an invalid package.json
+      ✔ should apply default configurations from extended packages
+      ✔ should apply extended configurations from cwd when no path is given
+    parserConfiguration
+      ✔ overrides the default parser configuration
+      ✔ supports --unknown-options-as-args
+    skipValidation
+      ✔ skips validation if an option with skipValidation is present
+      ✔ does not skip validation if no option with skipValidation is present
+      ✔ allows key to be specified with option shorthand
+      ✔ allows having an option that skips validation but not skipping validation if that option is not used
+    .help()
+      ✔ enables `--help` option and `help` command without arguments
+      ✔ enables `--help` option and `help` command with `true` argument
+      ✔ enables given string as help option and command with string argument
+      ✔ enables given string as help option and command with custom description with two string arguments
+      ✔ enables given string as help option and command with custom description with two string arguments and `true` argument
+    .help() with .alias()
+      ✔ uses multi-char (but not single-char) help alias as command
+    .coerce()
+      ✔ supports string and function args (as option key and coerce function)
+      ✔ supports object arg (as map of multiple options)
+      ✔ supports array and function args (as option keys and coerce function)
+      ✔ allows an error to be handled by fail() handler
+      ✔ supports an option alias
+      ✔ supports a global option within command
+      ✔ is supported by .option()
+      ✔ supports positional and variadic args for a command
+      ✔ returns camelcase args for a command
+      ✔ allows an error from positional arg to be handled by fail() handler
+      ✔ throws error if coerce callback is missing
+      61) shows coerced option in help
+    stop parsing
+      ✔ populates argv._ with unparsed arguments after "--"
+    yargs context
+      ✔ should track commands being executed
+    positional
+      ✔ defaults array with no arguments to []
+      ✔ populates array with appropriate arguments
+      ✔ allows a conflicting argument to be specified
+      ✔ allows a default to be set
+      ✔ allows a defaultDescription to be set
+      ✔ allows an implied argument to be specified
+      ✔ allows an alias to be provided
+      ✔ allows normalize to be specified
+      ✔ allows a choices array to be specified
+      ✔ allows a coerce method to be provided
+      ✔ allows a boolean type to be specified
+      ✔ allows a number type to be specified
+      ✔ allows a string type to be specified
+      ✔ allows positional arguments for subcommands to be configured
+      ✔ allows positionals to be defined for default command
+      ✔ does not parse large scientific notation values, when type string
+    "nargs" with "array"
+      ✔ should not consume more than nargs items
+      ✔ should apply nargs with higher precedence than requiresArg: true
+      ✔ should apply nargs with higher precedence than requiresArg()
+      ✔ should raise error if not enough values follow nargs key
+    should not pollute the prototype
+      ✔ does not pollute, when .parse() is called
+      ✔ does not pollute, when .argv is called
+      ✔ does not pollute, when options are set
+    parsing --value as a value in -f=--value and --bar=--value
+      ✔ should work in the general case
+      ✔ should work with array
+      ✔ should work with nargs
+      ✔ should work with both array and nargs
+    bug #1758
+      ✔ does not drop .0 if flag is configured as string
+      ✔ does not drop .0 if positional is configured as string
+      ✔ continues to parse values in _ as numbers, when they look like numbers
+    async
+      parse
+        ✔ calls parse callback once async handler has resolved
+        ✔ calls parse callback once deeply nested promise has resolved
+        ✔ populates err with async rejection
+        ✔ caches nested help output, so that it can be output by showHelp()
+        ✔ caches deeply nested help output, so that it can be output by showHelp()
+      argv
+        ✔ returns promise that resolves argv on success
+        ✔ returns deeply nested promise that resolves argv on success
+        ✔ returns promise that can be caught if rejected
+        ✔ caches nested help output, so that it can be output by showHelp()
+        ✔ caches deeply nested help output, so that it can be output by showHelp()
+    getHelp
+      62) should run parse() and return help, if parse() not yet called
+      ✔ should display top-level help with no command given
+      ✔ should allow help to be output for failed command
+      ✔ should allow help to be output for successful command
+      ✔ should not run handler or middleware
+      ✔ should use cached help message for nested synchronous commands
+      ✔ should return appropriate help message when async builder used
+    getters
+      ✔ has getter for strict commands
+      ✔ has getter for strict options
+    parseAsync
+      ✔ returns promise when parse is synchronous
+      ✔ returns promise when parse is asynchronous
+    parseSync
+      ✔ succeeds if no async functions used during parsing
+      ✔ throws if any async method is used
+
+
+  750 passing (8s)
+  1 pending
+  62 failing
+
+  1) Command
+       commandDir
+         supports nested subcommands:
+
+      AssertionError: expected [ …(8) ] to deeply equal [ …(10) ]
+      + expected - actual
+
+         "  command dream within-a-dream [command] [opts]  Dream within a dream"
+         "Options:"
+         "  --help     Show help  [boolean]"
+         "  --version  Show version number  [boolean]"
+      +  "  --shared   Is the dream shared with others?  [boolean]"
+      +  "  --extract  Attempt extraction?  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.cjs:950:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  2) Command
+       async
+         displays error and appropriate help message when handler fails:
+     AssertionError: expected 'usage foo\n\nfoo command\n\nOptions:\…' to include 'bar option'
+      at Context.<anonymous> (test/command.cjs:2134:23)
+
+  3) Completion
+       zsh
+         completes options for a command:
+     AssertionError: expected [ '--bar:', '--help:Show help' ] to include '--bar:bar option'
+      at Context.<anonymous> (test/completion.cjs:1054:21)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  4) Completion
+       zsh
+         does not apply validation when --get-yargs-completions is passed in:
+     AssertionError: expected [ '--help:Show help', …(2) ] to include '--foo:bar'
+      at Context.<anonymous> (test/completion.cjs:1100:21)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  5) integration tests
+       flushes all output when --help is executed:
+     Uncaught AssertionError: expected 'issue-497.js [command]\n\nCommands:\n…' to match /--o999/
+      at /Users/franktip/git/mutation-testing-data/casestudy/yargs-2171/yargs/test/integration.cjs:85:21
+      at ChildProcess.<anonymous> (test/integration.cjs:247:5)
+      at ChildProcess.emit (node:events:524:28)
+      at maybeClose (node:internal/child_process:1104:16)
+      at Socket.<anonymous> (node:internal/child_process:456:11)
+      at Socket.emit (node:events:524:28)
+      at Pipe.<anonymous> (node:net:343:12)
+
+  6) usage tests
+       allows multiple option calls to not clobber description:
+
+      AssertionError: expected '--arg [string] [default: "new"]' to equal '--arg Old description [string] [defau…'
+      + expected - actual
+
+      ---arg [string] [default: "new"]
+      +--arg Old description [string] [default: "new"]
+      
+      at Context.<anonymous> (test/usage.cjs:4866:15)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  7) usage tests
+       deprecate options
+         using .option(x, {deprecate: [boolean|string]})
+           {deprecated: true} should show [deprecated]:
+     AssertionError: expected 'Options:\n  --help     Show help  [bo…' to include '  -x  [deprecated]'
+      at Context.<anonymous> (test/usage.cjs:370:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  8) usage tests
+       deprecate options
+         using .option(x, {deprecate: [boolean|string]})
+           {deprecated: string} should show [deprecated: string]:
+     AssertionError: expected 'Options:\n  --help     Show help  [bo…' to include '  -x  [deprecated: string]'
+      at Context.<anonymous> (test/usage.cjs:376:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  9) usage tests
+       deprecate options
+         using .option(x, {deprecate: [boolean|string]})
+           {deprecated: boolean} in sub-command:
+     AssertionError: expected 'usage command\n\ncommand\n\nOptions:\…' to include '  -x  [deprecated]'
+      at Context.<anonymous> (test/usage.cjs:388:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  10) usage tests
+       deprecate options
+         using .option(x, {deprecate: [boolean|string]})
+           {deprecated: string} in sub-command:
+     AssertionError: expected 'usage command\n\ncommand\n\nOptions:\…' to include '  -x  [deprecated: string]'
+      at Context.<anonymous> (test/usage.cjs:401:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  11) usage tests
+       deprecate options
+         using .deprecateOption(x, [string])
+           .deprecateOption(x) should show [deprecated]:
+     AssertionError: expected 'Options:\n  --help     Show help  [bo…' to include '  -x  [deprecated]'
+      at Context.<anonymous> (test/usage.cjs:410:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  12) usage tests
+       deprecate options
+         using .deprecateOption(x, [string])
+           .deprecateOption(x, string) should show [deprecated: string]:
+     AssertionError: expected 'Options:\n  --help     Show help  [bo…' to include '  -x  [deprecated: string]'
+      at Context.<anonymous> (test/usage.cjs:420:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  13) usage tests
+       deprecate options
+         using .deprecateOption(x, [string])
+           .deprecateOption(x) in a sub-command:
+     AssertionError: expected 'usage command\n\ncommand\n\nOptions:\…' to include '  -x  [deprecated]'
+      at Context.<anonymous> (test/usage.cjs:433:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  14) usage tests
+       deprecate options
+         using .deprecateOption(x, [string])
+           .deprecateOption(x, string) in a sub-command:
+     AssertionError: expected 'usage command\n\ncommand\n\nOptions:\…' to include '  -x  [deprecated: string]'
+      at Context.<anonymous> (test/usage.cjs:447:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  15) usage tests
+       when exitProcess is false
+         fail()
+           is invoked with yargs instance as third argument:
+     AssertionError: expected 'usage foo\n\ndesc\n\nOptions:\n  --he…' to include 'bar command'
+      at Context.<anonymous> (test/usage.cjs:653:28)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  16) usage tests
+       required arguments
+         with options object
+           should show a failure message if a required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(4) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+      +  "  -b, --bar      bar option"
+         "Not enough arguments following: f"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:881:24)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  17) usage tests
+       required arguments
+         with options object
+           should show a failure message if more than one required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(4) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+      +  "  -b, --bar      bar option"
+         "Not enough arguments following: bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:913:24)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  18) usage tests
+       required arguments
+         with requiresArg method
+           should show a failure message if a required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(4) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+      +  "  -b, --bar      bar option"
+         "Not enough arguments following: f"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:948:24)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  19) usage tests
+       with strict() option set
+         should fail given an option argument without a corresponding description:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(4) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+      +  "  -b, --bar      bar option"
+         "Unknown argument: baz"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1100:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  20) usage tests
+       with strict() option set
+         should fail given multiple option arguments without corresponding descriptions:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(4) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+      +  "  -b, --bar      bar option"
+         "Unknown arguments: baz, q"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1161:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  21) usage tests
+       demand option with boolean flag
+         with demand option
+           should report missing required arguments:
+
+      AssertionError: expected [ Array(8) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "      --help     Show help  [boolean]"
+         "      --version  Show version number  [boolean]"
+      -  "  -x  [required]"
+      +  "  -x             an option  [required]"
+      +  "  -y             another option"
+         ""
+         "Missing required argument: x"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1277:24)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  22) usage tests
+       demand option with boolean flag
+         with required option
+           should report missing required arguments:
+
+      AssertionError: expected [ Array(8) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "      --help     Show help  [boolean]"
+         "      --version  Show version number  [boolean]"
+      -  "  -x  [required]"
+      +  "  -x             an option  [required]"
+      +  "  -y             another option"
+         ""
+         "Missing required argument: x"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1311:24)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  23) usage tests
+       help option
+         should use 2 dashes for general 1-digit usage:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --1  [string] [default: \"first\"]"
+      +  "  --1        First one  [string] [default: \"first\"]"
+         "  --help     Show help  [boolean]"
+         "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1411:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  24) usage tests
+       help option
+         should use single dashes for 1-digit boolean key usage:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "  -1             Negative one  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1437:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  25) usage tests
+       help option
+         should use single dashes for 1-digit boolean alias usage:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help         Show help  [boolean]"
+      +  "      --version      Show version number  [boolean]"
+      +  "  -1, --negativeone  Negative one  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1464:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  26) usage tests
+       help option
+         should use 2 dashes for multiple-digit alias usage:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "  --help               Show help  [boolean]"
+      +  "  --version            Show version number  [boolean]"
+      +  "  --onehundred, --100  one hundred  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:1491:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  27) usage tests
+       wrap
+         should align span columns when ansi colors are not used in a description:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "      --version  Show version number                                   [boolean]"
+      +  "  -f, --file     The file to add or remove                   [string] [required]"
+         "  -h, --help     Show help                                             [boolean]"
+      -  "  -f, --file                                                 [string] [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2014:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  28) usage tests
+       wrap
+         should align span columns when ansi colors are used in a description:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "      --version  Show version number                                   [boolean]"
+      +  "  -f, --file     The file to add or remove                   [string] [required]"
+         "  -h, --help     Show help                                             [boolean]"
+      -  "  -f, --file                                                 [string] [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2042:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  29) usage tests
+       commands
+         preserves global wrap() for commands that do not override it:
+
+      AssertionError: expected [ 'usage upload <dest>', '', …(5) ] to deeply equal [ 'usage upload <dest>', '', …(6) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "  --help     Show help  [boolean]"
+         "  --version  Show version number  [boolean]"
+      +  "  --force    Force overwrite of remote directory contents  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2222:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  30) usage tests
+       commands
+         allows a command to override global wrap():
+
+      AssertionError: expected [ 'usage upload <dest>', '', …(5) ] to deeply equal [ 'usage upload <dest>', '', …(7) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "  --help     Show help               [boolean]"
+         "  --version  Show version number     [boolean]"
+      +  "  --force    Force overwrite of remote"
+      +  "             directory contents      [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2273:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  31) usage tests
+       commands
+         should display global non empty groups for commands:
+
+      AssertionError: expected [ 'usage upload', '', …(8) ] to deeply equal [ 'usage upload', '', …(9) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "      --version  Show version number  [boolean]"
+         "  -h             Show help  [boolean]"
+      +  "  -q  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2478:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  32) usage tests
+       commands
+         should display global non empty groups for subcommands:
+
+      AssertionError: expected [ 'usage do upload', '', …(8) ] to deeply equal [ 'usage do upload', '', …(9) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "      --version  Show version number  [boolean]"
+         "  -h             Show help  [boolean]"
+      +  "  -q  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:2523:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  33) usage tests
+       defaultDescription
+         using option() without default()
+           should output given desc without default value:
+     AssertionError: expected 'Options:\n      --version  Show versi…' to include 'default: 80 for HTTP and 443 for HTTPS'
+      at Context.<anonymous> (test/usage.cjs:2960:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  34) usage tests
+       showHelp
+         should show help regardless of whether argv has been called:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:3260:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  35) usage tests
+       showHelp
+         should print the help using console.error when no arguments were specified:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:3283:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  36) usage tests
+       showHelp
+         should call the correct console.log method when specified:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:3307:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  37) usage tests
+       showHelp
+         should call the callback to print when specified:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+       ]
+      
+      at printCallback (test/usage.cjs:3327:24)
+      at Object.self.showHelp (lib/usage.ts:618:5)
+      at YargsInstance.showHelp (lib/yargs-factory.ts:1320:17)
+      at Context.<anonymous> (test/usage.cjs:3323:9)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  38) usage tests
+       choices
+         should output choices when defined for non-hidden options:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "  --help        Show help  [boolean]"
+      +  "  --version     Show version number  [boolean]"
+      +  "  --answer      does this look good?  [choices: \"yes\", \"no\", \"maybe\"]"
+      +  "  --confidence  percentage of confidence  [choices: 0, 25, 50, 75, 100]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:3534:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  39) usage tests
+       count
+         should indicate when an option is a count:
+     AssertionError: expected 'Options:\n  --version  Show version n…' to match /\[count]/
+      at Context.<anonymous> (test/usage.cjs:3582:31)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  40) usage tests
+       array
+         should indicate when an option is an array:
+     AssertionError: expected 'Options:\n  --version  Show version n…' to match /\[array]/
+      at Context.<anonymous> (test/usage.cjs:3599:31)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  41) usage tests
+       group
+         allows an an option to be placed in an alternative group:
+
+      AssertionError: expected [ 'Heroes:', …(5) ] to deeply equal [ 'Heroes:', …(5) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  --batman  [string] [default: \"Bruce Wayne\"]"
+      +  "  --batman  not the world's happiest guy  [string] [default: \"Bruce Wayne\"]"
+         ""
+         "Options:"
+         "  --help     Show help  [boolean]"
+         "  --version  Show version number  [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:3619:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  42) usage tests
+       default command
+         should display options (with descriptions) on failed default command:
+
+      AssertionError: expected [ 'usage <arg1>', '', …(6) ] to deeply equal [ 'usage <arg1>', '', …(7) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      -  "  --arg1                                                     [string] [required]"
+      +  "  --arg1     arg1 desc                                       [string] [required]"
+      +  "  --arg2     arg2 desc                                                  [string]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:3982:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  43) usage tests
+       positional
+         should display help section for positionals:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(8) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern"
+      +  "  pattern  the pattern to list keys for"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4014:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  44) usage tests
+       positional
+         shows that variadic positional arguments are arrays:
+
+      AssertionError: expected [ 'usage list [pattern...]', '', …(8) ] to deeply equal [ 'usage list [pattern...]', '', …(8) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern                                                  [array] [default: []]"
+      +  "  pattern  the pattern to list keys for                    [array] [default: []]"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4045:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  45) usage tests
+       positional
+         indicates that <foo> positional arguments are required:
+
+      AssertionError: expected [ 'usage list <pattern>', '', …(8) ] to deeply equal [ 'usage list <pattern>', '', …(8) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern                                                             [required]"
+      +  "  pattern  the pattern to list keys for                               [required]"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4076:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  46) usage tests
+       positional
+         displays aliases appropriately:
+
+      AssertionError: expected [ 'usage list [pattern|thingy]', …(9) ] to deeply equal [ 'usage list [pattern|thingy]', …(9) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern, thingy"
+      +  "  pattern, thingy  the pattern to list keys for"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4107:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  47) usage tests
+       positional
+         displays type information:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(8) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern                                                               [string]"
+      +  "  pattern  the pattern to list keys for                                 [string]"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4139:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  48) usage tests
+       positional
+         displays choices array:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(8) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         ""
+         "List key-value pairs for pattern"
+         ""
+         "Positionals:"
+      -  "  pattern                                                [choices: \"foo\", \"bar\"]"
+      +  "  pattern  the pattern to list keys for                  [choices: \"foo\", \"bar\"]"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4171:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  49) usage tests
+       hidden options
+         --help should display all options except for hidden ones:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --foo      FOO"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4205:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  50) usage tests
+       hidden options
+         --help should display all options except for hidden ones even with a default:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4234:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  51) usage tests
+       hidden options
+         --help should display all options except for hidden ones even in a group:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4261:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  52) usage tests
+       hidden options
+         --help should display all groups except for ones with only hidden options:
+
+      AssertionError: expected [ 'Shown:', '  --qux', '', …(3) ] to deeply equal [ 'Shown:', '  --qux', '', …(4) ]
+      + expected - actual
+
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4292:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  53) usage tests
+       hidden options
+         --help should display all options (including hidden ones) with --show-hidden:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --foo      FOO"
+      +  "  --bar"
+      +  "  --baz      BAZ"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4320:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  54) usage tests
+       hidden options
+         --help should display all groups (including ones with only hidden options) with --show-hidden:
+
+      AssertionError: expected [ 'Hidden:', '  --foo', …(8) ] to deeply equal [ 'Hidden:', '  --foo  FOO', …(9) ]
+      + expected - actual
+
+       [
+         "Hidden:"
+      -  "  --foo"
+      -  "  --baz"
+      +  "  --foo  FOO"
+      +  "  --baz  BAZ"
+         ""
+         "Shown:"
+         "  --qux"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4352:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  55) usage tests
+       hidden options
+         --help should display --custom-show-hidden:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help                Show help                                      [boolean]"
+         "  --version             Show version number                            [boolean]"
+      +  "  --foo                 FOO"
+      +  "  --bar"
+         "  --custom-show-hidden  Show hidden options                            [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4385:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  56) usage tests
+       hidden options
+         --help should display all options with --custom-show-hidden:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(6) ]
+      + expected - actual
+
+       [
+         "Options:"
+         "  --help                Show help                                      [boolean]"
+         "  --version             Show version number                            [boolean]"
+      +  "  --foo                 FOO"
+      +  "  --bar"
+      +  "  --baz                 BAZ"
+         "  --custom-show-hidden  Show hidden options                            [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.cjs:4413:22)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  57) usage tests
+       usage for default command
+         positional
+           should contain the expected output for --help:
+
+      AssertionError: expected [ 'Hello, world!', '', …(10) ] to deeply equal [ 'Hello, world!', '', …(10) ]
+      + expected - actual
+
+         "  usage [foo]     Default command description                          [default]"
+         "  usage foo       Foo command description"
+         ""
+         "Positionals:"
+      -  "  foo"
+      +  "  foo  foo parameter"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4720:43)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  58) usage tests
+       usage for default command
+         positional
+           should contain the expected output for showHelp:
+
+      AssertionError: expected [ 'Hello, world!', '', …(10) ] to deeply equal [ 'Hello, world!', '', …(10) ]
+      + expected - actual
+
+         "  usage [foo]     Default command description                          [default]"
+         "  usage foo       Foo command description"
+         ""
+         "Positionals:"
+      -  "  foo"
+      +  "  foo  foo parameter"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4736:43)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  59) usage tests
+       async builder
+         positional
+           should contain the expected output for --help:
+
+      AssertionError: expected [ 'Hello, world!', '', …(10) ] to deeply equal [ 'Hello, world!', '', …(10) ]
+      + expected - actual
+
+         "  usage [foo]     Default command description                          [default]"
+         "  usage foo       Foo command description"
+         ""
+         "Positionals:"
+      -  "  foo"
+      +  "  foo  foo parameter"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4810:43)
+
+  60) usage tests
+       async builder
+         positional
+           should contain the expected output for getHelp:
+
+      AssertionError: expected [ 'Hello, world!', '', …(10) ] to deeply equal [ 'Hello, world!', '', …(10) ]
+      + expected - actual
+
+         "  usage [foo]     Default command description                          [default]"
+         "  usage foo       Foo command description"
+         ""
+         "Positionals:"
+      -  "  foo"
+      +  "  foo  foo parameter"
+         ""
+         "Options:"
+         "  --help     Show help                                                 [boolean]"
+         "  --version  Show version number                                       [boolean]"
+      
+      at Context.<anonymous> (test/usage.cjs:4826:38)
+
+  61) yargs dsl tests
+       .coerce()
+         shows coerced option in help:
+     AssertionError: expected 'Options:\n  --help     Show help     …' to match /option2 description/
+      at Context.<anonymous> (test/yargs.cjs:2239:19)
+
+  62) yargs dsl tests
+       getHelp
+         should run parse() and return help, if parse() not yet called:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  --help     Show help  [boolean]"
+      -  "  --version  Show version number  [boolean]"
+      +  "      --help     Show help  [boolean]"
+      +  "      --version  Show version number  [boolean]"
+      +  "  -f, --foo      foo option"
+       ]
+      
+      at Context.<anonymous> (test/yargs.cjs:3044:22)
+
+
+
+--------------------------|---------|----------|---------|---------|-------------------
+File                      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+--------------------------|---------|----------|---------|---------|-------------------
+All files                 |   99.93 |    96.34 |   99.62 |   99.93 |                   
+ yargs                    |     100 |      100 |     100 |     100 |                   
+  index.cjs               |     100 |      100 |     100 |     100 |                   
+ yargs/lib                |   99.92 |    96.76 |   99.57 |   99.92 |                   
+  argsert.ts              |     100 |      100 |     100 |     100 |                   
+  cjs.ts                  |     100 |       60 |     100 |     100 | 16                
+  command.ts              |     100 |    99.43 |     100 |     100 | 78                
+  completion-templates.ts |     100 |      100 |     100 |     100 |                   
+  completion.ts           |     100 |    96.72 |     100 |     100 | 45-46,98,330      
+  middleware.ts           |     100 |     97.5 |     100 |     100 | 54                
+  parse-command.ts        |     100 |      100 |     100 |     100 |                   
+  usage.ts                |   99.75 |    95.12 |   97.61 |   99.75 | 427-428           
+  validation.ts           |     100 |    98.43 |     100 |     100 | 69,355            
+  yargs-factory.ts        |   99.91 |     96.3 |     100 |   99.91 | 1051-1052         
+  yerror.ts               |     100 |      100 |     100 |     100 |                   
+ yargs/lib/platform-shims |     100 |    55.55 |     100 |     100 |                   
+  cjs.ts                  |     100 |    55.55 |     100 |     100 | 23,39             
+ yargs/lib/typings        |     100 |      100 |     100 |     100 |                   
+  common-types.ts         |     100 |      100 |     100 |     100 |                   
+ yargs/lib/utils          |     100 |    93.05 |     100 |     100 |                   
+  apply-extends.ts        |     100 |    95.65 |     100 |     100 | 16                
+  is-promise.ts           |     100 |      100 |     100 |     100 |                   
+  levenshtein.ts          |     100 |    85.71 |     100 |     100 | 28-29             
+  maybe-async-result.ts   |     100 |      100 |     100 |     100 |                   
+  obj-filter.ts           |     100 |      100 |     100 |     100 |                   
+  process-argv.ts         |     100 |      100 |     100 |     100 |                   
+  set-blocking.ts         |     100 |    83.33 |     100 |     100 | 10                
+  which-module.ts         |     100 |       80 |     100 |     100 | 2                 
+--------------------------|---------|----------|---------|---------|-------------------

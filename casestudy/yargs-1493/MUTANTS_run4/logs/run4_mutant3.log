@@ -1,0 +1,3545 @@
+
+> yargs@15.0.2 test
+> c8 --reporter=html --reporter=text mocha --require ./test/before.js --timeout=12000 --check-leaks
+
+
+
+  ✓ should expose yargs-parser as Parser
+  Argsert
+    ✓ does not warn if optional argument is not provided
+    ✓ warn if wrong type is provided for optional argument
+    ✓ does not warn if optional argument is valid
+    ✓ warns if required argument is not provided
+    ✓ warns if required argument is of wrong type
+    ✓ supports a combination of required and optional arguments
+    ✓ warns if too many arguments are provided
+    ✓ warn with argument position if wrong type is provided for argument
+    ✓ warn with generic argument position if wrong type is provided for seventh or greater argument
+    ✓ configures function to accept 0 parameters, if only arguments object is provided
+    ✓ allows for any type if * is provided
+    ✓ should ignore trailing undefined values
+    ✓ should not ignore undefined values that are not trailing
+    ✓ supports null as special type
+
+  Command
+    ✓ preserves top-level envPrefix
+    ✓ respects order of positional arguments when matching commands
+    ✓ handles positional arguments if command is invoked using .parse()
+    ✓ invokes command handler repeatedly if parse() is called multiple times
+    ✓ allows command handler to be invoked repeatedly when help is enabled
+    ✓ does not require builder function to return
+    ✓ allows builder function to parse argv without returning
+    ✓ allows builder function to return parsed argv
+    ✓ ignores extra spaces in command string
+    ✓ executes a command via alias
+    ✓ should kick along [demand] configuration to commands
+    ✓ should support numeric commands
+    ✓ should not execute command if it is proceeded by another positional argument
+    ✓ should allow positional arguments for inner commands in strict mode, when no handler is provided
+    ✓ does not coerce number from positional with leading "+"
+    positional arguments
+      ✓ parses command string and populates optional and required positional arguments
+      ✓ populates inner argv with positional arguments
+      ✓ populates outer argv with positional arguments
+      ✓ populates argv with camel-case variants of arguments when possible
+      ✓ populates argv with camel-case variants of variadic args when possible
+      ✓ populates subcommand's inner argv with positional arguments
+      ✓ ignores positional args for aliases
+      ✓ does not overwrite existing values in argv for keys that are not positional
+      ✓ does not load config twice when command executed
+      ✓ handles -- in conjunction with positional arguments
+      ✓ continues to support populate-- for commands, post #1457
+    variadic
+      ✓ allows required arguments to be variadic
+      ✓ allows optional arguments to be variadic
+      ✓ fails if required arguments are missing
+      ✓ does not fail if zero optional arguments are provided
+      ✓ only allows the last argument to be variadic
+      ✓ allows camel-case, variadic arguments, and strict mode to be combined
+    missing positional arguments
+      ✓ fails if a required argument is missing
+      ✓ does not fail if optional argument is missing
+    API
+      ✓ accepts string, string as first 2 arguments
+      ✓ accepts array, string as first 2 arguments
+      ✓ accepts string, boolean as first 2 arguments
+      ✓ accepts array, boolean as first 2 arguments
+      ✓ accepts function as 3rd argument
+      ✓ accepts options object as 3rd argument
+      ✓ accepts module (with builder function and handler function) as 3rd argument
+      ✓ accepts module (with builder object and handler function) as 3rd argument
+      ✓ accepts module (describe key, builder function) as 1st argument
+      ✓ accepts module (description key, builder function) as 1st argument
+      ✓ accepts module (desc key, builder function) as 1st argument
+      ✓ accepts module (false describe, builder function) as 1st argument
+      ✓ accepts module (missing describe, builder function) as 1st argument
+      ✓ accepts module (describe key, builder object) as 1st argument
+      ✓ accepts module (missing handler function) as 1st argument
+      ✓ accepts module (with command array) as 1st argument
+      ✓ accepts module (with command string and aliases array) as 1st argument
+      ✓ accepts module (with command array and aliases array) as 1st argument
+      ✓ accepts module (with command string and aliases string) as 1st argument
+    commandDir
+      1) supports relative dirs
+      2) supports nested subcommands
+      3) supports a "recurse" boolean option
+      4) supports a "visit" function option
+      5) detects and ignores cyclic dir references
+      6) derives 'command' string from filename when not exported
+    help command
+      7) displays command help appropriately
+    positional aliases
+      ✓ allows an alias to be defined for a required positional argument
+      ✓ allows an alias to be defined for an optional positional argument
+      ✓ allows variadic and positional arguments to be combined
+    global parsing hints
+      config
+        ✓ does not load config for command if global is false
+        ✓ loads config for command by default
+      validation
+        ✓ resets implies logic for command if global is false
+        ✓ applies conflicts logic for command by default
+        ✓ resets conflicts logic for command if global is false
+        ✓ applies custom checks globally by default
+        ✓ resets custom check if global is false
+        ✓ applies demandOption globally
+      strict
+        ✓ defaults to false when not called
+        ✓ can be enabled just for a command
+        ✓ applies strict globally by default
+        ✓ does not fail strict check due to postional command arguments
+        ✓ does not fail strict check due to postional command arguments in nested commands
+        ✓ allows a command to override global`
+        ✓ does not fire command if validation fails
+      types
+        ✓ applies array type globally
+        ✓ allows global setting to be disabled for array type
+        ✓ applies choices type globally
+      aliases
+        ✓ defaults to applying aliases globally
+        ✓ allows global application of alias to be disabled
+      coerce
+        ✓ defaults to applying coerce rules globally
+        ✓ should bubble errors thrown by coerce function inside commands
+      defaults
+        ✓ applies defaults globally
+      describe
+        ✓ flags an option as global if a description is set
+      help
+        8) applies help globally
+      version
+        ✓ applies version globally
+      groups
+        9) should apply custom option groups globally
+    default commands
+      ✓ executes default command if no positional arguments given
+      ✓ executes default command if undefined positional arguments and only command
+      ✓ executes default command if defined positional arguments and only command
+      ✓ allows $0 as an alias for a default command
+      ✓ does not execute default command if another command is provided
+      ✓ allows default command to be set as alias
+      ✓ allows command to be run when alias is default command
+      ✓ the last default command set should take precedence
+      strict
+        ✓ executes default command when strict mode is enabled
+        ✓ allows default command aliases, when strict mode is enabled
+    usage
+      ✓ allows you to configure a default command
+      ✓ throws exception if default command does not have leading $0
+    async
+      ✓ fails when the promise returned by the command handler rejects
+      ✓ succeeds when the promise returned by the command handler resolves
+      ✓ displays error and appropriate help message when handler fails
+
+  Completion
+    default completion behavior
+      ✓ avoids repeating already included commands
+      ✓ avoids repeating already included options
+      ✓ avoids repeating options whose aliases are already included
+      ✓ completes options for the correct command
+      ✓ does not complete hidden commands
+      ✓ does not include possitional arguments
+      ✓ works if command has no options
+      ✓ returns arguments as completion suggestion, if next contains '-'
+    generateCompletionScript()
+      ✓ replaces completion command variable with custom completion command in script
+      ✓ if $0 has a .js extension, a ./ prefix is added
+      ✓ allows $0 and cmd to be set
+    completion()
+      ✓ shows completion script if command registered with completion(cmd) is called
+      ✓ allows a custom function to be registered for completion
+      ✓ passes current arg for completion and the parsed arguments thus far to custom function
+      ✓ if a promise is returned, completions can be asynchronous
+      ✓ if a promise is returned, errors are handled
+      ✓ if a callback parameter is provided, completions can be asynchronous
+    bash
+      ✓ returns a list of commands as completion suggestions
+      ✓ avoids interruption from command recommendations
+      ✓ avoids interruption from default command
+      ✓ completes options for a command
+      ✓ does not apply validation when --get-yargs-completions is passed in
+      generateCompletionScript()
+        ✓ replaces application variable with $0 in script
+      getCompletion()
+        ✓ returns default completion to callback
+        ✓ returns default completion to callback for options
+    zsh
+      ✓ returns a list of commands as completion suggestions
+      ✓ avoids interruption from command recommendations
+      ✓ avoids interruption from default command
+      ✓ completes options for a command
+      ✓ replaces application variable with $0 in script
+      ✓ does not apply validation when --get-yargs-completions is passed in
+      ✓ bails out early when full command matches
+      getCompletion()
+        ✓ returns default completion to callback
+
+  integration tests
+    ✓ should run as a shell script with no arguments (101ms)
+    ✓ should run as a shell script with arguments (100ms)
+    ✓ should run as a node script with no arguments (287ms)
+    ✓ should run as a node script with arguments (278ms)
+    ✓ allows --help to be completed without returning help message (93ms)
+    10) flushes all output when --help is executed
+    ✓ correctly fills positional command args with preceding option (105ms)
+    ✓ correctly fills positional command args with = assignment in preceding option (100ms)
+    path returned by "which"
+      ✓ should match the actual path to the script file (102ms)
+      ✓ should match the actual path to the script file, with arguments (93ms)
+    load root package.json
+      version #
+        ✓ defaults to appropriate version # when yargs is installed normally (139ms)
+        ✓ defaults to appropriate version # when yargs is symlinked (108ms)
+      parser settings
+        ✓ reads parser config settings when yargs is installed normally (105ms)
+        ✓ reads parser config settings when yargs is installed as a symlink (93ms)
+        ✓ reads parser config settings when somebody obscures require.main (104ms)
+        ✓ reads parser config settings when entry file has no extension (104ms)
+
+  isPromise
+    ✓ returns `false` on non promise value
+    ✓ returns `true` on es6 promise
+    ✓ returns `true` on some other thenable
+    ✓ returns `false` if some falsy value is passed
+    ✓ returns `false` if passed object has no `then` property
+    ✓ returns `false` if `then` is not a function
+
+  middleware
+    ✓ should add a list of callbacks to global middleware
+    ✓ should throw exception if middleware is not a function
+    ✓ should add a single callback to global middleware
+    ✓ runs the middleware before reaching the handler
+    ✓ runs all middleware before reaching the handler
+    ✓ should be able to register middleware regardless of when middleware is called
+    ✓ doesn't modify globalMiddleware array when executing middleware
+    ✓ allows middleware to be added in builder
+    ✓ passes yargs object to middleware
+    ✓ applies aliases before middleware is called
+    async
+      ✓ fails when the promise returned by the middleware rejects
+      ✓ calls the command handler when all middleware promises resolve
+      ✓ calls an async middleware only once for nested subcommands
+    applyBeforeValidation=true
+      ✓ runs before validation
+      ✓ throws an error if promise returned and applyBeforeValidation enabled
+      ✓ runs before validation, when middleware is added in builder
+      ✓ applies aliases before middleware is called, for global middleware
+      ✓ applies aliases before middleware is called, when middleware is added in builder
+
+  ObjFilter
+    ✓ returns a new reference to the original object if no filter function is given
+
+  usage tests
+    ✓ should return valid values when check passes
+    11) should display missing arguments when check fails with a thrown exception
+    12) should display missing arguments when check fails with a return value
+    ✓ should return a valid result when check condition passes
+    13) should display a failed message when check condition fails
+    ✓ should return a valid result when demanding a count of non-hyphenated values
+    14) should return a failure message when not enough non-hyphenated arguments are found after a demand count
+    15) should return a custom failure message when not enough non-hyphenated arguments are found after a demand count
+    ✓ should return a valid result when setting defaults for singles
+    ✓ should return a valid result when default is set for an alias
+    16) should print a single line when failing and default is set for an alias
+    ✓ should allow you to set default values for a hash of options
+    17) should display example on fail
+    ✓ should succeed when rebase
+    ✓ should not print usage string if help() is called without arguments
+    ✓ should add --help as an option for printing usage text if help() is called without arguments
+    demand options
+      18) should show an error along with a custom message on demand fail
+      ✓ should return valid values when demand passes
+      19) should not show a custom message if msg is null
+      using .demand()
+        20) should show an error along with the missing arguments on demand fail
+        21) missing argument message given if one command, but an argument not on the list is provided
+        22) missing command message if all the required arguments exist, but not enough commands are provided
+        ✓ no failure occurs if the required arguments and the required number of commands are provided
+        23) missing command message if all the required arguments exist, but not enough commands are provided
+        using .require()
+          24) should show an error along with the missing arguments on demand fail
+          25) missing argument message given if one command and an argument not on the list are provided
+      min/max demanded count
+        ✓ does not output an error if '_' count is within the min/max range
+        26) outputs an error if '_' count is above max
+        27) outputs an error if '_' count is below min
+        28) allows a customer error message to be provided
+        ✓ shouldn't interpret the second argument as a max when it is an array
+    when exitProcess is false
+      when check fails with a thrown exception
+        29) should display missing arguments once
+      fail()
+        ✓ is called with the original error message as the first parameter
+        ✓ is invoked with yargs instance as third argument
+        when check() throws error
+          ✓ fail() is called with the original error object as the second parameter
+        when command() throws error
+          ✓ fail() is called with the original error object as the second parameter
+    required arguments
+      ✓ still requires argument if 'type' hints are given
+      with options object
+        30) should show a failure message if a required option is missing
+        31) should show a failure message if more than one required option is missing
+      with requiresArg method
+        32) should show a failure message if a required option is missing
+    with strict() option set
+      33) should fail given an option argument that is not demanded
+      34) should fail given an option argument without a corresponding description
+      35) should fail given multiple option arguments without corresponding descriptions
+      ✓ should pass given option arguments with corresponding descriptions
+      with hyphens in options
+        ✓ fails when an invalid argument is provided
+        ✓ accepts valid options
+        ✓ works with aliases
+        ✓ accepts mixed options with values
+    demand option with boolean flag
+      ✓ should not report missing required arguments when given an alias
+      with demand option
+        36) should report missing required arguments
+      with required option
+        37) should report missing required arguments
+    help option
+      38) should display usage
+      39) should not show both dashed and camelCase aliases
+      40) should use 2 dashes for 1-digit key usage
+      41) should use 2 dashes for 1-digit alias usage
+      when exitProcess is false
+        42) should not validate arguments (required argument)
+        43) should not validate arguments (nargs)
+    version option
+      ✓ should display version
+      ✓ accepts version option as first argument, and version number as second argument
+      ✓ should default to 'version' as version option
+      when exitProcess is false
+        ✓ should not validate arguments (required argument)
+        ✓ should not validate arguments (nargs)
+    showHelpOnFail
+      ✓ should display user supplied message
+    exitProcess
+      ✓ should not call process.exit on error if disabled
+    scriptName
+      44) should display user supplied scriptName
+      45) should not alter the user supplied scriptName
+    wrap
+      ✓ should wrap argument descriptions onto multiple lines
+      - should wrap based on window-size if no wrap is provided
+      ✓ should not raise an exception when long default and description are provided
+      46) should wrap the left-hand-column if it takes up more than 50% of the screen
+      ✓ should not wrap left-hand-column if no description is provided
+      ✓ should wrap the usage string
+      47) should align span columns when ansi colors are not used in a description
+      48) should align span columns when ansi colors are used in a description
+    commands
+      49) should output a list of available commands
+      50) should not show hidden commands
+      51) allows completion command to be hidden
+      52) preserves global wrap() for commands that do not override it
+      53) allows a command to override global wrap()
+      54) resets groups for a command handler, respecting order
+      55) allows global option to be disabled
+      56) can add to preserved groups
+      57) can bump up preserved groups
+      58) should display global non empty groups for commands
+      59) should display global non empty groups for subcommands
+      60) should list a module command only once
+      61) allows a builder function to override default usage() string
+      62) allows a builder function to disable default usage() with null
+      63) displays given command chain with positional args in default usage for subcommand with builder object
+      64) displays given command chain with positional args in default usage for subcommand with builder function
+      65) displays aliases for commands that have them (no wrap)
+      66) displays aliases for commands that have them (with wrap)
+      67) allows a builder to add more than one usage with mutiple usage calls
+      68) allows a builder to disable usage with null after mutiple usage calls
+      69) does not display $0 twice when default commands are enabled
+    epilogue
+      70) should display an epilog message at the end of the usage instructions
+      71) supports multiple epilogs
+      72) replaces $0 in epilog string
+    default
+      ✓ should indicate that the default is a generated-value, if function is provided
+      ✓ if a named function is provided, should use name rather than (generated-value)
+      ✓ default-description take precedence if one is provided
+      ✓ serializes object and array defaults
+    defaultDescription
+      using option() without default()
+        ✓ should output given desc with default value
+        ✓ should output given desc without default value
+        ✓ should prefer given desc over function desc
+      using option() with default()
+        ✓ should prefer default() desc when given last
+        ✓ should prefer option() desc when given last
+        ✓ should prefer option() desc over default() function
+      using positional() without default()
+        ✓ should output given desc with default value
+        ✓ should output given desc without default value
+        ✓ should prefer given desc over function desc
+      using positional() with default()
+        ✓ should prefer default() desc when given last
+        ✓ should prefer positional() desc when given last
+        ✓ should prefer positional() desc over default() function
+    normalizeAliases
+      73) should display 'description' string in help message if set for alias
+      74) should display 'required' string in help message if set for alias
+      75) should display 'type' string in help message if set for alias
+      76) should display 'type' number in help message if set for alias
+    showHelp
+      77) should show help regardless of whether argv has been called
+      78) should print the help using console.error when no arguments were specified
+      79) should call the correct console.log method when specified
+      80) should call the callback to print when specified
+    $0
+      ✓ is detected correctly for a basic script
+      ✓ is detected correctly when argv contains "node"
+      ✓ is detected correctly when dirname contains "node"
+      ✓ is detected correctly when dirname and argv contain "node"
+      ✓ is detected correctly when argv contains "iojs"
+      ✓ is detected correctly when dirname contains "iojs"
+      ✓ is detected correctly when dirname and argv contain "iojs"
+      ✓ is detected correctly when argv contains "node.exe"
+      ✓ is detected correctly when argv contains "iojs.exe"
+      ✓ is resolved to the relative path if it is shorter
+      ✓ is not resolved to the relative path if it is larger
+    choices
+      81) should output choices when defined for non-hidden options
+      82) should not output choices when defined for hidden options
+    count
+      ✓ should indicate when an option is a count
+    array
+      ✓ should indicate when an option is an array
+    group
+      83) allows an an option to be placed in an alternative group
+      84) does not print the 'Options:' group if no keys are in it
+      85) displays alias keys appropriately within a grouping
+      86) allows a group to be provided as the only information about an option
+      87) allows multiple options to be grouped at the same time
+      88) allows group to be provided in the options object
+      89) only displays a duplicated option once per group
+    cjk
+      90) should calculate width of cjk text correctly
+    default command
+      91) should display top-level help with no command given
+      92) should display top-level help with sorting with no command given if sorting enabled
+      93) should display default command as ./$0 if it has no aliases
+      94) should display positionals that have been configured
+      95) should display options that have been configured
+    positional
+      96) should display help section for positionals
+      97) shows that variadic positional arguments are arrays
+      98) indicates that <foo> positional arguments are required
+      99) displays aliases appropriately
+      100) displays type information
+      101) displays choices array
+    hidden options
+      102) --help should display all options except for hidden ones
+      103) --help should display all options except for hidden ones even with a default
+      104) --help should display all options except for hidden ones even in a group
+      105) --help should display all groups except for ones with only hidden options
+      106) --help should display all options (including hidden ones) with --show-hidden
+      107) --help should display all groups (including ones with only hidden options) with --show-hidden
+      108) --help should display --custom-show-hidden
+      109) --help should display all options with --custom-show-hidden
+
+  validation tests
+    implies
+      ✓ fails if '_' populated, and implied argument not set
+      ✓ fails if key implies values in '_', but '_' is not populated
+      ✓ fails if either implied argument is not set and displays only failed
+      ✓ fails if --no-foo's implied argument is not set
+      ✓ fails if a key is set, along with a key that it implies should not be set
+      ✓ fails if implied key (with "no" in the name) is not set
+      ✓ doesn't fail if implied key (with "no" in the name) is set
+      ✓ fails if implied key (with "no" in the name) is given when it should not
+      ✓ doesn't fail if implied key (with "no" in the name) that should not be given is not set
+      ✓ allows key to be specified with option shorthand
+    conflicts
+      ✓ fails if both arguments are supplied
+      ✓ fails if argument is supplied along with either conflicting argument
+      ✓ should not fail if no conflicting arguments are provided
+      ✓ should not fail if argument with conflict is provided, but not the argument it conflicts with
+      ✓ should not fail if conflicting argument is provided, without argument with conflict
+      ✓ allows an object to be provided defining conflicting option pairs
+      ✓ takes into account aliases when applying conflicts logic
+      ✓ allows key to be specified with option shorthand
+      ✓ should fail if alias of conflicting argument is provided
+      ✓ should fail if alias of argument with conflict is provided
+      ✓ should use appropriate translation
+    demand
+      ✓ fails with standard error message if msg is not defined
+      ✓ fails in strict mode with invalid command
+      ✓ fails in strict mode with extra positionals
+      ✓ does not fail in strict mode when no commands configured
+      ✓ should recognize context variables in strict mode
+      ✓ should recognize context variables in strict mode, when running sub-commands
+      ✓ fails when a required argument is missing
+      ✓ fails when required arguments are present, but a command is missing
+      ✓ fails without a message if msg is null
+      ✓ custom failure message should be printed for both min and max constraints
+      ✓ interprets min relative to command
+      ✓ interprets max relative to command
+    requiresArg
+      ✓ fails when a required argument value of type number is missing
+      ✓ fails when a required argument value of type string is missing
+      ✓ fails when a required argument value of type boolean is missing
+      ✓ fails when a required argument value of type array is missing
+      ✓ does not fail if argument with required value is not provided
+      ✓ does not fail if argument with required value is not provided to subcommand
+    choices
+      ✓ fails with one invalid value
+      ✓ fails with one valid and one invalid value
+      ✓ fails with multiple invalid values for same argument
+      ✓ fails with case-insensitive value
+      ✓ fails with multiple invalid arguments
+      ✓ succeeds when demandOption is true and valid choice is provided
+      ✓ fails when demandOption is true and choice is not provided
+      ✓ succeeds when demandOption is false and no choice is provided
+      ✓ succeeds when demandOption is not provided and no choice is provided
+    config
+      ✓ should raise an appropriate error if JSON file is not found
+      ✓ should not raise an exception if config file is set as default argument value
+      110) should be displayed in the help message
+      111) should be displayed in the help message with its default name
+      112) should allow help message to be overridden
+      113) outputs an error returned by the parsing function
+      114) outputs an error if thrown by the parsing function
+    defaults
+      ✓ should not fail when demanded options with defaults are missing
+    strict mode
+      ✓ does not fail when command with subcommands called
+      ✓ does not fail for hidden options
+      ✓ does not fail if an alias is provided, rather than option itself
+      ✓ does not fail when unrecognized option is passed after --
+    demandOption
+      ✓ allows an array of options to be demanded
+      ✓ allows demandOption in option shorthand
+    demandCommand
+      ✓ should return a custom failure message when too many non-hyphenated arguments are found after a demand count
+      ✓ allows a custom min message to be provided
+      ✓ allows a custom min and max message to be provided
+      ✓ defaults to demanding 1 command
+
+  yargs dsl tests
+    ✓ should use bin name for $0, eliminating path
+    ✓ accepts an object for aliases
+    ✓ do not populates argv with placeholder keys for unset options
+    ✓ accepts an object for implies
+    ✓ accepts an object for describes
+    ✓ a function can be provided, to execute when a parsing failure occurs
+    ✓ should set alias to string if option is string
+    ✓ should allow a valid choice
+    ✓ should ignore a missing array choice with an empty default
+    ✓ should allow defaultDescription to be set with .option()
+    ✓ should not require config object for an option
+    ✓ should not fail if command handler freezes object
+    hide
+      ✓ should add the key to hiddenOptions
+    showHidden
+      ✓ should have a default show-hidden private option pre-configured
+      ✓ should not have show-hidden as an actual option described by default
+      ✓ should set show-hidden option
+      ✓ should set custom-show-hidden option
+    showHelpOnFail
+      ✓ should display custom failure message, if string is provided as first argument
+      ✓ calling with no arguments should default to displaying help
+    exitProcess
+      ✓ should set exit process to true, if no argument provided
+      when exitProcess is set to false and a failure occurs
+        ✓ should throw an exception
+        ✓ should output the errors to stderr once
+    reset
+      ✓ should put yargs back into its initial state
+      ✓ does not invoke parse with an error if reset has been called and option is not global
+    command
+      ✓ executes command handler with parsed argv
+      ✓ runs all middleware before reaching the handler
+      ✓ recommends a similar command if no command handler is found
+      ✓ does not recommend a similiar command if no similar command exists
+      ✓ recommends the longest match first
+      ✓ does not print command recommendation if help message will be shown
+      115) skips executing root-level command if builder's help is executed
+      116) executes top-level help if no handled command is provided
+      117) accepts an object for describing a command's options
+      ✓ accepts a module with a 'builder' and 'handler' key
+      ✓ accepts a module with a keys 'command', 'describe', 'builder', and 'handler'
+      ✓ derives 'command' string from filename when missing
+      ✓ throws error for non-module command object missing 'command' string
+    terminalWidth
+      - returns the maximum width of the terminal
+    number
+      ✓ accepts number arguments when a number type is specified
+      ✓ should expose an options short-hand for numbers
+    choices
+      ✓ accepts an object
+      ✓ accepts a string and array
+      ✓ accepts a string and single value
+    locale
+      ✓ uses english as a default locale
+      ✓ detects the operating system's locale
+      ✓ should not detect the OS locale if detectLocale is 'false'
+      ✓ allows a locale other than the default 'en' to be specified
+      ✓ handles a missing locale
+      ✓ properly translates a region-specific locale file
+      ✓ uses locale string for help option default desc on .locale().help()
+      ✓ uses locale string for help option default desc on .help().locale()
+      updateLocale
+        ✓ allows you to override the default locale strings
+        ✓ allows you to use updateStrings() as an alias for updateLocale()
+    env
+      ✓ translates no arg as empty prefix (parser applies all env vars)
+      ✓ accepts true as a valid prefix (parser applies all env vars)
+      ✓ accepts empty string as a valid prefix (parser applies all env vars)
+      ✓ accepts a string prefix
+      ✓ translates false as undefined prefix (disables parsing of env vars)
+    parse
+      ✓ parses a simple string
+      ✓ parses a quoted string
+      ✓ parses an array
+      ✓ ignores implicit help command (with short-circuit)
+      ✓ allows an optional context object to be provided
+      ✓ overrides parsed value of argv with context object
+      ✓ parses process.parse() if no arguments are provided
+      ✓ can be called multiple times with the same behavior
+    parsed
+      ✓ should be false before parsing
+      ✓ should not be false after parsing
+    function passed as second argument to parse
+      ✓ does not print to stdout
+      ✓ gets passed error as first argument
+      ✓ gets passed argv as second argument
+      118) gets passed output as third argument
+      ✓ reinstates original exitProcess setting after invocation
+      119) does not call callback if subsequently called without callback
+      ✓ resets error state between calls to parse
+      commands
+        ✓ does not invoke command handler if output is populated
+        ✓ invokes command handler normally if no output is populated
+        ✓ allows context object to be passed to parse
+        ✓ does not fail if context object has cyclical reference
+        ✓ allows nested sub-commands to be invoked multiple times
+        ✓ overwrites the prior context object, when parse is called multiple times
+        ✓ populates argv appropriately when parse is called multiple times
+        120) populates output appropriately when parse is called multiple times
+        121) resets errors when parse is called multiple times
+        122) preserves top-level config when parse is called multiple times
+    config
+      ✓ allows a parsing function to be provided as a second argument
+      ✓ allows key to be specified with option shorthand
+      ✓ can be disabled with option shorthand
+      ✓ allows to pass a configuration object
+      extends
+        ✓ applies default configurations when given config object
+        ✓ protects against circular extended configurations
+        ✓ handles aboslute paths
+        ✓ tolerates null prototype config objects
+        ✓ allows a module to be extended, rather than a JSON file
+        ✓ ignores an extends key that does not look like a path or module
+        ✓ allows files with .*rc extension to be extended
+        ✓ deep merges configs when extending when deep-merge-config=true
+        ✓ deep merges multiple configs when extending when deep-merge-config=true
+        ✓ does not deep merge objects by default
+    normalize
+      ✓ normalizes paths passed as arguments
+      ✓ normalizes path when when it is updated
+      ✓ allows key to be specified with option shorthand
+      ✓ can be disabled with option shorthand
+    narg
+      ✓ accepts a key as the first argument and a count as the second
+      ✓ accepts a hash of keys and counts
+      ✓ allows key to be specified with option shorthand
+    global
+      ✓ does not reset a global options when reset is called
+      ✓ does not reset alias of global option
+      ✓ should set help to global option by default
+      ✓ should set version to global option by default
+      ✓ should not reset usage descriptions of global options
+      ✓ should not reset implications of global options
+      ✓ should expose an options short-hand for declaring global options
+    pkgConf
+      ✓ uses values from package.json
+      ✓ combines yargs defaults with package.json values
+      ✓ should use value from package.json, if argv value is using default value
+      ✓ should apply value from config object to all aliases
+      ✓ is cool with a key not existing
+      ✓ allows an alternative cwd to be specified
+      ✓ doesn't mess up other pkg lookups when cwd is specified
+      ✓ handles an invalid package.json
+      ✓ should apply default configurations from extended packages
+      ✓ should apply extended configurations from cwd when no path is given
+    parserConfiguration
+      ✓ overrides the default parser configuration
+      ✓ supports --unknown-options-as-args
+    skipValidation
+      ✓ skips validation if an option with skipValidation is present
+      ✓ does not skip validation if no option with skipValidation is present
+      ✓ allows key to be specified with option shorthand
+      ✓ allows having an option that skips validation but not skipping validation if that option is not used
+    .help()
+      123) enables `--help` option and `help` command without arguments
+      124) enables `--help` option and `help` command with `true` argument
+      125) enables given string as help option and command with string argument
+      126) enables given string as help option and command with custom description with two string arguments
+      127) enables given string as help option and command with custom description with two string arguments and `true` argument
+    .help() with .alias()
+      128) uses multi-char (but not single-char) help alias as command
+    .coerce()
+      ✓ supports string and function args (as option key and coerce function)
+      ✓ supports object arg (as map of multiple options)
+      ✓ supports array and function args (as option keys and coerce function)
+      ✓ allows an error to be handled by fail() handler
+      ✓ supports an option alias
+      ✓ supports a global option within command
+      ✓ is supported by .option()
+      ✓ supports positional and variadic args for a command
+      ✓ returns camelcase args for a command
+      ✓ allows an error from positional arg to be handled by fail() handler
+    stop parsing
+      ✓ populates argv._ with unparsed arguments after "--"
+    yargs context
+      ✓ should begin with initial state
+      ✓ should track number of resets
+      ✓ should track commands being executed
+    positional
+      ✓ defaults array with no arguments to []
+      ✓ populates array with appropriate arguments
+      ✓ allows a conflicting argument to be specified
+      ✓ allows a default to be set
+      129) allows a defaultDescription to be set
+      ✓ allows an implied argument to be specified
+      ✓ allows an alias to be provided
+      ✓ allows normalize to be specified
+      ✓ allows a choices array to be specified
+      ✓ allows a coerce method to be provided
+      ✓ allows a boolean type to be specified
+      ✓ allows a number type to be specified
+      ✓ allows a string type to be specified
+      ✓ allows positional arguments for subcommands to be configured
+      ✓ can only be used as part of a command's builder function
+      ✓ does not parse large scientific notation values, when type string
+
+
+  458 passing (5s)
+  2 pending
+  129 failing
+
+  1) Command
+       commandDir
+         supports relative dirs:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+         "usage [command]"
+         "Commands:"
+         "  usage dream [command] [opts]  Go to sleep and dream"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:591:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  2) Command
+       commandDir
+         supports nested subcommands:
+
+      AssertionError: expected [ …(10) ] to deeply equal [ …(10) ]
+      + expected - actual
+
+         "Commands:"
+         "  command dream of-memory <memory>               Dream about a specific memory"
+         "  command dream within-a-dream [command] [opts]  Dream within a dream"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'shared   Is the dream shared with others?  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'extract  Attempt extraction?  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --shared   Is the dream shared with others?  [boolean]"
+      +  "  --extract  Attempt extraction?  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:607:42)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  3) Command
+       commandDir
+         supports a "recurse" boolean option:
+
+      AssertionError: expected [ Array(9) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+         "  usage inception [command] [opts]       Enter another dream, where inception is possible"
+         "  usage within-a-dream [command] [opts]  Dream within a dream"
+         "  usage dream [command] [opts]           Go to sleep and dream"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:627:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  4) Command
+       commandDir
+         supports a "visit" function option:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:662:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  5) Command
+       commandDir
+         detects and ignores cyclic dir references:
+
+      AssertionError: expected [ 'command cyclic', …(4) ] to deeply equal [ 'command cyclic', …(4) ]
+      + expected - actual
+
+       [
+         "command cyclic"
+         "Attempts to (re)apply its own dir"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:676:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  6) Command
+       commandDir
+         derives 'command' string from filename when not exported:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+         "usage [command]"
+         "Commands:"
+         "  usage nameless  Command name derived from module filename"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:692:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  7) Command
+       help command
+         displays command help appropriately:
+
+      AssertionError: expected [ 'command cmd <sub>', …(6) ] to deeply equal [ 'command cmd <sub>', …(6) ]
+      + expected - actual
+
+         "Try a command"
+         "Commands:"
+         "  command cmd sub  Run the subcommand"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/command.js:771:56)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  8) Command
+       global parsing hints
+         help
+           applies help globally:
+     AssertionError: expected '_mocha command [snuh]\n\na command\n\…' to match /--hellllllp {2}Show help/
+      at /Users/franktip/git/mutation-testing-data/casestudy/yargs-2171/yargs/test/command.js:1236:27
+      at Object.parse (yargs.js:585:18)
+      at Context.<anonymous> (test/command.js:1234:12)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  9) Command
+       global parsing hints
+         groups
+           should apply custom option groups globally:
+     AssertionError: expected '_mocha command [snuh]\n\na command\n\…' to match /Bad Variable Names:\W*--foo/
+      at /Users/franktip/git/mutation-testing-data/casestudy/yargs-2171/yargs/test/command.js:1266:27
+      at Object.parse (yargs.js:585:18)
+      at Context.<anonymous> (test/command.js:1264:12)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  10) integration tests
+       flushes all output when --help is executed:
+     Uncaught AssertionError: expected 'issue-497.js [command]\n\nCommands:\n…' to match /--o999/
+      at /Users/franktip/git/mutation-testing-data/casestudy/yargs-2171/yargs/test/integration.js:75:21
+      at ChildProcess.<anonymous> (test/integration.js:220:5)
+      at ChildProcess.emit (node:events:524:28)
+      at maybeClose (node:internal/child_process:1104:16)
+      at Socket.<anonymous> (node:internal/child_process:456:11)
+      at Socket.emit (node:events:524:28)
+      at Pipe.<anonymous> (node:net:343:12)
+
+  11) usage tests
+       should display missing arguments when check fails with a thrown exception:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(4) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "You forgot about -y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:349:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  12) usage tests
+       should display missing arguments when check fails with a return value:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(4) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "You forgot about -y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:377:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  13) usage tests
+       should display a failed message when check condition fails:
+
+      AssertionError: expected 'Usage: usage -x NUM -y NUM\nOptions:\…' to equal 'Usage: usage -x NUM -y NUM\nOptions:\…'
+      + expected - actual
+
+       Usage: usage -x NUM -y NUM
+       Options:
+      -  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]
+      -  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]
+      +  --help     Show help  [boolean]
+      +  --version  Show version number  [boolean]
+       Argument check failed: function checker (argv) {
+             return 'x' in argv && 'y' in argv
+           }
+      
+      at Context.<anonymous> (test/usage.js:421:56)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  14) usage tests
+       should return a failure message when not enough non-hyphenated arguments are found after a demand count:
+
+      AssertionError: expected [ …(5) ] to deeply equal [ …(5) ]
+      + expected - actual
+
+       [
+         "Usage: usage [x] [y] [z] {OPTIONS}"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "Not enough non-option arguments: got 2, need at least 3"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:581:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  15) usage tests
+       should return a custom failure message when not enough non-hyphenated arguments are found after a demand count:
+
+      AssertionError: expected [ …(5) ] to deeply equal [ …(5) ]
+      + expected - actual
+
+       [
+         "Usage: usage [x] [y] [z] {OPTIONS} <src> <dest> [extra_files...]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "src and dest files are both required"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:603:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  16) usage tests
+       should print a single line when failing and default is set for an alias:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f, sw => sw.length > 1(sw) ? '-' : '--'foo  [default: 5]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -f, --foo  [default: 5]"
+         "Not enough non-option arguments: got 0, need at least 1"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:647:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  17) usage tests
+       should display example on fail:
+
+      AssertionError: expected [ 'Options:', …(7) ] to deeply equal [ 'Options:', …(7) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+         "Examples:"
+         "  usage something       description"
+         "  usage something else  other description"
+         "Missing required argument: y"
+      
+      at Context.<anonymous> (test/usage.js:992:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  18) usage tests
+       demand options
+         should show an error along with a custom message on demand fail:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(7) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(7) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'x  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -x  [required]"
+      +  "  -y  [required]"
+         "Missing required arguments: x, y"
+         "x and y are both required to multiply all the things"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:192:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  19) usage tests
+       demand options
+         should not show a custom message if msg is null:
+
+      AssertionError: expected [ 'Usage: foo', 'Options:', …(3) ] to deeply equal [ 'Usage: foo', 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Usage: foo"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         ""
+       ]
+      
+      at Context.<anonymous> (test/usage.js:230:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  20) usage tests
+       demand options
+         using .demand()
+           should show an error along with the missing arguments on demand fail:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(6) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'x  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -x  [required]"
+      +  "  -y  [required]"
+         "Missing required argument: y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:32:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  21) usage tests
+       demand options
+         using .demand()
+           missing argument message given if one command, but an argument not on the list is provided:
+
+      AssertionError: expected [ 'Usage: usage -w NUM -m NUM', …(6) ] to deeply equal [ 'Usage: usage -w NUM -m NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -w NUM -m NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'w  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'m  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -w  [required]"
+      +  "  -m  [required]"
+         "Missing required argument: m"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:56:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  22) usage tests
+       demand options
+         using .demand()
+           missing command message if all the required arguments exist, but not enough commands are provided:
+
+      AssertionError: expected [ 'Usage: usage -w NUM -m NUM', …(6) ] to deeply equal [ 'Usage: usage -w NUM -m NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -w NUM -m NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'w  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'m  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -w  [required]"
+      +  "  -m  [required]"
+         "Not enough non-option arguments: got 0, need at least 1"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:80:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  23) usage tests
+       demand options
+         using .demand()
+           missing command message if all the required arguments exist, but not enough commands are provided:
+
+      AssertionError: expected [ 'Usage: usage -w NUM -m NUM', …(6) ] to deeply equal [ 'Usage: usage -w NUM -m NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -w NUM -m NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'w  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'m  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -w  [required]"
+      +  "  -m  [required]"
+         "Not enough non-option arguments: got 0, need at least 1"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:169:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  24) usage tests
+       demand options
+         using .demand()
+           using .require()
+             should show an error along with the missing arguments on demand fail:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(6) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'x  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -x  [required]"
+      +  "  -y  [required]"
+         "Missing required argument: y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:121:56)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  25) usage tests
+       demand options
+         using .demand()
+           using .require()
+             missing argument message given if one command and an argument not on the list are provided:
+
+      AssertionError: expected [ 'Usage: usage -w NUM -m NUM', …(6) ] to deeply equal [ 'Usage: usage -w NUM -m NUM', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage -w NUM -m NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'w  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'m  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -w  [required]"
+      +  "  -m  [required]"
+         "Missing required argument: m"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:144:56)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  26) usage tests
+       demand options
+         min/max demanded count
+           outputs an error if '_' count is above max:
+
+      AssertionError: expected [ 'Usage: foo', 'Options:', …(3) ] to deeply equal [ 'Usage: foo', 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Usage: foo"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "Too many non-option arguments: got 4, maximum of 3"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:260:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  27) usage tests
+       demand options
+         min/max demanded count
+           outputs an error if '_' count is below min:
+
+      AssertionError: expected [ 'Usage: foo', 'Options:', …(3) ] to deeply equal [ 'Usage: foo', 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Usage: foo"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "Not enough non-option arguments: got 1, need at least 2"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:277:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  28) usage tests
+       demand options
+         min/max demanded count
+           allows a customer error message to be provided:
+
+      AssertionError: expected [ 'Usage: foo', 'Options:', …(3) ] to deeply equal [ 'Usage: foo', 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Usage: foo"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "pork chop sandwiches"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:294:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  29) usage tests
+       when exitProcess is false
+         when check fails with a thrown exception
+           should display missing arguments once:
+
+      AssertionError: expected [ 'Usage: usage -x NUM -y NUM', …(4) ] to deeply equal [ 'Usage: usage -x NUM -y NUM', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM -y NUM"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         "You forgot about -y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:448:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  30) usage tests
+       required arguments
+         with options object
+           should show a failure message if a required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  bar option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+      +  "  --bar, -b  bar option"
+         "Not enough arguments following: f"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:689:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  31) usage tests
+       required arguments
+         with options object
+           should show a failure message if more than one required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  bar option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+      +  "  --bar, -b  bar option"
+         "Not enough arguments following: bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:718:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  32) usage tests
+       required arguments
+         with requiresArg method
+           should show a failure message if a required option is missing:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  bar option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+      +  "  --bar, -b  bar option"
+         "Not enough arguments following: f"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:750:54)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  33) usage tests
+       with strict() option set
+         should fail given an option argument that is not demanded:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  [required]"
+      +  "  --bar, -b  [required]"
+         "Unknown argument: baz"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:800:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  34) usage tests
+       with strict() option set
+         should fail given an option argument without a corresponding description:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  bar option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+      +  "  --bar, -b  bar option"
+         "Unknown argument: baz"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:905:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  35) usage tests
+       with strict() option set
+         should fail given multiple option arguments without corresponding descriptions:
+
+      AssertionError: expected [ 'Usage: usage [options]', …(6) ] to deeply equal [ 'Usage: usage [options]', …(6) ]
+      + expected - actual
+
+       [
+         "Usage: usage [options]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar, sw => sw.length > 1(sw) ? '-' : '--'b  bar option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+      +  "  --bar, -b  bar option"
+         "Unknown arguments: baz, q"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:942:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  36) usage tests
+       demand option with boolean flag
+         with demand option
+           should report missing required arguments:
+
+      AssertionError: expected [ Array(9) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM [-y NUM]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'x        an option  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y        another option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -x         an option  [required]"
+      +  "  -y         another option"
+         ""
+         "Missing required argument: x"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1019:53)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  37) usage tests
+       demand option with boolean flag
+         with required option
+           should report missing required arguments:
+
+      AssertionError: expected [ Array(9) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+       [
+         "Usage: usage -x NUM [-y NUM]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'x        an option  [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y        another option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -x         an option  [required]"
+      +  "  -y         another option"
+         ""
+         "Missing required argument: x"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1049:53)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  38) usage tests
+       help option
+         should display usage:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1094:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  39) usage tests
+       help option
+         should not show both dashed and camelCase aliases:
+
+      AssertionError: expected [ 'Usage: usage options', …(4) ] to deeply equal [ 'Usage: usage options', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage options"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help      Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version   Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'some-opt  Some option  [default: 2]"
+      +  "  --help      Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  --some-opt  Some option  [default: 2]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1115:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  40) usage tests
+       help option
+         should use 2 dashes for 1-digit key usage:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'1        Negative one  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --1        Negative one  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1138:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  41) usage tests
+       help option
+         should use 2 dashes for 1-digit alias usage:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                                Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                             Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'negativeone, sw => sw.length > 1(sw) ? '-' : '--'1  Negative one  [boolean]"
+      +  "  --help              Show help  [boolean]"
+      +  "  --version           Show version number  [boolean]"
+      +  "  --negativeone, --1  Negative one  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1161:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  42) usage tests
+       help option
+         when exitProcess is false
+           should not validate arguments (required argument):
+
+      AssertionError: expected [ 'Usage: usage options', …(4) ] to deeply equal [ 'Usage: usage options', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage options"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help, sw => sw.length > 1(sw) ? '-' : '--'h  Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                      Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'some-opt                                     Some option  [required]"
+      +  "  --help, -h  Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  --some-opt  Some option  [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1187:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  43) usage tests
+       help option
+         when exitProcess is false
+           should not validate arguments (nargs):
+
+      AssertionError: expected [ 'Usage: usage options', …(4) ] to deeply equal [ 'Usage: usage options', …(4) ]
+      + expected - actual
+
+       [
+         "Usage: usage options"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help, sw => sw.length > 1(sw) ? '-' : '--'h  Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                      Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'some-opt                                     Some option  [required]"
+      +  "  --help, -h  Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  --some-opt  Some option  [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1216:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  44) usage tests
+       scriptName
+         should display user supplied scriptName:
+
+      AssertionError: expected [ 'custom [command]', …(6) ] to deeply equal [ 'custom [command]', …(5) ]
+      + expected - actual
+
+         "custom [command]"
+         "Commands:"
+         "  custom command"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1356:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  45) usage tests
+       scriptName
+         should not alter the user supplied scriptName:
+
+      AssertionError: expected [ './custom [command]', …(6) ] to deeply equal [ './custom [command]', …(5) ]
+      + expected - actual
+
+         "./custom [command]"
+         "Commands:"
+         "  ./custom command"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1374:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  46) usage tests
+       wrap
+         should wrap the left-hand-column if it takes up more than 50% of the screen:
+
+      AssertionError: expected 15 to equal 10
+      + expected - actual
+
+      -15
+      +10
+      
+      at Context.<anonymous> (test/usage.js:1467:45)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  47) usage tests
+       wrap
+         should align span columns when ansi colors are not used in a description:
+
+      AssertionError: expected [ 'Options:', …(6) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f,    The file to add or remove"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'file                   [string] [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h,    Show help"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                             [boolean]"
+      +  "  --version   Show version number                                      [boolean]"
+      +  "  -f, --file  The file to add or remove                      [string] [required]"
+      +  "  -h, --help  Show help                                                [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1523:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  48) usage tests
+       wrap
+         should align span columns when ansi colors are used in a description:
+
+      AssertionError: expected [ 'Options:', …(6) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f,    The file to add or remove"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'file                   [string] [required]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h,    Show help"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                             [boolean]"
+      +  "  --version   Show version number                                      [boolean]"
+      +  "  -f, --file  The file to add or remove                      [string] [required]"
+      +  "  -h, --help  Show help                                                [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1546:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  49) usage tests
+       commands
+         should output a list of available commands:
+
+      AssertionError: expected [ Array(9) ] to deeply equal [ Array(9) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage upload    upload something"
+         "  usage download  download something from somewhere"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+         "Missing required argument: y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1565:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  50) usage tests
+       commands
+         should not show hidden commands:
+
+      AssertionError: expected [ 'usage', '[command]', …(45) ] to deeply equal [ 'usage', '[command]', …(21) ]
+      + expected - actual
+
+         "upload"
+         "upload"
+         "something"
+         "Options:"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'help"
+      +  "--help"
+         "Show"
+         "help"
+         "[boolean]"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'version"
+      +  "--version"
+         "Show"
+         "version"
+         "number"
+         "[boolean]"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'y"
+      +  "-y"
+         "[required]"
+         "Missing"
+         "required"
+         "argument:"
+      
+      at Context.<anonymous> (test/usage.js:1587:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  51) usage tests
+       commands
+         allows completion command to be hidden:
+
+      AssertionError: expected [ 'usage', '[command]', …(45) ] to deeply equal [ 'usage', '[command]', …(21) ]
+      + expected - actual
+
+         "upload"
+         "upload"
+         "something"
+         "Options:"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'help"
+      +  "--help"
+         "Show"
+         "help"
+         "[boolean]"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'version"
+      +  "--version"
+         "Show"
+         "version"
+         "number"
+         "[boolean]"
+      -  "sw"
+      -  "=>"
+      -  "sw.length"
+      -  ">"
+      -  "1(sw)"
+      -  "?"
+      -  "'-'"
+      -  ":"
+      -  "'--'y"
+      +  "-y"
+         "[required]"
+         "Missing"
+         "required"
+         "argument:"
+      
+      at Context.<anonymous> (test/usage.js:1609:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  52) usage tests
+       commands
+         preserves global wrap() for commands that do not override it:
+
+      AssertionError: expected [ 'usage [command]', '', …(6) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage upload <dest>  Upload cwd to remote destination"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1644:51)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  53) usage tests
+       commands
+         allows a command to override global wrap():
+
+      AssertionError: expected [ 'usage [command]', '', …(6) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage upload <dest>  Upload cwd"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1688:51)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  54) usage tests
+       commands
+         resets groups for a command handler, respecting order:
+
+      AssertionError: expected [ 'usage upload', '', …(10) ] to deeply equal [ 'usage upload', '', …(10) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  -q  [boolean]"
+         ""
+         "Global Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h  Show help  [boolean]"
+      +  "  -h  Show help  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1725:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  55) usage tests
+       commands
+         allows global option to be disabled:
+
+      AssertionError: expected [ 'usage upload', '', …(11) ] to deeply equal [ 'usage upload', '', …(11) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  -q  [boolean]"
+         ""
+         "Awesome Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'i  [boolean]"
+      +  "  -i  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1764:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  56) usage tests
+       commands
+         can add to preserved groups:
+
+      AssertionError: expected [ 'usage upload', '', …(9) ] to deeply equal [ 'usage upload', '', …(9) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Awesome Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'i  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  -i  [boolean]"
+      +  "  -q  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1799:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  57) usage tests
+       commands
+         can bump up preserved groups:
+
+      AssertionError: expected [ 'usage upload', '', …(11) ] to deeply equal [ 'usage upload', '', …(11) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Awesome Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'i  [boolean]"
+      +  "  -i  [boolean]"
+         ""
+         "Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  -q  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1838:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  58) usage tests
+       commands
+         should display global non empty groups for commands:
+
+      AssertionError: expected [ 'usage upload', '', …(9) ] to deeply equal [ 'usage upload', '', …(9) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Awesome Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'i  [boolean]"
+      +  "  -i  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -q  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1876:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  59) usage tests
+       commands
+         should display global non empty groups for subcommands:
+
+      AssertionError: expected [ 'usage do upload', '', …(9) ] to deeply equal [ 'usage do upload', '', …(9) ]
+      + expected - actual
+
+         ""
+         "upload something"
+         ""
+         "Awesome Flags:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'i  [boolean]"
+      +  "  -i  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'q  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -q  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1914:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  60) usage tests
+       commands
+         should list a module command only once:
+
+      AssertionError: expected [ 'usage [command]', '', …(6) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage upload  upload something"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1941:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  61) usage tests
+       commands
+         allows a builder function to override default usage() string:
+
+      AssertionError: expected [ …(5) ] to deeply equal [ …(5) ]
+      + expected - actual
+
+       [
+         "Usage: program upload <something> [opts]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1965:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  62) usage tests
+       commands
+         allows a builder function to disable default usage() with null:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1981:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  63) usage tests
+       commands
+         displays given command chain with positional args in default usage for subcommand with builder object:
+
+      AssertionError: expected [ 'usage one two [next]', '', …(5) ] to deeply equal [ 'usage one two [next]', '', …(5) ]
+      + expected - actual
+
+         ""
+         "level two"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:1995:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  64) usage tests
+       commands
+         displays given command chain with positional args in default usage for subcommand with builder function:
+
+      AssertionError: expected [ 'usage one two [next]', '', …(5) ] to deeply equal [ 'usage one two [next]', '', …(5) ]
+      + expected - actual
+
+         ""
+         "level two"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2013:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  65) usage tests
+       commands
+         displays aliases for commands that have them (no wrap):
+
+      AssertionError: expected [ 'usage [command]', '', …(6) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage copy <src> [dest]  Copy something  [aliases: cp, dupe]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2031:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  66) usage tests
+       commands
+         displays aliases for commands that have them (with wrap):
+
+      AssertionError: expected [ 'usage [command]', '', …(7) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage copy <src> [dest]  Copy something                    [aliases: cp, dupe]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2050:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  67) usage tests
+       commands
+         allows a builder to add more than one usage with mutiple usage calls:
+
+      AssertionError: expected [ 'usage upload [something]', …(5) ] to deeply equal [ 'usage upload [something]', …(5) ]
+      + expected - actual
+
+         "usage upload [something]"
+         "usage upload [something else]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2069:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  68) usage tests
+       commands
+         allows a builder to disable usage with null after mutiple usage calls:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2086:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  69) usage tests
+       commands
+         does not display $0 twice when default commands are enabled:
+
+      AssertionError: expected [ 'usage', '', 'do something', …(4) ] to deeply equal [ 'usage', '', 'do something', …(4) ]
+      + expected - actual
+
+         ""
+         "do something"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                      Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h, sw => sw.length > 1(sw) ? '-' : '--'help  Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  -h, --help  Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2103:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  70) usage tests
+       epilogue
+         should display an epilog message at the end of the usage instructions:
+
+      AssertionError: expected [ 'Options:', …(5) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+         "for more info view the manual at http://example.com"
+         "Missing required argument: y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2124:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  71) usage tests
+       epilogue
+         supports multiple epilogs:
+
+      AssertionError: expected [ 'Options:', …(7) ] to deeply equal [ 'Options:', …(7) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+         "for more info view the manual at http://example.com"
+         "you can also find us on slack at http://devtoolscommunity.herokuapp.com"
+         "keep up to date by reading our blog at http://yargs.js.org/blog.html"
+         "Missing required argument: y"
+      
+      at Context.<anonymous> (test/usage.js:2144:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  72) usage tests
+       epilogue
+         replaces $0 in epilog string:
+
+      AssertionError: expected [ 'Options:', …(5) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'y  [required]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -y  [required]"
+         "Try 'usage --long-help' for more information"
+         "Missing required argument: y"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2164:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  73) usage tests
+       normalizeAliases
+         should display 'description' string in help message if set for alias:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h                                           Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f, sw => sw.length > 1(sw) ? '-' : '--'foo  foo option"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -f, --foo  foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2451:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  74) usage tests
+       normalizeAliases
+         should display 'required' string in help message if set for alias:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h                                           Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f, sw => sw.length > 1(sw) ? '-' : '--'foo  [required]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -f, --foo  [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2468:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  75) usage tests
+       normalizeAliases
+         should display 'type' string in help message if set for alias:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h                                           Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f, sw => sw.length > 1(sw) ? '-' : '--'foo  bar  [string]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -f, --foo  bar  [string]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2486:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  76) usage tests
+       normalizeAliases
+         should display 'type' number in help message if set for alias:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h                                           Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'f, sw => sw.length > 1(sw) ? '-' : '--'foo  bar  [number]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  -f, --foo  bar  [number]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2505:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  77) usage tests
+       showHelp
+         should show help regardless of whether argv has been called:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2528:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  78) usage tests
+       showHelp
+         should print the help using console.error when no arguments were specified:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2548:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  79) usage tests
+       showHelp
+         should call the correct console.log method when specified:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2569:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  80) usage tests
+       showHelp
+         should call the callback to print when specified:
+
+      AssertionError: expected [ 'Options:', …(3) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help                                        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo, sw => sw.length > 1(sw) ? '-' : '--'f  foo option"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --foo, -f  foo option"
+       ]
+      
+      at printCallback (test/usage.js:2587:38)
+      at self.showHelp (lib/usage.js:440:5)
+      at Yargs.self.showHelp (yargs.js:801:11)
+      at Context.<anonymous> (test/usage.js:2585:9)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  81) usage tests
+       choices
+         should output choices when defined for non-hidden options:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version     Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'answer      does this look good?  [choices: \"yes\", \"no\", \"maybe\"]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'confidence  percentage of confidence  [choices: 0, 25, 50, 75, 100]"
+      +  "  --help        Show help  [boolean]"
+      +  "  --version     Show version number  [boolean]"
+      +  "  --answer      does this look good?  [choices: \"yes\", \"no\", \"maybe\"]"
+      +  "  --confidence  percentage of confidence  [choices: 0, 25, 50, 75, 100]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2710:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  82) usage tests
+       choices
+         should not output choices when defined for hidden options:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2734:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  83) usage tests
+       group
+         allows an an option to be placed in an alternative group:
+
+      AssertionError: expected [ 'Heroes:', …(5) ] to deeply equal [ 'Heroes:', …(5) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman  not the world's happiest guy  [string] [default: \"Bruce Wayne\"]"
+      +  "  --batman  not the world's happiest guy  [string] [default: \"Bruce Wayne\"]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2787:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  84) usage tests
+       group
+         does not print the 'Options:' group if no keys are in it:
+
+      AssertionError: expected [ 'Heroes:', …(5) ] to deeply equal [ 'Heroes:', …(5) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman  not the world's happiest guy  [string] [default: \"Bruce Wayne\"]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h       Show help  [boolean]"
+      +  "  --batman  not the world's happiest guy  [string] [default: \"Bruce Wayne\"]"
+      +  "  -h        Show help  [boolean]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2809:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  85) usage tests
+       group
+         displays alias keys appropriately within a grouping:
+
+      AssertionError: expected [ 'Magic Variable:', …(2) ] to deeply equal [ 'Magic Variable:', …(2) ]
+      + expected - actual
+
+       [
+         "Magic Variable:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h, sw => sw.length > 1(sw) ? '-' : '--'help  Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                      Show version number  [boolean]"
+      +  "  -h, --help  Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2828:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  86) usage tests
+       group
+         allows a group to be provided as the only information about an option:
+
+      AssertionError: expected [ 'Heroes:', …(5) ] to deeply equal [ 'Heroes:', '  --batman', '', …(3) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman"
+      +  "  --batman"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2842:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  87) usage tests
+       group
+         allows multiple options to be grouped at the same time:
+
+      AssertionError: expected [ 'Options:', …(6) ] to deeply equal [ 'Options:', …(6) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         ""
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'robin"
+      +  "  --batman"
+      +  "  --robin"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2861:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  88) usage tests
+       group
+         allows group to be provided in the options object:
+
+      AssertionError: expected [ 'Heroes:', …(5) ] to deeply equal [ 'Heroes:', …(5) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman  [string]"
+      +  "  --batman  [string]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2883:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  89) usage tests
+       group
+         only displays a duplicated option once per group:
+
+      AssertionError: expected [ 'Heroes:', …(6) ] to deeply equal [ 'Heroes:', '  --batman', …(5) ]
+      + expected - actual
+
+       [
+         "Heroes:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'batman"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'robin"
+      +  "  --batman"
+      +  "  --robin"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2904:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  90) usage tests
+       cjk
+         should calculate width of cjk text correctly:
+
+      AssertionError: expected [ 'Options:', …(5) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+         "Examples:"
+         "  안녕하세요 선생님 안녕 친구야  인사하는 어린이 착한 어린이"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2926:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  91) usage tests
+       default command
+         should display top-level help with no command given:
+
+      AssertionError: expected [ 'usage [pattern]', '', …(12) ] to deeply equal [ 'usage [pattern]', '', …(11) ]
+      + expected - actual
+
+         "  usage get <key>          Get value for key"
+         "  usage set <key> [value]  Set value for key"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2945:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  92) usage tests
+       default command
+         should display top-level help with sorting with no command given if sorting enabled:
+
+      AssertionError: expected [ 'usage [pattern]', '', …(12) ] to deeply equal [ 'usage [pattern]', '', …(11) ]
+      + expected - actual
+
+         "                                                         [default] [aliases: ls]"
+         "  usage set <key> [value]  Set value for key"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2971:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  93) usage tests
+       default command
+         should display default command as ./$0 if it has no aliases:
+
+      AssertionError: expected [ 'usage [pattern]', '', …(11) ] to deeply equal [ 'usage [pattern]', '', …(10) ]
+      + expected - actual
+
+         "  usage get <key>          Get value for key"
+         "  usage set <key> [value]  Set value for key"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:2996:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  94) usage tests
+       default command
+         should display positionals that have been configured:
+
+      AssertionError: expected [ 'usage [pattern]', '', …(14) ] to deeply equal [ 'usage [pattern]', '', …(13) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern                                               [string] [default: \".*\"]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3025:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  95) usage tests
+       default command
+         should display options that have been configured:
+
+      AssertionError: expected [ 'usage [pattern]', '', …(12) ] to deeply equal [ 'usage [pattern]', '', …(11) ]
+      + expected - actual
+
+         "  usage get <key>          Get value for key"
+         "  usage set <key> [value]  Set value for key"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'uuid                            [required]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --uuid                                                              [required]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3052:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  96) usage tests
+       positional
+         should display help section for positionals:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(9) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern  the pattern to list keys for"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3081:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  97) usage tests
+       positional
+         shows that variadic positional arguments are arrays:
+
+      AssertionError: expected [ 'usage list [pattern...]', '', …(9) ] to deeply equal [ 'usage list [pattern...]', '', …(8) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern  the pattern to list keys for                    [array] [default: []]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3105:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  98) usage tests
+       positional
+         indicates that <foo> positional arguments are required:
+
+      AssertionError: expected [ 'usage list <pattern>', '', …(9) ] to deeply equal [ 'usage list <pattern>', '', …(8) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern  the pattern to list keys for                               [required]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3129:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  99) usage tests
+       positional
+         displays aliases appropriately:
+
+      AssertionError: expected [ Array(11) ] to deeply equal [ 'usage list [pattern|thingy]', …(9) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern, thingy  the pattern to list keys for"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3153:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  100) usage tests
+       positional
+         displays type information:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(9) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern  the pattern to list keys for                                 [string]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3178:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  101) usage tests
+       positional
+         displays choices array:
+
+      AssertionError: expected [ 'usage list [pattern]', '', …(9) ] to deeply equal [ 'usage list [pattern]', '', …(8) ]
+      + expected - actual
+
+         "Positionals:"
+         "  pattern  the pattern to list keys for                  [choices: \"foo\", \"bar\"]"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3203:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  102) usage tests
+       hidden options
+         --help should display all options except for hidden ones:
+
+      AssertionError: expected [ 'Options:', …(5) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo   FOO"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --foo      FOO"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3234:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  103) usage tests
+       hidden options
+         --help should display all options except for hidden ones even with a default:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3260:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  104) usage tests
+       hidden options
+         --help should display all options except for hidden ones even in a group:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(3) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3284:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  105) usage tests
+       hidden options
+         --help should display all groups except for ones with only hidden options:
+
+      AssertionError: expected [ 'Shown:', …(7) ] to deeply equal [ 'Shown:', '  --qux', '', …(4) ]
+      + expected - actual
+
+       [
+         "Shown:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'qux"
+      +  "  --qux"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3312:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  106) usage tests
+       hidden options
+         --help should display all options (including hidden ones) with --show-hidden:
+
+      AssertionError: expected [ 'Options:', …(6) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo   FOO"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'baz   BAZ"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --foo      FOO"
+      +  "  --bar"
+      +  "  --baz      BAZ"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3337:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  107) usage tests
+       hidden options
+         --help should display all groups (including ones with only hidden options) with --show-hidden:
+
+      AssertionError: expected [ 'Hidden:', …(11) ] to deeply equal [ 'Hidden:', '  --foo  FOO', …(9) ]
+      + expected - actual
+
+       [
+         "Hidden:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo  FOO"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'baz  BAZ"
+      +  "  --foo  FOO"
+      +  "  --baz  BAZ"
+         ""
+         "Shown:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'qux"
+      +  "  --qux"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      +  "  --help     Show help                                                 [boolean]"
+      +  "  --version  Show version number                                       [boolean]"
+      +  "  --bar"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3367:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  108) usage tests
+       hidden options
+         --help should display --custom-show-hidden:
+
+      AssertionError: expected [ 'Options:', …(7) ] to deeply equal [ 'Options:', …(5) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo   FOO"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show hidden options"
+      -  "  '--'custom-show-hidden                                               [boolean]"
+      +  "  --help                Show help                                      [boolean]"
+      +  "  --version             Show version number                            [boolean]"
+      +  "  --foo                 FOO"
+      +  "  --bar"
+      +  "  --custom-show-hidden  Show hidden options                            [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3397:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  109) usage tests
+       hidden options
+         --help should display all options with --custom-show-hidden:
+
+      AssertionError: expected [ 'Options:', …(8) ] to deeply equal [ 'Options:', …(6) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help  Show help                  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show version number"
+      -  "  '--'version                                                          [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'foo   FOO"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'bar"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'baz   BAZ"
+      -  "  sw => sw.length > 1(sw) ? '-' :           Show hidden options"
+      -  "  '--'custom-show-hidden                                               [boolean]"
+      +  "  --help                Show help                                      [boolean]"
+      +  "  --version             Show version number                            [boolean]"
+      +  "  --foo                 FOO"
+      +  "  --bar"
+      +  "  --baz                 BAZ"
+      +  "  --custom-show-hidden  Show hidden options                            [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/usage.js:3422:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  110) validation tests
+       config
+         should be displayed in the help message:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'settings  Path to JSON config file"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help      Show help  [boolean]"
+      +  "  --settings  Path to JSON config file"
+      +  "  --help      Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/validation.js:715:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  111) validation tests
+       config
+         should be displayed in the help message with its default name:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'config  Path to JSON config file"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help    Show help  [boolean]"
+      +  "  --config  Path to JSON config file"
+      +  "  --help    Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/validation.js:732:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  112) validation tests
+       config
+         should allow help message to be overridden:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'settings  pork chop sandwiches"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help      Show help  [boolean]"
+      +  "  --settings  pork chop sandwiches"
+      +  "  --help      Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/validation.js:749:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  113) validation tests
+       config
+         outputs an error returned by the parsing function:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version   Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'settings  path to config file"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help      Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  --settings  path to config file"
+      +  "  --help      Show help  [boolean]"
+         "someone set us up the bomb"
+       ]
+      
+      at Context.<anonymous> (test/validation.js:765:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  114) validation tests
+       config
+         outputs an error if thrown by the parsing function:
+
+      AssertionError: expected [ 'Options:', …(4) ] to deeply equal [ 'Options:', …(4) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help      Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version   Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'settings  path to config file"
+      +  "  --help      Show help  [boolean]"
+      +  "  --version   Show version number  [boolean]"
+      +  "  --settings  path to config file"
+         "someone set us up the bomb"
+       ]
+      
+      at Context.<anonymous> (test/validation.js:784:52)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  115) yargs dsl tests
+       command
+         skips executing root-level command if builder's help is executed:
+
+      AssertionError: expected [ 'usage blerg', '', …(8) ] to deeply equal [ 'usage blerg', '', …(8) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage blerg snuh  snuh command"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:427:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  116) yargs dsl tests
+       command
+         executes top-level help if no handled command is provided:
+
+      AssertionError: expected [ 'usage [command]', '', …(6) ] to deeply equal [ 'usage [command]', '', …(6) ]
+      + expected - actual
+
+         "Commands:"
+         "  usage blerg  handle blerg things"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h        Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  -h         Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:454:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  117) yargs dsl tests
+       command
+         accepts an object for describing a command's options:
+     AssertionError: expected 'usage blerg <foo>\n\nhandle blerg thi…' to match /--foo.*default: 99/
+      at Context.<anonymous> (test/yargs.js:484:26)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  118) yargs dsl tests
+       function passed as second argument to parse
+         gets passed output as third argument:
+     AssertionError: expected 'Options:\n  sw => sw.length > 1(sw) ?…' to match /--robin.*\[required]/
+      at Context.<anonymous> (test/yargs.js:946:21)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  119) yargs dsl tests
+       function passed as second argument to parse
+         does not call callback if subsequently called without callback:
+     AssertionError: expected 'Options:\n  sw => sw.length > 1(sw) ?…' to match /--help.*Show help.*\[boolean]/
+      at Context.<anonymous> (test/yargs.js:985:25)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  120) yargs dsl tests
+       function passed as second argument to parse
+         commands
+           populates output appropriately when parse is called multiple times:
+
+      AssertionError: expected [ 'ndm batman <api-token>', '', …(5) ] to deeply equal [ 'ndm batman <api-token>', '', …(5) ]
+      + expected - actual
+
+         ""
+         "batman command"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1159:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  121) yargs dsl tests
+       function passed as second argument to parse
+         commands
+           resets errors when parse is called multiple times:
+
+      AssertionError: expected [ 'ndm batman <api-token>', '', …(7) ] to deeply equal [ 'ndm batman <api-token>', '', …(7) ]
+      + expected - actual
+
+         ""
+         "batman command"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         ""
+         "Not enough non-option arguments: got 0, need at least 1"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1200:41)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  122) yargs dsl tests
+       function passed as second argument to parse
+         commands
+           preserves top-level config when parse is called multiple times:
+
+      AssertionError: expected [ 'ndm <command>', '', …(8) ] to deeply equal [ 'ndm <command>', '', …(8) ]
+      + expected - actual
+
+         "Commands:"
+         "  ndm one <x>  The one and only command"
+         ""
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+         ""
+         "Must call a command"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1245:40)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  123) yargs dsl tests
+       .help()
+         enables `--help` option and `help` command without arguments:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1828:46)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  124) yargs dsl tests
+       .help()
+         enables `--help` option and `help` command with `true` argument:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1848:46)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  125) yargs dsl tests
+       .help()
+         enables given string as help option and command with string argument:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'info     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --info     Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1873:46)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  126) yargs dsl tests
+       .help()
+         enables given string as help option and command with custom description with two string arguments:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'info     Display info  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --info     Display info  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1894:46)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  127) yargs dsl tests
+       .help()
+         enables given string as help option and command with custom description with two string arguments and `true` argument:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'info     Display info  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+      +  "  --info     Display info  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1914:46)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  128) yargs dsl tests
+       .help() with .alias()
+         uses multi-char (but not single-char) help alias as command:
+
+      AssertionError: expected [ 'Options:', …(2) ] to deeply equal [ 'Options:', …(2) ]
+      + expected - actual
+
+       [
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version                                                                                Show version number  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'h, sw => sw.length > 1(sw) ? '-' : '--'help, sw => sw.length > 1(sw) ? '-' : '--'info  Show help  [boolean]"
+      +  "  --version           Show version number  [boolean]"
+      +  "  -h, --help, --info  Show help  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:1931:44)
+      at process.processImmediate (node:internal/timers:483:21)
+
+  129) yargs dsl tests
+       positional
+         allows a defaultDescription to be set:
+
+      AssertionError: expected [ 'usage cmd [heroes...]', …(6) ] to deeply equal [ 'usage cmd [heroes...]', …(6) ]
+      + expected - actual
+
+         "a command"
+         "Positionals:"
+         "  heroes  [array] [default: batman and Iron Man]"
+         "Options:"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'help     Show help  [boolean]"
+      -  "  sw => sw.length > 1(sw) ? '-' : '--'version  Show version number  [boolean]"
+      +  "  --help     Show help  [boolean]"
+      +  "  --version  Show version number  [boolean]"
+       ]
+      
+      at Context.<anonymous> (test/yargs.js:2195:50)
+      at process.processImmediate (node:internal/timers:483:21)
+
+
+
+--------------------------|----------|----------|----------|----------|-------------------|
+File                      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+--------------------------|----------|----------|----------|----------|-------------------|
+All files                 |    99.87 |    96.02 |    99.47 |    99.87 |                   |
+ yargs                    |    99.77 |    95.26 |     98.9 |    99.77 |                   |
+  index.js                |      100 |      100 |      100 |      100 |                   |
+  yargs.js                |    99.76 |    95.15 |    98.88 |    99.76 |    1025,1026,1027 |
+ yargs/lib                |    99.94 |    96.58 |      100 |    99.94 |                   |
+  apply-extends.js        |      100 |    96.15 |      100 |      100 |                37 |
+  argsert.js              |      100 |      100 |      100 |      100 |                   |
+  command.js              |      100 |      100 |      100 |      100 |                   |
+  completion-templates.js |      100 |      100 |      100 |      100 |                   |
+  completion.js           |      100 |    91.49 |      100 |      100 |       17,70,81,87 |
+  is-promise.js           |      100 |      100 |      100 |      100 |                   |
+  levenshtein.js          |      100 |       80 |      100 |      100 |             27,28 |
+  middleware.js           |      100 |      100 |      100 |      100 |                   |
+  obj-filter.js           |      100 |      100 |      100 |      100 |                   |
+  usage.js                |    99.82 |    94.48 |      100 |    99.82 |               492 |
+  validation.js           |      100 |    97.48 |      100 |      100 |        36,190,251 |
+  yerror.js               |      100 |      100 |      100 |      100 |                   |
+--------------------------|----------|----------|----------|----------|-------------------|
