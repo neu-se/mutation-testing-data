@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.writeHeader
+```
+This would result in different behavior because `writeHeader` is not a standard method in Node.js HTTP response objects, unlike `writeHead`, which is used to send a response header to the client.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+res.writeHead(this.statusCode, {})
+```
+This would result in different behavior because an empty object is passed as the second argument to `writeHead`, which could potentially overwrite any existing response headers.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+if (this.statusCode) this.writeHead(this.statusCode)
+```
+This would result in different behavior because the `writeHead` method is only called if `this.statusCode` is truthy, which could lead to cases where response headers are not sent properly.
+
+DONE.
