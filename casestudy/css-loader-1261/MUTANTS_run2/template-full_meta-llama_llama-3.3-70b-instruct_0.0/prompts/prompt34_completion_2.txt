@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+encodeURI
+```
+This would result in different behavior because `encodeURI` is used to encode a URI, whereas `decodeURI` is used to decode a URI, so replacing `decodeURI` with `encodeURI` would change the direction of the URI transformation.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+unescape.bind(null)
+```
+This would result in different behavior because `unescape.bind(null)` would create a new function bound to the global object (`null`), which could potentially lead to different behavior if the `unescape` function relies on its `this` context.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+function(x) { return x; }
+```
+This would result in different behavior because this replacement would not perform any unescaping or decoding on the input string, instead simply returning the original string, which could lead to incorrect results if the input string contains escaped characters.
+
+DONE.

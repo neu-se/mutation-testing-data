@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+encodeURI(normalizedUrl)
+```
+This would result in different behavior because `encodeURI` is used instead of `unescape`, which would change the way special characters are handled in the URL.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+normalizedUrl.replace(/%/g, '%25')
+```
+This would result in different behavior because it manually escapes the `%` character, which is different from how `unescape` handles it, potentially leading to incorrect URL decoding.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+unescape(escape(normalizedUrl))
+```
+This would result in different behavior because it first escapes the URL using `escape` and then unescapes it using `unescape`, which could lead to different results due to the double encoding and decoding process.
+
+DONE.
