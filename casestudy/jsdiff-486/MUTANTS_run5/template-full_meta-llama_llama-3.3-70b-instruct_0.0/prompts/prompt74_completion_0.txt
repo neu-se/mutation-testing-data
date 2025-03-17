@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+key in obj
+```
+This would result in different behavior because it checks if the key is anywhere in the prototype chain of `obj`, not just its own properties, potentially including inherited properties.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+obj[key] !== undefined
+```
+This would result in different behavior because it checks if the value of `obj[key]` is not `undefined`, rather than checking if `obj` has its own property `key`, potentially missing keys with `undefined` values.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because it would always include every key in the sorted list, even if the key is not a direct property of `obj`, and even if `obj` does not have any properties, which could lead to errors when trying to access those keys.
+
+DONE.

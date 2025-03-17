@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+oldEOFNewline && noNlBeforeAdds
+```
+This would result in different behavior because it inverts the conditions, so the special case message is added when the old file has an EOF newline and there are no newlines before adds, instead of when it doesn't.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!newEOFNewline && !noNlBeforeAdds
+```
+This would result in different behavior because it checks for the absence of an EOF newline in the new file and the presence of newlines before adds, which is a different combination of conditions than the original.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+oldEOFNewline || !noNlBeforeAdds
+```
+This would result in different behavior because it uses an OR operator instead of an AND operator, so the special case message is added when either the old file has an EOF newline or there are newlines before adds, instead of requiring both conditions to be true.
+
+DONE.
