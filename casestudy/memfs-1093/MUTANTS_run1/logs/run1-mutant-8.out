@@ -1,0 +1,58 @@
+
+> memfs@4.15.1 test
+> jest --maxWorkers 2
+
+FAIL src/__tests__/volume.test.ts (16.718 s)
+  ● volume › Volume › .reset() › Open streams should not be affected
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      362 |         });
+      363 |       });
+    > 364 |       it('Open streams should not be affected', async () => {
+          |       ^
+      365 |         const vol = new Volume();
+      366 |         const json = {
+      367 |           '/hello': 'world',
+
+      at src/__tests__/volume.test.ts:364:7
+      at src/__tests__/volume.test.ts:341:5
+      at src/__tests__/volume.test.ts:44:3
+      at Object.<anonymous> (src/__tests__/volume.test.ts:16:1)
+
+  ● volume › Volume › .close(fd, callback) › Closes file without errors
+
+    thrown: "Exceeded timeout of 5000 ms for a test while waiting for `done()` to be called.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      524 |     describe('.close(fd, callback)', () => {
+      525 |       const vol = new Volume();
+    > 526 |       it('Closes file without errors', done => {
+          |       ^
+      527 |         vol.open('/test.txt', 'w', (err, fd) => {
+      528 |           expect(err).toBe(null);
+      529 |           vol.close(fd || -1, err => {
+
+      at src/__tests__/volume.test.ts:526:7
+      at src/__tests__/volume.test.ts:524:5
+      at src/__tests__/volume.test.ts:44:3
+      at Object.<anonymous> (src/__tests__/volume.test.ts:16:1)
+
+  ● volume › .createWriteStream › accepts filehandle as fd option
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      1507 |   });
+      1508 |   describe('.createWriteStream', () => {
+    > 1509 |     it('accepts filehandle as fd option', async () => {
+           |     ^
+      1510 |       const vol = new Volume();
+      1511 |       const fh = await vol.promises.open('/test.txt', 'wx', 0o600);
+      1512 |       const writeStream = vol.createWriteStream('', { fd: fh });
+
+      at src/__tests__/volume.test.ts:1509:5
+      at src/__tests__/volume.test.ts:1508:3
+      at Object.<anonymous> (src/__tests__/volume.test.ts:16:1)
+
