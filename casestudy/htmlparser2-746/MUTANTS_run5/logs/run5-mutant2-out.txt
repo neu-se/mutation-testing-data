@@ -1,0 +1,408 @@
+
+> htmlparser2@6.0.0 test
+> jest --coverage
+
+FAIL src/__tests__/events.ts
+  ● Events › Template script tags
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -35,11 +35,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "<h1>Heading1</h1>",
+    +       "<h1>Heading1</h1></script></p>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+  ● Events › CDATA (inside special)
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -12,11 +12,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "/*<![CDATA[*/ asdf ><asdf></adsf><> fo/*]]>*/",
+    +       "/*<![CDATA[*/ asdf ><asdf></adsf><> fo/*]]>*/</script>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+  ● Events › Scripts creating other scripts
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -25,11 +25,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "var str = '<script></'+'script>';",
+    +       "var str = '<script></'+'script>';</script></p>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+  ● Events › Special special tags
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 102
+    + Received  +   1
+
+    @@ -113,117 +113,16 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "</scripter</soo",
+    +       "</scripter</soo</sCript><STyLE></styler</STylE><sCiPt><stylee><scriptee><soo>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+            "script",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "</styler",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+          ],
+          "event": "closetag",
+        },
+      ]
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+  ● Events › Scripts ending with <
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -12,11 +12,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "<",
+    +       "<</script>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+  ● Events › </title> in <script> (#745)
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -12,11 +12,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "'</title>'",
+    +       "'</title>'</script>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:896:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+PASS src/__tests__/stream.ts
+FAIL src/Tokenizer.spec.ts
+  ● Tokenizer › should support standard special tags
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 3
+
+      Array [
+        "onopentagname: 'script'",
+        "onopentagend",
+    -   "onclosetag: 'script'",
+    -   "onopentagname: 'div'",
+    -   "onopentagend",
+    -   "onclosetag: 'div'",
+    +   "ontext: '</script>'",
+    +   "ontext: '<div>'",
+    +   "ontext: '</div>'",
+        "onend",
+      ]
+
+      131 |         tokenizer.write(normalScriptInput);
+      132 |         tokenizer.end();
+    > 133 |         expect(logger.log).toEqual(normalScriptOutput);
+          |                            ^
+      134 |         tokenizer.reset();
+      135 |         logger.log = [];
+      136 | 
+
+      at Object.<anonymous> (src/Tokenizer.spec.ts:133:28)
+
+PASS src/FeedHandler.spec.ts
+PASS src/Parser.spec.ts
+PASS src/index.spec.ts
+PASS src/WritableStream.spec.ts
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------------------------------
+File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                           
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------------------------------
+All files              |   95.32 |    91.76 |   96.62 |   95.69 |                                                                             
+ src                   |   95.11 |    91.53 |   96.32 |   95.52 |                                                                             
+  CollectingHandler.ts |   66.67 |       50 |      80 |      80 | 22-25                                                                       
+  FeedHandler.ts       |   91.27 |    75.34 |     100 |   90.98 | 80-81,189,192,195,199,202,205,208,211,220                                   
+  MultiplexHandler.ts  |   93.55 |      100 |    87.5 |   93.55 | 52,61                                                                       
+  Parser.ts            |   99.37 |      100 |    96.3 |   99.36 | 492                                                                         
+  Tokenizer.ts         |   95.73 |    92.94 |   98.31 |   95.68 | 371,594-598,613,795,799,801,803,815,817,829,831,833,835,884,920-923,928-929 
+  WritableStream.ts    |     100 |      100 |     100 |     100 |                                                                             
+  index.ts             |     100 |      100 |     100 |     100 |                                                                             
+ src/__fixtures__      |     100 |      100 |     100 |     100 |                                                                             
+  test-helper.ts       |     100 |      100 |     100 |     100 |                                                                             
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------------------------------
+
+Test Suites: 2 failed, 5 passed, 7 total
+Tests:       7 failed, 55 passed, 62 total
+Snapshots:   10 passed, 10 total
+Time:        1.221 s
+Ran all test suites.

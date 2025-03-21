@@ -1,0 +1,1090 @@
+
+> htmlparser2@6.0.0 test
+> jest --coverage
+
+PASS src/WritableStream.spec.ts
+PASS src/Parser.spec.ts
+PASS src/index.spec.ts
+FAIL src/Tokenizer.spec.ts
+  ● Tokenizer › should support standard special tags
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 3
+
+      Array [
+        "onopentagname: 'title'",
+        "onopentagend",
+    -   "onclosetag: 'title'",
+    -   "onopentagname: 'div'",
+    -   "onopentagend",
+    -   "onclosetag: 'div'",
+    +   "ontext: '</title>'",
+    +   "ontext: '<div>'",
+    +   "ontext: '</div>'",
+        "onend",
+      ]
+
+      165 |         tokenizer.write(normalTitleInput);
+      166 |         tokenizer.end();
+    > 167 |         expect(logger.log).toEqual(normalTitleOutput);
+          |                            ^
+      168 |         tokenizer.reset();
+      169 |         logger.log = [];
+      170 |     });
+
+      at Object.<anonymous> (src/Tokenizer.spec.ts:167:28)
+
+PASS src/FeedHandler.spec.ts
+FAIL src/__tests__/events.ts
+  ● Events › Special special tags
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 203
+    + Received  +   1
+
+    @@ -12,218 +12,16 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "<b>foo</b><title>",
+    +       "<b>foo</b><title></TiTlE><sitle><b></b></sitle><ttyle><b></b></ttyle><sCriPT></scripter</soo</sCript><STyLE></styler</STylE><sCiPt><stylee><scriptee><soo>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+            "title",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "sitle",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "sitle",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "sitle",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "ttyle",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "ttyle",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "b",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "ttyle",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "script",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "script",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "</scripter</soo",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "script",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "</styler",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "style",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "soo",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scriptee",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "stylee",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "scipt",
+          ],
+          "event": "closetag",
+        },
+      ]
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:894:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+FAIL src/__tests__/stream.ts
+  ● Stream › Basic html
+
+    expect(received).toBeNull()
+
+    Received: [Error: expect(received).toStrictEqual(expected) // deep equality·
+    - Expected  - 26
+    + Received  +  1·
+    @@ -32,42 +32,17 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "The Title",
+    +       "The Title</title><body>Hello world</body></html>",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+            "title",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "Hello world",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+          ],
+          "event": "closetag",
+        },
+        Object {
+          "data": Array []
+
+      91 | 
+      92 |     return (err: null | Error, actual?: unknown | unknown[]) => {
+    > 93 |         expect(err).toBeNull();
+         |                     ^
+      94 |         if (file.useSnapshot) {
+      95 |             expect(actual).toMatchSnapshot();
+      96 |         } else {
+
+      at WritableStream.<anonymous> (src/__fixtures__/test-helper.ts:93:21)
+
+  ● Stream › Attributes
+
+    expect(received).toBeNull()
+
+    Received: [Error: expect(received).toStrictEqual(expected) // deep equality·
+    - Expected  - 279
+    + Received  +  12·
+    @@ -66,304 +66,37 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "Attributes test",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "head",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       " Normal attributes ",
+    -     ],
+    -     "event": "comment",
+    -   },
+    -   Object {
+    -     "data": Array [],
+    -     "event": "commentend",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "id",
+    -       "test0",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "class",
+    -       "value0",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -       "value1",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -       Object {
+    -         "class": "value0",
+    -         "id": "test0",
+    -         "title": "value1",
+    -       },
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "class=\"value0\" title=\"value1\"",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    +       "Attributes test</title>
+    + </head>
+    + <body>
+    + 	<!-- Normal attributes -->
+    + 	<button id=\"test0\" class=\"value0\" title=\"value1\">class=\"value0\" title=\"value1\"</button>·
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       " Attributes with no quotes or value ",
+    -     ],
+    -     "event": "comment",
+    -   },
+    -   Object {
+    -     "data": Array [],
+    -     "event": "commentend",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "id",
+    -       "test1",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "class",
+    -       "value2",
+    -       null,
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "disabled",
+    -       "",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -       Object {
+    -         "class": "value2",
+    -         "disabled": "",
+    -         "id": "test1",
+    -       },
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "class=value2 disabled",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    + 	<!-- Attributes with no quotes or value -->
+    + 	<button id=\"test1\" class=value2 disabled>class=value2 disabled</button>·
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       " Attributes with no space between them. No valid, but accepted by the browser ",
+    -     ],
+    -     "event": "comment",
+    -   },
+    -   Object {
+    -     "data": Array [],
+    -     "event": "commentend",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    + 	<!-- Attributes with no space between them. No valid, but accepted by the browser -->
+    + 	<button id=\"test2\" class=\"value4\"title=\"value5\">class=\"value4\"title=\"value5\"</button>
+    + </body>
+    + </html>",
+          ],
+          "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "id",
+    -       "test2",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+        },
+        Object {
+          "data": Array [
+    -       "class",
+    -       "value4",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+            "title",
+    -       "value5",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -       Object {
+    -         "class": "value4",
+    -         "id": "test2",
+    -         "title": "value5",
+    -       },
+          ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "class=\"value4\"title=\"value5\"",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "button",
+    -     ],
+          "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+        },
+        Object {
+          "data": Array [
+    -       "body",
+    +       "head",
+          ],
+          "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+        },
+        Object {
+          "data": Array [
+            "html",
+          ],]
+
+      91 | 
+      92 |     return (err: null | Error, actual?: unknown | unknown[]) => {
+    > 93 |         expect(err).toBeNull();
+         |                     ^
+      94 |         if (file.useSnapshot) {
+      95 |             expect(actual).toMatchSnapshot();
+      96 |         } else {
+
+      at WritableStream.<anonymous> (src/__fixtures__/test-helper.ts:93:21)
+
+  ● Stream › SVG
+
+    expect(received).toBeNull()
+
+    Received: [Error: expect(received).toStrictEqual(expected) // deep equality·
+    - Expected  - 324
+    + Received  +  17·
+    @@ -66,124 +66,27 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "SVG test",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "head",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    +       "SVG test</title>
+    + </head>
+    + <body>
+    + 	<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">
+    + 		<title>Test</title>
+    + 		<animate />
+    + 		<polygon />
+    + 		<g>
+    + 			<path>
+    + 				<title>x</title>
+    + 				<animate />
+    + 			</path>
+    + 		</g>
+    + 	</svg>
+    + </body>
+    + </html>
+      ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "svg",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "version",
+    -       "1.1",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "xmlns",
+    -       "http://www.w3.org/2000/svg",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "xmlns:xlink",
+    -       "http://www.w3.org/1999/xlink",
+    -       "\"",
+    -     ],
+    -     "event": "attribute",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "svg",
+    -       Object {
+    -         "version": "1.1",
+    -         "xmlns": "http://www.w3.org/2000/svg",
+    -         "xmlns:xlink": "http://www.w3.org/1999/xlink",
+    -       },
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 		",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "Test",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+    @@ -191,226 +94,16 @@
+          ],
+          "event": "closetag",
+        },
+        Object {
+          "data": Array [
+    -       "
+    - 		",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 		",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "polygon",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "polygon",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "polygon",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 		",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "g",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "g",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 			",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "path",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "path",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 				",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "x",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "title",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 				",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -     ],
+    -     "event": "opentagname",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -       Object {},
+    -     ],
+    -     "event": "opentag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "animate",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 			",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "path",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 		",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "g",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - 	",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "svg",
+    +       "head",
+          ],
+          "event": "closetag",
+        },
+        Object {
+          "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "body",
+    -     ],
+    -     "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+    -   },
+    -   Object {
+    -     "data": Array [
+            "html",
+          ],
+          "event": "closetag",
+    -   },
+    -   Object {
+    -     "data": Array [
+    -       "
+    - ",
+    -     ],
+    -     "event": "text",
+        },
+      ]]
+
+      91 | 
+      92 |     return (err: null | Error, actual?: unknown | unknown[]) => {
+    > 93 |         expect(err).toBeNull();
+         |                     ^
+      94 |         if (file.useSnapshot) {
+      95 |             expect(actual).toMatchSnapshot();
+      96 |         } else {
+
+      at WritableStream.<anonymous> (src/__fixtures__/test-helper.ts:93:21)
+
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------
+File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                   
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------
+All files              |   96.13 |    93.27 |    97.3 |   96.53 |                                                     
+ src                   |   95.96 |    93.08 |   97.06 |   96.39 |                                                     
+  CollectingHandler.ts |   66.67 |       50 |      80 |      80 | 22-25                                               
+  FeedHandler.ts       |   91.27 |    75.34 |     100 |   90.98 | 80-81,189,192,195,199,202,205,208,211,220           
+  MultiplexHandler.ts  |   93.55 |      100 |    87.5 |   93.55 | 52,61                                               
+  Parser.ts            |   98.74 |    99.37 |    96.3 |   98.73 | 265,492                                             
+  Tokenizer.ts         |   97.33 |    95.58 |     100 |    97.3 | 375,596,611,795,845,847,849,851,882,918-921,926-927 
+  WritableStream.ts    |     100 |      100 |     100 |     100 |                                                     
+  index.ts             |     100 |      100 |     100 |     100 |                                                     
+ src/__fixtures__      |     100 |      100 |     100 |     100 |                                                     
+  test-helper.ts       |     100 |      100 |     100 |     100 |                                                     
+-----------------------|---------|----------|---------|---------|-----------------------------------------------------
+Test Suites: 3 failed, 4 passed, 7 total
+Tests:       5 failed, 57 passed, 62 total
+Snapshots:   10 passed, 10 total
+Time:        4.159 s
+Ran all test suites.
