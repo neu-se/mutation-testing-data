@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+opts.stripWWW && urlObj.hostname.startsWith('www.')
+```
+This would result in different behavior because it checks if the hostname starts with 'www.' instead of matching the entire hostname against a specific pattern, potentially removing 'www.' from hostnames that don't match the original pattern.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!opts.stripWWW || /^www\.([a-z\-\d]{2,63})\.([a-z\.]{2,5})$/.test(urlObj.hostname)
+```
+This would result in different behavior because it uses the logical OR operator (`||`) with the negation of `opts.stripWWW`, which means 'www.' would be removed even if `opts.stripWWW` is `false`, as long as the hostname matches the pattern.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+opts.stripWWW && urlObj.hostname.includes('www.')
+```
+This would result in different behavior because it checks if 'www.' is included anywhere in the hostname, not just at the start, potentially removing 'www.' from hostnames where it appears in the middle or at the

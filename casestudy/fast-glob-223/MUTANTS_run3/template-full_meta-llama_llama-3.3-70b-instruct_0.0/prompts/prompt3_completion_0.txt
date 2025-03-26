@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+micromatch
+```
+This would result in different behavior because `micromatch` is an object with various methods, including `makeRe` and `isMatch`, whereas `isGlob` is a function that checks if a string is a glob pattern, so using `micromatch` directly would likely cause a TypeError.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+() => true
+```
+This would result in different behavior because this replacement would always return `true`, indicating that every pattern is dynamic, whereas `isGlob` checks if a string is a glob pattern and returns a boolean value accordingly.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pattern => pattern.includes(ESCAPE_SYMBOL)
+```
+This would result in different behavior because this replacement checks if the pattern includes the escape symbol, whereas `isGlob` checks if the string is a glob pattern, which may not necessarily include the escape symbol, so the replacement would have a different condition for determining if a pattern is dynamic.
+
+DONE.

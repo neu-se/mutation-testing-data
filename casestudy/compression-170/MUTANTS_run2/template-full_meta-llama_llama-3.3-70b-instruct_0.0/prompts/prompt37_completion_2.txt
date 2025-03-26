@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.statusCode = 404
+```
+This would result in different behavior because it sets the status code to 404 (Not Found) instead of writing the response headers with the current status code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+res.writeHead(this.statusCode, {'Content-Type': 'text/plain'})
+```
+This would result in different behavior because it sets the 'Content-Type' header to 'text/plain' in addition to writing the response headers with the current status code, potentially changing the response's content type.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+this.write('Error')
+```
+This would result in different behavior because it writes the string 'Error' to the response body instead of writing the response headers with the current status code, potentially causing the response to be sent prematurely.
+
+DONE.

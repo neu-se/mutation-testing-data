@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+
+      this.#options.key[key] = true; // track manually set keys.
+
+      if (opt.alias) this.alias(key, opt.alias);
+
+      const deprecate = opt.deprecate || opt.deprecated;
+
+      if (deprecate) {
+        this.deprecateOption(key, deprecate);
+      }
+
+      const demand = opt.demand || opt.required || opt.require;
+
+      // A required option can be specified via "demand: true".
+      if (demand) {
+        this.demand(key, demand);
+      }
+
+      if (opt.demandOption) {
+        this.demandOption(
+          key,
+          typeof opt.demandOption === 'string' ? opt.demandOption : undefined
+        );
+      }
+
+      if (opt.conflicts) {
+        this.conflicts(key, opt.conflicts);
+      }
+
+      if ('default' in opt) {
+        this.default(key, opt.default);
+      }
+
+      if (opt.implies !== undefined) {
+        this.implies(key, opt.implies);
+      }
+
+      if (opt.nargs !== undefined) {
+        this.nargs(key, opt.nargs);
+      }
+
+      if (opt.config) {
+        this.config(key, opt.configParser);
+      }
+
+      if (opt.normalize) {
+        this.normalize(key);
+      }
+
+      if (opt.choices) {
+        this.choices(key, opt.choices);
+      }
+
+      if (opt.coerce) {
+        this.coerce(key, opt.coerce);
+      }
+
+      if (opt.group) {
+        this.group(key, opt.group);
+      }
+
+      if (opt.boolean || opt.type === 'boolean') {
+        this.boolean(key);
+        if (opt.alias) this.boolean(opt.alias);
+      }
+
+      if (opt.array || opt.type === 'array') {
+        this.array(key);
+        if (opt.alias) this.array(opt.alias);
+      }
+
+      if (opt.number || opt.type === 'number') {
+        this.number(key);
+        if (opt.alias) this.number(opt.alias);
+      }
+
+      if (opt.string || opt.type === 'string') {
+        this.string(key);
+        if (opt.alias) this.string(opt.alias);
+      }
+
+      if (opt.count || opt.type === 'count') {
+        this.count(key);
+      }
+
+      if (typeof opt.global === 'boolean') {
+        this.global(key, opt.global);
+      }
+
+      if (opt.defaultDescription) {
+        this.#options.defaultDescription[key] = opt.defaultDescription;
+      }
+
+      if (opt.skipValidation) {
+        this.skipValidation(key);
+      }
+
+      const desc = opt.describe || opt.description || opt.desc;
+      const descriptions = this.#usage.getDescriptions();
+      if (
+        !Object.prototype.hasOwnProperty.call(<PLACEHOLDER>) ||
+        typeof desc === 'string'
+      ) {
+        this.describe(key, desc);
+      }
+
+      if (opt.hidden) {
+        this.hide(key);
+      }
+
+      if (opt.requiresArg) {
+        this.requiresArg(key);
+      }
+    }
+
+    return this;
+  }
+  options(
+    key: string | Dictionary<OptionDefinition>,
+    opt?: OptionDefinition
+  ): YargsInstance {
+    return this.option(key, opt);
+  }
+  parse(
+    args?: string | string[],
+    shortCircuit?: object | ParseCallback | boolean,
+    _parseFn?: ParseCallback
+  ): Arguments | Promise<Arguments> {
+    argsert(
+      '[string|array] [function|boolean|object] [function]',
+      [args, shortCircuit, _parseFn],
+      arguments.length
+    );
+    this[kFreeze](); // Push current state of parser onto stack.
+    if (typeof args === 'undefined') {
+      args = this.#processArgs;
+    }
+
+    // a context object can optionally be provided, this allows
+    // additional information to be passed to a command handler.
+    if (typeof shortCircuit === 'object') {
+      this.#parseContext = shortCircuit;
+      shortCircuit = _parseFn;
+    }
+
+    // by providing a function as a second argument to
+    // parse you can capture output that would otherwise
+    // default to printing to stdout/stderr.
+    if (typeof shortCircuit === 'function') {
+      this.#parseFn = shortCircuit as ParseCallback;
+      shortCircuit = false;
+    }
+    // completion short-circuits the parsing process,
+    // skipping validation, etc.
+    if (!shortCircuit) this.#processArgs = args;
+
+    if (this.#parseFn) this.#exitProcess = false;
+
+    const parsed = this[kRunYargsParserAndExecuteCommands](
+      args,
+      !!shortCircuit
+    );
+    const tmpParsed = this.parsed;
+    this.#completion!.setParsed(this.parsed as DetailedArguments);
+    if (isPromise(parsed)) {
+      return parsed
+        .then(argv => {
+          if (this.#parseFn) this.#parseFn(this.#exitError, argv, this.#output);
+          return argv;
+        })
+        .catch(err => {
+          if (this.#parseFn) {
+            this.#parseFn!(
+              err,
+              (this.parsed as DetailedArguments).argv,
+              this.#output
+            );
+          }
+          throw err;
+        })
+        .finally(() => {
+          this[kUnfreeze](); // Pop the stack.
+          this.parsed = tmpParsed;
+        });
+    } else {
+      if (this.#parseFn) this.#parseFn(this.#exitError, parsed, this.#output);
+      this[kUnfreeze](); // Pop the stack.
+      this.parsed = tmpParsed;
+    }
+    return parsed;
+  }
+  parseAsync(
+    args?: string | string[],
+    shortCircuit?: object | ParseCallback | boolean,
+    _parseFn?: ParseCallback
+  ): Promise<Arguments> {
+    const maybePromise = this.parse(args, shortCircuit, _parseFn);
+    return !isPromise(maybePromise)
+      ? Promise.resolve(maybePromise)
+      : maybePromise;
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+descriptions, key
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

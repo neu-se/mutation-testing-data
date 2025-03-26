@@ -1,0 +1,383 @@
+
+> memfs@4.8.1 test
+> jest --maxWorkers 2
+
+FAIL src/__tests__/volume/readdirSync.test.ts
+  ● readdirSync() › accepts option {withFileTypes: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Array [
+        Object {
+          "mode": 33206,
+          "name": "af",
+    -     "path": "/x",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "b",
+    -     "path": "/x",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "c",
+    -     "path": "/x",
+    +     "path": "",
+        },
+      ]
+
+      67 |       return { ...dirent };
+      68 |     });
+    > 69 |     expect(mapped).toEqual([
+         |                    ^
+      70 |       { mode: 33206, name: 'af', path: '/x' },
+      71 |       { mode: 16895, name: 'b', path: '/x' },
+      72 |       { mode: 16895, name: 'c', path: '/x' },
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:69:20)
+
+  ● readdirSync() › accepts option {recursive: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 6
+    + Received  + 6
+
+      Array [
+    +   ".cf0",
+        "af1",
+        "af2",
+        "b",
+    -   "b/bf1",
+    -   "b/bf2",
+    +   "bf1",
+    +   "bf2",
+        "c",
+    -   "c/c",
+    -   "c/c/.cf0",
+    -   "c/c/cf1",
+    -   "c/c/cf2",
+    +   "c",
+    +   "cf1",
+    +   "cf2",
+      ]
+
+      86 |     const all = vol.readdirSync('/y', { recursive: true });
+      87 |     (all as any).sort();
+    > 88 |     expect(all).toEqual(['af1', 'af2', 'b', 'b/bf1', 'b/bf2', 'c', 'c/c', 'c/c/.cf0', 'c/c/cf1', 'c/c/cf2']);
+         |                 ^
+      89 |   });
+      90 |
+      91 |   it('accepts option {recursive: true, withFileTypes: true}', () => {
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:88:17)
+
+  ● readdirSync() › accepts option {recursive: true, withFileTypes: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 16
+    + Received  + 16
+
+      Array [
+        Object {
+          "mode": 33206,
+    +     "name": ".cf0",
+    +     "path": "",
+    +   },
+    +   Object {
+    +     "mode": 33206,
+          "name": "af1",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "af2",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "b",
+    -     "path": "/z",
+    -   },
+    -   Object {
+    -     "mode": 16895,
+    -     "name": "c",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "bf1",
+    -     "path": "/z/b",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "bf2",
+    -     "path": "/z/b",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "c",
+    -     "path": "/z/c",
+    +     "path": "",
+        },
+        Object {
+    -     "mode": 33206,
+    -     "name": ".cf0",
+    -     "path": "/z/c/c",
+    +     "mode": 16895,
+    +     "name": "c",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "cf1",
+    -     "path": "/z/c/c",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "cf2",
+    -     "path": "/z/c/c",
+    +     "path": "",
+        },
+      ]
+
+      105 |       })
+      106 |       .sort((a, b) => a.path.localeCompare(b.path));
+    > 107 |     expect(mapped).toEqual([
+          |                    ^
+      108 |       { mode: 33206, name: 'af1', path: '/z' },
+      109 |       { mode: 33206, name: 'af2', path: '/z' },
+      110 |       { mode: 16895, name: 'b', path: '/z' },
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:107:20)
+
+PASS src/fsa-to-node/__tests__/FsaNodeFs.test.ts
+PASS src/__tests__/volume.test.ts
+PASS src/__tests__/promises.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemDirectoryHandle.test.ts
+PASS src/crud/__tests__/matryoshka.test.ts
+PASS src/fsa-to-crud/__tests__/FsaCrud.test.ts
+PASS src/snapshot/__tests__/json.test.ts
+PASS src/snapshot/__tests__/binary.test.ts
+PASS src/crud-to-cas/__tests__/CrudCas.test.ts
+PASS src/__tests__/index.test.ts
+PASS src/__tests__/volume/copyFileSync.test.ts
+PASS src/__tests__/volume/writeSync.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemFileHandle.test.ts
+PASS src/__tests__/volume/readFile.test.ts
+PASS src/__tests__/volume/readSync.test.ts
+PASS src/__tests__/volume/closeSync.test.ts
+PASS src/__tests__/volume/copyFile.test.ts
+PASS src/__tests__/volume/write.test.ts
+PASS src/__tests__/volume/openSync.test.ts
+PASS src/crud-to-cas/__tests__/CrudCasBase.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemSyncAccessHandle.test.ts
+PASS src/snapshot/__tests__/async.test.ts
+PASS src/__tests__/volume/rmSync.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemWritableFileStream.test.ts
+PASS src/node-to-crud/__tests__/FsaCrud.test.ts
+PASS src/snapshot/__tests__/sync.test.ts
+PASS src/print/__tests__/index.test.ts
+PASS src/node-to-fsa/__tests__/scenarios.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemHandle.test.ts
+PASS src/__tests__/volume/rmPromise.test.ts
+PASS src/__tests__/volume/renameSync.test.ts
+PASS src/__tests__/volume/exists.test.ts
+PASS src/__tests__/volume/appendFileSync.test.ts
+PASS src/__tests__/volume/appendFile.test.ts
+PASS src/__tests__/volume/ReadStream.test.ts
+PASS src/__tests__/node.test.ts
+PASS src/__tests__/volume/existsSync.test.ts
+PASS src/__tests__/volume/writeFileSync.test.ts
+PASS src/__tests__/volume/mkdirSync.test.ts
+PASS src/node-to-fsa/__tests__/util.test.ts
+PASS src/__tests__/volume/WriteStream.test.ts
+PASS src/__tests__/volume/realpathSync.test.ts
+PASS src/fsa-to-node/__tests__/util.test.ts
+PASS src/__tests__/volume/statSync.test.ts
+PASS src/__tests__/volume/toString.test.ts
+PASS src/__tests__/process.test.ts
+PASS src/__tests__/volume/rename.test.ts
+PASS src/__tests__/setTimeoutUnref.test.ts
+PASS src/__tests__/setImmediate.test.ts
+
+Summary of all failing tests
+FAIL src/__tests__/volume/readdirSync.test.ts
+  ● readdirSync() › accepts option {withFileTypes: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Array [
+        Object {
+          "mode": 33206,
+          "name": "af",
+    -     "path": "/x",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "b",
+    -     "path": "/x",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "c",
+    -     "path": "/x",
+    +     "path": "",
+        },
+      ]
+
+      67 |       return { ...dirent };
+      68 |     });
+    > 69 |     expect(mapped).toEqual([
+         |                    ^
+      70 |       { mode: 33206, name: 'af', path: '/x' },
+      71 |       { mode: 16895, name: 'b', path: '/x' },
+      72 |       { mode: 16895, name: 'c', path: '/x' },
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:69:20)
+
+  ● readdirSync() › accepts option {recursive: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 6
+    + Received  + 6
+
+      Array [
+    +   ".cf0",
+        "af1",
+        "af2",
+        "b",
+    -   "b/bf1",
+    -   "b/bf2",
+    +   "bf1",
+    +   "bf2",
+        "c",
+    -   "c/c",
+    -   "c/c/.cf0",
+    -   "c/c/cf1",
+    -   "c/c/cf2",
+    +   "c",
+    +   "cf1",
+    +   "cf2",
+      ]
+
+      86 |     const all = vol.readdirSync('/y', { recursive: true });
+      87 |     (all as any).sort();
+    > 88 |     expect(all).toEqual(['af1', 'af2', 'b', 'b/bf1', 'b/bf2', 'c', 'c/c', 'c/c/.cf0', 'c/c/cf1', 'c/c/cf2']);
+         |                 ^
+      89 |   });
+      90 |
+      91 |   it('accepts option {recursive: true, withFileTypes: true}', () => {
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:88:17)
+
+  ● readdirSync() › accepts option {recursive: true, withFileTypes: true}
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 16
+    + Received  + 16
+
+      Array [
+        Object {
+          "mode": 33206,
+    +     "name": ".cf0",
+    +     "path": "",
+    +   },
+    +   Object {
+    +     "mode": 33206,
+          "name": "af1",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "af2",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "b",
+    -     "path": "/z",
+    -   },
+    -   Object {
+    -     "mode": 16895,
+    -     "name": "c",
+    -     "path": "/z",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "bf1",
+    -     "path": "/z/b",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "bf2",
+    -     "path": "/z/b",
+    +     "path": "",
+        },
+        Object {
+          "mode": 16895,
+          "name": "c",
+    -     "path": "/z/c",
+    +     "path": "",
+        },
+        Object {
+    -     "mode": 33206,
+    -     "name": ".cf0",
+    -     "path": "/z/c/c",
+    +     "mode": 16895,
+    +     "name": "c",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "cf1",
+    -     "path": "/z/c/c",
+    +     "path": "",
+        },
+        Object {
+          "mode": 33206,
+          "name": "cf2",
+    -     "path": "/z/c/c",
+    +     "path": "",
+        },
+      ]
+
+      105 |       })
+      106 |       .sort((a, b) => a.path.localeCompare(b.path));
+    > 107 |     expect(mapped).toEqual([
+          |                    ^
+      108 |       { mode: 33206, name: 'af1', path: '/z' },
+      109 |       { mode: 33206, name: 'af2', path: '/z' },
+      110 |       { mode: 16895, name: 'b', path: '/z' },
+
+      at Object.<anonymous> (src/__tests__/volume/readdirSync.test.ts:107:20)
+
+
+Test Suites: 1 failed, 49 passed, 50 total
+Tests:       3 failed, 16 skipped, 869 passed, 888 total
+Snapshots:   15 passed, 15 total
+Time:        3.204 s, estimated 5 s
+Ran all test suites.

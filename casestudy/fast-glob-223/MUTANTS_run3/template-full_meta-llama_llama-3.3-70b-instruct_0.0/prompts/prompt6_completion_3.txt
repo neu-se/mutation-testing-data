@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.substring(1), { strict: true }
+```
+This would result in different behavior because the pattern is being trimmed of its first character, potentially altering the glob matching, and the strict option is set to true, which could lead to different matching results.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+pattern.toUpperCase(), { strict: false }
+```
+This would result in different behavior because the pattern is being converted to uppercase, which might not match the original case-sensitive pattern, potentially leading to false negatives or positives in the glob matching.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+pattern, { strict: false, nocase: true }
+```
+This would result in different behavior because the nocase option is set to true, making the glob matching case-insensitive, which could lead to different results compared to the original case-sensitive matching.
+
+DONE.

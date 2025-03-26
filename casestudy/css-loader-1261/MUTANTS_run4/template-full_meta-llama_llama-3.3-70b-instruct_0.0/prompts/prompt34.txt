@@ -1,0 +1,224 @@
+Your task is to apply mutation testing to the following code:
+```
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+import { fileURLToPath } from "url";
+import path from "path";
+
+import { urlToRequest, interpolateName } from "loader-utils";
+import cssesc from "cssesc";
+import modulesValues from "postcss-modules-values";
+import localByDefault from "postcss-modules-local-by-default";
+import extractImports from "postcss-modules-extract-imports";
+import modulesScope from "postcss-modules-scope";
+import camelCase from "camelcase";
+
+const whitespace = "[\\x20\\t\\r\\n\\f]";
+const unescapeRegExp = new RegExp(
+  `\\\\([\\da-f]{1,6}${whitespace}?|(${whitespace})|.)`,
+  "ig"
+);
+const matchNativeWin32Path = /^[A-Z]:[/\\]|^\\\\/i;
+
+function unescape(str) {
+  return str.replace(unescapeRegExp, (_, escaped, escapedWhitespace) => {
+    const high = `0x${escaped}` - 0x10000;
+
+    /* eslint-disable line-comment-position */
+    // NaN means non-codepoint
+    // Workaround erroneous numeric interpretation of +"0x"
+    // eslint-disable-next-line no-self-compare
+    return high !== high || escapedWhitespace
+      ? escaped
+      : high < 0
+      ? // BMP codepoint
+        String.fromCharCode(high + 0x10000)
+      : // Supplemental Plane codepoint (surrogate pair)
+        // eslint-disable-next-line no-bitwise
+        String.fromCharCode((high >> 10) | 0xd800, (high & 0x3ff) | 0xdc00);
+    /* eslint-enable line-comment-position */
+  });
+}
+
+function normalizePath(file) {
+  return path.sep === "\\" ? file.replace(/\\/g, "/") : file;
+}
+
+// eslint-disable-next-line no-control-regex
+const filenameReservedRegex = /[<>:"/\\|?*]/g;
+// eslint-disable-next-line no-control-regex
+const reControlChars = /[\u0000-\u001f\u0080-\u009f]/g;
+
+function escapeLocalIdent(localident) {
+  return cssesc(
+    localident
+      // For `[hash]` placeholder
+      .replace(/^((-?[0-9])|--)/, "_$1")
+      .replace(filenameReservedRegex, "-")
+      .replace(reControlChars, "-")
+      .replace(/\./g, "-"),
+    { isIdentifier: true }
+  );
+}
+
+function defaultGetLocalIdent(
+  loaderContext,
+  localIdentName,
+  localName,
+  options
+) {
+  const { context, hashPrefix } = options;
+  const { resourcePath } = loaderContext;
+  const request = normalizePath(path.relative(context, resourcePath));
+
+  // eslint-disable-next-line no-param-reassign
+  options.content = `${hashPrefix + request}\x00${localName}`;
+
+  return interpolateName(loaderContext, localIdentName, options);
+}
+
+function normalizeUrl(url, isStringValue) {
+  let normalizedUrl = url;
+
+  if (isStringValue && /\\(\n|\r\n|\r|\f)/.test(normalizedUrl)) {
+    normalizedUrl = normalizedUrl.replace(/\\(\n|\r\n|\r|\f)/g, "");
+  }
+
+  if (matchNativeWin32Path.test(url)) {
+    return decodeURI(normalizedUrl);
+  }
+
+  return <PLACEHOLDER>(unescape(normalizedUrl));
+}
+
+function requestify(url, rootContext) {
+  if (/^file:/i.test(url)) {
+    return fileURLToPath(url);
+  }
+
+  return url.charAt(0) === "/"
+    ? urlToRequest(url, rootContext)
+    : urlToRequest(url);
+}
+
+function getFilter(filter, resourcePath) {
+  return (...args) => {
+    if (typeof filter === "function") {
+      return filter(...args, resourcePath);
+    }
+
+    return true;
+  };
+}
+
+function getValidLocalName(localName, exportLocalsConvention) {
+  if (exportLocalsConvention === "dashesOnly") {
+    return dashesCamelCase(localName);
+  }
+
+  return camelCase(localName);
+}
+
+const moduleRegExp = /\.module(s)?\.\w+$/i;
+const icssRegExp = /\.icss\.\w+$/i;
+
+function getModulesOptions(rawOptions, loaderContext) {
+  const { resourcePath } = loaderContext;
+  let isIcss;
+
+  if (typeof rawOptions.modules === "undefined") {
+    const isModules = moduleRegExp.test(resourcePath);
+
+    if (!isModules) {
+      isIcss = icssRegExp.test(resourcePath);
+    }
+
+    if (!isModules && !isIcss) {
+      return false;
+    }
+  } else if (
+    typeof rawOptions.modules === "boolean" &&
+    rawOptions.modules === false
+  ) {
+    return false;
+  }
+
+  let modulesOptions = {
+    compileType: isIcss ? "icss" : "module",
+    auto: true,
+    mode: "local",
+    exportGlobals: false,
+    localIdentName: "[hash:base64]",
+    localIdentContext: loaderContext.rootContext,
+    localIdentHashPrefix: "",
+    // eslint-disable-next-line no-undefined
+    localIdentRegExp: undefined,
+    // eslint-disable-next-line no-undefined
+    getLocalIdent: undefined,
+    namedExport: false,
+    exportLocalsConvention: "asIs",
+    exportOnlyLocals: false,
+  };
+
+  if (
+    typeof rawOptions.modules === "boolean" ||
+    typeof rawOptions.modules === "string"
+  ) {
+    modulesOptions.mode =
+      typeof rawOptions.modules === "string" ? rawOptions.modules : "local";
+  } else {
+    if (rawOptions.modules) {
+      if (typeof rawOptions.modules.auto === "boolean") {
+        const isModules =
+          rawOptions.modules.auto && moduleRegExp.test(resourcePath);
+
+        if (!isModules) {
+          return false;
+        }
+      } else if (rawOptions.modules.auto instanceof RegExp) {
+        const isModules = rawOptions.modules.auto.test(resourcePath);
+
+        if (!isModules) {
+          return false;
+        }
+      } else if (typeof rawOptions.modules.auto === "function") {
+        const isModule = rawOptions.modules.auto(resourcePath);
+
+        if (!isModule) {
+          return false;
+        }
+      }
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+decodeURI
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

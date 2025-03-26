@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+obj.hasOwnProperty
+```
+This would result in different behavior because `obj.hasOwnProperty` is a function that needs to be called with the property name as an argument, whereas `Object.prototype.hasOwnProperty.call` is a method that is called directly on the object with the property name as an argument, so the behavior would be different if `obj` does not have its own `hasOwnProperty` method or if it is overridden.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+key in obj
+```
+This would result in different behavior because `key in obj` checks the entire prototype chain of `obj`, whereas `Object.prototype.hasOwnProperty.call` only checks the own properties of `obj`, so properties inherited from the prototype chain would be included in the first case but not in the second.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+true
+```
+This would result in different behavior because `true` would always evaluate to true, so all properties of `obj` would be included in `sortedKeys`, regardless of whether they are own properties or not, whereas `Object.prototype.hasOwnProperty.call` filters out properties that are not own

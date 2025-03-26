@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+    const file = new this.props.File(link, node, flagsNum, this.newFdNumber());
+    this.fds[file.fd] = file;
+    this.openFiles++;
+
+    if (flagsNum & O_TRUNC) file.truncate();
+
+    return file;
+  }
+
+  private openFile(
+    filename: string,
+    flagsNum: number,
+    modeNum: number | undefined,
+    resolveSymlinks: boolean = true,
+  ): File {
+    const steps = filenameToSteps(filename);
+    let link: Link | null;
+    try {
+      link = resolveSymlinks ? this.getResolvedLinkOrThrow(filename, 'open') : this.getLinkOrThrow(filename, 'open');
+
+      // Check if file already existed when trying to create it exclusively (O_CREAT and O_EXCL flags are set).
+      // This is an error, see https://pubs.opengroup.org/onlinepubs/009695399/functions/open.html:
+      // "If O_CREAT and O_EXCL are set, open() shall fail if the file exists."
+      if (link && flagsNum & O_CREAT && flagsNum & O_EXCL) throw createError(EEXIST, 'open', filename);
+    } catch (err) {
+      // Try creating a new file, if it does not exist and O_CREAT flag is set.
+      // Note that this will still throw if the ENOENT came from one of the
+      // intermediate directories instead of the file itself.
+      if (err.code === ENOENT && flagsNum & O_CREAT) {
+        const dirname: string = pathModule.dirname(filename);
+        const dirLink: Link = this.getResolvedLinkOrThrow(dirname);
+        const dirNode = dirLink.getNode();
+
+        // Check that the place we create the new file is actually a directory and that we are allowed to do so:
+        if (!dirNode.isDirectory()) throw createError(ENOTDIR, 'open', filename);
+        if (!dirNode.canExecute() || !dirNode.canWrite()) throw createError(EACCES, 'open', filename);
+
+        // This is a difference to the original implementation, which would simply not create a file unless modeNum was specified.
+        // However, current Node versions will default to 0o666.
+        modeNum ??= 0o666;
+
+        link = this.createLink(dirLink, steps[steps.length - 1], false, modeNum);
+      } else throw err;
+    }
+
+    if (link) return this.openLink(link, flagsNum, resolveSymlinks);
+    throw createError(ENOENT, 'open', filename);
+  }
+
+  private openBase(filename: string, flagsNum: number, modeNum: number, resolveSymlinks: boolean = true): number {
+    const file = this.openFile(filename, flagsNum, modeNum, resolveSymlinks);
+    if (!file) throw createError(ENOENT, 'open', filename);
+    return file.fd;
+  }
+
+  openSync(path: PathLike, flags: TFlags, mode: TMode = MODE.DEFAULT): number {
+    // Validate (1) mode; (2) path; (3) flags - in that order.
+    const modeNum = modeToNumber(mode);
+    const fileName = pathToFilename(path);
+    const flagsNum = flagsToNumber(flags);
+    return this.openBase(fileName, flagsNum, modeNum, !(flagsNum & O_SYMLINK));
+  }
+
+  open(path: PathLike, flags: TFlags, /* ... */ callback: TCallback<number>);
+  open(path: PathLike, flags: TFlags, mode: TMode, callback: TCallback<number>);
+  open(path: PathLike, flags: TFlags, a: TMode | TCallback<number>, b?: TCallback<number>) {
+    let mode: TMode = a as TMode;
+    let callback: TCallback<number> = b as TCallback<number>;
+
+    if (typeof a === 'function') {
+      mode = MODE.DEFAULT;
+      callback = a;
+    }
+    mode = mode || MODE.DEFAULT;
+
+    const modeNum = modeToNumber(mode);
+    const fileName = pathToFilename(path);
+    const flagsNum = flagsToNumber(flags);
+
+    this.wrapAsync(this.openBase, [fileName, flagsNum, modeNum, !(flagsNum & O_SYMLINK)], callback);
+  }
+
+  private closeFile(file: File) {
+    if (!this.fds[file.fd]) return;
+
+    this.openFiles--;
+    delete this.fds[file.fd];
+    this.releasedFds.push(file.fd);
+  }
+
+  closeSync(fd: number) {
+    validateFd(fd);
+    const file = this.getFileByFdOrThrow(fd, 'close');
+    this.closeFile(file);
+  }
+
+  close(fd: number, callback: TCallback<void>) {
+    validateFd(fd);
+    const file = this.getFileByFdOrThrow(fd, 'close');
+    // NOTE: not calling closeSync because we can reset in between close and closeSync
+    this.wrapAsync(this.closeFile, <PLACEHOLDER>, callback);
+  }
+
+  private openFileOrGetById(id: TFileId, flagsNum: number, modeNum?: number): File {
+    if (typeof id === 'number') {
+      const file = this.fds[id];
+      if (!file) throw createError(ENOENT);
+      return file;
+    } else {
+      return this.openFile(pathToFilename(id), flagsNum, modeNum);
+    }
+  }
+
+  private readBase(
+    fd: number,
+    buffer: Buffer | ArrayBufferView | DataView,
+    offset: number,
+    length: number,
+    position: number | null,
+  ): number {
+    if (buffer.byteLength < length) {
+      throw createError(ERR_OUT_OF_RANGE, 'read', undefined, undefined, RangeError);
+    }
+    const file = this.getFileByFdOrThrow(fd);
+    if (file.node.isSymlink()) {
+      throw createError(EPERM, 'read', file.link.getPath());
+    }
+    return file.read(
+      buffer,
+      Number(offset),
+      Number(length),
+      position === -1 || typeof position !== 'number' ? undefined : position,
+    );
+  }
+
+  readSync(
+    fd: number,
+    buffer: Buffer | ArrayBufferView | DataView,
+    offset: number,
+    length: number,
+    position: number | null,
+  ): number {
+    validateFd(fd);
+    return this.readBase(fd, buffer, offset, length, position);
+  }
+
+  read(
+    fd: number,
+    buffer: Buffer | ArrayBufferView | DataView,
+    offset: number,
+    length: number,
+    position: number | null,
+    callback: (err?: Error | null, bytesRead?: number, buffer?: Buffer | ArrayBufferView | DataView) => void,
+  ) {
+    validateCallback(callback);
+
+    // This `if` branch is from Node.js
+    if (length === 0) {
+      return queueMicrotask(() => {
+        if (callback) callback(null, 0, buffer);
+      });
+    }
+
+    setImmediate(() => {
+      try {
+        const bytes = this.readBase(fd, buffer, offset, length, position);
+        callback(null, bytes, buffer);
+      } catch (err) {
+        callback(err);
+      }
+    });
+  }
+
+  private readvBase(fd: number, buffers: ArrayBufferView[], position: number | null): number {
+    const file = this.getFileByFdOrThrow(fd);
+    let p = position ?? undefined;
+    if (p === -1) {
+      p = undefined;
+    }
+    let bytesRead = 0;
+    for (const buffer of buffers) {
+      const bytes = file.read(buffer, 0, buffer.byteLength, p);
+      p = undefined;
+      bytesRead += bytes;
+      if (bytes < buffer.byteLength) break;
+    }
+    return bytesRead;
+  }
+
+  readv(fd: number, buffers: ArrayBufferView[], callback: misc.TCallback2<number, ArrayBufferView[]>): void;
+  readv(
+    fd: number,
+    buffers: ArrayBufferView[],
+    position: number | null,
+    callback: misc.TCallback2<number, ArrayBufferView[]>,
+  ): void;
+  readv(
+    fd: number,
+    buffers: ArrayBufferView[],
+    a: number | null | misc.TCallback2<number, ArrayBufferView[]>,
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+[file]
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+node.isFile() && (flagsNum === FLAGS.r)
+```
+This would result in different behavior because it checks if the node is a file and the flags are set to read-only, instead of checking if the node is a directory and the flags are not set to read-only.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!node.isFile() && (flagsNum & FLAGS.w)
+```
+This would result in different behavior because it checks if the node is not a file and the flags have the write bit set, instead of checking if the node is a directory and the flags are not set to read-only.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+node.isDirectory() || (flagsNum !== FLAGS.r)
+```
+This would result in different behavior because it checks if the node is a directory or the flags are not set to read-only, instead of checking if the node is a directory and the flags are not set to read-only, effectively changing the logical operator from `&&` to `||`.
+
+DONE.

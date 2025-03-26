@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```
+path.join(currentPath, targetPath)
+```
+This would result in different behavior because it would incorrectly join the `currentPath` and `targetPath` instead of replacing `currentPath` with `targetPath` in the `file.name`, potentially leading to incorrect file paths.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+source.replace(currentPath, '')
+```
+This would result in different behavior because it would remove the `currentPath` from the `source` path instead of replacing it with `targetPath`, potentially resulting in relative paths instead of absolute paths.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+file.name.substring(0, file.name.indexOf(currentPath) + currentPath.length)
+```
+This would result in different behavior because it would only keep the part of the `file.name` up to and including the `currentPath`, instead of replacing `currentPath` with `targetPath`, potentially resulting in truncated file paths.
+
+DONE.

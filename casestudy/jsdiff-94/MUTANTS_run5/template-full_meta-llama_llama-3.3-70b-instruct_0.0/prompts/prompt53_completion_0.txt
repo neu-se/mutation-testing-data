@@ -1,0 +1,17 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+oldEOFNewline && noNlBeforeAdds
+```
+This would result in different behavior because the condition is now checking if `oldEOFNewline` is true and `noNlBeforeAdds` is true, instead of checking if `oldEOFNewline` is false and `noNlBeforeAdds` is true, which changes the logic of when to insert the 'No newline at end of file' marker.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+!newEOFNewline && !noNlBeforeAdds
+```
+This would result in different behavior because the condition is now checking if `newEOFNewline` is false and `noNlBeforeAdds` is false, instead of checking if `oldEOFNewline` is false and `noNlBeforeAdds` is true, which changes the logic of when to insert the 'No newline at end of file' marker and also considers the state of the new file.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+oldEOFNewline || !noNlBeforeAdds
+```
+This would result in different behavior

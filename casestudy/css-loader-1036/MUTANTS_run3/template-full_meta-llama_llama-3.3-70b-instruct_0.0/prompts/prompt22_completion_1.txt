@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+(source) => `/*# sourceURL=${cssMapping.sourceRoot || ''}${source.toUpperCase()} */`
+```
+This would result in different behavior because the source URL is converted to uppercase, potentially affecting how the source map is resolved.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+(source) => `/*# sourceURL=${source} */`
+```
+This would result in different behavior because the `sourceRoot` property of `cssMapping` is ignored, which could lead to incorrect source map resolution if the source root is not the current working directory.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+(source) => `/*# sourceURL=${cssMapping.sources[0]} */`
+```
+This would result in different behavior because only the first source of the source map is used as the source URL, potentially causing issues if there are multiple sources.
+
+DONE.

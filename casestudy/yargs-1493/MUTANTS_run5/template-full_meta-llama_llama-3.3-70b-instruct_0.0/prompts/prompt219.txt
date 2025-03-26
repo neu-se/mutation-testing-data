@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+      wrap: !!theWrap
+    })
+
+    // the usage string.
+    if (!usageDisabled) {
+      if (usages.length) {
+        // user-defined usage.
+        usages.forEach((usage) => {
+          ui.div(`${usage[0].replace(/\$0/g, base$0)}`)
+          if (usage[1]) {
+            ui.div({ text: `${usage[1]}`, padding: [1, 0, 0, 0] })
+          }
+        })
+        ui.div()
+      } else if (commands.length) {
+        let u = null
+        // demonstrate how commands are used.
+        if (demandedCommands._) {
+          u = `${base$0} <${__('command')}>\n`
+        } else {
+          u = `${base$0} [${__('command')}]\n`
+        }
+        ui.div(`${u}`)
+      }
+    }
+
+    // your application's commands, i.e., non-option
+    // arguments populated in '_'.
+    if (commands.length) {
+      ui.div(__('Commands:'))
+
+      const context = yargs.getContext()
+      const parentCommands = context.commands.length ? `${context.commands.join(' ')} ` : ''
+
+      if (yargs.getParserConfiguration()['sort-commands'] === true) {
+        commands = commands.sort((a, b) => a[0].localeCompare(b[0]))
+      }
+
+      commands.forEach((command) => {
+        const commandString = `${base$0} ${parentCommands}${command[0].replace(/^\$0 ?/, '')}` // drop $0 from default commands.
+        ui.span(
+          {
+            text: commandString,
+            padding: [0, 2, 0, 2],
+            width: maxWidth(commands, theWrap, `${base$0}${parentCommands}`) + 4
+          },
+          { text: command[1] }
+        )
+        const hints = []
+        if (command[2]) hints.push(`[${__('default:').slice(0, -1)}]`) // TODO hacking around i18n here
+        if (command[3] && command[3].length) {
+          hints.push(`[${__('aliases:')} ${command[3].join(', ')}]`)
+        }
+        if (hints.length) {
+          ui.div({ text: hints.join(' '), padding: [0, 0, 0, 2], align: 'right' })
+        } else {
+          ui.div()
+        }
+      })
+
+      ui.div()
+    }
+
+    // perform some cleanup on the keys array, making it
+    // only include top-level keys not their aliases.
+    const aliasKeys = (Object.keys(options.alias) || [])
+      .concat(Object.keys(yargs.parsed.newAliases) || [])
+
+    keys = keys.filter(key => !yargs.parsed.newAliases[key] && aliasKeys.every(alias => (options.alias[alias] || []).indexOf(key) === -1))
+
+    // populate 'Options:' group with any keys that have not
+    // explicitly had a group set.
+    if (!groups[defaultGroup]) groups[defaultGroup] = []
+    addUngroupedKeys(keys, options.alias, groups)
+
+    // display 'Options:' table along with any custom tables:
+    Object.keys(groups).forEach((groupName) => {
+      if (!groups[groupName].length) return
+
+      // if we've grouped the key 'f', but 'f' aliases 'foobar',
+      // normalizedKeys should contain only 'foobar'.
+      const normalizedKeys = groups[groupName].filter(filterHiddenOptions).map((key) => {
+        if (~aliasKeys.indexOf(key)) return key
+        for (let i = 0, aliasKey; (aliasKey = aliasKeys[i]) !== undefined; i++) {
+          if (~(options.alias[aliasKey] || []).indexOf(key)) return aliasKey
+        }
+        return key
+      })
+
+      if (normalizedKeys.length < 1) return
+
+      ui.div(__(groupName))
+
+      // actually generate the switches string --foo, -f, --bar.
+      const switches = normalizedKeys.reduce((acc, key) => {
+        acc[key] = [ key ].concat(options.alias[key] || [])
+          .map(sw => {
+            // for the special positional group don't
+            // add '--' or '-' prefix.
+            if (groupName === self.getPositionalGroupName()) return sw
+            else return (<PLACEHOLDER>(sw) ? '-' : '--') + sw
+          })
+          .join(', ')
+
+        return acc
+      }, {})
+
+      normalizedKeys.forEach((key) => {
+        const kswitch = switches[key]
+        let desc = descriptions[key] || ''
+        let type = null
+
+        if (~desc.lastIndexOf(deferY18nLookupPrefix)) desc = __(desc.substring(deferY18nLookupPrefix.length))
+
+        if (~options.boolean.indexOf(key)) type = `[${__('boolean')}]`
+        if (~options.count.indexOf(key)) type = `[${__('count')}]`
+        if (~options.string.indexOf(key)) type = `[${__('string')}]`
+        if (~options.normalize.indexOf(key)) type = `[${__('string')}]`
+        if (~options.array.indexOf(key)) type = `[${__('array')}]`
+        if (~options.number.indexOf(key)) type = `[${__('number')}]`
+
+        const extra = [
+          type,
+          (key in demandedOptions) ? `[${__('required')}]` : null,
+          options.choices && options.choices[key] ? `[${__('choices:')} ${
+            self.stringifiedValues(options.choices[key])}]` : null,
+          defaultString(options.default[key], options.defaultDescription[key])
+        ].filter(Boolean).join(' ')
+
+        ui.span(
+          { text: kswitch, padding: [0, 2, 0, 2], width: maxWidth(switches, theWrap) + 4 },
+          desc
+        )
+
+        if (extra) ui.div({ text: extra, padding: [0, 0, 0, 2], align: 'right' })
+        else ui.div()
+      })
+
+      ui.div()
+    })
+
+    // describe some common use-cases for your application.
+    if (examples.length) {
+      ui.div(__('Examples:'))
+
+      examples.forEach((example) => {
+        example[0] = example[0].replace(/\$0/g, base$0)
+      })
+
+      examples.forEach((example) => {
+        if (example[1] === '') {
+          ui.div(
+            {
+              text: example[0],
+              padding: [0, 2, 0, 2]
+            }
+          )
+        } else {
+          ui.div(
+            {
+              text: example[0],
+              padding: [0, 2, 0, 2],
+              width: maxWidth(examples, theWrap) + 4
+            }, {
+              text: example[1]
+            }
+          )
+        }
+      })
+
+      ui.div()
+    }
+
+    // the usage string.
+    if (epilogs.length > 0) {
+      const e = epilogs.map(epilog => epilog.replace(/\$0/g, base$0)).join('\n')
+      ui.div(`${e}\n`)
+    }
+
+    // Remove the trailing white spaces
+    return ui.toString().replace(/\s*$/, '')
+  }
+
+  // return the maximum width of a string
+  // in the left-hand column of a table.
+  function maxWidth (table, theWrap, modifier) {
+    let width = 0
+
+    // table might be of the form [leftColumn],
+    // or {key: leftColumn}
+    if (!Array.isArray(table)) {
+      table = Object.keys(table).map(key => [table[key]])
+    }
+
+    table.forEach((v) => {
+      width = Math.max(
+        stringWidth(modifier ? `${modifier} ${v[0]}` : v[0]),
+        width
+      )
+    })
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+/^[^0-9]$/.test
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+src
+```
+This would result in different behavior because it changes the comparison to check if the destination parent is the root path of the source, instead of the destination, potentially allowing incorrect directory checks.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+path.parse(src).root
+```
+This would result in different behavior because it always checks if the destination parent is the root path of the source, instead of the destination, which could lead to incorrect results if the source and destination are on different file systems.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+'/'
+```
+This would result in different behavior because it changes the comparison to check if the destination parent is the absolute root directory, instead of the root directory of the destination, potentially allowing incorrect directory checks on systems with multiple file systems.
+
+DONE.

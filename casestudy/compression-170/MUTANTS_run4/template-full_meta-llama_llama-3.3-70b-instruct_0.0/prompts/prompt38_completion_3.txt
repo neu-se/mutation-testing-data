@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+this.statusCode + 1
+```
+This would result in different behavior because it increments the status code by 1, potentially changing the HTTP response code sent to the client.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+res.locals.statusCode
+```
+This would result in different behavior because it refers to a different variable (`res.locals.statusCode` instead of `this.statusCode`), which may not exist or have a different value, potentially causing an error or incorrect response.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+req.method === 'GET' ? 200 : this.statusCode
+```
+This would result in different behavior because it conditionally sets the status code to 200 if the request method is GET, otherwise using the original status code, potentially altering the response code based on the request method.
+
+DONE.

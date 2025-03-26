@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+fs.accessSync
+```
+This would result in different behavior because `fs.accessSync` checks the accessibility of the file, whereas `fs.existsSync` checks the existence of the file, which might lead to different outcomes based on the file system's permissions.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+function(file) { return true; }
+```
+This would result in different behavior because this function always returns `true`, indicating that the destination file always exists, even if it doesn't, which would lead to the file being overwritten or an error being thrown every time.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+fs.lstatSync
+```
+This would result in different behavior because `fs.lstatSync` returns information about a symbolic link, whereas `fs.existsSync` checks the existence of the actual file, which could lead to incorrect results if the destination file is a symbolic link.
+
+DONE.

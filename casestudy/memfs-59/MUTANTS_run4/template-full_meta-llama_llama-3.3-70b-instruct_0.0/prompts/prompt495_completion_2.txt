@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+!node.isFile() && (flagsNum !== FLAGS.w)
+```
+This would result in different behavior because it checks if the node is not a file and the flags do not include write permission, instead of checking if the node is a directory and the flags do not include read permission.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+node.isDirectory() && (flagsNum & FLAGS.w)
+```
+This would result in different behavior because it checks if the node is a directory and the flags include write permission, instead of checking if the node is a directory and the flags do not include read permission.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+!node.isDirectory() && (flagsNum !== FLAGS.r)
+```
+This would result in different behavior because it checks if the node is not a directory and the flags do not include read permission, instead of checking if the node is a directory and the flags do not include read permission.
+
+DONE.

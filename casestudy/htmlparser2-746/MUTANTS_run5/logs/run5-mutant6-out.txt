@@ -1,0 +1,102 @@
+
+> htmlparser2@6.0.0 test
+> jest --coverage
+
+FAIL src/__tests__/events.ts
+  ● Events › </title> in <script> (#745)
+
+    expect(received).toStrictEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -12,11 +12,11 @@
+          ],
+          "event": "opentag",
+        },
+        Object {
+          "data": Array [
+    -       "'</title>'",
+    +       "''",
+          ],
+          "event": "text",
+        },
+        Object {
+          "data": Array [
+
+       95 |             expect(actual).toMatchSnapshot();
+       96 |         } else {
+    >  97 |             expect(actual).toStrictEqual(file.expected);
+          |                            ^
+       98 |         }
+       99 | 
+      100 |         if (repeated) done();
+
+      at src/__fixtures__/test-helper.ts:97:28
+      at onend (src/__fixtures__/test-helper.ts:48:13)
+      at CollectingHandler.func (src/CollectingHandler.ts:12:49)
+      at CollectingHandler.MultiplexHandler.onend (src/MultiplexHandler.ts:55:14)
+      at Parser.onend (src/Parser.ts:426:23)
+      at Tokenizer.finish (src/Tokenizer.ts:895:18)
+      at Tokenizer.end (src/Tokenizer.ts:283:32)
+      at Parser.end (src/Parser.ts:468:24)
+      at Object.writeToParser (src/__fixtures__/test-helper.ts:25:12)
+      at src/__tests__/events.ts:4:12
+
+PASS src/__tests__/stream.ts
+FAIL src/Tokenizer.spec.ts
+  ● Tokenizer › should support standard special tags
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 3
+
+      Array [
+        "onopentagname: 'title'",
+        "onopentagend",
+    -   "onclosetag: 'title'",
+    -   "onopentagname: 'div'",
+    -   "onopentagend",
+    -   "onclosetag: 'div'",
+    +   "ontext: '</title>'",
+    +   "ontext: '<div>'",
+    +   "ontext: '</div>'",
+        "onend",
+      ]
+
+      165 |         tokenizer.write(normalTitleInput);
+      166 |         tokenizer.end();
+    > 167 |         expect(logger.log).toEqual(normalTitleOutput);
+          |                            ^
+      168 |         tokenizer.reset();
+      169 |         logger.log = [];
+      170 |     });
+
+      at Object.<anonymous> (src/Tokenizer.spec.ts:167:28)
+
+PASS src/FeedHandler.spec.ts
+PASS src/Parser.spec.ts
+PASS src/index.spec.ts
+PASS src/WritableStream.spec.ts
+-----------------------|---------|----------|---------|---------|-------------------------------------------
+File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                         
+-----------------------|---------|----------|---------|---------|-------------------------------------------
+All files              |   97.05 |    95.05 |    97.3 |   97.48 |                                           
+ src                   |   96.92 |    94.92 |   97.06 |   97.38 |                                           
+  CollectingHandler.ts |   66.67 |       50 |      80 |      80 | 22-25                                     
+  FeedHandler.ts       |   91.27 |    75.34 |     100 |   90.98 | 80-81,189,192,195,199,202,205,208,211,220 
+  MultiplexHandler.ts  |   93.55 |      100 |    87.5 |   93.55 | 52,61                                     
+  Parser.ts            |   99.37 |      100 |    96.3 |   99.36 | 492                                       
+  Tokenizer.ts         |   98.75 |    98.23 |     100 |   98.74 | 883,919-922,927-928                       
+  WritableStream.ts    |     100 |      100 |     100 |     100 |                                           
+  index.ts             |     100 |      100 |     100 |     100 |                                           
+ src/__fixtures__      |     100 |      100 |     100 |     100 |                                           
+  test-helper.ts       |     100 |      100 |     100 |     100 |                                           
+-----------------------|---------|----------|---------|---------|-------------------------------------------
+
+Test Suites: 2 failed, 5 passed, 7 total
+Tests:       2 failed, 60 passed, 62 total
+Snapshots:   10 passed, 10 total
+Time:        1.239 s
+Ran all test suites.

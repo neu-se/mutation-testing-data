@@ -1,0 +1,100 @@
+
+> memfs@4.15.1 test
+> jest --maxWorkers 2
+
+PASS src/__tests__/promises.test.ts
+PASS src/crud/__tests__/matryoshka.test.ts
+PASS src/fsa-to-node/__tests__/FsaNodeFs.test.ts
+PASS src/crud-to-cas/__tests__/CrudCas.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemFileHandle.test.ts
+PASS src/fsa-to-crud/__tests__/FsaCrud.test.ts
+PASS src/node-to-fsa/__tests__/scenarios.test.ts
+PASS src/crud-to-cas/__tests__/CrudCasBase.test.ts
+PASS src/__tests__/volume/WriteStream.test.ts
+PASS src/__tests__/volume/ReadStream.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemDirectoryHandle.test.ts
+PASS src/__tests__/volume/writeFileSync.test.ts
+PASS src/__tests__/node.test.ts
+PASS src/__tests__/volume/readFile.test.ts
+PASS src/snapshot/__tests__/json.test.ts
+PASS src/__tests__/index.test.ts
+PASS src/__tests__/volume/writeSync.test.ts
+PASS src/__tests__/volume/closeSync.test.ts
+PASS src/__tests__/volume/write.test.ts
+PASS src/snapshot/__tests__/binary.test.ts
+PASS src/__tests__/volume/readdirSync.test.ts
+PASS src/__tests__/volume/openSync.test.ts
+PASS src/__tests__/volume/rmSync.test.ts
+PASS src/__tests__/volume/copyFileSync.test.ts
+PASS src/__tests__/volume/renameSync.test.ts
+PASS src/__tests__/volume/chmodSync.test.ts
+PASS src/__tests__/volume/rmPromise.test.ts
+PASS src/node-to-crud/__tests__/FsaCrud.test.ts
+PASS src/__tests__/volume/mkdirSync.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemSyncAccessHandle.test.ts
+PASS src/__tests__/volume/utimesSync.test.ts
+PASS src/__tests__/volume/copyFile.test.ts
+PASS src/__tests__/volume/statSync.test.ts
+PASS src/__tests__/volume/lutimesSync.test.ts
+PASS src/__tests__/volume/readSync.test.ts
+PASS src/__tests__/volume/appendFileSync.test.ts
+PASS src/__tests__/volume/realpathSync.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemWritableFileStream.test.ts
+PASS src/snapshot/__tests__/async.test.ts
+PASS src/snapshot/__tests__/sync.test.ts
+PASS src/print/__tests__/index.test.ts
+PASS src/node-to-fsa/__tests__/NodeFileSystemHandle.test.ts
+PASS src/__tests__/volume/appendFile.test.ts
+PASS src/__tests__/volume/rename.test.ts
+PASS src/__tests__/volume/FileHandle.test.ts
+PASS src/__tests__/volume/toString.test.ts
+PASS src/__tests__/setImmediate.test.ts
+PASS src/fsa-to-node/__tests__/util.test.ts
+PASS src/__tests__/volume/exists.test.ts
+PASS src/__tests__/volume/existsSync.test.ts
+PASS src/node-to-fsa/__tests__/util.test.ts
+PASS src/__tests__/process.test.ts
+PASS src/__tests__/setTimeoutUnref.test.ts
+FAIL src/__tests__/volume.test.ts
+  ● volume › Volume › .reset() › Open streams should not be affected
+
+    EBADF: bad file descriptor, close
+
+      144 |
+      145 | export function createError(errorCode: string, func = '', path = '', path2 = '', Constructor = Error) {
+    > 146 |   const error = new Constructor(formatError(errorCode, func, path, path2));
+          |                 ^
+      147 |   (error as any).code = errorCode;
+      148 |
+      149 |   if (path) {
+
+      at createError (src/node/util.ts:146:17)
+      at Volume.getFileByFdOrThrow (src/volume.ts:544:33)
+      at Volume.closeSync (src/volume.ts:822:23)
+      at Immediate.<anonymous> (src/volume.ts:582:25)
+
+Summary of all failing tests
+FAIL src/__tests__/volume.test.ts
+  ● volume › Volume › .reset() › Open streams should not be affected
+
+    EBADF: bad file descriptor, close
+
+      144 |
+      145 | export function createError(errorCode: string, func = '', path = '', path2 = '', Constructor = Error) {
+    > 146 |   const error = new Constructor(formatError(errorCode, func, path, path2));
+          |                 ^
+      147 |   (error as any).code = errorCode;
+      148 |
+      149 |   if (path) {
+
+      at createError (src/node/util.ts:146:17)
+      at Volume.getFileByFdOrThrow (src/volume.ts:544:33)
+      at Volume.closeSync (src/volume.ts:822:23)
+      at Immediate.<anonymous> (src/volume.ts:582:25)
+
+
+Test Suites: 1 failed, 53 passed, 54 total
+Tests:       1 failed, 17 skipped, 982 passed, 1000 total
+Snapshots:   15 passed, 15 total
+Time:        6.232 s, estimated 7 s
+Ran all test suites.

@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+cb(new Error('Unexpected error'))
+```
+This would result in different behavior because it always returns an error, instead of calling the callback with no arguments, which could lead to unexpected behavior in the calling code.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null, srcStat)
+```
+This would result in different behavior because it passes the `srcStat` to the callback, instead of not passing any value, which could cause issues if the calling code expects no value or a different value.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+cb(null, { srcStat: null, destStat: null })
+```
+This would result in different behavior because it passes an object with `srcStat` and `destStat` set to `null` to the callback, instead of not passing any value, which could cause issues if the calling code expects no value or a different value.
+
+DONE.

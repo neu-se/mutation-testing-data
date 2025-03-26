@@ -1,0 +1,234 @@
+Your task is to apply mutation testing to the following code:
+```
+ * Copyright(c) 2010 Sencha Inc.
+ * Copyright(c) 2011 TJ Holowaychuk
+ * Copyright(c) 2014 Jonathan Ong
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+'use strict'
+
+/**
+ * Module dependencies.
+ * @private
+ */
+
+var Negotiator = require('negotiator')
+var Buffer = require('safe-buffer').Buffer
+var bytes = require('bytes')
+var compressible = require('compressible')
+var debug = require('debug')('compression')
+var onHeaders = require('on-headers')
+var vary = require('vary')
+var zlib = require('zlib')
+
+/**
+ * Module exports.
+ */
+
+module.exports = compression
+module.exports.filter = shouldCompress
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var cacheControlNoTransformRegExp = /(?:^|,)\s*?no-transform\s*?(?:,|$)/
+
+/**
+ * Compress response data with gzip / deflate.
+ *
+ * @param {Object} [options]
+ * @return {Function} middleware
+ * @public
+ */
+
+function compression (options) {
+  var opts = options || {}
+
+  // options
+  var filter = opts.filter || shouldCompress
+  var threshold = bytes.parse(opts.threshold)
+
+  if (threshold == null) {
+    threshold = 1024
+  }
+
+  return function compression (req, res, next) {
+    var ended = false
+    var length
+    var listeners = []
+    var stream
+
+    var _end = res.end
+    var _on = res.on
+    var _write = res.write
+
+    // flush
+    res.flush = function flush () {
+      if (stream) {
+        stream.flush()
+      }
+    }
+
+    // proxy
+
+    res.write = function write (chunk, encoding) {
+      if (ended) {
+        return false
+      }
+
+      if (!headersSent(res)) {
+        this.writeHead(this.statusCode)
+      }
+
+      return stream
+        ? stream.write(toBuffer(chunk, encoding))
+        : _write.call(this, chunk, encoding)
+    }
+
+    res.end = function end (chunk, encoding) {
+      if (ended) {
+        return false
+      }
+
+      if (!headersSent(res)) {
+        // estimate the length
+        if (!this.getHeader('Content-Length')) {
+          length = chunkLength(chunk, encoding)
+        }
+
+        <PLACEHOLDER>(this.statusCode)
+      }
+
+      if (!stream) {
+        return _end.call(this, chunk, encoding)
+      }
+
+      // mark ended
+      ended = true
+
+      // write Buffer for Node.js 0.8
+      return chunk
+        ? stream.end(toBuffer(chunk, encoding))
+        : stream.end()
+    }
+
+    res.on = function on (type, listener) {
+      if (!listeners || type !== 'drain') {
+        return _on.call(this, type, listener)
+      }
+
+      if (stream) {
+        return stream.on(type, listener)
+      }
+
+      // buffer listeners for future stream
+      listeners.push([type, listener])
+
+      return this
+    }
+
+    function nocompress (msg) {
+      debug('no compression: %s', msg)
+      addListeners(res, _on, listeners)
+      listeners = null
+    }
+
+    onHeaders(res, function onResponseHeaders () {
+      // determine if request is filtered
+      if (!filter(req, res)) {
+        nocompress('filtered')
+        return
+      }
+
+      // determine if the entity should be transformed
+      if (!shouldTransform(req, res)) {
+        nocompress('no transform')
+        return
+      }
+
+      // vary
+      vary(res, 'Accept-Encoding')
+
+      // content-length below threshold
+      if (Number(res.getHeader('Content-Length')) < threshold || length < threshold) {
+        nocompress('size below threshold')
+        return
+      }
+
+      var encoding = res.getHeader('Content-Encoding') || 'identity'
+
+      // already encoded
+      if (encoding !== 'identity') {
+        nocompress('already encoded')
+        return
+      }
+
+      // head
+      if (req.method === 'HEAD') {
+        nocompress('HEAD request')
+        return
+      }
+
+      // compression method
+      var negotiator = new Negotiator(req)
+      var method = negotiator.encoding(['gzip', 'deflate', 'identity'], ['gzip'])
+
+      // negotiation failed
+      if (!method || method === 'identity') {
+        nocompress('not acceptable')
+        return
+      }
+
+      // compression stream
+      debug('%s compression', method)
+      stream = method === 'gzip'
+        ? zlib.createGzip(opts)
+        : zlib.createDeflate(opts)
+
+      // add buffered listeners to stream
+      addListeners(stream, stream.on, listeners)
+
+      // header fields
+      res.setHeader('Content-Encoding', method)
+      res.removeHeader('Content-Length')
+
+      // compression
+      stream.on('data', function onStreamData (chunk) {
+        if (_write.call(res, chunk) === false) {
+          stream.pause()
+```
+
+by replacing the PLACEHOLDER with a buggy code fragment that has different
+behavior than the original code fragment, which was:
+```
+this.writeHead
+```
+Please consider changes such as using different operators, changing constants,
+referring to different variables, object properties, functions, or methods.  
+
+Provide three answers as fenced code blocks containing a single line of code,
+using the following template:
+
+Option 1: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```
+<code fragment>
+```
+This would result in different behavior because <brief explanation>.
+
+Please conclude your response with "DONE."

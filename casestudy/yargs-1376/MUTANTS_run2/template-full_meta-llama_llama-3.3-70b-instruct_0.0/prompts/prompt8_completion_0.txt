@@ -1,0 +1,19 @@
+Option 1: The PLACEHOLDER can be replaced with:
+```javascript
+config.hasOwnProperty('extends')
+```
+This would result in different behavior because it does not check the prototype chain, potentially allowing for inherited properties to be ignored, whereas the original code uses `Object.prototype.hasOwnProperty.call` to ensure that the check is performed on the object itself, regardless of any modifications to `config` or its prototype.
+
+Option 2: The PLACEHOLDER can be replaced with:
+```javascript
+config.extends !== undefined
+```
+This would result in different behavior because it checks if the `extends` property is not undefined, which could be true even if the property does not exist on the object (e.g., if it exists on the prototype chain), whereas the original code checks for the property's existence on the object itself.
+
+Option 3: The PLACEHOLDER can be replaced with:
+```javascript
+'extends' in config
+```
+This would result in different behavior because it checks if the `extends` property exists anywhere in the prototype chain of `config`, whereas the original code checks if the property exists directly on the `config` object, ignoring any inherited properties.
+
+DONE.

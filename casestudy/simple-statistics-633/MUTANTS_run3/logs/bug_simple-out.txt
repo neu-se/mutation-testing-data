@@ -1,0 +1,4970 @@
+
+> simple-statistics@7.7.3 test
+> rollup -c rollup.config.js && npm run lint && tap --lines 95 --branches 95 --functions 95 --statements 95 --coverage test/*.test.js --jobs=4
+
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.mjs[22m...[39m
+[32mcreated [1mdist/simple-statistics.mjs[22m in [1m291ms[22m[39m
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.js[22m...[39m
+[32mcreated [1mdist/simple-statistics.js[22m in [1m190ms[22m[39m
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.min.js[22m...[39m
+[32mcreated [1mdist/simple-statistics.min.js[22m in [1m692ms[22m[39m
+
+> simple-statistics@7.7.3 prelint
+> tsc --skipLibCheck
+
+
+> simple-statistics@7.7.3 lint
+> eslint index.js src test && prettier --check src test "!test/types.js"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> simple-statistics@7.7.3 postlint
+> documentation lint src
+
+TAP version 13
+ok 1 - test/add_to_mean.test.js # time=15.618ms {
+    # Subtest: addToMean
+        # Subtest: can get add a single value to a mean
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can get add a single value to a mean # time=2.342ms
+        
+        1..1
+    ok 1 - addToMean # time=7.465ms
+    
+    1..1
+    # time=15.618ms
+}
+
+ok 2 - test/approx_equal.test.js # time=34.256ms {
+    # Subtest: approximate strict equality
+        # Subtest: handles equal values
+            ok 1 - expect truthy value
+            1..1
+        ok 1 - handles equal values # time=1.957ms
+        
+        # Subtest: handles values separated by less than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 2 - handles values separated by less than epsilon # time=0.925ms
+        
+        # Subtest: handles values separated by more than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - handles values separated by more than epsilon # time=1.144ms
+        
+        # Subtest: handles values separated by relatively less than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 4 - handles values separated by relatively less than epsilon # time=0.651ms
+        
+        # Subtest: handles values separated by relatively more than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 5 - handles values separated by relatively more than epsilon # time=0.584ms
+        
+        # Subtest: handles negative values
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            ok 3 - expect truthy value
+            ok 4 - expect truthy value
+            1..4
+        ok 6 - handles negative values # time=0.838ms
+        
+        # Subtest: handles larger tolerances
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 7 - handles larger tolerances # time=0.53ms
+        
+        # Subtest: handles values near zero
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 8 - handles values near zero # time=0.622ms
+        
+        1..8
+    ok 1 - approximate strict equality # time=31.804ms
+    
+    1..1
+    # time=34.256ms
+}
+
+ok 3 - test/bayes.test.js # time=32.676ms {
+    # Subtest: BayesianClassifier
+        # Subtest: makes an easy call with one training round
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - makes an easy call with one training round # time=4.157ms
+        
+        # Subtest: makes fify-fifty call
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - makes fify-fifty call # time=1.369ms
+        
+        # Subtest: makes seventy-five/twenty-five call
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - makes seventy-five/twenty-five call # time=1.204ms
+        
+        # Subtest: tests multiple properties
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - tests multiple properties # time=1.126ms
+        
+        # Subtest: classifies multiple things
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 5 - classifies multiple things # time=1.432ms
+        
+        1..5
+    ok 1 - BayesianClassifier # time=23.981ms
+    
+    1..1
+    # time=32.676ms
+}
+
+ok 4 - test/bernoulli_distribution.test.js # time=20.197ms {
+    # Subtest: bernoulliDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for p = 0.3
+            ok 1 - expect truthy value
+            ok 2 - 0.0001
+            ok 3 - 0.0001
+            1..3
+        ok 1 - can return generate probability and cumulative probability distributions for p = 0.3 # time=2.662ms
+        
+        # Subtest: can return null when p is not a valid probability
+            ok 1 - p should be greater than 0.0
+            ok 2 - p should be less than 1.0
+            1..2
+        ok 2 - can return null when p is not a valid probability # time=1.475ms
+        
+        1..2
+    ok 1 - bernoulliDistribution # time=10.752ms
+    
+    1..1
+    # time=20.197ms
+}
+
+ok 5 - test/binomial_distribution.test.js # time=20.625ms {
+    # Subtest: binomialDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for n = 6, p = 0.3
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            ok 3 - 0.0001
+            ok 4 - 0.0001
+            ok 5 - 0.0001
+            ok 6 - 0.0001
+            ok 7 - 0.0001
+            ok 8 - 0.0001
+            1..8
+        ok 1 - can return generate probability and cumulative probability distributions for n = 6, p = 0.3 # time=3.561ms
+        
+        # Subtest: can return null when p or n are not valid parameters
+            ok 1 - n should be strictly positive
+            ok 2 - n should be an integer
+            ok 3 - p should be greater than 0.0
+            ok 4 - p should be less than 1.0
+            1..4
+        ok 2 - can return null when p or n are not valid parameters # time=1.174ms
+        
+        1..2
+    ok 1 - binomialDistribution # time=11.975ms
+    
+    1..1
+    # time=20.625ms
+}
+
+ok 6 - test/bisect.test.js # time=16.175ms {
+    # Subtest: bisect
+        # Subtest: can find root of sin and cos
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - Throws if it exceeds the number of iterations allowed
+            ok 4 - Throws with syntax error f must be a function
+            1..4
+        ok 1 - can find root of sin and cos # time=3.299ms
+        
+        1..1
+    ok 1 - bisect # time=7.884ms
+    
+    1..1
+    # time=16.175ms
+}
+
+ok 7 - test/chi_squared_goodness_of_fit.test.js # time=22.979ms {
+    # Subtest: chiSquaredGoodnessOfFit
+        # Subtest: can reject the null hypothesis with level of confidence specified at 0.05
+            ok 1 - should be equal
+            1..1
+        ok 1 - can reject the null hypothesis with level of confidence specified at 0.05 # time=3.134ms
+        
+        # Subtest: can accept the null hypothesis with level of confidence specified at 0.10
+            ok 1 - should be equal
+            1..1
+        ok 2 - can accept the null hypothesis with level of confidence specified at 0.10 # time=0.978ms
+        
+        # Subtest: can tolerate gaps in distribution
+            ok 1 - should be equal
+            1..1
+        ok 3 - can tolerate gaps in distribution # time=0.853ms
+        
+        1..3
+    ok 1 - chiSquaredGoodnessOfFit # time=18.408ms
+    
+    1..1
+    # time=22.979ms
+}
+
+ok 8 - test/chunk.test.js # time=21.76ms {
+    # Subtest: chunk
+        # Subtest: can get chunks of an array
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            ok 3 - should be equivalent
+            ok 4 - should be equivalent
+            ok 5 - should be equivalent
+            ok 6 - should be equivalent
+            ok 7 - should be equivalent
+            ok 8 - Throws with zero chunk size
+            ok 9 - Throws with non-integer chunk size
+            1..9
+        ok 1 - can get chunks of an array # time=8.092ms
+        
+        1..1
+    ok 1 - chunk # time=13.296ms
+    
+    1..1
+    # time=21.76ms
+}
+
+ok 9 - test/ckmeans.test.js # time=23.845ms {
+    # Subtest: C k-means
+        ok 1 - exports fn
+        ok 2 - Cannot generate more values than input
+        ok 3 - single-value case
+        ok 4 - same-value case
+        ok 5 - should be equivalent
+        ok 6 - should be equivalent
+        ok 7 - should be equivalent
+        ok 8 - should be equivalent
+        ok 9 - should be equivalent
+        ok 10 - should be equivalent
+        ok 11 - should be equivalent
+        ok 12 - should be equivalent
+        ok 13 - should be equivalent
+        ok 14 - should be equivalent
+        ok 15 - should be equivalent
+        ok 16 - should be equivalent
+        1..16
+    ok 1 - C k-means # time=14.042ms
+    
+    1..1
+    # time=23.845ms
+}
+
+ok 10 - test/coefficient_of_variation.test.js # time=16.804ms {
+    # Subtest: coefficient_of_variation
+        # Subtest: can get the coefficientOfVariation of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the coefficientOfVariation of a six-sided die # time=2.796ms
+        
+        1..1
+    ok 1 - coefficient_of_variation # time=8.697ms
+    
+    1..1
+    # time=16.804ms
+}
+
+ok 11 - test/combinations.test.js # time=25.523ms {
+    # Subtest: combinations
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=5.244ms
+        
+        # Subtest: generates combinations of 1,2,3 choosing two at a time
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates combinations of 1,2,3 choosing two at a time # time=1.662ms
+        
+        1..2
+    ok 1 - combinations # time=15.947ms
+    
+    1..1
+    # time=25.523ms
+}
+
+ok 12 - test/combinations_replacement.test.js # time=24.756ms {
+    # Subtest: combinations
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=5.271ms
+        
+        # Subtest: generates combinations of 1,2 choosing two at a time, with replacement
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates combinations of 1,2 choosing two at a time, with replacement # time=1.732ms
+        
+        1..2
+    ok 1 - combinations # time=15.879ms
+    
+    1..1
+    # time=24.756ms
+}
+
+ok 13 - test/combine_means.test.js # time=16.957ms {
+    # Subtest: combineMeans
+        # Subtest: can combine the means of two lists
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can combine the means of two lists # time=2.719ms
+        
+        1..1
+    ok 1 - combineMeans # time=8.186ms
+    
+    1..1
+    # time=16.957ms
+}
+
+ok 14 - test/combine_variances.test.js # time=16.693ms {
+    # Subtest: combineVariances
+        # Subtest: can combine the variances of two lists
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can combine the variances of two lists # time=3.126ms
+        
+        1..1
+    ok 1 - combineVariances # time=9.056ms
+    
+    1..1
+    # time=16.693ms
+}
+
+ok 15 - test/cumulative.test.js # time=41.339ms {
+    # Subtest: cumulativeStdNormalProbability
+        # Subtest: wikipedia test example works
+            ok 1 - should be equal
+            1..1
+        ok 1 - wikipedia test example works # time=2.65ms
+        
+        # Subtest: nondecreasing
+            1..0
+        ok 2 - nondecreasing # time=1.004ms
+        
+        # Subtest: matches errorFunction
+            1..0
+        ok 3 - matches errorFunction # time=2.719ms
+        
+        # Subtest: symmetry
+            ok 1 - should be equal
+            1..1
+        ok 4 - symmetry # time=0.79ms
+        
+        # Subtest: inverse
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            ok 7 - should be equal
+            ok 8 - should be equal
+            ok 9 - should be equal
+            ok 10 - should be equal
+            ok 11 - should be equal
+            ok 12 - should be equal
+            ok 13 - should be equal
+            ok 14 - should be equal
+            ok 15 - should be equal
+            ok 16 - should be equal
+            ok 17 - should be equal
+            ok 18 - should be equal
+            ok 19 - should be equal
+            ok 20 - should be equal
+            ok 21 - should be equal
+            ok 22 - should be equal
+            ok 23 - should be equal
+            ok 24 - should be equal
+            ok 25 - should be equal
+            ok 26 - should be equal
+            ok 27 - should be equal
+            ok 28 - should be equal
+            ok 29 - should be equal
+            ok 30 - should be equal
+            ok 31 - should be equal
+            ok 32 - should be equal
+            ok 33 - should be equal
+            ok 34 - should be equal
+            ok 35 - should be equal
+            ok 36 - should be equal
+            ok 37 - should be equal
+            ok 38 - should be equal
+            ok 39 - should be equal
+            ok 40 - should be equal
+            ok 41 - should be equal
+            ok 42 - should be equal
+            ok 43 - should be equal
+            ok 44 - should be equal
+            ok 45 - should be equal
+            ok 46 - should be equal
+            ok 47 - should be equal
+            ok 48 - should be equal
+            ok 49 - should be equal
+            ok 50 - should be equal
+            ok 51 - should be equal
+            ok 52 - should be equal
+            ok 53 - should be equal
+            ok 54 - should be equal
+            ok 55 - should be equal
+            ok 56 - should be equal
+            ok 57 - should be equal
+            ok 58 - should be equal
+            ok 59 - should be equal
+            ok 60 - should be equal
+            ok 61 - should be equal
+            ok 62 - should be equal
+            ok 63 - should be equal
+            ok 64 - should be equal
+            ok 65 - should be equal
+            ok 66 - should be equal
+            ok 67 - should be equal
+            ok 68 - should be equal
+            ok 69 - should be equal
+            ok 70 - should be equal
+            ok 71 - should be equal
+            ok 72 - should be equal
+            ok 73 - should be equal
+            ok 74 - should be equal
+            ok 75 - should be equal
+            ok 76 - should be equal
+            ok 77 - should be equal
+            ok 78 - should be equal
+            ok 79 - should be equal
+            ok 80 - should be equal
+            ok 81 - should be equal
+            ok 82 - should be equal
+            ok 83 - should be equal
+            ok 84 - should be equal
+            ok 85 - should be equal
+            ok 86 - should be equal
+            ok 87 - should be equal
+            ok 88 - should be equal
+            ok 89 - should be equal
+            ok 90 - should be equal
+            ok 91 - should be equal
+            ok 92 - should be equal
+            ok 93 - should be equal
+            ok 94 - should be equal
+            ok 95 - should be equal
+            ok 96 - should be equal
+            ok 97 - should be equal
+            ok 98 - should be equal
+            ok 99 - should be equal
+            ok 100 - should be equal
+            ok 101 - should be equal
+            1..101
+        ok 5 - inverse # time=8.02ms
+        
+        1..5
+    ok 1 - cumulativeStdNormalProbability # time=30.7ms
+    
+    # Subtest: cumulativeStdLogisticProbability
+        # Subtest: median is zero
+            ok 1 - should be equal
+            1..1
+        ok 1 - median is zero # time=0.477ms
+        
+        # Subtest: increasing
+            1..0
+        ok 2 - increasing # time=0.827ms
+        
+        # Subtest: symmetry
+            1..0
+        ok 3 - symmetry # time=0.338ms
+        
+        1..3
+    ok 2 - cumulativeStdLogisticProbability # time=6.966ms
+    
+    1..2
+    # time=41.339ms
+}
+
+ok 16 - test/equal_interval_breaks.test.js # time=15.796ms {
+    # Subtest: equalIntervalBreaks
+        ok 1 - 1-length case
+        ok 2 - three breaks
+        ok 3 - two breaks
+        ok 4 - one break
+        1..4
+    ok 1 - equalIntervalBreaks # time=6.877ms
+    
+    1..1
+    # time=15.796ms
+}
+
+ok 17 - test/error_function.test.js # time=35.614ms {
+    # Subtest: errorFunction
+        1..0
+    ok 1 - errorFunction # time=4.289ms
+    
+    # Subtest: symmetry
+        ok 1 - should be equal
+        1..1
+    ok 2 - symmetry # time=1.044ms
+    
+    # Subtest: inverse
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        ok 5 - should be equal
+        ok 6 - should be equal
+        ok 7 - should be equal
+        ok 8 - should be equal
+        ok 9 - should be equal
+        ok 10 - should be equal
+        ok 11 - should be equal
+        ok 12 - should be equal
+        ok 13 - should be equal
+        ok 14 - should be equal
+        ok 15 - should be equal
+        ok 16 - should be equal
+        ok 17 - should be equal
+        ok 18 - should be equal
+        ok 19 - should be equal
+        ok 20 - should be equal
+        ok 21 - should be equal
+        ok 22 - should be equal
+        ok 23 - should be equal
+        ok 24 - should be equal
+        ok 25 - should be equal
+        ok 26 - should be equal
+        ok 27 - should be equal
+        ok 28 - should be equal
+        ok 29 - should be equal
+        ok 30 - should be equal
+        ok 31 - should be equal
+        ok 32 - should be equal
+        ok 33 - should be equal
+        ok 34 - should be equal
+        ok 35 - should be equal
+        ok 36 - should be equal
+        ok 37 - should be equal
+        ok 38 - should be equal
+        ok 39 - should be equal
+        ok 40 - should be equal
+        ok 41 - should be equal
+        ok 42 - should be equal
+        ok 43 - should be equal
+        ok 44 - should be equal
+        ok 45 - should be equal
+        ok 46 - should be equal
+        ok 47 - should be equal
+        ok 48 - should be equal
+        ok 49 - should be equal
+        ok 50 - should be equal
+        ok 51 - should be equal
+        ok 52 - should be equal
+        ok 53 - should be equal
+        ok 54 - should be equal
+        ok 55 - should be equal
+        ok 56 - should be equal
+        ok 57 - should be equal
+        ok 58 - should be equal
+        ok 59 - should be equal
+        ok 60 - should be equal
+        ok 61 - should be equal
+        ok 62 - should be equal
+        ok 63 - should be equal
+        ok 64 - should be equal
+        ok 65 - should be equal
+        ok 66 - should be equal
+        ok 67 - should be equal
+        ok 68 - should be equal
+        ok 69 - should be equal
+        ok 70 - should be equal
+        ok 71 - should be equal
+        ok 72 - should be equal
+        ok 73 - should be equal
+        ok 74 - should be equal
+        ok 75 - should be equal
+        ok 76 - should be equal
+        ok 77 - should be equal
+        ok 78 - should be equal
+        ok 79 - should be equal
+        ok 80 - should be equal
+        ok 81 - should be equal
+        ok 82 - should be equal
+        ok 83 - should be equal
+        ok 84 - should be equal
+        ok 85 - should be equal
+        ok 86 - should be equal
+        ok 87 - should be equal
+        ok 88 - should be equal
+        ok 89 - should be equal
+        ok 90 - should be equal
+        ok 91 - should be equal
+        ok 92 - should be equal
+        ok 93 - should be equal
+        ok 94 - should be equal
+        ok 95 - should be equal
+        ok 96 - should be equal
+        ok 97 - should be equal
+        ok 98 - should be equal
+        ok 99 - should be equal
+        ok 100 - should be equal
+        ok 101 - should be equal
+        ok 102 - should be equal
+        ok 103 - should be equal
+        ok 104 - should be equal
+        ok 105 - should be equal
+        ok 106 - should be equal
+        ok 107 - should be equal
+        ok 108 - should be equal
+        ok 109 - should be equal
+        ok 110 - should be equal
+        ok 111 - should be equal
+        ok 112 - should be equal
+        ok 113 - should be equal
+        ok 114 - should be equal
+        ok 115 - should be equal
+        ok 116 - should be equal
+        ok 117 - should be equal
+        ok 118 - should be equal
+        ok 119 - should be equal
+        ok 120 - should be equal
+        ok 121 - should be equal
+        ok 122 - should be equal
+        ok 123 - should be equal
+        ok 124 - should be equal
+        ok 125 - should be equal
+        ok 126 - should be equal
+        ok 127 - should be equal
+        ok 128 - should be equal
+        ok 129 - should be equal
+        ok 130 - should be equal
+        ok 131 - should be equal
+        ok 132 - should be equal
+        ok 133 - should be equal
+        ok 134 - should be equal
+        ok 135 - should be equal
+        ok 136 - should be equal
+        ok 137 - should be equal
+        ok 138 - should be equal
+        ok 139 - should be equal
+        ok 140 - should be equal
+        ok 141 - should be equal
+        ok 142 - should be equal
+        ok 143 - should be equal
+        ok 144 - should be equal
+        ok 145 - should be equal
+        ok 146 - should be equal
+        ok 147 - should be equal
+        ok 148 - should be equal
+        ok 149 - should be equal
+        ok 150 - should be equal
+        ok 151 - should be equal
+        ok 152 - should be equal
+        ok 153 - should be equal
+        ok 154 - should be equal
+        ok 155 - should be equal
+        ok 156 - should be equal
+        ok 157 - should be equal
+        ok 158 - should be equal
+        ok 159 - should be equal
+        ok 160 - should be equal
+        ok 161 - should be equal
+        ok 162 - should be equal
+        ok 163 - should be equal
+        ok 164 - should be equal
+        ok 165 - should be equal
+        ok 166 - should be equal
+        ok 167 - should be equal
+        ok 168 - should be equal
+        ok 169 - should be equal
+        ok 170 - should be equal
+        ok 171 - should be equal
+        ok 172 - should be equal
+        ok 173 - should be equal
+        ok 174 - should be equal
+        ok 175 - should be equal
+        ok 176 - should be equal
+        ok 177 - should be equal
+        ok 178 - should be equal
+        ok 179 - should be equal
+        ok 180 - should be equal
+        ok 181 - should be equal
+        ok 182 - should be equal
+        ok 183 - should be equal
+        ok 184 - should be equal
+        ok 185 - should be equal
+        ok 186 - should be equal
+        ok 187 - should be equal
+        ok 188 - should be equal
+        ok 189 - should be equal
+        ok 190 - should be equal
+        ok 191 - should be equal
+        ok 192 - should be equal
+        ok 193 - should be equal
+        ok 194 - should be equal
+        ok 195 - should be equal
+        ok 196 - should be equal
+        ok 197 - should be equal
+        ok 198 - should be equal
+        ok 199 - should be equal
+        ok 200 - should be equal
+        1..200
+    ok 3 - inverse # time=18.216ms
+    
+    1..3
+    # time=35.614ms
+}
+
+ok 18 - test/factorial.test.js # time=29.9ms {
+    # Subtest: factorial
+        # Subtest: cannot calculate the factorial of a number lower than zero
+            ok 1 - expected to throw
+            1..1
+        ok 1 - cannot calculate the factorial of a number lower than zero # time=2.775ms
+        
+        # Subtest: rejects floating-point inputs
+            ok 1 - expected to throw
+            1..1
+        ok 2 - rejects floating-point inputs # time=1.072ms
+        
+        # Subtest: can calculate 0! = 1
+            ok 1 - should be equal
+            1..1
+        ok 3 - can calculate 0! = 1 # time=0.939ms
+        
+        # Subtest: can calculate 1! = 1
+            ok 1 - should be equal
+            1..1
+        ok 4 - can calculate 1! = 1 # time=0.751ms
+        
+        # Subtest: can calculate 100! = 1
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate 100! = 1 # time=0.881ms
+        
+        1..5
+    ok 1 - factorial # time=27.852ms
+    
+    1..1
+    # time=29.9ms
+}
+
+ok 19 - test/gamma.test.js # time=27.924ms {
+    # Subtest: gamma
+        # Subtest: gamma for integer should return whole number
+            ok 1 - should be equal
+            1..1
+        ok 1 - gamma for integer should return whole number # time=2.559ms
+        
+        # Subtest: gamma for positive real float should be correct
+            ok 1 - expect truthy value
+            1..1
+        ok 2 - gamma for positive real float should be correct # time=1.095ms
+        
+        # Subtest: gamma for negative real float should be correct
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - gamma for negative real float should be correct # time=0.773ms
+        
+        # Subtest: gamma for negative integer should return NaN
+            ok 1 - expect truthy value
+            1..1
+        ok 4 - gamma for negative integer should return NaN # time=0.74ms
+        
+        # Subtest: gamma for zero should return NaN
+            ok 1 - expect truthy value
+            1..1
+        ok 5 - gamma for zero should return NaN # time=0.624ms
+        
+        1..5
+    ok 1 - gamma # time=25.237ms
+    
+    1..1
+    # time=27.924ms
+}
+
+ok 20 - test/gammaln.test.js # time=22.151ms {
+    # Subtest: gammaln
+        # Subtest: gammaln for positive real float should be correct
+            ok 1 - should be equal
+            1..1
+        ok 1 - gammaln for positive real float should be correct # time=2.276ms
+        
+        # Subtest: exp(gammaln(n)) for n should equal gamma(n)
+            ok 1 - should be equal
+            1..1
+        ok 2 - exp(gammaln(n)) for n should equal gamma(n) # time=0.963ms
+        
+        # Subtest: gammaln for negative n should be Infinity
+            ok 1 - should be equal
+            1..1
+        ok 3 - gammaln for negative n should be Infinity # time=2.177ms
+        
+        # Subtest: gammaln for n === 0 should return NaN
+            ok 1 - should be equal
+            1..1
+        ok 4 - gammaln for n === 0 should return NaN # time=2.519ms
+        
+        1..4
+    ok 1 - gammaln # time=20.145ms
+    
+    1..1
+    # time=22.151ms
+}
+
+ok 21 - test/geometric_mean.test.js # time=23.853ms {
+    # Subtest: geometric mean
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the mean of two numbers # time=3.309ms
+        
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for empty lists # time=0.981ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 3 - cannot calculate for lists with negative numbers # time=0.935ms
+        
+        # Subtest: equals zero if array contains zero
+            1..0
+        ok 4 - equals zero if array contains zero # time=0.488ms
+        
+        1..4
+    ok 1 - geometric mean # time=21.521ms
+    
+    1..1
+    # time=23.853ms
+}
+
+ok 22 - test/harmonic_mean.test.js # time=21.287ms {
+    # Subtest: harmonicMean
+        # Subtest: can get the mean of two or more numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the mean of two or more numbers # time=2.976ms
+        
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for empty lists # time=0.956ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 3 - cannot calculate for lists with negative numbers # time=0.812ms
+        
+        1..3
+    ok 1 - harmonicMean # time=16.627ms
+    
+    1..1
+    # time=21.287ms
+}
+
+ok 23 - test/iqr.test.js # time=21.204ms {
+    # Subtest: interquartile range (iqr)
+        # Subtest: can get proper iqr of an even-length list
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get proper iqr of an even-length list # time=2.681ms
+        
+        # Subtest: can get proper iqr of an odd-length list
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get proper iqr of an odd-length list # time=0.909ms
+        
+        # Subtest: an iqr of a zero-length list cannot be calculated
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an iqr of a zero-length list cannot be calculated # time=1.508ms
+        
+        1..3
+    ok 1 - interquartile range (iqr) # time=15.898ms
+    
+    1..1
+    # time=21.204ms
+}
+
+ok 24 - test/k_means_cluster.test.js # time=35.255ms {
+    # Subtest: k-means clustering test
+        # Subtest: Single cluster of one point contains only that point
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 1 - Single cluster of one point contains only that point # time=5.022ms
+        
+        # Subtest: Single cluster of two points contains both points
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 2 - Single cluster of two points contains both points # time=1.487ms
+        
+        # Subtest: Two clusters of two points puts each point in its own cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 3 - Two clusters of two points puts each point in its own cluster # time=4.001ms
+        
+        # Subtest: Two clusters of four paired points puts each pair in a cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 4 - Two clusters of four paired points puts each pair in a cluster # time=1.445ms
+        
+        # Subtest: Two clusters of two 2D points puts each point in its own cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 5 - Two clusters of two 2D points puts each point in its own cluster # time=1.051ms
+        
+        # Subtest: Base case of one value
+            ok 1 - expected to throw
+            1..1
+        ok 6 - Base case of one value # time=0.644ms
+        
+        # Subtest: Two clusters of three 2D points puts two points in one cluster and one in the other
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 7 - Two clusters of three 2D points puts two points in one cluster and one in the other # time=0.961ms
+        
+        1..7
+    ok 1 - k-means clustering test # time=33.134ms
+    
+    1..1
+    # time=35.255ms
+}
+
+ok 25 - test/kernel_density_estimation.test.js # time=27.576ms {
+    # Subtest: kernel density estimation
+        # Subtest: default kernel and bandwidth
+            ok 1 - density(-3) = 0.006725383080803049 != 0.00622253574711248
+            ok 2 - density(-2) = 0.09535649908332725 != 0.0955008985482363
+            ok 3 - density(-1) = 0.26263648397806405 != 0.26278412857974
+            ok 4 - density(0) = 0.3521783483093786 != 0.35334369527338
+            ok 5 - density(1) = 0.21390865841745316 != 0.214348469979353
+            ok 6 - density(2) = 0.0654843034111212 != 0.0652701909587952
+            ok 7 - density(3) = 0.0033136835339548664 != 0.00303679902517155
+            1..7
+        ok 1 - default kernel and bandwidth # time=4.858ms
+        
+        # Subtest: gaussian default kernel
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 2 - gaussian default kernel # time=2.963ms
+        
+        # Subtest: invalid kernel
+            ok 1 - expected to throw
+            ok 2 - expected to throw
+            1..2
+        ok 3 - invalid kernel # time=1.386ms
+        
+        1..3
+    ok 1 - kernel density estimation # time=22.191ms
+    
+    1..1
+    # time=27.576ms
+}
+
+ok 26 - test/linear_regression.test.js # time=33.515ms {
+    # Subtest: linear regression
+        # Subtest: correctly generates a line for a 0, 0 to 1, 1 dataset
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - correctly generates a line for a 0, 0 to 1, 1 dataset # time=3.018ms
+        
+        # Subtest: correctly generates a line for a 0, 0 to 1, 0 dataset
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 2 - correctly generates a line for a 0, 0 to 1, 0 dataset # time=1.26ms
+        
+        # Subtest: handles a single-point sample
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - handles a single-point sample # time=3.169ms
+        
+        # Subtest: a straight line will have a slope of 0
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - a straight line will have a slope of 0 # time=1.42ms
+        
+        # Subtest: a line at 50% grade
+            ok 1 - should be equivalent
+            1..1
+        ok 5 - a line at 50% grade # time=0.808ms
+        
+        # Subtest: a line with a high y-intercept
+            ok 1 - should be equivalent
+            1..1
+        ok 6 - a line with a high y-intercept # time=0.603ms
+        
+        1..6
+    ok 1 - linear regression # time=30.39ms
+    
+    1..1
+    # time=33.515ms
+}
+
+ok 27 - test/log_average.test.js # time=30.608ms {
+    # Subtest: log average
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 1 - cannot calculate for empty lists # time=2.645ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for lists with negative numbers # time=0.889ms
+        
+        # Subtest: does not overflow for large products
+            1..0
+        ok 3 - does not overflow for large products # time=3.051ms
+        
+        # Subtest: does not underflow for small products
+            1..0
+        ok 4 - does not underflow for small products # time=0.609ms
+        
+        # Subtest: agrees with geometricMean
+            1..0
+        ok 5 - agrees with geometricMean # time=0.554ms
+        
+        # Subtest: equals zero if array contains zero
+            1..0
+        ok 6 - equals zero if array contains zero # time=0.365ms
+        
+        1..6
+    ok 1 - log average # time=27.134ms
+    
+    1..1
+    # time=30.608ms
+}
+
+ok 28 - test/logit.test.js # time=17.815ms {
+    # Subtest: logit
+        # Subtest: throws on logit < 0
+            ok 1 - expected to throw
+            1..1
+        ok 1 - throws on logit < 0 # time=2.292ms
+        
+        # Subtest: computes the logit otherwise
+            ok 1 - should be equal
+            1..1
+        ok 2 - computes the logit otherwise # time=0.801ms
+        
+        1..2
+    ok 1 - logit # time=9.861ms
+    
+    1..1
+    # time=17.815ms
+}
+
+ok 29 - test/mad.test.js # time=25.585ms {
+    # Subtest: median absolute deviation (mad)
+        # Subtest: median absolute deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - median absolute deviation of an example on wikipedia # time=2.381ms
+        
+        # Subtest: median absolute deviation of 0-10
+            ok 1 - should be equal
+            1..1
+        ok 2 - median absolute deviation of 0-10 # time=0.999ms
+        
+        # Subtest: median absolute deviation of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 3 - median absolute deviation of one number is zero # time=0.95ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 4 - zero-length corner case # time=1.807ms
+        
+        1..4
+    ok 1 - median absolute deviation (mad) # time=23.339ms
+    
+    1..1
+    # time=25.585ms
+}
+
+ok 30 - test/mean.test.js # time=23.163ms {
+    # Subtest: mean
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the mean of two numbers # time=2.744ms
+        
+        # Subtest: can get the mean of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the mean of one number # time=1.053ms
+        
+        # Subtest: an empty list has no average
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an empty list has no average # time=1.13ms
+        
+        1..3
+    ok 1 - mean # time=17.629ms
+    
+    1..1
+    # time=23.163ms
+}
+
+ok 31 - test/mean_simple.test.js # time=23.154ms {
+    # Subtest: meanSimple
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the mean of two numbers # time=2.486ms
+        
+        # Subtest: can get the mean of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the mean of one number # time=1.13ms
+        
+        # Subtest: an empty list has no average
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an empty list has no average # time=1.206ms
+        
+        1..3
+    ok 1 - meanSimple # time=18.521ms
+    
+    1..1
+    # time=23.154ms
+}
+
+ok 32 - test/median.test.js # time=28.163ms {
+    # Subtest: median
+        # Subtest: can get the median of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the median of three numbers # time=2.563ms
+        
+        # Subtest: can get the median of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the median of two numbers # time=1.056ms
+        
+        # Subtest: can get the median of four numbers
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the median of four numbers # time=2.507ms
+        
+        # Subtest: cannot calculate the median of an empty list
+            ok 1 - expected to throw
+            1..1
+        ok 4 - cannot calculate the median of an empty list # time=1.1ms
+        
+        # Subtest: sorts numbers numerically
+            ok 1 - should be equal
+            1..1
+        ok 5 - sorts numbers numerically # time=0.561ms
+        
+        # Subtest: does not change the sorting order of its input
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 6 - does not change the sorting order of its input # time=0.704ms
+        
+        1..6
+    ok 1 - median # time=25.092ms
+    
+    1..1
+    # time=28.163ms
+}
+
+ok 33 - test/minmax.test.js # time=40.817ms {
+    # Subtest: min
+        ok 1 - zero length array throws
+        # Subtest: can get the minimum of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the minimum of one number # time=1.769ms
+        
+        # Subtest: can get the minimum of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the minimum of three numbers # time=0.914ms
+        
+        1..3
+    ok 1 - min # time=11.883ms
+    
+    # Subtest: max
+        ok 1 - zero length array throws
+        # Subtest: can get the maximum of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the maximum of three numbers # time=1.183ms
+        
+        1..2
+    ok 2 - max # time=8.699ms
+    
+    # Subtest: extent
+        ok 1 - zero length array throws
+        # Subtest: can get the extent of one number
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the extent of one number # time=3.469ms
+        
+        # Subtest: can get the extent of three numbers
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - can get the extent of three numbers # time=0.986ms
+        
+        1..3
+    ok 3 - extent # time=9.662ms
+    
+    # Subtest: sorted
+        ok 1 - maxSorted
+        ok 2 - minSorted
+        ok 3 - extentSorted
+        1..3
+    ok 4 - sorted # time=1.463ms
+    
+    1..4
+    # time=40.817ms
+}
+
+ok 34 - test/mode.test.js # time=67.066ms {
+    # Subtest: mode
+        # Subtest: mode
+            # Subtest: the mode of a single-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 1 - the mode of a single-number array is that one number # time=3.198ms
+            
+            # Subtest: the mode of a two-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 2 - the mode of a two-number array is that one number # time=1.317ms
+            
+            # Subtest: other cases
+                ok 1 - should be equal
+                ok 2 - should be equal
+                ok 3 - should be equal
+                ok 4 - should be equal
+                ok 5 - should be equal
+                ok 6 - should be equal
+                ok 7 - should be equal
+                ok 8 - should be equal
+                1..8
+            ok 3 - other cases # time=2.987ms
+            
+            # Subtest: the mode of an empty array is null
+                ok 1 - expected to throw
+                1..1
+            ok 4 - the mode of an empty array is null # time=0.918ms
+            
+            # Subtest: the mode of a three-number array with two same numbers is the repeated one
+                ok 1 - should be equal
+                1..1
+            ok 5 - the mode of a three-number array with two same numbers is the repeated one # time=0.709ms
+            
+            1..5
+        ok 1 - mode # time=32.976ms
+        
+        # Subtest: modeFast
+            # Subtest: the mode of a single-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 1 - the mode of a single-number array is that one number # time=0.755ms
+            
+            # Subtest: the mode of a two-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 2 - the mode of a two-number array is that one number # time=0.501ms
+            
+            # Subtest: other cases
+                ok 1 - should be equal
+                ok 2 - should be equal
+                ok 3 - should be equal
+                ok 4 - should be equal
+                ok 5 - should be equal
+                ok 6 - should be equal
+                ok 7 - should be equal
+                ok 8 - should be equal
+                1..8
+            ok 3 - other cases # time=1.717ms
+            
+            # Subtest: the mode of an empty array is null
+                ok 1 - expected to throw
+                1..1
+            ok 4 - the mode of an empty array is null # time=0.494ms
+            
+            # Subtest: the mode of a three-number array with two same numbers is the repeated one
+                ok 1 - should be equal
+                1..1
+            ok 5 - the mode of a three-number array with two same numbers is the repeated one # time=0.492ms
+            
+            1..5
+        ok 2 - modeFast # time=19.766ms
+        
+        # Subtest: mode sorted
+            ok 1 - should be equal
+            1..1
+        ok 3 - mode sorted # time=0.559ms
+        
+        1..3
+    ok 1 - mode # time=62.961ms
+    
+    1..1
+    # time=67.066ms
+}
+
+ok 35 - test/normal_distribution.test.js # time=37.111ms {
+    # Subtest: natural distribution and z-score
+        # Subtest: normal table is exposed in the API
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - normal table is exposed in the API # time=2.885ms
+        
+        # Subtest: P(Z <= 0.4) is 0.6554
+            ok 1 - should be equal
+            1..1
+        ok 2 - P(Z <= 0.4) is 0.6554 # time=0.931ms
+        
+        # Subtest: P(Z <= -1.20) is 0.1151
+            ok 1 - should be equal
+            1..1
+        ok 3 - P(Z <= -1.20) is 0.1151 # time=1.175ms
+        
+        # Subtest: P(X <= 82) when X ~ N (80, 25) is 0.6554
+            ok 1 - should be equal
+            1..1
+        ok 4 - P(X <= 82) when X ~ N (80, 25) is 0.6554 # time=0.927ms
+        
+        # Subtest: P(X >= 90) when X ~ N (80, 25) is 0.0228
+            ok 1 - should be equal
+            1..1
+        ok 5 - P(X >= 90) when X ~ N (80, 25) is 0.0228 # time=0.745ms
+        
+        # Subtest: P(X <= 74) when X ~ N (80, 25) is 0.1151
+            ok 1 - should be equal
+            1..1
+        ok 6 - P(X <= 74) when X ~ N (80, 25) is 0.1151 # time=0.619ms
+        
+        # Subtest: P(78 <= X <= 88) when X ~ N (80, 25) is 0.6006
+            ok 1 - should be equal
+            1..1
+        ok 7 - P(78 <= X <= 88) when X ~ N (80, 25) is 0.6006 # time=0.648ms
+        
+        1..7
+    ok 1 - natural distribution and z-score # time=34.74ms
+    
+    1..1
+    # time=37.111ms
+}
+
+ok 36 - test/numeric_sort.test.js # time=17.008ms {
+    # Subtest: numericSort
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - should be equivalent
+        ok 4 - does not mutate input
+        1..4
+    ok 1 - numericSort # time=6.769ms
+    
+    1..1
+    # time=17.008ms
+}
+
+ok 37 - test/perceptron.test.js # time=36.442ms {
+    # Subtest: perceptron
+        # Subtest: initializes to zeros if label is zero
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 1 - initializes to zeros if label is zero # time=5.808ms
+        
+        # Subtest: initializes to values if label is one
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - initializes to values if label is one # time=1.396ms
+        
+        # Subtest: base case of zero prediction features
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - base case of zero prediction features # time=0.667ms
+        
+        # Subtest: train with invalid label
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - train with invalid label # time=0.928ms
+        
+        # Subtest: learns to separate one from two
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 5 - learns to separate one from two # time=0.806ms
+        
+        # Subtest: learns a diagonal boundary
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            1..4
+        ok 6 - learns a diagonal boundary # time=1.452ms
+        
+        1..6
+    ok 1 - perceptron # time=31.212ms
+    
+    1..1
+    # time=36.442ms
+}
+
+ok 38 - test/permutation_test.test.js # time=93.291ms {
+    # Subtest: permutation test
+        # Subtest: P-value of identical distributions being different should be 1
+            ok 1 - should be equal
+            1..1
+        ok 1 - P-value of identical distributions being different should be 1 # time=22.339ms
+        
+        # Subtest: P-value of distribution less than itself should be 1
+            ok 1 - should be equal
+            1..1
+        ok 2 - P-value of distribution less than itself should be 1 # time=18.314ms
+        
+        # Subtest: P-value of small sample greater than large sample should be 0
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - P-value of small sample greater than large sample should be 0 # time=23.187ms
+        
+        # Subtest: permutationTest should throw error if wrong argument received
+            ok 1 - alternative must be one of specified options
+            1..1
+        ok 4 - permutationTest should throw error if wrong argument received # time=1.11ms
+        
+        1..4
+    ok 1 - permutation test # time=78.21ms
+    
+    1..1
+    # time=93.291ms
+}
+
+ok 39 - test/permutations_heap.test.js # time=24.05ms {
+    # Subtest: permutationsHeap
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=4.235ms
+        
+        # Subtest: generates 1, 2, 3 permutations
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates 1, 2, 3 permutations # time=2.465ms
+        
+        1..2
+    ok 1 - permutationsHeap # time=13.929ms
+    
+    1..1
+    # time=24.05ms
+}
+
+ok 40 - test/poisson_distribution.test.js # time=27.472ms {
+    # Subtest: poissonDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for lambda = 3.0
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 1 - can return generate probability and cumulative probability distributions for lambda = 3.0 # time=2.683ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 4.0
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 2 - can generate probability and cumulative probability distributions for lambda = 4.0 # time=1.056ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 5.5
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 3 - can generate probability and cumulative probability distributions for lambda = 5.5 # time=3.382ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 9.5
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 4 - can generate probability and cumulative probability distributions for lambda = 9.5 # time=0.859ms
+        
+        # Subtest: can return undefined when lambda <= 0
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 5 - can return undefined when lambda <= 0 # time=0.696ms
+        
+        1..5
+    ok 1 - poissonDistribution # time=25.423ms
+    
+    1..1
+    # time=27.472ms
+}
+
+ok 41 - test/product.test.js # time=27.697ms {
+    # Subtest: product
+        # Subtest: can get the product of one number
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the product of one number # time=2.995ms
+        
+        # Subtest: can get the product of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the product of two numbers # time=1.097ms
+        
+        # Subtest: can get the product of a negative number
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the product of a negative number # time=0.883ms
+        
+        # Subtest: the product of no numbers is one - the multiplicative identity
+            ok 1 - should be equal
+            1..1
+        ok 4 - the product of no numbers is one - the multiplicative identity # time=1.189ms
+        
+        1..4
+    ok 1 - product # time=23.009ms
+    
+    1..1
+    # time=27.697ms
+}
+
+ok 42 - test/quantile.test.js # time=45.379ms {
+    # Subtest: quantile
+        # Subtest: can get proper quantiles of an even-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get proper quantiles of an even-length list # time=4.38ms
+        
+        # Subtest: can get proper quantiles of an odd-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 2 - can get proper quantiles of an odd-length list # time=1.643ms
+        
+        # Subtest: the median quantile is equal to the median
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 3 - the median quantile is equal to the median # time=1.411ms
+        
+        ok 4 - a zero-length list throws an error
+        # Subtest: test odd-value case
+            ok 1 - should be equal
+            1..1
+        ok 5 - test odd-value case # time=0.515ms
+        
+        # Subtest: bad bounds throw an error
+            ok 1 - expected to throw
+            ok 2 - expected to throw
+            1..2
+        ok 6 - bad bounds throw an error # time=0.805ms
+        
+        # Subtest: max quantile is equal to the max
+            ok 1 - should be equal
+            1..1
+        ok 7 - max quantile is equal to the max # time=0.629ms
+        
+        # Subtest: min quantile is equal to the min
+            ok 1 - should be equal
+            1..1
+        ok 8 - min quantile is equal to the min # time=0.582ms
+        
+        # Subtest: if quantile arg is an array, response is an array of quantiles
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 9 - if quantile arg is an array, response is an array of quantiles # time=3.62ms
+        
+        # Subtest: can get an array of quantiles on a small number of elements
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 10 - can get an array of quantiles on a small number of elements # time=1.4ms
+        
+        1..10
+    ok 1 - quantile # time=42.865ms
+    
+    1..1
+    # time=45.379ms
+}
+
+ok 43 - test/quantile_rank.test.js # time=18.779ms {
+    # Subtest: quantileRank
+        # Subtest: can get proper quantile ranks
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            1..6
+        ok 1 - can get proper quantile ranks # time=4.143ms
+        
+        1..1
+    ok 1 - quantileRank # time=10.076ms
+    
+    1..1
+    # time=18.779ms
+}
+
+ok 44 - test/quantile_rank_sorted.test.js # time=16.064ms {
+    # Subtest: quantileRankSorted
+        # Subtest: can get proper quantile ranks
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            1..5
+        ok 1 - can get proper quantile ranks # time=3.375ms
+        
+        1..1
+    ok 1 - quantileRankSorted # time=8.429ms
+    
+    1..1
+    # time=16.064ms
+}
+
+ok 45 - test/quantilesorted.test.js # time=15.767ms {
+    # Subtest: quantileSorted
+        # Subtest: can get proper quantiles of an even-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get proper quantiles of an even-length list # time=2.746ms
+        
+        1..1
+    ok 1 - quantileSorted # time=7.787ms
+    
+    1..1
+    # time=15.767ms
+}
+
+ok 46 - test/quickselect.test.js # time=20.344ms {
+    # Subtest: quickselect
+        ok 1 - should be equivalent
+        1..1
+    ok 1 - quickselect # time=5.591ms
+    
+    # Subtest: quickselect long arrays
+        ok 1 - should be equal
+        1..1
+    ok 2 - quickselect long arrays # time=1.204ms
+    
+    # Subtest: quickselect long arrays L35 coverage
+        ok 1 - should be equal
+        1..1
+    ok 3 - quickselect long arrays L35 coverage # time=0.74ms
+    
+    1..3
+    # time=20.344ms
+}
+
+ok 47 - test/r_squared.test.js # time=23.02ms {
+    # Subtest: r-squared
+        # Subtest: says that the r squared of a two-point line is perfect
+            ok 1 - should be equal
+            1..1
+        ok 1 - says that the r squared of a two-point line is perfect # time=3.13ms
+        
+        # Subtest: says that the r squared of a three-point line is not perfect
+            ok 1 - should not be equal
+            1..1
+        ok 2 - says that the r squared of a three-point line is not perfect # time=0.981ms
+        
+        # Subtest: r-squared of single sample is 1
+            ok 1 - should be equal
+            1..1
+        ok 3 - r-squared of single sample is 1 # time=1.154ms
+        
+        1..3
+    ok 1 - r-squared # time=16.988ms
+    
+    1..1
+    # time=23.02ms
+}
+
+ok 48 - test/root_mean_square.test.js # time=25.08ms {
+    # Subtest: root_mean_square
+        # Subtest: can get the RMS of two or more numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the RMS of two or more numbers # time=2.907ms
+        
+        # Subtest: returns null for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - returns null for empty lists # time=2.055ms
+        
+        1..2
+    ok 1 - root_mean_square # time=12.857ms
+    
+    1..1
+    # time=25.08ms
+}
+
+ok 49 - test/sample.test.js # time=22.507ms {
+    # Subtest: sample
+        ok 1 - edge case - zero array
+        ok 2 - edge case - zero array
+        ok 3 - edge case - zero array
+        ok 4 - edge case - sample of 1
+        ok 5 - should be equivalent
+        ok 6 - should be equivalent
+        ok 7 - should be equivalent
+        ok 8 - should be equivalent
+        ok 9 - non-number contents
+        1..9
+    ok 1 - sample # time=10.784ms
+    
+    1..1
+    # time=22.507ms
+}
+
+ok 50 - test/sample_correlation.test.js # time=34.195ms {
+    # Subtest: sample correlation
+        # Subtest: can get the sample correlation of identical arrays
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sample correlation of identical arrays # time=3.051ms
+        
+        # Subtest: can get the sample correlation of different arrays
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the sample correlation of different arrays # time=1.657ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 3 - zero-length corner case # time=2.703ms
+        
+        1..3
+    ok 1 - sample correlation # time=19.646ms
+    
+    # Subtest: sample rank correlation
+        # Subtest: absolute rank correlation for monotonic function equals one
+            1..0
+        ok 1 - absolute rank correlation for monotonic function equals one # time=1.091ms
+        
+        # Subtest: rank correlation agrees with R calculation
+            1..0
+        ok 2 - rank correlation agrees with R calculation # time=0.533ms
+        
+        1..2
+    ok 2 - sample rank correlation # time=8.927ms
+    
+    1..2
+    # time=34.195ms
+}
+
+ok 51 - test/sample_covariance.test.js # time=29.889ms {
+    # Subtest: sample covariance
+        # Subtest: can get perfect negative covariance
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get perfect negative covariance # time=2.479ms
+        
+        # Subtest: covariance of something with itself is its variance
+            ok 1 - should be equal
+            1..1
+        ok 2 - covariance of something with itself is its variance # time=1.492ms
+        
+        # Subtest: covariance is zero for something with no correlation
+            ok 1 - should be equal
+            1..1
+        ok 3 - covariance is zero for something with no correlation # time=0.865ms
+        
+        # Subtest: unequal-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 4 - unequal-length corner case # time=0.992ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 5 - zero-length corner case # time=0.615ms
+        
+        1..5
+    ok 1 - sample covariance # time=26.752ms
+    
+    1..1
+    # time=29.889ms
+}
+
+ok 52 - test/sample_kurtosis.test.js # time=33.393ms {
+    # Subtest: sample kurtosis
+        # Subtest: the kurtosis of an empty sample is null
+            ok 1 - expected to throw
+            1..1
+        ok 1 - the kurtosis of an empty sample is null # time=2.482ms
+        
+        # Subtest: the kurtosis of an sample with one number is null
+            ok 1 - expected to throw
+            1..1
+        ok 2 - the kurtosis of an sample with one number is null # time=0.99ms
+        
+        # Subtest: the kurtosis of an sample with two numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the kurtosis of an sample with two numbers is null # time=0.613ms
+        
+        # Subtest: the kurtosis of an sample with three numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 4 - the kurtosis of an sample with three numbers is null # time=0.984ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 1
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate the kurtosis of SAS example 1 # time=0.923ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 2
+            ok 1 - should be equal
+            1..1
+        ok 6 - can calculate the kurtosis of SAS example 2 # time=0.646ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 3
+            ok 1 - should be equal
+            1..1
+        ok 7 - can calculate the kurtosis of SAS example 3 # time=0.47ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 4
+            ok 1 - should be equal
+            1..1
+        ok 8 - can calculate the kurtosis of SAS example 4 # time=0.427ms
+        
+        1..8
+    ok 1 - sample kurtosis # time=31.161ms
+    
+    1..1
+    # time=33.393ms
+}
+
+ok 53 - test/sample_skewness.test.js # time=29.298ms {
+    # Subtest: sample skewness
+        # Subtest: the skewness of an empty sample is null
+            ok 1 - expected to throw
+            1..1
+        ok 1 - the skewness of an empty sample is null # time=2.515ms
+        
+        # Subtest: the skewness of an sample with one number is null
+            ok 1 - expected to throw
+            1..1
+        ok 2 - the skewness of an sample with one number is null # time=0.938ms
+        
+        # Subtest: the skewness of an sample with two numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the skewness of an sample with two numbers is null # time=0.654ms
+        
+        # Subtest: can calculate the skewness of SAS example 1
+            ok 1 - should be equal
+            1..1
+        ok 4 - can calculate the skewness of SAS example 1 # time=1.073ms
+        
+        # Subtest: can calculate the skewness of SAS example 2
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate the skewness of SAS example 2 # time=0.663ms
+        
+        # Subtest: can calculate the skewness of SAS example 3
+            ok 1 - should be equal
+            1..1
+        ok 6 - can calculate the skewness of SAS example 3 # time=0.475ms
+        
+        1..6
+    ok 1 - sample skewness # time=26.268ms
+    
+    1..1
+    # time=29.298ms
+}
+
+ok 54 - test/sample_standard_deviation.test.js # time=15.765ms {
+    # Subtest: sampleStandardDeviation
+        # Subtest: can get the standard deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the standard deviation of an example on wikipedia # time=2.377ms
+        
+        ok 2 - zero-length corner case
+        1..2
+    ok 1 - sampleStandardDeviation # time=7.737ms
+    
+    1..1
+    # time=15.765ms
+}
+
+ok 55 - test/sample_variance.test.js # time=22.911ms {
+    # Subtest: sample variance
+        # Subtest: can get the sample variance of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sample variance of a six-sided die # time=2.5ms
+        
+        # Subtest: can get the sample variance of numbers 1-10
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the sample variance of numbers 1-10 # time=0.867ms
+        
+        # Subtest: the sample variance of two numbers that are the same is 0
+            ok 1 - should be equal
+            1..1
+        ok 3 - the sample variance of two numbers that are the same is 0 # time=0.571ms
+        
+        ok 4 - the sample variance of one number cannot be calculated
+        ok 5 - the sample variance of no numbers cannot be calculated
+        1..5
+    ok 1 - sample variance # time=14.454ms
+    
+    1..1
+    # time=22.911ms
+}
+
+ok 56 - test/sample_with_replacement.test.js # time=15.097ms {
+    # Subtest: sampleWithReplacement
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - should be equivalent
+        ok 4 - should be equivalent
+        ok 5 - should be equivalent
+        1..5
+    ok 1 - sampleWithReplacement # time=6.851ms
+    
+    1..1
+    # time=15.097ms
+}
+
+ok 57 - test/shuffle.test.js # time=24.326ms {
+    # Subtest: shuffle
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - does not change original array
+        ok 4 - should be equivalent
+        ok 5 - does not change original array
+        1..5
+    ok 1 - shuffle # time=7.565ms
+    
+    # Subtest: shuffleInPlace
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - changes original array
+        1..3
+    ok 2 - shuffleInPlace # time=1.781ms
+    
+    # Subtest: shuffleInPlace truly random
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        1..2
+    ok 3 - shuffleInPlace truly random # time=1.224ms
+    
+    1..3
+    # time=24.326ms
+}
+
+ok 58 - test/sign.test.js # time=18.184ms {
+    # Subtest: bisect
+        # Subtest: can find sign of number
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            ok 7 - Throws with syntax error x is not a number
+            1..7
+        ok 1 - can find sign of number # time=3.868ms
+        
+        1..1
+    ok 1 - bisect # time=9.336ms
+    
+    1..1
+    # time=18.184ms
+}
+
+ok 59 - test/silhouette.test.js # time=29.82ms {
+    # Subtest: silhouette test
+        # Subtest: Requires equal-sized arrays
+            ok 1 - expected to throw
+            1..1
+        ok 1 - Requires equal-sized arrays # time=2.173ms
+        
+        # Subtest: Single cluster of one point has metric 0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - Single cluster of one point has metric 0 # time=3.174ms
+        
+        # Subtest: Single cluster of two points has metric 1.0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 3 - Single cluster of two points has metric 1.0 # time=1.925ms
+        
+        # Subtest: Two clusters with one point each has metric 0.0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 4 - Two clusters with one point each has metric 0.0 # time=1.148ms
+        
+        # Subtest: Two clusters with two points each has metric 0.5
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 5 - Two clusters with two points each has metric 0.5 # time=1.128ms
+        
+        1..5
+    ok 1 - silhouette test # time=27.342ms
+    
+    1..1
+    # time=29.82ms
+}
+
+ok 60 - test/standard_deviation.test.js # time=24.201ms {
+    # Subtest: standardDeviation
+        # Subtest: can get the standard deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the standard deviation of an example on wikipedia # time=2.499ms
+        
+        # Subtest: can get the standard deviation of 1-3
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the standard deviation of 1-3 # time=0.865ms
+        
+        # Subtest: zero-length array corner case
+            ok 1 - expected to throw
+            1..1
+        ok 3 - zero-length array corner case # time=1.118ms
+        
+        # Subtest: can get the standard deviation of 1-10
+            ok 1 - should be equal
+            1..1
+        ok 4 - can get the standard deviation of 1-10 # time=0.744ms
+        
+        # Subtest: the standard deviation of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 5 - the standard deviation of one number is zero # time=0.548ms
+        
+        1..5
+    ok 1 - standardDeviation # time=22.204ms
+    
+    1..1
+    # time=24.201ms
+}
+
+ok 61 - test/standard_normal_table.test.js # time=16.012ms {
+    # Subtest: standardNormalTable
+        1..0
+    ok 1 - standardNormalTable # time=5.25ms
+    
+    # Subtest: all entries are numeric
+        1..0
+    ok 2 - all entries are numeric # time=0.632ms
+    
+    1..2
+    # time=16.012ms
+}
+
+ok 62 - test/subtract_from_mean.test.js # time=17.737ms {
+    # Subtest: subtractFromMean
+        # Subtest: can remove a single value from a mean
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can remove a single value from a mean # time=3.326ms
+        
+        1..1
+    ok 1 - subtractFromMean # time=9.325ms
+    
+    1..1
+    # time=17.737ms
+}
+
+not ok 63 - test/sum.test.js # time=48.518ms
+  ---
+  env: {}
+  file: test/sum.test.js
+  timeout: 30000
+  command: /usr/local/bin/node
+  args:
+    - test/sum.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /Users/franktip/git/mutation-testing-data/casestudy/simple-statistics-633/simple-statistics
+  exitCode: 1
+  ...
+{
+    # Subtest: sum
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sum of two numbers # time=2.356ms
+        
+        # Subtest: the sum of no numbers is zero
+            ok 1 - should be equal
+            1..1
+        ok 2 - the sum of no numbers is zero # time=0.884ms
+        
+        # Subtest: returns NaN if a non-number is given
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            ok 3 - expect truthy value
+            ok 4 - expect truthy value
+            1..4
+        ok 3 - returns NaN if a non-number is given # time=2.914ms
+        
+        1..3
+    ok 1 - sum # time=15.76ms
+    
+    # Subtest: sumSimple
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sum of two numbers # time=0.598ms
+        
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the sum of two numbers # time=0.836ms
+        
+        # Subtest: the sum of no numbers is zero
+            ok 1 - should be equal
+            1..1
+        ok 3 - the sum of no numbers is zero # time=0.355ms
+        
+        # Subtest: same NaN behavior as sum
+            not ok 1 - expect truthy value
+              ---
+              at:
+                line: 57
+                column: 11
+                file: test/sum.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (test/sum.test.js:57:11)
+                Test.<anonymous> (test/sum.test.js:56:7)
+                Object.<anonymous> (test/sum.test.js:27:1)
+                Module.replacementCompile (node_modules/append-transform/index.js:60:13)
+                Object.<anonymous> (node_modules/append-transform/index.js:64:4)
+              source: |2
+                    t.test("same NaN behavior as sum", function (t) {
+                        t.ok(isNaN(ss.sumSimple([null])));
+                ----------^
+                        t.ok(isNaN(ss.sumSimple([1, 2, null])));
+                        t.end();
+              ...
+            
+            not ok 2 - expect truthy value
+              ---
+              at:
+                line: 58
+                column: 11
+                file: test/sum.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (test/sum.test.js:58:11)
+                Test.<anonymous> (test/sum.test.js:56:7)
+                Object.<anonymous> (test/sum.test.js:27:1)
+                Module.replacementCompile (node_modules/append-transform/index.js:60:13)
+                Object.<anonymous> (node_modules/append-transform/index.js:64:4)
+              source: |2
+                        t.ok(isNaN(ss.sumSimple([null])));
+                        t.ok(isNaN(ss.sumSimple([1, 2, null])));
+                ----------^
+                        t.end();
+                    });
+              ...
+            
+            1..2
+            # failed 2 of 2 tests
+        not ok 4 - same NaN behavior as sum # time=17.759ms
+        
+        1..4
+        # failed 1 of 4 tests
+    not ok 2 - sumSimple # time=27.215ms
+    
+    1..2
+    # failed 1 of 2 tests
+    # time=48.518ms
+}
+
+ok 64 - test/sum_nth_power_deviations.test.js # time=11.761ms {
+    # Subtest: sumNthPowerDeviations
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        1..4
+    ok 1 - sumNthPowerDeviations # time=3.699ms
+    
+    1..1
+    # time=11.761ms
+}
+
+ok 65 - test/t_test.test.js # time=18.147ms {
+    # Subtest: t test
+        # Subtest: can compare a known value to the mean of samples
+            ok 1 - should be equal
+            1..1
+        ok 1 - can compare a known value to the mean of samples # time=3.052ms
+        
+        1..1
+    ok 1 - t test # time=8.685ms
+    
+    1..1
+    # time=18.147ms
+}
+
+ok 66 - test/t_test_two_sample.test.js # time=26.308ms {
+    # Subtest: tTestTwoSample
+        # Subtest: can test independency of two samples
+            ok 1 - should be equal
+            1..1
+        ok 1 - can test independency of two samples # time=2.687ms
+        
+        # Subtest: can test independency of two samples (mu == -2)
+            ok 1 - should be equal
+            1..1
+        ok 2 - can test independency of two samples (mu == -2) # time=0.936ms
+        
+        # Subtest: can test independency of two samples of different lengths
+            ok 1 - should be equal
+            1..1
+        ok 3 - can test independency of two samples of different lengths # time=1.061ms
+        
+        # Subtest: has an edge case for one sample being of size zero
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 4 - has an edge case for one sample being of size zero # time=1.664ms
+        
+        1..4
+    ok 1 - tTestTwoSample # time=23.917ms
+    
+    1..1
+    # time=26.308ms
+}
+
+ok 67 - test/unique_count_sorted.test.js # time=12.014ms {
+    # Subtest: uniqueCountSorted
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        ok 5 - should be equal
+        ok 6 - should be equal
+        ok 7 - should be equal
+        1..7
+    ok 1 - uniqueCountSorted # time=4.202ms
+    
+    1..1
+    # time=12.014ms
+}
+
+ok 68 - test/variance.test.js # time=20.243ms {
+    # Subtest: variance
+        # Subtest: can get the variance of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the variance of a six-sided die # time=2.459ms
+        
+        # Subtest: the variance of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 2 - the variance of one number is zero # time=0.933ms
+        
+        # Subtest: the variance of no numbers cannot be calculated
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the variance of no numbers cannot be calculated # time=2.483ms
+        
+        1..3
+    ok 1 - variance # time=15.107ms
+    
+    1..1
+    # time=20.243ms
+}
+
+ok 69 - test/wilcoxon_rank_sum.test.js # time=29.229ms {
+    # Subtest: wilcoxonRankSum
+        # Subtest: x is dominated by y
+            ok 1 - should be equal
+            1..1
+        ok 1 - x is dominated by y # time=2.424ms
+        
+        # Subtest: y is dominated by x
+            ok 1 - should be equal
+            1..1
+        ok 2 - y is dominated by x # time=0.987ms
+        
+        # Subtest: x and y are interleaved
+            ok 1 - should be equal
+            1..1
+        ok 3 - x and y are interleaved # time=0.638ms
+        
+        # Subtest: x and y overlap at one value
+            ok 1 - should be equal
+            1..1
+        ok 4 - x and y overlap at one value # time=2.947ms
+        
+        # Subtest: trailing tied ranks are handled correctly
+            ok 1 - should be equal
+            1..1
+        ok 5 - trailing tied ranks are handled correctly # time=0.714ms
+        
+        # Subtest: empty input throws
+            ok 1 - Neither sample can be empty
+            ok 2 - Neither sample can be empty
+            ok 3 - Neither sample can be empty
+            1..3
+        ok 6 - empty input throws # time=1.22ms
+        
+        1..6
+    ok 1 - wilcoxonRankSum # time=26.37ms
+    
+    1..1
+    # time=29.229ms
+}
+
+ok 70 - test/z_score.test.js # time=11.886ms {
+    # Subtest: zScore
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        1..3
+    ok 1 - zScore # time=3.377ms
+    
+    1..1
+    # time=11.886ms
+}
+
+1..70
+# failed 1 of 70 tests
+# time=6974.183ms
+---------------------------------------|---------|----------|---------|---------|-------------------
+File                                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------------|---------|----------|---------|---------|-------------------
+All files                              |   99.69 |    96.88 |     100 |   99.67 |                   
+ add_to_mean.js                        |     100 |      100 |     100 |     100 |                   
+ approx_equal.js                       |     100 |      100 |     100 |     100 |                   
+ bayesian_classifier.js                |     100 |      100 |     100 |     100 |                   
+ bernoulli_distribution.js             |     100 |      100 |     100 |     100 |                   
+ binomial_distribution.js              |     100 |      100 |     100 |     100 |                   
+ bisect.js                             |     100 |      100 |     100 |     100 |                   
+ chi_squared_distribution_table.js     |     100 |      100 |     100 |     100 |                   
+ chi_squared_goodness_of_fit.js        |     100 |      100 |     100 |     100 |                   
+ chunk.js                              |     100 |      100 |     100 |     100 |                   
+ ckmeans.js                            |     100 |    96.87 |     100 |     100 | 74                
+ coefficient_of_variation.js           |     100 |      100 |     100 |     100 |                   
+ combinations.js                       |     100 |      100 |     100 |     100 |                   
+ combinations_replacement.js           |     100 |      100 |     100 |     100 |                   
+ combine_means.js                      |     100 |      100 |     100 |     100 |                   
+ combine_variances.js                  |     100 |      100 |     100 |     100 |                   
+ ...lative_std_logistic_probability.js |     100 |      100 |     100 |     100 |                   
+ cumulative_std_normal_probability.js  |     100 |      100 |     100 |     100 |                   
+ epsilon.js                            |     100 |      100 |     100 |     100 |                   
+ equal_interval_breaks.js              |     100 |      100 |     100 |     100 |                   
+ error_function.js                     |     100 |      100 |     100 |     100 |                   
+ euclidean_distance.js                 |     100 |      100 |     100 |     100 |                   
+ extent.js                             |     100 |      100 |     100 |     100 |                   
+ extent_sorted.js                      |     100 |      100 |     100 |     100 |                   
+ factorial.js                          |     100 |      100 |     100 |     100 |                   
+ gamma.js                              |     100 |      100 |     100 |     100 |                   
+ gammaln.js                            |     100 |      100 |     100 |     100 |                   
+ geometric_mean.js                     |     100 |      100 |     100 |     100 |                   
+ harmonic_mean.js                      |     100 |      100 |     100 |     100 |                   
+ interquartile_range.js                |     100 |       75 |     100 |     100 | 21                
+ inverse_error_function.js             |     100 |      100 |     100 |     100 |                   
+ k_means_cluster.js                    |     100 |    83.33 |     100 |     100 | 23                
+ kernel_density_estimation.js          |   96.55 |    85.71 |     100 |   96.55 | 77                
+ linear_regression.js                  |     100 |      100 |     100 |     100 |                   
+ linear_regression_line.js             |     100 |      100 |     100 |     100 |                   
+ log_average.js                        |     100 |      100 |     100 |     100 |                   
+ logit.js                              |     100 |      100 |     100 |     100 |                   
+ make_matrix.js                        |     100 |      100 |     100 |     100 |                   
+ max.js                                |     100 |      100 |     100 |     100 |                   
+ max_sorted.js                         |     100 |      100 |     100 |     100 |                   
+ mean.js                               |     100 |      100 |     100 |     100 |                   
+ mean_simple.js                        |     100 |      100 |     100 |     100 |                   
+ median.js                             |     100 |      100 |     100 |     100 |                   
+ median_absolute_deviation.js          |     100 |      100 |     100 |     100 |                   
+ median_sorted.js                      |     100 |      100 |     100 |     100 |                   
+ min.js                                |     100 |      100 |     100 |     100 |                   
+ min_sorted.js                         |     100 |      100 |     100 |     100 |                   
+ mode.js                               |     100 |      100 |     100 |     100 |                   
+ mode_fast.js                          |     100 |      100 |     100 |     100 |                   
+ mode_sorted.js                        |     100 |      100 |     100 |     100 |                   
+ numeric_sort.js                       |     100 |      100 |     100 |     100 |                   
+ perceptron.js                         |     100 |      100 |     100 |     100 |                   
+ permutation_test.js                   |   97.14 |    89.47 |     100 |   96.77 | 92                
+ permutations_heap.js                  |     100 |      100 |     100 |     100 |                   
+ poisson_distribution.js               |     100 |      100 |     100 |     100 |                   
+ probit.js                             |     100 |      100 |     100 |     100 |                   
+ product.js                            |     100 |      100 |     100 |     100 |                   
+ quantile.js                           |     100 |      100 |     100 |     100 |                   
+ quantile_rank.js                      |     100 |      100 |     100 |     100 |                   
+ quantile_rank_sorted.js               |     100 |      100 |     100 |     100 |                   
+ quantile_sorted.js                    |     100 |      100 |     100 |     100 |                   
+ quickselect.js                        |     100 |      100 |     100 |     100 |                   
+ r_squared.js                          |     100 |      100 |     100 |     100 |                   
+ relative_error.js                     |   66.66 |       75 |     100 |   66.66 | 35                
+ root_mean_square.js                   |     100 |      100 |     100 |     100 |                   
+ sample.js                             |     100 |      100 |     100 |     100 |                   
+ sample_correlation.js                 |     100 |      100 |     100 |     100 |                   
+ sample_covariance.js                  |     100 |      100 |     100 |     100 |                   
+ sample_kurtosis.js                    |     100 |      100 |     100 |     100 |                   
+ sample_rank_correlation.js            |     100 |      100 |     100 |     100 |                   
+ sample_skewness.js                    |     100 |      100 |     100 |     100 |                   
+ sample_standard_deviation.js          |     100 |      100 |     100 |     100 |                   
+ sample_variance.js                    |     100 |      100 |     100 |     100 |                   
+ sample_with_replacement.js            |     100 |       75 |     100 |     100 | 22                
+ shuffle.js                            |     100 |      100 |     100 |     100 |                   
+ shuffle_in_place.js                   |     100 |      100 |     100 |     100 |                   
+ sign.js                               |     100 |      100 |     100 |     100 |                   
+ silhouette.js                         |     100 |       90 |     100 |     100 | 111               
+ silhouette_metric.js                  |     100 |      100 |     100 |     100 |                   
+ standard_deviation.js                 |     100 |      100 |     100 |     100 |                   
+ standard_normal_table.js              |     100 |      100 |     100 |     100 |                   
+ subtract_from_mean.js                 |     100 |      100 |     100 |     100 |                   
+ sum.js                                |     100 |      100 |     100 |     100 |                   
+ sum_nth_power_deviations.js           |     100 |      100 |     100 |     100 |                   
+ sum_simple.js                         |     100 |      100 |     100 |     100 |                   
+ t_test.js                             |     100 |      100 |     100 |     100 |                   
+ t_test_two_sample.js                  |     100 |    91.66 |     100 |     100 | 51                
+ unique_count_sorted.js                |     100 |      100 |     100 |     100 |                   
+ variance.js                           |     100 |      100 |     100 |     100 |                   
+ wilcoxon_rank_sum.js                  |     100 |      100 |     100 |     100 |                   
+ z_score.js                            |     100 |      100 |     100 |     100 |                   
+---------------------------------------|---------|----------|---------|---------|-------------------
+
+> simple-statistics@7.7.3 test
+> rollup -c rollup.config.js && npm run lint && tap --lines 95 --branches 95 --functions 95 --statements 95 --coverage test/*.test.js --jobs=4
+
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.mjs[22m...[39m
+[32mcreated [1mdist/simple-statistics.mjs[22m in [1m308ms[22m[39m
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.js[22m...[39m
+[32mcreated [1mdist/simple-statistics.js[22m in [1m189ms[22m[39m
+[36m
+[1mindex.js[22m → [1mdist/simple-statistics.min.js[22m...[39m
+[32mcreated [1mdist/simple-statistics.min.js[22m in [1m613ms[22m[39m
+
+> simple-statistics@7.7.3 prelint
+> tsc --skipLibCheck
+
+
+> simple-statistics@7.7.3 lint
+> eslint index.js src test && prettier --check src test "!test/types.js"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> simple-statistics@7.7.3 postlint
+> documentation lint src
+
+TAP version 13
+ok 1 - test/add_to_mean.test.js # time=17.219ms {
+    # Subtest: addToMean
+        # Subtest: can get add a single value to a mean
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can get add a single value to a mean # time=2.676ms
+        
+        1..1
+    ok 1 - addToMean # time=7.729ms
+    
+    1..1
+    # time=17.219ms
+}
+
+ok 2 - test/approx_equal.test.js # time=35.574ms {
+    # Subtest: approximate strict equality
+        # Subtest: handles equal values
+            ok 1 - expect truthy value
+            1..1
+        ok 1 - handles equal values # time=2.284ms
+        
+        # Subtest: handles values separated by less than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 2 - handles values separated by less than epsilon # time=0.873ms
+        
+        # Subtest: handles values separated by more than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - handles values separated by more than epsilon # time=1.516ms
+        
+        # Subtest: handles values separated by relatively less than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 4 - handles values separated by relatively less than epsilon # time=0.709ms
+        
+        # Subtest: handles values separated by relatively more than epsilon
+            ok 1 - expect truthy value
+            1..1
+        ok 5 - handles values separated by relatively more than epsilon # time=0.573ms
+        
+        # Subtest: handles negative values
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            ok 3 - expect truthy value
+            ok 4 - expect truthy value
+            1..4
+        ok 6 - handles negative values # time=0.844ms
+        
+        # Subtest: handles larger tolerances
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 7 - handles larger tolerances # time=0.755ms
+        
+        # Subtest: handles values near zero
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 8 - handles values near zero # time=0.728ms
+        
+        1..8
+    ok 1 - approximate strict equality # time=33.304ms
+    
+    1..1
+    # time=35.574ms
+}
+
+ok 3 - test/bayes.test.js # time=35.526ms {
+    # Subtest: BayesianClassifier
+        # Subtest: makes an easy call with one training round
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - makes an easy call with one training round # time=4.897ms
+        
+        # Subtest: makes fify-fifty call
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - makes fify-fifty call # time=1.392ms
+        
+        # Subtest: makes seventy-five/twenty-five call
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - makes seventy-five/twenty-five call # time=0.926ms
+        
+        # Subtest: tests multiple properties
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - tests multiple properties # time=1.019ms
+        
+        # Subtest: classifies multiple things
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 5 - classifies multiple things # time=1.354ms
+        
+        1..5
+    ok 1 - BayesianClassifier # time=26.315ms
+    
+    1..1
+    # time=35.526ms
+}
+
+ok 4 - test/bernoulli_distribution.test.js # time=22.015ms {
+    # Subtest: bernoulliDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for p = 0.3
+            ok 1 - expect truthy value
+            ok 2 - 0.0001
+            ok 3 - 0.0001
+            1..3
+        ok 1 - can return generate probability and cumulative probability distributions for p = 0.3 # time=2.788ms
+        
+        # Subtest: can return null when p is not a valid probability
+            ok 1 - p should be greater than 0.0
+            ok 2 - p should be less than 1.0
+            1..2
+        ok 2 - can return null when p is not a valid probability # time=1.178ms
+        
+        1..2
+    ok 1 - bernoulliDistribution # time=11.263ms
+    
+    1..1
+    # time=22.015ms
+}
+
+ok 5 - test/binomial_distribution.test.js # time=22.466ms {
+    # Subtest: binomialDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for n = 6, p = 0.3
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            ok 3 - 0.0001
+            ok 4 - 0.0001
+            ok 5 - 0.0001
+            ok 6 - 0.0001
+            ok 7 - 0.0001
+            ok 8 - 0.0001
+            1..8
+        ok 1 - can return generate probability and cumulative probability distributions for n = 6, p = 0.3 # time=4.471ms
+        
+        # Subtest: can return null when p or n are not valid parameters
+            ok 1 - n should be strictly positive
+            ok 2 - n should be an integer
+            ok 3 - p should be greater than 0.0
+            ok 4 - p should be less than 1.0
+            1..4
+        ok 2 - can return null when p or n are not valid parameters # time=1.251ms
+        
+        1..2
+    ok 1 - binomialDistribution # time=12.918ms
+    
+    1..1
+    # time=22.466ms
+}
+
+ok 6 - test/bisect.test.js # time=16.548ms {
+    # Subtest: bisect
+        # Subtest: can find root of sin and cos
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - Throws if it exceeds the number of iterations allowed
+            ok 4 - Throws with syntax error f must be a function
+            1..4
+        ok 1 - can find root of sin and cos # time=3.714ms
+        
+        1..1
+    ok 1 - bisect # time=8.897ms
+    
+    1..1
+    # time=16.548ms
+}
+
+ok 7 - test/chi_squared_goodness_of_fit.test.js # time=22.701ms {
+    # Subtest: chiSquaredGoodnessOfFit
+        # Subtest: can reject the null hypothesis with level of confidence specified at 0.05
+            ok 1 - should be equal
+            1..1
+        ok 1 - can reject the null hypothesis with level of confidence specified at 0.05 # time=2.642ms
+        
+        # Subtest: can accept the null hypothesis with level of confidence specified at 0.10
+            ok 1 - should be equal
+            1..1
+        ok 2 - can accept the null hypothesis with level of confidence specified at 0.10 # time=1.22ms
+        
+        # Subtest: can tolerate gaps in distribution
+            ok 1 - should be equal
+            1..1
+        ok 3 - can tolerate gaps in distribution # time=1.334ms
+        
+        1..3
+    ok 1 - chiSquaredGoodnessOfFit # time=17.52ms
+    
+    1..1
+    # time=22.701ms
+}
+
+ok 8 - test/chunk.test.js # time=23.356ms {
+    # Subtest: chunk
+        # Subtest: can get chunks of an array
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            ok 3 - should be equivalent
+            ok 4 - should be equivalent
+            ok 5 - should be equivalent
+            ok 6 - should be equivalent
+            ok 7 - should be equivalent
+            ok 8 - Throws with zero chunk size
+            ok 9 - Throws with non-integer chunk size
+            1..9
+        ok 1 - can get chunks of an array # time=9.511ms
+        
+        1..1
+    ok 1 - chunk # time=14.941ms
+    
+    1..1
+    # time=23.356ms
+}
+
+ok 9 - test/ckmeans.test.js # time=21.666ms {
+    # Subtest: C k-means
+        ok 1 - exports fn
+        ok 2 - Cannot generate more values than input
+        ok 3 - single-value case
+        ok 4 - same-value case
+        ok 5 - should be equivalent
+        ok 6 - should be equivalent
+        ok 7 - should be equivalent
+        ok 8 - should be equivalent
+        ok 9 - should be equivalent
+        ok 10 - should be equivalent
+        ok 11 - should be equivalent
+        ok 12 - should be equivalent
+        ok 13 - should be equivalent
+        ok 14 - should be equivalent
+        ok 15 - should be equivalent
+        ok 16 - should be equivalent
+        1..16
+    ok 1 - C k-means # time=12.818ms
+    
+    1..1
+    # time=21.666ms
+}
+
+ok 10 - test/coefficient_of_variation.test.js # time=15.372ms {
+    # Subtest: coefficient_of_variation
+        # Subtest: can get the coefficientOfVariation of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the coefficientOfVariation of a six-sided die # time=2.51ms
+        
+        1..1
+    ok 1 - coefficient_of_variation # time=7.665ms
+    
+    1..1
+    # time=15.372ms
+}
+
+ok 11 - test/combinations.test.js # time=21.834ms {
+    # Subtest: combinations
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=4.47ms
+        
+        # Subtest: generates combinations of 1,2,3 choosing two at a time
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates combinations of 1,2,3 choosing two at a time # time=1.547ms
+        
+        1..2
+    ok 1 - combinations # time=13.354ms
+    
+    1..1
+    # time=21.834ms
+}
+
+ok 12 - test/combinations_replacement.test.js # time=20.994ms {
+    # Subtest: combinations
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=4.374ms
+        
+        # Subtest: generates combinations of 1,2 choosing two at a time, with replacement
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates combinations of 1,2 choosing two at a time, with replacement # time=1.528ms
+        
+        1..2
+    ok 1 - combinations # time=13.159ms
+    
+    1..1
+    # time=20.994ms
+}
+
+ok 13 - test/combine_means.test.js # time=15.777ms {
+    # Subtest: combineMeans
+        # Subtest: can combine the means of two lists
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can combine the means of two lists # time=2.623ms
+        
+        1..1
+    ok 1 - combineMeans # time=7.47ms
+    
+    1..1
+    # time=15.777ms
+}
+
+ok 14 - test/combine_variances.test.js # time=15.682ms {
+    # Subtest: combineVariances
+        # Subtest: can combine the variances of two lists
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can combine the variances of two lists # time=2.835ms
+        
+        1..1
+    ok 1 - combineVariances # time=7.795ms
+    
+    1..1
+    # time=15.682ms
+}
+
+ok 15 - test/cumulative.test.js # time=43.623ms {
+    # Subtest: cumulativeStdNormalProbability
+        # Subtest: wikipedia test example works
+            ok 1 - should be equal
+            1..1
+        ok 1 - wikipedia test example works # time=2.769ms
+        
+        # Subtest: nondecreasing
+            1..0
+        ok 2 - nondecreasing # time=1.017ms
+        
+        # Subtest: matches errorFunction
+            1..0
+        ok 3 - matches errorFunction # time=2.888ms
+        
+        # Subtest: symmetry
+            ok 1 - should be equal
+            1..1
+        ok 4 - symmetry # time=1.213ms
+        
+        # Subtest: inverse
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            ok 7 - should be equal
+            ok 8 - should be equal
+            ok 9 - should be equal
+            ok 10 - should be equal
+            ok 11 - should be equal
+            ok 12 - should be equal
+            ok 13 - should be equal
+            ok 14 - should be equal
+            ok 15 - should be equal
+            ok 16 - should be equal
+            ok 17 - should be equal
+            ok 18 - should be equal
+            ok 19 - should be equal
+            ok 20 - should be equal
+            ok 21 - should be equal
+            ok 22 - should be equal
+            ok 23 - should be equal
+            ok 24 - should be equal
+            ok 25 - should be equal
+            ok 26 - should be equal
+            ok 27 - should be equal
+            ok 28 - should be equal
+            ok 29 - should be equal
+            ok 30 - should be equal
+            ok 31 - should be equal
+            ok 32 - should be equal
+            ok 33 - should be equal
+            ok 34 - should be equal
+            ok 35 - should be equal
+            ok 36 - should be equal
+            ok 37 - should be equal
+            ok 38 - should be equal
+            ok 39 - should be equal
+            ok 40 - should be equal
+            ok 41 - should be equal
+            ok 42 - should be equal
+            ok 43 - should be equal
+            ok 44 - should be equal
+            ok 45 - should be equal
+            ok 46 - should be equal
+            ok 47 - should be equal
+            ok 48 - should be equal
+            ok 49 - should be equal
+            ok 50 - should be equal
+            ok 51 - should be equal
+            ok 52 - should be equal
+            ok 53 - should be equal
+            ok 54 - should be equal
+            ok 55 - should be equal
+            ok 56 - should be equal
+            ok 57 - should be equal
+            ok 58 - should be equal
+            ok 59 - should be equal
+            ok 60 - should be equal
+            ok 61 - should be equal
+            ok 62 - should be equal
+            ok 63 - should be equal
+            ok 64 - should be equal
+            ok 65 - should be equal
+            ok 66 - should be equal
+            ok 67 - should be equal
+            ok 68 - should be equal
+            ok 69 - should be equal
+            ok 70 - should be equal
+            ok 71 - should be equal
+            ok 72 - should be equal
+            ok 73 - should be equal
+            ok 74 - should be equal
+            ok 75 - should be equal
+            ok 76 - should be equal
+            ok 77 - should be equal
+            ok 78 - should be equal
+            ok 79 - should be equal
+            ok 80 - should be equal
+            ok 81 - should be equal
+            ok 82 - should be equal
+            ok 83 - should be equal
+            ok 84 - should be equal
+            ok 85 - should be equal
+            ok 86 - should be equal
+            ok 87 - should be equal
+            ok 88 - should be equal
+            ok 89 - should be equal
+            ok 90 - should be equal
+            ok 91 - should be equal
+            ok 92 - should be equal
+            ok 93 - should be equal
+            ok 94 - should be equal
+            ok 95 - should be equal
+            ok 96 - should be equal
+            ok 97 - should be equal
+            ok 98 - should be equal
+            ok 99 - should be equal
+            ok 100 - should be equal
+            ok 101 - should be equal
+            1..101
+        ok 5 - inverse # time=8.818ms
+        
+        1..5
+    ok 1 - cumulativeStdNormalProbability # time=32.354ms
+    
+    # Subtest: cumulativeStdLogisticProbability
+        # Subtest: median is zero
+            ok 1 - should be equal
+            1..1
+        ok 1 - median is zero # time=0.477ms
+        
+        # Subtest: increasing
+            1..0
+        ok 2 - increasing # time=1.107ms
+        
+        # Subtest: symmetry
+            1..0
+        ok 3 - symmetry # time=0.37ms
+        
+        1..3
+    ok 2 - cumulativeStdLogisticProbability # time=7.974ms
+    
+    1..2
+    # time=43.623ms
+}
+
+ok 16 - test/equal_interval_breaks.test.js # time=16.407ms {
+    # Subtest: equalIntervalBreaks
+        ok 1 - 1-length case
+        ok 2 - three breaks
+        ok 3 - two breaks
+        ok 4 - one break
+        1..4
+    ok 1 - equalIntervalBreaks # time=7.469ms
+    
+    1..1
+    # time=16.407ms
+}
+
+ok 17 - test/error_function.test.js # time=33.798ms {
+    # Subtest: errorFunction
+        1..0
+    ok 1 - errorFunction # time=4.853ms
+    
+    # Subtest: symmetry
+        ok 1 - should be equal
+        1..1
+    ok 2 - symmetry # time=1.027ms
+    
+    # Subtest: inverse
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        ok 5 - should be equal
+        ok 6 - should be equal
+        ok 7 - should be equal
+        ok 8 - should be equal
+        ok 9 - should be equal
+        ok 10 - should be equal
+        ok 11 - should be equal
+        ok 12 - should be equal
+        ok 13 - should be equal
+        ok 14 - should be equal
+        ok 15 - should be equal
+        ok 16 - should be equal
+        ok 17 - should be equal
+        ok 18 - should be equal
+        ok 19 - should be equal
+        ok 20 - should be equal
+        ok 21 - should be equal
+        ok 22 - should be equal
+        ok 23 - should be equal
+        ok 24 - should be equal
+        ok 25 - should be equal
+        ok 26 - should be equal
+        ok 27 - should be equal
+        ok 28 - should be equal
+        ok 29 - should be equal
+        ok 30 - should be equal
+        ok 31 - should be equal
+        ok 32 - should be equal
+        ok 33 - should be equal
+        ok 34 - should be equal
+        ok 35 - should be equal
+        ok 36 - should be equal
+        ok 37 - should be equal
+        ok 38 - should be equal
+        ok 39 - should be equal
+        ok 40 - should be equal
+        ok 41 - should be equal
+        ok 42 - should be equal
+        ok 43 - should be equal
+        ok 44 - should be equal
+        ok 45 - should be equal
+        ok 46 - should be equal
+        ok 47 - should be equal
+        ok 48 - should be equal
+        ok 49 - should be equal
+        ok 50 - should be equal
+        ok 51 - should be equal
+        ok 52 - should be equal
+        ok 53 - should be equal
+        ok 54 - should be equal
+        ok 55 - should be equal
+        ok 56 - should be equal
+        ok 57 - should be equal
+        ok 58 - should be equal
+        ok 59 - should be equal
+        ok 60 - should be equal
+        ok 61 - should be equal
+        ok 62 - should be equal
+        ok 63 - should be equal
+        ok 64 - should be equal
+        ok 65 - should be equal
+        ok 66 - should be equal
+        ok 67 - should be equal
+        ok 68 - should be equal
+        ok 69 - should be equal
+        ok 70 - should be equal
+        ok 71 - should be equal
+        ok 72 - should be equal
+        ok 73 - should be equal
+        ok 74 - should be equal
+        ok 75 - should be equal
+        ok 76 - should be equal
+        ok 77 - should be equal
+        ok 78 - should be equal
+        ok 79 - should be equal
+        ok 80 - should be equal
+        ok 81 - should be equal
+        ok 82 - should be equal
+        ok 83 - should be equal
+        ok 84 - should be equal
+        ok 85 - should be equal
+        ok 86 - should be equal
+        ok 87 - should be equal
+        ok 88 - should be equal
+        ok 89 - should be equal
+        ok 90 - should be equal
+        ok 91 - should be equal
+        ok 92 - should be equal
+        ok 93 - should be equal
+        ok 94 - should be equal
+        ok 95 - should be equal
+        ok 96 - should be equal
+        ok 97 - should be equal
+        ok 98 - should be equal
+        ok 99 - should be equal
+        ok 100 - should be equal
+        ok 101 - should be equal
+        ok 102 - should be equal
+        ok 103 - should be equal
+        ok 104 - should be equal
+        ok 105 - should be equal
+        ok 106 - should be equal
+        ok 107 - should be equal
+        ok 108 - should be equal
+        ok 109 - should be equal
+        ok 110 - should be equal
+        ok 111 - should be equal
+        ok 112 - should be equal
+        ok 113 - should be equal
+        ok 114 - should be equal
+        ok 115 - should be equal
+        ok 116 - should be equal
+        ok 117 - should be equal
+        ok 118 - should be equal
+        ok 119 - should be equal
+        ok 120 - should be equal
+        ok 121 - should be equal
+        ok 122 - should be equal
+        ok 123 - should be equal
+        ok 124 - should be equal
+        ok 125 - should be equal
+        ok 126 - should be equal
+        ok 127 - should be equal
+        ok 128 - should be equal
+        ok 129 - should be equal
+        ok 130 - should be equal
+        ok 131 - should be equal
+        ok 132 - should be equal
+        ok 133 - should be equal
+        ok 134 - should be equal
+        ok 135 - should be equal
+        ok 136 - should be equal
+        ok 137 - should be equal
+        ok 138 - should be equal
+        ok 139 - should be equal
+        ok 140 - should be equal
+        ok 141 - should be equal
+        ok 142 - should be equal
+        ok 143 - should be equal
+        ok 144 - should be equal
+        ok 145 - should be equal
+        ok 146 - should be equal
+        ok 147 - should be equal
+        ok 148 - should be equal
+        ok 149 - should be equal
+        ok 150 - should be equal
+        ok 151 - should be equal
+        ok 152 - should be equal
+        ok 153 - should be equal
+        ok 154 - should be equal
+        ok 155 - should be equal
+        ok 156 - should be equal
+        ok 157 - should be equal
+        ok 158 - should be equal
+        ok 159 - should be equal
+        ok 160 - should be equal
+        ok 161 - should be equal
+        ok 162 - should be equal
+        ok 163 - should be equal
+        ok 164 - should be equal
+        ok 165 - should be equal
+        ok 166 - should be equal
+        ok 167 - should be equal
+        ok 168 - should be equal
+        ok 169 - should be equal
+        ok 170 - should be equal
+        ok 171 - should be equal
+        ok 172 - should be equal
+        ok 173 - should be equal
+        ok 174 - should be equal
+        ok 175 - should be equal
+        ok 176 - should be equal
+        ok 177 - should be equal
+        ok 178 - should be equal
+        ok 179 - should be equal
+        ok 180 - should be equal
+        ok 181 - should be equal
+        ok 182 - should be equal
+        ok 183 - should be equal
+        ok 184 - should be equal
+        ok 185 - should be equal
+        ok 186 - should be equal
+        ok 187 - should be equal
+        ok 188 - should be equal
+        ok 189 - should be equal
+        ok 190 - should be equal
+        ok 191 - should be equal
+        ok 192 - should be equal
+        ok 193 - should be equal
+        ok 194 - should be equal
+        ok 195 - should be equal
+        ok 196 - should be equal
+        ok 197 - should be equal
+        ok 198 - should be equal
+        ok 199 - should be equal
+        ok 200 - should be equal
+        1..200
+    ok 3 - inverse # time=17.492ms
+    
+    1..3
+    # time=33.798ms
+}
+
+ok 18 - test/factorial.test.js # time=28.345ms {
+    # Subtest: factorial
+        # Subtest: cannot calculate the factorial of a number lower than zero
+            ok 1 - expected to throw
+            1..1
+        ok 1 - cannot calculate the factorial of a number lower than zero # time=2.652ms
+        
+        # Subtest: rejects floating-point inputs
+            ok 1 - expected to throw
+            1..1
+        ok 2 - rejects floating-point inputs # time=1.278ms
+        
+        # Subtest: can calculate 0! = 1
+            ok 1 - should be equal
+            1..1
+        ok 3 - can calculate 0! = 1 # time=1.01ms
+        
+        # Subtest: can calculate 1! = 1
+            ok 1 - should be equal
+            1..1
+        ok 4 - can calculate 1! = 1 # time=1.045ms
+        
+        # Subtest: can calculate 100! = 1
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate 100! = 1 # time=1.004ms
+        
+        1..5
+    ok 1 - factorial # time=26.333ms
+    
+    1..1
+    # time=28.345ms
+}
+
+ok 19 - test/gamma.test.js # time=25.226ms {
+    # Subtest: gamma
+        # Subtest: gamma for integer should return whole number
+            ok 1 - should be equal
+            1..1
+        ok 1 - gamma for integer should return whole number # time=2.154ms
+        
+        # Subtest: gamma for positive real float should be correct
+            ok 1 - expect truthy value
+            1..1
+        ok 2 - gamma for positive real float should be correct # time=1.069ms
+        
+        # Subtest: gamma for negative real float should be correct
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - gamma for negative real float should be correct # time=2.784ms
+        
+        # Subtest: gamma for negative integer should return NaN
+            ok 1 - expect truthy value
+            1..1
+        ok 4 - gamma for negative integer should return NaN # time=0.666ms
+        
+        # Subtest: gamma for zero should return NaN
+            ok 1 - expect truthy value
+            1..1
+        ok 5 - gamma for zero should return NaN # time=0.547ms
+        
+        1..5
+    ok 1 - gamma # time=23.268ms
+    
+    1..1
+    # time=25.226ms
+}
+
+ok 20 - test/gammaln.test.js # time=22.124ms {
+    # Subtest: gammaln
+        # Subtest: gammaln for positive real float should be correct
+            ok 1 - should be equal
+            1..1
+        ok 1 - gammaln for positive real float should be correct # time=2.243ms
+        
+        # Subtest: exp(gammaln(n)) for n should equal gamma(n)
+            ok 1 - should be equal
+            1..1
+        ok 2 - exp(gammaln(n)) for n should equal gamma(n) # time=0.98ms
+        
+        # Subtest: gammaln for negative n should be Infinity
+            ok 1 - should be equal
+            1..1
+        ok 3 - gammaln for negative n should be Infinity # time=0.557ms
+        
+        # Subtest: gammaln for n === 0 should return NaN
+            ok 1 - should be equal
+            1..1
+        ok 4 - gammaln for n === 0 should return NaN # time=0.952ms
+        
+        1..4
+    ok 1 - gammaln # time=18.085ms
+    
+    1..1
+    # time=22.124ms
+}
+
+ok 21 - test/geometric_mean.test.js # time=25.343ms {
+    # Subtest: geometric mean
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the mean of two numbers # time=3.026ms
+        
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for empty lists # time=1.523ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 3 - cannot calculate for lists with negative numbers # time=0.765ms
+        
+        # Subtest: equals zero if array contains zero
+            1..0
+        ok 4 - equals zero if array contains zero # time=0.763ms
+        
+        1..4
+    ok 1 - geometric mean # time=22.996ms
+    
+    1..1
+    # time=25.343ms
+}
+
+ok 22 - test/harmonic_mean.test.js # time=24.037ms {
+    # Subtest: harmonicMean
+        # Subtest: can get the mean of two or more numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the mean of two or more numbers # time=2.964ms
+        
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for empty lists # time=0.999ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 3 - cannot calculate for lists with negative numbers # time=0.579ms
+        
+        1..3
+    ok 1 - harmonicMean # time=15.052ms
+    
+    1..1
+    # time=24.037ms
+}
+
+ok 23 - test/iqr.test.js # time=23.949ms {
+    # Subtest: interquartile range (iqr)
+        # Subtest: can get proper iqr of an even-length list
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get proper iqr of an even-length list # time=4.019ms
+        
+        # Subtest: can get proper iqr of an odd-length list
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get proper iqr of an odd-length list # time=0.863ms
+        
+        # Subtest: an iqr of a zero-length list cannot be calculated
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an iqr of a zero-length list cannot be calculated # time=0.969ms
+        
+        1..3
+    ok 1 - interquartile range (iqr) # time=15.239ms
+    
+    1..1
+    # time=23.949ms
+}
+
+ok 24 - test/k_means_cluster.test.js # time=35.993ms {
+    # Subtest: k-means clustering test
+        # Subtest: Single cluster of one point contains only that point
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 1 - Single cluster of one point contains only that point # time=5.044ms
+        
+        # Subtest: Single cluster of two points contains both points
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 2 - Single cluster of two points contains both points # time=1.599ms
+        
+        # Subtest: Two clusters of two points puts each point in its own cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 3 - Two clusters of two points puts each point in its own cluster # time=3.811ms
+        
+        # Subtest: Two clusters of four paired points puts each pair in a cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 4 - Two clusters of four paired points puts each pair in a cluster # time=1.34ms
+        
+        # Subtest: Two clusters of two 2D points puts each point in its own cluster
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 5 - Two clusters of two 2D points puts each point in its own cluster # time=1.097ms
+        
+        # Subtest: Base case of one value
+            ok 1 - expected to throw
+            1..1
+        ok 6 - Base case of one value # time=0.732ms
+        
+        # Subtest: Two clusters of three 2D points puts two points in one cluster and one in the other
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 7 - Two clusters of three 2D points puts two points in one cluster and one in the other # time=1.02ms
+        
+        1..7
+    ok 1 - k-means clustering test # time=33.845ms
+    
+    1..1
+    # time=35.993ms
+}
+
+ok 25 - test/kernel_density_estimation.test.js # time=27.387ms {
+    # Subtest: kernel density estimation
+        # Subtest: default kernel and bandwidth
+            ok 1 - density(-3) = 0.006725383080803049 != 0.00622253574711248
+            ok 2 - density(-2) = 0.09535649908332725 != 0.0955008985482363
+            ok 3 - density(-1) = 0.26263648397806405 != 0.26278412857974
+            ok 4 - density(0) = 0.3521783483093786 != 0.35334369527338
+            ok 5 - density(1) = 0.21390865841745316 != 0.214348469979353
+            ok 6 - density(2) = 0.0654843034111212 != 0.0652701909587952
+            ok 7 - density(3) = 0.0033136835339548664 != 0.00303679902517155
+            1..7
+        ok 1 - default kernel and bandwidth # time=5.241ms
+        
+        # Subtest: gaussian default kernel
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 2 - gaussian default kernel # time=3.534ms
+        
+        # Subtest: invalid kernel
+            ok 1 - expected to throw
+            ok 2 - expected to throw
+            1..2
+        ok 3 - invalid kernel # time=1.178ms
+        
+        1..3
+    ok 1 - kernel density estimation # time=21.445ms
+    
+    1..1
+    # time=27.387ms
+}
+
+ok 26 - test/linear_regression.test.js # time=34.571ms {
+    # Subtest: linear regression
+        # Subtest: correctly generates a line for a 0, 0 to 1, 1 dataset
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - correctly generates a line for a 0, 0 to 1, 1 dataset # time=3.125ms
+        
+        # Subtest: correctly generates a line for a 0, 0 to 1, 0 dataset
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 2 - correctly generates a line for a 0, 0 to 1, 0 dataset # time=1.254ms
+        
+        # Subtest: handles a single-point sample
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - handles a single-point sample # time=1.895ms
+        
+        # Subtest: a straight line will have a slope of 0
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - a straight line will have a slope of 0 # time=1.968ms
+        
+        # Subtest: a line at 50% grade
+            ok 1 - should be equivalent
+            1..1
+        ok 5 - a line at 50% grade # time=0.81ms
+        
+        # Subtest: a line with a high y-intercept
+            ok 1 - should be equivalent
+            1..1
+        ok 6 - a line with a high y-intercept # time=0.681ms
+        
+        1..6
+    ok 1 - linear regression # time=31.408ms
+    
+    1..1
+    # time=34.571ms
+}
+
+ok 27 - test/log_average.test.js # time=29.163ms {
+    # Subtest: log average
+        # Subtest: cannot calculate for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 1 - cannot calculate for empty lists # time=2.399ms
+        
+        # Subtest: cannot calculate for lists with negative numbers
+            ok 1 - expected to throw
+            1..1
+        ok 2 - cannot calculate for lists with negative numbers # time=0.892ms
+        
+        # Subtest: does not overflow for large products
+            1..0
+        ok 3 - does not overflow for large products # time=0.778ms
+        
+        # Subtest: does not underflow for small products
+            1..0
+        ok 4 - does not underflow for small products # time=0.476ms
+        
+        # Subtest: agrees with geometricMean
+            1..0
+        ok 5 - agrees with geometricMean # time=0.525ms
+        
+        # Subtest: equals zero if array contains zero
+            1..0
+        ok 6 - equals zero if array contains zero # time=0.287ms
+        
+        1..6
+    ok 1 - log average # time=25.257ms
+    
+    1..1
+    # time=29.163ms
+}
+
+ok 28 - test/logit.test.js # time=18.731ms {
+    # Subtest: logit
+        # Subtest: throws on logit < 0
+            ok 1 - expected to throw
+            1..1
+        ok 1 - throws on logit < 0 # time=2.355ms
+        
+        # Subtest: computes the logit otherwise
+            ok 1 - should be equal
+            1..1
+        ok 2 - computes the logit otherwise # time=0.805ms
+        
+        1..2
+    ok 1 - logit # time=10.462ms
+    
+    1..1
+    # time=18.731ms
+}
+
+ok 29 - test/mad.test.js # time=28.339ms {
+    # Subtest: median absolute deviation (mad)
+        # Subtest: median absolute deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - median absolute deviation of an example on wikipedia # time=2.798ms
+        
+        # Subtest: median absolute deviation of 0-10
+            ok 1 - should be equal
+            1..1
+        ok 2 - median absolute deviation of 0-10 # time=1.053ms
+        
+        # Subtest: median absolute deviation of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 3 - median absolute deviation of one number is zero # time=0.592ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 4 - zero-length corner case # time=2.685ms
+        
+        1..4
+    ok 1 - median absolute deviation (mad) # time=25.917ms
+    
+    1..1
+    # time=28.339ms
+}
+
+ok 30 - test/mean.test.js # time=21.396ms {
+    # Subtest: mean
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the mean of two numbers # time=2.288ms
+        
+        # Subtest: can get the mean of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the mean of one number # time=0.854ms
+        
+        # Subtest: an empty list has no average
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an empty list has no average # time=2.288ms
+        
+        1..3
+    ok 1 - mean # time=14.593ms
+    
+    1..1
+    # time=21.396ms
+}
+
+ok 31 - test/mean_simple.test.js # time=19.802ms {
+    # Subtest: meanSimple
+        # Subtest: can get the mean of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the mean of two numbers # time=2.243ms
+        
+        # Subtest: can get the mean of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the mean of one number # time=0.864ms
+        
+        # Subtest: an empty list has no average
+            ok 1 - expected to throw
+            1..1
+        ok 3 - an empty list has no average # time=1.014ms
+        
+        1..3
+    ok 1 - meanSimple # time=14.94ms
+    
+    1..1
+    # time=19.802ms
+}
+
+ok 32 - test/median.test.js # time=28.044ms {
+    # Subtest: median
+        # Subtest: can get the median of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the median of three numbers # time=2.805ms
+        
+        # Subtest: can get the median of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the median of two numbers # time=1.047ms
+        
+        # Subtest: can get the median of four numbers
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the median of four numbers # time=0.59ms
+        
+        # Subtest: cannot calculate the median of an empty list
+            ok 1 - expected to throw
+            1..1
+        ok 4 - cannot calculate the median of an empty list # time=2.64ms
+        
+        # Subtest: sorts numbers numerically
+            ok 1 - should be equal
+            1..1
+        ok 5 - sorts numbers numerically # time=0.574ms
+        
+        # Subtest: does not change the sorting order of its input
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 6 - does not change the sorting order of its input # time=0.707ms
+        
+        1..6
+    ok 1 - median # time=25.186ms
+    
+    1..1
+    # time=28.044ms
+}
+
+ok 33 - test/minmax.test.js # time=34.792ms {
+    # Subtest: min
+        ok 1 - zero length array throws
+        # Subtest: can get the minimum of one number
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the minimum of one number # time=1.643ms
+        
+        # Subtest: can get the minimum of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the minimum of three numbers # time=0.928ms
+        
+        1..3
+    ok 1 - min # time=10.993ms
+    
+    # Subtest: max
+        ok 1 - zero length array throws
+        # Subtest: can get the maximum of three numbers
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the maximum of three numbers # time=2.595ms
+        
+        1..2
+    ok 2 - max # time=7.931ms
+    
+    # Subtest: extent
+        ok 1 - zero length array throws
+        # Subtest: can get the extent of one number
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the extent of one number # time=3.46ms
+        
+        # Subtest: can get the extent of three numbers
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - can get the extent of three numbers # time=0.712ms
+        
+        1..3
+    ok 3 - extent # time=8.411ms
+    
+    # Subtest: sorted
+        ok 1 - maxSorted
+        ok 2 - minSorted
+        ok 3 - extentSorted
+        1..3
+    ok 4 - sorted # time=1.217ms
+    
+    1..4
+    # time=34.792ms
+}
+
+ok 34 - test/mode.test.js # time=54.411ms {
+    # Subtest: mode
+        # Subtest: mode
+            # Subtest: the mode of a single-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 1 - the mode of a single-number array is that one number # time=2.832ms
+            
+            # Subtest: the mode of a two-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 2 - the mode of a two-number array is that one number # time=1.28ms
+            
+            # Subtest: other cases
+                ok 1 - should be equal
+                ok 2 - should be equal
+                ok 3 - should be equal
+                ok 4 - should be equal
+                ok 5 - should be equal
+                ok 6 - should be equal
+                ok 7 - should be equal
+                ok 8 - should be equal
+                1..8
+            ok 3 - other cases # time=2.221ms
+            
+            # Subtest: the mode of an empty array is null
+                ok 1 - expected to throw
+                1..1
+            ok 4 - the mode of an empty array is null # time=0.792ms
+            
+            # Subtest: the mode of a three-number array with two same numbers is the repeated one
+                ok 1 - should be equal
+                1..1
+            ok 5 - the mode of a three-number array with two same numbers is the repeated one # time=0.463ms
+            
+            1..5
+        ok 1 - mode # time=27.027ms
+        
+        # Subtest: modeFast
+            # Subtest: the mode of a single-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 1 - the mode of a single-number array is that one number # time=0.605ms
+            
+            # Subtest: the mode of a two-number array is that one number
+                ok 1 - should be equal
+                1..1
+            ok 2 - the mode of a two-number array is that one number # time=0.449ms
+            
+            # Subtest: other cases
+                ok 1 - should be equal
+                ok 2 - should be equal
+                ok 3 - should be equal
+                ok 4 - should be equal
+                ok 5 - should be equal
+                ok 6 - should be equal
+                ok 7 - should be equal
+                ok 8 - should be equal
+                1..8
+            ok 3 - other cases # time=1.339ms
+            
+            # Subtest: the mode of an empty array is null
+                ok 1 - expected to throw
+                1..1
+            ok 4 - the mode of an empty array is null # time=0.442ms
+            
+            # Subtest: the mode of a three-number array with two same numbers is the repeated one
+                ok 1 - should be equal
+                1..1
+            ok 5 - the mode of a three-number array with two same numbers is the repeated one # time=0.388ms
+            
+            1..5
+        ok 2 - modeFast # time=16.06ms
+        
+        # Subtest: mode sorted
+            ok 1 - should be equal
+            1..1
+        ok 3 - mode sorted # time=0.357ms
+        
+        1..3
+    ok 1 - mode # time=51.367ms
+    
+    1..1
+    # time=54.411ms
+}
+
+ok 35 - test/normal_distribution.test.js # time=30.191ms {
+    # Subtest: natural distribution and z-score
+        # Subtest: normal table is exposed in the API
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - normal table is exposed in the API # time=2.572ms
+        
+        # Subtest: P(Z <= 0.4) is 0.6554
+            ok 1 - should be equal
+            1..1
+        ok 2 - P(Z <= 0.4) is 0.6554 # time=0.83ms
+        
+        # Subtest: P(Z <= -1.20) is 0.1151
+            ok 1 - should be equal
+            1..1
+        ok 3 - P(Z <= -1.20) is 0.1151 # time=1.031ms
+        
+        # Subtest: P(X <= 82) when X ~ N (80, 25) is 0.6554
+            ok 1 - should be equal
+            1..1
+        ok 4 - P(X <= 82) when X ~ N (80, 25) is 0.6554 # time=0.883ms
+        
+        # Subtest: P(X >= 90) when X ~ N (80, 25) is 0.0228
+            ok 1 - should be equal
+            1..1
+        ok 5 - P(X >= 90) when X ~ N (80, 25) is 0.0228 # time=0.531ms
+        
+        # Subtest: P(X <= 74) when X ~ N (80, 25) is 0.1151
+            ok 1 - should be equal
+            1..1
+        ok 6 - P(X <= 74) when X ~ N (80, 25) is 0.1151 # time=0.444ms
+        
+        # Subtest: P(78 <= X <= 88) when X ~ N (80, 25) is 0.6006
+            ok 1 - should be equal
+            1..1
+        ok 7 - P(78 <= X <= 88) when X ~ N (80, 25) is 0.6006 # time=0.376ms
+        
+        1..7
+    ok 1 - natural distribution and z-score # time=27.894ms
+    
+    1..1
+    # time=30.191ms
+}
+
+ok 36 - test/numeric_sort.test.js # time=15.273ms {
+    # Subtest: numericSort
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - should be equivalent
+        ok 4 - does not mutate input
+        1..4
+    ok 1 - numericSort # time=6.353ms
+    
+    1..1
+    # time=15.273ms
+}
+
+ok 37 - test/perceptron.test.js # time=35.653ms {
+    # Subtest: perceptron
+        # Subtest: initializes to zeros if label is zero
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 1 - initializes to zeros if label is zero # time=5.892ms
+        
+        # Subtest: initializes to values if label is one
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - initializes to values if label is one # time=1.5ms
+        
+        # Subtest: base case of zero prediction features
+            ok 1 - should be equivalent
+            1..1
+        ok 3 - base case of zero prediction features # time=0.723ms
+        
+        # Subtest: train with invalid label
+            ok 1 - should be equivalent
+            1..1
+        ok 4 - train with invalid label # time=0.773ms
+        
+        # Subtest: learns to separate one from two
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 5 - learns to separate one from two # time=0.899ms
+        
+        # Subtest: learns a diagonal boundary
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            1..4
+        ok 6 - learns a diagonal boundary # time=1.642ms
+        
+        1..6
+    ok 1 - perceptron # time=29.777ms
+    
+    1..1
+    # time=35.653ms
+}
+
+ok 38 - test/permutation_test.test.js # time=92.667ms {
+    # Subtest: permutation test
+        # Subtest: P-value of identical distributions being different should be 1
+            ok 1 - should be equal
+            1..1
+        ok 1 - P-value of identical distributions being different should be 1 # time=22.807ms
+        
+        # Subtest: P-value of distribution less than itself should be 1
+            ok 1 - should be equal
+            1..1
+        ok 2 - P-value of distribution less than itself should be 1 # time=15.847ms
+        
+        # Subtest: P-value of small sample greater than large sample should be 0
+            ok 1 - expect truthy value
+            1..1
+        ok 3 - P-value of small sample greater than large sample should be 0 # time=23.602ms
+        
+        # Subtest: permutationTest should throw error if wrong argument received
+            ok 1 - alternative must be one of specified options
+            1..1
+        ok 4 - permutationTest should throw error if wrong argument received # time=1.066ms
+        
+        1..4
+    ok 1 - permutation test # time=76.307ms
+    
+    1..1
+    # time=92.667ms
+}
+
+ok 39 - test/permutations_heap.test.js # time=25.124ms {
+    # Subtest: permutationsHeap
+        # Subtest: generates 1 permutation
+            ok 1 - should be equivalent
+            1..1
+        ok 1 - generates 1 permutation # time=4.622ms
+        
+        # Subtest: generates 1, 2, 3 permutations
+            ok 1 - should be equivalent
+            1..1
+        ok 2 - generates 1, 2, 3 permutations # time=2.583ms
+        
+        1..2
+    ok 1 - permutationsHeap # time=15.291ms
+    
+    1..1
+    # time=25.124ms
+}
+
+ok 40 - test/poisson_distribution.test.js # time=26.544ms {
+    # Subtest: poissonDistribution
+        # Subtest: can return generate probability and cumulative probability distributions for lambda = 3.0
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 1 - can return generate probability and cumulative probability distributions for lambda = 3.0 # time=2.682ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 4.0
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 2 - can generate probability and cumulative probability distributions for lambda = 4.0 # time=1.083ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 5.5
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 3 - can generate probability and cumulative probability distributions for lambda = 5.5 # time=2.543ms
+        
+        # Subtest: can generate probability and cumulative probability distributions for lambda = 9.5
+            ok 1 - should be equal
+            ok 2 - 0.0001
+            1..2
+        ok 4 - can generate probability and cumulative probability distributions for lambda = 9.5 # time=0.939ms
+        
+        # Subtest: can return undefined when lambda <= 0
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 5 - can return undefined when lambda <= 0 # time=0.728ms
+        
+        1..5
+    ok 1 - poissonDistribution # time=24.268ms
+    
+    1..1
+    # time=26.544ms
+}
+
+ok 41 - test/product.test.js # time=25.018ms {
+    # Subtest: product
+        # Subtest: can get the product of one number
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the product of one number # time=2.747ms
+        
+        # Subtest: can get the product of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the product of two numbers # time=0.819ms
+        
+        # Subtest: can get the product of a negative number
+            ok 1 - should be equal
+            1..1
+        ok 3 - can get the product of a negative number # time=0.746ms
+        
+        # Subtest: the product of no numbers is one - the multiplicative identity
+            ok 1 - should be equal
+            1..1
+        ok 4 - the product of no numbers is one - the multiplicative identity # time=0.903ms
+        
+        1..4
+    ok 1 - product # time=20.296ms
+    
+    1..1
+    # time=25.018ms
+}
+
+ok 42 - test/quantile.test.js # time=41.308ms {
+    # Subtest: quantile
+        # Subtest: can get proper quantiles of an even-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get proper quantiles of an even-length list # time=3.026ms
+        
+        # Subtest: can get proper quantiles of an odd-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 2 - can get proper quantiles of an odd-length list # time=1.752ms
+        
+        # Subtest: the median quantile is equal to the median
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 3 - the median quantile is equal to the median # time=1.277ms
+        
+        ok 4 - a zero-length list throws an error
+        # Subtest: test odd-value case
+            ok 1 - should be equal
+            1..1
+        ok 5 - test odd-value case # time=0.747ms
+        
+        # Subtest: bad bounds throw an error
+            ok 1 - expected to throw
+            ok 2 - expected to throw
+            1..2
+        ok 6 - bad bounds throw an error # time=0.796ms
+        
+        # Subtest: max quantile is equal to the max
+            ok 1 - should be equal
+            1..1
+        ok 7 - max quantile is equal to the max # time=0.718ms
+        
+        # Subtest: min quantile is equal to the min
+            ok 1 - should be equal
+            1..1
+        ok 8 - min quantile is equal to the min # time=0.696ms
+        
+        # Subtest: if quantile arg is an array, response is an array of quantiles
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 9 - if quantile arg is an array, response is an array of quantiles # time=3.169ms
+        
+        # Subtest: can get an array of quantiles on a small number of elements
+            ok 1 - should be equivalent
+            ok 2 - should be equivalent
+            1..2
+        ok 10 - can get an array of quantiles on a small number of elements # time=1.305ms
+        
+        1..10
+    ok 1 - quantile # time=39.268ms
+    
+    1..1
+    # time=41.308ms
+}
+
+ok 43 - test/quantile_rank.test.js # time=16.72ms {
+    # Subtest: quantileRank
+        # Subtest: can get proper quantile ranks
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            1..6
+        ok 1 - can get proper quantile ranks # time=3.645ms
+        
+        1..1
+    ok 1 - quantileRank # time=8.708ms
+    
+    1..1
+    # time=16.72ms
+}
+
+ok 44 - test/quantile_rank_sorted.test.js # time=14.726ms {
+    # Subtest: quantileRankSorted
+        # Subtest: can get proper quantile ranks
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            1..5
+        ok 1 - can get proper quantile ranks # time=2.91ms
+        
+        1..1
+    ok 1 - quantileRankSorted # time=7.52ms
+    
+    1..1
+    # time=14.726ms
+}
+
+ok 45 - test/quantilesorted.test.js # time=15.998ms {
+    # Subtest: quantileSorted
+        # Subtest: can get proper quantiles of an even-length list
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get proper quantiles of an even-length list # time=2.814ms
+        
+        1..1
+    ok 1 - quantileSorted # time=7.963ms
+    
+    1..1
+    # time=15.998ms
+}
+
+ok 46 - test/quickselect.test.js # time=21.298ms {
+    # Subtest: quickselect
+        ok 1 - should be equivalent
+        1..1
+    ok 1 - quickselect # time=6.17ms
+    
+    # Subtest: quickselect long arrays
+        ok 1 - should be equal
+        1..1
+    ok 2 - quickselect long arrays # time=1.278ms
+    
+    # Subtest: quickselect long arrays L35 coverage
+        ok 1 - should be equal
+        1..1
+    ok 3 - quickselect long arrays L35 coverage # time=1.169ms
+    
+    1..3
+    # time=21.298ms
+}
+
+ok 47 - test/r_squared.test.js # time=23.098ms {
+    # Subtest: r-squared
+        # Subtest: says that the r squared of a two-point line is perfect
+            ok 1 - should be equal
+            1..1
+        ok 1 - says that the r squared of a two-point line is perfect # time=3.055ms
+        
+        # Subtest: says that the r squared of a three-point line is not perfect
+            ok 1 - should not be equal
+            1..1
+        ok 2 - says that the r squared of a three-point line is not perfect # time=0.962ms
+        
+        # Subtest: r-squared of single sample is 1
+            ok 1 - should be equal
+            1..1
+        ok 3 - r-squared of single sample is 1 # time=0.63ms
+        
+        1..3
+    ok 1 - r-squared # time=14.019ms
+    
+    1..1
+    # time=23.098ms
+}
+
+ok 48 - test/root_mean_square.test.js # time=18.548ms {
+    # Subtest: root_mean_square
+        # Subtest: can get the RMS of two or more numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 1 - can get the RMS of two or more numbers # time=2.742ms
+        
+        # Subtest: returns null for empty lists
+            ok 1 - expected to throw
+            1..1
+        ok 2 - returns null for empty lists # time=0.939ms
+        
+        1..2
+    ok 1 - root_mean_square # time=10.557ms
+    
+    1..1
+    # time=18.548ms
+}
+
+ok 49 - test/sample.test.js # time=17.991ms {
+    # Subtest: sample
+        ok 1 - edge case - zero array
+        ok 2 - edge case - zero array
+        ok 3 - edge case - zero array
+        ok 4 - edge case - sample of 1
+        ok 5 - should be equivalent
+        ok 6 - should be equivalent
+        ok 7 - should be equivalent
+        ok 8 - should be equivalent
+        ok 9 - non-number contents
+        1..9
+    ok 1 - sample # time=8.411ms
+    
+    1..1
+    # time=17.991ms
+}
+
+ok 50 - test/sample_correlation.test.js # time=29.892ms {
+    # Subtest: sample correlation
+        # Subtest: can get the sample correlation of identical arrays
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sample correlation of identical arrays # time=2.52ms
+        
+        # Subtest: can get the sample correlation of different arrays
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the sample correlation of different arrays # time=0.925ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 3 - zero-length corner case # time=1.545ms
+        
+        1..3
+    ok 1 - sample correlation # time=16.437ms
+    
+    # Subtest: sample rank correlation
+        # Subtest: absolute rank correlation for monotonic function equals one
+            1..0
+        ok 1 - absolute rank correlation for monotonic function equals one # time=1.077ms
+        
+        # Subtest: rank correlation agrees with R calculation
+            1..0
+        ok 2 - rank correlation agrees with R calculation # time=0.621ms
+        
+        1..2
+    ok 2 - sample rank correlation # time=6.419ms
+    
+    1..2
+    # time=29.892ms
+}
+
+ok 51 - test/sample_covariance.test.js # time=26.823ms {
+    # Subtest: sample covariance
+        # Subtest: can get perfect negative covariance
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get perfect negative covariance # time=2.266ms
+        
+        # Subtest: covariance of something with itself is its variance
+            ok 1 - should be equal
+            1..1
+        ok 2 - covariance of something with itself is its variance # time=0.933ms
+        
+        # Subtest: covariance is zero for something with no correlation
+            ok 1 - should be equal
+            1..1
+        ok 3 - covariance is zero for something with no correlation # time=1.082ms
+        
+        # Subtest: unequal-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 4 - unequal-length corner case # time=1.137ms
+        
+        # Subtest: zero-length corner case
+            ok 1 - expected to throw
+            1..1
+        ok 5 - zero-length corner case # time=0.588ms
+        
+        1..5
+    ok 1 - sample covariance # time=24.87ms
+    
+    1..1
+    # time=26.823ms
+}
+
+ok 52 - test/sample_kurtosis.test.js # time=30.619ms {
+    # Subtest: sample kurtosis
+        # Subtest: the kurtosis of an empty sample is null
+            ok 1 - expected to throw
+            1..1
+        ok 1 - the kurtosis of an empty sample is null # time=2.38ms
+        
+        # Subtest: the kurtosis of an sample with one number is null
+            ok 1 - expected to throw
+            1..1
+        ok 2 - the kurtosis of an sample with one number is null # time=0.901ms
+        
+        # Subtest: the kurtosis of an sample with two numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the kurtosis of an sample with two numbers is null # time=0.574ms
+        
+        # Subtest: the kurtosis of an sample with three numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 4 - the kurtosis of an sample with three numbers is null # time=0.797ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 1
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate the kurtosis of SAS example 1 # time=0.861ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 2
+            ok 1 - should be equal
+            1..1
+        ok 6 - can calculate the kurtosis of SAS example 2 # time=0.482ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 3
+            ok 1 - should be equal
+            1..1
+        ok 7 - can calculate the kurtosis of SAS example 3 # time=0.376ms
+        
+        # Subtest: can calculate the kurtosis of SAS example 4
+            ok 1 - should be equal
+            1..1
+        ok 8 - can calculate the kurtosis of SAS example 4 # time=0.379ms
+        
+        1..8
+    ok 1 - sample kurtosis # time=28.429ms
+    
+    1..1
+    # time=30.619ms
+}
+
+ok 53 - test/sample_skewness.test.js # time=33.574ms {
+    # Subtest: sample skewness
+        # Subtest: the skewness of an empty sample is null
+            ok 1 - expected to throw
+            1..1
+        ok 1 - the skewness of an empty sample is null # time=2.967ms
+        
+        # Subtest: the skewness of an sample with one number is null
+            ok 1 - expected to throw
+            1..1
+        ok 2 - the skewness of an sample with one number is null # time=1.239ms
+        
+        # Subtest: the skewness of an sample with two numbers is null
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the skewness of an sample with two numbers is null # time=0.919ms
+        
+        # Subtest: can calculate the skewness of SAS example 1
+            ok 1 - should be equal
+            1..1
+        ok 4 - can calculate the skewness of SAS example 1 # time=1.289ms
+        
+        # Subtest: can calculate the skewness of SAS example 2
+            ok 1 - should be equal
+            1..1
+        ok 5 - can calculate the skewness of SAS example 2 # time=0.703ms
+        
+        # Subtest: can calculate the skewness of SAS example 3
+            ok 1 - should be equal
+            1..1
+        ok 6 - can calculate the skewness of SAS example 3 # time=0.447ms
+        
+        1..6
+    ok 1 - sample skewness # time=30.211ms
+    
+    1..1
+    # time=33.574ms
+}
+
+ok 54 - test/sample_standard_deviation.test.js # time=17.521ms {
+    # Subtest: sampleStandardDeviation
+        # Subtest: can get the standard deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the standard deviation of an example on wikipedia # time=2.578ms
+        
+        ok 2 - zero-length corner case
+        1..2
+    ok 1 - sampleStandardDeviation # time=8.682ms
+    
+    1..1
+    # time=17.521ms
+}
+
+ok 55 - test/sample_variance.test.js # time=23.178ms {
+    # Subtest: sample variance
+        # Subtest: can get the sample variance of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sample variance of a six-sided die # time=2.883ms
+        
+        # Subtest: can get the sample variance of numbers 1-10
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the sample variance of numbers 1-10 # time=0.926ms
+        
+        # Subtest: the sample variance of two numbers that are the same is 0
+            ok 1 - should be equal
+            1..1
+        ok 3 - the sample variance of two numbers that are the same is 0 # time=0.585ms
+        
+        ok 4 - the sample variance of one number cannot be calculated
+        ok 5 - the sample variance of no numbers cannot be calculated
+        1..5
+    ok 1 - sample variance # time=16.39ms
+    
+    1..1
+    # time=23.178ms
+}
+
+ok 56 - test/sample_with_replacement.test.js # time=16.557ms {
+    # Subtest: sampleWithReplacement
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - should be equivalent
+        ok 4 - should be equivalent
+        ok 5 - should be equivalent
+        1..5
+    ok 1 - sampleWithReplacement # time=6.768ms
+    
+    1..1
+    # time=16.557ms
+}
+
+ok 57 - test/shuffle.test.js # time=25.824ms {
+    # Subtest: shuffle
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - does not change original array
+        ok 4 - should be equivalent
+        ok 5 - does not change original array
+        1..5
+    ok 1 - shuffle # time=9.018ms
+    
+    # Subtest: shuffleInPlace
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        ok 3 - changes original array
+        1..3
+    ok 2 - shuffleInPlace # time=1.444ms
+    
+    # Subtest: shuffleInPlace truly random
+        ok 1 - should be equivalent
+        ok 2 - should be equivalent
+        1..2
+    ok 3 - shuffleInPlace truly random # time=1.304ms
+    
+    1..3
+    # time=25.824ms
+}
+
+ok 58 - test/sign.test.js # time=19.202ms {
+    # Subtest: bisect
+        # Subtest: can find sign of number
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            ok 4 - should be equal
+            ok 5 - should be equal
+            ok 6 - should be equal
+            ok 7 - Throws with syntax error x is not a number
+            1..7
+        ok 1 - can find sign of number # time=4.165ms
+        
+        1..1
+    ok 1 - bisect # time=10.142ms
+    
+    1..1
+    # time=19.202ms
+}
+
+ok 59 - test/silhouette.test.js # time=32.136ms {
+    # Subtest: silhouette test
+        # Subtest: Requires equal-sized arrays
+            ok 1 - expected to throw
+            1..1
+        ok 1 - Requires equal-sized arrays # time=2.513ms
+        
+        # Subtest: Single cluster of one point has metric 0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 2 - Single cluster of one point has metric 0 # time=3.353ms
+        
+        # Subtest: Single cluster of two points has metric 1.0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 3 - Single cluster of two points has metric 1.0 # time=1.519ms
+        
+        # Subtest: Two clusters with one point each has metric 0.0
+            ok 1 - should be equivalent
+            ok 2 - should be equal
+            1..2
+        ok 4 - Two clusters with one point each has metric 0.0 # time=1.225ms
+        
+        # Subtest: Two clusters with two points each has metric 0.5
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            1..2
+        ok 5 - Two clusters with two points each has metric 0.5 # time=1.085ms
+        
+        1..5
+    ok 1 - silhouette test # time=29.574ms
+    
+    1..1
+    # time=32.136ms
+}
+
+ok 60 - test/standard_deviation.test.js # time=25.063ms {
+    # Subtest: standardDeviation
+        # Subtest: can get the standard deviation of an example on wikipedia
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the standard deviation of an example on wikipedia # time=2.465ms
+        
+        # Subtest: can get the standard deviation of 1-3
+            ok 1 - should be equal
+            1..1
+        ok 2 - can get the standard deviation of 1-3 # time=0.847ms
+        
+        # Subtest: zero-length array corner case
+            ok 1 - expected to throw
+            1..1
+        ok 3 - zero-length array corner case # time=1.416ms
+        
+        # Subtest: can get the standard deviation of 1-10
+            ok 1 - should be equal
+            1..1
+        ok 4 - can get the standard deviation of 1-10 # time=0.765ms
+        
+        # Subtest: the standard deviation of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 5 - the standard deviation of one number is zero # time=0.5ms
+        
+        1..5
+    ok 1 - standardDeviation # time=22.881ms
+    
+    1..1
+    # time=25.063ms
+}
+
+ok 61 - test/standard_normal_table.test.js # time=16.601ms {
+    # Subtest: standardNormalTable
+        1..0
+    ok 1 - standardNormalTable # time=5.392ms
+    
+    # Subtest: all entries are numeric
+        1..0
+    ok 2 - all entries are numeric # time=0.584ms
+    
+    1..2
+    # time=16.601ms
+}
+
+ok 62 - test/subtract_from_mean.test.js # time=20.512ms {
+    # Subtest: subtractFromMean
+        # Subtest: can remove a single value from a mean
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 1 - can remove a single value from a mean # time=3.427ms
+        
+        1..1
+    ok 1 - subtractFromMean # time=10.431ms
+    
+    1..1
+    # time=20.512ms
+}
+
+not ok 63 - test/sum.test.js # time=51.651ms
+  ---
+  env: {}
+  file: test/sum.test.js
+  timeout: 30000
+  command: /usr/local/bin/node
+  args:
+    - test/sum.test.js
+  stdio:
+    - 0
+    - pipe
+    - 2
+  cwd: /Users/franktip/git/mutation-testing-data/casestudy/simple-statistics-633/simple-statistics
+  exitCode: 1
+  ...
+{
+    # Subtest: sum
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sum of two numbers # time=2.511ms
+        
+        # Subtest: the sum of no numbers is zero
+            ok 1 - should be equal
+            1..1
+        ok 2 - the sum of no numbers is zero # time=0.901ms
+        
+        # Subtest: returns NaN if a non-number is given
+            ok 1 - expect truthy value
+            ok 2 - expect truthy value
+            ok 3 - expect truthy value
+            ok 4 - expect truthy value
+            1..4
+        ok 3 - returns NaN if a non-number is given # time=3.6ms
+        
+        1..3
+    ok 1 - sum # time=17.489ms
+    
+    # Subtest: sumSimple
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the sum of two numbers # time=0.668ms
+        
+        # Subtest: can get the sum of two numbers
+            ok 1 - should be equal
+            ok 2 - should be equal
+            1..2
+        ok 2 - can get the sum of two numbers # time=0.704ms
+        
+        # Subtest: the sum of no numbers is zero
+            ok 1 - should be equal
+            1..1
+        ok 3 - the sum of no numbers is zero # time=0.352ms
+        
+        # Subtest: same NaN behavior as sum
+            not ok 1 - expect truthy value
+              ---
+              at:
+                line: 57
+                column: 11
+                file: test/sum.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (test/sum.test.js:57:11)
+                Test.<anonymous> (test/sum.test.js:56:7)
+                Object.<anonymous> (test/sum.test.js:27:1)
+                Module.replacementCompile (node_modules/append-transform/index.js:60:13)
+                Object.<anonymous> (node_modules/append-transform/index.js:64:4)
+              source: |2
+                    t.test("same NaN behavior as sum", function (t) {
+                        t.ok(isNaN(ss.sumSimple([null])));
+                ----------^
+                        t.ok(isNaN(ss.sumSimple([1, 2, null])));
+                        t.end();
+              ...
+            
+            not ok 2 - expect truthy value
+              ---
+              at:
+                line: 58
+                column: 11
+                file: test/sum.test.js
+                type: Test
+              stack: |
+                Test.<anonymous> (test/sum.test.js:58:11)
+                Test.<anonymous> (test/sum.test.js:56:7)
+                Object.<anonymous> (test/sum.test.js:27:1)
+                Module.replacementCompile (node_modules/append-transform/index.js:60:13)
+                Object.<anonymous> (node_modules/append-transform/index.js:64:4)
+              source: |2
+                        t.ok(isNaN(ss.sumSimple([null])));
+                        t.ok(isNaN(ss.sumSimple([1, 2, null])));
+                ----------^
+                        t.end();
+                    });
+              ...
+            
+            1..2
+            # failed 2 of 2 tests
+        not ok 4 - same NaN behavior as sum # time=18.258ms
+        
+        1..4
+        # failed 1 of 4 tests
+    not ok 2 - sumSimple # time=27.619ms
+    
+    1..2
+    # failed 1 of 2 tests
+    # time=51.651ms
+}
+
+ok 64 - test/sum_nth_power_deviations.test.js # time=12.106ms {
+    # Subtest: sumNthPowerDeviations
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        1..4
+    ok 1 - sumNthPowerDeviations # time=3.618ms
+    
+    1..1
+    # time=12.106ms
+}
+
+ok 65 - test/t_test.test.js # time=17.599ms {
+    # Subtest: t test
+        # Subtest: can compare a known value to the mean of samples
+            ok 1 - should be equal
+            1..1
+        ok 1 - can compare a known value to the mean of samples # time=2.873ms
+        
+        1..1
+    ok 1 - t test # time=8.649ms
+    
+    1..1
+    # time=17.599ms
+}
+
+ok 66 - test/t_test_two_sample.test.js # time=28.991ms {
+    # Subtest: tTestTwoSample
+        # Subtest: can test independency of two samples
+            ok 1 - should be equal
+            1..1
+        ok 1 - can test independency of two samples # time=2.986ms
+        
+        # Subtest: can test independency of two samples (mu == -2)
+            ok 1 - should be equal
+            1..1
+        ok 2 - can test independency of two samples (mu == -2) # time=1.339ms
+        
+        # Subtest: can test independency of two samples of different lengths
+            ok 1 - should be equal
+            1..1
+        ok 3 - can test independency of two samples of different lengths # time=0.64ms
+        
+        # Subtest: has an edge case for one sample being of size zero
+            ok 1 - should be equal
+            ok 2 - should be equal
+            ok 3 - should be equal
+            1..3
+        ok 4 - has an edge case for one sample being of size zero # time=1.631ms
+        
+        1..4
+    ok 1 - tTestTwoSample # time=23.844ms
+    
+    1..1
+    # time=28.991ms
+}
+
+ok 67 - test/unique_count_sorted.test.js # time=12.312ms {
+    # Subtest: uniqueCountSorted
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        ok 4 - should be equal
+        ok 5 - should be equal
+        ok 6 - should be equal
+        ok 7 - should be equal
+        1..7
+    ok 1 - uniqueCountSorted # time=4.221ms
+    
+    1..1
+    # time=12.312ms
+}
+
+ok 68 - test/variance.test.js # time=21.806ms {
+    # Subtest: variance
+        # Subtest: can get the variance of a six-sided die
+            ok 1 - should be equal
+            1..1
+        ok 1 - can get the variance of a six-sided die # time=2.253ms
+        
+        # Subtest: the variance of one number is zero
+            ok 1 - should be equal
+            1..1
+        ok 2 - the variance of one number is zero # time=1.299ms
+        
+        # Subtest: the variance of no numbers cannot be calculated
+            ok 1 - expected to throw
+            1..1
+        ok 3 - the variance of no numbers cannot be calculated # time=0.99ms
+        
+        1..3
+    ok 1 - variance # time=17.007ms
+    
+    1..1
+    # time=21.806ms
+}
+
+ok 69 - test/wilcoxon_rank_sum.test.js # time=32.643ms {
+    # Subtest: wilcoxonRankSum
+        # Subtest: x is dominated by y
+            ok 1 - should be equal
+            1..1
+        ok 1 - x is dominated by y # time=2.114ms
+        
+        # Subtest: y is dominated by x
+            ok 1 - should be equal
+            1..1
+        ok 2 - y is dominated by x # time=0.776ms
+        
+        # Subtest: x and y are interleaved
+            ok 1 - should be equal
+            1..1
+        ok 3 - x and y are interleaved # time=0.653ms
+        
+        # Subtest: x and y overlap at one value
+            ok 1 - should be equal
+            1..1
+        ok 4 - x and y overlap at one value # time=1.383ms
+        
+        # Subtest: trailing tied ranks are handled correctly
+            ok 1 - should be equal
+            1..1
+        ok 5 - trailing tied ranks are handled correctly # time=0.966ms
+        
+        # Subtest: empty input throws
+            ok 1 - Neither sample can be empty
+            ok 2 - Neither sample can be empty
+            ok 3 - Neither sample can be empty
+            1..3
+        ok 6 - empty input throws # time=1.221ms
+        
+        1..6
+    ok 1 - wilcoxonRankSum # time=30.158ms
+    
+    1..1
+    # time=32.643ms
+}
+
+ok 70 - test/z_score.test.js # time=15.837ms {
+    # Subtest: zScore
+        ok 1 - should be equal
+        ok 2 - should be equal
+        ok 3 - should be equal
+        1..3
+    ok 1 - zScore # time=5.464ms
+    
+    1..1
+    # time=15.837ms
+}
+
+1..70
+# failed 1 of 70 tests
+# time=6776.361ms
+---------------------------------------|---------|----------|---------|---------|-------------------
+File                                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------------|---------|----------|---------|---------|-------------------
+All files                              |   99.69 |    96.88 |     100 |   99.67 |                   
+ add_to_mean.js                        |     100 |      100 |     100 |     100 |                   
+ approx_equal.js                       |     100 |      100 |     100 |     100 |                   
+ bayesian_classifier.js                |     100 |      100 |     100 |     100 |                   
+ bernoulli_distribution.js             |     100 |      100 |     100 |     100 |                   
+ binomial_distribution.js              |     100 |      100 |     100 |     100 |                   
+ bisect.js                             |     100 |      100 |     100 |     100 |                   
+ chi_squared_distribution_table.js     |     100 |      100 |     100 |     100 |                   
+ chi_squared_goodness_of_fit.js        |     100 |      100 |     100 |     100 |                   
+ chunk.js                              |     100 |      100 |     100 |     100 |                   
+ ckmeans.js                            |     100 |    96.87 |     100 |     100 | 74                
+ coefficient_of_variation.js           |     100 |      100 |     100 |     100 |                   
+ combinations.js                       |     100 |      100 |     100 |     100 |                   
+ combinations_replacement.js           |     100 |      100 |     100 |     100 |                   
+ combine_means.js                      |     100 |      100 |     100 |     100 |                   
+ combine_variances.js                  |     100 |      100 |     100 |     100 |                   
+ ...lative_std_logistic_probability.js |     100 |      100 |     100 |     100 |                   
+ cumulative_std_normal_probability.js  |     100 |      100 |     100 |     100 |                   
+ epsilon.js                            |     100 |      100 |     100 |     100 |                   
+ equal_interval_breaks.js              |     100 |      100 |     100 |     100 |                   
+ error_function.js                     |     100 |      100 |     100 |     100 |                   
+ euclidean_distance.js                 |     100 |      100 |     100 |     100 |                   
+ extent.js                             |     100 |      100 |     100 |     100 |                   
+ extent_sorted.js                      |     100 |      100 |     100 |     100 |                   
+ factorial.js                          |     100 |      100 |     100 |     100 |                   
+ gamma.js                              |     100 |      100 |     100 |     100 |                   
+ gammaln.js                            |     100 |      100 |     100 |     100 |                   
+ geometric_mean.js                     |     100 |      100 |     100 |     100 |                   
+ harmonic_mean.js                      |     100 |      100 |     100 |     100 |                   
+ interquartile_range.js                |     100 |       75 |     100 |     100 | 21                
+ inverse_error_function.js             |     100 |      100 |     100 |     100 |                   
+ k_means_cluster.js                    |     100 |    83.33 |     100 |     100 | 23                
+ kernel_density_estimation.js          |   96.55 |    85.71 |     100 |   96.55 | 77                
+ linear_regression.js                  |     100 |      100 |     100 |     100 |                   
+ linear_regression_line.js             |     100 |      100 |     100 |     100 |                   
+ log_average.js                        |     100 |      100 |     100 |     100 |                   
+ logit.js                              |     100 |      100 |     100 |     100 |                   
+ make_matrix.js                        |     100 |      100 |     100 |     100 |                   
+ max.js                                |     100 |      100 |     100 |     100 |                   
+ max_sorted.js                         |     100 |      100 |     100 |     100 |                   
+ mean.js                               |     100 |      100 |     100 |     100 |                   
+ mean_simple.js                        |     100 |      100 |     100 |     100 |                   
+ median.js                             |     100 |      100 |     100 |     100 |                   
+ median_absolute_deviation.js          |     100 |      100 |     100 |     100 |                   
+ median_sorted.js                      |     100 |      100 |     100 |     100 |                   
+ min.js                                |     100 |      100 |     100 |     100 |                   
+ min_sorted.js                         |     100 |      100 |     100 |     100 |                   
+ mode.js                               |     100 |      100 |     100 |     100 |                   
+ mode_fast.js                          |     100 |      100 |     100 |     100 |                   
+ mode_sorted.js                        |     100 |      100 |     100 |     100 |                   
+ numeric_sort.js                       |     100 |      100 |     100 |     100 |                   
+ perceptron.js                         |     100 |      100 |     100 |     100 |                   
+ permutation_test.js                   |   97.14 |    89.47 |     100 |   96.77 | 92                
+ permutations_heap.js                  |     100 |      100 |     100 |     100 |                   
+ poisson_distribution.js               |     100 |      100 |     100 |     100 |                   
+ probit.js                             |     100 |      100 |     100 |     100 |                   
+ product.js                            |     100 |      100 |     100 |     100 |                   
+ quantile.js                           |     100 |      100 |     100 |     100 |                   
+ quantile_rank.js                      |     100 |      100 |     100 |     100 |                   
+ quantile_rank_sorted.js               |     100 |      100 |     100 |     100 |                   
+ quantile_sorted.js                    |     100 |      100 |     100 |     100 |                   
+ quickselect.js                        |     100 |      100 |     100 |     100 |                   
+ r_squared.js                          |     100 |      100 |     100 |     100 |                   
+ relative_error.js                     |   66.66 |       75 |     100 |   66.66 | 35                
+ root_mean_square.js                   |     100 |      100 |     100 |     100 |                   
+ sample.js                             |     100 |      100 |     100 |     100 |                   
+ sample_correlation.js                 |     100 |      100 |     100 |     100 |                   
+ sample_covariance.js                  |     100 |      100 |     100 |     100 |                   
+ sample_kurtosis.js                    |     100 |      100 |     100 |     100 |                   
+ sample_rank_correlation.js            |     100 |      100 |     100 |     100 |                   
+ sample_skewness.js                    |     100 |      100 |     100 |     100 |                   
+ sample_standard_deviation.js          |     100 |      100 |     100 |     100 |                   
+ sample_variance.js                    |     100 |      100 |     100 |     100 |                   
+ sample_with_replacement.js            |     100 |       75 |     100 |     100 | 22                
+ shuffle.js                            |     100 |      100 |     100 |     100 |                   
+ shuffle_in_place.js                   |     100 |      100 |     100 |     100 |                   
+ sign.js                               |     100 |      100 |     100 |     100 |                   
+ silhouette.js                         |     100 |       90 |     100 |     100 | 111               
+ silhouette_metric.js                  |     100 |      100 |     100 |     100 |                   
+ standard_deviation.js                 |     100 |      100 |     100 |     100 |                   
+ standard_normal_table.js              |     100 |      100 |     100 |     100 |                   
+ subtract_from_mean.js                 |     100 |      100 |     100 |     100 |                   
+ sum.js                                |     100 |      100 |     100 |     100 |                   
+ sum_nth_power_deviations.js           |     100 |      100 |     100 |     100 |                   
+ sum_simple.js                         |     100 |      100 |     100 |     100 |                   
+ t_test.js                             |     100 |      100 |     100 |     100 |                   
+ t_test_two_sample.js                  |     100 |    91.66 |     100 |     100 | 51                
+ unique_count_sorted.js                |     100 |      100 |     100 |     100 |                   
+ variance.js                           |     100 |      100 |     100 |     100 |                   
+ wilcoxon_rank_sum.js                  |     100 |      100 |     100 |     100 |                   
+ z_score.js                            |     100 |      100 |     100 |     100 |                   
+---------------------------------------|---------|----------|---------|---------|-------------------
