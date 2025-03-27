@@ -6,14 +6,14 @@ This would result in different behavior because `Math.ceil` rounds up to the nea
 
 Option 2: The PLACEHOLDER can be replaced with:
 ```javascript
-offset => Math.round(offset / 60)
+offset => offset / 60
 ```
-This would result in different behavior because it uses `Math.round` to round the result to the nearest integer, which could produce different results than `Math.floor` for certain input values.
+This would result in different behavior because this code fragment would not perform any rounding, resulting in a floating-point number for hours, whereas `Math.floor` returns an integer.
 
 Option 3: The PLACEHOLDER can be replaced with:
 ```javascript
-Math.trunc
+Math.round
 ```
-This would result in different behavior because `Math.trunc` truncates the decimal part, similar to `Math.floor` for positive numbers but similar to `Math.ceil` for negative numbers, which could lead to different results in certain cases.
+This would result in different behavior because `Math.round` rounds to the nearest integer, which could produce different results than `Math.floor` when the fractional part of the offset is exactly 0.5, due to the way `Math.round` handles this case (it rounds to the nearest even integer).
 
 DONE.
